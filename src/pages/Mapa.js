@@ -8,8 +8,10 @@ import {
   TileLayer,
 } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
+// import Ikona from '';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Icon } from 'leaflet';
 //
 
 const markers = [
@@ -26,7 +28,11 @@ const markers = [
     popUp: 'ribicaa!',
   },
 ];
-
+//
+const myIcon = new Icon({
+  iconUrl: require('../assets/ikona.png'),
+  iconSize: [28, 28],
+});
 //
 export const Mapa = () => {
   const [data, setData] = useState(null);
@@ -53,6 +59,13 @@ export const Mapa = () => {
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {data && <GeoJSON data={data} />}
+      <MarkerClusterGroup>
+        {markers.map(i => (
+          <Marker position={i.geocode} icon={myIcon}>
+            <Popup>{i.popUp}</Popup>
+          </Marker>
+        ))}
+      </MarkerClusterGroup>
     </MapContainer>
   );
 };
