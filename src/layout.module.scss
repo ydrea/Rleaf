@@ -1,5 +1,5 @@
 @import './_variables.scss';
-.container {
+.c {
     height: calc(100vh - #{$headerHeight});
     background: $bg;
     display: flex;
