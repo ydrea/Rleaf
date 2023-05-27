@@ -54,7 +54,7 @@ export const Mapa = () => {
     <MapContainer
       center={[45.501, 13.5]}
       zoom={13}
-      style={{ height: '100vh' }}
+      style={{ height: '80vh' }}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {data && <GeoJSON data={data} />}
