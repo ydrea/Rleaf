@@ -5,11 +5,12 @@ import s from './footer.module.scss';
 export const Footer = () => {
   return (
     <div className={s.c}>
-      da)
+      {/* da)
       <a className={s.a} href="https://github.com/ydrea">
         ydrea
       </a>
-      (mnation
+      (mnation */}
+      impressum{' '}
     </div>
   );
 };

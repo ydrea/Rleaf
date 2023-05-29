@@ -1,13 +1,19 @@
 import React from 'react';
+import Search from './Search';
 import { Nav } from './Nav';
 import Logo from '../assets/logo.png';
-import st from './nav.module.scss';
+import t from './header.module.scss';
 //
 export const Header = () => {
   return (
-    <div className={st.log}>
-      <img src={Logo} height={40} />
-      pservatorijumum
+    <div className={t.hed}>
+      <div className={t.top}>
+        <div className={t.logo}>
+          <img src={Logo} height={40} />
+          pservatorijumum
+        </div>
+        <Search />
+      </div>
       <Nav />
     </div>
   );
