@@ -6,17 +6,22 @@ import './App.scss';
 import Layout from './Layout';
 //
 import { Route, Routes } from 'react-router-dom';
+import { QueryClientProvider, QueryClient } from 'react-query';
 //
 function App() {
+  const queryClient = new QueryClient();
   //
   return (
     <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/mapa" element={<Mapa />} />
-        <Route path="/gallery" element={<Gallery />} />
-      </Routes>
+      <QueryClientProvider client={queryClient}>
+        {' '}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/mapa" element={<Mapa />} />
+          <Route path="/gallery" element={<Gallery />} />
+        </Routes>
+      </QueryClientProvider>
     </Layout>
   );
 }
