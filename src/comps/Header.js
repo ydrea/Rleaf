@@ -3,6 +3,7 @@ import Search from './Search';
 import { Nav } from './Nav';
 import Logo from '../assets/logo.png';
 import t from './header.module.scss';
+import Selekt from './Selekt';
 //
 export const Header = () => {
   return (
@@ -12,7 +13,7 @@ export const Header = () => {
           <img src={Logo} height={40} />
           pservatorijumum
         </div>
-        <Search />
+        <Selekt />
       </div>
       <Nav />
     </div>

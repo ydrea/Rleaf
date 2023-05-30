@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState } from 'react';
-import i from './nav.module.scss';
+import l from './nav.module.scss';
 
+//
 function Search() {
   const [items, itemsSet] = useState([]);
   const [query, querySet] = useState('');
@@ -26,17 +27,14 @@ function Search() {
   const list = items.map(item => <p>{item}</p>);
 
   return (
-    <div className={i.log}>
+    <div className={l.log}>
       <input
         type="search"
         value={query}
         onChange={e => querySet(e.target.value)}
       ></input>
       <br />
-      <form onSubmit={handleSubmit}>
-        {/* <input type='text' ref={inputRef}></input> */}
-        {/* <button type="submit">add</button> */}
-      </form>
+      <form onSubmit={handleSubmit}> </form>
       {list} :: {derivedState}
     </div>
   );
