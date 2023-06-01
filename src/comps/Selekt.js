@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
-
 import t from './header.module.scss';
 //
 const filters = [
@@ -11,6 +10,8 @@ const filters = [
 //
 
 function Selekt() {
+  const [filterSelected, filterSelectedSet] = useState([]);
+  //
   function cusTom(theme) {
     return {
       ...theme,
@@ -22,6 +23,7 @@ function Selekt() {
       },
     };
   }
+  //
   return (
     <div>
       <div>
@@ -30,9 +32,11 @@ function Selekt() {
           placeholder="foto"
           className={t.selekt}
           isSearchable
+          isMulti
           options={filters}
-          getOptionLabel={option => option.label}
-          getOptionValue={option => option.value}
+          onChange={filterSelectedSet}
+          //   getOptionLabel={option => option.label}
+          //   getOptionValue={option => option.value}
         />
       </div>
     </div>
