@@ -1,5 +1,10 @@
+import galleryReducer from './rtk/gallerySlice';
 import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    galery: galleryReducer,
+  },
+  //   middleware: getDefaultMiddleware =>
+  //     getDefaultMiddleware().concat(gallerySlice.middleware),
 });

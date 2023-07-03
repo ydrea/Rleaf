@@ -7,8 +7,16 @@ import Layout from './Layout';
 //
 import { Route, Routes } from 'react-router-dom';
 //
+import { useEffect } from 'react';
+
+import { store } from './redux/store';
+//
 function App() {
   //
+
+  useEffect(() => {
+    console.log(store);
+  });
   return (
     <Layout>
       <Routes>

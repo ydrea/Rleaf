@@ -13,6 +13,8 @@ import axios from 'axios';
 import { Icon } from 'leaflet';
 //
 
+import { useGetCapabilitiesQuery } from '../redux/api/apiSlice';
+
 const markers = [
   {
     geocode: [45.5, 13.5],
@@ -49,6 +51,21 @@ export const Mapa = () => {
         console.error('Error fetching WFS data:', error);
       });
   }, []);
+
+  const { mapa, isLoading, isSuccess, isError, error } =
+    useGetCapabilitiesQuery();
+  // //
+  let content;
+  if (isLoading) {
+    console.log('loding');
+    //   content = <p>isLoading</p>;
+  } else if (isSuccess) {
+    console.log('po', mapa);
+    // content = JSON.stringify(mapa);
+  } else if (isError) {
+    console.log(error);
+    //   content = <p>{error}</p>;
+  }
 
   return (
     <MapContainer
