@@ -11,21 +11,19 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Icon } from 'leaflet';
-//
-
-import { useGetCapabilitiesQuery } from '../redux/api/apiSlice';
+//import { useGetCapabilitiesQuery } from '../redux/api/apiSlice';
 
 const markers = [
   {
-    geocode: [45.5, 13.5],
+    geocode: [45, 16],
     popUp: 'medo?',
   },
   {
-    geocode: [45.502, 13.5],
+    geocode: [45.02, 16.05],
     popUp: 'zeko!',
   },
   {
-    geocode: [45.501, 13.504],
+    geocode: [45.01, 16.04],
     popUp: 'ribicaa!',
   },
 ];
@@ -42,7 +40,7 @@ export const Mapa = () => {
     // Make the WFS request
     axios
       .get(
-        'https://starigrad.agr.unizg.hr/geoserver/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=qgis2webtest:kopnena_stanista_2016&outputFormat=application/json&srsName=epsg:4326'
+        'https://landscape.agr.hr/qgis/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=fiksno_granice_banije&outputFormat=application/json&srsName=epsg:4326'
       )
       .then(response => {
         setData(response.data); // Assuming the response contains the GeoJSON data
@@ -52,20 +50,20 @@ export const Mapa = () => {
       });
   }, []);
 
-  const { mapa, isLoading, isSuccess, isError, error } =
-    useGetCapabilitiesQuery();
+  // const { mapa, isLoading, isSuccess, isError, error } =
+  //   useGetCapabilitiesQuery();
   // //
   let content;
-  if (isLoading) {
-    console.log('loding');
-    //   content = <p>isLoading</p>;
-  } else if (isSuccess) {
-    console.log('po', mapa);
-    // content = JSON.stringify(mapa);
-  } else if (isError) {
-    console.log(error);
-    //   content = <p>{error}</p>;
-  }
+  // if (isLoading) {
+  // console.log('loding');
+  //   content = <p>isLoading</p>;
+  // } else if (isSuccess) {
+  //   console.log('po', mapa);
+  // content = JSON.stringify(mapa);
+  // } else if (isError) {
+  //   console.log(error);
+  //   content = <p>{error}</p>;
+  // }
 
   return (
     <MapContainer
