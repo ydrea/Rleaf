@@ -7,14 +7,17 @@ const initialState = {
 };
 
 export const mapSlice = createSlice({
-  name: 'map',
+  name: 'mapa',
   initialState,
   reducers: {
-    increment: state => (state.photos += 1),
-    decrement: state => (state.photos -= 1),
+    addEm(state, action) {
+      state.push(action.payload);
+    },
   },
 });
 
-export const { increment, decrement } = mapSlice.actions;
+export const selectEm = state => state.mapa.maps;
+
+export const { addEm } = mapSlice.actions;
 
 export default mapSlice.reducer;

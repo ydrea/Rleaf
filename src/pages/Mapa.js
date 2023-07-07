@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+import { selectEm, addEmd } from '../redux/rtk/mapSlice';
 import 'leaflet/dist/leaflet.css';
 import {
   Marker,
@@ -7,25 +9,15 @@ import {
   TileLayer,
 } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
-// import Ikona from '';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Icon } from 'leaflet';
-//import { useGetCapabilitiesQuery } from '../redux/api/apiSlice';
 
+//prettier-ignore
 const markers = [
-  {
-    geocode: [45, 16],
-    popUp: 'medo?',
-  },
-  {
-    geocode: [45.02, 16.05],
-    popUp: 'zeko!',
-  },
-  {
-    geocode: [45.01, 16.04],
-    popUp: 'ribicaa!',
-  },
+  { geocode: [45.2, 16.2], popUp: 'medo?'},
+  { geocode: [45.22, 16.25], popUp: 'zeko!'},
+  { geocode: [45.21, 16.24], popUp: 'kravicaa!'},
 ];
 //
 const myIcon = new Icon({
@@ -53,7 +45,7 @@ export const Mapa = () => {
   // const { mapa, isLoading, isSuccess, isError, error } =
   //   useGetCapabilitiesQuery();
   // //
-  let content;
+  // let content;
   // if (isLoading) {
   // console.log('loding');
   //   content = <p>isLoading</p>;
@@ -67,8 +59,8 @@ export const Mapa = () => {
 
   return (
     <MapContainer
-      center={[45.501, 13.5]}
-      zoom={13}
+      center={[45.2, 16.2]}
+      zoom={8}
       style={{ height: '80vh' }}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
