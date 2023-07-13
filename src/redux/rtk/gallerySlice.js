@@ -13,7 +13,7 @@ const initialState = {
   //   photos: 0,
   photos: [],
   loading: false,
-  //   error: null,
+  error: null,
 };
 
 export const gallerySlice = createSlice({
@@ -31,12 +31,17 @@ export const gallerySlice = createSlice({
       state.photos = action.payload;
       state.loading = false;
     },
+
+    [getPhotos.rejected]: (state, action) => {
+      state.status = 'reject';
+      state.error = action.error.message;
+    },
   },
 });
 
 // export const { increment, decrement } = gallerySlice.actions;
 
-export const selectEm = state => state.galery.photos;
+export const selectPhotos = state => state.galery.photos;
 
 export default gallerySlice.reducer;
 

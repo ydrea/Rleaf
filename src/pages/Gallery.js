@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import {
   getPhotos,
-  selectEm,
+  selectPhotos,
   // increment,
   // decrement,
 } from '../redux/rtk/gallerySlice';
@@ -12,7 +12,7 @@ import {
 export function Gallery() {
   //
   const dispatch = useDispatch();
-  const fotos = useSelector(selectEm);
+  const fotos = useSelector(selectPhotos);
   //
   useEffect(() => {
     dispatch(getPhotos());

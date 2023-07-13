@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- leaflet css link  -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+
+    <title>Web-GIS with qgis-server and leaflet</title>
+
+    <style>
+      body {
+        margin: 10px;
+        padding: 0;
+      }
+      #map {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <button>
+      <a
+        href="http://localhost:8080/geoserver/wfs?service=wfs&version=2.0.0&request=GetFeature&typeNames=topp:BU_2020_A0_S0&outputFormat=shape-zip&srsName=epsg:4326"
+        >Download zip shp</a
+      >
+    </button>
+  </body>
+</html>
+
+<!-- leaflet js link, plugins  -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<!-- Opravio, radi "transparent"... (309)  -->
+<script src="plugins/leaflet.wmsA.js"></script>
+<!--  ...i upaljena je po difoltu (310)  -->
+
+<!-- <script src="plugins/heatmap.js"></script>
+<script src="plugins/leaflet-heatmap.js"></script> -->
+<script src="plugins/leaflet-providers.js"></script>
+<!-- jquery link  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+var esriW=L.tileLayer.provider('Esri.WorldImagery')
+
+// Map
+var map = L.map("map",{
+    center: [45.501, 13.51],
+    zoom: 15,
+    // layers: [ esriW ]
+  });
+// Layers
+// Okay (implicit source)
+var options = {"transparent": true, opacity: .8, };
+var layer1 = L.WMS.layer("https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS=EPSG:3857&WIDTH=382&HEIGHT=266&FORMAT=image/png", "imenovanomjesto_heatmap", options);
+var layer2 = L.WMS.layer("https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS=EPSG:3857&WIDTH=382&HEIGHT=266&FORMAT=image/png", "registar_kult_dobra", options);
+var layer3 = L.WMS.layer("https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS=EPSG:3857&WIDTH=382&HEIGHT=266&FORMAT=image/png", "imenovanomjesto", options);
+
+var layer4 = L.WMS.layer("https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS=EPSG:3857&WIDTH=382&HEIGHT=266&FORMAT=image/png", "kopnena_stanista_2016", options);
+// layer1._source === layer2._source
+var control = L.control.layers({}, {
+    'heatmap': layer1,
+    'k.dobra': layer2,
+    'imenovano': layer3,
+    'stanista': layer4
+})
+control.addTo(map);
+
+var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 23,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  });
+osm.addTo(map)
+// //Raster
+//   const raster = L.tileLayer('	https://mjestopodsuncem.synology.me/qgis2web/savudrija_dof2cm_xyz/{z}/{x}/{y}.jpg', { minZoom: 17, maxZoom: 23 });
+// raster.addTo(map);
+
+// var baseLayers = {
+//   'osm': osm, 'ESRI': esriW, 
+//   'grga': raster
+// }
+
+//Marker
+var photo = L.marker([45.500, 13.50])
+.bindPopup('<img src="./img/sutjeska.jpg" width="210" height="155"></img>').addTo(map)
+
+var video = L.marker([45.501, 13.51])
+.bindPopup('<iframe width="210" height="105" src="https://www.youtube.com/embed/1cRiSDIO2c4?start=54" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>').addTo(map)
+
+
+
+// Legend
+"https://starigrad.agr.unizg.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=imenovanomjesto_heatmap&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"
+'https://starigrad.agr.unizg.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=imenovanomjesto&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0'
+//WMS
+// //
+// Default usage (uses L.WMS.Overlay)
+// var source = L.WMS.source("https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&transparent=true&CRS=EPSG:3857&WIDTH=382&HEIGHT=266&", {
+//     TRANSPARENT: true, 
+// });
+// source.getLayer("imenovanomjesto_heatmap").addTo(map);
+// source.getLayer("registar_kult_dobra").addTo(map);
+
+// //wms-1
+// var wms1 = L.tileLayer.wms("https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1501474.496000000043,5696425.048000000417,1508385.80700000003,5701233.758999999613&CRS=EPSG:3857&WIDTH=382&HEIGHT=266&"
+// , {
+//         layers: 'imenovanomjesto',
+//         format: 'image/png;mode=8bit',
+//         transparent: true,
+//         attribution: "wms test"
+//     });
+// wms1.addTo(map);
+
+
+// //wms-2
+// var wms2 = L.WMS.Layer(
+//   "https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1501474.496,5696425.048,1508385.807,5701233.759&CRS=EPSG:3857&1220&HEIGHT=1043&"
+// , {
+//         layers: 'imenovanomjesto_heatmap',
+//         format: 'image/png',
+//         transparent: true,
+//         attribution: "wms test"
+//     });
+// wms2.addTo(map);
+
+
+// // wms-3
+// var wms3 = L.WMS.Layer(
+//   "https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1502833.814999999944,5699939.108000000007,1505036.023000000045,5701148.696999999695&CRS=EPSG:3857&WIDTH=1220&HEIGHT=1046"
+// ,{
+// layers:'registar_kult_dobra',
+// format: 'image/png',
+// transparent: true,
+// });
+
+
+// // wms-4
+// var wms4 = L.tileLayer.wms(
+//   "https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1501756.763000000035,5698858.924999999814,1505090.206999999937,5701397.473000000231&CRS=EPSG:3857&WIDTH=220&HEIGHT=143&"
+// ,{
+// layers:'kopnena_stanista_2016',
+// format: 'image/png',
+// transparent: true,
+// tiled: false,
+// })
+
+// WFS
+// wfs_1
+  var geojsonStyle1 = {
+    fillColor: "yellow",
+    color: "lime",
+    weight: 2,
+    opacity: .5,
+    fillOpacity: 0.4,
+  };
+  var wfs1 =
+  'https://starigrad.agr.unizg.hr/qgis/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=kopnena_stanista_2016&SRSNAME=EPSG:3857&outputFormat=geoJson'
+
+  $.getJSON(wfs1).then((res) => {
+    var layer = L.geoJson(res, {
+      onEachFeature: function (f, l) {
+        l.bindPopup("Id: " + f.id + " Use:" + f.properties.nks1_naziv);
+      }, 
+      style: geojsonStyle1,
+//     console.log(res);
+    }
+)
+    // .addTo(map);
+    // map.fitBounds(layer.getBounds());
+  });
+
+  // 2
+
+  var geojsonStyle2 = {
+    fillColor: "blue",
+    color: "yellow",
+    weight: 2,
+    opacity: .5,
+    fillOpacity: .5,
+  };
+  var wfs2 =
+  'https://starigrad.agr.unizg.hr/qgis/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=registar_kult_dobra&SRSNAME=EPSG:3857&outputFormat=geoJson'
+
+  $.getJSON(wfs2).then((res) => {
+    var layer = L.geoJson(res, {
+      onEachFeature: function (f, l) {
+        l.bindPopup("Id: " + f.id + " Use:" + f.properties.nks1_naziv);
+      }, 
+      style: geojsonStyle2,
+//     console.log(res);
+    }
+)
+    // .addTo(map);
+    // map.fitBounds(layer.getBounds());
+  });
+
+  // wfs3
+  var geojsonStyle3 = {
+    fillColor: "red",
+    color: "white",
+    weight: 2,
+    opacity: .9,
+    fillOpacity: .8,
+  };
+  var wfs3 =
+  'https://starigrad.agr.unizg.hr/qgis/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=obuhvat_zahvat&SRSNAME=EPSG:3857&outputFormat=geoJson'
+  $.getJSON(wfs3).then((res) => {
+    var layer = L.geoJson(res, {
+      onEachFeature: function (f, l) {
+        l.bindPopup("Id: " + f.id + " Use:" + f.properties.nks1_naziv);
+      }, 
+      style: geojsonStyle3,
+//     console.log(res);
+    }
+)
+    // .addTo(map);
+    // map.fitBounds(layer.getBounds());
+  });
+  // var wfs = L.layerGroup([wfs1, wfs2, wfs3]).addTo(map)
+// 
+
+// var overlayLayers = {
+//   'imenovana': wms1,
+//   'heatMap': wms2,
+//   'kulturna': wms3,
+//   'staništa': wms4,   
+  // 'wfs': wfs,
+  // }
+
+  //
+var overlayWfs ={
+  //  'wfs': wfs,
+  // 'wfs1': wfs1,
+  // 'wfs2': wfs2,
+  // 'wfs3': wfs3,
+}
+
+//ctrl
+// var layerControl = L.control.layers(baseLayers,overlayLayers).addTo(map);
+</script>

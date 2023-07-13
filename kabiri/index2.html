@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- leaflet css link  -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+
+    <title>Web-GIS with qgis-server and leaflet</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <button>
+      <a
+        href="http://localhost:8080/geoserver/wfs?service=wfs&version=2.0.0&request=GetFeature&typeNames=topp:BU_2020_A0_S0&outputFormat=shape-zip&srsName=epsg:4326"
+        >Download zip shp</a
+      >
+    </button>
+  </body>
+</html>
+
+<!-- leaflet js link  -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="plugins/leaflet-providers.js"></script>
+<!-- jquery link  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+//osm
+  var map = L.map("map").setView([45.501, 13.51], 14);
+
+// Layer groups
+var esriW=L.tileLayer.provider('Esri.WorldImagery')
+
+  var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 23,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  });
+
+  osm.addTo(map);
+
+//vAstev
+  const raster = L.tileLayer('	https://mjestopodsuncem.synology.me/qgis2web/savudrija_dof2cm_xyz/{z}/{x}/{y}.jpg'
+, {
+  attribution: 'grgoje',
+  // subdomains: 'abcd',
+  minZoom: 17,
+  maxZoom: 23
+});
+// raster.addTo(map);
+
+var baseMaps = {
+  'osm': osm, 'ESRI': esriW
+}
+
+var overlayMaps = {
+  'wms': wms,
+  'wfs1': wfs1,
+  'wfs2': wfs2,
+  'wfs3': wfs3,
+}
+
+//WMS
+// //wms-1
+var wms1 = L.tileLayer.wms("https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1501474.496000000043,5696425.048000000417,1508385.80700000003,5701233.758999999613&CRS=EPSG:3857&WIDTH=382&HEIGHT=266&"
+, {
+        layers: 'imenovanomjesto',
+        format: 'image/png;mode=8bit',
+        transparent: true,
+        attribution: "wms test"
+    });
+// wms1.addTo(map);
+
+
+// //wms-2
+var wms2 = L.tileLayer.wms(
+  "https://starigrad.agr.unizg.hr/qgis/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1501474.496000000043,5696425.048000000417,1508385.80700000003,5701233.758999999613&CRS=EPSG:3857&WIDTH=1220&HEIGHT=1046&"
+, {
+        layers: 'imenovanomjesto_heatmap',
+        format: 'image/png',
+        transparent: true,
+        attribution: "wms test"
+    });
+// wms2.addTo(map);
+
+var wms = L.layerGroup([wms1, wms2]).addTo(map)
+
+
+// wfs_1
+  var geojsonStyle1 = {
+    fillColor: "yellow",
+    color: "lime",
+    weight: 2,
+    opacity: .5,
+    fillOpacity: 0.4,
+  };
+  var wfs1 =
+  'https://starigrad.agr.unizg.hr/qgis/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=kopnena_stanista_2016&SRSNAME=EPSG:3857&outputFormat=geoJson'
+
+  $.getJSON(wfs1).then((res) => {
+    var layer = L.geoJson(res, {
+      onEachFeature: function (f, l) {
+        l.bindPopup("Id: " + f.id + " Use:" + f.properties.nks1_naziv);
+      }, 
+      style: geojsonStyle1,
+//     console.log(res);
+    }
+)
+    .addTo(map);
+    // map.fitBounds(layer.getBounds());
+  });
+
+  // 2
+
+  var geojsonStyle2 = {
+    fillColor: "blue",
+    color: "yellow",
+    weight: 2,
+    opacity: .5,
+    fillOpacity: .5,
+  };
+  var wfs2 =
+  'https://starigrad.agr.unizg.hr/qgis/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=registar_kult_dobra&SRSNAME=EPSG:3857&outputFormat=geoJson'
+
+  $.getJSON(wfs2).then((res) => {
+    var layer = L.geoJson(res, {
+      onEachFeature: function (f, l) {
+        l.bindPopup("Id: " + f.id + " Use:" + f.properties.nks1_naziv);
+      }, 
+      style: geojsonStyle2,
+//     console.log(res);
+    }
+)
+    .addTo(map);
+    // map.fitBounds(layer.getBounds());
+  });
+  // 2
+
+  var geojsonStyle3 = {
+    fillColor: "red",
+    color: "white",
+    weight: 2,
+    opacity: .9,
+    fillOpacity: .8,
+  };
+  var wfs3 =
+  'https://starigrad.agr.unizg.hr/qgis/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=obuhvat_zahvat&SRSNAME=EPSG:3857&outputFormat=geoJson'
+
+  $.getJSON(wfs3).then((res) => {
+    var layer = L.geoJson(res, {
+      onEachFeature: function (f, l) {
+        l.bindPopup("Id: " + f.id + " Use:" + f.properties.nks1_naziv);
+      }, 
+      style: geojsonStyle3,
+//     console.log(res);
+    }
+)
+    .addTo(map);
+    // map.fitBounds(layer.getBounds());
+  });
+  // var wfs = L.layerGroup([wfs1, wfs2, wfs3]).addTo(map)
+// 
+var layerControl = L.control.layers(baseMaps).addTo(map);
+
+</script>
