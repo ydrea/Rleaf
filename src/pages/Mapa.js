@@ -14,8 +14,10 @@ import {
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Icon } from 'leaflet';
-import { UseMap } from './Mapb';
+import { Borders } from '../maps/borders';
+import { Border } from '../maps/border';
 import MarkerClusterGroup from '@changey/react-leaflet-markercluster';
+import { Cities } from '../maps/cities';
 //prettier-ignore
 const markers = [
   { geocode: [45.2, 16.2], popUp: 'medo?'},
@@ -31,56 +33,7 @@ const myIcon = new Icon({
 export const Mapa = () => {
   const [data, setData] = useState(null);
 
-  const { BaseLayer } = LayersControl;
-
-  useEffect(() => {
-    // Make the WFS request
-    axios
-      .get(
-        // 'https://landscape.agr.hr/qgis/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=naselja_stanovnistvo&outputFormat=application/json&srsName=epsg:4326'
-        // 'https://landscape.agr.hr/qgis/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=fiksno_gradoviRH&outputFormat=application/json&srsName=epsg:4326'
-        'https://landscape.agr.hr/qgis/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=fiksno_drzavna_granica&outputFormat=application/json&srsName=epsg:4326'
-        // 'https://landscape.agr.hr/qgis/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=fiksno_granice_banije&outputFormat=application/json&srsName=epsg:4326'
-        // 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=fiksno_granice_banije&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0'
-      )
-      .then(response => {
-        setData(response.data); // Assuming the response contains the GeoJSON data
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error fetching WFS data:', error);
-      });
-  }, []);
-
-  // const { mapa, isLoading, isSuccess, isError, error } =
-  //   useGetCapabilitiesQuery();
-  // //
-  // let content;
-  // if (isLoading) {
-  // console.log('loding');
-  //   content = <p>isLoading</p>;
-  // } else if (isSuccess) {
-  //   console.log('po', mapa);
-  // content = JSON.stringify(mapa);
-  // } else if (isError) {
-  //   console.log(error);
-  //   content = <p>{error}</p>;
-  // }
-
-  // useEffect(() => {
-  //   // Make the WFS request
-  //   axios
-  //     .get(
-  //       'https://landscape.agr.hr/qgis/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=fiksno_drzavna_granica&outputFormat=application/json&srsName=epsg:4326'
-  //     )
-  //     .then(response => {
-  //       setTemakz(response.data);
-  //       console.log(temakz);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching WFS data:', error);
-  //     });
-  // }, [data]);
+  const { BaseLayer, Overlay } = LayersControl;
 
   return (
     <MapContainer
@@ -92,7 +45,9 @@ export const Mapa = () => {
         <BaseLayer checked name="OSM">
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         </BaseLayer>
-        <UseMap />{' '}
+        <Border checked name="granica" />
+        <Borders checked name="granice" />
+        <Cities checked name="gradovi" />{' '}
       </LayersControl>
 
       {/* {temakz && <GeoJSON temakz={temakz} />} */}
