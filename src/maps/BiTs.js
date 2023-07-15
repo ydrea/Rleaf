@@ -53,3 +53,27 @@
 //       console.error('Error fetching WFS data:', error);
 //     });
 // }, []);
+const MyMapComponent = () => {
+  const wmsLayerOptions = {
+    layers: 'administrativna_naselja',
+    format: 'image/png',
+    transparent: true,
+    version: '1.1.0',
+    attribution: 'WMS Service Attribution',
+  };
+
+  return (
+    <MapContainer
+      center={[51.505, -0.09]}
+      zoom={13}
+      style={{ height: '100vh' }}
+    >
+      <TileLayer
+        url="https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0"
+        {...wmsLayerOptions}
+      />
+    </MapContainer>
+  );
+};
+
+export default MyMapComponent;

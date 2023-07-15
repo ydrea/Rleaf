@@ -18,6 +18,10 @@ import { Borders } from '../maps/borders';
 import { Border } from '../maps/border';
 import MarkerClusterGroup from '@changey/react-leaflet-markercluster';
 import { Cities } from '../maps/cities';
+import { TemaKZ } from '../maps/temakz';
+import { PreklopBN } from '../maps/preklopbn';
+import { PreklopAJ } from '../maps/preklopaj';
+import { ANaselja, PBNaselja } from '../maps/wms';
 //prettier-ignore
 const markers = [
   { geocode: [45.2, 16.2], popUp: 'medo?'},
@@ -47,7 +51,16 @@ export const Mapa = () => {
         </BaseLayer>
         <Border checked name="granica" />
         <Borders checked name="granice" />
-        <Cities checked name="gradovi" />{' '}
+        <Cities checked name="gradovi" Icon={myIcon} />{' '}
+        <BaseLayer name="koristenje zemljista">
+          <TemaKZ />
+        </BaseLayer>
+        <LayersControl.Overlay>
+          <ANaselja checked name="admin. naselja" />
+          <PBNaselja checked name="P banijska naselja" />
+          {/* <PreklopBN name="banijska naselja" />
+          <PreklopAJ name="administrativne jedinice" /> */}
+        </LayersControl.Overlay>
       </LayersControl>
 
       {/* {temakz && <GeoJSON temakz={temakz} />} */}
