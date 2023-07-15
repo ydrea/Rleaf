@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-// import { selectEm, addEmd } from '../redux/rtk/mapSlice';
 import 'leaflet/dist/leaflet.css';
 import {
   Marker,
@@ -8,20 +7,16 @@ import {
   Popup,
   TileLayer,
   LayersControl,
-  WMSTileLayer,
+  // WMSTileLayer,
 } from 'react-leaflet';
-// import MarkerClusterGroup from 'react-leaflet-cluster';
+import MarkerClusterGroup from 'react-leaflet-cluster';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Icon } from 'leaflet';
-import { Borders } from '../maps/borders';
-import { Border } from '../maps/border';
-import MarkerClusterGroup from '@changey/react-leaflet-markercluster';
-import { Cities } from '../maps/cities';
-import { TemaKZ } from '../maps/temakz';
-import { PreklopBN } from '../maps/preklopbn';
-import { PreklopAJ } from '../maps/preklopaj';
-import { ANaselja, PBNaselja } from '../maps/wms';
+//prettier-ignore
+import {
+  ANaselja, PAJedinice,  PBNaselja, JLS,   FiksniElementi,
+  PodRH, TemaKZ, TemaZP, TemaP
+} from '../maps/wms';
 //prettier-ignore
 const markers = [
   { geocode: [45.2, 16.2], popUp: 'medo?'},
@@ -49,25 +44,43 @@ export const Mapa = () => {
         <BaseLayer checked name="OSM">
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         </BaseLayer>
-        <Border checked name="granica" />
-        <Borders checked name="granice" />
-        <Cities checked name="gradovi" Icon={myIcon} />{' '}
-        <BaseLayer name="koristenje zemljista">
-          <TemaKZ />
+        <BaseLayer name="reljef">
+          <PodRH />
         </BaseLayer>
-        <LayersControl.Overlay>
-          <ANaselja checked name="admin. naselja" />
-          <PBNaselja checked name="P banijska naselja" />
-          {/* <PreklopBN name="banijska naselja" />
-          <PreklopAJ name="administrativne jedinice" /> */}
-        </LayersControl.Overlay>
+        <FiksniElementi />
+        <Overlay name="admin. naselja">
+          <ANaselja />
+        </Overlay>
+        <Overlay name="P banijska naselja">
+          <PBNaselja />
+        </Overlay>
+        <Overlay name="JLS">
+          <JLS />
+        </Overlay>
+        <Overlay name="P administrativne jedinice">
+          <PAJedinice />
+        </Overlay>
+        <LayersControl>
+          <BaseLayer name="tema_koristenje_zemljista">
+            <TemaKZ />
+          </BaseLayer>
+          <BaseLayer name="zastita_prirode">
+            <TemaZP />
+          </BaseLayer>
+          <BaseLayer name="potres">
+            <TemaP />
+          </BaseLayer>
+        </LayersControl>
       </LayersControl>
 
-      {/* {temakz && <GeoJSON temakz={temakz} />} */}
       {data && <GeoJSON data={data} />}
       <MarkerClusterGroup>
         {markers.map(i => (
-          <Marker position={i.geocode} icon={myIcon}>
+          <Marker
+            key={i.geocode[0]}
+            position={i.geocode}
+            icon={myIcon}
+          >
             <Popup>{i.popUp}</Popup>
           </Marker>
         ))}
