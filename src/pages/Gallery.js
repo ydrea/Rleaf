@@ -8,8 +8,19 @@ import {
   // increment,
   // decrement,
 } from '../redux/rtk/gallerySlice';
+import exifr from 'exifr';
+import imago from '../assets/BAN-001/BAN-001-27.jpg';
 //
 export function Gallery() {
+  const getExif = async () => {
+    const exIf = await exifr.parse(imago);
+    console.log(exIf);
+  };
+  //
+  useEffect(() => {
+    console.log(imago);
+    getExif();
+  }, []);
   //
   const dispatch = useDispatch();
   const fotos = useSelector(selectPhotos);
@@ -29,7 +40,8 @@ export function Gallery() {
           <img key={i.id} src={i.download_url} width="333" />
         ))}
       </div>
-      {/* {JSON.stringify(fotos)} */}
+
+      {/* {JSON.stringify(latitude)} */}
     </div>
   );
 }
