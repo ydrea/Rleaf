@@ -17,6 +17,7 @@ import {
   ANaselja, PAJedinice,  PBNaselja, JLS,   FiksniElementi,
   PodRH, TemaKZ, TemaZP, TemaP
 } from '../maps/wms';
+import { Stanovnistvo } from '../maps/wfs';
 //prettier-ignore
 const markers = [
   { geocode: [45.2, 16.2], popUp: 'medo?'},
@@ -54,8 +55,8 @@ export const Mapa = () => {
         <Overlay name="P banijska naselja">
           <PBNaselja />
         </Overlay>
-        <Overlay name="JLS">
-          <JLS />
+        <Overlay name="Stanovnistvo">
+          <Stanovnistvo />
         </Overlay>
         <Overlay name="P administrativne jedinice">
           <PAJedinice />
