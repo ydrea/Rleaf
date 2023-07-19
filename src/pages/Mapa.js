@@ -55,9 +55,9 @@ export const Mapa = () => {
         <Overlay name="P banijska naselja">
           <PBNaselja />
         </Overlay>
-        <Overlay name="Stanovnistvo">
+        {/* <Overlay name="Stanovnistvo">
           <Stanovnistvo />
-        </Overlay>
+        </Overlay> */}
         <Overlay name="P administrativne jedinice">
           <PAJedinice />
         </Overlay>
