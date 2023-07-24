@@ -1,4 +1,4 @@
-// import React from 'react';
+import { Login } from './Login';
 import y from './gallery.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -13,7 +13,7 @@ import imago from '../assets/BAN-001/BAN-001-27.jpg';
 //
 export function Gallery() {
   const getExif = async () => {
-    const exIf = await exifr.parse(imago);
+    const exIf = await exifr.gps(imago);
     console.log(exIf);
   };
   //
@@ -40,8 +40,7 @@ export function Gallery() {
           <img key={i.id} src={i.download_url} width="333" />
         ))}
       </div>
-
-      {/* {JSON.stringify(latitude)} */}
+      <Login />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Message from '../comps/Message';
 import Progress from '../comps/Progress';
 import axios from 'axios';
 import exifr from 'exifr';
+import Form from '../comps/Form';
 
 export const Upload = () => {
   const [file, setFile] = useState('');
@@ -10,7 +11,8 @@ export const Upload = () => {
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState('');
   const [uploadPercentage, setUploadPercentage] = useState(0);
-
+  const [exifR, exifRSet] = useState();
+  //
   const onChange = e => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
@@ -27,7 +29,7 @@ export const Upload = () => {
       // Clear percentage
       const { fileName, filePath } = res.data;
       setUploadedFile({ fileName, filePath });
-      setMessage('img File Uploaded');
+      setMessage(`img File ${fileName} Uploaded 2 ${filePath}`);
     } catch (err) {
       if (err.response.status === 500) {
         setMessage('There was a problem with the server');
@@ -37,13 +39,16 @@ export const Upload = () => {
       // setUploadPercentage(0);
     }
   };
-  //
+  //exifr
+  const getExif = async () => {
+    const exIf = await exifr.parse(file);
+    console.log(exIf);
+    exifRSet(exIf);
+  };
+
   useEffect(() => {
-    const getExif = async () => {
-      const exIf = await exifr.parse(file);
-      console.log(exIf);
-    };
     getExif();
+    console.log(exifR);
   }, [file]);
   //
 
@@ -63,7 +68,7 @@ export const Upload = () => {
           </label>
         </div>
 
-        <Progress percentage={uploadPercentage} />
+        {/* <Progress percentage={uploadPercentage} /> */}
 
         <input
           type="submit"
@@ -76,12 +81,15 @@ export const Upload = () => {
           <div className="col-md-6 m-auto">
             <h3 className="text-center">{uploadedFile.fileName}</h3>
             <img
-              style={{ width: '100%' }}
+              style={{ width: '60%' }}
               src={uploadedFile.filePath}
               alt="dije"
             />
           </div>
         </div>
+      ) : null}
+      {uploadedFile.fileName ? (
+        <Form uploadedFile={uploadedFile} exifR={exifR} />
       ) : null}
     </>
   );
