@@ -1,31 +1,45 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Form = ({ uploadedFile, exifR }) => {
+  const [srid, sridSet] = useState();
   //
-  const onSubmit = e => {
+  const place = {
+    lng: exifR.GPSLongitude[1],
+    lat: exifR.GPSLatitude[1],
+  };
+  const asPoint = p => ({
+    toPostgres: () =>
+      pgp.as.format('ST_MakePoint(${lng}, ${lat})', p),
+    rawType: true,
+  });
+  //query
+  // await db.oneOrNone(`SELECT * FROM table ORDER BY
+  //             ST_StartPoint(geom) <-> ST_SetSRID($1, $2) LIMIT 1;`, [asPoint(place), 4326]);
+
+  //
+  useEffect(() => {
+    const sriD = asPoint(place);
+    console.log('sriD', sriD);
+  }, []);
+  //
+  const onSubmit = async e => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     console.log(formData);
     const values = [...formData.values()];
     console.log(values);
     // //
-    // const place = {
-    //   lng: -122.2652671,
-    //   lat: 47.30995661
-    // };
-
-    //const asPoint = p => ({
-    //     toPostgres: () => pgp.as.format('ST_MakePoint(${lng}, ${lat})', p),
-    //     rawType: true
-    // });
-
-    //query
-    // await db.oneOrNone(`SELECT * FROM table ORDER BY
-    //             ST_StartPoint(geom) <-> ST_SetSRID($1, $2) LIMIT 1;`, [asPoint(place), 4326]);
-
-    const data = Object.fromEntries(formData);
+    try {
+      const res = await axios.post('/novi', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        //progress
+      });
+    } catch (err) {
+      console.error(err.msg);
+    }
+    // const data = Object.fromEntries(formData);
     // do something
-    console.log(data);
+    // console.log(data);
 
     // clear inputs
     e.currentTarget.reset();
@@ -75,12 +89,25 @@ const Form = ({ uploadedFile, exifR }) => {
         </div>
         <div className="form-control">
           <label>lokacija</label>
-          <input type="text" name="lokacija" />
+          <input
+            type="text"
+            name="lokacija"
+            value={exifR.Sublocation}
+          />
         </div>{' '}
         <div className="form-control">
           <label>datum</label>
           <input type="date" name="datum" />
         </div>
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          width: 400,
+          flexDirection: 'column',
+        }}
+      >
         <div className="form-control">
           <label>kategorija</label>
           <select>
@@ -97,31 +124,30 @@ const Form = ({ uploadedFile, exifR }) => {
             </option>
             <option value="prirodni_resursi">prirodni_resursi</option>
             <option value="stanovnistvo">stanovništvo</option>
+            <option value="poljoprivreda">poljoprivreda</option>
+            <option value="stocarstvo">stočarstvo</option>
             <option value="arhitektura">arhitektura</option>
           </select>
         </div>{' '}
-      </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div className="form-control">
           <label>autor</label>
-          <input type="text" name="autor" />
+          <input type="text" name="autor" value={exifR.Artist} />
         </div>
         <div className="form-control">
           <label>copyright</label>
-          <input type="text" name="copyright" />
+          <input
+            type="text"
+            name="copyright"
+            value={exifR.Copyright}
+          />
         </div>
         <div className="form-control">
           <label>copyright_holder</label>
-          <input type="text" name="copyright_holder" />
+          <input type="text" name="copyright_holder" value={'-'} />
         </div>
         <div className="form-control">
           <label>Tag-ovi</label>
-          <input
-            type="text"
-            name="tagovi"
-            value={JSON.stringify(uploadedFile)}
-          />
+          <input type="text" name="tagovi" value={exifR.Keywords} />
         </div>
         <div className="form-control">
           <label>DOI</label>
@@ -132,13 +158,19 @@ const Form = ({ uploadedFile, exifR }) => {
           />
         </div>
         <div className="form-control">
-          <label>point</label>
+          <label>lon</label>
           <input
             type="text"
-            name="point"
-            defaultValue={
-              exifR.GPSLongitude[1] + exifR.GPSLatitude[1]
-            }
+            name="lon"
+            value={exifR.GPSLongitude[1]}
+          />
+        </div>
+        <div className="form-control">
+          <label>lat</label>
+          <input
+            type="text"
+            name="lat"
+            value={exifR.GPSLatitude[1]}
           />
         </div>
         <div className="form-control">

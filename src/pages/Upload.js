@@ -41,7 +41,7 @@ export const Upload = () => {
   };
   //exifr
   const getExif = async () => {
-    const exIf = await exifr.parse(file);
+    const exIf = await exifr.parse(file, { iptc: true });
     console.log(exIf);
     exifRSet(exIf);
   };
