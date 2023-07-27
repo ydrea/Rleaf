@@ -1,10 +1,10 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Message from '../comps/Message';
-import Progress from '../comps/Progress';
+// import Progress from '../comps/Progress';
 import axios from 'axios';
 import exifr from 'exifr';
 import Form from '../comps/Form';
-
+//
 export const Upload = () => {
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
@@ -12,6 +12,8 @@ export const Upload = () => {
   const [message, setMessage] = useState('');
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [exifR, exifRSet] = useState();
+  //
+
   //
   const onChange = e => {
     setFile(e.target.files[0]);

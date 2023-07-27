@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 export const getPhotos = createAsyncThunk('getphotos', async () => {
   const res = await fetch(
     // 'https://picsum.photos/v2/list?page=2&limit=6'
-    'http://localhost:3500/photos'
+    'http://localhost:3500/photos/'
   );
   const result = await res.json();
   console.log(result);

@@ -1,48 +1,48 @@
 import { useEffect, useState } from 'react';
 
 const Form = ({ uploadedFile, exifR }) => {
-  const [srid, sridSet] = useState();
-  //
-  const place = {
-    lng: exifR.GPSLongitude[1],
-    lat: exifR.GPSLatitude[1],
-  };
-  const asPoint = p => ({
-    toPostgres: () =>
-      pgp.as.format('ST_MakePoint(${lng}, ${lat})', p),
-    rawType: true,
-  });
+  const [pod, podSet] = useState();
+  // const place = {
+  //   lng: exifR.GPSLongitude[1],
+  //   lat: exifR.GPSLatitude[1],
+  // };
+  // const asPoint = p => ({
+  //   toPostgres: () =>
+  //     pgp.as.format('ST_MakePoint(${lng}, ${lat})', p),
+  //   rawType: true,
+  // });
   //query
   // await db.oneOrNone(`SELECT * FROM table ORDER BY
   //             ST_StartPoint(geom) <-> ST_SetSRID($1, $2) LIMIT 1;`, [asPoint(place), 4326]);
 
-  //
+  // //
   useEffect(() => {
-    const sriD = asPoint(place);
-    console.log('sriD', sriD);
+    // podSet(formData);
   }, []);
-  //
-  const onSubmit = async e => {
+  // //
+  const handleSubmit = async e => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    console.log(formData);
+    const data = Object.fromEntries(formData);
+    console.log(data);
     const values = [...formData.values()];
+    console.log('====================================');
     console.log(values);
-    // //
+    console.log('====================================');
     try {
-      const res = await axios.post('/novi', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        //progress
+      const res = await fetch('http://localhost:3500/novi', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
       });
+      console.log('====================================');
+      console.log(res);
+      console.log('====================================');
     } catch (err) {
-      console.error(err.msg);
+      console.error(err.msg, 'nece');
     }
-    // const data = Object.fromEntries(formData);
-    // do something
-    // console.log(data);
-
     // clear inputs
-    e.currentTarget.reset();
+    // e.currentTarget.reset();
   };
   //
   useEffect(() => {
@@ -52,7 +52,7 @@ const Form = ({ uploadedFile, exifR }) => {
   return (
     <form
       style={{ display: 'flex', flexDirection: 'row' }}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
       <div
         style={{
@@ -61,14 +61,13 @@ const Form = ({ uploadedFile, exifR }) => {
           width: 400,
         }}
       >
-        {' '}
         <div className="form-control">
           <label>signatura</label>
           <input
             // formID="1"
             type="text"
             name="signatura"
-            value={uploadedFile.fileName}
+            defaultValue={uploadedFile.fileName}
           />
         </div>
         <div className="form-control">
@@ -92,12 +91,16 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="lokacija"
-            value={exifR.Sublocation}
+            defaultValue={exifR.Sublocation}
           />
         </div>{' '}
         <div className="form-control">
           <label>datum</label>
-          <input type="date" name="datum" />
+          <input
+            type="date"
+            name="datum"
+            defaultValue={Date.now().toString()}
+          />
         </div>
       </div>
 
@@ -111,50 +114,62 @@ const Form = ({ uploadedFile, exifR }) => {
         <div className="form-control">
           <label>kategorija</label>
           <select>
-            <option value="infrastruktura">infrastruktura</option>
-            <option value="ekologija">ekologija</option>
-            <option value="tradicijska_gradnja">
+            <option name="infrastruktura">infrastruktura</option>
+            <option name="ekologija">ekologija</option>
+            <option name="tradicijska_gradnja">
               tradicijska_gradnja
             </option>
-            <option value="vjerski_objekti">vjerski_objekti</option>
-            <option value="vazni_objekti">važni_objekti</option>
-            <option value="spomenici">spomenici</option>
-            <option value="gospodarski_objekti">
+            <option name="vjerski_objekti">vjerski_objekti</option>
+            <option name="vazni_objekti">važni_objekti</option>
+            <option name="spomenici">spomenici</option>
+            <option name="gospodarski_objekti">
               gospodarski_objekti
             </option>
-            <option value="prirodni_resursi">prirodni_resursi</option>
-            <option value="stanovnistvo">stanovništvo</option>
-            <option value="poljoprivreda">poljoprivreda</option>
-            <option value="stocarstvo">stočarstvo</option>
-            <option value="arhitektura">arhitektura</option>
+            <option name="prirodni_resursi">prirodni_resursi</option>
+            <option name="stanovnistvo">stanovništvo</option>
+            <option name="poljoprivreda">poljoprivreda</option>
+            <option name="stocarstvo">stočarstvo</option>
+            <option name="arhitektura">arhitektura</option>
           </select>
         </div>{' '}
         <div className="form-control">
           <label>autor</label>
-          <input type="text" name="autor" value={exifR.Artist} />
+          <input
+            type="text"
+            name="autor"
+            defaultValue={exifR.Artist}
+          />
         </div>
         <div className="form-control">
           <label>copyright</label>
           <input
             type="text"
             name="copyright"
-            value={exifR.Copyright}
+            defaultValue={exifR.Copyright}
           />
         </div>
         <div className="form-control">
           <label>copyright_holder</label>
-          <input type="text" name="copyright_holder" value={'-'} />
+          <input
+            type="text"
+            name="copyright_holder"
+            defaultValue={'-'}
+          />
         </div>
         <div className="form-control">
           <label>Tag-ovi</label>
-          <input type="text" name="tagovi" value={exifR.Keywords} />
+          <input
+            type="text"
+            name="tagovi"
+            defaultValue={exifR.Keywords}
+          />
         </div>
         <div className="form-control">
           <label>DOI</label>
           <input
             type="text"
             name="DOI"
-            value="10.5281/zenodo.8174233"
+            defaultValue="10.5281/zenodo.8174233"
           />
         </div>
         <div className="form-control">
@@ -162,7 +177,7 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="lon"
-            value={exifR.GPSLongitude[1]}
+            defaultValue={exifR.GPSLongitude[1]}
           />
         </div>
         <div className="form-control">
@@ -170,12 +185,20 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="lat"
-            value={exifR.GPSLatitude[1]}
+            defaultValue={exifR.GPSLatitude[1]}
           />
         </div>
+        {/* <div className="form-control">
+          <label>url_image</label>
+          <input type="text" name="url_image" defaultValue={``} />
+        </div>
+        <div className="form-control">
+          <label>url_thumb</label>
+          <input type="text" name="url_thumb" defaultValue={``} />
+        </div> */}
         <div className="form-control">
           <label></label>
-          <button type="submit">submit</button>
+          <button type="submit">SPREMI</button>
         </div>
       </div>
     </form>

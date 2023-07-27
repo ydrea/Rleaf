@@ -54,3 +54,13 @@ export default function App() {
     </form>
   );
 }
+
+const getExif = async () => {
+  const exIf = await exifr.gps(imago);
+  console.log(exIf);
+};
+//
+useEffect(() => {
+  console.log(imago);
+  getExif();
+}, []);
