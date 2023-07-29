@@ -177,7 +177,7 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="lon"
-            defaultValue={exifR.GPSLongitude[1]}
+            defaultValue={exifR.Longitude}
           />
         </div>
         <div className="form-control">
@@ -185,17 +185,9 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="lat"
-            defaultValue={exifR.GPSLatitude[1]}
+            defaultValue={exifR.Latitude}
           />
         </div>
-        {/* <div className="form-control">
-          <label>url_image</label>
-          <input type="text" name="url_image" defaultValue={``} />
-        </div>
-        <div className="form-control">
-          <label>url_thumb</label>
-          <input type="text" name="url_thumb" defaultValue={``} />
-        </div> */}
         <div className="form-control">
           <label></label>
           <button type="submit">SPREMI</button>

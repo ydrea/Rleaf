@@ -1,0 +1,10 @@
+.nav {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+.nav .navlink {
+  text-decoration: none;
+  font-size: large;
+  font-weight: 800;
+}/*# sourceMappingURL=nav.module.css.map */

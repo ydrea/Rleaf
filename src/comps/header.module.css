@@ -1,0 +1,14 @@
+.hed {
+  color: #554400;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selekt {
+  margin-right: 5px;
+  max-width: 245px;
+  margin-left: auto;
+}/*# sourceMappingURL=header.module.css.map */

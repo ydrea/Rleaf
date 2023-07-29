@@ -1,0 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+.c {
+  height: calc(100vh - 100px);
+  background: rgb(244, 244, 244);
+  display: flex;
+}/*# sourceMappingURL=layout.module.css.map */

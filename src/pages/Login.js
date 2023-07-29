@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 //
 export const Login = () => {
-  const fix = 'pwd';
+  const fix = process.env.REACT_APP_PASS;
   const [pass, passSet] = useState('');
   const valid = useSelector(selectValid);
   // const pwd = useSelector(selectPwd);
