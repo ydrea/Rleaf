@@ -66,22 +66,6 @@ export const ANaselja = () => {
   return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
 };
 
-// JLS
-export const JLS = () => {
-  const url =
-    'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE';
-
-  const wmsLayerOptions = {
-    layers: ' JLS',
-    format: 'image/png',
-    transparent: true,
-    version: '1.3.0',
-    attribution: 'WMS Service Attribution',
-  };
-
-  return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
-};
-
 // fiksni_elementi
 export const FiksniElementi = () => {
   const url =
@@ -122,6 +106,22 @@ export const TemaZP = () => {
 
   const wmsLayerOptions = {
     layers: 'tema_zastita_prirode',
+    format: 'image/png',
+    transparent: true,
+    version: '1.3.0',
+    attribution: 'WMS Service Attribution',
+  };
+
+  return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
+};
+
+// tema_zastita_prirode
+export const TemaS = () => {
+  const url =
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0';
+
+  const wmsLayerOptions = {
+    layers: 'tema_stanovnistvo',
     format: 'image/png',
     transparent: true,
     version: '1.3.0',

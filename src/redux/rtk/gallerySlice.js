@@ -10,15 +10,15 @@ export const getPhotos = createAsyncThunk('getphotos', async () => {
   return rezult;
 });
 //
-export const getAPhoto = createAsyncThunk('getaphoto', async () => {
-  const rez = await fetch('http://localhost:3500/photos:id');
+export const getAPhoto = createAsyncThunk('getaphoto', async id => {
+  const rez = await fetch(`http://localhost:3500/photos/${id}`);
   const rezult = await rez.json();
   console.log(rezult);
   return rezult;
 });
 //
 const initialState = {
-  idX: 2,
+  idX: 1,
   photos: [],
   loading: false,
   error: null,
@@ -28,8 +28,12 @@ export const gallerySlice = createSlice({
   name: 'galery',
   initialState,
   reducers: {
-    increment: state => (state.idX += 1),
-    decrement: state => (state.idX -= 1),
+    increment: state => {
+      state.idX += 1;
+    },
+    decrement: state => {
+      state.idX -= 1;
+    },
   },
   extraReducers: {
     [getPhotos.pending]: state => {

@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import 'leaflet/dist/leaflet.css';
 import {
   Marker,
@@ -14,10 +14,10 @@ import { useEffect, useState } from 'react';
 import { Icon } from 'leaflet';
 //prettier-ignore
 import {
-  ANaselja, PAJedinice,  PBNaselja, JLS,   FiksniElementi,
-  PodRH, TemaKZ, TemaZP, TemaP
+  ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
+  PodRH, TemaKZ, TemaZP, TemaP, TemaS
 } from '../maps/wms';
-import { Stanovnistvo } from '../maps/wfs';
+// import { Stanovnistvo } from '../maps/wfs';
 //prettier-ignore
 const markers = [
   { geocode: [45.2, 16.2], popUp: 'medo?'},
@@ -30,6 +30,7 @@ const myIcon = new Icon({
   iconSize: [28, 28],
 });
 //
+
 export const Mapa = () => {
   const [data, setData] = useState(null);
 
@@ -55,9 +56,6 @@ export const Mapa = () => {
         <Overlay name="P banijska naselja">
           <PBNaselja />
         </Overlay>
-        {/* <Overlay name="Stanovnistvo">
-          <Stanovnistvo />
-        </Overlay> */}
         <Overlay name="P administrativne jedinice">
           <PAJedinice />
         </Overlay>
@@ -65,10 +63,13 @@ export const Mapa = () => {
           <BaseLayer name="tema_koristenje_zemljista">
             <TemaKZ />
           </BaseLayer>
-          <BaseLayer name="zastita_prirode">
+          <BaseLayer name="tema_zastita_prirode">
             <TemaZP />
           </BaseLayer>
-          <BaseLayer name="potres">
+          <BaseLayer name="tema_stanovnistvo">
+            <TemaS />
+          </BaseLayer>
+          <BaseLayer name="tema_potres">
             <TemaP />
           </BaseLayer>
         </LayersControl>

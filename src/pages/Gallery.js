@@ -4,33 +4,46 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import {
   getPhotos,
+  increment,
+  decrement,
   selectPhotos,
   selectidX,
 } from '../redux/rtk/gallerySlice';
-// import ReactImageGallery from 'react-image-gallery';
-// import 'react-image-gallery/styles/css/image-gallery.css';
-
+import GalleryCard from '../comps/GalleryCard';
 //
 export function Gallery() {
   //
   const dispatch = useDispatch();
   const fotos = useSelector(selectPhotos);
-
-  const idX = useSelector(selectidX);
+  const idX = fotos.map(i => {
+    return i.id;
+  });
+  console.log(idX);
+  //
+  const ajNazad = () => {
+    dispatch(decrement(idX));
+  };
+  const ajNapred = () => {
+    dispatch(increment(idX));
+  };
   //
   const images = fotos.map((i, index) => (
     <div className={y.slider}>
-      <p style={{ fontSize: 40 }}>&#10092;</p>
+      <p style={{ fontSize: 40 }} onClick={ajNazad}>
+        &#10092;
+      </p>
       <img
         className={y.slide}
         key={i.id}
         src={process.env.REACT_APP_SERVER_PUB + `/${i.naziv}`}
         width="1000"
       />
-      <div className={y.exif} key={i.id}>
+      <div className={y.exif}>
         {i.naziv}, {i.opis}, {i.lokacija}
       </div>
-      <p style={{ fontSize: 40 }}>&#10093;</p>
+      <p style={{ fontSize: 40 }} onClick={ajNapred}>
+        &#10093;
+      </p>
     </div>
   ));
 
@@ -44,6 +57,7 @@ export function Gallery() {
   return (
     <div className={y.g}>
       {images[1]}
+      <GalleryCard idX={idX} />
       <Login />
     </div>
   );
