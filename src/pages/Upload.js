@@ -51,7 +51,7 @@ export const Upload = () => {
   useEffect(() => {
     getExif();
     console.log(exifR);
-  }, [file]);
+  }, [file, message]);
   //
 
   return (
@@ -90,7 +90,8 @@ export const Upload = () => {
           </div>
         </div>
       ) : null}
-      {uploadedFile.fileName ? (
+      {exifR ? (
+        //uploadedFile.fileName
         <Form uploadedFile={uploadedFile} exifR={exifR} />
       ) : null}
     </>

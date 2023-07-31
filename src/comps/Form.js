@@ -2,18 +2,6 @@ import { useEffect, useState } from 'react';
 
 const Form = ({ uploadedFile, exifR }) => {
   const [pod, podSet] = useState();
-  // const place = {
-  //   lng: exifR.GPSLongitude[1],
-  //   lat: exifR.GPSLatitude[1],
-  // };
-  // const asPoint = p => ({
-  //   toPostgres: () =>
-  //     pgp.as.format('ST_MakePoint(${lng}, ${lat})', p),
-  //   rawType: true,
-  // });
-  //query
-  // await db.oneOrNone(`SELECT * FROM table ORDER BY
-  //             ST_StartPoint(geom) <-> ST_SetSRID($1, $2) LIMIT 1;`, [asPoint(place), 4326]);
 
   // //
   useEffect(() => {
@@ -26,18 +14,15 @@ const Form = ({ uploadedFile, exifR }) => {
     const data = Object.fromEntries(formData);
     console.log(data);
     const values = [...formData.values()];
-    console.log('====================================');
     console.log(values);
-    console.log('====================================');
     try {
       const res = await fetch('http://localhost:3500/novi', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' },
       });
-      console.log('====================================');
       console.log(res);
-      console.log('====================================');
+      // e.currentTarget.reset();
     } catch (err) {
       console.error(err.msg, 'nece');
     }
@@ -46,6 +31,7 @@ const Form = ({ uploadedFile, exifR }) => {
   };
   //
   useEffect(() => {
+    // currentTarget.reset();
     console.log('PRops', uploadedFile, exifR);
   }, [uploadedFile]);
   //
@@ -177,7 +163,7 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="lon"
-            defaultValue={exifR.Longitude}
+            defaultValue={exifR.longitude}
           />
         </div>
         <div className="form-control">
@@ -185,7 +171,7 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="lat"
-            defaultValue={exifR.Latitude}
+            defaultValue={exifR.latitude}
           />
         </div>
         <div className="form-control">

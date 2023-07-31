@@ -12,7 +12,6 @@
   display: flex;
   gap: 30px;
   flex-direction: row;
-  align-items: center;
 }
 
 .slide {

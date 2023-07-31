@@ -19,10 +19,11 @@ export function Gallery() {
     return i.id;
   });
   console.log(idX);
-  //
+  //minus
   const ajNazad = () => {
     dispatch(decrement(idX));
   };
+  //plus
   const ajNapred = () => {
     dispatch(increment(idX));
   };
@@ -35,7 +36,7 @@ export function Gallery() {
       <img
         className={y.slide}
         key={i.id}
-        src={process.env.REACT_APP_SERVER_PUB + `/${i.naziv}`}
+        src={process.env.REACT_APP_SERVER_PUB + `/${i.signatura}`}
         width="1000"
       />
       <div className={y.exif}>
@@ -56,7 +57,7 @@ export function Gallery() {
 
   return (
     <div className={y.g}>
-      {images[1]}
+      {images[3]}
       <GalleryCard idX={idX} />
       <Login />
     </div>

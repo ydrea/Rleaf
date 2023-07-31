@@ -14,17 +14,37 @@ import { useEffect, useState } from 'react';
 import L from 'leaflet';
 import iconUrl from '../assets/ikona.png'; // Check the path to the icon image
 
-const myIcon = new L.Icon({
-  iconUrl: iconUrl.default,
-  iconSize: [28, 28],
-});
+import 'proj4'; // import required for side effect
+import 'proj4leaflet'; // import required for side effect
+
+// const myIcon = new L.Icon({
+//   iconUrl: iconUrl.default,
+//   iconSize: [28, 28],
+// });
 //prettier-ignore
-const markers = [
-  { geocode: [45.2, 16.2], popUp: 'medo?'},
-  { geocode: [45.22, 16.25], popUp: 'zeko!'},
-  { geocode: [45.21, 16.24], popUp: 'kravicaa!'},
-];
+// const markers = [
+//   { geocode: [45.2, 16.2], popUp: 'medo?'},
+//   { geocode: [45.22, 16.25], popUp: 'zeko!'},
+//   { geocode: [45.21, 16.24], popUp: 'kravicaa!'},
+// ];
 //
+
+// function EPSG3879() {
+//   // eslint-disable-line
+//   const crsName = 'EPSG:3879';
+//   const projDef =
+//     '+proj=tmerc +lat_0=0 +lon_0=25 +k=1 +x_0=25500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs';
+//   const bounds = [25440000, 6630000, 25571072, 6761072];
+//   const originNw = [bounds.min.x, bounds.max.y];
+//   const crsOpts = {
+//     resolutions: [
+//       256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5, 0.25, 0.125, 0.0625,
+//       0.03125,
+//     ],
+//   };
+//   return new L.Proj.CRS(crsName, projDef, bounds, crsOpts);
+// }
+
 //
 
 export const About = () => {
@@ -49,8 +69,27 @@ export const About = () => {
   // const onEachFeature = async (feature, layer) => {
   //   await layer.bindPopup(feature.properties.name);
   // };
-
+  // const layer = new L.WFS({
+  //   url: 'https://kartta.hel.fi/ws/geoserver/avoindata/wfs?',
+  //   typeNS: 'avoindata',
+  //   typeName: 'Kaupunginosajako',
+  //   crs: EPSG3879(),
+  //   style: {
+  //     color: 'blue',
+  //     weight: 2,
+  //   },
+  // });
   //
+
+  // const helsinkiCoordinates = [60.192059, 24.945831];
+  // const crs = EPSG3879();
+  // const url = 'https://kartta.hel.fi/ws/geoserver/avoindata/wms?'; // you may use any geoserver you know
+  // const wmsOptions = { layers: 'avoindata:Opaskartta_1940' }; // comma-separated string of any WMS layer(s) on the geoserver
+  // return (
+  //   <Map center={helsinkiCoordinates} zoom={8} minZoom={5} scrollWheelZoom={false} crs={crs}>
+  //     <WMSTileLayer url={url} wmsOptions={wmsOptions}/>
+  //   </Map>);
+
   return (
     <>O nama</>
     // <MapContainer
@@ -63,19 +102,8 @@ export const About = () => {
     //       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     //     </BaseLayer>
     //   </LayersControl>
-    //   {''}
+    //   {layer}
     //   {data && <GeoJSON data={data} onEachFeature={onEachFeature} />}
-    //   <MarkerClusterGroup>
-    //     {markers.map(i => (
-    //       <Marker
-    //         key={i.geocode[0]}
-    //         position={i.geocode}
-    //         icon={myIcon}
-    //       >
-    //         <Popup>{i.popUp}</Popup>
-    //       </Marker>
-    //     ))}
-    //   </MarkerClusterGroup>
     // </MapContainer>
   );
 };
