@@ -87,7 +87,8 @@ export function Gallery() {
               <div style={{ fontSize: 50, cursor: 'crosshair' }}>
                 {idx}
               </div>
-              {i.naziv}, {i.opis}, {i.lokacija}
+              {i.naziv}, {i.opis}, {i.lokacija}, {i.latitude},{' '}
+              {i.longitude}
             </div>
             <p
               style={{ fontSize: 40, cursor: 'crosshair' }}
