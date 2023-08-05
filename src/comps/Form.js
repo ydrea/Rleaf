@@ -11,10 +11,12 @@ const Form = ({ uploadedFile, exifR }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+
+    console.log(formData.entries().next().value);
     const data = Object.fromEntries(formData);
-    console.log(data);
+    // console.log(data);
     const values = [...formData.values()];
-    console.log(values);
+    // console.log(values);
     try {
       const res = await fetch('http://localhost:3500/novi', {
         method: 'POST',
@@ -77,7 +79,7 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="lokacija"
-            defaultValue={exifR.Sublocation}
+            defaultValue={exifR.Location}
           />
         </div>{' '}
         <div className="form-control">
@@ -85,7 +87,7 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="date"
             name="datum"
-            defaultValue={Date.now().toString()}
+            defaultValue={exifR.DateCreated}
           />
         </div>
       </div>
@@ -99,23 +101,23 @@ const Form = ({ uploadedFile, exifR }) => {
       >
         <div className="form-control">
           <label>kategorija</label>
-          <select>
-            <option name="infrastruktura">infrastruktura</option>
-            <option name="ekologija">ekologija</option>
-            <option name="tradicijska_gradnja">
+          <select name="kategorija">
+            <option value="infrastruktura">infrastruktura</option>
+            <option value="ekologija">ekologija</option>
+            <option value="tradicijska_gradnja">
               tradicijska_gradnja
             </option>
-            <option name="vjerski_objekti">vjerski_objekti</option>
-            <option name="vazni_objekti">važni_objekti</option>
-            <option name="spomenici">spomenici</option>
-            <option name="gospodarski_objekti">
+            <option value="vjerski_objekti">vjerski_objekti</option>
+            <option value="vazni_objekti">važni_objekti</option>
+            <option value="spomenici">spomenici</option>
+            <option value="gospodarski_objekti">
               gospodarski_objekti
             </option>
-            <option name="prirodni_resursi">prirodni_resursi</option>
-            <option name="stanovnistvo">stanovništvo</option>
-            <option name="poljoprivreda">poljoprivreda</option>
-            <option name="stocarstvo">stočarstvo</option>
-            <option name="arhitektura">arhitektura</option>
+            <option value="prirodni_resursi">prirodni_resursi</option>
+            <option value="stanovnistvo">stanovništvo</option>
+            <option value="poljoprivreda">poljoprivreda</option>
+            <option value="stocarstvo">stočarstvo</option>
+            <option value="arhitektura">arhitektura</option>
           </select>
         </div>{' '}
         <div className="form-control">
@@ -147,7 +149,7 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="tagovi"
-            defaultValue={exifR.Keywords}
+            defaultValue={exifR.subject}
           />
         </div>
         <div className="form-control">

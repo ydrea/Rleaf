@@ -4,6 +4,7 @@ import Message from '../comps/Message';
 import axios from 'axios';
 import exifr from 'exifr';
 import Form from '../comps/Form';
+import UnicodeDecoder from '../utils/unicoder';
 //
 export const Upload = () => {
   const [file, setFile] = useState('');
@@ -43,13 +44,14 @@ export const Upload = () => {
   };
   //exifr
   const getExif = async () => {
-    const exIf = await exifr.parse(file, { iptc: true });
+    const exIf = await exifr.parse(file, { iptc: true, xmp: true });
     console.log(exIf);
     exifRSet(exIf);
   };
 
   useEffect(() => {
     getExif();
+    // UnicodeDecoder(exifR);
     console.log(exifR);
   }, [file, message]);
   //

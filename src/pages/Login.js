@@ -12,14 +12,16 @@ import { useNavigate } from 'react-router-dom';
 //
 export const Login = () => {
   const fix = process.env.REACT_APP_PASS;
-  const [pass, passSet] = useState('');
+  const [pass, passSet] = useState(
+    localStorage.getItem('pass') || ''
+  );
   const valid = useSelector(selectValid);
-  // const pwd = useSelector(selectPwd);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //
   useEffect(() => {
     console.log(pass, valid);
+    localStorage.setItem('pass', pass);
   }, [pass]);
   // };
   const handleSubmit = e => {
