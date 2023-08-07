@@ -112,7 +112,14 @@ export const Mapa = () => {
             position={i.geocode}
             icon={myIcon}
           >
-            <Popup>{i.popUp}</Popup>
+            <Popup>
+              {i.popUp}
+              <img
+                width="233px"
+                src={`http://localhost:3500/public/${i.popUp}`}
+                alt={i.popUp}
+              />
+            </Popup>
           </Marker>
         ))}
       </MarkerClusterGroup>
