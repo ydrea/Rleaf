@@ -24,11 +24,7 @@ import axios from 'axios';
 //
 // foto layer
 //prettier-ignore
-const markers = [
-  { geocode: [45.2, 16.2], popUp: 'medo?'},
-  { geocode: [45.22, 16.25], popUp: 'zeko!'},
-  { geocode: [45.21, 16.24], popUp: 'kravicaa!'},
-];
+
 const myIcon = new Icon({
   iconUrl: require('../assets/ikona.png'),
   iconSize: [28, 28],
@@ -70,7 +66,7 @@ export const Mapa = () => {
 
   return (
     <MapContainer
-      center={[16.2, 45.2]}
+      center={[45.2, 16.2]}
       zoom={8}
       style={{ height: '80vh' }}
     >
@@ -107,7 +103,7 @@ export const Mapa = () => {
         </LayersControl>
       </LayersControl>
 
-      {data && <GeoJSON data={data} />}
+      {/* {data && <GeoJSON data={data} />} */}
 
       <MarkerClusterGroup>
         {markeri.map(i => (
