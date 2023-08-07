@@ -72,6 +72,7 @@ export const FiksniElementi = () => {
     'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE';
 
   const wmsLayerOptions = {
+    zIndex: 6,
     layers: 'fiksni_elementi',
     format: 'image/png',
     transparent: true,

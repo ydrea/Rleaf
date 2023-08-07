@@ -25,6 +25,8 @@ const Form = ({ uploadedFile, exifR }) => {
       });
       console.log(res);
       // e.currentTarget.reset();
+      // TO_DO
+      //window.location('/upload')
     } catch (err) {
       console.error(err.msg, 'nece');
     }
