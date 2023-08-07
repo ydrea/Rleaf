@@ -42,7 +42,7 @@ function onEachFeature(feature, layer) {
 
 export const Mapa = () => {
   const [data, setData] = useState(null);
-  const [markeri, markeriSet] = useState();
+  const [markeri, markeriSet] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,7 +54,7 @@ export const Mapa = () => {
           const geo = JSON.parse(item.geometry);
           return {
             popUp: item.signatura,
-            geocode: geo.coordinates,
+            geocode: [geo.coordinates[1], geo.coordinates[0]],
           };
         });
         markeriSet(parsedData);
@@ -70,7 +70,7 @@ export const Mapa = () => {
 
   return (
     <MapContainer
-      center={[45.2, 16.2]}
+      center={[16.2, 45.2]}
       zoom={8}
       style={{ height: '80vh' }}
     >
@@ -112,7 +112,7 @@ export const Mapa = () => {
       <MarkerClusterGroup>
         {markeri.map(i => (
           <Marker
-            key={i.geocode[0]}
+            key={i.geocode[0] + Math.random()}
             position={i.geocode}
             icon={myIcon}
           >
