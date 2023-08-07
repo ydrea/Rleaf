@@ -44,21 +44,22 @@ function Home() {
   }, [map]);
 
   return (
-    <MapContainer
-      whenCreated={setMap}
-      center={center}
-      zoom={9}
-      scrollWheelZoom={false}
-      style={{ height: '90vh', width: '90%' }} // Ensure the map container has a size
-    >
-      <TileLayer {...tileLayer} />
-      {/* Log the GeoJSON data */}
-      {console.log('Rendered GeoJSON data:', data)}
-      {/* Render GeoJSON features */}
-      {data && (
-        <GeoJSON data={data} onEachFeature={onEachFeature} />
-      )}{' '}
-    </MapContainer>
+    <>Home</>
+    // <MapContainer
+    //   whenCreated={setMap}
+    //   center={center}
+    //   zoom={9}
+    //   scrollWheelZoom={false}
+    //   style={{ height: '90vh', width: '90%' }} // Ensure the map container has a size
+    // >
+    //   <TileLayer {...tileLayer} />
+    //   {/* Log the GeoJSON data */}
+    //   {console.log('Rendered GeoJSON data:', data)}
+    //   {/* Render GeoJSON features */}
+    //   {data && (
+    //     <GeoJSON data={data} onEachFeature={onEachFeature} />
+    //   )}{' '}
+    // </MapContainer>
   );
 }
 
