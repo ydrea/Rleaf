@@ -7,11 +7,13 @@ import './index.scss';
 //
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+//
 import { ApiProvider } from '@reduxjs/toolkit/query/react';
 import { apiSlice } from './redux/api/apiSlice';
 
 //
+
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     {/* <ApiProvider api={apiSlice}> */}

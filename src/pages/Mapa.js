@@ -21,6 +21,11 @@ import {
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
+const Foto = () => {
+  const routeParams = useParams();
+};
 //
 // foto layer
 //prettier-ignore
