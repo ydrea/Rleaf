@@ -1,17 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const getPhotos = createAsyncThunk('getphotos', async () => {
-  const rez = await fetch(
-    // 'https://picsum.photos/v2/list?page=2&limit=6'
-    'http://localhost:3500/photos/'
-  );
+  const rez = await fetch(process.env.REACT_APP_SERVER + '/photos/');
   const rezult = await rez.json();
   console.log(rezult);
   return rezult;
 });
 //
 export const getAPhoto = createAsyncThunk('getaphoto', async id => {
-  const rez = await fetch(`http://localhost:3500/photos/${id}`);
+  const rez = await fetch(
+    process.env.REACT_APP_SERVER + `/photos/${id}`
+  );
   const rezult = await rez.json();
   console.log(rezult);
   return rezult;
