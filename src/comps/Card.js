@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectPhotos } from '../redux/rtk/gallerySlice';
 
-export const GalleryCard = ({ idx, id }) => {
+export const Card = ({ idx, id }) => {
   //
   const photos = useSelector(selectPhotos);
   console.log(photos);
@@ -15,8 +15,8 @@ export const GalleryCard = ({ idx, id }) => {
         {JSON.stringify(photos)}
         <img
           src={
-            // process.env.REACT_APP_SERVER_PUB +
-            `http://localhost:3500/photos/${id}`
+            process.env.REACT_APP_SERVER_PUB + `${id}`
+            // `http://localhost:3500/photos/${id}`
           }
           width="1000"
         />{' '}

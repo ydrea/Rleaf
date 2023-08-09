@@ -4,7 +4,10 @@ import { Mapa } from './pages/Mapa';
 import { Gallery } from './pages/Gallery';
 import { Upload } from './pages/Upload';
 import { Login } from './pages/Login';
-
+import { ImagePage } from './pages/ImagePage';
+import { GalleryCard } from './comps/GalleryCard';
+import { Card } from './comps/Card';
+//
 import './App.scss';
 import Layout from './Layout';
 //
@@ -13,7 +16,7 @@ import Private from './pages/protected/Private';
 //
 import { useEffect } from 'react';
 import { store } from './redux/store';
-//
+
 function App() {
   //
 
@@ -30,6 +33,12 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/mapa" element={<Mapa />} />
         <Route path="/gallery" element={<Gallery />} />
+
+        <Route path="/public/:id" element={<Card />} />
+
+        <Route path="/images" element={<ImagePage />} />
+        <Route path="/images/:id" element={<GalleryCard />} />
+
         <Route path="/login" element={<Login />} />
       </Routes>
     </Layout>

@@ -17,7 +17,9 @@ function Home() {
 
   const getTkz = async () => {
     try {
-      const res = await fetch('http://localhost:3500/wfs_tkz');
+      const res = await fetch(
+        process.env.REACT_APP_SERVER + '/wfs_tkz'
+      );
       const jsonData = await res.json();
       console.log('Fetched GeoJSON data:', jsonData);
       dataSet(jsonData);
