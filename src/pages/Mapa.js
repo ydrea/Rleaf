@@ -44,6 +44,8 @@ function onEachFeature(feature, layer) {
 export const Mapa = () => {
   const [data, setData] = useState(null);
   const [markeri, markeriSet] = useState([]);
+
+  //tipofthespear
   useEffect(() => {
     const fetchData = async () => {
       try {

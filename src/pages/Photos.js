@@ -89,6 +89,7 @@ function Photos() {
   const photos = useSelector(selectPhotos);
   const selectedPhoto = useSelector(selectAPhoto);
 
+  //redux
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
