@@ -50,7 +50,7 @@ export const Mapa = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3500/json_photos'
+          `${process.env.REACT_APP_SERVER}/json_photos`
         );
         console.log(response.data);
         const parsedData = response.data.map(item => {
@@ -123,7 +123,7 @@ export const Mapa = () => {
               {i.popUp}
               <img
                 width="233px"
-                src={`http://localhost:3500/public/${i.popUp}`}
+                src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
                 alt={i.popUp}
               />
             </Popup>
