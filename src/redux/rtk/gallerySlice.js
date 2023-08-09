@@ -1,23 +1,34 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const getPhotos = createAsyncThunk('getphotos', async () => {
-  const rez = await fetch(process.env.REACT_APP_SERVER + '/photos/');
-  const rezult = await rez.json();
-  console.log(rezult);
-  return rezult;
-});
+const url = `${process.env.REACT_APP_SERVER}/photosr`;
+
+console.log('====================================');
+console.log(url);
+console.log('====================================');
+export const getPhotos = createAsyncThunk(
+  'getphotos+rank',
+  async () => {
+    const rez = await fetch(url);
+    const rezult = await rez.json();
+    console.log('listaR', rezult);
+    return rezult;
+  }
+);
 //
-export const getAPhoto = createAsyncThunk('getaphoto', async id => {
-  const rez = await fetch(
-    process.env.REACT_APP_SERVER + `/photos/${id}`
-  );
-  const rezult = await rez.json();
-  console.log(rezult);
-  return rezult;
-});
+export const getAPhoto = createAsyncThunk(
+  'getaphoto+rank',
+  async id => {
+    const rez = await fetch(
+      `${process.env.REACT_APP_SERVER}/photosr/${id}`
+    );
+    const rezult = await rez.json();
+    console.log('oneR', rezult);
+    return rezult;
+  }
+);
 //
 const initialState = {
-  idX: 1,
+  idX: 2,
   photos: [],
   loading: false,
   error: null,
@@ -53,6 +64,20 @@ export const gallerySlice = createSlice({
 export const { increment, decrement } = gallerySlice.actions;
 
 export const selectPhotos = state => state.galery.photos;
+
+//
+export const selectAPhoto = state => {
+  console.log('Current idX:', state.galery.idX);
+  const selectedIdX = state.galery.idX;
+  const selectedPhoto = state.galery.photos.find(photo => {
+    const rank = parseInt(photo.rank_number);
+    return rank === selectedIdX;
+  });
+
+  console.log('Selected photo:', selectedPhoto);
+  return selectedPhoto;
+};
+
 export const selectidX = state => state.galery.idX;
 
 export default gallerySlice.reducer;

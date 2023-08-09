@@ -17,8 +17,8 @@ export const Nav = () => {
       <NavLink className={s.navlink} to="/gallery">
         gallery
       </NavLink>
-      <NavLink className={s.navlink} to="/images">
-        images
+      <NavLink className={s.navlink} to="/photos">
+        photos
       </NavLink>
     </nav>
   );
