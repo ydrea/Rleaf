@@ -8,7 +8,7 @@ import {
   decrement,
   selectAPhoto,
 } from '../redux/rtk/gallerySlice';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 //
 function Gallery() {
   const dispatch = useDispatch();

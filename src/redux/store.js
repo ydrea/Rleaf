@@ -6,9 +6,9 @@ import authReducer from './rtk/authSlice';
 //
 export const store = configureStore({
   reducer: {
-    galery: galleryReducer,
-    mapa: mapReducer,
-    auth: authReducer,
+    gallery: galleryReducer,
+    // mapa: mapReducer,
+    // auth: authReducer,
   },
   //   middleware: getDefaultMiddleware =>
   //     getDefaultMiddleware().concat(gallerySlice.middleware),
