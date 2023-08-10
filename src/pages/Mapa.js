@@ -21,7 +21,7 @@ import {
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const Foto = () => {
   const routeParams = useParams();
@@ -121,11 +121,13 @@ export const Mapa = () => {
           >
             <Popup>
               {i.popUp}
-              <img
-                width="233px"
-                src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
-                alt={i.popUp}
-              />
+              <Link to={{ pathname: '/photos', params: i.popUp }}>
+                <img
+                  width="233px"
+                  src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
+                  alt={i.popUp}
+                />
+              </Link>
             </Popup>
           </Marker>
         ))}
