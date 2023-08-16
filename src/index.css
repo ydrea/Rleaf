@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.cdnfonts.com/css/freesans");
 .c {
   height: calc(100vh - 100px);
-  background: rgb(244, 244, 244);
+  background: 8C8D85;
   display: flex;
 }
 
 body {
-  margin: 20;
+  margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "FreeSans", sans-serif;
 }/*# sourceMappingURL=index.css.map */

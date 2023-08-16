@@ -1,12 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 
-$Poppins: "Poppins", sans-serif;
+@import url('https://fonts.cdnfonts.com/css/freesans');
+
+                
+$FreeSans: "FreeSans", sans-serif;
+$Helvetica: "Helvetica Neue";
 
 // colors
-$dark: rgb(29, 29, 29);
-$light: #fff;
-$primary: rgb(162, 162, 246);
-$bg: rgb(244, 244, 244);
+$crn: 000000;
+$beo: #fff;
+// $primary: rgb(162, 162, 246);
+$bg: 8C8D85;
+$ljub: BD00FF;
 
 // spacing
 $spacing-md: 16px;
