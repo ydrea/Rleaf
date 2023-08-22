@@ -40,6 +40,7 @@ function App() {
         <Route path="/gallery/:id" element={<GalleryCard />} /> */}
         <Route path="/photos" element={<Photos />} />
         <Route path="/photos/:signatura" element={<Photos />} />
+        <Route path="/photos/:popUp" element={<Photos />} />
 
         <Route path="/login" element={<Login />} />
       </Routes>

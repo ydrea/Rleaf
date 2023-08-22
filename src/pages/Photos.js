@@ -19,7 +19,8 @@ export default function Photos() {
   const selectedPhoto = photos[selectedPhotoIndex];
   const { popUp, signatura } = useParams(); // Get both parameters from the URL
 
-  console.log(photos, popUp, signatura);
+  console.log('WTF', photos, popUp, signatura);
+
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
@@ -33,6 +34,14 @@ export default function Photos() {
     if (index !== -1) {
       dispatch(selectPhotoIndex(index)); // Set the selectedPhotoIndex in the store
     }
+    console.log(
+      'Signatura:',
+      signatura,
+      'URL Signatura:',
+      popUp,
+      'Index',
+      index
+    );
   }, [dispatch, photos, popUp, signatura]);
 
   // useEffect(() => {
@@ -68,7 +77,13 @@ export default function Photos() {
         <button onClick={handlePreviousPhoto}>Previous Photo</button>
         <button onClick={handleNextPhoto}>Next Photo</button>
       </div>
-      {selectedPhoto && <Card photo={selectedPhoto} />}
+      {selectedPhoto && (
+        <Card
+          photo={selectedPhoto}
+          popUp={popUp}
+          signatura={signatura}
+        />
+      )}
 
       {/* Render the list of photos as links */}
       <div>

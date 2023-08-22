@@ -62,7 +62,10 @@ export const gallerySlice = createSlice({
       state.status = 'reject';
       state.error = action.error.message;
     },
-    [getAPhoto.fulfilled]: (state, action) => {},
+    [getAPhoto.fulfilled]: (state, action) => {
+      const updatedPhoto = action.payload; // Assuming the action.payload contains the updated photo data
+      state.photos[state.selectedPhotoIndex] = updatedPhoto;
+    },
   },
 });
 

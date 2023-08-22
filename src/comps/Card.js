@@ -1,4 +1,4 @@
-export function Card({ photo }) {
+export function Card({ photo, popUp, signatura }) {
   return (
     <div>
       <img
