@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+// import {  } from 'react-router';
 import {
   getPhotos,
   increment,
@@ -18,6 +19,15 @@ export default function Photos() {
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const selectedPhoto = photos[selectedPhotoIndex];
   const { popUp, signatura } = useParams(); // Get both parameters from the URL
+
+  const history = useNavigate(); // Initialize the useHistory hook
+
+  const handleShowOnMap = () => {
+    if (selectedPhoto && selectedPhoto.popUp) {
+      // Navigate to Mapa route with the selected photo's popUp parameter
+      history.push(`/mapa/${selectedPhoto.popUp}`);
+    }
+  };
 
   useEffect(() => {
     dispatch(getPhotos());
@@ -68,7 +78,16 @@ export default function Photos() {
         <button onClick={handleNextPhoto}>Next Photo</button>
       </div>
       {selectedPhoto && <Card photo={selectedPhoto} />}
-
+      {selectedPhoto && (
+        <div>
+          <img
+            src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.popUp}`} // Construct the image URL
+            alt={selectedPhoto.naziv} // Use appropriate alt text
+          />
+          {/* Other details */}
+          <button onClick={handleShowOnMap}>Show on Map</button>
+        </div>
+      )}
       {/* Render the list of photos as links */}
       {/* <div>
         {photos.map(photo => (

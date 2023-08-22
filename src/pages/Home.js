@@ -1,5 +1,5 @@
 import 'leaflet/dist/leaflet.css';
-
+import './home.scss';
 import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';

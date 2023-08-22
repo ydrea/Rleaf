@@ -22,10 +22,11 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import CustomCtrl from '../comps/CustomCtrl';
 
-const Foto = () => {
-  const routeParams = useParams();
-};
+// const Foto = () => {
+//   const routeParams = useParams();
+// };
 //
 // foto layer
 //prettier-ignore
@@ -42,8 +43,23 @@ function onEachFeature(feature, layer) {
 }
 
 export const Mapa = () => {
+  const [lajeri, lajeriSet] = useState([
+    { name: 't1', visible: true },
+    { name: 't2', visible: false },
+  ]);
+  //
   const [data, setData] = useState(null);
   const [markeri, markeriSet] = useState([]);
+  //ex
+  const onLayerToggle = layerName => {
+    lajeriSet(prevLayers =>
+      prevLayers.map(layer =>
+        layer.name === layerName
+          ? { ...layer, visible: !layer.visible }
+          : layer
+      )
+    );
+  };
 
   //tipofthespear
   useEffect(() => {
@@ -72,66 +88,75 @@ export const Mapa = () => {
   const { BaseLayer, Overlay } = LayersControl;
 
   return (
-    <MapContainer
-      center={[45.2, 16.2]}
-      zoom={8}
-      style={{ height: '80vh' }}
+    <div
+      style={{
+        height: '70vh',
+        width: '140vh',
+      }}
     >
-      <LayersControl>
-        <BaseLayer checked name="OSM">
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        </BaseLayer>
-        <BaseLayer name="reljef">
-          <PodRH />
-        </BaseLayer>
-        <FiksniElementi />
-        <Overlay name="admin. naselja">
-          <ANaselja />
-        </Overlay>
-        <Overlay name="P banijska naselja">
-          <PBNaselja />
-        </Overlay>
-        <Overlay name="P administrativne jedinice">
-          <PAJedinice />
-        </Overlay>
+      {/* <CustomZoom /> */}
+      <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} />
+      <MapContainer
+        center={[45.2, 16.2]}
+        zoom={8}
+        style={{ height: '80vh' }}
+      >
         <LayersControl>
-          <BaseLayer name="tema_koristenje_zemljista">
-            <GeoJSON data={geojson} onEachFeature={onEachFeature} />
+          <BaseLayer checked name="OSM">
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           </BaseLayer>
-          <BaseLayer name="tema_zastita_prirode">
-            <TemaZP />
+          <BaseLayer name="reljef">
+            <PodRH />
           </BaseLayer>
-          <BaseLayer name="tema_stanovnistvo">
-            <TemaS />
-          </BaseLayer>
-          <BaseLayer name="tema_potres">
-            <TemaP />
-          </BaseLayer>
+          <FiksniElementi />
+          <Overlay name="admin. naselja">
+            <ANaselja />
+          </Overlay>
+          <Overlay name="P banijska naselja">
+            <PBNaselja />
+          </Overlay>
+          <Overlay name="P administrativne jedinice">
+            <PAJedinice />
+          </Overlay>
+          <LayersControl>
+            <BaseLayer name="tema_koristenje_zemljista">
+              <GeoJSON data={geojson} onEachFeature={onEachFeature} />
+            </BaseLayer>
+            <BaseLayer name="tema_zastita_prirode">
+              <TemaZP />
+            </BaseLayer>
+            <BaseLayer name="tema_stanovnistvo">
+              <TemaS />
+            </BaseLayer>
+            <BaseLayer name="tema_potres">
+              <TemaP />
+            </BaseLayer>
+          </LayersControl>
         </LayersControl>
-      </LayersControl>
 
-      {/* {data && <GeoJSON data={data} />} */}
+        {/* {data && <GeoJSON data={data} />} */}
 
-      <MarkerClusterGroup>
-        {markeri.map(i => (
-          <Marker
-            key={i.geocode[0] + Math.random()}
-            position={i.geocode}
-            icon={myIcon}
-          >
-            <Popup>
-              {i.popUp}
-              <Link to={{ pathname: '/photos', params: i.popUp }}>
-                <img
-                  width="233px"
-                  src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
-                  alt={i.popUp}
-                />
-              </Link>
-            </Popup>
-          </Marker>
-        ))}
-      </MarkerClusterGroup>
-    </MapContainer>
+        <MarkerClusterGroup>
+          {markeri.map(i => (
+            <Marker
+              key={i.geocode[0] + Math.random()}
+              position={i.geocode}
+              icon={myIcon}
+            >
+              <Popup>
+                {i.popUp}
+                <Link to={{ pathname: '/photos', params: i.popUp }}>
+                  <img
+                    width="233px"
+                    src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
+                    alt={i.popUp}
+                  />
+                </Link>
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+      </MapContainer>
+    </div>
   );
 };
