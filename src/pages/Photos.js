@@ -19,6 +19,7 @@ export default function Photos() {
   const selectedPhoto = photos[selectedPhotoIndex];
   const { popUp, signatura } = useParams(); // Get both parameters from the URL
 
+  console.log(photos, popUp, signatura);
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
@@ -70,7 +71,7 @@ export default function Photos() {
       {selectedPhoto && <Card photo={selectedPhoto} />}
 
       {/* Render the list of photos as links */}
-      {/* <div>
+      <div>
         {photos.map(photo => (
           <Link to={`/photos/${photo.signatura}`} key={photo.id}>
             <img
@@ -79,10 +80,11 @@ export default function Photos() {
                 `/${photo.signatura}`
               }
               alt={photo.naziv}
+              style={{ width: '400px' }}
             />
           </Link>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }

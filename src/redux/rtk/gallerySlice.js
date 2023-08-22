@@ -70,6 +70,7 @@ export const { increment, decrement, selectPhotoIndex } =
   gallerySlice.actions;
 
 export const selectPhotos = state => state.gallery.photos;
+//
 export const selectSelectedPhotoIndex = state =>
   state.gallery.selectedPhotoIndex;
 // ...
