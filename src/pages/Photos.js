@@ -18,6 +18,7 @@ export default function Photos() {
   const photos = useSelector(selectPhotos);
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const selectedPhoto = photos[selectedPhotoIndex];
+  console.log(selectedPhoto);
   const { popUp, signatura } = useParams(); // Get both parameters from the URL
 
   const history = useNavigate(); // Initialize the useHistory hook
