@@ -73,6 +73,15 @@ export const Nav = () => {
           </li>
           <li className="nav-item">
             <Link
+              to="/gallery"
+              className="nav-links"
+              onClick={closeMobileMenu}
+            >
+              <p>galerija</p>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
               // smooth
               href="/projects"
               className="nav-links"
@@ -83,7 +92,7 @@ export const Nav = () => {
           </li>
           <li className="nav-item">
             <Link
-              smooth
+              // smooth
               to="/mapa"
               className="nav-links"
               onClick={closeMobileMenu}
@@ -93,7 +102,7 @@ export const Nav = () => {
           </li>
           <li className="nav-item">
             <Link
-              smooth
+              // smooth
               to="/contact"
               className="nav-links"
               onClick={closeMobileMenu}
@@ -104,7 +113,7 @@ export const Nav = () => {
 
           <li className="nav-item">
             <Link
-              smooth
+              // smooth
               to="/login"
               className="nav-links"
               onClick={closeMobileMenu}

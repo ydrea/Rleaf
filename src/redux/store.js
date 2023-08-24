@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import mapReducer from './rtk/mapSlice';
+// import mapReducer from './rtk/mapSlice';
 import galleryReducer from './rtk/gallerySlice';
-import authReducer from './rtk/authSlice';
+// import authReducer from './rtk/authSlice';
 
 //
 export const store = configureStore({

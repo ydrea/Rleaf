@@ -1,24 +1,37 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams, useNavigate } from 'react-router-dom'; // Import useHistory from react-router
 import {
   getPhotos,
-  getAPhoto,
-  selectPhotos,
   increment,
   decrement,
+  selectPhotos,
+  selectPhotoIndex,
+  selectSelectedPhotoIndex,
   selectAPhoto,
 } from '../redux/rtk/gallerySlice';
-import { useParams, useHistory } from 'react-router-dom';
-//
-function Gallery() {
+import { Card } from '../comps/Card';
+
+export default function Photos() {
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
-  const selectedPhoto = useSelector(selectAPhoto);
-  const { id } = useParams();
+  const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
+  const selectedPhoto = photos[selectedPhotoIndex];
+  const { popUp, signatura } = useParams();
+  const navigate = useNavigate();
   //
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
+
+  useEffect(() => {
+    const index = photos.findIndex(
+      photo => photo.popUp === popUp || photo.signatura === signatura
+    );
+    if (index !== -1) {
+      dispatch(selectPhotoIndex(index));
+    }
+  }, [dispatch, photos, popUp, signatura]);
 
   const handleNextPhoto = () => {
     dispatch(increment());
@@ -28,12 +41,12 @@ function Gallery() {
     dispatch(decrement());
   };
 
-  useEffect(() => {
-    if (selectedPhoto === undefined) {
-      // Fetch individual photo data when component loads or idX changes
-      dispatch(getAPhoto(selectedPhoto?.id));
+  const handleShowOnMap = () => {
+    console.log('ajd');
+    if (selectedPhoto && selectedPhoto.popUp) {
+      navigate(`/mapa/${selectedPhoto.popUp}`);
     }
-  }, [dispatch, selectedPhoto]);
+  };
 
   return (
     <div>
@@ -42,34 +55,40 @@ function Gallery() {
         <button onClick={handleNextPhoto}>Next Photo</button>
       </div>
       {selectedPhoto && (
+        <Card
+          photo={selectedPhoto}
+          popUp={popUp}
+          signatura={signatura}
+        />
+      )}
+      {selectedPhoto && (
         <div>
           <img
-            src={
-              process.env.REACT_APP_SERVER_PUB +
-              `/${selectedPhoto.signatura}`
-            }
+            src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.popUp}`}
             alt={selectedPhoto.naziv}
-            width="1000px"
           />
           <div>
             {selectedPhoto.naziv}, {selectedPhoto.opis},{' '}
             {selectedPhoto.lokacija}, {selectedPhoto.latitude},{' '}
             {selectedPhoto.longitude}
           </div>
+          <button onClick={handleShowOnMap}>Show on Map</button>
         </div>
       )}
-      {/* Render the list of photos if needed */}
-      {photos.map(photo => (
-        <img
-          key={photo.id}
-          src={
-            process.env.REACT_APP_SERVER_PUB + `/${photo.signatura}`
-          }
-          alt={photo.naziv}
-        />
-      ))}
+      <div>
+        {photos.map(photo => (
+          <Link to={`/gallery/${photo.signatura}`} key={photo.id}>
+            <img
+              src={
+                process.env.REACT_APP_SERVER_PUB +
+                `/${photo.signatura}`
+              }
+              alt={photo.naziv}
+              style={{ width: '400px' }}
+            />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
-
-export default Gallery;

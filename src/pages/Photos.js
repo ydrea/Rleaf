@@ -21,50 +21,35 @@ export default function Photos() {
   const selectedPhoto = photos[selectedPhotoIndex];
   console.log(selectedPhoto);
   const { popUp, signatura } = useParams(); // Get both parameters from the URL
-
-  const history = useNavigate(); // Initialize the useHistory hook
+  const navigate = useNavigate(); //
 
   const handleShowOnMap = () => {
-    if (selectedPhoto && selectedPhoto.popUp) {
-      // Navigate to Mapa route with the selected photo's popUp parameter
-      history.push(`/mapa/${selectedPhoto.popUp}`);
+    if (selectedPhoto && selectedPhoto.signatura) {
+      navigate(`/mapa/${selectedPhoto.signatura}`);
     }
   };
 
+  //
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
 
+  //find it
   useEffect(() => {
-    // Find the index of the selected photo based on the popUp parameter if available,
-    // otherwise use the signatura parameter
+    console.log('PopUp:', popUp);
+    console.log('Signatura:', signatura);
+
     const index = photos.findIndex(
       photo => photo.popUp === popUp || photo.signatura === signatura
     );
+    console.log('Index:', index);
+
     if (index !== -1) {
-      dispatch(selectPhotoIndex(index)); // Set the selectedPhotoIndex in the store
+      dispatch(selectPhotoIndex(index));
     }
   }, [dispatch, photos, popUp, signatura]);
 
-  // useEffect(() => {
-  //   console.log(photos);
-  //   const index = photos.findIndex(photo => {
-  //     console.log(
-  //       'Signatura:',
-  //       photo.signatura,
-  //       'URL Signatura:',
-  //       signatura
-  //     );
-  //     return photo.signatura === signatura;
-  //   });
-  //   // ...
-  //   console.log('Index:', index); //
-  //   if (index !== -1) {
-  //     console.log('Dispatching selectPhotoIndex'); //
-  //     dispatch(selectPhotoIndex(index)); //
-  //   }
-  // }, [dispatch, photos, signatura]);
-
+  //prev/next
   const handleNextPhoto = () => {
     dispatch(increment());
   };
@@ -82,11 +67,6 @@ export default function Photos() {
       {selectedPhoto && <Card photo={selectedPhoto} />}
       {selectedPhoto && (
         <div>
-          <img
-            src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.popUp}`} // Construct the image URL
-            alt={selectedPhoto.naziv} // Use appropriate alt text
-          />
-          {/* Other details */}
           <button onClick={handleShowOnMap}>Show on Map</button>
         </div>
       )}
@@ -94,17 +74,17 @@ export default function Photos() {
       <div className="photo-container">
         {photos.map(photo => (
           <Link to={`/photos/${photo.signatura}`} key={photo.id}>
-            <div className="photo">
-              <img
-                className="photo-img"
-                src={
-                  process.env.REACT_APP_SERVER_PUB +
-                  `/${photo.signatura}`
-                }
-                alt={photo.naziv}
-              />
-              <div className="overlay"></div>
-            </div>
+            <img
+              src={
+                process.env.REACT_APP_SERVER_PUB +
+                `/${photo.signatura}`
+              }
+              alt={photo.naziv}
+              style={{ width: '400px' }}
+              onClick={() =>
+                dispatch(selectPhotoIndex(photos.indexOf(photo)))
+              }
+            />
           </Link>
         ))}
       </div>

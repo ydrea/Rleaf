@@ -10,7 +10,7 @@ import {
   // WMSTileLayer,
 } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
-import { useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Icon } from 'leaflet';
 //prettier-ignore
 import {
@@ -23,13 +23,7 @@ import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import CustomCtrl from '../comps/CustomCtrl';
-
-// const Foto = () => {
-//   const routeParams = useParams();
-// };
-//
-// foto layer
-//prettier-ignore
+import { useDispatch } from 'react-redux';
 
 const myIcon = new Icon({
   iconUrl: require('../assets/ikona.png'),
@@ -43,6 +37,28 @@ function onEachFeature(feature, layer) {
 }
 
 export const Mapa = () => {
+  //prog. zoom
+  const [selectedMarkerCoords, setSelectedMarkerCoords] =
+    useState(null);
+  const [centerMapOnMarker, setCenterMapOnMarker] = useState(false);
+
+  const mapRef = useRef(null); // Define a ref for the MapContainer
+  const markerClusterRef = useRef(null);
+  //
+  const mapCenter =
+    centerMapOnMarker && selectedMarkerCoords
+      ? selectedMarkerCoords
+      : [45.2, 16.2];
+  const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 12 : 8;
+
+  const handleMapCreated = mapInstance => {
+    if (centerMapOnMarker && selectedMarkerCoords) {
+      mapInstance.setView(selectedMarkerCoords, mapZoom);
+    }
+  };
+
+  // ...
+
   const [lajeri, lajeriSet] = useState([
     { name: 't1', visible: true },
     { name: 't2', visible: false },
@@ -60,6 +76,8 @@ export const Mapa = () => {
       )
     );
   };
+  //from gallery/
+  const { popUp, signatura } = useParams();
 
   //tipofthespear
   useEffect(() => {
@@ -85,22 +103,61 @@ export const Mapa = () => {
     fetchData();
   }, []);
 
+  //prog
+
+  useEffect(() => {
+    if (signatura && markeri.length > 0) {
+      const selectedMarker = markeri.find(
+        marker => marker.popUp === signatura
+      );
+      if (selectedMarker) {
+        setSelectedMarkerCoords(selectedMarker.geocode);
+        setCenterMapOnMarker(true);
+      }
+    }
+  }, [signatura, markeri]);
+
+  useEffect(() => {
+    if (centerMapOnMarker && selectedMarkerCoords) {
+      if (markerClusterRef.current) {
+        const closestMarkerIndex = findClosestMarker(
+          selectedMarkerCoords,
+          markeri
+        );
+        if (closestMarkerIndex !== -1) {
+          const markerToClick =
+            markerClusterRef.current._childMarkerContext.childMarkers[
+              closestMarkerIndex
+            ];
+          if (markerToClick) {
+            markerToClick.openPopup();
+            mapRef.current.leafletElement.setView(
+              selectedMarkerCoords,
+              mapZoom
+            );
+          }
+        }
+      }
+      setCenterMapOnMarker(false);
+    }
+  }, [centerMapOnMarker, selectedMarkerCoords, markeri, mapZoom]);
+
+  //
+
+  //
   const { BaseLayer, Overlay } = LayersControl;
 
   return (
-    <div
-      style={{
-        height: '70vh',
-        width: '140vh',
-      }}
-    >
-      {/* <CustomZoom /> */}
+    <div style={{ height: '70vh', width: '140vh' }}>
       <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} />
       <MapContainer
-        center={[45.2, 16.2]}
+        center={mapCenter}
         zoom={8}
         style={{ height: '80vh' }}
+        whenCreated={handleMapCreated}
+        ref={mapRef} // Add a ref to the MapContainer
       >
+        {' '}
         <LayersControl>
           <BaseLayer checked name="OSM">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -133,9 +190,7 @@ export const Mapa = () => {
             </BaseLayer>
           </LayersControl>
         </LayersControl>
-
         {/* {data && <GeoJSON data={data} />} */}
-
         <MarkerClusterGroup>
           {markeri.map(i => (
             <Marker
@@ -145,7 +200,7 @@ export const Mapa = () => {
             >
               <Popup>
                 {i.popUp}
-                <Link to={{ pathname: '/photos', params: i.popUp }}>
+                <Link to={`/photos/${i.popUp}`}>
                   <img
                     width="233px"
                     src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
