@@ -1,55 +1,94 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-// import {  } from 'react-router';
 import {
   getPhotos,
   increment,
   decrement,
-  selectPhotos,
   selectPhotoIndex,
+  selectPhotos,
   selectSelectedPhotoIndex,
-  selectAPhoto,
 } from '../redux/rtk/gallerySlice';
-import { Card } from '../comps/Card'; // Import your Card component
+import { Card } from '../comps/Card';
 import './photos.scss';
+
+import { useDispatch, useSelector } from 'react-redux';
+// import { selectPhotoIndex, selectPhotos } from './gallerySlice';
+import {
+  setSelectedMarker,
+  clearSelectedMarker,
+  selectSelectedMarkerCoords,
+  selectSelectedMarkerPopUp,
+} from '../redux/rtk/mapSlice';
+
+// ...
+// ...
 
 export default function Photos() {
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const selectedPhoto = photos[selectedPhotoIndex];
-  console.log(selectedPhoto);
-  const { popUp, signatura } = useParams(); // Get both parameters from the URL
-  const navigate = useNavigate(); //
+  const { signatura } = useParams();
+
+  const selectedMarkerCoords = useSelector(
+    selectSelectedMarkerCoords
+  );
+  const selectedMarkerPopUp = useSelector(selectSelectedMarkerPopUp);
+
+  // Get the markers array from Redux state
+  const markers = useSelector(selectMarkers);
+
+  useEffect(() => {
+    const selectedPhoto = photos.find(
+      photo => photo.signatura === signatura
+    );
+    if (selectedPhoto) {
+      dispatch(selectPhotoIndex(photos.indexOf(selectedPhoto)));
+
+      // Dispatch the action to set the selected marker coordinates
+      dispatch(
+        setSelectedMarker({
+          coords: selectedPhoto.geocode,
+          popUp: selectedPhoto.popUp,
+        })
+      );
+    }
+  }, [signatura, photos, dispatch]);
+  //
+  // useEffect(() => {
+  //   dispatch(getPhotos());
+  // }, [dispatch]);
 
   const handleShowOnMap = () => {
-    if (selectedPhoto && selectedPhoto.signatura) {
-      navigate(`/mapa/${selectedPhoto.signatura}`);
+    if (selectedMarkerCoords && selectedMarkerPopUp) {
+      const markerToClick = markers.find(
+        marker => marker.popUp === selectedMarkerPopUp
+      );
+
+      if (markerToClick) {
+        const markerIndex = markers.indexOf(markerToClick);
+        const markerCluster = markerClusterRef.current.leafletElement; // Now you can use markerClusterRef directly
+        const markerLayer =
+          markerCluster.getVisibleParent(markerIndex);
+
+        if (markerLayer) {
+          markerLayer.fireEvent('click');
+          const mapInstance = mapRef.current.leafletElement;
+          mapInstance.setView(selectedMarkerCoords, mapZoom);
+
+          // Wait for the zoom animation to complete before navigating
+          setTimeout(() => {
+            navigate(`/mapa/${selectedMarkerPopUp}`);
+          }, 500);
+        }
+      }
     }
   };
-
-  //
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
 
-  //find it
-  useEffect(() => {
-    console.log('PopUp:', popUp);
-    console.log('Signatura:', signatura);
-
-    const index = photos.findIndex(
-      photo => photo.popUp === popUp || photo.signatura === signatura
-    );
-    console.log('Index:', index);
-
-    if (index !== -1) {
-      dispatch(selectPhotoIndex(index));
-    }
-  }, [dispatch, photos, popUp, signatura]);
-
-  //prev/next
   const handleNextPhoto = () => {
     dispatch(increment());
   };
@@ -70,19 +109,16 @@ export default function Photos() {
           <button onClick={handleShowOnMap}>Show on Map</button>
         </div>
       )}
-      {/* Render the list of photos as links */}
       <div className="photo-container">
         {photos.map(photo => (
           <Link to={`/photos/${photo.signatura}`} key={photo.id}>
             <img
-              src={
-                process.env.REACT_APP_SERVER_PUB +
-                `/${photo.signatura}`
-              }
+              src={`${process.env.REACT_APP_SERVER_PUB}/${photo.signatura}`}
               alt={photo.naziv}
               style={{ width: '400px' }}
-              onClick={() =>
-                dispatch(selectPhotoIndex(photos.indexOf(photo)))
+              onClick={
+                () =>
+                  dispatch(selectPhotoIndex(photos.indexOf(photo))) // Dispatch the action directly
               }
             />
           </Link>

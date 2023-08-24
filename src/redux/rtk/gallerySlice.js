@@ -24,7 +24,7 @@ export const getAPhoto = createAsyncThunk(
 
 const initialState = {
   selectedPhotoIndex: 0,
-  idX: 2,
+  idX: 0,
   photos: [],
   loading: false,
   error: null,

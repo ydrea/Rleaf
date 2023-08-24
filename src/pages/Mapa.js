@@ -7,66 +7,72 @@ import {
   Popup,
   TileLayer,
   LayersControl,
-  // WMSTileLayer,
 } from 'react-leaflet';
-import MarkerClusterGroup from 'react-leaflet-cluster';
+import MarkerClusterGroup, {
+  findClosestMarker,
+} from 'react-leaflet-cluster';
 import { useRef, useEffect, useState } from 'react';
 import { Icon } from 'leaflet';
-//prettier-ignore
 import {
-  ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
-  PodRH, TemaZP, TemaP, TemaS
+  ANaselja,
+  PAJedinice,
+  PBNaselja,
+  FiksniElementi,
+  PodRH,
+  TemaZP,
+  TemaP,
+  TemaS,
 } from '../maps/wms';
-// import { markeri } from '../maps/markeri';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import CustomCtrl from '../comps/CustomCtrl';
-import { useDispatch } from 'react-redux';
+
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setSelectedMarker,
+  clearSelectedMarker,
+  setMarkerClusterRef,
+} from '../redux/rtk/mapSlice';
 
 const myIcon = new Icon({
   iconUrl: require('../assets/ikona.png'),
   iconSize: [28, 28],
 });
-//
 
-//temaKZ
 function onEachFeature(feature, layer) {
   layer.bindPopup(feature.properties.code_opis);
 }
 
 export const Mapa = () => {
-  //prog. zoom
-  const [selectedMarkerCoords, setSelectedMarkerCoords] =
-    useState(null);
-  const [centerMapOnMarker, setCenterMapOnMarker] = useState(false);
+  const dispatch = useDispatch();
+  const selectedMarkerCoords = useSelector(
+    state => state.map.selectedMarkerCoords
+  );
+  const selectedMarkerPopUp = useSelector(
+    state => state.map.selectedMarkerPopUp
+  );
 
-  const mapRef = useRef(null); // Define a ref for the MapContainer
-  const markerClusterRef = useRef(null);
-  //
-  const mapCenter =
-    centerMapOnMarker && selectedMarkerCoords
-      ? selectedMarkerCoords
-      : [45.2, 16.2];
-  const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 12 : 8;
+  // const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Set the markerClusterRef in the Redux store
+    dispatch(setMarkerClusterRef(markerClusterRef));
+  }, [dispatch]);
+
+  //ol
 
   const handleMapCreated = mapInstance => {
     if (centerMapOnMarker && selectedMarkerCoords) {
       mapInstance.setView(selectedMarkerCoords, mapZoom);
     }
   };
-
-  // ...
-
   const [lajeri, lajeriSet] = useState([
     { name: 't1', visible: true },
     { name: 't2', visible: false },
   ]);
-  //
-  const [data, setData] = useState(null);
+
   const [markeri, markeriSet] = useState([]);
-  //ex
+
   const onLayerToggle = layerName => {
     lajeriSet(prevLayers =>
       prevLayers.map(layer =>
@@ -76,17 +82,22 @@ export const Mapa = () => {
       )
     );
   };
-  //from gallery/
-  const { popUp, signatura } = useParams();
 
-  //tipofthespear
+  const { popUp, signatura } = useParams();
+  //
+
+  const mapRef = useRef(null);
+  const markerClusterRef = useRef(null);
+
+  const mapCenter = selectedMarkerCoords || [45.2, 16.2];
+  const mapZoom = selectedMarkerCoords ? 12 : 8;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_SERVER}/json_photos`
         );
-        console.log(response.data);
         const parsedData = response.data.map(item => {
           const geo = JSON.parse(item.geometry);
           return {
@@ -95,7 +106,6 @@ export const Mapa = () => {
           };
         });
         markeriSet(parsedData);
-        return parsedData;
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -103,8 +113,7 @@ export const Mapa = () => {
     fetchData();
   }, []);
 
-  //prog
-
+  //
   useEffect(() => {
     if (signatura && markeri.length > 0) {
       const selectedMarker = markeri.find(
@@ -118,32 +127,36 @@ export const Mapa = () => {
   }, [signatura, markeri]);
 
   useEffect(() => {
-    if (centerMapOnMarker && selectedMarkerCoords) {
+    if (selectedMarkerCoords && selectedMarkerPopUp) {
       if (markerClusterRef.current) {
-        const closestMarkerIndex = findClosestMarker(
-          selectedMarkerCoords,
-          markeri
+        const markerToClick = markeri.find(
+          marker => marker.popUp === selectedMarkerPopUp
         );
-        if (closestMarkerIndex !== -1) {
-          const markerToClick =
-            markerClusterRef.current._childMarkerContext.childMarkers[
-              closestMarkerIndex
-            ];
-          if (markerToClick) {
-            markerToClick.openPopup();
-            mapRef.current.leafletElement.setView(
-              selectedMarkerCoords,
-              mapZoom
-            );
+
+        if (markerToClick) {
+          const markerIndex = markeri.indexOf(markerToClick);
+
+          if (markerClusterRef.current) {
+            const markerCluster =
+              markerClusterRef.current.leafletElement;
+            const markerLayer =
+              markerCluster.getVisibleParent(markerIndex);
+
+            if (markerLayer) {
+              markerLayer.fireEvent('click');
+            }
+
+            if (mapRef.current) {
+              mapRef.current.leafletElement.setView(
+                selectedMarkerCoords,
+                mapZoom
+              );
+            }
           }
         }
       }
-      setCenterMapOnMarker(false);
     }
-  }, [centerMapOnMarker, selectedMarkerCoords, markeri, mapZoom]);
-
-  //
-
+  }, [selectedMarkerCoords, selectedMarkerPopUp, markeri, mapZoom]);
   //
   const { BaseLayer, Overlay } = LayersControl;
 
@@ -152,12 +165,11 @@ export const Mapa = () => {
       <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} />
       <MapContainer
         center={mapCenter}
-        zoom={8}
+        zoom={mapZoom}
         style={{ height: '80vh' }}
         whenCreated={handleMapCreated}
-        ref={mapRef} // Add a ref to the MapContainer
+        ref={mapRef}
       >
-        {' '}
         <LayersControl>
           <BaseLayer checked name="OSM">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -191,7 +203,8 @@ export const Mapa = () => {
           </LayersControl>
         </LayersControl>
         {/* {data && <GeoJSON data={data} />} */}
-        <MarkerClusterGroup>
+
+        <MarkerClusterGroup ref={markerClusterRef}>
           {markeri.map(i => (
             <Marker
               key={i.geocode[0] + Math.random()}

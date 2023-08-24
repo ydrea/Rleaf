@@ -1,51 +1,40 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const MAP_URL = 'https://landscape.agr.hr/qgis/';
-
-const wfs1 =
-  'https://landscape.agr.hr/qgis/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=application/json&srsName=epsg:4326&TYPENAME=fiksno_granice_banije';
-// 'https://landscape.agr.hr/qgis/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=application/json&srsName=epsg:4326&TYPENAME=naselja_stanovnistvo'
+// mapSlice.js
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  maps: [],
-  status: 'idle',
-  error: null,
+  selectedMarkerCoords: null,
+  selectedMarkerPopUp: null,
+  markerClusterRef: null,
 };
 
-export const fetchMap1 = createAsyncThunk('map1', async () => {
-  const res = await axios.get(wfs1);
-  console.log(res);
-  return res.data;
-});
-
-export const mapSlice = createSlice({
-  name: 'mapa',
+const mapSlice = createSlice({
+  name: 'map',
   initialState,
   reducers: {
-    addEm(state, action) {
-      state.push(action.payload);
+    setSelectedMarker: (state, action) => {
+      state.selectedMarkerCoords = action.payload.coords;
+      state.selectedMarkerPopUp = action.payload.popUp;
     },
-  },
-  extraReducers: {
-    [fetchMap1.pending]: (state, action) => {
-      state.status = 'pending';
+    clearSelectedMarker: state => {
+      state.selectedMarkerCoords = null;
+      state.selectedMarkerPopUp = null;
     },
-    [fetchMap1.fulfilled]: (state, action) => {
-      state.status = 'fulfilled';
-      state.maps = action.payload;
-    },
-    [fetchMap1.rejected]: (state, action) => {
-      state.status = 'reject';
-      state.error = action.error.message;
+
+    setMarkerClusterRef: (state, action) => {
+      state.markerClusterRef = action.payload;
     },
   },
 });
 
-export const selectEm = state => state.mapa.maps;
-export const selectStatus = state => state.mapa.status;
-export const selectError = state => state.mapa.error;
+export const {
+  setSelectedMarker,
+  clearSelectedMarker,
+  setMarkerClusterRef,
+} = mapSlice.actions;
 
-export const { addEm } = mapSlice.actions;
+export const selectSelectedMarkerCoords = state =>
+  state.map.selectedMarkerCoords;
+export const selectSelectedMarkerPopUp = state =>
+  state.map.selectedMarkerPopUp;
 
 export default mapSlice.reducer;
