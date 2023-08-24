@@ -17,9 +17,6 @@ import './photos.scss';
 export default function Photos() {
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
-  const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
-  const selectedPhoto = photos[selectedPhotoIndex];
-  console.log(selectedPhoto);
   const { popUp, signatura } = useParams(); // Get both parameters from the URL
   const navigate = useNavigate(); //
 

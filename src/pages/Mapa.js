@@ -23,7 +23,8 @@ import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import CustomCtrl from '../comps/CustomCtrl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAPhoto } from '../redux/rtk/gallerySlice';
 
 const myIcon = new Icon({
   iconUrl: require('../assets/ikona.png'),
@@ -37,6 +38,7 @@ function onEachFeature(feature, layer) {
 }
 
 export const Mapa = () => {
+  const selectedPhoto = useSelector(selectAPhoto);
   //prog. zoom
   const [selectedMarkerCoords, setSelectedMarkerCoords] =
     useState(null);
@@ -143,7 +145,6 @@ export const Mapa = () => {
   }, [centerMapOnMarker, selectedMarkerCoords, markeri, mapZoom]);
 
   //
-
   //
   const { BaseLayer, Overlay } = LayersControl;
 
@@ -212,6 +213,18 @@ export const Mapa = () => {
           ))}
         </MarkerClusterGroup>
       </MapContainer>
+      {/* Display the selected photo */}
+      {selectedPhoto && (
+        <div className="selected-photo">
+          <h3>Selected Photo</h3>
+          <img
+            width="1233px"
+            src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`}
+            alt={selectedPhoto.signatura}
+          />
+          <p>Signatura: {selectedPhoto.signatura}</p>
+        </div>
+      )}{' '}
     </div>
   );
 };
