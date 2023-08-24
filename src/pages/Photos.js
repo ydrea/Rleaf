@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 // import {  } from 'react-router';
@@ -13,22 +13,28 @@ import {
 } from '../redux/rtk/gallerySlice';
 import { Card } from '../comps/Card'; // Import your Card component
 import './photos.scss';
+import { MapContainer } from 'react-leaflet';
 
 export default function Photos() {
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(null);
+  // ... (existing code)
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
-  const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
+  // const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const selectedPhoto = photos[selectedPhotoIndex];
   console.log(selectedPhoto);
   const { popUp, signatura } = useParams(); // Get both parameters from the URL
   const navigate = useNavigate(); //
 
+  const handlePhotoClick = index => {
+    setSelectedPhotoIndex(index); // Update selectedPhotoIndex
+  };
   const handleShowOnMap = () => {
     if (selectedPhoto && selectedPhoto.signatura) {
+      setShowMapPopup(true); // Open the map popup
       navigate(`/mapa/${selectedPhoto.signatura}`);
     }
   };
-
   //
   useEffect(() => {
     dispatch(getPhotos());
@@ -81,13 +87,14 @@ export default function Photos() {
               }
               alt={photo.naziv}
               style={{ width: '400px' }}
-              onClick={() =>
-                dispatch(selectPhotoIndex(photos.indexOf(photo)))
-              }
+              onClick={() => handlePhotoClick(index)} // Call the new function
             />
           </Link>
         ))}
       </div>
+      {selectedPhotoIndex !== null && (
+        <Mapa selectedPhotoIndex={selectedPhotoIndex} />
+      )}
     </div>
   );
 }

@@ -36,7 +36,7 @@ function onEachFeature(feature, layer) {
   layer.bindPopup(feature.properties.code_opis);
 }
 
-export const Mapa = () => {
+export const Mapa = ({ selectPhotoIndex }) => {
   //prog. zoom
   const [selectedMarkerCoords, setSelectedMarkerCoords] =
     useState(null);
@@ -49,13 +49,13 @@ export const Mapa = () => {
     centerMapOnMarker && selectedMarkerCoords
       ? selectedMarkerCoords
       : [45.2, 16.2];
-  const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 12 : 8;
+  const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 12 : 21;
 
-  const handleMapCreated = mapInstance => {
-    if (centerMapOnMarker && selectedMarkerCoords) {
-      mapInstance.setView(selectedMarkerCoords, mapZoom);
-    }
-  };
+  // const handleMapCreated = mapInstance => {
+  //   if (centerMapOnMarker && selectedMarkerCoords) {
+  //     mapInstance.setView(selectedMarkerCoords, mapZoom);
+  //   }
+  // };
 
   // ...
 
@@ -117,30 +117,30 @@ export const Mapa = () => {
     }
   }, [signatura, markeri]);
 
-  useEffect(() => {
-    if (centerMapOnMarker && selectedMarkerCoords) {
-      if (markerClusterRef.current) {
-        const closestMarkerIndex = findClosestMarker(
-          selectedMarkerCoords,
-          markeri
-        );
-        if (closestMarkerIndex !== -1) {
-          const markerToClick =
-            markerClusterRef.current._childMarkerContext.childMarkers[
-              closestMarkerIndex
-            ];
-          if (markerToClick) {
-            markerToClick.openPopup();
-            mapRef.current.leafletElement.setView(
-              selectedMarkerCoords,
-              mapZoom
-            );
-          }
-        }
-      }
-      setCenterMapOnMarker(false);
-    }
-  }, [centerMapOnMarker, selectedMarkerCoords, markeri, mapZoom]);
+  // useEffect(() => {
+  //   if (centerMapOnMarker && selectedMarkerCoords) {
+  //     if (markerClusterRef.current) {
+  //       const closestMarkerIndex = findClosestMarker(
+  //         selectedMarkerCoords,
+  //         markeri
+  //       );
+  //       if (closestMarkerIndex !== -1) {
+  //         const markerToClick =
+  //           markerClusterRef.current._childMarkerContext.childMarkers[
+  //             closestMarkerIndex
+  //           ];
+  //         if (markerToClick) {
+  //           markerToClick.openPopup();
+  //           mapRef.current.leafletElement.setView(
+  //             selectedMarkerCoords,
+  //             mapZoom
+  //           );
+  //         }
+  //       }
+  //     }
+  //     setCenterMapOnMarker(false);
+  //   }
+  // }, [centerMapOnMarker, selectedMarkerCoords, markeri, mapZoom]);
 
   //
 
@@ -154,7 +154,7 @@ export const Mapa = () => {
         center={mapCenter}
         zoom={8}
         style={{ height: '80vh' }}
-        whenCreated={handleMapCreated}
+        // whenCreated={handleMapCreated}
         ref={mapRef} // Add a ref to the MapContainer
       >
         {' '}
@@ -210,6 +210,31 @@ export const Mapa = () => {
               </Popup>
             </Marker>
           ))}
+          {showMapPopup && selectedMarkerCoords && (
+            <Marker position={selectedMarkerCoords} icon={myIcon}>
+              <Popup>
+                {selectedPhoto && selectedPhoto.popUp}
+                <Link
+                  to={`/photos/${
+                    selectedPhoto && selectedPhoto.popUp
+                  }`}
+                >
+                  <img
+                    width="233px"
+                    src={`${process.env.REACT_APP_SERVER_PUB}/${
+                      selectedPhoto && selectedPhoto.popUp
+                    }`}
+                    alt={selectedPhoto && selectedPhoto.popUp}
+                  />
+                </Link>
+              </Popup>
+            </Marker>
+          )}
+          {selectedPhotoIndex !== null && (
+            <Marker position={selectedMarkerCoords} icon={myIcon}>
+              <Popup>{selectedMarkerCoords}</Popup>
+            </Marker>
+          )}
         </MarkerClusterGroup>
       </MapContainer>
     </div>
