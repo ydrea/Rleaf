@@ -64,7 +64,7 @@ export const Mapa = () => {
     { name: 't2', visible: false },
   ]);
   //
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
   const [markeri, markeriSet] = useState([]);
   //ex
   const onLayerToggle = layerName => {
