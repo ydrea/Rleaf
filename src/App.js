@@ -1,11 +1,12 @@
 import Home from './pages/Home';
 import About from './pages/About';
 import { Mapa } from './pages/Mapa';
-import Gallery from './pages/Gallery';
+import Contact from './pages/Contact';
+import Projects from './pages/Projects';
+
 import { Upload } from './pages/Upload';
 import { Login } from './pages/Login';
-import { ImagePage } from './pages/ImagePage';
-import { GalleryCard } from './comps/GalleryCard';
+
 import { Card } from './comps/Card';
 import PhotoViewer from './pages/Photos';
 import { PhotosCard } from './comps/PhotosCard';
@@ -34,14 +35,14 @@ function App() {
         </Route>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contacts" element={<Contact />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/mapa" element={<Mapa />} />
         <Route path="/mapa/:popUp" element={<Mapa />} />
 
-        {/* 
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/gallery/:id" element={<GalleryCard />} /> */}
         <Route path="/photos" element={<Photos />} />
         <Route path="/photos/:signatura" element={<Photos />} />
+        <Route path="/photos/:popUp" element={<Photos />} />
 
         <Route path="/login" element={<Login />} />
       </Routes>

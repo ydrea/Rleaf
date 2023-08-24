@@ -12,6 +12,7 @@ import {
   selectAPhoto,
 } from '../redux/rtk/gallerySlice';
 import { Card } from '../comps/Card'; // Import your Card component
+import './photos.scss';
 
 export default function Photos() {
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ export default function Photos() {
   };
 
   return (
-    <div>
+    <div className="gallery">
       <div>
         <button onClick={handlePreviousPhoto}>Previous Photo</button>
         <button onClick={handleNextPhoto}>Next Photo</button>
@@ -90,19 +91,23 @@ export default function Photos() {
         </div>
       )}
       {/* Render the list of photos as links */}
-      {/* <div>
+      <div className="photo-container">
         {photos.map(photo => (
           <Link to={`/photos/${photo.signatura}`} key={photo.id}>
-            <img
-              src={
-                process.env.REACT_APP_SERVER_PUB +
-                `/${photo.signatura}`
-              }
-              alt={photo.naziv}
-            />
+            <div className="photo">
+              <img
+                className="photo-img"
+                src={
+                  process.env.REACT_APP_SERVER_PUB +
+                  `/${photo.signatura}`
+                }
+                alt={photo.naziv}
+              />
+              <div className="overlay"></div>
+            </div>
           </Link>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }

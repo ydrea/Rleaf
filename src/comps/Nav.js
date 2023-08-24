@@ -55,7 +55,6 @@ export const Nav = () => {
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
           <li className="nav-item">
             <Link
-              smooth
               to="/"
               className="nav-links"
               onClick={closeMobileMenu}
@@ -65,7 +64,6 @@ export const Nav = () => {
           </li>
           <li className="nav-item">
             <Link
-              smooth
               to="/photos"
               className="nav-links"
               onClick={closeMobileMenu}
@@ -75,7 +73,7 @@ export const Nav = () => {
           </li>
           <li className="nav-item">
             <Link
-              smooth
+              // smooth
               href="/projects"
               className="nav-links"
               onClick={closeMobileMenu}

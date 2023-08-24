@@ -1,0 +1,40 @@
+.gallery {
+  background-color: gray;
+}
+
+.photo-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.photo {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.photo .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.photo:hover {
+  transform: scale(1.05);
+}
+.photo:hover .overlay {
+  opacity: 0;
+}/*# sourceMappingURL=photos.css.map */
