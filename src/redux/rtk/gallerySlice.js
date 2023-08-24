@@ -28,6 +28,9 @@ const initialState = {
   photos: [],
   loading: false,
   error: null,
+
+  selectedPhotoGeocode: null,
+  centerMapOnSelectedPhoto: false,
 };
 
 export const gallerySlice = createSlice({
@@ -49,6 +52,15 @@ export const gallerySlice = createSlice({
     selectPhotoIndex: (state, action) => {
       state.selectedPhotoIndex = action.payload;
     },
+
+    setSelectedPhotoGeocode: (state, action) => {
+      state.selectedPhotoGeocode = action.payload;
+      state.centerMapOnSelectedPhoto = true;
+    },
+    clearSelectedPhotoGeocode: state => {
+      state.selectedPhotoGeocode = null;
+      state.centerMapOnSelectedPhoto = false;
+    },
   },
   extraReducers: {
     [getPhotos.pending]: state => {
@@ -66,13 +78,22 @@ export const gallerySlice = createSlice({
   },
 });
 
-export const { increment, decrement, selectPhotoIndex } =
-  gallerySlice.actions;
+export const {
+  increment,
+  decrement,
+  selectPhotoIndex,
+  setSelectedPhotoGeocode,
+  clearSelectedPhotoGeocode,
+} = gallerySlice.actions;
 
 export const selectPhotos = state => state.gallery.photos;
 export const selectSelectedPhotoIndex = state =>
   state.gallery.selectedPhotoIndex;
 // ...
+
+export const selectSelectedPhotoGeocode = state =>
+  state.gallery.selectedPhotoGeocode; // Add this selector
+
 export const selectAPhoto = state => {
   const selectedIdX = state.gallery.idX;
   const selectedPhoto = state.gallery.photos.find(photo => {

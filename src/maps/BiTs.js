@@ -6,6 +6,43 @@ import tileLayer from '../utils/tileLayer';
 //
 // const center = [45.2, 16.2];
 
+useEffect(() => {
+  if (signatura && markeri.length > 0) {
+    const selectedMarker = markeri.find(
+      marker => marker.popUp === signatura
+    );
+    if (selectedMarker) {
+      setSelectedMarkerCoords(selectedMarker.geocode);
+      setCenterMapOnMarker(true);
+    }
+  }
+}, [signatura, markeri]);
+
+useEffect(() => {
+  if (centerMapOnMarker && selectedMarkerCoords) {
+    if (markerClusterRef.current) {
+      const closestMarkerIndex = findClosestMarker(
+        selectedMarkerCoords,
+        markeri
+      );
+      if (closestMarkerIndex !== -1) {
+        const markerToClick =
+          markerClusterRef.current._childMarkerContext.childMarkers[
+            closestMarkerIndex
+          ];
+        if (markerToClick) {
+          markerToClick.openPopup();
+          mapRef.current.leafletElement.setView(
+            selectedMarkerCoords,
+            mapZoom
+          );
+        }
+      }
+    }
+    setCenterMapOnMarker(false);
+  }
+}, [centerMapOnMarker, selectedMarkerCoords, markeri, mapZoom]);
+
 // function onEachFeature(feature, layer) {
 //   layer.bindPopup(feature.properties.code_opis);
 // }

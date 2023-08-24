@@ -10,6 +10,9 @@ import {
   selectPhotoIndex,
   selectSelectedPhotoIndex,
   selectAPhoto,
+  setSelectedPhotoGeocode,
+  selectSelectedPhotoGeocode,
+  clearSelectedPhotoGeocode,
 } from '../redux/rtk/gallerySlice';
 import { Card } from '../comps/Card'; // Import your Card component
 import './photos.scss';
@@ -22,9 +25,20 @@ export default function Photos() {
   console.log(selectedPhoto);
   const { popUp, signatura } = useParams(); // Get both parameters from the URL
   const navigate = useNavigate(); //
+  const selectedPhotoGeocode = useSelector(
+    selectSelectedPhotoGeocode
+  );
 
   const handleShowOnMap = () => {
-    if (selectedPhoto && selectedPhoto.signatura) {
+    if (selectedPhoto && selectedPhoto.geocode) {
+      // Dispatch the action to set the selected photo's geocode
+      dispatch(setSelectedPhotoGeocode(selectedPhoto.geocode));
+
+      // Log the geocode and signatura
+      console.log('Geocode:', selectedPhoto.geocode);
+      console.log('Signatura:', selectedPhoto.signatura);
+
+      // Navigate to the map using the signatura parameter
       navigate(`/mapa/${selectedPhoto.signatura}`);
     }
   };

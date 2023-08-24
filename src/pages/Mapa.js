@@ -23,8 +23,14 @@ import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import CustomCtrl from '../comps/CustomCtrl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectAPhoto,
+  selectSelectedPhotoGeocode,
+  clearSelectedPhotoGeocode,
+} from '../redux/rtk/gallerySlice';
 
+//custom icon
 const myIcon = new Icon({
   iconUrl: require('../assets/ikona.png'),
   iconSize: [28, 28],
@@ -37,25 +43,37 @@ function onEachFeature(feature, layer) {
 }
 
 export const Mapa = () => {
-  //prog. zoom
+  const selectedPhoto = useSelector(selectAPhoto);
+
   const [selectedMarkerCoords, setSelectedMarkerCoords] =
     useState(null);
   const [centerMapOnMarker, setCenterMapOnMarker] = useState(false);
+  const dispatch = useDispatch();
 
-  const mapRef = useRef(null); // Define a ref for the MapContainer
+  const selectedPhotoGeocode = useSelector(
+    selectSelectedPhotoGeocode
+  ); //
+
+  // Define mapCenter based on selectedPhotoGeocode or a default value
+  const mapCenter = selectedPhotoGeocode || [45.2, 16.2];
+  //
+  const mapRef = useRef(null);
   const markerClusterRef = useRef(null);
   //
-  const mapCenter =
-    centerMapOnMarker && selectedMarkerCoords
-      ? selectedMarkerCoords
-      : [45.2, 16.2];
-  const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 12 : 8;
+  useEffect(() => {
+    if (selectedPhotoGeocode) {
+      // Use the mapRef and markerClusterRef for map interaction
+      if (mapRef.current) {
+        // Logic to find and open the appropriate marker's pop-up
+        // ...
+        // Logic to zoom to the selected photo's geocode
+        mapRef.current.setView(selectedPhotoGeocode, mapZoom);
+      }
 
-  const handleMapCreated = mapInstance => {
-    if (centerMapOnMarker && selectedMarkerCoords) {
-      mapInstance.setView(selectedMarkerCoords, mapZoom);
+      // Clear the selected photo's geocode and reset the flag
+      dispatch(clearSelectedPhotoGeocode());
     }
-  };
+  }, [selectedPhotoGeocode]);
 
   // ...
 
@@ -105,6 +123,7 @@ export const Mapa = () => {
 
   //prog
 
+  // Handle opening popup and zooming to marker when signatura changes
   useEffect(() => {
     if (signatura && markeri.length > 0) {
       const selectedMarker = markeri.find(
@@ -116,7 +135,7 @@ export const Mapa = () => {
       }
     }
   }, [signatura, markeri]);
-
+  //  to marker when centerMapOnMarker is true
   useEffect(() => {
     if (centerMapOnMarker && selectedMarkerCoords) {
       if (markerClusterRef.current) {
@@ -131,19 +150,13 @@ export const Mapa = () => {
             ];
           if (markerToClick) {
             markerToClick.openPopup();
-            mapRef.current.leafletElement.setView(
-              selectedMarkerCoords,
-              mapZoom
-            );
+            mapRef.current.setView(selectedMarkerCoords, mapZoom);
           }
         }
       }
       setCenterMapOnMarker(false);
     }
-  }, [centerMapOnMarker, selectedMarkerCoords, markeri, mapZoom]);
-
-  //
-
+  }, [centerMapOnMarker, selectedMarkerCoords, markeri]);
   //
   const { BaseLayer, Overlay } = LayersControl;
 
@@ -154,7 +167,6 @@ export const Mapa = () => {
         center={mapCenter}
         zoom={8}
         style={{ height: '80vh' }}
-        whenCreated={handleMapCreated}
         ref={mapRef} // Add a ref to the MapContainer
       >
         {' '}
@@ -212,6 +224,14 @@ export const Mapa = () => {
           ))}
         </MarkerClusterGroup>
       </MapContainer>
+      {selectedPhoto && (
+        <div className="selectedphoto">
+          <img
+            width="1000px"
+            src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.popUp}`}
+          />
+        </div>
+      )}
     </div>
   );
 };
