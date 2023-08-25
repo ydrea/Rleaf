@@ -35,8 +35,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contacts" element={<Contact />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/mapa/:signatura" element={<Mapa />} />
         <Route path="/mapa" element={<Mapa />} />
-        <Route path="/mapa/:popUp" element={<Mapa />} />
 
         <Route path="/photos" element={<Photos />} />
         <Route path="/photos/:signatura" element={<Photos />} />

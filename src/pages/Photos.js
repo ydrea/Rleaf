@@ -1,48 +1,54 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-// import {  } from 'react-router';
 import {
   getPhotos,
   increment,
   decrement,
+  setSelectedPhotoIndex, // Correct import
+  setSelectedPhoto, // Add this import if you intend to use it later
   selectPhotos,
-  selectPhotoIndex,
   selectSelectedPhotoIndex,
   selectAPhoto,
 } from '../redux/rtk/gallerySlice';
-import { Card } from '../comps/Card'; // Import your Card component
+import { Card } from '../comps/Card';
 import './photos.scss';
 
 export default function Photos() {
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
-  const { popUp, signatura } = useParams(); // Get both parameters from the URL
-  const navigate = useNavigate(); //
+  const { popUp, signatura } = useParams();
+  const navigate = useNavigate();
 
+  const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
+  const selectedPhoto = photos[selectedPhotoIndex];
+
+  //handle onClick
+  const handlePhotoClick = index => {
+    dispatch(setSelectedPhotoIndex(index));
+  };
+
+  //nav to map
   const handleShowOnMap = () => {
     if (selectedPhoto && selectedPhoto.signatura) {
+      dispatch(setSelectedPhoto(selectedPhoto)); // Store selected photo in Redux store
+
       navigate(`/mapa/${selectedPhoto.signatura}`);
     }
   };
 
-  //
+  //get em all
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
 
   //find it
   useEffect(() => {
-    console.log('PopUp:', popUp);
-    console.log('Signatura:', signatura);
-
     const index = photos.findIndex(
       photo => photo.popUp === popUp || photo.signatura === signatura
     );
-    console.log('Index:', index);
-
     if (index !== -1) {
-      dispatch(selectPhotoIndex(index));
+      dispatch(setSelectedPhotoIndex(index));
     }
   }, [dispatch, photos, popUp, signatura]);
 
@@ -78,9 +84,7 @@ export default function Photos() {
               }
               alt={photo.naziv}
               style={{ width: '400px' }}
-              onClick={() =>
-                dispatch(selectPhotoIndex(photos.indexOf(photo)))
-              }
+              onClick={() => handlePhotoClick(photos.indexOf(photo))}
             />
           </Link>
         ))}

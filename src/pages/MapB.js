@@ -1,4 +1,15 @@
 import geojson from '../data/temakz.geojson.json';
+import axios from 'axios';
+import {
+  ANaselja,
+  PAJedinice,
+  PBNaselja,
+  FiksniElementi,
+  PodRH,
+  TemaZP,
+  TemaP,
+  TemaS,
+} from '../maps/wms';
 import 'leaflet/dist/leaflet.css';
 import {
   Marker,
@@ -7,78 +18,94 @@ import {
   Popup,
   TileLayer,
   LayersControl,
-  // WMSTileLayer,
 } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { useRef, useEffect, useState } from 'react';
 import geolib from 'geolib';
 
 import { Icon } from 'leaflet';
-//prettier-ignore
-import {
-  ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
-  PodRH, TemaZP, TemaP, TemaS
-} from '../maps/wms';
-// import { markeri } from '../maps/markeri';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import CustomCtrl from '../comps/CustomCtrl';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAPhoto } from '../redux/rtk/gallerySlice';
-
+import { CustomCtrl } from '../comps/CustomCtrl';
+//
 const myIcon = new Icon({
   iconUrl: require('../assets/ikona.png'),
   iconSize: [28, 28],
 });
-//
 
-//temaKZ
 function onEachFeature(feature, layer) {
   layer.bindPopup(feature.properties.code_opis);
 }
 
 export const Mapa = () => {
   const selectedPhoto = useSelector(selectAPhoto);
+  const dispatch = useDispatch();
 
-  //prog. zoom
   const [selectedMarkerCoords, setSelectedMarkerCoords] =
     useState(null);
   const [centerMapOnMarker, setCenterMapOnMarker] = useState(false);
 
-  const mapRef = useRef(null); // Define a ref for the MapContainer
+  const mapRef = useRef(null);
   const markerClusterRef = useRef(null);
-  //
+
   const mapCenter =
     centerMapOnMarker && selectedMarkerCoords
       ? selectedMarkerCoords
       : [45.2, 16.2];
+  useEffect(() => {
+    if (centerMapOnMarker && selectedMarkerCoords) {
+      if (markerClusterRef.current) {
+        const closestMarkerIndex = findClosestMarker(
+          selectedMarkerCoords,
+          markeri
+        );
+        if (closestMarkerIndex !== -1) {
+          const markerToClick =
+            markerClusterRef.current._childMarkerContext.childMarkers[
+              closestMarkerIndex
+            ];
+          if (markerToClick) {
+            markerToClick.openPopup();
+
+            const distanceMeters = geolib.getDistance(
+              { latitude: mapCenter[0], longitude: mapCenter[1] },
+              {
+                latitude: selectedMarkerCoords[0],
+                longitude: selectedMarkerCoords[1],
+              }
+            );
+
+            const zoomLevel = Math.min(
+              18,
+              16 - Math.log2(distanceMeters / 1000)
+            );
+
+            mapRef.current.leafletElement.setView(
+              selectedMarkerCoords,
+              zoomLevel
+            );
+          }
+        }
+      }
+      setCenterMapOnMarker(false);
+    }
+  }, [centerMapOnMarker, selectedMarkerCoords, markeri, mapCenter]);
+
   const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 18 : 12;
 
   const handleMapCreated = mapInstance => {
-    console.log(
-      'handleMapCreated:',
-      selectedMarkerCoords,
-      centerMapOnMarker
-    );
     if (centerMapOnMarker && selectedMarkerCoords) {
       mapInstance.setView(selectedMarkerCoords, mapZoom);
     }
   };
 
-  // ...
-
   const [lajeri, lajeriSet] = useState([
     { name: 't1', visible: true },
     { name: 't2', visible: false },
   ]);
-  //
-  // const [data, setData] = useState(null);
   const [markeri, markeriSet] = useState([]);
-  const [selMarker, setSelMarker] = useState([]);
 
-  //ex
   const onLayerToggle = layerName => {
     lajeriSet(prevLayers =>
       prevLayers.map(layer =>
@@ -88,17 +115,15 @@ export const Mapa = () => {
       )
     );
   };
-  //from gallery/
-  const { popUp, signatura } = useParams();
 
-  //tipofthespear
+  const { signatura } = useParams();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_SERVER}/json_photos`
         );
-        console.log(response.data);
         const parsedData = response.data.map(item => {
           const geo = JSON.parse(item.geometry);
           return {
@@ -113,9 +138,8 @@ export const Mapa = () => {
       }
     };
     fetchData();
+    console.log(markeri);
   }, []);
-
-  //prog
 
   useEffect(() => {
     if (signatura && markeri.length > 0) {
@@ -123,42 +147,62 @@ export const Mapa = () => {
         marker => marker.popUp === signatura
       );
       if (selectedMarker) {
-        console.log('Selected Marker:', selectedMarker);
-        setSelMarker(selectedMarker);
-        // setSelectedMarkerCoords(selectedMarker.geocode);
-        // setCenterMapOnMarker(true);
+        setSelectedMarkerCoords(selectedMarker.geocode);
+        setCenterMapOnMarker(true);
       }
     }
   }, [signatura, markeri]);
 
-  // ...
-  // Inside your useEffect
+  useEffect(() => {
+    if (centerMapOnMarker && selectedMarkerCoords) {
+      if (markerClusterRef.current) {
+        const closestMarkerIndex = findClosestMarker(
+          selectedMarkerCoords,
+          markeri
+        );
+        if (closestMarkerIndex !== -1) {
+          const markerToClick =
+            markerClusterRef.current._childMarkerContext.childMarkers[
+              closestMarkerIndex
+            ];
+          if (markerToClick) {
+            markerToClick.openPopup();
 
-  // useEffect(() => {
-  //   if (
-  //     centerMapOnMarker &&
-  //     selectedMarkerCoords &&
-  //     mapRef.current &&
-  //     mapRef.current.leafletElement
-  //   ) {
-  //     mapRef.current.leafletElement.setView(selectedMarkerCoords, 18);
-  //     setCenterMapOnMarker(false);
-  //   }
-  // }, [centerMapOnMarker, selectedMarkerCoords]);
-  // // ...
-  // //
-  //
+            const distanceMeters = geolib.getDistance(
+              { latitude: mapCenter[0], longitude: mapCenter[1] },
+              {
+                latitude: selectedMarkerCoords[0],
+                longitude: selectedMarkerCoords[1],
+              }
+            );
+
+            const zoomLevel = Math.min(
+              18,
+              16 - Math.log2(distanceMeters / 1000)
+            );
+
+            mapRef.current.leafletElement.setView(
+              selectedMarkerCoords,
+              zoomLevel
+            );
+          }
+        }
+      }
+      setCenterMapOnMarker(false);
+    }
+  }, [centerMapOnMarker, selectedMarkerCoords, markeri, mapCenter]);
+
   const { BaseLayer, Overlay } = LayersControl;
 
   return (
     <div style={{ height: '70vh', width: '140vh' }}>
       <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} />
-
       <MapContainer
         center={mapCenter}
         zoom={mapZoom}
         style={{ height: '80vh' }}
-        ref={mapRef}
+        whenCreated={handleMapCreated}
+        ref={mapRef} // Add a ref to the MapContainer
       >
         {' '}
         <LayersControl>
@@ -194,47 +238,39 @@ export const Mapa = () => {
           </LayersControl>
         </LayersControl>
         {/* {data && <GeoJSON data={data} />} */}
-        {/* <MarkerClusterGroup> */}
-        {markeri.map(i => (
-          <Marker
-            key={i.geocode[0] + Math.random()}
-            position={i.geocode}
-            icon={myIcon}
-          >
-            <Popup>
-              {i.popUp}
-              <Link to={`/photos/${i.popUp}`}>
-                <img
-                  width="233px"
-                  src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
-                  alt={i.popUp}
-                />
-              </Link>
-            </Popup>
-          </Marker>
-        ))}
-        {/* </MarkerClusterGroup> */}
+        <MarkerClusterGroup>
+          {markeri.map(i => (
+            <Marker
+              key={i.geocode[0] + Math.random()}
+              position={i.geocode}
+              icon={myIcon}
+            >
+              <Popup>
+                {i.popUp}
+                <Link to={`/photos/${i.popUp}`}>
+                  <img
+                    width="233px"
+                    src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
+                    alt={i.popUp}
+                  />
+                </Link>
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
       </MapContainer>
       {/* Display the selected photo */}
-      <div style={{ background: 'transparent' }}>
-        {selMarker ? (
-          <div>
-            <h3>Selected Photo</h3>
-            <p>
-              Image URL:{' '}
-              {/* {`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`} */}
-            </p>
-            <img
-              width="75%"
-              src={`${process.env.REACT_APP_SERVER_PUB}/${selMarker.popUp}`}
-              // alt={selectedPhoto.signatura}
-            />
-            {/* <p>Signatura: {selectedPhoto.signatura}</p> */}
-          </div>
-        ) : (
-          <p style={{ color: 'black' }}>nopoto</p>
-        )}
-      </div>
+      {selectedPhoto && (
+        <div className="selected-photo">
+          <h3>Selected Photo</h3>
+          <img
+            width="1233px"
+            src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`}
+            alt={selectedPhoto.signatura}
+          />
+          <p>Signatura: {selectedPhoto.signatura}</p>
+        </div>
+      )}{' '}
     </div>
   );
 };

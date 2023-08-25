@@ -23,8 +23,8 @@ export const getAPhoto = createAsyncThunk(
 );
 
 const initialState = {
-  selectedPhotoIndex: 0,
-  idX: -1,
+  selectedPhotoIndex: -1,
+  idX: 0,
   photos: [],
   loading: false,
   error: null,
@@ -46,8 +46,11 @@ export const gallerySlice = createSlice({
         0
       );
     },
-    selectPhotoIndex: (state, action) => {
+    setSelectedPhotoIndex: (state, action) => {
       state.selectedPhotoIndex = action.payload;
+    },
+    setSelectedPhoto: (state, action) => {
+      state.selectedPhoto = action.payload;
     },
   },
   extraReducers: {
@@ -66,8 +69,13 @@ export const gallerySlice = createSlice({
   },
 });
 
-export const { increment, decrement, selectPhotoIndex } =
-  gallerySlice.actions;
+export const {
+  increment,
+  decrement,
+  selectPhotoIndex,
+  setSelectedPhoto,
+  setSelectedPhotoIndex,
+} = gallerySlice.actions;
 
 export const selectPhotos = state => state.gallery.photos;
 export const selectSelectedPhotoIndex = state =>
@@ -79,7 +87,6 @@ export const selectAPhoto = state => {
     const rank = parseInt(photo.rank_number);
     return rank === selectedIdX;
   });
-
   return selectedPhoto;
 };
 
