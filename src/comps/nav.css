@@ -11,7 +11,7 @@
 }
 
 .navbar-container {
-  background-color: gray;
+  background-color: #8C8D85;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +47,7 @@
   top: 53px;
 }
 
-.line-div {
+.navline-div {
   border-top: 2px solid white;
   position: absolute;
   top: 80px;
@@ -63,7 +63,6 @@
   align-items: center;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  height: 100%;
 }
 
 .nav-links:hover {
@@ -110,6 +109,7 @@ p::first-letter {
     top: 80px;
     left: -100%;
     opacity: 1;
+    z-index: 998;
     transition: all 0.5s ease;
   }
   .nav-menu.active {
@@ -117,7 +117,7 @@ p::first-letter {
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
-    z-index: 1;
+    z-index: 888;
   }
   .nav-item {
     height: 80px;

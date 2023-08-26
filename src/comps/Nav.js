@@ -123,8 +123,7 @@ export const Nav = () => {
           </li>
         </ul>
         {/* {button && <button>SIGN UP</button>} */}
-
-        <div className="line-div" />
+        <div className="navline-div" />
       </nav>
     </>
   );

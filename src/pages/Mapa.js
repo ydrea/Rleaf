@@ -48,13 +48,13 @@ export const Mapa = () => {
   const [centerMapOnMarker, setCenterMapOnMarker] = useState(false);
 
   const mapRef = useRef(null); // Define a ref for the MapContainer
-  const markerClusterRef = useRef(null);
+  // const markerClusterRef = useRef(null);
   //
   const mapCenter =
     centerMapOnMarker && selectedMarkerCoords
       ? selectedMarkerCoords
       : [45.2, 16.2];
-  const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 18 : 12;
+  const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 14 : 9;
 
   const handleMapCreated = mapInstance => {
     console.log(

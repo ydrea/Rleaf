@@ -77,15 +77,22 @@ export default function Photos() {
       <div className="photo-container">
         {photos.map(photo => (
           <Link to={`/photos/${photo.signatura}`} key={photo.id}>
-            <img
-              src={
-                process.env.REACT_APP_SERVER_PUB +
-                `/${photo.signatura}`
-              }
-              alt={photo.naziv}
-              style={{ width: '400px' }}
-              onClick={() => handlePhotoClick(photos.indexOf(photo))}
-            />
+            <div className="photo">
+              {' '}
+              <img
+                className="photo-img"
+                src={
+                  process.env.REACT_APP_SERVER_PUB +
+                  `/${photo.signatura}`
+                }
+                alt={photo.naziv}
+                style={{ width: '400px' }}
+                onClick={() =>
+                  handlePhotoClick(photos.indexOf(photo))
+                }
+              />
+              <div className="overlay"></div>
+            </div>{' '}
           </Link>
         ))}
       </div>

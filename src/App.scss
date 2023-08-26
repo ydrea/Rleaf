@@ -2,18 +2,12 @@
 
 .App {
   text-align: center;
+background-color: $bg;
 }
 .leaflet-container {
   height: 75vh;
   width: 75%;
 }
-
-// .App-header {
-//   background-color: $bg;
-//   height: 150px;
-//   padding: 20px;
-//   color: white;
-// }
 
 .App-intro {
   font-size: large;
