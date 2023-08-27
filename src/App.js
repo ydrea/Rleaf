@@ -32,8 +32,8 @@ function App() {
           <Route path="upload" element={<Upload />} />
         </Route>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contacts" element={<Contact />} />
+        {/* <Route path="/about" element={<About />} /> */}
+        <Route path="/contact" element={<Contact />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/mapa/:signatura" element={<Mapa />} />
         <Route path="/mapa" element={<Mapa />} />
@@ -42,9 +42,9 @@ function App() {
         <Route path="/photos/:signatura" element={<Photos />} />
         <Route path="/photos/:popUp" element={<Photos />} />
 
-        <Route path="/gallery" element={<Gallery />} />
+        {/* <Route path="/gallery" element={<Gallery />} />
         <Route path="/gallery/:signatura" element={<Gallery />} />
-        <Route path="/gallery/:popUp" element={<Gallery />} />
+        <Route path="/gallery/:popUp" element={<Gallery />} /> */}
 
         <Route path="/login" element={<Login />} />
       </Routes>

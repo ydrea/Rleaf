@@ -1,0 +1,29 @@
+@import url("https://fonts.cdnfonts.com/css/freesans");
+.projects-container {
+  position: relative;
+  display: flex;
+}
+
+.tekst1 {
+  position: absolute;
+  top: 10vh;
+  display: flex;
+  padding-right: 50vh;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #8C8D85;
+  color: #fff;
+  font-size: 30px;
+}
+
+.tekst2 {
+  position: absolute;
+  top: 120vh;
+  display: flex;
+  padding-left: 50vh;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #8C8D85;
+  color: #fff;
+  font-size: 30px;
+}/*# sourceMappingURL=projects.css.map */

@@ -6,7 +6,9 @@
 }
 .home {
   position: relative;
+  max-width: 100%;
 }
+
 image {
     object-fit: fill;
     width: 100%;
@@ -48,7 +50,11 @@ image {
   // margin-bottom: -2vh;
     }
 
-
+.section {
+  height: 100vh;
+  display: flex;
+  margin-left: 2vw;
+}
   .line-div {
     border-top: 2px solid white;
     position: absolute;
@@ -59,7 +65,7 @@ margin-top: -6vh;
   }
 
 .about {
-  position: absolute; top: 100vh;
+  // position: absolute; top: 100vh;
   display: flex;
   padding-left: 10vh;
   // margin-right: auto;
@@ -71,28 +77,34 @@ margin-top: -6vh;
   font-size: 30px;
 }
 .about > li {
+  color: #000;
   list-style: circle;
 }
 
-.homeimg1 {
-  position: relative; top: 100vh; 
+.homeimg {
+// position: absolute;
   margin-left: 10vw;
-  display: flex;
+  margin-top: 15vh;
+  width: 86vw;
 }
+
 .textinimg {
   position: absolute; top: 245vh; 
-  right: 15vw;
+  right: 45vw;
   z-index: 10;
   font-size: 30px;
   width: 60vh;
 }
-
-.homeimg2 {
-  position: absolute; top: 300vh; margin-left: 10vw;
+ 
+.Titleinimg {
+  position: absolute; 
+  right: 45vw;
+  z-index: 20;
+  font-size: 80px;
+  width: 60vh;
 }
-
 .footer {
-  position: absolute; top: 400vh;
+  position: absolute; bottom: 0;
 
 }
 

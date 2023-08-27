@@ -1,16 +1,26 @@
 @import url("https://fonts.cdnfonts.com/css/freesans");
+.nav {
+  position: fixed;
+  top: 0;
+}
+
+.home {
+  position: relative;
+  max-width: 100%;
+}
+
 image {
   -o-object-fit: fill;
      object-fit: fill;
   width: 100%;
-  height: 100vh;
+  height: 75vh;
   position: fixed;
   z-index: 1;
 }
 
-.home-container {
+.img-container {
   background: url("../../public/img-home-g.png") center center/cover no-repeat;
-  height: 90vh;
+  height: 75vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -21,14 +31,15 @@ image {
      object-fit: fill;
 }
 
-.home-container > h1 {
+.img-container > h1 {
   color: #fff;
-  font-size: 240px;
+  font-size: 150px;
+  z-index: 100;
 }
 
-.home-container > p {
+.img-container > p {
   position: absolute;
-  top: 90vh;
+  top: 80vh;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -36,6 +47,12 @@ image {
   color: #fff;
   font-size: 30px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+.section {
+  height: 100vh;
+  display: flex;
+  margin-left: 2vw;
 }
 
 .line-div {
@@ -48,10 +65,8 @@ image {
 }
 
 .about {
-  position: relative;
-  top: 140vh;
   display: flex;
-  margin-left: 2vh;
+  padding-left: 10vh;
   flex-direction: column;
   justify-content: center;
   width: 100%;
@@ -61,28 +76,31 @@ image {
 }
 
 .about > li {
+  color: #000;
   list-style: circle;
 }
 
-.homeimg1 {
-  position: relative;
-  top: 180vh;
-  display: flex;
+.homeimg {
+  margin-left: 10vw;
+  margin-top: 15vh;
+  width: 86vw;
 }
 
 .textinimg {
   position: absolute;
-  top: 268vh;
-  right: 15vw;
+  top: 245vh;
+  right: 45vw;
   z-index: 10;
   font-size: 30px;
   width: 60vh;
 }
 
-.homeimg2 {
-  position: relative;
-  top: 171vh;
-  left: -22vw;
+.Titleinimg {
+  position: absolute;
+  right: 45vw;
+  z-index: 20;
+  font-size: 80px;
+  width: 60vh;
 }
 
 .footer {
