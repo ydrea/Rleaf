@@ -7,7 +7,7 @@ import { Nav } from './comps/Nav';
 const Layout = ({ children }) => {
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <div>{children}</div>
       {/* <Footer /> */}
     </>
