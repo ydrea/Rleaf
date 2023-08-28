@@ -13,6 +13,8 @@ import {
 } from '../redux/rtk/gallerySlice';
 import { Card } from '../comps/Card';
 import './photos.scss';
+import Botun from '../comps/Botun';
+import { Button } from 'reactstrap';
 
 export default function Photos() {
   const dispatch = useDispatch();
@@ -63,16 +65,15 @@ export default function Photos() {
 
   return (
     <div className="gallery">
-      <div>
-        <button onClick={handlePreviousPhoto}>Previous Photo</button>
-        <button onClick={handleNextPhoto}>Next Photo</button>
-      </div>
-      {selectedPhoto && <Card photo={selectedPhoto} />}
       {selectedPhoto && (
-        <div>
-          <button onClick={handleShowOnMap}>Show on Map</button>
-        </div>
+        <Card photo={selectedPhoto} className="card" />
       )}
+      <div className="dugmici">
+        <Button onClick={handlePreviousPhoto}>Previous Photo</Button>
+        <Button onClick={handleShowOnMap}>Show on Map</Button>
+        <Button onClick={handleNextPhoto}>Next Photo</Button>
+      </div>
+
       {/* Render the list of photos as links */}
       <div className="photo-container">
         {photos.map(photo => (

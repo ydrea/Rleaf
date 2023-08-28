@@ -17,29 +17,26 @@ function Home() {
     <>
       {' '}
       <div className="home">
-        <section className="section">
-          {' '}
-          <div className="img-container">
-            <img
-              src="img-home-g.png"
-              alt="img"
-              className={`image ${jelNije ? 'animateImg' : ''}`}
-            />
-            <h1 className="vozi">opservatorij</h1>
+        {/* <section className="section1"> */}{' '}
+        <div className="img-container">
+          <img
+            src="img-home-g.png"
+            alt="img"
+            className={`image ${jelNije ? 'animateImg' : ''}`}
+          />
+          <h1 className="vozi">opservatorij</h1>
 
-            <h1
-              className={`aepali ${jelNije ? 'animateAepali' : ''}`}
-            >
-              krajobraza
-            </h1>
-            <p>
-              Interdisciplinarna platforma posvećena istraživanju i
-              razumijevanju krajobraza
-              <div className="line-div" ref={rockRef} />
-            </p>
-          </div>
-        </section>
-        <section className="section">
+          <h1 className={`aepali ${jelNije ? 'animateAepali' : ''}`}>
+            krajobraza
+          </h1>
+          <p>
+            Interdisciplinarna platforma posvećena istraživanju i
+            razumijevanju krajobraza
+            <div className="line-div" ref={rockRef} />
+          </p>
+        </div>
+        {/* </section> */}
+        <section className="section2">
           <div className="about">
             <p>O opservatoriju </p>
             Opservatorij krajobraza je interdisciplinarna platforma za
@@ -80,7 +77,7 @@ function Home() {
             </ul>{' '}
           </div>
         </section>
-        <section className="section">
+        <section className="section3">
           <div className="homeimg">
             <img src="home1.png" />
           </div>
@@ -92,14 +89,14 @@ function Home() {
             regeneraciju zajednica...
           </div>
         </section>
-        <section className="section">
+        <section className="section4">
           <div className="homeimg">
             <img src="home2.png" />
           </div>
           <div className="Titleinimg">Zašto je važan krajobraz?</div>
         </section>
-        <section className="section">
-          <div className="about">
+        <section className="section5">
+          <div className="aboutright">
             Koncept krajobraza zadnjih 30 ak godina dobiva značajan
             zamah na globalnoj razini. Smatra se važnim (1) elementom
             globalnog nasljeđa, (2) dobro je od javnog interesa, (3)
@@ -126,14 +123,14 @@ function Home() {
             i znanstveno utemeljena.
           </div>
         </section>
-        <section className="section">
+        <section className="section6">
           <div className="homeimg">
             <img src="home3.png" />
           </div>
           <div className="Titleinimg">Čime se bavi opservatorij?</div>
         </section>
-        <section className="section">
-          <div className="about">
+        <section className="section7">
+          <div className="aboutleft">
             Konvencija o europskim krajobrazima opservatorijima
             krajobraza predviđa važnu ulogu u: (1) dokumentiranju i
             monitoringu krajobraza i čimbenika koji ga tvore, (2)

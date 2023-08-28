@@ -69,26 +69,26 @@ export const Mapa = () => {
 
   // ...
 
-  const [lajeri, lajeriSet] = useState([
-    { name: 't1', visible: true },
-    { name: 't2', visible: false },
-  ]);
-  //
+  // const [lajeri, lajeriSet] = useState([
+  //   { name: 't1', visible: true },
+  //   { name: 't2', visible: false },
+  // ]);
+  // //
   // const [data, setData] = useState(null);
   const [markeri, markeriSet] = useState([]);
   const [selMarker, setSelMarker] = useState([]);
 
-  //ex
-  const onLayerToggle = layerName => {
-    lajeriSet(prevLayers =>
-      prevLayers.map(layer =>
-        layer.name === layerName
-          ? { ...layer, visible: !layer.visible }
-          : layer
-      )
-    );
-  };
-  //from gallery/
+  // //ex
+  // const onLayerToggle = layerName => {
+  //   lajeriSet(prevLayers =>
+  //     prevLayers.map(layer =>
+  //       layer.name === layerName
+  //         ? { ...layer, visible: !layer.visible }
+  //         : layer
+  //     )
+  //   );
+  // };
+  //from params
   const { popUp, signatura } = useParams();
 
   //tipofthespear
@@ -131,28 +131,27 @@ export const Mapa = () => {
     }
   }, [signatura, markeri]);
 
-  // ...
-  // Inside your useEffect
+  // operativa...
 
-  // useEffect(() => {
-  //   if (
-  //     centerMapOnMarker &&
-  //     selectedMarkerCoords &&
-  //     mapRef.current &&
-  //     mapRef.current.leafletElement
-  //   ) {
-  //     mapRef.current.leafletElement.setView(selectedMarkerCoords, 18);
-  //     setCenterMapOnMarker(false);
-  //   }
-  // }, [centerMapOnMarker, selectedMarkerCoords]);
-  // // ...
+  useEffect(() => {
+    if (
+      centerMapOnMarker &&
+      selectedMarkerCoords &&
+      mapRef.current &&
+      mapRef.current.leafletElement
+    ) {
+      mapRef.current.leafletElement.setView(selectedMarkerCoords, 18);
+      setCenterMapOnMarker(false);
+    }
+  }, [centerMapOnMarker, selectedMarkerCoords]);
+  // ...
   // //
   //
   const { BaseLayer, Overlay } = LayersControl;
 
   return (
     <div style={{ height: '70vh', width: '140vh' }}>
-      <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} />
+      {/* <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} /> */}
 
       <MapContainer
         center={mapCenter}

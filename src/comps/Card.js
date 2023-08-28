@@ -4,7 +4,7 @@ export function Card({ photo }) {
       <img
         src={process.env.REACT_APP_SERVER_PUB + `/${photo.signatura}`} //
         alt={photo.naziv}
-        width="100%"
+        width="60%"
       />
       <div>
         {photo.naziv}, {photo.opis}, {photo.lokacija},{' '}

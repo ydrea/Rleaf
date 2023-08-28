@@ -3,8 +3,25 @@
 $overlay-color: $bg;
 $overlay-opacity: 1;
 
+.dugmici {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+max-width: 75vw;
+margin-bottom: 3vh;
+}
+
+
 .gallery {
     background-color: $bg;
+}
+
+.card {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+max-width: 75vw;
 }
 
 .photo-container {
