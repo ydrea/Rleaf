@@ -41,6 +41,7 @@ function onEachFeature(feature, layer) {
 
 export const Mapa = () => {
   const selectedPhoto = useSelector(selectAPhoto);
+  const [popupOpen, setPopupOpen] = useState(false);
 
   //prog. zoom
   const [selectedMarkerCoords, setSelectedMarkerCoords] =
@@ -68,6 +69,21 @@ export const Mapa = () => {
   };
 
   // ...
+  // Function to open a marker's popup and focus on its position
+  const openMarkerPopup = marker => {
+    if (marker && marker.leafletElement) {
+      marker.leafletElement.openPopup();
+      if (centerMapOnMarker) {
+        mapRef.current.leafletElement.setView(
+          marker.options.position,
+          mapZoom
+        );
+        setCenterMapOnMarker(false);
+      }
+    }
+  };
+
+  //
 
   const [lajeri, lajeriSet] = useState([
     { name: 't1', visible: true },
@@ -76,7 +92,8 @@ export const Mapa = () => {
   //
   // const [data, setData] = useState(null);
   const [markeri, markeriSet] = useState([]);
-  const [selMarker, setSelMarker] = useState([]);
+  const [selMarker, setSelMarker] = useState(null);
+  // const [selectedMarker, setSelectedMarker] = useState(null);
 
   //ex
   const onLayerToggle = layerName => {
@@ -119,14 +136,14 @@ export const Mapa = () => {
 
   useEffect(() => {
     if (signatura && markeri.length > 0) {
-      const selectedMarker = markeri.find(
+      const selMarker = markeri.find(
         marker => marker.popUp === signatura
       );
-      if (selectedMarker) {
-        console.log('Selected Marker:', selectedMarker);
-        setSelMarker(selectedMarker);
-        // setSelectedMarkerCoords(selectedMarker.geocode);
-        // setCenterMapOnMarker(true);
+      if (selMarker) {
+        console.log('Selected Marker:', selMarker);
+        setSelMarker(selMarker);
+
+        openMarkerPopup(selMarker.ref);
       }
     }
   }, [signatura, markeri]);
@@ -147,6 +164,11 @@ export const Mapa = () => {
   // }, [centerMapOnMarker, selectedMarkerCoords]);
   // // ...
   // //
+
+  const togglePopup = () => {
+    setPopupOpen(!popupOpen);
+  };
+
   //
   const { BaseLayer, Overlay } = LayersControl;
 
@@ -160,7 +182,6 @@ export const Mapa = () => {
         style={{ height: '80vh' }}
         ref={mapRef}
       >
-        {' '}
         <LayersControl>
           <BaseLayer checked name="OSM">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -195,46 +216,45 @@ export const Mapa = () => {
         </LayersControl>
         {/* {data && <GeoJSON data={data} />} */}
         {/* <MarkerClusterGroup> */}
+
         {markeri.map(i => (
           <Marker
             key={i.geocode[0] + Math.random()}
             position={i.geocode}
             icon={myIcon}
+            eventHandlers={{
+              click: () => setSelMarker(i),
+            }}
           >
-            <Popup>
-              {i.popUp}
-              <Link to={`/photos/${i.popUp}`}>
-                <img
-                  width="233px"
-                  src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
-                  alt={i.popUp}
-                />
-              </Link>
-            </Popup>
+            {/* Link to the photo */}
+            <Link to={`/photos/${i.popUp}`}>
+              <img
+                width="233px"
+                src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
+                alt={i.popUp}
+              />
+            </Link>
+
+            {/* Popup */}
+            {selMarker === i && (
+              <Popup
+                position={i.geocode}
+                onClose={() => setSelMarker(null)}
+              >
+                <div>
+                  <h4>{i.popUp}</h4>
+                  <img
+                    width="233px"
+                    src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
+                    alt={i.popUp}
+                  />
+                </div>
+              </Popup>
+            )}
           </Marker>
         ))}
-        {/* </MarkerClusterGroup> */}
       </MapContainer>
-      {/* Display the selected photo */}
-      <div style={{ background: 'transparent' }}>
-        {selMarker ? (
-          <div>
-            <h3>Selected Photo</h3>
-            <p>
-              Image URL:{' '}
-              {/* {`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`} */}
-            </p>
-            <img
-              width="75%"
-              src={`${process.env.REACT_APP_SERVER_PUB}/${selMarker.popUp}`}
-              // alt={selectedPhoto.signatura}
-            />
-            {/* <p>Signatura: {selectedPhoto.signatura}</p> */}
-          </div>
-        ) : (
-          <p style={{ color: 'black' }}>nopoto</p>
-        )}
-      </div>
+      {/* ... */}
     </div>
   );
 };

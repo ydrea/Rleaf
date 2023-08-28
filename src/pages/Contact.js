@@ -3,7 +3,7 @@ import React from 'react';
 
 function Contact() {
   return (
-    <div id="contact">
+    <div style={{ fontSize: 30, padding: '5vw' }}>
       <div>
         info@croatianlandscape.hr Opservatorij krajobraza Sveučilište
         u Zagrebu, Agronomski fakultet izv.prof.dr.sc. Goran Andlar
