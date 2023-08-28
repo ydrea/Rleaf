@@ -69,9 +69,54 @@ export default function Photos() {
         <Card photo={selectedPhoto} className="card" />
       )}
       <div className="dugmici">
-        <Button onClick={handlePreviousPhoto}>Previous Photo</Button>
-        <Button onClick={handleShowOnMap}>Show on Map</Button>
-        <Button onClick={handleNextPhoto}>Next Photo</Button>
+        <Button
+          style={{
+            borderBottomWidth: '3px',
+            borderBottomColor: 'white',
+            borderTopWidth: '3px',
+            borderTopColor: 'white',
+            borderLeftWidth: '3px',
+            borderLeftColor: 'white',
+            borderRightColor: '#8c8d85',
+            backgroundColor: '#8c8d85',
+            fontKerning: '1.5',
+          }}
+          onClick={handlePreviousPhoto}
+        >
+          Previous Photo
+        </Button>
+        <Button
+          style={{
+            borderBottomWidth: '3px',
+            borderBottomColor: 'white',
+            borderTopWidth: '3px',
+            borderTopColor: 'white',
+            borderLeftWidth: '3px',
+            borderLeftColor: 'white',
+            borderRightColor: '#8c8d85',
+            backgroundColor: '#8c8d85',
+            fontKerning: '1.5',
+          }}
+          onClick={handleShowOnMap}
+        >
+          Show on Map
+        </Button>
+        <Button
+          style={{
+            borderBottomWidth: '3px',
+            borderBottomColor: 'white',
+            borderTopWidth: '3px',
+            borderTopColor: 'white',
+            borderLeftWidth: '3px',
+            borderLeftColor: 'white',
+            borderRightColor: '#8c8d85',
+            backgroundColor: '#8c8d85',
+            fontKerning: '1.5',
+          }}
+          onClick={handleNextPhoto}
+        >
+          Next Photo
+        </Button>
       </div>
 
       {/* Render the list of photos as links */}
