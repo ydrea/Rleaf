@@ -25,7 +25,7 @@ function Home() {
               alt="img"
               className={`image ${jelNije ? 'animateImg' : ''}`}
             />
-            <h1 className="stoj">opservatorij</h1>
+            <h1 className="vozi">opservatorij</h1>
 
             <h1
               className={`aepali ${jelNije ? 'animateAepali' : ''}`}

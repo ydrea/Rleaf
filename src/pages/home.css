@@ -37,17 +37,17 @@
     top: 0vh;
   }
   75% {
-    top: -20vh;
+    top: -30vh;
   }
   100% {
-    top: -40vh;
+    position: fixed;
+    top: -55vh;
   }
 }
 .img-container {
   margin-top: 10vh;
   height: 75vh;
   width: 100%;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -55,17 +55,17 @@
      object-fit: fill;
 }
 
-.stoj {
+.vozi {
   color: #fff;
-  font-size: 150px;
+  font-size: 130px;
   z-index: 100;
   position: absolute;
-  top: 20vh;
+  top: 25vh;
 }
 
 .aepali {
   color: #fff;
-  font-size: 150px;
+  font-size: 130px;
   z-index: 100;
   position: absolute;
   top: 40vh;
