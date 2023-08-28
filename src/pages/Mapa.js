@@ -25,6 +25,8 @@ import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import CustomCtrl from '../comps/CustomCtrl';
+import Footer from '../comps/Footer';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAPhoto } from '../redux/rtk/gallerySlice';
 
@@ -152,7 +154,6 @@ export const Mapa = () => {
   return (
     <div style={{ height: '70vh', width: '140vh' }}>
       {/* <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} /> */}
-
       <MapContainer
         center={mapCenter}
         zoom={mapZoom}
@@ -234,6 +235,7 @@ export const Mapa = () => {
           <p style={{ color: 'black' }}>nopoto</p>
         )}
       </div>
+      <Footer />{' '}
     </div>
   );
 };

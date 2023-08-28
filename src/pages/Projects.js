@@ -1,4 +1,5 @@
 import './projects.scss';
+import Footer from '../comps/Footer';
 
 //
 function Projects() {
@@ -50,6 +51,7 @@ function Projects() {
         Opservatorija naći će se fotografije kuća, okućnica i naselja
         obrađivanih kroz projekt.
       </div>
+      <Footer />{' '}
     </div>
   );
 }

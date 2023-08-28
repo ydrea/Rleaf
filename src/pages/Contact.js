@@ -1,5 +1,5 @@
 import React from 'react';
-// import { transition } from '../transition';
+import Footer from '../comps/Footer';
 
 function Contact() {
   return (
@@ -21,6 +21,7 @@ function Contact() {
         aktivnostima. Unesite svoju e-mail adresu i pridružite se
         putovanju prema očuvanju i razumijevanju krajobraza.
       </div>
+      <Footer />{' '}
     </div>
   );
 }

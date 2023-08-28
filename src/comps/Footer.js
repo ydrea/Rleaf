@@ -2,7 +2,7 @@ import React from 'react';
 import './footer.scss';
 
 //
-export const Footer = () => {
+export default function Footer() {
   return (
     <div className="footer">
       {/* da)
@@ -10,6 +10,7 @@ export const Footer = () => {
         ydrea
       </a>
       (mnation */}
+      <img src="../../logoBmp.png" />
       Uvjeti korištenja "Sve fotografije i tekstovi objavljeni na ovom
       portalu podliježu CC BY-NC-SA 4.0 licenci. Ova licenca dopušta
       nekomercijalno umnožavanje, dijeljenje i mijenjanje, uz
@@ -18,4 +19,4 @@ export const Footer = () => {
       su vam potrebne fotografije u izvornoj veličini. "
     </div>
   );
-};
+}

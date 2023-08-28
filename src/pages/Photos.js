@@ -5,15 +5,15 @@ import {
   getPhotos,
   increment,
   decrement,
-  setSelectedPhotoIndex, // Correct import
-  setSelectedPhoto, // Add this import if you intend to use it later
+  setSelectedPhotoIndex, //
+  setSelectedPhoto, //
   selectPhotos,
   selectSelectedPhotoIndex,
   selectAPhoto,
 } from '../redux/rtk/gallerySlice';
 import { Card } from '../comps/Card';
+import Footer from '../comps/Footer';
 import './photos.scss';
-import Botun from '../comps/Botun';
 import { Button } from 'reactstrap';
 
 export default function Photos() {
@@ -118,7 +118,6 @@ export default function Photos() {
           Next Photo
         </Button>
       </div>
-
       {/* Render the list of photos as links */}
       <div className="photo-container">
         {photos.map(photo => (
@@ -142,6 +141,7 @@ export default function Photos() {
           </Link>
         ))}
       </div>
+      <Footer />{' '}
     </div>
   );
 }

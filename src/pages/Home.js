@@ -1,17 +1,17 @@
 import 'leaflet/dist/leaflet.css';
 import './home.scss';
-import { Footer } from '../comps/Footer';
+import Footer from '../comps/Footer';
 import { Nav } from '../comps/Nav';
 import { useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 //
 function Home() {
   const { ref: rockRef, inView: jelNije } = useInView({
-    rootMargin: '0px 0px -10% 0px',
-    triggerOnce: false, // Ensure it triggers only once
+    rootMargin: '0px 0px -6% 0px',
+    triggerOnce: false, //
   });
 
-  console.log('jelNije:', jelNije); // Check in the
+  console.log('jelNije:', jelNije); //
   //
   return (
     <>
