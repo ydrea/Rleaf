@@ -6,23 +6,36 @@ import { useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 //
 function Home() {
-  const { ref: scrollRef, inView: jelJe } = useInView();
+  const { ref: rockRef, inView: jelNije } = useInView({
+    rootMargin: '0px 0px -10% 0px',
+    triggerOnce: false, // Ensure it triggers only once
+  });
 
+  console.log('jelNije:', jelNije); // Check in the
   //
   return (
     <>
-      {/* <Nav className="nav" /> */}
+      {' '}
       <div className="home">
         <section className="section">
           {' '}
           <div className="img-container">
-            <h1>opservatorij</h1>
-            <h1>krajobraza</h1>
+            <img
+              src="img-home-g.png"
+              alt="img"
+              className={`image ${jelNije ? 'animateImg' : ''}`}
+            />
+            <h1 className="stoj">opservatorij</h1>
+
+            <h1
+              className={`aepali ${jelNije ? 'animateAepali' : ''}`}
+            >
+              krajobraza
+            </h1>
             <p>
               Interdisciplinarna platforma posvećena istraživanju i
               razumijevanju krajobraza
-              <div className="line-div" ref={scrollRef} />
-              {jelJe ? 'da' : 'ne'}
+              <div className="line-div" ref={rockRef} />
             </p>
           </div>
         </section>

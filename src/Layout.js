@@ -9,8 +9,8 @@ import { Nav } from './comps/Nav';
 const Layout = ({ children }) => {
   return (
     <>
-      <Nav className="nav" />
-      <div>{children}</div>
+      <Nav />
+      <div className="izkompenzuj">{children}</div>
       {/* <Footer /> */}
     </>
   );

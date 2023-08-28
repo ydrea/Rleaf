@@ -9,12 +9,12 @@
   left: 0;
   right: 0;
   z-index: 999;
-  background-color: #8C8D85;
+  background-color: rgba(140, 141, 133, 0.6666666667);
   padding-bottom: 0 !important;
 }
 
 .navbar-container {
-  background-color: #8C8D85;
+  background-color: rgba(140, 141, 133, 0.6666666667);
   display: flex;
   justify-content: center;
   align-items: center;
