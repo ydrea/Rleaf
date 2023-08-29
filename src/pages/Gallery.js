@@ -49,7 +49,7 @@ export default function Photos() {
   };
 
   return (
-    <div>
+    <div className="gallery">
       <div>
         <button onClick={handlePreviousPhoto}>Previous Photo</button>
         <button onClick={handleNextPhoto}>Next Photo</button>

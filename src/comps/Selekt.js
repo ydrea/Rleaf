@@ -25,21 +25,17 @@ function Selekt() {
   }
   //
   return (
-    <div>
-      <div>
-        <Select
-          theme={cusTom}
-          placeholder="foto"
-          className={t.selekt}
-          isSearchable
-          isMulti
-          options={filters}
-          onChange={filterSelectedSet}
-          //   getOptionLabel={option => option.label}
-          //   getOptionValue={option => option.value}
-        />
-      </div>
-    </div>
+    <Select
+      theme={cusTom}
+      placeholder="foto"
+      className={t.selekt}
+      isSearchable
+      isMulti
+      options={filters}
+      onChange={filterSelectedSet}
+      //   getOptionLabel={option => option.label}
+      //   getOptionValue={option => option.value}
+    />
   );
 }
 

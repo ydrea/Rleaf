@@ -1,43 +1,8 @@
-// import { HashLink as Link } from 'react-router-hash-link';
-import './nav.scss';
+import './nav.css';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 //
-
-// function ScrollLink({ to, children }) {
-//   const { pathname } = useLocation();
-
-//   useEffect(() => {
-//     const handleClick = e => {
-//       e.preventDefault();
-
-//       const targetId = to;
-//       const targetElement = document.querySelector(targetId);
-
-//       if (targetElement) {
-//         const topOffset = targetElement.offsetTop;
-//         window.scrollTo({
-//           top: topOffset,
-//           behavior: 'smooth',
-//         });
-//       }
-//     };
-
-//     const link = document.querySelector(`a[href='${to}']`);
-//     link.addEventListener('click', handleClick);
-
-//     return () => {
-//       link.removeEventListener('click', handleClick);
-//     };
-//   }, [to]);
-
-//   return (
-//     <a href={to} className="nav-links">
-//       {children}
-//     </a>
-//   );
-// }
 
 //
 export const Nav = () => {
@@ -61,7 +26,17 @@ export const Nav = () => {
                 className="nav-links"
                 onClick={closeMobileMenu}
               >
-                <p>opservatorij</p>
+                <p>početna</p>
+              </Link>
+            </li>
+            {/* OPSERVATORIJ */}
+            <li className="nav-item">
+              <Link
+                to="/about"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                <p>o opservatoriju</p>
               </Link>
             </li>
             {/* PROJEKTI */}

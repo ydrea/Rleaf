@@ -1,173 +1,115 @@
 @import url("https://fonts.cdnfonts.com/css/freesans");
 .home {
-  position: relative;
-  max-width: 100%;
+position: relative;
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 
-.section {
-  height: 100vh;
-  display: flex;
-  margin-left: 2vw;
-}
+/* .animateImg {
+transition: translateX(80%);
+} */
 
-.image {
-  -o-object-fit: fill;
-     object-fit: fill;
-  width: 100%;
-  height: 75vh;
-  position: absolute;
-  top: 20vh;
+image {
+  /* object-fit: fill; */
+display: block;
+  max-width: 90vw !important;
+  position: absolute; 
   z-index: 1;
-}
-
-.animateImg {
-  animation-duration: 0.5s;
-  animation-name: move-up;
-  animation-fill-mode: forwards;
-}
-
-@keyframes move-up {
-  0% {
-    top: 20vh;
+}    
+  .img-container {
+    /* margin-top: 15vh; */
+    width: 100vw !important;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    object-fit: fill;
   }
-  25% {
-    top: 10vh;
+
+  .vozi {
+    color: #fff;
+    font-size: 130px;
+    z-index: 100;
+    position: absolute; top: 25vh; left: 25vw;
   }
-  50% {
-    top: 0vh;
+ 
+  .aepali {
+    color: #fff;
+    font-size: 130px;
+    z-index: 100;
+    position: absolute; top: 45vh;left: 25vw;
   }
-  75% {
-    top: -30vh;
+  
+  .animateAepali {
+    animation-duration: .5s;
+    animation-name: move-down;
+    animation-fill-mode: forwards;
   }
-  100% {
-    position: fixed;
-    top: -55vh;
+  @keyframes move-down {
+    0% {top: 40vh;}
+    25%{top: 60vh;}
+    50%{top: 80vh;}
+    100% {display: none;}
   }
-}
-.img-container {
-  margin-top: 10vh;
-  height: 75vh;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  -o-object-fit: fill;
-     object-fit: fill;
-}
-
-.vozi {
-  color: #fff;
-  font-size: 130px;
-  z-index: 100;
-  position: absolute;
-  top: 25vh;
-}
-
-.aepali {
-  color: #fff;
-  font-size: 130px;
-  z-index: 100;
-  position: absolute;
-  top: 40vh;
-}
-
-.animateAepali {
-  animation-duration: 0.5s;
-  animation-name: move-down;
-  animation-fill-mode: forwards;
-}
-
-@keyframes move-down {
-  0% {
-    top: 40vh;
-  }
-  25% {
-    top: 60vh;
-  }
-  50% {
-    top: 80vh;
-  }
-  100% {
-    display: none;
-  }
-}
-.img-container > p {
-  position: absolute;
-  top: 90vh;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: #8C8D85;
-  color: #fff;
-  font-size: 30px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-}
-
-.line-div {
-  border-top: 2px solid white;
-  position: absolute;
-  margin-top: -6vh;
-  box-sizing: border-box;
-  width: 100%;
-  height: 0.6rem;
-}
-
-.about {
-  display: flex;
-  padding-left: 10vh;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  background-color: #8C8D85;
-  color: #fff;
-  font-size: 30px;
-}
-
-.about > li {
-  color: #000;
-  list-style: circle;
-}
-
-.homeimg {
-  margin-left: 10vw;
-  margin-top: 15vh;
-  width: 86vw;
-}
-
-.textinimg {
-  position: absolute;
-  top: 245vh;
-  right: 45vw;
-  z-index: 10;
-  font-size: 30px;
-  width: 60vh;
-}
-
-.Titleinimg {
-  position: absolute;
-  right: 45vw;
-  z-index: 20;
-  font-size: 80px;
-  width: 60vh;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-}
-
-@media screen and (max-width: 960px) {
-  .home-container > h1 {
-    font-size: 70px;
-    /* margin-top: auto; */
-  }
-}
-@media screen and (max-width: 768px) {
-  .home-container > h1 {
-    font-size: 50px;
-    /* margin-top: auto; */
-  }
-  .hero-container > p {
+  
+  .podnaslov {
+    position: absolute;
+    top: 100vh; 
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 3;
     font-size: 30px;
+    }
+
+  .line-div {
+    border-top: 2px solid white;
+    position: absolute;
+    top: 90vh;
+    box-sizing: border-box;
+    width: 100%;
+    height: 0.6rem;
   }
-}/*# sourceMappingURL=home.css.map */
+  .one {
+    height: 600px;
+    background-color: #8c8d85;
+  }
+  .two {
+    height: 812px;
+    background-color: #8c8d85;
+  }
+  .three {
+    height: 600px;
+    background-color: #8c8d85;
+  }
+  .four {
+    height: 600px;
+    background-color: #8c8d85;
+  }
+  .textinimg {
+    position: absolute; bottom: 15vh; 
+    right: 15vw;
+    z-index: 10;
+    font-size: 30px;
+    width: 60vw;
+  }
+  @media screen and (max-width: 960px) {
+    .home-container > h1 {
+      font-size: 70px;
+      /* margin-top: auto; */
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .home-container > h1 {
+      font-size: 50px;
+      /* margin-top: auto; */
+    }
+  
+    .home-container > p {
+      font-size: 30px;
+    }
+  
+}

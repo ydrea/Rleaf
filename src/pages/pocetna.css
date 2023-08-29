@@ -1,0 +1,114 @@
+.one {
+    height: 600px;
+    background-color: #caf0f8;
+  }
+  .two {
+    height: 600px;
+    background-color: #f5cac3;
+  }
+  .three {
+    height: 600px;
+    background-color: #d8f3dc;
+  }
+  .four {
+    height: 600px;
+    background-color: #ffc6ff;
+  }
+  
+
+
+
+
+  .section1 {
+    position: relative;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section2 {
+    position: relative;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section3 {
+    position: relative;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+  }
+  .section4 {
+    position: relative;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+  }
+
+.about1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #8c8d85;
+  color: #fff;
+  font-size: 30px;
+}
+.about2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #8c8d85;
+  color: #fff;
+  font-size: 30px;
+}
+.about3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #8c8d85;
+  color: #fff;
+  font-size: 30px;
+}
+.about4 {
+  font-size: 30px;
+}
+
+.homeimg1 {
+  /* position: absolute;  */
+  left: 0; 
+  top: 0;
+  display: block;
+  /* margin-left: 2vw; */
+  margin-top: 15vh;
+  width: 60vw !important;
+}
+
+.homeimg2 {
+  position: absolute; top: 0;
+  display: block;
+  /* margin-left: 2vw; */
+  /* margin-top: 15vh; */
+  width: 25%;
+}
+
+.textinimg {
+  position: absolute; bottom: 15vh; 
+  right: 15vw;
+  z-index: 10;
+  font-size: 30px;
+  width: 60vw;
+}
+ 
+.Titleinimg {
+  position: absolute; 
+  right: 35vw;
+  bottom: 0;
+  z-index: 20;
+  font-size: 80px;
+  width: 60vw;
+}
+.footer {
+  position: absolute; bottom: 0;
+
+}

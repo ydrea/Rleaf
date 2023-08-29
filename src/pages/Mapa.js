@@ -11,8 +11,7 @@ import {
 } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { useRef, useEffect, useState } from 'react';
-import geolib from 'geolib';
-
+import './mapa.css';
 import { Icon } from 'leaflet';
 //prettier-ignore
 import {

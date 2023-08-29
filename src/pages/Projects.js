@@ -1,4 +1,4 @@
-import './projects.scss';
+import './projects.css';
 import Footer from '../comps/Footer';
 
 //

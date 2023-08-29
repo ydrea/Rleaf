@@ -1,16 +1,15 @@
 @import url("https://fonts.cdnfonts.com/css/freesans");
 .navbar {
-  /* background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%); */
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed !important;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 999;
   background-color: rgba(140, 141, 133, 0.6666666667);
-  padding-bottom: 0 !important;
+  padding-bottom: 0;
 }
 
 .navbar-container {
@@ -161,4 +160,4 @@ p::first-letter {
     color: #242424;
     transition: 250ms;
   }
-}/*# sourceMappingURL=nav.css.map */
+}

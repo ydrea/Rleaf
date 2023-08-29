@@ -3,12 +3,11 @@ import About from './pages/About';
 import { Mapa } from './pages/Mapa';
 import Contact from './pages/Contact';
 import Projects from './pages/Projects';
-
+//
 import { Upload } from './pages/Upload';
 import { Login } from './pages/Login';
-
 //
-import './App.scss';
+import './App.css';
 import Layout from './Layout';
 //
 import { Route, Routes } from 'react-router-dom';
@@ -17,7 +16,6 @@ import Private from './pages/protected/Private';
 import { useEffect } from 'react';
 import { store } from './redux/store';
 import Photos from './pages/Photos';
-import Gallery from './pages/Gallery';
 
 function App() {
   //
@@ -32,7 +30,7 @@ function App() {
           <Route path="upload" element={<Upload />} />
         </Route>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/about" element={<About />} /> */}
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/mapa/:signatura" element={<Mapa />} />

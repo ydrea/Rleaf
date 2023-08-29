@@ -13,7 +13,7 @@ import {
 } from '../redux/rtk/gallerySlice';
 import { Card } from '../comps/Card';
 import Footer from '../comps/Footer';
-import './photos.scss';
+import './photos.css';
 import { Button } from 'reactstrap';
 
 export default function Photos() {

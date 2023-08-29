@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import './form.module.css';
 const Form = ({ uploadedFile, exifR }) => {
   const [pod, podSet] = useState();
 
@@ -48,7 +48,7 @@ const Form = ({ uploadedFile, exifR }) => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          width: 400,
+          // width: 400,
         }}
       >
         <div className="form-control">
@@ -97,7 +97,7 @@ const Form = ({ uploadedFile, exifR }) => {
       <div
         style={{
           display: 'flex',
-          width: 400,
+          // width: 400,
           flexDirection: 'column',
         }}
       >

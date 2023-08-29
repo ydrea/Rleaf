@@ -1,7 +1,3 @@
-@import '../_variables';
-
-$overlay-color: $bg;
-$overlay-opacity: 1;
 
 .dugmici {
   display: flex;
@@ -13,7 +9,7 @@ margin-bottom: 3vh;
 
 
 .gallery {
-    background-color: $bg;
+    /* background-color: $bg; */
 }
 
 .card {
@@ -28,7 +24,6 @@ max-width: 75vw;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-// background-color: $bg;
 }
 
 .photo {
@@ -51,7 +46,7 @@ max-width: 75vw;
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
-      opacity: 1; // Start fully visible (dimmed)
+      opacity: 1;
       pointer-events: none;
       transition: opacity 0.3s ease;
     }
@@ -60,7 +55,7 @@ max-width: 75vw;
       transform: scale(1.05);
   
       .overlay {
-        opacity: 0; // Remove dimming on hover
+        opacity: 0;
       }
     }
   }

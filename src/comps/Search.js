@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
-import l from './nav.module.scss';
+// import l from './nav.module.scss';
 
 //
 function Search() {
