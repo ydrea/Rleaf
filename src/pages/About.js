@@ -95,7 +95,7 @@ export default function About() {
           <div style={{ position: 'relative' }}>
             {' '}
             <img
-              src="home1.png"
+              src="about2.png"
               style={{
                 width: '100%',
                 backgroundRepeat: 'no-repeat',
