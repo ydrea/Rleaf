@@ -1,4 +1,4 @@
-@import url("https://fonts.cdnfonts.com/css/freesans");
+/* @import url("https://fonts.cdnfonts.com/css/freesans"); */
 .navbar {
   display: flex;
   justify-content: center;
@@ -10,6 +10,12 @@
   z-index: 999;
   background-color: rgba(140, 141, 133, 0.6666666667);
   padding-bottom: 0;
+}
+image {
+display: block;
+max-width: 90vw !important;
+position: absolute; 
+z-index: 1;
 }
 
 .navbar-container {
@@ -38,7 +44,7 @@
 .navline-div {
   border-top: 2px solid white;
   position: absolute;
-  top: 12vh;
+  top: 14vh;
   left: 0;
   box-sizing: border-box;
   width: 100%;

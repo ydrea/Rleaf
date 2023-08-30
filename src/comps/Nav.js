@@ -14,6 +14,7 @@ export const Nav = () => {
     <>
       <div className="navbar">
         <nav className="navbar-container">
+          {/* <img src="img-nav.png" /> */}
           <div className="menu-icon" onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
@@ -66,7 +67,7 @@ export const Nav = () => {
                 className="nav-links"
                 onClick={closeMobileMenu}
               >
-                <p>medijateka</p>
+                <p>fototeka</p>
               </Link>
             </li>
             {/* CONTACT */}

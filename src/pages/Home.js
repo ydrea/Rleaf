@@ -7,7 +7,7 @@ import { useInView } from 'react-intersection-observer';
 //
 function Home() {
   const { ref: rockRef, inView: jelNije } = useInView({
-    rootMargin: '0px 0px -6% 0px',
+    rootMargin: '0px 0px -3% 0px',
     triggerOnce: false, //
   });
 
@@ -22,7 +22,9 @@ function Home() {
           alt="img"
           className={`image ${jelNije ? 'animateImg' : ''}`}
         />
-        <h1 className="vozi">opservatorij</h1>
+        <h1 className={`vozi ${jelNije ? 'animateVozi' : ''}`}>
+          opservatorij
+        </h1>
 
         <h1 className={`aepali ${jelNije ? 'animateAepali' : ''}`}>
           krajobraza
@@ -30,7 +32,7 @@ function Home() {
         <div className="podnaslov">
           Interdisciplinarna platforma posvećena istraživanju i
           razumijevanju krajobraza
-          <div className="line-div" ref={rockRef} />
+          <div className="line" ref={rockRef} />
         </div>
       </div>
       {/* //sections */}

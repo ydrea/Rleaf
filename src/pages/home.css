@@ -1,4 +1,4 @@
-@import url("https://fonts.cdnfonts.com/css/freesans");
+/* @import url("https://fonts.cdnfonts.com/css/freesans"); */
 .home {
 position: relative;
 width: 100%;
@@ -10,11 +10,11 @@ align-items: center;
 /* .animateImg {
 transition: translateX(80%);
 } */
-
+ 
 image {
   /* object-fit: fill; */
 display: block;
-  max-width: 90vw !important;
+  max-width: 100vw !important;
   position: absolute; 
   z-index: 1;
 }    
@@ -28,11 +28,35 @@ display: block;
     object-fit: fill;
   }
 
+  .animateImg {
+    animation-duration: .5s;
+    animation-name: move-it;
+    animation-fill-mode: forwards;
+  }
+  @keyframes move-it {
+    /* 0% {top: 0vh;} */
+    25%{top: -25vh;}
+    50%{top: -50vh;}
+    100% {display: sticky;}
+  }
+ 
   .vozi {
     color: #fff;
     font-size: 130px;
     z-index: 100;
     position: absolute; top: 25vh; left: 25vw;
+  }
+
+  .animateVozi {
+    animation-duration: .5s;
+    animation-name: move-up;
+    animation-fill-mode: forwards;
+  }
+  @keyframes move-up {
+    0% {top: 25vh;}
+    25%{top: 22.5vh;}
+    50%{top: 20vh;}
+    100% {display: sticky;}
   }
  
   .aepali {
@@ -48,9 +72,9 @@ display: block;
     animation-fill-mode: forwards;
   }
   @keyframes move-down {
-    0% {top: 40vh;}
-    25%{top: 60vh;}
-    50%{top: 80vh;}
+    0% {top: 45vh;}
+    25%{top: 47.5vh;}
+    50%{top: 50vh;}
     100% {display: none;}
   }
   
@@ -64,10 +88,10 @@ display: block;
     font-size: 30px;
     }
 
-  .line-div {
+  .line {
     border-top: 2px solid white;
     position: absolute;
-    top: 90vh;
+    top: 5vh;
     box-sizing: border-box;
     width: 100%;
     height: 0.6rem;

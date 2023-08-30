@@ -1,12 +1,10 @@
-@import url("https://fonts.cdnfonts.com/css/freesans");
+/* @import url("https://fonts.cdnfonts.com/css/freesans"); */
 .App {
   text-align: center;
   background-color: #8C8D85;
 }
-
-.leaflet-container {
-  height: 75vh;
-  width: 75%;
+.lealet-container {
+  z-index: 0 !important;
 }
 
 .App-intro {
