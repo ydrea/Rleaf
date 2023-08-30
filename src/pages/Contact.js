@@ -3,7 +3,7 @@ import Footer from '../comps/Footer';
 
 function Contact() {
   return (
-    <div id="contact">
+    <div id="contact" style={{ fontSize: '30px' }}>
       <p>
         info@croatianlandscape.hr Opservatorij krajobraza Sveučilište
         u Zagrebu, Agronomski fakultet izv.prof.dr.sc. Goran Andlar

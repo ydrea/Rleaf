@@ -1,0 +1,38 @@
+
+  /* .animateAepali {
+    animation-duration: .5s;
+    animation-name: move-down;
+    animation-fill-mode: forwards;
+  }
+  @keyframes move-down {
+    0% {top: 45vh;}
+    25%{top: 47.5vh;}
+    50%{top: 50vh;}
+    100% {display: none;}
+  }
+   */
+
+  /* .animateVozi {
+    animation-duration: .5s;
+    animation-name: move-up;
+    animation-fill-mode: forwards;
+  }
+  @keyframes move-up {
+    0% {top: 25vh;}
+    25%{top: 22.5vh;}
+    50%{top: 20vh;}
+    100% {display: sticky;}
+  }
+  */
+
+    /* .animateImg {
+    animation-duration: .5s;
+    animation-name: move-it;
+    animation-fill-mode: forwards;
+  }
+  @keyframes move-it {
+    0% {top: 0vh;} 
+    25%{top: -25vh;}
+    50%{top: -50vh;}
+    100% {display: sticky;}
+  } */

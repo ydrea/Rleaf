@@ -1,3 +1,4 @@
+import Footer from '../comps/Footer';
 import './about.css';
 export default function About() {
   return (
@@ -7,7 +8,7 @@ export default function About() {
         istraživanje krajobraza i razvoj temeljen na krajobrazu. 2023.
         godine počeo je sa radom kao virtualni kolaborativni subjekt,
         a inicijalnu grupu čine stručnjaci različitih profila:
-        <ul>
+        <ul style={{ color: 'black' }}>
           <li>
             {' '}
             dr.sc. Goran Andlar, izvanredni profesor na Agronomskom
@@ -57,7 +58,9 @@ export default function About() {
           <div
             style={{
               position: 'absolute',
-              top: '20vh',
+              bottom: '0',
+              right: '10vw',
+              width: '25vw',
               color: 'white',
               textAlign: 'center',
               fontSize: '60px',
@@ -109,7 +112,9 @@ export default function About() {
             <div
               style={{
                 position: 'absolute',
-                top: '20vh',
+                bottom: '0',
+                right: '10vw',
+                width: '25vw',
                 color: 'white',
                 textAlign: 'center',
                 fontSize: '60px',
@@ -146,11 +151,15 @@ export default function About() {
           Za sve informacije vezane uz ‘Opservatorij krajobraza’,
           slobodno nas kontaktirajte putem e-maila na
           [info@croatianlandscape.hr] ili telefonom na [+385 xx xxx
-          xxxx]. Zanima vas više o našem radu i misiji? Pretplatite se
-          na naš newsletter i budite u tijeku s našim istraživanjima i
-          aktivnostima. Unesite svoju e-mail adresu i pridružite se
-          putovanju prema očuvanju i razumijevanju krajobraza.
+          xxxx].
+          <div style={{ color: 'black' }}>
+            Zanima vas više o našem radu i misiji? Pretplatite se na
+            naš newsletter i budite u tijeku s našim istraživanjima i
+            aktivnostima. Unesite svoju e-mail adresu i pridružite se
+            putovanju prema očuvanju i razumijevanju krajobraza.
+          </div>
         </div>
+        <Footer />{' '}
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const Message = ({ msg }) => {
         data-dismiss="alert"
         aria-label="Close"
       >
-        <span aria-hidden="true">&times;</span>
+        <div aria-hidden="true">&times;</div>
       </button>
     </div>
   );

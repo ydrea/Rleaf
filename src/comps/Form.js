@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './form.module.css';
+import './form.css';
 const Form = ({ uploadedFile, exifR }) => {
   const [pod, podSet] = useState();
 

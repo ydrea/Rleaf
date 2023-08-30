@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 //
 function Home() {
+  const ref = useRef();
   const { ref: rockRef, inView: jelNije } = useInView({
     rootMargin: '0px 0px -3% 0px',
     triggerOnce: false, //
@@ -16,27 +17,21 @@ function Home() {
   return (
     <div className="home">
       {/* <section className="section"> */}{' '}
-      <div className="img-container">
-        <img
-          src="img-home-g.png"
-          alt="img"
-          className={`image ${jelNije ? 'animateImg' : ''}`}
-        />
-        <h1 className={`vozi ${jelNije ? 'animateVozi' : ''}`}>
-          opservatorij
-        </h1>
+      <div className="cont0">
+        <img src="img-home-g.png" className="img0" />
+        <div className="txt0">
+          <div className="vozi"> Opservatorij</div>
+          <div className="aepali">krajobraza</div>
+        </div>
 
-        <h1 className={`aepali ${jelNije ? 'animateAepali' : ''}`}>
-          krajobraza
-        </h1>
         <div className="podnaslov">
           Interdisciplinarna platforma posvećena istraživanju i
           razumijevanju krajobraza
           <div className="line" ref={rockRef} />
         </div>
       </div>
-      {/* //sections */}
-      <div className="one" style={{ fontSize: '30px' }}>
+      {/* //Sections */}
+      <div className="S1">
         'Opservatorij' je platforma koja djeluje kao virtualni
         kolaborativni subjekt koji okuplja stručnjake različitih
         profila. U središtu naše pažnje je koncept krajobraza koji se
@@ -45,31 +40,10 @@ function Home() {
         razumijevanju krajobraza kroz kombinaciju prirodnih,
         kulturno-povijesnih i vizualnih čimbenika.
       </div>
-      <div className="two">
-        <div style={{ position: 'relative' }}>
-          {' '}
-          <img
-            src="home1.png"
-            style={{
-              width: '100%',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              display: 'grid',
-              placeItems: 'center',
-              zIndex: 0,
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              top: '20vh',
-              color: 'white',
-              textAlign: 'center',
-              fontSize: '30px',
-              zIndex: '33',
-            }}
-          >
+      <div className="S2">
+        <div className="cont2">
+          <img src="home1.png" className="img1" />
+          <div className="txt2">
             Pilot područje Opservatorija je Banovina ili Banija,
             marginalizirana regija Hrvatske, izrazito pogođena ratnim
             stradanjima tijekom 1990-ih i jakim potresom 2020. godine,
@@ -79,25 +53,22 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="three" style={{ fontSize: '30px' }}>
-        {/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
-        <div style={{ verticalAlign: 'left' }}>
-          {' '}
-          <img src="home2.png" style={{ verticalAlign: 'left' }} />
-        </div>{' '}
-        <p>
+      <div className="S3">
+        {/* <div className="cont3"> */}
+        <img src="home2.png" />
+        <div>
           Pozivamo vas da se pridružite našem putovanju prema očuvanju
           i razumijevanju krajobraza.
-        </p>{' '}
+        </div>
         {/* </div> */}
       </div>
-      <div className="four" style={{ fontSize: '30px' }}>
+      <div className="S4">
         Za sve informacije vezane uz ‘Opservatorij krajobraza’,
         slobodno nas kontaktirajte putem e-maila na
         [info@croatianlandscape.hr] ili telefonom na [+385 xx xxx
         xxxx].
       </div>
-      <div style={{ fontSize: '30px' }}>
+      <div style={{ fontSize: '30px', color: 'black' }}>
         Zanima vas više o našem radu i misiji? Pretplatite se na naš
         newsletter i budite u tijeku s našim istraživanjima i
         aktivnostima. Unesite svoju e-mail adresu i pridružite se
