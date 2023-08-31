@@ -1,6 +1,6 @@
 import Home from './pages/Home';
 import About from './pages/About';
-import { Mapa } from './pages/Mapa';
+import { Map } from './pages/Map';
 import Contact from './pages/Contact';
 import Projects from './pages/Projects';
 //
@@ -33,8 +33,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/mapa/:signatura" element={<Mapa />} />
-        <Route path="/mapa" element={<Mapa />} />
+        <Route path="/mapa/:signatura" element={<Map />} />
+        <Route path="/mapa" element={<Map />} />
 
         <Route path="/photos" element={<Photos />} />
         <Route path="/photos/:signatura" element={<Photos />} />

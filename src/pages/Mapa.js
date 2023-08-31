@@ -9,7 +9,6 @@ import {
   LayersControl,
   // WMSTileLayer,
 } from 'react-leaflet';
-import MarkerClusterGroup from 'react-leaflet-cluster';
 import { useRef, useEffect, useState } from 'react';
 import './mapa.css';
 import { Icon } from 'leaflet';
@@ -18,8 +17,6 @@ import {
   ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
   PodRH, TemaZP, TemaP, TemaS
 } from '../maps/wms';
-// import { markeri } from '../maps/markeri';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
@@ -29,9 +26,17 @@ import Footer from '../comps/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAPhoto } from '../redux/rtk/gallerySlice';
 
+import {
+  setSelectedPhoto,
+  setSelectedMarker,
+} from '../redux/rtk/mapSlice';
+
+//custom icon
 const myIcon = new Icon({
   iconUrl: require('../assets/ikona.png'),
   iconSize: [28, 28],
+  iconAnchor: [14, 28],
+  popupAnchor: [0, -28],
 });
 //
 
@@ -41,7 +46,8 @@ function onEachFeature(feature, layer) {
 }
 
 export const Mapa = () => {
-  const selectedPhoto = useSelector(selectAPhoto);
+  const selectedPhoto = useSelector(state => state.selectedPhoto);
+  const [clickedPhoto, setClickedPhoto] = useState(null);
 
   //prog. zoom
   const [selectedMarkerCoords, setSelectedMarkerCoords] =
@@ -50,6 +56,9 @@ export const Mapa = () => {
 
   const mapRef = useRef(null); // Define a ref for the MapContainer
   // const markerClusterRef = useRef(null);
+
+  const markerRefs = useRef([]);
+
   //
   const mapCenter =
     centerMapOnMarker && selectedMarkerCoords
@@ -145,7 +154,13 @@ export const Mapa = () => {
       setCenterMapOnMarker(false);
     }
   }, [centerMapOnMarker, selectedMarkerCoords]);
-  // ...
+
+  // handle click
+  const handlePhotoClick = (photo, marker) => {
+    dispatch(setSelectedPhoto(photo));
+    dispatch(setSelectedMarker(marker));
+  };
+
   // //
   //
   const { BaseLayer, Overlay } = LayersControl;
@@ -207,31 +222,28 @@ export const Mapa = () => {
                   width="233px"
                   src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
                   alt={i.popUp}
+                  onClick={() => handlePhotoClick(i, i)}
                 />
               </Link>
             </Popup>
           </Marker>
         ))}
-        {/* </MarkerClusterGroup> */}
+        // ...{/* </MarkerClusterGroup> */}
       </MapContainer>
       {/* Display the selected photo */}
       <div style={{ background: 'transparent' }}>
-        {selMarker ? (
+        {selectedPhoto ? (
           <div>
             <h3>Selected Photo</h3>
-            <p>
-              Image URL:{' '}
-              {/* {`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`} */}
-            </p>
+            <p>Image URL:</p>
             <img
               width="75%"
-              src={`${process.env.REACT_APP_SERVER_PUB}/${selMarker.popUp}`}
-              // alt={selectedPhoto.signatura}
+              src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.popUp}`}
+              alt={selectedPhoto.popUp}
             />
-            {/* <p>Signatura: {selectedPhoto.signatura}</p> */}
           </div>
         ) : (
-          <p style={{ color: 'black' }}>nopoto</p>
+          <p style={{ color: 'black' }}>No photo selected</p>
         )}
       </div>
       <Footer />{' '}

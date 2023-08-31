@@ -2,28 +2,38 @@
 .projects-container {
   position: relative;
   display: flex;
+  flex-direction: column;
 }
 
+/* .P1 {position: relative;} */
+.proj1{
+  max-width: 100%;
+  height: auto;
+}
 .tekst1 {
-  position: absolute;
+   /* position: absolute; */
   top: 10vh;
-  display: flex;
-  padding-right: 50vh;
-  flex-direction: column;
+  left: 10vh;
+  flex-direction: column; 
   justify-content: center;
-  background-color: #8C8D85;
+  /* background-color: #8C8D85; */
   color: #fff;
   font-size: 30px;
+}
+/* .P2 {position: relative} */
+.proj2 {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.tekst2 {
+  /* position: absolute; */
+  top: 10vh; right: 10vh;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: #8C8D85; */
+  color: #fff;
+  font-size: 30px;
+  margin-bottom: 1vh;
 }
 
-.tekst2 {
-  position: absolute;
-  top: 120vh;
-  display: flex;
-  padding-left: 50vh;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #8C8D85;
-  color: #fff;
-  font-size: 30px;
-}
