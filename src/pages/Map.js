@@ -67,11 +67,17 @@ export const Map = () => {
     if (marker) {
       dispatch(setSelectedMarker(marker));
     }
+    if (cardRef.current) {
+      cardRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
   };
 
-  // map ref
+  // refs
   const mapRef = useRef(null);
-
+  const cardRef = useRef(null);
   //center, coords
   const [selectedMarkerCoords, setSelectedMarkerCoords] =
     useState(null);
@@ -81,15 +87,15 @@ export const Map = () => {
   const mapCenter =
     centerMapOnMarker && selectedMarkerCoords
       ? selectedMarkerCoords
-      : [45.2, 16.2];
+      : [45.28, 16.04];
   const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 14 : 9;
 
   return (
-    <div style={{ height: '70vh', width: '140vh' }}>
+    <div>
       <MapContainer
         center={mapCenter}
         zoom={mapZoom}
-        style={{ height: '80vh' }}
+        style={{ height: '70vh', width: '70vw' }}
         ref={mapRef}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -101,14 +107,13 @@ export const Map = () => {
             position={i.geocode}
             icon={myIcon}
           >
-            // ...
             <Popup>
               {i.popUp}
               <Link
                 to={`/photos/${i.popUp}`}
                 onClick={event => {
-                  event.preventDefault(); // Prevent the default link behavior
-                  handlePhotoClick(i); // Call your handler function
+                  event.preventDefault();
+                  handlePhotoClick(i);
                 }}
               >
                 <img
@@ -121,7 +126,13 @@ export const Map = () => {
           </Marker>
         ))}
       </MapContainer>
-      {clickedPhoto && <Card photo={clickedPhoto.photoData} />}
+
+      {/* under the map */}
+      {clickedPhoto && (
+        <div ref={cardRef}>
+          <Card photo={clickedPhoto.photoData} />
+        </div>
+      )}
       <Footer />
     </div>
   );
