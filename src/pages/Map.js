@@ -82,7 +82,6 @@ export const Map = () => {
   const [selectedMarkerCoords, setSelectedMarkerCoords] =
     useState(null);
   const [centerMapOnMarker, setCenterMapOnMarker] = useState(false);
-
   //prog. zoom
   const mapCenter =
     centerMapOnMarker && selectedMarkerCoords
