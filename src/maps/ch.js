@@ -24,25 +24,25 @@ const Wfs = () => {
   //   console.log('Map clicked!', e.latlng);
   // };
 
-  // useEffect(() => {
-  //   // Make the WFS request
-  //   axios
-  //     .get(
-  //       'https://starigrad.agr.unizg.hr/geoserver/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=qgis2webtest:kopnena_stanista_2016&outputFormat=application/json&srsName=epsg:4326'
-  //     )
-  //     .then(response => {
-  //       setData(response.data); // Assuming the response contains the GeoJSON data
-  //       console.log(data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching WFS data:', error);
-  //     });
-  // }, [data]);
+  useEffect(() => {
+    // Make the WFS request
+    axios
+      .get(
+        'https://starigrad.agr.unizg.hr/geoserver/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=qgis2webtest:kopnena_stanista_2016&outputFormat=application/json&srsName=epsg:4326'
+      )
+      .then(response => {
+        setData(response.data); // Assuming the response contains the GeoJSON data
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error fetching WFS data:', error);
+      });
+  }, [data]);
 
-  // const myIcon = new Icon({
-  //   iconUrl: require('../assets/ikona.png'),
-  //   iconSize: [28, 28],
-  // });
+  const myIcon = new Icon({
+    iconUrl: require('../assets/ikona.png'),
+    iconSize: [28, 28],
+  });
 
   const { BaseLayer, Overlay } = LayersControl;
 
@@ -92,17 +92,16 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-// const myIcon = new L.Icon({
-//   iconUrl: iconUrl.default,
-//   iconSize: [28, 28],
-// });
-//prettier-ignore
-// const markers = [
-//   { geocode: [45.2, 16.2], popUp: 'medo?'},
-//   { geocode: [45.22, 16.25], popUp: 'zeko!'},
-//   { geocode: [45.21, 16.24], popUp: 'kravicaa!'},
-// ];
-//
+const myIcon = new L.Icon({
+  iconUrl: iconUrl.default,
+  iconSize: [28, 28],
+});
+prettier - ignore;
+const markers = [
+  { geocode: [45.2, 16.2], popUp: 'medo?' },
+  { geocode: [45.22, 16.25], popUp: 'zeko!' },
+  { geocode: [45.21, 16.24], popUp: 'kravicaa!' },
+];
 
 // function EPSG3879() {
 //   // eslint-disable-line
@@ -122,40 +121,159 @@ L.Icon.Default.mergeOptions({
 
 //
 
-export const About = () => {
-//   // const [data, setData] = useState([]);
+export const vVmsGetinfo = () => {
+  function MapComponent() {
+    // State for storing the WMS GetFeatureInfo response
+    const [featureInfo, setFeatureInfo] = useState('');
 
-//   const mapRef = useRef();
+    // Map configuration
+    const mapConfig = {
+      center: [51.505, -0.09], // Initial map center
+      zoom: 13, // Initial zoom level
+    };
 
-//   useEffect(() => {
-//     const { current = {} } = mapRef;
-//     const { leafletElement: map } = current;
+    // Create a custom icon if needed
+    const customIcon = new L.Icon({
+      iconUrl: 'path_to_icon.png',
+      iconSize: [28, 28],
+    });
 
-//     if ( !map ) return;
+    // Function to handle GetFeatureInfo requests
+    const getFeatureInfo = async latlng => {
+      const wmsUrl = 'URL_TO_WMS_SERVER'; // Replace with your WMS server URL
 
+      try {
+        // Make a GetFeatureInfo request to the WMS server
+        const response = await axios.get(wmsUrl, {
+          params: {
+            request: 'GetFeatureInfo',
+            service: 'WMS',
+            srs: 'EPSG:4326', // Coordinate reference system
+            format: 'image/png',
+            transparent: true,
+            version: '1.1.1',
+            bbox: map.getBounds().toBBoxString(),
+            height: 300,
+            width: 300,
+            layers: 'YOUR_WMS_LAYER_NAME',
+            query_layers: 'YOUR_WMS_LAYER_NAME',
+            info_format: 'text/plain',
+            feature_count: 1,
+            x: 150, // Coordinates in pixels
+            y: 150, // Coordinates in pixels
+          },
+        });
 
-//     const parksGeoJson = new L.GeoJSON(nationalParks, {
-//       onEachFeature: (feature = {}, layer) => {
-//         const { properties = {} } = feature;
-//         const { Name } = properties;
+        // Update the featureInfo state with the response data
+        setFeatureInfo(response.data);
+      } catch (error) {
+        console.error('Error fetching GetFeatureInfo:', error);
+      }
+    };
 
-//         if ( !Name ) return;
+    useEffect(() => {
+      if (!map) return;
 
-//         layer.bindPopup(`<p>${Name}</p>`);
-//       }
-//     });
+      const legend = L.control({ position: 'bottomleft' });
 
-//     parksGeoJson.addTo(map);
-//   }, [])
-// return (
-  
-//   <div className="App">
-//   <MapContainer ref={mapRef} center={[39.50, -98.35]} zoom={4}>
-//     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors" />
-//   </MapContainer>
-// </div>
-// );
-}
+      legend.onAdd = () => {
+        const div = L.DomUtil.create('div', 'legend');
+        div.innerHTML = `Custom Legend Content`;
+        return div;
+      };
+      legend.addTo(map);
+    }, [map]);
+
+    useEffect(() => {
+      // Initialize the map
+      const map = L.map('map').setView(
+        mapConfig.center,
+        mapConfig.zoom
+      );
+
+      // Add a tile layer (OpenStreetMap in this case)
+      L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      ).addTo(map);
+
+      // Add a click event listener to the map for GetFeatureInfo
+      map.on('click', e => {
+        getFeatureInfo(e.latlng);
+      });
+
+      // Return a clean-up function to remove the map when the component unmounts
+      return () => {
+        map.remove();
+      };
+    }, []); // The empty dependency array ensures this effect runs once
+
+    return (
+      <div id="map" style={{ height: '500px' }}>
+        {/* Render the GetFeatureInfo response */}
+        <div className="feature-info">{featureInfo}</div>
+      </div>
+    );
+  }
+
+  const MyMapComponent = () => {
+    const wmsLayerOptions = {
+      layers: 'administrativna_naselja',
+      format: 'image/png',
+      transparent: true,
+      version: '1.1.0',
+      attribution: 'WMS Service Attribution',
+    };
+
+    return (
+      <MapContainer
+        center={[51.505, -0.09]}
+        zoom={13}
+        style={{ height: '100vh' }}
+      >
+        <TileLayer
+          url="https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0"
+          {...wmsLayerOptions}
+        />
+      </MapContainer>
+    );
+  };
+
+  // export MyMapComponent;
+
+  // export default MapComponent;
+
+  //   // const [data, setData] = useState([]);
+
+  //   const mapRef = useRef();
+
+  //   useEffect(() => {
+  //     const { current = {} } = mapRef;
+  //     const { leafletElement: map } = current;
+
+  //     if ( !map ) return;
+
+  //     const parksGeoJson = new L.GeoJSON(nationalParks, {
+  //       onEachFeature: (feature = {}, layer) => {
+  //         const { properties = {} } = feature;
+  //         const { Name } = properties;
+
+  //         if ( !Name ) return;
+
+  //         layer.bindPopup(`<p>${Name}</p>`);
+  //       }
+  //     });
+
+  //     parksGeoJson.addTo(map);
+  //   }, [])
+  // return (
+
+  //   <div className="App">
+  //   <MapContainer ref={mapRef} center={[39.50, -98.35]} zoom={4}>
+  //     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors" />
+  //   </MapContainer>
+  // </div>
+  // );
+};
 
 //////////////////////////////////////////////////////
 // const { BaseLayer, Overlay } = LayersControl;

@@ -9,6 +9,17 @@ import {
   TileLayer,
   LayersControl,
 } from 'react-leaflet';
+import {
+  ANaselja,
+  PAJedinice,
+  PBNaselja,
+  FiksniElementi,
+  PodRH,
+  TemaZP,
+  TemaP,
+  TemaS,
+  TemaEWAP,
+} from '../maps/wms';
 
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -16,15 +27,54 @@ import axios from 'axios';
 
 import { Card } from '../comps/Card';
 import Footer from '../comps/Footer';
-
+// import Fly from './Fly';
 import { useDispatch } from 'react-redux';
 import { setSelectedMarker } from '../redux/rtk/mapSlice';
+// import { Ewap } from './temaEwap';
+import geojson from '../data/temakz.geojson.json';
+
+//
+
+const fetchLegend = async layerName => {
+  try {
+    const legendUrl = `https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&LAYER=${layerName}&FORMAT=image/png`;
+
+    const response = await axios.get(legendUrl, {
+      responseType: 'blob',
+    });
+    return URL.createObjectURL(response.data);
+  } catch (error) {
+    console.error('Error fetching legend:', error);
+    return null;
+  }
+};
 
 //
 export const Map = () => {
   const [clickedPhoto, setClickedPhoto] = useState(null);
   const [markeri, markeriSet] = useState([]);
   const dispatch = useDispatch();
+
+  //temaKZ
+  function onEachFeature(feature, layer) {
+    layer.bindPopup(feature.properties.code_opis);
+  }
+  //controls
+  const { BaseLayer, Overlay } = LayersControl;
+
+  // refs
+  const mapRef = useRef(null);
+  const cardRef = useRef(null);
+  //center, coords
+  const [selectedMarkerCoords, setSelectedMarkerCoords] =
+    useState(null);
+  const [centerMapOnMarker, setCenterMapOnMarker] = useState(false);
+  //prog. zoom
+  const mapCenter =
+    centerMapOnMarker && selectedMarkerCoords
+      ? selectedMarkerCoords
+      : [45.28, 16.04];
+  const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 14 : 9;
   //custom icon
   const myIcon = new Icon({
     iconUrl: require('../assets/ikona.png'),
@@ -75,29 +125,53 @@ export const Map = () => {
     }
   };
 
-  // refs
-  const mapRef = useRef(null);
-  const cardRef = useRef(null);
-  //center, coords
-  const [selectedMarkerCoords, setSelectedMarkerCoords] =
-    useState(null);
-  const [centerMapOnMarker, setCenterMapOnMarker] = useState(false);
-  //prog. zoom
-  const mapCenter =
-    centerMapOnMarker && selectedMarkerCoords
-      ? selectedMarkerCoords
-      : [45.28, 16.04];
-  const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 14 : 9;
-
   return (
     <div>
       <MapContainer
         center={mapCenter}
         zoom={mapZoom}
         style={{ height: '70vh', width: '70vw' }}
-        ref={mapRef}
+        whenCreated={map => {
+          if (mapRef.current === null) {
+            mapRef.current = map;
+          }
+        }}
       >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <LayersControl>
+          <BaseLayer checked name="OSM">
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          </BaseLayer>
+          <BaseLayer name="reljef" zIndex={0}>
+            <PodRH />
+          </BaseLayer>
+          <FiksniElementi />
+          <Overlay name="admin. naselja">
+            <ANaselja />
+          </Overlay>
+          <Overlay name="P banijska naselja">
+            <PBNaselja />
+          </Overlay>
+          <Overlay name="P administrativne jedinice">
+            <PAJedinice />
+          </Overlay>
+          <LayersControl>
+            <BaseLayer name="tema_koristenje_zemljista">
+              <GeoJSON data={geojson} onEachFeature={onEachFeature} />
+            </BaseLayer>
+            <BaseLayer name="tema_zastita_prirode">
+              <TemaZP />
+            </BaseLayer>
+            <BaseLayer name="tema_stanovnistvo">
+              <TemaS />
+            </BaseLayer>
+            <BaseLayer name="tema_potres">
+              <TemaP />
+            </BaseLayer>
+            <BaseLayer name="tema_EWAP">
+              <TemaEWAP />
+            </BaseLayer>
+          </LayersControl>
+        </LayersControl>
 
         {/* markeri     */}
         {markeri.map(i => (

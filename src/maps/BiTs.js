@@ -113,6 +113,7 @@ import tileLayer from '../utils/tileLayer';
 //       console.error('Error fetching WFS data:', error);
 //     });
 // }, []);
+
 // const MyMapComponent = () => {
 //   const wmsLayerOptions = {
 //     layers: 'administrativna_naselja',

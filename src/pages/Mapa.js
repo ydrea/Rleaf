@@ -54,7 +54,7 @@ export const Mapa = () => {
     useState(null);
   const [centerMapOnMarker, setCenterMapOnMarker] = useState(false);
 
-  const mapRef = useRef(null); // Define a ref for the MapContainer
+  const mapRef = useRef(null);
   // const markerClusterRef = useRef(null);
 
   const markerRefs = useRef([]);

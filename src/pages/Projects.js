@@ -54,10 +54,17 @@ function Projects() {
           pojedinačnih objekata, vještina, znanja i umijeća vezanih uz
           obradu drveta i gradnju građevina od drvata te obiteljskih i
           osobnih priča vlasnika i graditelja drvenih kuća. Više o
-          projektu možete pročitati na stranicama Društva Terra
-          Banalis, a na interaktivnoj karti na stranicama
-          Opservatorija naći će se fotografije kuća, okućnica i
-          naselja obrađivanih kroz projekt.
+          projektu možete pročitati na{' '}
+          <a
+            href="https://terrabanalis.wixsite.com/terrabanalis/drvena-ba%C5%A1tina-sm%C5%BE"
+            target="_blank"
+            rel="noreferrer"
+          >
+            stranicama Društva Terra Banalis
+          </a>
+          , a na interaktivnoj karti na stranicama Opservatorija naći
+          će se fotografije kuća, okućnica i naselja obrađivanih kroz
+          projekt.
         </div>
       </div>{' '}
       <Footer style={{ position: 'apsolute', bottom: '0' }} />{' '}
