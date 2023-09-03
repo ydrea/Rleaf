@@ -34,22 +34,9 @@ import { useDispatch } from 'react-redux';
 import { setSelectedMarker } from '../redux/rtk/mapSlice';
 // import { Ewap } from './temaEwap';
 import geojson from '../data/temakz.geojson.json';
+import MapClickHandler from '../maps/temaEwap';
 
 //
-
-// const fetchLegend = async layerName => {
-//   try {
-//     const legendUrl = `https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&LAYER=${layerName}&FORMAT=image/png`;
-
-//     const response = await axios.get(legendUrl, {
-//       responseType: 'blob',
-//     });
-//     return URL.createObjectURL(response.data);
-//   } catch (error) {
-//     console.error('Error fetching legend:', error);
-//     return null;
-//   }
-// };
 
 //
 export const Map = () => {
@@ -127,25 +114,7 @@ export const Map = () => {
     }
   };
 
-  //banija_zgrade
-
-  // useMapEvents({
-  //   click: async e => {
-  //     const { latlng } = e;
-  //     const { lat, lng } = latlng;
-
-  //     // Send a GetFeatureInfo request to your WMS service
-  //     const getFeatureInfoUrl = `https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&SRS=EPSG:3857&WIDTH=800&HEIGHT=600&LAYERS=banija_zgrade&QUERY_LAYERS=banija_zgrade&STYLES=&FORMAT=image/png&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${lng}&Y=${lat}`;
-
-  //     try {
-  //       const response = await axios.get(getFeatureInfoUrl);
-  //       const featureInfoData = response.data; // Process the feature info data as needed
-  //       console.log('Feature Info Data:', featureInfoData);
-  //     } catch (error) {
-  //       console.error('Error fetching feature info:', error);
-  //     }
-  //   },
-  // });
+  //tema_drvena_arhitektura
 
   return (
     <div>
@@ -189,18 +158,9 @@ export const Map = () => {
             <BaseLayer name="tema_potres">
               <TemaP />
             </BaseLayer>
-            <BaseLayer name="banija_zgrade">
-              <WMSTileLayer
-                url="https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE"
-                layers="banija_zgrade"
-                format="image/png mode: 8bit"
-                dpi={137}
-                map_resolution={137}
-                format_options={137}
-                transparent={true}
-                version="1.3.0"
-                attribution="WMS Service Attribution"
-              />
+            <BaseLayer name="tema_drvena_arhitektura">
+              <TemaEWAP />
+              <MapClickHandler />
             </BaseLayer>{' '}
           </LayersControl>
         </LayersControl>

@@ -6,6 +6,7 @@ import Projects from './pages/Projects';
 //
 import { Upload } from './pages/Upload';
 import { Login } from './pages/Login';
+import { Fileupload } from './pages/Fileupload';
 //
 import './App.css';
 import Layout from './Layout';
@@ -27,7 +28,7 @@ function App() {
     <Layout>
       <Routes>
         <Route element={<Private />}>
-          <Route path="upload" element={<Upload />} />
+          <Route path="/upload" element={<Upload />} />
         </Route>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

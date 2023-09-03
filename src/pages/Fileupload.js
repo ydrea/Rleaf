@@ -3,16 +3,22 @@ import Message from '../comps/Message';
 // import Progress from '../comps/Progress';
 import axios from 'axios';
 import exifr from 'exifr';
-import Form from '../comps/Form';
+import Form from '../comps/FormA';
 import UnicodeDecoder from '../utils/unicoder';
+import './Fileupload.css';
 //
-export const Upload = () => {
+export const Fileupload = () => {
   const [file, setFile] = useState('');
-  const [filename, setFilename] = useState('');
+  const [filename, setFilename] = useState('Choose File');
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState('');
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [exifR, exifRSet] = useState();
+
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
   //
 
   //
@@ -25,14 +31,17 @@ export const Upload = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('file', file);
-    try { const res = await axios.post(`${process.env.REACT_APP_SERVER}/upload`, formData, {
-        headers: {'Content-Type': 'multipart/form-data' },
-    //progress
+  
+    try {
+      const res = await axios.post(`/upload`, formData, {
+        headers: {'Content-Type': 'multipart/form-data' }
       });
-      // Clear percentage
+  
       const { fileName, filePath } = res.data;
-      setUploadedFile({ fileName, filePath });
-      setMessage(`img File ${fileName} Uploaded 2 ${filePath}`);
+      const newUploadedFile = { fileName, filePath };
+      setUploadedFiles([...uploadedFiles, newUploadedFile]);
+  
+      setMessage(`Image File ${fileName} Uploaded to ${filePath}`);
     } catch (err) {
       if (err.response.status === 500) {
         setMessage('There was a problem with the server');
@@ -43,33 +52,23 @@ export const Upload = () => {
     }
   };
   //exifr
-  //exifr
   const getExif = async () => {
-    try {
-      const exIf = await exifr.parse(file, { iptc: true, xmp: true });
-      console.log(exIf);
-      exifRSet(exIf);
-    } catch (error) {
-      console.error('Error parsing EXIF data:', error);
-      setMessage(
-        'Error parsing EXIF data. Please check the file format.'
-      );
-    }
+    const exIf = await exifr.parse(file, { iptc: true, xmp: true });
+    console.log(exIf);
+    exifRSet(exIf);
   };
 
   useEffect(() => {
-    if (file) {
-      getExif();
-    }
-  }, [file]);
+    getExif();
+    // UnicodeDecoder(exifR);
+    console.log(exifR);
+  }, [file, message]);
+  //
 
   return (
     <>
       {message ? <Message msg={message} /> : null}
-      <form
-        onSubmit={onSubmit}
-        style={{ marginTop: '30vh', marginLeft: '45vw' }}
-      >
+      <form onSubmit={onSubmit}>
         <div className="custom-file mb-4">
           <input
             type="file"
@@ -90,6 +89,27 @@ export const Upload = () => {
           className="btn btn-primary btn-block mt-4"
         />
       </form>
+      <div className="thumbnails">
+        {uploadedFiles.map((file, index) => (
+          <img
+            key={index}
+            className={`thumbnail ${
+              selectedImageIndex === index ? 'selected' : ''
+            }`}
+            src={file.filePath}
+            alt={`Thumbnail ${index}`}
+            onClick={() => setSelectedImageIndex(index)}
+          />
+        ))}
+      </div>
+      <Form
+        uploadedFile={
+          selectedImageIndex !== null
+            ? uploadedFiles[selectedImageIndex]
+            : {}
+        }
+        exifR={exifR}
+      />
       {uploadedFile ? (
         <div className="row mt-5">
           <div className="col-md-6 m-auto">

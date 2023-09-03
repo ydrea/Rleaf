@@ -38,7 +38,7 @@ export const Login = () => {
   };
 
   return (
-    <form>
+    <form style={{ position: 'absolute', top: '50vh' }}>
       Login
       <input
         type="text"

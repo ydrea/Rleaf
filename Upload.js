@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Message from '../comps/Message';
+import Form from '../comps/Form';
+import './Upload.css';
 // import Progress from '../comps/Progress';
 import axios from 'axios';
 import exifr from 'exifr';
-import Form from '../comps/Form';
-import UnicodeDecoder from '../utils/unicoder';
-//
+
 export const Upload = () => {
   const [file, setFile] = useState('');
-  const [filename, setFilename] = useState('');
+  const [filename, setFilename] = useState('Choose File');
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState('');
   const [uploadPercentage, setUploadPercentage] = useState(0);
-  const [exifR, exifRSet] = useState();
-  //
+  const [exifR, setExifR] = useState(null);
 
-  //
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
   const onChange = e => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
@@ -25,14 +26,17 @@ export const Upload = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('file', file);
-    try { const res = await axios.post(`${process.env.REACT_APP_SERVER}/upload`, formData, {
-        headers: {'Content-Type': 'multipart/form-data' },
-    //progress
+  
+    try {
+      const res = await axios.post('/upload', formData, {
+        headers: {'Content-Type': 'multipart/form-data' }
       });
-      // Clear percentage
+  
       const { fileName, filePath } = res.data;
-      setUploadedFile({ fileName, filePath });
-      setMessage(`img File ${fileName} Uploaded 2 ${filePath}`);
+      const newUploadedFile = { fileName, filePath };
+      setUploadedFiles([...uploadedFiles, newUploadedFile]);
+  
+      setMessage(`Image File ${fileName} Uploaded to ${filePath}`);
     } catch (err) {
       if (err.response.status === 500) {
         setMessage('There was a problem with the server');
@@ -42,34 +46,35 @@ export const Upload = () => {
       // setUploadPercentage(0);
     }
   };
-  //exifr
-  //exifr
-  const getExif = async () => {
-    try {
-      const exIf = await exifr.parse(file, { iptc: true, xmp: true });
-      console.log(exIf);
-      exifRSet(exIf);
-    } catch (error) {
-      console.error('Error parsing EXIF data:', error);
-      setMessage(
-        'Error parsing EXIF data. Please check the file format.'
-      );
-    }
-  };
-
+  //
   useEffect(() => {
+    const getExif = async () => {
+      try {
+        const exIf = await exifr.parse(file, { gps: true });
+        setExifR(exIf);
+      } catch (err) {
+        console.error('Error getting EXIF data:', err);
+        setExifR(null); // Handle error by setting to null
+      }
+    };
     if (file) {
       getExif();
     }
   }, [file]);
 
+  // useEffect(() => {
+  //   const getExif = async () => {
+  //     const exIf = await exifr.gps(file);
+  //     console.log(exIf);
+  //   };
+  //   getExif();
+  // }, [file]);
+  //
+
   return (
     <>
       {message ? <Message msg={message} /> : null}
-      <form
-        onSubmit={onSubmit}
-        style={{ marginTop: '30vh', marginLeft: '45vw' }}
-      >
+      <form onSubmit={onSubmit}>
         <div className="custom-file mb-4">
           <input
             type="file"
@@ -90,21 +95,41 @@ export const Upload = () => {
           className="btn btn-primary btn-block mt-4"
         />
       </form>
+
+      <div className="thumbnails">
+        {uploadedFiles.map((file, index) => (
+          <img
+            key={index}
+            className={`thumbnail ${
+              selectedImageIndex === index ? 'selected' : ''
+            }`}
+            src={file.filePath}
+            alt={`Thumbnail ${index}`}
+            onClick={() => setSelectedImageIndex(index)}
+          />
+        ))}
+      </div>
+      {exifR !== null && (
+        <Form
+          uploadedFile={
+            selectedImageIndex !== null
+              ? uploadedFiles[selectedImageIndex]
+              : {}
+          }
+          exifR={exifR}
+        />
+      )}
       {uploadedFile ? (
         <div className="row mt-5">
           <div className="col-md-6 m-auto">
             <h3 className="text-center">{uploadedFile.fileName}</h3>
             <img
-              style={{ width: '60%' }}
+              style={{ width: '100%' }}
               src={uploadedFile.filePath}
               alt="dije"
             />
           </div>
         </div>
-      ) : null}
-      {exifR ? (
-        //uploadedFile.fileName
-        <Form uploadedFile={uploadedFile} exifR={exifR} />
       ) : null}
     </>
   );

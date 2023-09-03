@@ -1,5 +1,5 @@
 .navbar {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -20,7 +20,7 @@ z-index: 1;
 
 .navbar-container {
   background-color: rgba(140, 141, 133, 0);
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   height: 14.5vh;
@@ -57,7 +57,7 @@ width: auto;}
   align-items: center;
   text-decoration: none;
   margin: 0.5rem 1rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .nav-links:hover {
@@ -91,7 +91,7 @@ p::first-letter {
   height: 0.6rem;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 990px) {
   .NavbarItems {
     position: relative;
   }

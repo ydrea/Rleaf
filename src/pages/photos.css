@@ -1,14 +1,28 @@
-/* @import url("https://fonts.cdnfonts.com/css/freesans"); */
+
 .gallery {
   background-color: #8C8D85;
 }
-
+/* photos.css */
 .photo-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
+.card-above-image {
+  position: absolute;
+  z-index: 1;
+  width: 80vw; /* Set the desired width for the card */
+  height: auto; /* Allow the card's height to adjust based on content */
+  /* You can adjust top, left, and other properties to control the positioning */
+  top: 0;
+  left: 0;
+  background-color: white; /* Set the background color for the card */
+  padding: 10px; /* Add padding or other styling as needed */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow or other effects */
+  /* Add any other styling you need */
+}
 
+/* Adjust the layout of other images as needed */
 .photo {
   position: relative;
   width: 200px;
@@ -16,12 +30,36 @@
   overflow: hidden;
   transition: transform 0.2s ease;
 }
+
 .photo img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
+
+/* When an image is selected, you can style it differently if desired */
+.photo.selected {
+  /* Add styles to adjust the layout of the selected image */
+  width: 80vw; /* Adjust width as needed to match card width */
+  height: auto; /* Allow height to adjust based on content */
+}
+
+.card-photo {
+  width: 80vw; /* Adjust to the width of your Card component */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.card-container {
+  width: 80vw; /* Adjust to the width of your Card component */
+  height: auto; /* Maintain aspect ratio */
+  display: flex;
+  flex-direction: column; /* Adjust layout as needed */
+  background-color: #fff; /* Background color for the card */
+  padding: 20px; /* Adjust padding as needed */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add shadow for card */
+}
+
 .photo .overlay {
   position: absolute;
   top: 0;
@@ -38,4 +76,31 @@
 }
 .photo:hover .overlay {
   opacity: 0;
+}
+
+.card {
+  position: absolute;
+  z-index: 1;
+  transition: transform .2 ease;
+}
+.card-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.card-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.card-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 200ms, transform 200ms;
 }

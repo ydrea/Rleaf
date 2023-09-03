@@ -141,18 +141,19 @@ export const FiksniElementi = () => {
 // tema_EWAP
 export const TemaEWAP = () => {
   const url =
-    'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE';
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1810728.437587378547,5687433.67418665532,1815706.106449044077,5692281.923657917418&CRS=EPSG:3857&WIDTH=2000&HEIGHT=1948&LAYERS=tema_drvena_arhitektura&STYLES=&DPI=137&MAP_RESOLUTION=137&FORMAT_OPTIONS=dpi:137&TRANSPARENT=TRUE&FORMAT=image/png;%20mode%3D8bit';
 
   const wmsLayerOptions = {
-    layers: 'banija_zgrade',
-    format: 'image/png mode: 8bit',
-    dpi: 137,
-    map_resolution: 137,
-    format_options: 137,
-    transparent: true,
-    version: '1.3.0',
-    attribution: 'WMS Service Attribution',
+    // layers: 'tema_drvena_arhitektura',
+    // format: 'image/png',
+    // dpi: 137,
+    // map_resolution: 137,
+    // format_options: 137,
+    // transparent: true,
+    // version: '1.3.0',
+    // attribution: 'WMS Service Attribution',
   };
+  // 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE&tema_drvena_arhitektura&image/png';
 
   return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
 };

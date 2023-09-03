@@ -7,6 +7,7 @@ export const getPhotos = createAsyncThunk(
   async () => {
     const rez = await fetch(url);
     const rezult = await rez.json();
+    console.log(rezult);
     return rezult;
   }
 );
@@ -29,6 +30,8 @@ const initialState = {
   loading: false,
   error: null,
 };
+
+// ... (imports and initialState remain the same)
 
 export const gallerySlice = createSlice({
   name: 'gallery',
@@ -56,16 +59,20 @@ export const gallerySlice = createSlice({
   extraReducers: {
     [getPhotos.pending]: state => {
       state.loading = true;
+      state.error = null; // Clear any previous errors
     },
     [getPhotos.fulfilled]: (state, action) => {
       state.photos = action.payload;
       state.loading = false;
+      state.error = null; // Clear any previous errors
     },
     [getPhotos.rejected]: (state, action) => {
-      state.status = 'reject';
+      state.loading = false;
       state.error = action.error.message;
     },
-    [getAPhoto.fulfilled]: (state, action) => {},
+    [getAPhoto.fulfilled]: (state, action) => {
+      state.selectedPhoto = action.payload;
+    },
   },
 });
 
