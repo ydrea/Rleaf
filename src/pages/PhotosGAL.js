@@ -56,9 +56,9 @@ export default function Photos() {
           </div>
         ))}
       </div>
-      {cardVisible && selectedPhotoIndex !== null && (
+      {/* {cardVisible && selectedPhotoIndex !== null && (
         <Card photo={photos[selectedPhotoIndex]} className="card" />
-      )}
+      )} */}
     </div>
   );
 }

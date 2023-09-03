@@ -94,15 +94,16 @@ p::first-letter {
 @media screen and (max-width: 990px) {
   .NavbarItems {
     position: relative;
+    /* background-color: red; */
   }
   .nav-menu {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
     height: 90vh;
     position: absolute;
     top: 80px;
-    left: -100%;
+    left: -130%;
     opacity: 1;
     z-index: 998;
     transition: all 0.5s ease;
@@ -115,11 +116,11 @@ p::first-letter {
     z-index: 888;
   }
   .nav-item {
-    height: 70px;
+    height: 50px;
   }
   .nav-links {
     text-align: center;
-    padding: 1rem;
+    /* padding: 1rem; */
     width: 100%;
     display: table;
   }
@@ -128,12 +129,12 @@ p::first-letter {
     color: #242424;
     border-radius: 0;
   }
-  .navbar-logo {
+  /* .navbar-logo {
     position: absolute;
     top: 0;
     left: 0;
     transform: translate(25%, 50%);
-  }
+  } */
   .menu-icon {
     display: block;
     position: absolute;
@@ -152,7 +153,7 @@ p::first-letter {
     text-align: center;
     margin: 2rem auto;
     border-radius: 4px;
-    width: 80%;
+    width: 50%;
     text-decoration: none;
     font-size: 1.5rem;
     background-color: transparent;

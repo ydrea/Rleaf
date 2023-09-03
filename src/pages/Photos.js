@@ -7,7 +7,6 @@ import {
   selectPhotos,
   selectSelectedPhotoIndex,
 } from '../redux/rtk/gallerySlice';
-import { Card } from '../comps/Card';
 import './photos.css';
 
 export default function Photos() {
@@ -44,7 +43,21 @@ export default function Photos() {
     <div className="gallery">
       <div className="photo-container">
         {photos.map((photo, index) => (
-          <div key={photo.id} className="photo">
+          <div
+            key={photo.id}
+            className={`photo ${
+              selectedPhotoIndex === index ? 'selected' : ''
+            }`}
+          >
+            {selectedPhotoIndex === index && (
+              <div className="selected-div1">
+                <p>{photo.naziv}</p>
+                <p>{photo.tagovi}</p>
+                <p>{photo.kategorija}</p>
+                <p>{photo.opis}</p>
+                <p>{photo.autor}</p>
+              </div>
+            )}
             <img
               src={
                 process.env.REACT_APP_SERVER_PUB +
@@ -53,12 +66,14 @@ export default function Photos() {
               alt={photo.naziv}
               onClick={() => handlePhotoClick(index)}
             />
+            {selectedPhotoIndex === index && (
+              <div className="selected-div2">
+                <Link to="">Pokaži na karti</Link>
+              </div>
+            )}{' '}
           </div>
         ))}
       </div>
-      {cardVisible && selectedPhotoIndex !== null && (
-        <Card photo={photos[selectedPhotoIndex]} className="card" />
-      )}
     </div>
   );
 }
