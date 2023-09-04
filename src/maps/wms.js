@@ -51,21 +51,21 @@ export const PodRH = () => {
   };
 
   return (
-    <>
+    <div>
       <WMSTileLayer url={wmsUrl} {...wmsLayerOptions} />
       {legendUrl && (
         <div
           style={{
             zIndex: '900',
-            position: 'absolute',
-            right: '0',
+            position: 'relative',
           }}
         >
           {' '}
           <img src={legendUrl} alt="Legend" />
         </div>
-      )}{' '}
-    </>
+      )}
+      {/* </div> */}
+    </div>
   );
 };
 
