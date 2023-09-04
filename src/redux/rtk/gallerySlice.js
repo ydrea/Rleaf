@@ -29,6 +29,7 @@ const initialState = {
   photos: [],
   loading: false,
   error: null,
+  selectedFilters: [],
 };
 
 // ... (imports and initialState remain the same)
@@ -55,16 +56,19 @@ export const gallerySlice = createSlice({
     setSelectedPhoto: (state, action) => {
       state.selectedPhoto = action.payload;
     },
+    setFilters: (state, action) => {
+      state.selectedFilters = action.payload;
+    },
   },
   extraReducers: {
     [getPhotos.pending]: state => {
       state.loading = true;
-      state.error = null; // Clear any previous errors
+      state.error = null;
     },
     [getPhotos.fulfilled]: (state, action) => {
       state.photos = action.payload;
       state.loading = false;
-      state.error = null; // Clear any previous errors
+      state.error = null;
     },
     [getPhotos.rejected]: (state, action) => {
       state.loading = false;
@@ -82,6 +86,7 @@ export const {
   selectPhotoIndex,
   setSelectedPhoto,
   setSelectedPhotoIndex,
+  setFilters,
 } = gallerySlice.actions;
 
 export const selectPhotos = state => state.gallery.photos;
@@ -97,6 +102,20 @@ export const selectAPhoto = state => {
   return selectedPhoto;
 };
 
-// ...
+//
+export const selectFilteredPhotos = state => {
+  const selectedFilters = state.gallery.selectedFilters;
+  const allPhotos = state.gallery.photos;
+
+  if (selectedFilters.length === 0) {
+    return allPhotos;
+  }
+
+  return allPhotos.filter(
+    photo =>
+      selectedFilters.includes(photo.tagovi) ||
+      selectedFilters.includes(photo.kategorije)
+  );
+};
 
 export default gallerySlice.reducer;

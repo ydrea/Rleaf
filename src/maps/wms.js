@@ -64,7 +64,6 @@ export const PodRH = () => {
           <img src={legendUrl} alt="Legend" />
         </div>
       )}
-      {/* </div> */}
     </div>
   );
 };

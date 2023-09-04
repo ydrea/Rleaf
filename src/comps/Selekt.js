@@ -1,40 +1,43 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import t from './header.module.scss';
-//
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectPhotos, // Replace with the actual selector for your photos
+  setFilters, // Define a Redux action to set the filters
+} from '../redux/rtk/gallerySlice'; // Replace with your Redux slice import
+
 const filters = [
-  { value: 'url1', label: 'URL1' },
-  { value: 'url2', label: 'URL2' },
-  { value: 'url3', label: 'URL3' },
+  { value: 'tag1', label: 'Tag 1' },
+  { value: 'tag2', label: 'Tag 2' },
+  { value: 'tag3', label: 'Tag 3' },
+  // Add more filter options as needed
 ];
-//
 
 function Selekt() {
-  const [filterSelected, filterSelectedSet] = useState([]);
-  //
-  function cusTom(theme) {
-    return {
-      ...theme,
-      colors: {
-        ...theme.colors,
-        primary: '#554400',
-        primary25: 'orange',
-        primary50: 'moccasin',
-      },
-    };
-  }
-  //
+  const dispatch = useDispatch();
+  const photos = useSelector(selectPhotos); // Replace with the actual selector for your photos
+  const [filterSelected, setFilterSelected] = useState([]);
+  // Handle filter selection changes
+  const handleFilterChange = selectedFilters => {
+    setFilterSelected(selectedFilters);
+
+    // Extract the selected filter values from the selected filters array
+    const selectedFilterValues = selectedFilters.map(
+      filter => filter.value
+    );
+
+    // Dispatch an action to update the filters in Redux state
+    dispatch(setFilters(selectedFilterValues)); // Replace with your Redux action
+  };
   return (
     <Select
-      theme={cusTom}
-      placeholder="foto"
-      className={t.selekt}
+      // theme={cusTom}
+      placeholder="Select Filters"
       isSearchable
       isMulti
       options={filters}
-      onChange={filterSelectedSet}
-      //   getOptionLabel={option => option.label}
-      //   getOptionValue={option => option.value}
+      value={filterSelected}
+      onChange={handleFilterChange}
     />
   );
 }

@@ -10,6 +10,7 @@ import {
   LayersControl,
   useMapEvents,
   WMSTileLayer,
+  ZoomControl,
 } from 'react-leaflet';
 import {
   ANaselja,
@@ -119,15 +120,17 @@ export const Map = () => {
   return (
     <div>
       <MapContainer
+        zoomControl={false}
         center={mapCenter}
         zoom={mapZoom}
-        style={{ height: '70vh', width: '70vw' }}
+        style={{ height: '75vh', width: 'auto' }}
         whenCreated={map => {
           if (mapRef.current === null) {
             mapRef.current = map;
           }
         }}
       >
+        <ZoomControl position="bottomright" />
         <LayersControl>
           <BaseLayer checked name="OSM">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

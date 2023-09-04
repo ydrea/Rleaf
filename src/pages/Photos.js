@@ -6,15 +6,36 @@ import {
   setSelectedPhotoIndex,
   selectPhotos,
   selectSelectedPhotoIndex,
+  setFilters,
+  selectFilteredPhotos,
 } from '../redux/rtk/gallerySlice';
 import './photos.css';
+import Selekt from '../comps/Selekt';
 
+//
 export default function Photos() {
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
   const { popUp, signatura } = useParams();
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const [cardVisible, setCardVisible] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState([]); //
+
+  // Define filters here
+  const filters = [
+    { value: 'tag1', label: 'Tag 1' },
+    { value: 'tag2', label: 'Tag 2' },
+    { value: 'tag3', label: 'Tag 3' },
+    // Add more filter options as needed
+  ];
+  const filteredPhotos = useSelector(state =>
+    selectFilteredPhotos(state, selectedFilters)
+  );
+
+  const handleFilterChange = selectedOptions => {
+    setSelectedFilters(selectedOptions);
+    dispatch(setFilters(selectedOptions));
+  };
 
   // Handle onClick
   const handlePhotoClick = index => {
@@ -41,8 +62,16 @@ export default function Photos() {
 
   return (
     <div className="gallery">
+      <div className="photo-filters">
+        {/* filter options */}
+        <Selekt
+          selectedOptions={selectedFilters}
+          onChange={handleFilterChange}
+          filters={filters}
+        />
+      </div>
       <div className="photo-container">
-        {photos.map((photo, index) => (
+        {filteredPhotos.map((photo, index) => (
           <div
             key={photo.id}
             className={`photo ${
@@ -68,7 +97,7 @@ export default function Photos() {
             />
             {selectedPhotoIndex === index && (
               <div className="selected-div2">
-                <Link to="">Pokaži na karti</Link>
+                {/* <Link to="">Pokaži na karti</Link> */}
               </div>
             )}{' '}
           </div>
