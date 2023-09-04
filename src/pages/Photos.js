@@ -21,12 +21,11 @@ export default function Photos() {
   const [cardVisible, setCardVisible] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState([]); //
 
-  // Define filters here
+  //
   const filters = [
     { value: 'tag1', label: 'Tag 1' },
     { value: 'tag2', label: 'Tag 2' },
     { value: 'tag3', label: 'Tag 3' },
-    // Add more filter options as needed
   ];
   const filteredPhotos = useSelector(state =>
     selectFilteredPhotos(state, selectedFilters)
