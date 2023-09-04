@@ -22,11 +22,43 @@ export default function Photos() {
   const [selectedFilters, setSelectedFilters] = useState([]); //
 
   //
+  // Assuming photos is an array of photo objects
+  const tagoviSet = new Set();
+  const kategorijeSet = new Set();
+
+  photos.forEach(photo => {
+    // Check if photo.tagovi is an array
+    if (Array.isArray(photo.tagovi)) {
+      // Extract unique 'tagovi' values
+      photo.tagovi.forEach(tag => {
+        tagoviSet.add(tag);
+      });
+    }
+
+    // Extract unique 'kategorije' values
+    kategorijeSet.add(photo.kategorija);
+  });
+
+  // Convert sets to arrays for filter options
+  const tagoviOptions = Array.from(tagoviSet).map(tag => ({
+    value: tag,
+    label: tag,
+  }));
+
+  const kategorijeOptions = Array.from(kategorijeSet).map(
+    kategorija => ({
+      value: kategorija,
+      label: kategorija,
+    })
+  );
+
+  //
   const filters = [
-    { value: 'tag1', label: 'Tag 1' },
-    { value: 'tag2', label: 'Tag 2' },
-    { value: 'tag3', label: 'Tag 3' },
+    { label: 'Tagovi', options: tagoviOptions },
+    { label: 'Kategorije', options: kategorijeOptions },
   ];
+  console.log(filters);
+  //
   const filteredPhotos = useSelector(state =>
     selectFilteredPhotos(state, selectedFilters)
   );
@@ -64,9 +96,9 @@ export default function Photos() {
       <div className="photo-filters">
         {/* filter options */}
         <Selekt
+          filters={filters}
           selectedOptions={selectedFilters}
           onChange={handleFilterChange}
-          filters={filters}
         />
       </div>
       <div className="photo-container">
