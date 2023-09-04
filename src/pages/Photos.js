@@ -46,11 +46,11 @@ export default function Photos() {
     const photoElements = document.querySelectorAll('.photo');
     photoElements.forEach((element, idx) => {
       if (idx === index) {
-        element.style.width = '80vw'; // Adjust to the width of your Card component
-        element.style.height = 'auto'; // Maintain aspect ratio
+        element.style.width = '80vw';
+        element.style.height = 'auto';
       } else {
-        element.style.width = '200px'; // Adjust to the original width of other photos
-        element.style.height = '150px'; // Adjust to the original height of other photos
+        element.style.width = '200px';
+        element.style.height = '150px';
       }
     });
   };

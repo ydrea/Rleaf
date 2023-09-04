@@ -32,8 +32,6 @@ const initialState = {
   selectedFilters: [],
 };
 
-// ... (imports and initialState remain the same)
-
 export const gallerySlice = createSlice({
   name: 'gallery',
   initialState,
