@@ -11,7 +11,7 @@ import {
 } from '../redux/rtk/gallerySlice';
 import './photos.css';
 import Selekt from '../comps/Selekt';
-
+import Botun from '../comps/Botun';
 //
 export default function Photos() {
   const dispatch = useDispatch();
@@ -117,11 +117,13 @@ export default function Photos() {
           >
             {selectedPhotoIndex === index && (
               <div className="selected-div1">
+                <Botun>prev</Botun>
                 <p>{photo.naziv}</p>
                 <p>{photo.tagovi}</p>
                 <p>{photo.kategorija}</p>
                 <p>{photo.opis}</p>
                 <p>{photo.autor}</p>
+                <Botun>next</Botun>
               </div>
             )}
             <img

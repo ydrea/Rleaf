@@ -36,12 +36,12 @@ margin-top: 11.5vh;
 }
 
 .selected-div1 {
-  width: 80vw; 
+  width: 88vw; 
   color: red; 
-  padding-left: 1vw;
 display: flex;
-justify-content: space-around;
+justify-content: space-between;
 margin-top: -3vh;
+align-items: baseline;
 }
 
 

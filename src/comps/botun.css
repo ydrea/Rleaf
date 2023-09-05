@@ -1,0 +1,34 @@
+/* Reset some default styles for the button */
+.custom-botun {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 8px;
+    background-color: #8c8d85; /* Gray background color */
+    color: #fff; /* Text color */
+    font-weight: 800;
+    border-radius: 0px; /* Rounded corners */
+    position: relative; /* To position the shadow */
+z-index: 12;
+border-top: solid white 1.5px;
+border-bottom: solid white 1.5px;
+border-left: solid white 1.5px;
+}
+
+/* Style for the button container */
+.botun-container {
+    display: inline-block;
+    position: relative;
+}
+
+/* Style for the button shadow */
+.botun-shadow {
+    position: absolute;
+    top: -2px; /* Offset from the top */
+    right: 10px; /* Offset from the left */
+    width: calc(36px); /* 2px on each side */
+    height: calc(30px); /* 2px on top and bottom */
+    background-color: white; /* Shadow color */
+    border-radius: 0px; /* Slightly larger than the button's radius */
+    z-index: 11; /* Place it behind the button */
+}
