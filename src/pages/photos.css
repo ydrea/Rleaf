@@ -27,15 +27,21 @@ flex-direction: row;
   -o-object-fit: cover;
   object-fit: cover;
 }
-
-/* When an image is selected, you can style it differently if desired */
 .photo.selected {
-  width: 80vw; /* Adjust width as needed to match card width */
-  height: auto; /* Allow height to adjust based on content */
+  max-width: 90vw; 
+  max-height: 90vh; 
+  width: auto;
+  height: auto;
+margin-top: 1vh;
 }
-.selected-div1{width: 80vw; color: red; padding-left: 1vw;
+
+.selected-div1 {
+  width: 80vw; 
+  color: red; 
+  padding-left: 1vw;
 display: flex;
 justify-content: space-around;
+margin-top: -1vh;
 }
 
 
@@ -56,30 +62,3 @@ justify-content: space-around;
 .photo:hover .overlay {
   opacity: 0;
 }
-
-/* .card {
-  position: absolute;
-  z-index: 1;
-  transition: transform .2 ease;
-}
-.card-enter {
-  opacity: 0;
-  transform: scale(0.9);
-}
-
-.card-enter-active {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 200ms, transform 200ms;
-}
-
-.card-exit {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.card-exit-active {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 200ms, transform 200ms;
-} */

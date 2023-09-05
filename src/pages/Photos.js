@@ -73,16 +73,22 @@ export default function Photos() {
     dispatch(setSelectedPhotoIndex(index));
     setCardVisible(true);
 
-    // Adjust photo sizes
+    // Reset all photo sizes
     const photoElements = document.querySelectorAll('.photo');
     photoElements.forEach((element, idx) => {
-      if (idx === index) {
-        element.style.width = '80vw';
-        element.style.height = 'auto';
-      } else {
-        element.style.width = '200px';
-        element.style.height = '150px';
-      }
+      element.style.width = '170px';
+      element.style.height = '140px';
+    });
+
+    // Adjust the size of the selected photo
+    const selectedPhoto = photoElements[index];
+    selectedPhoto.style.width = '90vw';
+    selectedPhoto.style.height = '90vh';
+
+    // Scroll the selected photo into view
+    selectedPhoto.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
     });
   };
 
