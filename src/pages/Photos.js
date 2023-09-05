@@ -21,25 +21,22 @@ export default function Photos() {
   const [cardVisible, setCardVisible] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState([]); //
 
-  //
+  //console.log(photos);
+
   // Assuming photos is an array of photo objects
   const tagoviSet = new Set();
   const kategorijeSet = new Set();
 
   photos.forEach(photo => {
-    // Check if photo.tagovi is an array
-    if (Array.isArray(photo.tagovi)) {
-      // Extract unique 'tagovi' values
-      photo.tagovi.forEach(tag => {
-        tagoviSet.add(tag);
-      });
-    }
+    const tagoviArray = photo.tagovi.split(',');
 
-    // Extract unique 'kategorije' values
+    tagoviArray.forEach(tag => {
+      tagoviSet.add(tag.trim());
+    });
+
     kategorijeSet.add(photo.kategorija);
   });
 
-  // Convert sets to arrays for filter options
   const tagoviOptions = Array.from(tagoviSet).map(tag => ({
     value: tag,
     label: tag,
@@ -55,9 +52,11 @@ export default function Photos() {
   //
   const filters = [
     { label: 'Tagovi', options: tagoviOptions },
-    { label: 'Kategorije', options: kategorijeOptions },
+    { label: 'KATEGORIJE', options: kategorijeOptions },
   ];
   console.log(filters);
+
+  console.log('TAGpoTAG', tagoviSet, tagoviOptions);
   //
   const filteredPhotos = useSelector(state =>
     selectFilteredPhotos(state, selectedFilters)
@@ -82,13 +81,14 @@ export default function Photos() {
 
     // Adjust the size of the selected photo
     const selectedPhoto = photoElements[index];
-    selectedPhoto.style.width = '90vw';
-    selectedPhoto.style.height = '90vh';
+    selectedPhoto.style.width = '88vw';
+    selectedPhoto.style.height = 'auto';
 
     // Scroll the selected photo into view
     selectedPhoto.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
+      inline: 'nearest',
     });
   };
 

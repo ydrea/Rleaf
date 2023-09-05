@@ -37,10 +37,12 @@
 
 // export default Selekt;
 import React, { useState } from 'react';
-import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPhotos, setFilters } from '../redux/rtk/gallerySlice';
+import Select from 'react-select';
 
+//
 function Selekt({ filters }) {
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
@@ -52,12 +54,22 @@ function Selekt({ filters }) {
     const selectedFilterValues = selectedFilters.map(
       filter => filter.value
     );
-
+    console.log('AKTIVNI filter', filters, selectedFilterValues);
     dispatch(setFilters(selectedFilterValues));
   };
+  //
+  const cusTom = {
+    control: styles => ({ ...styles, backgroundColor: '8c8d85' }),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      console.log('selekt', data, isDisabled, isFocused, isSelected);
+      return { ...styles, color: 'black' };
+    },
+  };
 
+  //
   return (
     <Select
+      styles={cusTom}
       placeholder="Select Filters"
       isSearchable
       isMulti
