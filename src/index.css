@@ -2,10 +2,11 @@
   font-family: 'FreeSans Medium';
   font-style: normal;
   font-weight: normal;
-  src: url('../public/fonts/freesans-2-cufonfonts-webfont/FreeSans.woff') format('woff');
+  src: url('../public/fonts/freesans.woff2') format('woff2');
+  src: url('../public/fonts/FreeSans.woff') format('woff');
   }
   
-
+/* 
  @font-face {
   font-family: 'FreeSans Oblique';
   font-style: normal;
@@ -27,7 +28,7 @@
   font-style: normal;
   font-weight: normal;
     src: url('../public/fonts/freesans-2-cufonfonts-webfont/FreeSansBoldOblique.woff') format('woff');
-  } 
+  }  */
 
 html, body, #root {
   width: 100%; 

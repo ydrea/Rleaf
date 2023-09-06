@@ -54,13 +54,13 @@ function Home() {
         </div>
       </div>
       <div className="S3">
-        {/* <div className="cont3"> */}
-        <img src="home2.png" />
-        <div>
-          Pozivamo vas da se pridružite našem putovanju prema očuvanju
-          i razumijevanju krajobraza.
+        <div className="constrainer">
+          <img src="home2.png" className="img2" />
+          <div>
+            Pozivamo vas da se pridružite našem putovanju prema
+            očuvanju i razumijevanju krajobraza.
+          </div>
         </div>
-        {/* </div> */}
       </div>
       <div className="S4">
         Za sve informacije vezane uz ‘Opservatorij krajobraza’,

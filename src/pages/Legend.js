@@ -6,13 +6,10 @@ function Legend({ selectedLayer }) {
   const [legendUrl, setLegendUrl] = useState(
     `https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&LAYER=${selectedLayer}&FORMAT=image/png&TRANSPARENT=true`
   );
-
-  // Reset selectedLayer when it changes
   useEffect(() => {
-    setLegendUrl(null); // Reset to null when selectedLayer changes
+    setLegendUrl(null);
   }, [selectedLayer]);
 
-  // Fetch and set the legend URL
   useEffect(() => {
     if (selectedLayer) {
       const fetchLegend = async () => {

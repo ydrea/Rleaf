@@ -89,7 +89,7 @@ export function Map() {
   //deep inside
   const mapRef = useRef();
   useEffect(() => {
-    const map = mapRef.current; //.leafletElement;
+    const map = mapRef.current;
     if (map) {
       map.on('baselayerchange', e => {
         console.log(e.name);

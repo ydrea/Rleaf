@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { WMSTileLayer } from 'react-leaflet';
-
+import axios from 'axios';
 // tema_EWAP
 export const TemaEWAP = () => {
   const url =

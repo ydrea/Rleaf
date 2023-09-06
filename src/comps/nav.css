@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  right: 0; 
   z-index: 999;
   background-color: rgba(140, 141, 133, 1);
 height: 14.5vh;
@@ -20,36 +20,41 @@ z-index: 1;
 
 .navbar-container {
   background-color: rgba(140, 141, 133, 0);
-  /* display: flex; */
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 14.5vh;
-width: auto;}
+  width: 100%; /* Use 100% width for responsiveness */
+  position: relative; /* Relative positioning for absolute children */
+}
 
 .fa-typo3 {
   margin-left: 0.5rem;
-  font-size: 1.8rem;
+  font-size: 2vw;
+  position: relative; /* Add relative positioning */
+  top: -2vh; /* Adjust this value to position it higher on the y-axis */
 }
-
 .nav-menu {
   display: flex;
   grid-gap: 10px;
   list-style: none;
   text-align: center;
   justify-content: flex-start;
-  position: absolute;
-  top: .1vh;
+  position: relative; /* Relative positioning for absolute children */
 }
 
+/* .navline-div serves as the element to cut through letters */
 .navline-div {
-  border-top: 2px solid white;
   position: absolute;
-  top: 15vh;
+  top: 62%; /* Adjust as needed to position it at the center of the nav-menu */
   left: 0;
   box-sizing: border-box;
   width: 100%;
-  height: 0.6rem;
+  height: 2px; /* Adjust line height as needed */
+  background-color: white; /* Adjust line color as needed */
+  transform: translateY(-50%); /* Center the line vertically */
 }
+
 
 .nav-links {
   color: #000;
@@ -138,12 +143,19 @@ p::first-letter {
   .menu-icon {
     display: block;
     position: absolute;
-    top: 0;
+    top: -20px;
     right: 0;
     transform: translate(-100%, 60%);
     font-size: 1.8rem;
     cursor: pointer;
   }
+
+.fa-typo3 {
+  margin-left: 0.2rem;
+  font-size: 2vw;
+  position: relative; /* Add relative positioning */
+  top: -25px; /* Adjust this value to position it higher on the y-axis */
+}
   .fa-times {
     color: #fff;
     font-size: 2rem;
