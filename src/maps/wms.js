@@ -56,6 +56,8 @@ export const PodRH = () => {
     <>
       <div
         style={{
+          maxWidth: 'auto',
+          maxHeight: '80vh',
           position: 'absolute',
           top: '0vh',
           left: '0vw',
@@ -177,6 +179,8 @@ export const TemaZP = () => {
       <img
         src={legend}
         style={{
+          maxWidth: 'auto',
+          maxHeight: '40vh',
           zIndex: '800',
           position: 'fixed',
           bottom: '0vh',
@@ -208,6 +212,8 @@ export const TemaS = () => {
       <img
         src={legend}
         style={{
+          maxHeight: '40vh',
+          maxWidth: 'auto',
           zIndex: '800',
           position: 'fixed',
           top: '20vh',
