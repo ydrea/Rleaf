@@ -168,9 +168,25 @@ export const TemaZP = () => {
     version: '1.3.0',
     attribution: 'WMS Service Attribution',
   };
-  return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
-};
+  const legend =
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=tema_zastita_prirode';
 
+  return (
+    <>
+      {<WMSTileLayer url={url} {...wmsLayerOptions} />}
+      <img
+        src={legend}
+        style={{
+          zIndex: '800',
+          position: 'fixed',
+          bottom: '0vh',
+          right: '0',
+        }}
+        alt="Legend for tema_zastita_prirode"
+      />
+    </>
+  );
+};
 // tema_stanovnistvo
 export const TemaS = () => {
   const url =
@@ -195,7 +211,7 @@ export const TemaS = () => {
           zIndex: '800',
           position: 'fixed',
           top: '20vh',
-          left: '0',
+          right: '0',
         }}
         alt="Legend for tema_stanovnistvo"
       />
