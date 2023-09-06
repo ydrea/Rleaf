@@ -24,7 +24,7 @@ export const TemaEWAP = () => {
 // https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_hidrologija
 export const PodRH = () => {
   const [legendUrl, setLegendUrl] = useState(
-    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_hidrologija'
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_hidrologija&TRANSPARENT=true'
   );
   const url =
     'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1401309.737,5146724.677,2219713.38,5899537.848&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE';
@@ -54,23 +54,25 @@ export const PodRH = () => {
 
   return (
     <>
+      {' '}
+      {<WMSTileLayer url={url} {...wmsLayerOptions} />}
       <div
         style={{
+          background: 'transparent',
           maxWidth: 'auto',
-          maxHeight: '80vh',
+          maxHeight: '60vh',
           position: 'absolute',
           top: '0vh',
-          left: '0vw',
+          left: '1vw',
+          // paddingRight: '5vw',
           zIndex: '1000',
         }}
       >
-        <img
+        {/* <img
           src={legendUrl}
           alt="Legend for podloge_reljef_hidrologija"
-        />
+        /> */}
       </div>
-
-      {<WMSTileLayer url={url} {...wmsLayerOptions} />}
     </>
   );
 };
@@ -171,23 +173,24 @@ export const TemaZP = () => {
     attribution: 'WMS Service Attribution',
   };
   const legend =
-    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=tema_zastita_prirode';
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=tema_zastita_prirode&TRANSPARENT=true';
 
   return (
     <>
       {<WMSTileLayer url={url} {...wmsLayerOptions} />}
-      <img
+      {/* <img
         src={legend}
         style={{
+          background: 'transparent',
           maxWidth: 'auto',
           maxHeight: '40vh',
           zIndex: '800',
           position: 'fixed',
           bottom: '0vh',
-          right: '0',
+          right: '4vw',
         }}
         alt="Legend for tema_zastita_prirode"
-      />
+      /> */}
     </>
   );
 };
@@ -204,23 +207,24 @@ export const TemaS = () => {
     attribution: 'WMS Service Attribution',
   };
   const legend =
-    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=tema_stanovnistvo';
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=tema_stanovnistvo&TRANSPARENT=true';
 
   return (
     <>
       {<WMSTileLayer url={url} {...wmsLayerOptions} />}
-      <img
+      {/* <img
         src={legend}
         style={{
+          background: '#8c8d85',
           maxHeight: '40vh',
           maxWidth: 'auto',
           zIndex: '800',
           position: 'fixed',
           top: '20vh',
-          right: '0',
+          right: '9vw',
         }}
         alt="Legend for tema_stanovnistvo"
-      />
+      /> */}
     </>
   );
 };

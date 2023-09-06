@@ -108,8 +108,9 @@ export function Map() {
   return (
     <div
       style={{
-        height: '70vh',
-        width: '140vh',
+        height: '80vh',
+        width: '60vw',
+        paddingLeft: '15vw',
       }}
     >
       {/* <CustomZoom /> */}

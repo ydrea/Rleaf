@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function Legend({ selectedLayer }) {
   const [legendUrl, setLegendUrl] = useState(
-    `https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&LAYER=${selectedLayer}&FORMAT=image/png`
+    `https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&LAYER=${selectedLayer}&FORMAT=image/png&TRANSPARENT=true`
   );
 
   // Reset selectedLayer when it changes
@@ -36,7 +36,13 @@ function Legend({ selectedLayer }) {
   return (
     <div style={{ position: 'fixed', top: '20vh', right: '0' }}>
       {legendUrl ? (
-        <img src={legendUrl} alt={`${selectedLayer} Legend`} />
+        <img
+          src={legendUrl}
+          style={{
+            background: 'transparent',
+          }}
+          alt={`${selectedLayer} Legend`}
+        />
       ) : (
         <p>Loading legend...</p>
       )}
