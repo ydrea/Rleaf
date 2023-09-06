@@ -1,70 +1,75 @@
-// import React from 'react';
-// import { WMSTileLayer } from 'react-leaflet';
-
-// podloge_reljef_hidrologija
-
-// import axios from 'axios';
-
-// const fetchLegend = async layerName => {
-//   try {
-//     const legendUrl = `https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&LAYER=${layerName}&FORMAT=image/png`;
-
-// } catch (error) {
-// console.error('Error fetching legend:', error);
-// return null;
-// }
-// };
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { WMSTileLayer } from 'react-leaflet';
-import axios from 'axios';
 
+// tema_EWAP
+export const TemaEWAP = () => {
+  const url =
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1810728.437587378547,5687433.67418665532,1815706.106449044077,5692281.923657917418&CRS=EPSG:3857&WIDTH=2000&HEIGHT=1948&LAYERS=tema_drvena_arhitektura&STYLES=&DPI=137&MAP_RESOLUTION=137&FORMAT_OPTIONS=dpi:137&TRANSPARENT=TRUE&FORMAT=image/png;%20mode%3D8bit';
+
+  const wmsLayerOptions = {
+    // layers: 'tema_drvena_arhitektura',
+    // format: 'image/png',
+    // dpi: 137,
+    // map_resolution: 137,
+    // format_options: 137,
+    // transparent: true,
+    // version: '1.3.0',
+    // attribution: 'WMS Service Attribution',
+  };
+  // 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE&tema_drvena_arhitektura&image/png';
+
+  return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
+};
+
+// https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_hidrologija
 export const PodRH = () => {
-  const layerName = 'podloge_reljef_hidrologija';
-  const wmsUrl =
+  const [legendUrl, setLegendUrl] = useState(
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_hidrologija'
+  );
+  const url =
     'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1401309.737,5146724.677,2219713.38,5899537.848&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE';
 
-  const fetchLegend = async () => {
-    const legendUrl = `https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&LAYER=${layerName}&FORMAT=image/png`;
-
-    try {
-      const response = await axios.get(legendUrl, {
-        responseType: 'blob',
-      });
-      const legendImageUrl = URL.createObjectURL(response.data);
-      setLegendUrl(legendImageUrl);
-    } catch (error) {
-      console.error('Error fetching legend:', error);
-    }
-  };
-
-  const [legendUrl, setLegendUrl] = useState(null);
-
-  useEffect(() => {
-    fetchLegend();
-  }, []);
   const wmsLayerOptions = {
-    layers: layerName,
+    layers: 'podloge_reljef_hidrologija',
     format: 'image/png',
     transparent: true,
     version: '1.3.0',
     attribution: 'WMS Service Attribution',
   };
+  useEffect(() => {
+    const fetchLegend = async () => {
+      try {
+        const response = await axios.get(legendUrl, {
+          responseType: 'blob',
+        });
+        const legendImageUrl = URL.createObjectURL(response.data);
+        setLegendUrl(legendImageUrl);
+      } catch (error) {
+        console.error('Error fetching legend:', error);
+      }
+    };
+
+    fetchLegend(); // Trigger the fetchLegend function when the component mounts.
+  }, []);
 
   return (
-    <div>
-      <WMSTileLayer url={wmsUrl} {...wmsLayerOptions} />
-      {legendUrl && (
-        <div
-          style={{
-            zIndex: '900',
-            position: 'relative',
-          }}
-        >
-          {' '}
-          <img src={legendUrl} alt="Legend" />
-        </div>
-      )}
-    </div>
+    <>
+      <div
+        style={{
+          position: 'absolute',
+          top: '0vh',
+          left: '0vw',
+          zIndex: '1000',
+        }}
+      >
+        <img
+          src={legendUrl}
+          alt="Legend for podloge_reljef_hidrologija"
+        />
+      </div>
+
+      {<WMSTileLayer url={url} {...wmsLayerOptions} />}
+    </>
   );
 };
 
@@ -79,7 +84,6 @@ export const PAJedinice = () => {
     transparent: true,
     version: '1.3.0',
     attribution: 'WMS Service Attribution',
-    // zIndex: 800
   };
 
   return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
@@ -136,26 +140,6 @@ export const FiksniElementi = () => {
 };
 
 // Teme
-
-// tema_EWAP
-export const TemaEWAP = () => {
-  const url =
-    'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1810728.437587378547,5687433.67418665532,1815706.106449044077,5692281.923657917418&CRS=EPSG:3857&WIDTH=2000&HEIGHT=1948&LAYERS=tema_drvena_arhitektura&STYLES=&DPI=137&MAP_RESOLUTION=137&FORMAT_OPTIONS=dpi:137&TRANSPARENT=TRUE&FORMAT=image/png;%20mode%3D8bit';
-
-  const wmsLayerOptions = {
-    // layers: 'tema_drvena_arhitektura',
-    // format: 'image/png',
-    // dpi: 137,
-    // map_resolution: 137,
-    // format_options: 137,
-    // transparent: true,
-    // version: '1.3.0',
-    // attribution: 'WMS Service Attribution',
-  };
-  // 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE&tema_drvena_arhitektura&image/png';
-
-  return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
-};
 // tema_koristenje_zemljista
 export const TemaKZ = () => {
   const url =
@@ -172,7 +156,7 @@ export const TemaKZ = () => {
   return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
 };
 
-// tema_zastita_prirode
+// https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=tema_zastita_prirode
 export const TemaZP = () => {
   const url =
     'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0';
@@ -184,11 +168,10 @@ export const TemaZP = () => {
     version: '1.3.0',
     attribution: 'WMS Service Attribution',
   };
-
   return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
 };
 
-// tema_zastita_prirode
+// tema_stanovnistvo
 export const TemaS = () => {
   const url =
     'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0';
@@ -200,8 +183,24 @@ export const TemaS = () => {
     version: '1.3.0',
     attribution: 'WMS Service Attribution',
   };
+  const legend =
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=tema_stanovnistvo';
 
-  return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
+  return (
+    <>
+      {<WMSTileLayer url={url} {...wmsLayerOptions} />}
+      <img
+        src={legend}
+        style={{
+          zIndex: '800',
+          position: 'fixed',
+          top: '20vh',
+          left: '0',
+        }}
+        alt="Legend for tema_stanovnistvo"
+      />
+    </>
+  );
 };
 
 // tema_potres

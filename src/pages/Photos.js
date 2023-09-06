@@ -8,6 +8,8 @@ import {
   selectSelectedPhotoIndex,
   setFilters,
   selectFilteredPhotos,
+  increment,
+  decrement,
 } from '../redux/rtk/gallerySlice';
 import './photos.css';
 import Selekt from '../comps/Selekt';
@@ -48,6 +50,16 @@ export default function Photos() {
       label: kategorija,
     })
   );
+  //
+
+  //prev/next
+  const handleNextPhoto = () => {
+    dispatch(increment());
+  };
+
+  const handlePreviousPhoto = () => {
+    dispatch(decrement());
+  };
 
   //
   const filters = [
@@ -117,13 +129,13 @@ export default function Photos() {
           >
             {selectedPhotoIndex === index && (
               <div className="selected-div1">
-                <Botun>prev</Botun>
+                <Botun onClick={handlePreviousPhoto}>prev</Botun>
                 <p>{photo.naziv}</p>
                 <p>{photo.tagovi}</p>
                 <p>{photo.kategorija}</p>
                 <p>{photo.opis}</p>
                 <p>{photo.autor}</p>
-                <Botun>next</Botun>
+                <Botun onClick={handleNextPhoto}>next</Botun>
               </div>
             )}
             <img

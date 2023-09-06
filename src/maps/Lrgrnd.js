@@ -39,3 +39,37 @@ const MapWithLegend = () => {
 };
 
 // export default MapWithLegend;
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+
+// function Legend({ selectedLayer }) {
+//   const [legendUrl, setLegendUrl] = useState(
+//     `https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&LAYER=${selectedLayer}&FORMAT=image/png`
+//   );
+
+//   const fetchLegend = async () => {
+//     try {
+//       const response = await axios.get(legendUrl, {
+//         responseType: 'blob',
+//       });
+//       const legendImageUrl = URL.createObjectURL(response.data);
+//       setLegendUrl(legendImageUrl);
+//     } catch (error) {
+//       console.error('Error fetching legend:', error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchLegend();
+//   }, [selectedLayer]); // Trigger the fetch when selectedLayer changes
+
+//   return (
+//     <div>
+//       <img
+//         src={legendUrl}
+//         className="legend"
+//         alt={`${selectedLayer} Legend`}
+//       />
+//     </div>
+//   );
+// }

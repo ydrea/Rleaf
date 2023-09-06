@@ -1,6 +1,5 @@
+import geojson from '../data/temakz.geojson.json';
 import 'leaflet/dist/leaflet.css';
-import { Icon } from 'leaflet';
-
 import {
   Marker,
   GeoJSON,
@@ -8,72 +7,62 @@ import {
   Popup,
   TileLayer,
   LayersControl,
-  useMapEvents,
-  WMSTileLayer,
   ZoomControl,
+  // WMSTileLayer,
 } from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-cluster';
+import { useRef, useEffect, useState } from 'react';
+import { Icon } from 'leaflet';
+//prettier-ignore
 import {
-  ANaselja,
-  PAJedinice,
-  PBNaselja,
-  FiksniElementi,
-  PodRH,
-  TemaZP,
-  TemaP,
-  TemaS,
-  TemaEWAP,
+  ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
+  PodRH, TemaZP, TemaP, TemaS
 } from '../maps/wms';
-
-import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+// import { markeri } from '../maps/markeri';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+import { transition } from '../transition';
+import CustomCtrl from '../comps/CustomCtrl';
+// import CustomZoom from '../comps/CustomZoom';
+import Legend from './Legend';
+import './mapa.css';
+//
+// foto layer
+//prettier-ignore
 
-import { Card } from '../comps/Card';
-import Footer from '../comps/Footer';
-// import Fly from './Fly';
-import { useDispatch } from 'react-redux';
-import { setSelectedMarker } from '../redux/rtk/mapSlice';
-// import { Ewap } from './temaEwap';
-import geojson from '../data/temakz.geojson.json';
-import MapClickHandler from '../maps/temaEwap';
-
+const myIcon = new Icon({
+  iconUrl: require('../assets/ikona.png'),
+  iconSize: [28, 28],
+});
 //
 
-//
-export const Map = () => {
-  const [clickedPhoto, setClickedPhoto] = useState(null);
+//temaKZ
+function onEachFeature(feature, layer) {
+  layer.bindPopup(feature.properties.code_opis);
+}
+
+export function Map() {
+  const [lajeri, lajeriSet] = useState([
+    { name: 't1', visible: true },
+    { name: 't2', visible: false },
+  ]);
+  //
   const [markeri, markeriSet] = useState([]);
-  const dispatch = useDispatch();
+  const [selectedLayer, setSelectedLayer] = useState(null);
 
-  //temaKZ
-  function onEachFeature(feature, layer) {
-    layer.bindPopup(feature.properties.code_opis);
-  }
-  //controls
-  const { BaseLayer, Overlay } = LayersControl;
-
-  // refs
-  const mapRef = useRef(null);
-  const cardRef = useRef(null);
-  //center, coords
-  const [selectedMarkerCoords, setSelectedMarkerCoords] =
-    useState(null);
-  const [centerMapOnMarker, setCenterMapOnMarker] = useState(false);
-  //prog. zoom
-  const mapCenter =
-    centerMapOnMarker && selectedMarkerCoords
-      ? selectedMarkerCoords
-      : [45.28, 16.04];
-  const mapZoom = centerMapOnMarker && selectedMarkerCoords ? 14 : 9;
-  //custom icon
-  const myIcon = new Icon({
-    iconUrl: require('../assets/ikona.png'),
-    iconSize: [28, 28],
-    iconAnchor: [14, 28],
-    popupAnchor: [0, -28],
-  });
-
-  //tipofthespear - Banija
+  //external control
+  const onLayerToggle = layerName => {
+    lajeriSet(prevLayers =>
+      prevLayers.map(layer =>
+        layer.name === layerName
+          ? { ...layer, visible: !layer.visible }
+          : layer
+      )
+    );
+  };
+  //tipofthespear
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -86,7 +75,6 @@ export const Map = () => {
           return {
             popUp: item.signatura,
             geocode: [geo.coordinates[1], geo.coordinates[0]],
-            photoData: item,
           };
         });
         markeriSet(parsedData);
@@ -98,55 +86,93 @@ export const Map = () => {
     fetchData();
   }, []);
 
-  //handle click
-  const handlePhotoClick = photo => {
-    setClickedPhoto(photo);
-    const marker = markeri.find(
-      marker => marker.popUp === photo.popUp
-    );
-    if (marker) {
-      dispatch(setSelectedMarker(marker));
-    }
-    if (cardRef.current) {
-      cardRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
+  //deep inside
+  const mapRef = useRef();
+  useEffect(() => {
+    const map = mapRef.current; //.leafletElement;
+    if (map) {
+      map.on('baselayerchange', e => {
+        console.log(e.name);
+        setSelectedLayer(e.name);
       });
     }
-  };
+  }, [selectedLayer]);
 
-  //tema_drvena_arhitektura
+  useEffect(() => {
+    console.log(selectedLayer);
+  }, [selectedLayer]);
+
+  //and out
+  const { BaseLayer, Overlay } = LayersControl;
 
   return (
-    <div>
+    <div
+      style={{
+        height: '70vh',
+        width: '140vh',
+      }}
+    >
+      {/* <CustomZoom /> */}
+      <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} />
+
       <MapContainer
+        ref={mapRef}
+        center={[45.2, 16.2]}
+        zoom={8}
+        style={{ height: '80vh' }}
         zoomControl={false}
-        center={mapCenter}
-        zoom={mapZoom}
-        style={{ height: '75vh', width: 'auto' }}
-        whenCreated={map => {
-          if (mapRef.current === null) {
-            mapRef.current = map;
-          }
-        }}
       >
         <ZoomControl position="bottomright" />
+        {selectedLayer && (
+          <Legend
+            styles={{
+              position: 'fixed',
+              top: '20',
+              right: '0',
+              zIndex: '555',
+            }}
+            selectedLayer={selectedLayer}
+          />
+        )}
         <LayersControl>
           <BaseLayer checked name="OSM">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           </BaseLayer>
-          <BaseLayer name="reljef" zIndex={0}>
+
+          <BaseLayer name="podloge_reljef_hidrologija">
             <PodRH />
           </BaseLayer>
           <FiksniElementi />
-          <Overlay name="admin. naselja">
+          <Overlay name="administrativna_naselja">
             <ANaselja />
           </Overlay>
-          <Overlay name="P banijska naselja">
-            <PBNaselja />
+          <Overlay name="preklop_banijska_naselja">
+            <PBNaselja
+              eventHandlers={{
+                add: e => {
+                  console.log('Added Layer:', e.target);
+                  setSelectedLayer('preklop_banijska_naselja');
+                },
+                remove: e => {
+                  console.log('Removed layer:', e.target);
+                },
+              }}
+            />
           </Overlay>
-          <Overlay name="P administrativne jedinice">
-            <PAJedinice />
+          <Overlay name="preklop_administrativne_jedinice">
+            <PAJedinice
+              eventHandlers={{
+                add: e => {
+                  console.log('Added Layer:', e.target);
+                  setSelectedLayer(
+                    'preklop_administrativne_jedinice'
+                  );
+                },
+                remove: e => {
+                  console.log('Removed layer:', e.target);
+                },
+              }}
+            />
           </Overlay>
           <LayersControl>
             <BaseLayer name="tema_koristenje_zemljista">
@@ -161,49 +187,43 @@ export const Map = () => {
             <BaseLayer name="tema_potres">
               <TemaP />
             </BaseLayer>
-            <BaseLayer name="tema_drvena_arhitektura">
-              <TemaEWAP />
-              <MapClickHandler />
-            </BaseLayer>{' '}
           </LayersControl>
         </LayersControl>
-
-        {/* markeri     */}
-        {markeri.map(i => (
-          <Marker
-            key={i.geocode[0] + Math.random()}
-            position={i.geocode}
-            icon={myIcon}
-          >
-            <Popup>
-              {i.popUp}
-              <Link
-                to={`/photos/${i.popUp}`}
-                onClick={event => {
-                  event.preventDefault();
-                  handlePhotoClick(i);
-                }}
+        {/* {data && <GeoJSON data={data} />} */}
+        <MarkerClusterGroup>
+          {markeri.map(i => (
+            <Marker
+              key={i.geocode[0] + Math.random()}
+              position={i.geocode}
+              icon={myIcon}
+            >
+              <Popup>
+                {i.popUp}
+                <Link to={{ pathname: '/photos', params: i.popUp }}>
+                  <img
+                    width="233px"
+                    src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
+                    alt={i.popUp}
+                  />
+                </Link>
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+        {lajeri.map(
+          layer =>
+            layer.visible && (
+              <Marker
+                position={[45.21, 16.19]}
+                icon={myIcon}
+                key={layer.name}
               >
-                <img
-                  width="233px"
-                  src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
-                  alt={i.popUp}
-                />
-              </Link>
-            </Popup>
-          </Marker>
-        ))}
-
-        {/* useMapEvents should be inside MapContainer */}
+                <Popup>{layer.name}</Popup>
+              </Marker>
+            )
+        )}
       </MapContainer>
-
-      {/* under the map */}
-      {clickedPhoto && (
-        <div ref={cardRef}>
-          <Card photo={clickedPhoto.photoData} />
-        </div>
-      )}
-      <Footer />
     </div>
   );
-};
+}
+// export default Mapa;
