@@ -154,7 +154,7 @@ display: block;
 }
 .txt3 {
   position: absolute;
-  top: 99%; 
+  top: 129%; 
   left: 0;
   width: 50%;
   text-align: left;
@@ -162,10 +162,12 @@ display: block;
 }
   
     
-.S4 {display: block;
+.S4 {
+  display: block;
   position: relative;
   height: 80vh; 
-  margin-top: auto;}
+  margin-top: 40vh;
+}
 .txt4{
   width: 50%;
 position: absolute;

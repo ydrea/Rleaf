@@ -65,14 +65,16 @@ z-index: 1;
   font-size: 1.5rem;
 }
 
-.nav-links:hover {
+.first-letter-white {
+  color: #fff;
+}
+
+.nav-links:hover,
+.nav-links.clicked  {
   color: #fff;
   text-decoration: none;
 }
 
-p::first-letter {
-  color: #fff;
-}
 
 .fa-bars {
   color: #fff;
