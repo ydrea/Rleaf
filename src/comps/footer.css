@@ -7,4 +7,5 @@
   margin-top: 5vh;
   min-height: fit-content;
   background-color: #8C8D85;
+position: relative; bottom: 0;
 }

@@ -18,7 +18,7 @@ function Home() {
     <div className="home">
       {/* <section className="section"> */}{' '}
       <div className="cont0">
-        <img src="img-home-g.png" className="img0" />
+        <img src="home0.png" className="img0" />
         <div className="txt0">
           <div className="vozi"> Opservatorij</div>
           <div className="aepali">krajobraza</div>
@@ -42,7 +42,7 @@ function Home() {
       </div>
       <div className="S2">
         <div className="cont2">
-          <img src="home1.png" className="img1" />
+          <img src="home2.png" className="img2" />
           <div className="txt2">
             Pilot područje Opservatorija je Banovina ili Banija,
             marginalizirana regija Hrvatske, izrazito pogođena ratnim
@@ -53,28 +53,35 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="S3">
-        <div className="constrainer">
-          <img src="home2.png" className="img2" />
-          <div>
-            Pozivamo vas da se pridružite našem putovanju prema
-            očuvanju i razumijevanju krajobraza.
+      <div className="fors">
+        {' '}
+        <div className="S3">
+          <div className="cont3">
+            <img src="home3.png" className="img3" />
+            <div className="txt3">
+              Pozivamo vas da se pridružite našem putovanju prema
+              očuvanju i razumijevanju krajobraza.
+            </div>{' '}
           </div>
         </div>
+        <div className="S4">
+          <div className="txt4">
+            Za sve informacije vezane uz ‘Opservatorij krajobraza’,
+            slobodno nas kontaktirajte putem e-maila na
+            [info@croatianlandscape.hr] ili telefonom na [+385 xx xxx
+            xxxx].
+            <div style={{ color: 'black' }}>
+              Zanima vas više o našem radu i misiji? Pretplatite se na
+              naš newsletter i budite u tijeku s našim istraživanjima
+              i aktivnostima. Unesite svoju e-mail adresu i pridružite
+              se putovanju prema očuvanju i razumijevanju krajobraza."
+            </div>
+          </div>
+        </div>
+        <div>
+          <Footer className="foo" />
+        </div>
       </div>
-      <div className="S4">
-        Za sve informacije vezane uz ‘Opservatorij krajobraza’,
-        slobodno nas kontaktirajte putem e-maila na
-        [info@croatianlandscape.hr] ili telefonom na [+385 xx xxx
-        xxxx].
-      </div>
-      <div style={{ fontSize: '30px', color: 'black' }}>
-        Zanima vas više o našem radu i misiji? Pretplatite se na naš
-        newsletter i budite u tijeku s našim istraživanjima i
-        aktivnostima. Unesite svoju e-mail adresu i pridružite se
-        putovanju prema očuvanju i razumijevanju krajobraza."
-      </div>
-      <Footer style={{ position: 'apsolute', bottom: '0' }} />
     </div>
   );
 }

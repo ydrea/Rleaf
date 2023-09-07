@@ -3,9 +3,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 30px; /* Consider using em or rem units for font size */
-  position: relative; /* Relative positioning for containing absolutely positioned elements */
-}
+  font-size: 30px; 
+  /* position: relative;  */
+  }
 
 .cont0 {
   position: relative;
@@ -36,8 +36,7 @@
   z-index: 100;
   position: absolute;
   left: 25vw; /* Adjust left position as needed */
-  /* Adjust top position to position them above .podnaslov within .txt0 */
-}
+  }
 
 .vozi {
   color: #fff;
@@ -46,9 +45,8 @@
   position: absolute;
   left: 25vw; /* Adjust left position as needed */
   top: auto; /* Remove the 'top' property */
-  bottom: 17.5rem; /* Adjust the 'bottom' property using rem units */
-
-}
+  bottom: 17.5rem; 
+  }
 
 .aepali {
   color: #fff;
@@ -57,8 +55,8 @@
   position: absolute;
   left: 25vw; /* Adjust left position as needed */
   top: auto; /* Remove the 'top' property */
-  bottom: 12.5rem; /* Adjust the 'bottom' property using rem units */
-}
+  bottom: 12.5rem; 
+  }
 
 .podnaslov {
   position: relative; /* Change to relative positioning */
@@ -93,16 +91,15 @@ white-space: pre-line;
 
 
 .S2 {
-  height: 80vh; /* Use vh units for consistent section height */
- display: flex;
-align-items: center;
+  height: 80vh; 
+  align-items: center;
 }
 
 .cont2 {
   position: relative;
 }
 
-.img1 {
+.img2 {
   object-fit: cover;
   width: 100%;
   background-repeat: no-repeat;
@@ -110,13 +107,13 @@ align-items: center;
   background-size: cover;
   display: grid;
   place-items: center;
+/* height: 80vh; */
   z-index: 0;
 }
 
 .txt2 {
   position: absolute;
   padding-right: 1rem;
-  /* padding-left: 3rem; */
   right: 0;
   text-align: left;
   z-index: 33;
@@ -125,36 +122,60 @@ align-items: center;
   bottom: 10vh;
 }
 
+.fors{
+  display: block;
+height: 200vh;
+}
+
 .S3 {
-  height: 80vh; 
-  position: relative; 
+  height: 120vh;
+display: block;
+/* border: #fff solid 2px; */
+/* background-color: antiquewhite; */
 }
 
-/* .constrainer {
-  max-width: 45%;
-  max-height: 65vh;
+  .cont3 {
+    /* background-color: aquamarine; */
   position: relative;
-} */
-
-.img2 {
-  position: absolute;
-  object-fit: fill;
-  top: 23vh;
-  left: 0;
-  height: 59%;
-  width: 45%;
-
+  top: 28vh;
+  min-height: 80vh;
+  min-width: 50%;
 }
 
+.img3 {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 45%; 
+  height: auto; 
+  object-fit: contain; 
+  z-index: 889;
+/* bottom: 3px !important; */
+}
 .txt3 {
   position: absolute;
-  top: 50vh;
+  top: 99%; 
   left: 0;
+  width: 50%;
+  text-align: left;
+/* bottom: 3px !important; */
 }
+  
+    
+.S4 {display: block;
+  position: relative;
+  height: 80vh; 
+  margin-top: auto;}
+.txt4{
+  width: 50%;
+position: absolute;
+right: 0;
 
-.S4 {
-  height: 60vh; /* Use vh units for consistent section height */
-  background-color: #8c8d85;
+}
+.foo {
+  display: block;
+position: absolute;
+top: 100vh;
 }
 
 @media screen and (max-width: 960px) {
