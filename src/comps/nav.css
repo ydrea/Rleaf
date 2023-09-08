@@ -11,12 +11,6 @@
 height: 14.5vh;
   padding-bottom: 0;
 }
-/* image {
-display: block;
-max-width: 90vw !important;
-position: absolute; 
-z-index: 1;
-} */
 
 .navbar-container {
   background-color: rgba(140, 141, 133, 0);
@@ -62,7 +56,8 @@ z-index: 1;
   align-items: center;
   text-decoration: none;
   margin: 0.5rem 1rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+position: relative;
 }
 
 .first-letter-white {
@@ -75,6 +70,70 @@ z-index: 1;
   text-decoration: none;
 }
 
+/* Style submenu links with href */
+.submenu-link {
+  text-decoration: none;
+  color: #000; /* Customize as needed */
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+}
+
+.submenu-link:hover {
+  color: #fff; /* Customize as needed */
+  text-decoration: none;
+}
+
+/* Style plain submenu items without href */
+.submenu-item {
+  /* Style plain submenu items here */
+  /* Example styles: */
+  color: #333; /* Customize as needed */
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+}
+
+.submenu-item:hover {
+  /* Style plain submenu items on hover here */
+  /* Example styles: */
+  background-color: #f2f2f2; /* Customize as needed */
+}
+
+
+/* Style the submenu when the parent is hovered */
+.submenu-parent:hover .dropdown {
+  display: block;
+}
+/* .dropdown */
+
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 7vh;
+  left: auto;
+    font-size: 0.875rem;
+  z-index: 9999;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  list-style: none;
+  background-color: #8c8d85;
+  border-radius: 0.5rem;
+  display: none;
+}
+
+.dropdown.show {
+  display: block;
+}
+
+.dropdown .dropdown-submenu {
+  position: absolute;
+  left: 100%;
+  top: -7px;
+}
+
+/* end.dropdown */
 
 .fa-bars {
   color: #fff;

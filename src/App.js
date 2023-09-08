@@ -2,7 +2,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import { Map } from './pages/Map';
 import Contact from './pages/Contact';
-import Projects from './pages/Projects';
+import Ewap from './pages/projects/ewap';
+import Banija from './pages/projects/banija';
 //
 import { Upload } from './pages/Upload';
 import { Login } from './pages/Login';
@@ -33,7 +34,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/banija" element={<Banija />} />
+        <Route path="/projects/ewap" element={<Ewap />} />
+
         <Route path="/mapa/:signatura" element={<Map />} />
         <Route path="/mapa" element={<Map />} />
 

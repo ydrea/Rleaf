@@ -1,206 +1,206 @@
 .home {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 30px; 
-  /* position: relative;  */
-  }
-
-.cont0 {
-  position: relative;
-}
-
-.img0 {
-  object-fit: cover;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: grid;
-  place-items: center;
-  z-index: 0;
-  height: 80vh; /* Adjust the height to match the section height */
-}
-
-.txt0 {
-  text-align: center;
-  z-index: 33;
-  position: relative; /* Position the container relative for absolute child elements */
-}
-
-.vozi,
-.aepali {
-  color: #fff;
-  font-size: 100px; /* Adjust font size as needed */
-  z-index: 100;
-  position: absolute;
-  left: 25vw; /* Adjust left position as needed */
-  }
-
-.vozi {
-  color: #fff;
-  font-size: 100px; /* Adjust font size as needed */
-  z-index: 100;
-  position: absolute;
-  left: 25vw; /* Adjust left position as needed */
-  top: auto; /* Remove the 'top' property */
-  bottom: 17.5rem; 
-  }
-
-.aepali {
-  color: #fff;
-  font-size: 100px; /* Adjust font size as needed */
-  z-index: 100;
-  position: absolute;
-  left: 25vw; /* Adjust left position as needed */
-  top: auto; /* Remove the 'top' property */
-  bottom: 12.5rem; 
-  }
-
-.podnaslov {
-  position: relative; /* Change to relative positioning */
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  z-index: 3;
-  font-size: 30px;
-  margin-top: 0.6rem; 
-}
-
-.line {
-  border-top: 2px solid white;
-  position: absolute; /* Change to absolute positioning */
-  top: 100%; /* Position it just below .podnaslov */
-  box-sizing: border-box;
-  width: 100%;
-  height: 0.6rem;
-  margin-top: -0.40rem; /* Add negative margin to overlap with .podnaslov */
-  z-index: 4; /* Increase z-index to place it above .podnaslov */
-}
-
-
-.S1 {
-  font-size: 1.8rem; 
-  height: 80vh; 
-  padding-top: 20vh;
-  padding-left: 4vw;
-white-space: pre-line;
-}
-
-
-
-.S2 {
-  height: 80vh; 
-  align-items: center;
-}
-
-.cont2 {
-  position: relative;
-}
-
-.img2 {
-  object-fit: cover;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: grid;
-  place-items: center;
-/* height: 80vh; */
-  z-index: 0;
-}
-
-.txt2 {
-  position: absolute;
-  padding-right: 1rem;
-  right: 0;
-  text-align: left;
-  z-index: 33;
-  max-width: 53%;
-  width: 100%;
-  bottom: 10vh;
-}
-
-.fors{
-  display: block;
-height: 200vh;
-}
-
-.S3 {
-  height: 120vh;
-display: block;
-/* border: #fff solid 2px; */
-/* background-color: antiquewhite; */
-}
-
-  .cont3 {
-    /* background-color: aquamarine; */
-  position: relative;
-  top: 28vh;
-  min-height: 80vh;
-  min-width: 50%;
-}
-
-.img3 {
-  position: absolute;
-  top: 40%;
-  left: 0;
-  width: 45%; 
-  height: auto; 
-  object-fit: contain; 
-  z-index: 889;
-/* bottom: 3px !important; */
-}
-.txt3 {
-  position: absolute;
-  top: 129%; 
-  left: 0;
-  width: 50%;
-  text-align: left;
-/* bottom: 3px !important; */
-}
-  
-    
-.S4 {
-  display: block;
-  position: relative;
-  height: 80vh; 
-  margin-top: 40vh;
-}
-.txt4{
-  width: 50%;
-position: absolute;
-right: 0;
-
-}
-.foo {
-  display: block;
-position: absolute;
-top: 100vh;
-}
-
-@media screen and (max-width: 960px) {
-  .home {
-    font-size: 25px; /* Adjust font size for smaller screens */
-  }
-
-  .vozi,
-   .aepali {
-    font-size: 60px; /* Adjust font size for smaller screens */
-  }
-
-  .podnaslov {
-    font-size: 30px; /* Adjust font size for smaller screens */
-    top: 50%;
+    width: 100%;
     display: flex;
-    position: static; /* Return to static positioning for smaller screens */
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px; 
+    /* position: relative;  */
+    }
+  
+  .cont0 {
+    position: relative;
+  }
+  
+  .img0 {
+    object-fit: cover;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: grid;
+    place-items: center;
+    z-index: 0;
+    height: 80vh; /* Adjust the height to match the section height */
+  }
+  
+  .txt0 {
     text-align: center;
+    z-index: 33;
+    position: relative; /* Position the container relative for absolute child elements */
   }
-
+  
+  .vozi,
+  .aepali {
+    color: #fff;
+    font-size: 100px; /* Adjust font size as needed */
+    z-index: 100;
+    position: absolute;
+    left: 25vw; /* Adjust left position as needed */
+    }
+  
+  .vozi {
+    color: #fff;
+    font-size: 100px; /* Adjust font size as needed */
+    z-index: 100;
+    position: absolute;
+    left: 25vw; /* Adjust left position as needed */
+    top: auto; /* Remove the 'top' property */
+    bottom: 17.5rem; 
+    }
+  
+  .aepali {
+    color: #fff;
+    font-size: 100px; /* Adjust font size as needed */
+    z-index: 100;
+    position: absolute;
+    left: 25vw; /* Adjust left position as needed */
+    top: auto; /* Remove the 'top' property */
+    bottom: 12.5rem; 
+    }
+  
+  .podnaslov {
+    position: relative; /* Change to relative positioning */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 3;
+    font-size: 30px;
+    margin-top: 0.6rem; 
+  }
+  
   .line {
-    position: absolute; /* Keep absolute positioning for lines */
-    bottom: 0;
+    border-top: 2px solid white;
+    position: absolute; /* Change to absolute positioning */
+    top: 100%; /* Position it just below .podnaslov */
+    box-sizing: border-box;
+    width: 100%;
+    height: 0.6rem;
+    margin-top: -0.40rem; /* Add negative margin to overlap with .podnaslov */
+    z-index: 4; /* Increase z-index to place it above .podnaslov */
   }
-}
+  
+  
+  .S1 {
+    font-size: 1.8rem; 
+    height: 80vh; 
+    padding-top: 20vh;
+    padding-left: 4vw;
+  white-space: pre-line;
+  }
+  
+  
+  
+  .S2 {
+    height: 80vh; 
+    align-items: center;
+  }
+  
+  .cont2 {
+    position: relative;
+  } 
+  
+  .img2 {
+    object-fit: cover;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: grid;
+    place-items: center;
+  /* height: 80vh; */
+    z-index: 0;
+  }
+  
+  .txt2 {
+    position: absolute;
+    padding-right: 1rem;
+    right: 0;
+    text-align: left;
+    z-index: 33;
+    max-width: 53%;
+    width: 100%;
+    bottom: 10vh;
+  }
+  
+  .fors{
+    display: block;
+  height: 200vh;
+  }
+  
+  .S3 {
+    height: 120vh;
+  display: block;
+  /* border: #fff solid 2px; */
+  /* background-color: antiquewhite; */
+  }
+  
+    .cont3 {
+      /* background-color: aquamarine; */
+    position: relative;
+    top: 28vh;
+    min-height: 80vh;
+    min-width: 50%;
+  }
+  
+  .img3 {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    width: 45%; 
+    height: auto; 
+    object-fit: contain; 
+    z-index: 889;
+  /* bottom: 3px !important; */
+  }
+  .txt3 {
+    position: absolute;
+    top: 129%; 
+    left: 0;
+    width: 50%;
+    text-align: left;
+  /* bottom: 3px !important; */
+  }
+    
+      
+  .S4 {
+    display: block;
+    position: relative;
+    height: 80vh; 
+    margin-top: 40vh;
+  }
+  .txt4{
+    width: 50%;
+  position: absolute;
+  right: 0;
+  
+  }
+  .foo {
+    display: block;
+  position: absolute;
+  top: 100vh;
+  }
+  
+  @media screen and (max-width: 960px) {
+    .home {
+      font-size: 25px; /* Adjust font size for smaller screens */
+    }
+  
+    .vozi,
+     .aepali {
+      font-size: 60px; /* Adjust font size for smaller screens */
+    }
+  
+    .podnaslov {
+      font-size: 30px; /* Adjust font size for smaller screens */
+      top: 50%;
+      display: flex;
+      position: static; /* Return to static positioning for smaller screens */
+      justify-content: center;
+      text-align: center;
+    }
+  
+    .line {
+      position: absolute; /* Keep absolute positioning for lines */
+      bottom: 0;
+    }
+  }
