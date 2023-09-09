@@ -50,7 +50,7 @@ export function Map() {
   ]);
   //
   const [markeri, markeriSet] = useState([]);
-  const [selectedLayer, setSelectedLayer] = useState(null);
+  const [selectedLayer, setSelectedLayer] = useState();
 
   //external control
   const onLayerToggle = layerName => {
@@ -88,15 +88,19 @@ export function Map() {
 
   //deep inside
   const mapRef = useRef();
+  // Deep inside your useEffect
   useEffect(() => {
-    const map = mapRef.current;
-    if (map) {
-      map.on('baselayerchange', e => {
-        console.log(e.name);
-        setSelectedLayer(e.name);
-      });
-    }
-  }, [selectedLayer]);
+    const fetchLegend = async () => {
+      const map = mapRef.current;
+      if (map) {
+        map.on('baselayerchange', e => {
+          console.log(e.name);
+          setSelectedLayer(e.name);
+        });
+      }
+    };
+    fetchLegend();
+  }, []);
 
   useEffect(() => {
     console.log(selectedLayer);
@@ -130,7 +134,7 @@ export function Map() {
               position: 'fixed',
               top: '20',
               right: '0',
-              zIndex: '555',
+              zIndex: '5555',
             }}
             selectedLayer={selectedLayer}
           />

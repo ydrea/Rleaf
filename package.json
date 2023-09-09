@@ -1,5 +1,5 @@
 {
-  "name": "leaf",
+  "name": "rleaf",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -65,8 +65,19 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-private-property-in-object": "^7.22.11",
+    "@babel/preset-env": "^7.22.15",
+    "@babel/preset-react": "^7.22.15",
     "@types/leaflet": "^1.9.3",
-    "@types/leaflet.wms": "^0.2.0"
+    "@types/leaflet.wms": "^0.2.0",
+    "babel-jest": "^29.6.4",
+    "jest": "^27.5.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
   },
   "proxy": "http://localhost:5000/"
 }

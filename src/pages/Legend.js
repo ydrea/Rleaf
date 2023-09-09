@@ -1,19 +1,16 @@
-// export default Legend;
+// Legend.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Legend({ selectedLayer }) {
-  const [legendUrl, setLegendUrl] = useState(
-    `https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&LAYER=${selectedLayer}&FORMAT=image/png&TRANSPARENT=true`
-  );
-  useEffect(() => {
-    setLegendUrl(null);
-  }, [selectedLayer]);
+  const [legendUrl, setLegendUrl] = useState(null);
 
   useEffect(() => {
     if (selectedLayer) {
       const fetchLegend = async () => {
         const legendUrl = `https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&LAYER=${selectedLayer}&FORMAT=image/png`;
+
+        console.log('Fetching legend for layer:', selectedLayer);
 
         try {
           const response = await axios.get(legendUrl, {
@@ -27,16 +24,22 @@ function Legend({ selectedLayer }) {
       };
 
       fetchLegend();
+    } else {
+      // Clear legendUrl if selectedLayer is falsy
+      setLegendUrl(null);
     }
   }, [selectedLayer]);
 
   return (
-    <div style={{ position: 'fixed', top: '20vh', right: '0' }}>
+    <div>
       {legendUrl ? (
         <img
           src={legendUrl}
           style={{
-            background: 'transparent',
+            zIndex: '9999',
+            position: 'fixed',
+            top: '0',
+            right: '0',
           }}
           alt={`${selectedLayer} Legend`}
         />

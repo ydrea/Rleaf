@@ -23,7 +23,7 @@ function App() {
   //
 
   useEffect(() => {
-    console.log(store);
+    // console.dir(window);
   });
   return (
     <Layout>

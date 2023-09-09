@@ -8,35 +8,54 @@ export default function About() {
         istraživanje krajobraza i razvoj temeljen na krajobrazu. 2023.
         godine počeo je sa radom kao virtualni kolaborativni subjekt,
         a inicijalnu grupu čine stručnjaci različitih profila:
-        <ul style={{ color: 'black' }}>
+        <ul style={{ textDecoration: 'none' }}>
           <li>
-            {' '}
-            dr.sc. Goran Andlar, izvanredni profesor na Agronomskom
-            fakultetu Sveučilišta u Zagrebu (UNIZG)
+            <p> dr.sc. Goran Andlar</p>{' '}
+            <span>
+              {' '}
+              izvanredni profesor na Agronomskom fakultetu Sveučilišta
+              u Zagrebu (UNIZG)
+            </span>
           </li>
           <li>
-            dr.sc. Sanja Lončar, izvanredna profesorica na Filozofskom
-            fakultetu (UNIZG)
+            <p>dr.sc. Sanja Lončar</p>{' '}
+            <span>
+              izvanredna profesorica na Filozofskom fakultetu (UNIZG)
+            </span>
           </li>
           <li>
-            dr.sc. Hrvoje Tomić, izvanredni profesor na Agronomskom
-            fakultetu (UNIZG)
+            <p>dr.sc. Hrvoje Tomić</p>{' '}
+            <span>
+              izvanredni profesor na Agronomskom fakultetu (UNIZG)
+            </span>
           </li>
           <li>
-            mag. art. Davor Konjikušić, umjetnički asistent na
-            Akademiji dramskih umjetnosti (UNIZG)
+            <p>mag. art. Davor Konjikušić</p>{' '}
+            <span>
+              umjetnički asistent na Akademiji dramskih umjetnosti
+              (UNIZG)
+            </span>
           </li>
           <li>
-            dr.sc. Aleksandar Lukić, redoviti profesor na
-            Prirodoslovno-matematičkom fakultetu (UNIZG)
+            <p>dr.sc. Aleksandar Lukić</p>{' '}
+            <span>
+              redoviti profesor na Prirodoslovno-matematičkom
+              fakultetu (UNIZG)
+            </span>
           </li>
           <li>
-            dr.sc. Filip Šrajer, prostorni planer i urbanist, osnivač
-            tvrtke EKOMENA d.o.o.
+            <p>dr.sc. Filip Šrajer</p>{' '}
+            <span>
+              prostorni planer i urbanist, osnivač tvrtke EKOMENA
+              d.o.o.
+            </span>
           </li>
           <li>
-            Damir Gamulin, grafički dizajner, osnivač tvrtke
-            Organizirano oblikovanje d.o.o.
+            <p>Damir Gamulin</p>{' '}
+            <span>
+              grafički dizajner, osnivač tvrtke Organizirano
+              oblikovanje d.o.o.
+            </span>
           </li>
         </ul>
       </div>
@@ -59,10 +78,10 @@ export default function About() {
             style={{
               position: 'absolute',
               bottom: '0',
-              right: '10vw',
+              left: '50%',
               width: '25vw',
               color: 'white',
-              textAlign: 'center',
+              textAlign: 'left',
               fontSize: '60px',
               zIndex: '33',
             }}
@@ -113,10 +132,10 @@ export default function About() {
               style={{
                 position: 'absolute',
                 bottom: '0',
-                right: '10vw',
+                left: '1vw',
                 width: '25vw',
                 color: 'white',
-                textAlign: 'center',
+                textAlign: 'left',
                 fontSize: '60px',
                 zIndex: '33',
               }}
@@ -147,17 +166,19 @@ export default function About() {
           Hrvatska, Ministarstvo kulture i medija (pokroviteljstvo).
         </div>
         <div className="six">
-          {' '}
-          Za sve informacije vezane uz ‘Opservatorij krajobraza’,
-          slobodno nas kontaktirajte putem e-maila na
-          [info@croatianlandscape.hr] ili telefonom na [+385 xx xxx
-          xxxx].
-          <div style={{ color: 'black' }}>
+          <p>
+            Za sve informacije vezane uz ‘Opservatorij krajobraza’,
+            slobodno nas kontaktirajte putem e-maila na
+            [info@croatianlandscape.hr] ili telefonom na [+385 xx xxx
+            xxxx].
+          </p>
+          <p>
+            {' '}
             Zanima vas više o našem radu i misiji? Pretplatite se na
             naš newsletter i budite u tijeku s našim istraživanjima i
             aktivnostima. Unesite svoju e-mail adresu i pridružite se
             putovanju prema očuvanju i razumijevanju krajobraza.
-          </div>
+          </p>
         </div>
         <Footer />{' '}
       </div>
