@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import {
   getPhotos,
   setSelectedPhotoIndex,
@@ -14,16 +14,16 @@ import {
 import './photos.css';
 import Selekt from '../comps/Selekt';
 import Botun from '../comps/Botun';
+import { setSelectedPhoto } from '../redux/rtk/mapSlice'; //
 //
 export default function Photos() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
   const { popUp, signatura } = useParams();
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const [cardVisible, setCardVisible] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState([]); //
-
-  //console.log(photos);
 
   // Assuming photos is an array of photo objects
   const tagoviSet = new Set();
@@ -109,6 +109,13 @@ export default function Photos() {
     dispatch(getPhotos());
   }, [dispatch]);
 
+  //send it to show on map
+  const handleShowOnMapClick = photo => {
+    dispatch(setSelectedPhoto(photo)); // Dispatch the action with the selected photo
+    // You can also navigate to the map view or update the map's state here if needed.
+    navigate(`/mapa/${photo.signatura}`);
+  };
+
   return (
     <div className="gallery">
       <div className="photo-filters">
@@ -134,7 +141,11 @@ export default function Photos() {
                 <p>{photo.tagovi}</p>
                 <p>{photo.kategorija}</p>
                 <p>{photo.opis}</p>
-                <p>{photo.autor}</p>
+                <p>{photo.signatura}</p>
+                <button onClick={() => handleShowOnMapClick(photo)}>
+                  Show on Map
+                </button>
+
                 <Botun onClick={handleNextPhoto}>next</Botun>
               </div>
             )}
@@ -149,6 +160,22 @@ export default function Photos() {
             {selectedPhotoIndex === index && (
               <div className="selected-div2">
                 {/* <Link to="">Pokaži na karti</Link> */}
+                {photos.map(photo => (
+                  <div key={photo.id}>
+                    <img src={photo.url} alt={photo.name} />
+                    <Link to={`/map/${photo.id}`}>Show on Map</Link>
+                  </div>
+                ))}
+                {photos.map(photo => (
+                  <div key={photo.id}>
+                    <img src={photo.url} alt={photo.name} />
+                    <button
+                      onClick={() => handleShowOnMapClick(photo)}
+                    >
+                      Show on Map
+                    </button>
+                  </div>
+                ))}
               </div>
             )}{' '}
           </div>

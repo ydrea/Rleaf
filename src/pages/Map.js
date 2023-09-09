@@ -19,16 +19,22 @@ import {
   PodRH, TemaZP, TemaP, TemaS
 } from '../maps/wms';
 // import { markeri } from '../maps/markeri';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { transition } from '../transition';
 import CustomCtrl from '../comps/CustomCtrl';
 // import CustomZoom from '../comps/CustomZoom';
 import Legend from './Legend';
+
+import Footer from '../comps/Footer';
 import './mapa.css';
 //
+
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setSelectedPhoto } from '../redux/rtk/mapSlice'; // Import the action
+
 // foto layer
 //prettier-ignore
 
@@ -51,6 +57,51 @@ export function Map() {
   //
   const [markeri, markeriSet] = useState([]);
   const [selectedLayer, setSelectedLayer] = useState();
+
+  const mapRef = useRef();
+  const markerRef = useRef([]);
+
+  //show on map
+  const { signatura } = useParams(); // Get the photoId from the URL parameter
+  const [shouldZoomAndClick, setShouldZoomAndClick] = useState(false);
+
+  const selectedPhoto = useSelector(
+    state => state.mapa.selectedPhoto
+  );
+
+  //ajeeee
+  // Inside your component
+
+  useEffect(() => {
+    console.log('Selected Photo:', selectedPhoto);
+    if (selectedPhoto && mapRef.current) {
+      // Rest of the zooming and popup code
+    }
+  }, [selectedPhoto]);
+
+  useEffect(() => {
+    if (selectedPhoto && mapRef.current) {
+      const geocode = [
+        selectedPhoto.geom.coordinates[1],
+        selectedPhoto.geom.coordinates[0],
+      ];
+
+      // Zoom the map to the location of the selected photo
+      mapRef.current.setView(geocode, 11);
+    }
+  }, [selectedPhoto]);
+
+  //popni gaaa
+  const openMarkerPopup = () => {
+    if (markerRef.current) {
+      markerRef.current.leafletElement.openPopup();
+    }
+  };
+  useEffect(() => {
+    if (shouldZoomAndClick) {
+      openMarkerPopup();
+    }
+  }, [shouldZoomAndClick]);
 
   //external control
   const onLayerToggle = layerName => {
@@ -87,7 +138,11 @@ export function Map() {
   }, []);
 
   //deep inside
-  const mapRef = useRef();
+  useEffect(() => {
+    console.log('Map Ref:', mapRef.current);
+    // Rest of the code
+  }, []);
+
   // Deep inside your useEffect
   useEffect(() => {
     const fetchLegend = async () => {
@@ -195,26 +250,42 @@ export function Map() {
           </LayersControl>
         </LayersControl>
         {/* {data && <GeoJSON data={data} />} */}
-        <MarkerClusterGroup>
-          {markeri.map(i => (
-            <Marker
-              key={i.geocode[0] + Math.random()}
-              position={i.geocode}
-              icon={myIcon}
-            >
-              <Popup>
-                {i.popUp}
-                <Link to={{ pathname: '/photos', params: i.popUp }}>
-                  <img
-                    width="233px"
-                    src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
-                    alt={i.popUp}
-                  />
-                </Link>
-              </Popup>
-            </Marker>
-          ))}
-        </MarkerClusterGroup>
+        {/* <MarkerClusterGroup> */}
+        {shouldZoomAndClick &&
+          // Use a setTimeout to delay the click action slightly
+          setTimeout(() => {
+            console.log('Timeout triggered');
+            const marker = markerRef.current;
+            if (marker) {
+              marker.openPopup();
+            }
+          }, 100)}
+        {markeri.map(i => (
+          <Marker
+            key={i.geocode[0] + Math.random()}
+            position={i.geocode}
+            icon={myIcon}
+            ref={ref => {
+              // Store the reference to each marker individually
+              if (ref) {
+                markerRef.current.push(ref);
+              }
+            }}
+          >
+            <Popup>
+              {i.popUp}
+              <Link to={{ pathname: '/photos', params: i.popUp }}>
+                <img
+                  width="233px"
+                  src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
+                  alt={i.popUp}
+                />
+              </Link>
+            </Popup>
+          </Marker>
+        ))}
+        {console.log('Marker Ref:', markerRef.current)}
+        {/* </MarkerClusterGroup> */}
         {lajeri.map(
           layer =>
             layer.visible && (
@@ -228,6 +299,22 @@ export function Map() {
             )
         )}
       </MapContainer>
+      <div style={{ background: 'transparent' }}>
+        {selectedPhoto ? (
+          <div>
+            <h3>Selected Photo</h3>
+            <p>Image URL:</p>
+            <img
+              width="75%"
+              src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`}
+              alt={selectedPhoto.signatura}
+            />
+          </div>
+        ) : (
+          <p style={{ color: 'black' }}>No photo selected</p>
+        )}
+      </div>
+      <Footer />
     </div>
   );
 }
