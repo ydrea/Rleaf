@@ -1,7 +1,29 @@
-import React from 'react';
 import './Modal.css';
+import { useState, useEffect } from 'react';
 
-const Modal = ({ isOpen, closeModal, children }) => {
+//
+const Modal = ({
+  isOpen,
+  closeModal,
+  children,
+  thumbnailUrl,
+  signatura,
+}) => {
+  const [confirmationVisible, setConfirmationVisible] =
+    useState(false);
+
+  useEffect(() => {
+    if (confirmationVisible) {
+      // Automatically close the modal after 2 seconds
+      const timeoutId = setTimeout(() => {
+        closeModal();
+        setConfirmationVisible(false);
+      }, 2000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [confirmationVisible, closeModal]);
+
   if (!isOpen) return null;
 
   return (
@@ -10,10 +32,10 @@ const Modal = ({ isOpen, closeModal, children }) => {
         <button className="modal-close-button" onClick={closeModal}>
           X
         </button>
+        <img src={thumbnailUrl} alt={signatura} />
         {children}
       </div>
     </div>
   );
 };
-
 export default Modal;

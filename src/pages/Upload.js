@@ -3,8 +3,9 @@ import Message from '../comps/Message';
 // import Progress from '../comps/Progress';
 import axios from 'axios';
 import exifr from 'exifr';
-import Form from '../comps/Form';
-import UnicodeDecoder from '../utils/unicoder';
+import Photos from './Photos';
+import PhotosEDIT from './PhotosEDIT';
+
 //
 export const Upload = () => {
   const [file, setFile] = useState('');
@@ -13,6 +14,8 @@ export const Upload = () => {
   const [message, setMessage] = useState('');
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [exifR, exifRSet] = useState();
+  const [fileUploaded, setFileUploaded] = useState(false);
+
   //
 
   //
@@ -25,7 +28,8 @@ export const Upload = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('file', file);
-    try { const res = await axios.post(`${process.env.REACT_APP_SERVER}/upload`, formData, {
+    try 
+    { const res = await axios.post(`${process.env.REACT_APP_SERVER}/upload`, formData, {
         headers: {'Content-Type': 'multipart/form-data' },
     //progress
       });
@@ -33,6 +37,7 @@ export const Upload = () => {
       const { fileName, filePath } = res.data;
       setUploadedFile({ fileName, filePath });
       setMessage(`img File ${fileName} Uploaded 2 ${filePath}`);
+    setFileUploaded(true)
     } catch (err) {
       if (err.response.status === 500) {
         setMessage('There was a problem with the server');
@@ -42,7 +47,7 @@ export const Upload = () => {
       // setUploadPercentage(0);
     }
   };
-  //exifr
+
   //exifr
   const getExif = async () => {
     try {
@@ -65,6 +70,7 @@ export const Upload = () => {
 
   return (
     <>
+      {/* <pre>{JSON.stringify(exifR, null, 2)}</pre>{' '} */}
       {message ? <Message msg={message} /> : null}
       <form
         onSubmit={onSubmit}
@@ -97,15 +103,12 @@ export const Upload = () => {
             <img
               style={{ width: '60%' }}
               src={uploadedFile.filePath}
-              alt="dije"
+              alt="nije"
             />
           </div>
         </div>
       ) : null}
-      {exifR ? (
-        //uploadedFile.fileName
-        <Form uploadedFile={uploadedFile} exifR={exifR} />
-      ) : null}
+      <PhotosEDIT />{' '}
     </>
   );
 };

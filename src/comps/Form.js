@@ -1,65 +1,80 @@
 import { useEffect, useState } from 'react';
 import './form.css';
+import Message from './Message';
+
+//
 const Form = ({ uploadedFile, exifR }) => {
   const [pod, podSet] = useState();
+  const [confirmationMsg, setConfirmationMsg] = useState('');
 
-  // //
-  useEffect(() => {
-    // podSet(formData);
-  }, []);
-  // //
+  // // //
+  // useEffect(() => {
+  //   console.log(exifR);
+  // }, [uploadedFile]);
+  // // //
+
   const handleSubmit = async e => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
     console.log(formData.entries().next().value);
     const data = Object.fromEntries(formData);
-    // console.log(data);
-    const values = [...formData.values()];
-    // console.log(values);
+
+    // Handle exifR properties gracefully with default values
+    const location = exifR ? exifR.Location : '';
+    const dateCreated = exifR ? exifR.DateCreated : '';
+    const artist = exifR ? exifR.Artist : '';
+    const copyright = exifR ? exifR.Copyright : '';
+    const subject = exifR ? JSON.stringify(exifR.subject) : '';
+    const longitude = exifR ? exifR.longitude : '';
+    const latitude = exifR ? exifR.latitude : '';
+
     try {
-      const res = await fetch('http://localhost:3500/novi', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      console.log(res);
-      // e.currentTarget.reset();
-      // TO_DO
-      //window.location('/upload')
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER}/novi`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            ...data,
+            lokacija: location,
+            datum: dateCreated,
+            autor: artist,
+            copyright,
+            tagovi: subject,
+            lon: longitude,
+            lat: latitude,
+          }),
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+
+      setConfirmationMsg('Record successfully submitted!');
     } catch (err) {
       console.error(err.msg, 'nece');
     }
-    // clear inputs
-    // e.currentTarget.reset();
   };
-  //
+
   useEffect(() => {
     // currentTarget.reset();
-    console.log('PRops', uploadedFile, exifR);
+    console.log('PRops', uploadedFile);
   }, [uploadedFile]);
   //
   return (
     <form
-      style={{ display: 'flex', flexDirection: 'row' }}
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        paddingLeft: '4vw',
+      }}
       onSubmit={handleSubmit}
     >
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          // width: 400,
+          width: '50vw',
         }}
       >
-        <div className="form-control">
-          <label>signatura</label>
-          <input
-            // formID="1"
-            type="text"
-            name="signatura"
-            defaultValue={uploadedFile.fileName}
-          />
-        </div>
         <div className="form-control">
           <label>naziv</label>
           <input type="text" name="naziv" />
@@ -81,23 +96,22 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="lokacija"
-            defaultValue={exifR.Location}
+            defaultValue={uploadedFile?.lokacija}
           />
         </div>{' '}
         <div className="form-control">
           <label>datum</label>
           <input
-            type="date"
+            type="text"
             name="datum"
-            defaultValue={exifR.DateCreated}
+            defaultValue={uploadedFile.datum_sni}
           />
         </div>
       </div>
-
       <div
         style={{
           display: 'flex',
-          // width: 400,
+          width: '40vw',
           flexDirection: 'column',
         }}
       >
@@ -127,7 +141,7 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="autor"
-            defaultValue={exifR.Artist}
+            defaultValue={uploadedFile?.autor}
           />
         </div>
         <div className="form-control">
@@ -135,7 +149,7 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="copyright"
-            defaultValue={exifR.Copyright}
+            defaultValue={uploadedFile.copyright}
           />
         </div>
         <div className="form-control">
@@ -143,15 +157,15 @@ const Form = ({ uploadedFile, exifR }) => {
           <input
             type="text"
             name="copyright_holder"
-            defaultValue={'-'}
+            defaultValue={'Croatian Landscapes'}
           />
         </div>
         <div className="form-control">
-          <label>Tag-ovi</label>
+          <label>tagovi</label>
           <input
             type="text"
             name="tagovi"
-            defaultValue={exifR.subject}
+            defaultValue={JSON.stringify(uploadedFile?.tagovi)}
           />
         </div>
         <div className="form-control">
@@ -163,26 +177,13 @@ const Form = ({ uploadedFile, exifR }) => {
           />
         </div>
         <div className="form-control">
-          <label>lon</label>
-          <input
-            type="text"
-            name="lon"
-            defaultValue={exifR.longitude}
-          />
-        </div>
-        <div className="form-control">
-          <label>lat</label>
-          <input
-            type="text"
-            name="lat"
-            defaultValue={exifR.latitude}
-          />
-        </div>
-        <div className="form-control">
           <label></label>
           <button type="submit">SPREMI</button>
         </div>
       </div>
+      {confirmationMsg && (
+        <Message msg={confirmationMsg} type="confirmation" />
+      )}{' '}
     </form>
   );
 };
