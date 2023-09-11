@@ -1,0 +1,4 @@
+MapA: ima (nakrcane) legende,  neresponzivni markeri
+MapB: marker pliva na photos
+MapD: isto kao B
+MapC: ras pad

@@ -1,46 +1,78 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom'; // Import useHistory from react-router
 import {
   getPhotos,
+  setSelectedPhotoIndex,
+  selectPhotos,
+  selectSelectedPhotoIndex,
+  setFilters,
+  selectFilteredPhotos,
   increment,
   decrement,
-  selectPhotos,
-  selectPhotoIndex,
-  selectSelectedPhotoIndex,
-  selectAPhoto,
 } from '../redux/rtk/gallerySlice';
 import { Card } from '../comps/Card';
 
 export default function Photos() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
-  const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
-  const selectedPhoto = photos[selectedPhotoIndex];
   const { popUp, signatura } = useParams();
-  const navigate = useNavigate();
-  //
+  const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
+  const [cardVisible, setCardVisible] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState([]); //
+
+  //get em
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
 
-  useEffect(() => {
-    const index = photos.findIndex(
-      photo => photo.popUp === popUp || photo.signatura === signatura
-    );
-    if (index !== -1) {
-      dispatch(selectPhotoIndex(index));
-    }
-  }, [dispatch, photos, popUp, signatura]);
+  // Assuming photos is an array of photo objects
+  const tagoviSet = new Set();
+  const kategorijeSet = new Set();
 
+  photos.forEach(photo => {
+    const tagoviArray = photo.tagovi.split(',');
+
+    tagoviArray.forEach(tag => {
+      tagoviSet.add(tag.trim());
+    });
+
+    kategorijeSet.add(photo.kategorija);
+  });
+
+  const tagoviOptions = Array.from(tagoviSet).map(tag => ({
+    value: tag,
+    label: tag,
+  }));
+
+  const kategorijeOptions = Array.from(kategorijeSet).map(
+    kategorija => ({
+      value: kategorija,
+      label: kategorija,
+    })
+  );
+  //
+  console.log('selectedPhotoIndex:', selectedPhotoIndex);
+  console.log('photos:', photos);
+  const photoElements = document.querySelectorAll('.photo');
+  // photoElements.forEach((element, elementidx) => {
+  //   element.style.width = '170px';
+  //   element.style.height = '140px';
+  // });
+
+  // Adjust the size of the selected photo
+  const selectedPhoto = photoElements[selectedPhotoIndex];
+
+  // prev
   const handleNextPhoto = () => {
     dispatch(increment());
   };
-
+  //next
   const handlePreviousPhoto = () => {
     dispatch(decrement());
   };
-
+  //showOnMap
   const handleShowOnMap = () => {
     console.log('ajd');
     if (selectedPhoto && selectedPhoto.popUp) {
@@ -50,10 +82,10 @@ export default function Photos() {
 
   return (
     <div className="gallery">
-      <div>
+      {/* <div>
         <button onClick={handlePreviousPhoto}>Previous Photo</button>
         <button onClick={handleNextPhoto}>Next Photo</button>
-      </div>
+      </div> */}
       {selectedPhoto && (
         <Card
           photo={selectedPhoto}
@@ -61,7 +93,7 @@ export default function Photos() {
           signatura={signatura}
         />
       )}
-      {selectedPhoto && (
+      {/* {selectedPhoto && (
         <div>
           <img
             src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.popUp}`}
@@ -74,17 +106,21 @@ export default function Photos() {
           </div>
           <button onClick={handleShowOnMap}>Show on Map</button>
         </div>
-      )}
+      )} */}
       <div>
         {photos.map(photo => (
-          <Link to={`/gallery/${photo.signatura}`} key={photo.id}>
+          <Link
+            to={`/photos/${photo.signatura}`}
+            key={photo.id}
+            target="_blank"
+          >
             <img
               src={
                 process.env.REACT_APP_SERVER_PUB +
                 `/${photo.signatura}`
               }
               alt={photo.naziv}
-              style={{ width: '400px' }}
+              style={{ width: '200px' }}
             />
           </Link>
         ))}

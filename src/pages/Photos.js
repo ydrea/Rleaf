@@ -51,15 +51,43 @@ export default function Photos() {
     })
   );
   //
+  console.log('selectedPhotoIndex:', selectedPhotoIndex);
+  console.log('photos:', photos);
 
-  //prev/next
-  const handleNextPhoto = () => {
-    dispatch(increment());
-  };
+  // const reSize = () => {
+  //   const photoElements = document.querySelectorAll('.photo');
+  //   photoElements.forEach((element, elementidx) => {
+  //     element.style.width = '170px';
+  //     element.style.height = '140px';
+  //   });
 
-  const handlePreviousPhoto = () => {
-    dispatch(decrement());
-  };
+  //   // Adjust the size of the selected photo
+  //   const selectedPhoto = photoElements[selectedPhotoIndex];
+  //   if (selectedPhoto) {
+  //     selectedPhoto.style.width = '88vw';
+  //     selectedPhoto.style.height = 'auto';
+
+  //     // Scroll the selected photo into view
+  //     selectedPhoto.scrollIntoView({
+  //       behavior: 'smooth',
+  //       block: 'center',
+  //       inline: 'nearest',
+  //     });
+  //   }
+  // };
+
+  // //prev/next
+  // const handleNextPhoto = () => {
+  //   console.log('inkrement');
+  //   dispatch(increment());
+  //   reSize();
+  // };
+
+  // const handlePreviousPhoto = () => {
+  //   console.log('dekrement');
+  //   dispatch(decrement());
+  //   reSize();
+  // };
 
   //
   const filters = [
@@ -83,26 +111,8 @@ export default function Photos() {
   const handlePhotoClick = index => {
     dispatch(setSelectedPhotoIndex(index));
     setCardVisible(true);
-
-    // Reset all photo sizes
-    const photoElements = document.querySelectorAll('.photo');
-    photoElements.forEach((element, idx) => {
-      element.style.width = '170px';
-      element.style.height = '140px';
-    });
-
-    // Adjust the size of the selected photo
-    const selectedPhoto = photoElements[index];
-    selectedPhoto.style.width = '88vw';
-    selectedPhoto.style.height = 'auto';
-
-    // Scroll the selected photo into view
-    selectedPhoto.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-      inline: 'nearest',
-    });
   };
+  // Reset all photo sizes
 
   // Get photos
   useEffect(() => {
@@ -136,17 +146,17 @@ export default function Photos() {
           >
             {selectedPhotoIndex === index && (
               <div className="selected-div1">
-                <Botun onClick={handlePreviousPhoto}>prev</Botun>
+                {/* <button onClick={handlePreviousPhoto}>prev</button> */}
                 <p>{photo.naziv}</p>
                 <p>{photo.tagovi}</p>
                 <p>{photo.kategorija}</p>
                 <p>{photo.opis}</p>
                 <p>{photo.signatura}</p>
-                <button onClick={() => handleShowOnMapClick(photo)}>
+                {/* <button onClick={() => handleShowOnMapClick(photo)}>
                   Show on Map
                 </button>
 
-                <Botun onClick={handleNextPhoto}>next</Botun>
+                <button onClick={handleNextPhoto}>next</button> */}
               </div>
             )}
             <img

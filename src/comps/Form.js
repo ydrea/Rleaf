@@ -7,12 +7,6 @@ const Form = ({ uploadedFile, exifR }) => {
   const [pod, podSet] = useState();
   const [confirmationMsg, setConfirmationMsg] = useState('');
 
-  // // //
-  // useEffect(() => {
-  //   console.log(exifR);
-  // }, [uploadedFile]);
-  // // //
-
   const handleSubmit = async e => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);

@@ -42,7 +42,7 @@ function onEachFeature(feature, layer) {
   layer.bindPopup(feature.properties.code_opis);
 }
 
-export const Mapa = () => {
+export const Map = () => {
   const selectedPhoto = useSelector(selectAPhoto);
 
   //prog. zoom

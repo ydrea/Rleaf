@@ -17,7 +17,8 @@ import Private from './pages/protected/Private';
 //
 import { useEffect } from 'react';
 import { store } from './redux/store';
-import Photos from './pages/Photos';
+import Photos from './pages/Gallery';
+import GalleryElement from './pages/GalleryElement';
 
 function App() {
   //
@@ -41,10 +42,13 @@ function App() {
         <Route path="/mapa" element={<Map />} />
 
         <Route path="/photos" element={<Photos />} />
-        <Route path="/photos/:signatura" element={<Photos />} />
+        <Route
+          path="/photos/:signatura"
+          element={<GalleryElement />}
+        />
         <Route path="/photos/:popUp" element={<Photos />} />
-
-        {/* <Route path="/gallery" element={<Gallery />} />
+        {/* 
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/gallery/:signatura" element={<Gallery />} />
         <Route path="/gallery/:popUp" element={<Gallery />} /> */}
 

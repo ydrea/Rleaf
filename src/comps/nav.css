@@ -55,7 +55,7 @@ height: 14.5vh;
   display: flex;
   align-items: center;
   text-decoration: none;
-  margin: 0.5rem 1rem;
+  margin: 0.5rem 0.5rem;
   font-size: 1.3rem;
 position: relative;
 white-space: pre !important; 
@@ -113,13 +113,13 @@ white-space: pre !important;
 
 .dropdown {
   position: absolute;
-  right: 0;
+  /* right: 0; */
   top: 7vh;
-  left: auto;
+  /* left: auto; */
     font-size: 0.875rem;
   z-index: 9999;
-  min-width: 10rem;
-  padding: 0.5rem 0;
+  min-width: 5rem;
+  padding: 0.5rem 0.5rem;
   list-style: none;
   background-color: #8c8d85;
   border-radius: 0.5rem;

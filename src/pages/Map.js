@@ -1,149 +1,110 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Icon } from 'leaflet';
+import { useRef, useEffect, useState } from 'react';
+
+import 'leaflet/dist/leaflet.css';
 import {
-  Marker,
   MapContainer,
-  Popup,
+  useMap,
   TileLayer,
-  LayersControl,
-  ZoomControl,
+  Marker,
+  Popup,
 } from 'react-leaflet';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-// Define custom icon
-const myIcon = new Icon({
-  iconUrl: require('../assets/ikona.png'),
-  iconSize: [28, 28],
-});
+// import styles from './controlling-the-map-from-outside-the-map.module.css';
+import tileLayer from '../utils/tileLayer';
 
-// Custom hook for fetching markers data
-function useMarkersData() {
-  const [markersData, setMarkersData] = useState([]);
+const center = [52.2295, 21.01];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_SERVER}/json_photos`
-        );
-        const parsedData = response.data.map(item => {
-          const geo = JSON.parse(item.geometry);
-          return {
-            popUp: item.signatura,
-            geocode: [geo.coordinates[1], geo.coordinates[0]],
-            id: item.id,
-          };
-        });
-        setMarkersData(parsedData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-  }, []);
+const points = [
+  {
+    id: '1',
+    lat: 52.228785157729114,
+    lng: 21.006867885589603,
+    title: 'Marker 1',
+  },
+  {
+    id: '2',
+    lat: 52.22923201880194,
+    lng: 21.00897073745728,
+    title: 'Marker 2',
+  },
+  {
+    id: '3',
+    lat: 52.22963944703663,
+    lng: 21.01091265678406,
+    title: 'Marker 3',
+  },
+  {
+    id: '4',
+    lat: 52.229928587386496,
+    lng: 21.01218938827515,
+    title: 'Marker 4',
+  },
+];
 
-  return markersData;
-}
-
-// Custom hook for controlling the map from outside
-function useMapController(mapInstance) {
-  const showLocationOnMap = (latitude, longitude) => {
-    if (mapInstance) {
-      const location = [latitude, longitude];
-      mapInstance.setView(location, 10);
-
-      // Find the marker by ID and open its popup
-      const marker = markers.find(
-        marker => marker.id === selectedPhoto.id
-      );
-      if (marker) {
-        marker.openPopup();
-      }
-    }
-  };
-
-  return showLocationOnMap;
-}
-
-export function Map() {
-  const mapInstance = useRef(null);
-  const markersData = useMarkersData();
-  // Use useSelector to get the selectedPhoto from Redux store
-  const selectedPhoto = useSelector(
-    state => state.mapa.selectedPhoto
-  );
-
-  // Custom hook to control the map from outside
-  const showLocationOnMap = useMapController(mapInstance.current);
-
-  // Monitor changes to selectedPhoto and zoom the map
-  useEffect(() => {
-    if (selectedPhoto && mapInstance.current) {
-      const geocode = [
-        selectedPhoto.geom.coordinates[1],
-        selectedPhoto.geom.coordinates[0],
-      ];
-
-      // Zoom the map to the location of the selected photo
-      mapInstance.current.setView(geocode, 10); // Adjust the zoom level as needed
-    }
-  }, [selectedPhoto]);
-
+const ListMarkers = ({ onItemClick }) => {
   return (
-    <div
-      style={{ height: '80vh', width: '60vw', paddingLeft: '15vw' }}
-    >
-      <MapContainer
-        whenCreated={map => (mapInstance.current = map)}
-        center={[45.2, 16.2]}
-        zoom={8}
-        style={{ height: '80vh' }}
-        zoomControl={false}
-      >
-        <ZoomControl position="bottomright" />
-        <LayersControl>
-          <LayersControl.BaseLayer checked name="OSM">
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          </LayersControl.BaseLayer>
-          {/* Add more base layers and overlays here */}
-        </LayersControl>
-        {markersData.map((i, index) => (
-          <Marker key={index} position={i.geocode} icon={myIcon}>
-            <Popup>
-              {i.popUp}
-              {/* Add any content you want in the popup */}
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>{' '}
-      <div style={{ background: 'transparent' }}>
-        {selectedPhoto ? (
-          <div>
-            {selectedPhoto && (
-              <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <a
-                  href={`#`}
-                  onClick={() =>
-                    showLocationOnMap(
-                      selectedPhoto.latitude,
-                      selectedPhoto.longitude
-                    )
-                  }
-                >
-                  View Selected Location
-                </a>
-              </div>
-            )}{' '}
-            <img
-              width="75%"
-              src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`}
-              alt={selectedPhoto.signatura}
-            />
-          </div>
-        ) : (
-          <p style={{ color: 'black' }}>No photo selected</p>
-        )}
-      </div>
+    <div>
+      {/* //className={styles.markersList}> */}
+      {points.map(({ title }, index) => (
+        <div
+          // className={styles.markerItem}
+          key={index}
+          onClick={e => {
+            e.preventDefault();
+            onItemClick(index);
+          }}
+        >
+          {title}
+        </div>
+      ))}
     </div>
   );
-}
+};
+
+const MyMarkers = ({ data, selectedIndex }) => {
+  return data.map((item, index) => (
+    <PointMarker
+      key={index}
+      content={item.title}
+      center={{ lat: item.lat, lng: item.lng }}
+      openPopup={selectedIndex === index}
+    />
+  ));
+};
+
+const PointMarker = ({ center, content, openPopup }) => {
+  const map = useMap();
+  const markerRef = useRef(null);
+
+  useEffect(() => {
+    if (openPopup) {
+      map.flyToBounds([center]);
+      markerRef.current.openPopup();
+    }
+  }, [map, center, openPopup]);
+
+  return (
+    <Marker ref={markerRef} position={center}>
+      <Popup>{content}</Popup>
+    </Marker>
+  );
+};
+
+export const Map = () => {
+  const [selected, setSelected] = useState();
+
+  function handleItemClick(index) {
+    setSelected(index);
+  }
+
+  return (
+    <>
+      <MapContainer center={center} zoom={16} scrollWheelZoom={false}>
+        <TileLayer {...tileLayer} />
+
+        <MyMarkers selectedIndex={selected} data={points} />
+      </MapContainer>
+
+      <ListMarkers data={points} onItemClick={handleItemClick} />
+    </>
+  );
+};

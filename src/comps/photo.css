@@ -1,0 +1,38 @@
+.cont{
+    display: flex;
+ }
+ .image-wrapper {
+   margin: auto;
+   display: inline-block;
+   align-items: center;
+   position: relative;
+ }
+ .prev,
+ .next {
+    cursor:pointer;
+   background-color: #8c8d85;
+    position: absolute;
+    bottom: 1vh;
+     height: 8vh;
+   width: 16vw;
+    z-index: 1;
+ }
+ .prev {
+   left: 0;
+ }
+ .next{
+   right: 0;
+ }       
+ #big-one {
+   display: block;
+ }
+ .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+ }

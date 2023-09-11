@@ -3,11 +3,11 @@ import { LayersControl, Map, TileLayer } from 'react-leaflet';
 
 const center = [51.505, -0.09];
 
-export default function App() {
-  const mapRef = useRef();
+export function Map() {
+  // const mapRef = useRef();
 
   useEffect(() => {
-    const map = mapRef.current.leafletElement;
+    // const map = mapRef.current.leafletElement;
     map.on('baselayerchange', e => {
       //do whatever
       console.log(e.name);
@@ -34,7 +34,7 @@ export default function App() {
       center={center}
       zoom={13}
       style={{ height: '100vh' }}
-      ref={mapRef}
+      // ref={mapRef}
     >
       <LayersControl position="topright">
         <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
