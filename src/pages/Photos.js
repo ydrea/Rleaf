@@ -139,7 +139,7 @@ export default function Photos() {
         />
       </div>
       <div className="photo-container">
-        {filteredPhotos.map((photo, index) => (
+        {zip.map((photo, index) => (
           <div
             key={photo.id}
             className="photo"
@@ -175,7 +175,7 @@ export default function Photos() {
               signatura={signatura} // Pass the alt text
               currentPhotoIndex={currentPhotoIndex}
               setCurrentPhotoIndex={setCurrentPhotoIndex}
-              filteredPhotos={filteredPhotos}
+              zip={zip}
             >
               {/* Optionally, you can add content inside the modal */}
               <div>
