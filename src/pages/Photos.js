@@ -21,41 +21,12 @@ import Selekt from '../comps/Selekt';
 import ModalPhoto from './ModalPhoto';
 import { setSelectedPhoto } from '../redux/rtk/mapSlice'; //
 
-const PBar = () => {
-  const [state, setState] = useState(
-    JSON.parse(localStorage.getItem('state'))
-  );
-
-  const location = useLocation();
-
-  useEffect(() => {
-    localStorage.removeItem('state');
-  }, []);
-
-  useEffect(() => {
-    if (location.state) {
-      setState(location.state);
-    }
-  }, [location]);
-
-  useEffect(() => {
-    console.log('Passed state', { state });
-  }, [state]);
-
-  return (
-    <>
-      <h1>Bar</h1>
-      <div>State: {JSON.stringify(state)}</div>
-    </>
-  );
-};
-
 //
 export default function Photos() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
-  const { popUp, signatura } = useParams();
+  const { signatura } = useParams();
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const [cardVisible, setCardVisible] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -106,7 +77,7 @@ export default function Photos() {
   );
   //
   // console.log('Index:', index);
-  console.log('photos:', photos);
+  console.log('potos', photos);
 
   //
   const filters = [

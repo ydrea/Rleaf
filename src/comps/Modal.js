@@ -32,7 +32,11 @@ const Modal = ({
         <button className="modal-close-button" onClick={closeModal}>
           X
         </button>
-        <img src={thumbnailUrl} alt={signatura} />
+        <img
+          src={thumbnailUrl}
+          alt={signatura}
+          style={{ width: '20%' }}
+        />
         {children}
       </div>
     </div>

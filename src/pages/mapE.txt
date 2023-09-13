@@ -29,3 +29,31 @@ export default function Photos() {
     </div>
   );
 }
+const PBar = () => {
+  const [state, setState] = useState(
+    JSON.parse(localStorage.getItem('state'))
+  );
+
+  const location = useLocation();
+
+  useEffect(() => {
+    localStorage.removeItem('state');
+  }, []);
+
+  useEffect(() => {
+    if (location.state) {
+      setState(location.state);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    console.log('Passed state', { state });
+  }, [state]);
+
+  return (
+    <>
+      <h1>Bar</h1>
+      <div>State: {JSON.stringify(state)}</div>
+    </>
+  );
+};

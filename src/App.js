@@ -16,9 +16,7 @@ import { Route, Routes } from 'react-router-dom';
 import Private from './pages/protected/Private';
 //
 import { useEffect } from 'react';
-import { store } from './redux/store';
 import Photos from './pages/Photos';
-import GalleryElement from './pages/GalleryElement';
 import Photo from './pages/Photo';
 
 function App() {
@@ -45,7 +43,7 @@ function App() {
         <Route path="/mapa/:signatura" element={<Map />} />
         <Route path="/mapa" element={<Map />} />
 
-        <Route path="/photo" element={<Photo />} />
+        <Route path="/modal" element={<Photo />} />
 
         <Route path="/photos" element={<Photos />} />
 

@@ -35,7 +35,7 @@ flex-direction: row;
 margin-top: 11.5vh;
 }
 
-.selected-div2 {
+.selected-div2, .selected-div1 {
   width: 88vw; 
   color: red; 
 display: none;

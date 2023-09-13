@@ -1,5 +1,5 @@
 /* Modal overlay */
-.modal-overlay {
+.modalp-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,7 +12,7 @@
     z-index: 1000; /* Ensure it appears above other content */
   }
   /* Modal container */
-.modal {
+.modalp {
 position: fixed; top: 5%;
   background-color: #8c8d85;
   border-radius: 5px;
@@ -27,7 +27,7 @@ position: fixed; top: 5%;
 }
 
 /* Image inside the modal */
-.modal img {
+.modalp img {
   position: relative;
   max-width: 100%; 
   max-height: 100%; 

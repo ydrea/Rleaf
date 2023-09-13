@@ -36,8 +36,7 @@ const ModalPhoto = ({
     filteredPhotos.length > 0
       ? process.env.REACT_APP_SERVER_PUB +
         `/${filteredPhotos[currentPhotoIndex].signatura}`
-      : ''; // Provide a default empty URL if there are no photos
-
+      : '';
   //
   return (
     <div className="modal-overlay">
