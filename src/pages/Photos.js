@@ -64,13 +64,13 @@ export default function Photos() {
   // const photoUrl = `/Photo?selectedPhotoIndex=${selectedPhotoIndex}`;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(
-    selectedPhotoIndex
-  );
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
   // Define a function to open the modal
   const openModal = index => {
     setCurrentPhotoIndex(index);
+    console.log('index', index);
+    console.log('current', currentPhotoIndex);
     setIsModalOpen(true);
   };
 
@@ -105,7 +105,7 @@ export default function Photos() {
     })
   );
   //
-  console.log('selectedPhotoIndex:', selectedPhotoIndex);
+  // console.log('Index:', index);
   console.log('photos:', photos);
 
   //
@@ -126,12 +126,12 @@ export default function Photos() {
     dispatch(setFilters(selectedOptions));
   };
 
-  // Handle onClick
-  const handlePhotoClick = index => {
-    dispatch(setSelectedPhotoIndex(index));
-    dispatch(setSelectedPhoto(filteredPhotos[index]));
-    setCardVisible(true);
-  };
+  // // Handle onClick
+  // const handlePhotoClick = index => {
+  //   dispatch(setSelectedPhotoIndex(index));
+  //   dispatch(setSelectedPhoto(filteredPhotos[index]));
+  //   setCardVisible(true);
+  // };
   // Reset all photo sizes
 
   // Get photos
@@ -165,7 +165,7 @@ export default function Photos() {
             //   selectedPhotoIndex === index ? 'selected' : ''
             // }`}
           >
-            {selectedPhotoIndex === index && (
+            {index && (
               <div className="selected-div1">
                 {/* <button onClick={handlePreviousPhoto}>prev</button> */}
                 <p>{photo.naziv}</p>
@@ -192,15 +192,15 @@ export default function Photos() {
               } // Pass the URL of the image
               signatura={signatura} // Pass the alt text
               currentPhotoIndex={currentPhotoIndex}
+              setCurrentPhotoIndex={setCurrentPhotoIndex}
               filteredPhotos={filteredPhotos}
             >
               {/* Optionally, you can add content inside the modal */}
               <div>
-                <h2>Additional Content</h2>
                 <div className="selected-div2"></div>
               </div>
             </ModalPhoto>
-            {selectedPhotoIndex === index && (
+            {index && (
               <div>
                 {/* <Link to="">Pokaži na karti</Link> */}
                 {/* {photos.map(photo => (
