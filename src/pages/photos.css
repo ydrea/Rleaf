@@ -34,14 +34,18 @@ flex-direction: row;
   height: auto;
 margin-top: 11.5vh;
 }
-
-.selected-div2, .selected-div1 {
-  width: 88vw; 
-  color: red; 
-display: none;
+.selected-div1,
+/* {display: none} */
+.selected-div2 {
+  font-size: large;
+  width: 58vw; 
+  color: #fff; 
+display: flex;
+position: absolute; bottom: 1vh; left:20vw;
 justify-content: space-between;
-margin-top: -3vh;
+/* margin-top: -3vh; */
 align-items: baseline;
+z-index: 111;
 }
 
 

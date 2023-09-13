@@ -9,13 +9,14 @@ const ModalPhoto = ({
   thumbnailUrl,
   signatura,
   currentPhotoIndex,
-  filteredPhotos,
+  zip,
   setCurrentPhotoIndex,
 }) => {
   // const [currentPhotoIndex, setCurrentPhotoIndex] =
   //   useState(currentPhotoIndex);
 
   // useEffect(() => {
+  console.log(children);
   //   if (confirmationVisible) {
   //     // Automatically close the modal after 2 seconds
   //     const timeoutId = setTimeout(() => {
@@ -25,18 +26,26 @@ const ModalPhoto = ({
 
   //     return () => clearTimeout(timeoutId);
   //   }
-  // }, [confirmationVisible, closeModal]);
+  // }, []);
 
   if (!isOpen) return null;
-  useEffect(() => {
-    console.log(currentPhotoIndex, filteredPhotos[currentPhotoIndex]);
-  }, [currentPhotoIndex]);
+  // useEffect(() => {
+  //   console.log(
+  //     'ovaj zip',
+  //     currentPhotoIndex,
+  //     'ovaj zip',
+  //     zip[currentPhotoIndex]
+  //   );
+  // }, [currentPhotoIndex]);
 
   const currentPhotoUrl =
-    filteredPhotos.length > 0
+    zip.length > 0
       ? process.env.REACT_APP_SERVER_PUB +
-        `/${filteredPhotos[currentPhotoIndex].signatura}`
+        `/${zip[currentPhotoIndex].signatura}`
       : '';
+  //
+  const currentContents = zip[currentPhotoIndex];
+  console.log('Cc', currentContents);
   //
   return (
     <div className="modal-overlay">
@@ -45,7 +54,11 @@ const ModalPhoto = ({
           X
         </button>
         <img src={currentPhotoUrl} />
-        {children}
+        <div className="selected-div2">
+          <p>{currentContents.naziv}</p>
+          <p>{currentContents.signatura}</p>
+          <p>{currentContents.opis}</p>
+        </div>
       </div>
       <button
         className="prev"
@@ -57,13 +70,14 @@ const ModalPhoto = ({
       >
         Prev
       </button>
+
       <button
         className="next"
         onClick={() => {
           setCurrentPhotoIndex(prevIndex => prevIndex + 1);
           console.log('next');
         }}
-        disabled={currentPhotoIndex === filteredPhotos.length - 1}
+        disabled={currentPhotoIndex === zip.length - 1}
       >
         Next
       </button>

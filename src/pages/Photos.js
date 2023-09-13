@@ -179,7 +179,13 @@ export default function Photos() {
             >
               {/* Optionally, you can add content inside the modal */}
               <div>
-                <div className="selected-div2"></div>
+                <div className="selected-div2">
+                  <p>{photo.naziv}</p>
+                  <p>{photo.tagovi}</p>
+                  <p>{photo.kategorija}</p>
+                  {/* <p>{photo.opis}</p> */}
+                  {/* <p>{photo.signatura}</p> */}
+                </div>
               </div>
             </ModalPhoto>
             {index && (
