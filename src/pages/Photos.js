@@ -1,3 +1,4 @@
+import pics from '../data/citabica.json';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -110,6 +111,16 @@ export default function Photos() {
     dispatch(getPhotos());
   }, [dispatch]);
 
+  //Get pics json
+  const pici = pics;
+  const zip = photos.map((e, i) => {
+    let foo = pici.find(bar => bar.signatura === e.signatura);
+    if (foo && foo.pici) {
+      e.pici = foo.pici; // Use 'foo' instead of 'bar' to access the found object
+    }
+    return e;
+  });
+  console.log('fubar', zip);
   //send it to show on map
   const handleShowOnMapClick = photo => {
     dispatch(setSelectedPhoto(photo)); // Dispatch the action with the selected photo
