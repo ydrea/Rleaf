@@ -38,7 +38,7 @@ margin-top: 11.5vh;
 .selected-div1 {
   width: 88vw; 
   color: red; 
-display: flex;
+display: none;
 justify-content: space-between;
 margin-top: -3vh;
 align-items: baseline;
