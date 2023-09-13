@@ -1,6 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
+import pics from '../../data/citabica.json';
 const url = `${process.env.REACT_APP_SERVER}/photosr`;
+//Get pics json
+const pici = pics;
+const zip = photos.map((e, i) => {
+  let foo = pici.find(bar => bar.signatura === e.signatura);
+  if (foo && foo.pici) {
+    e.pici = foo.pici;
+  }
+  return e;
+});
+console.log('fubar', zip);
 
 export const getPhotos = createAsyncThunk(
   'gallery/getPhotos',
@@ -26,6 +36,7 @@ export const getAPhoto = createAsyncThunk(
 const initialState = {
   selectedPhotoIndex: 0,
   idX: 0,
+  zip: [],
   photos: [],
   loading: false,
   error: null,
@@ -89,13 +100,13 @@ export const {
   setFilters,
 } = gallerySlice.actions;
 
-export const selectPhotos = state => state.gallery.photos;
+export const selectPhotos = state => state.gallery.zip;
 export const selectSelectedPhotoIndex = state =>
   state.gallery.selectedPhotoIndex;
 // ...
 export const selectAPhoto = state => {
   const selectedIdX = state.gallery.idX;
-  const selectedPhoto = state.gallery.photos.find(photo => {
+  const selectedPhoto = state.gallery.zip.find(photo => {
     const rank = parseInt(photo.rank_number);
     return rank === selectedIdX;
   });
@@ -104,19 +115,19 @@ export const selectAPhoto = state => {
 //
 export const selectSelectedPhoto = state => {
   const selectedPhotoIndex = state.gallery.selectedPhotoIndex;
-  const photos = state.gallery.photos;
+  const zip = state.gallery.zip;
 
-  if (selectedPhotoIndex >= 0 && selectedPhotoIndex < photos.length) {
-    return photos[selectedPhotoIndex];
+  if (selectedPhotoIndex >= 0 && selectedPhotoIndex < zip.length) {
+    return zip[selectedPhotoIndex];
   }
 
-  return null; // Return null or handle this case accordingly
+  return null;
 };
 
 //
 export const selectFilteredPhotos = state => {
   const selectedFilters = state.gallery.selectedFilters;
-  const allPhotos = state.gallery.photos;
+  const allPhotos = state.gallery.zip;
 
   if (selectedFilters.length === 0) {
     return allPhotos;

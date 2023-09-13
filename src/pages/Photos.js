@@ -1,4 +1,3 @@
-import pics from '../data/citabica.json';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -26,7 +25,7 @@ import { setSelectedPhoto } from '../redux/rtk/mapSlice'; //
 export default function Photos() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const photos = useSelector(selectPhotos);
+  const zip = useSelector(selectPhotos);
   const { signatura } = useParams();
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const [cardVisible, setCardVisible] = useState(false);
@@ -55,7 +54,7 @@ export default function Photos() {
   const tagoviSet = new Set();
   const kategorijeSet = new Set();
 
-  photos.forEach(photo => {
+  zip.forEach(photo => {
     const tagoviArray = photo.tagovi.split(',');
 
     tagoviArray.forEach(tag => {
@@ -78,7 +77,7 @@ export default function Photos() {
   );
   //
   // console.log('Index:', index);
-  console.log('potos', photos);
+  console.log('potos', zip);
 
   //
   const filters = [
@@ -111,16 +110,6 @@ export default function Photos() {
     dispatch(getPhotos());
   }, [dispatch]);
 
-  //Get pics json
-  const pici = pics;
-  const zip = photos.map((e, i) => {
-    let foo = pici.find(bar => bar.signatura === e.signatura);
-    if (foo && foo.pici) {
-      e.pici = foo.pici; // Use 'foo' instead of 'bar' to access the found object
-    }
-    return e;
-  });
-  console.log('fubar', zip);
   //send it to show on map
   const handleShowOnMapClick = photo => {
     dispatch(setSelectedPhoto(photo)); // Dispatch the action with the selected photo
