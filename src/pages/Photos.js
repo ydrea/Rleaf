@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  useParams,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import {
   getPhotos,
   setSelectedPhotoIndex,
@@ -13,8 +18,38 @@ import {
 } from '../redux/rtk/gallerySlice';
 import './photos.css';
 import Selekt from '../comps/Selekt';
-import Botun from '../comps/Botun';
+import ModalPhoto from './ModalPhoto';
 import { setSelectedPhoto } from '../redux/rtk/mapSlice'; //
+
+const PBar = () => {
+  const [state, setState] = useState(
+    JSON.parse(localStorage.getItem('state'))
+  );
+
+  const location = useLocation();
+
+  useEffect(() => {
+    localStorage.removeItem('state');
+  }, []);
+
+  useEffect(() => {
+    if (location.state) {
+      setState(location.state);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    console.log('Passed state', { state });
+  }, [state]);
+
+  return (
+    <>
+      <h1>Bar</h1>
+      <div>State: {JSON.stringify(state)}</div>
+    </>
+  );
+};
+
 //
 export default function Photos() {
   const navigate = useNavigate();
@@ -23,9 +58,28 @@ export default function Photos() {
   const { popUp, signatura } = useParams();
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const [cardVisible, setCardVisible] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState([]); //
+  const [selectedFilters, setSelectedFilters] = useState([]);
 
-  // Assuming photos is an array of photo objects
+  // Construct the URL with selectedPhotoIndex
+  // const photoUrl = `/Photo?selectedPhotoIndex=${selectedPhotoIndex}`;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(
+    selectedPhotoIndex
+  );
+
+  // Define a function to open the modal
+  const openModal = index => {
+    setCurrentPhotoIndex(index);
+    setIsModalOpen(true);
+  };
+
+  // Define a function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // arrays to Sets
   const tagoviSet = new Set();
   const kategorijeSet = new Set();
 
@@ -54,41 +108,6 @@ export default function Photos() {
   console.log('selectedPhotoIndex:', selectedPhotoIndex);
   console.log('photos:', photos);
 
-  // const reSize = () => {
-  //   const photoElements = document.querySelectorAll('.photo');
-  //   photoElements.forEach((element, elementidx) => {
-  //     element.style.width = '170px';
-  //     element.style.height = '140px';
-  //   });
-
-  //   // Adjust the size of the selected photo
-  //   const selectedPhoto = photoElements[selectedPhotoIndex];
-  //   if (selectedPhoto) {
-  //     selectedPhoto.style.width = '88vw';
-  //     selectedPhoto.style.height = 'auto';
-
-  //     // Scroll the selected photo into view
-  //     selectedPhoto.scrollIntoView({
-  //       behavior: 'smooth',
-  //       block: 'center',
-  //       inline: 'nearest',
-  //     });
-  //   }
-  // };
-
-  // //prev/next
-  // const handleNextPhoto = () => {
-  //   console.log('inkrement');
-  //   dispatch(increment());
-  //   reSize();
-  // };
-
-  // const handlePreviousPhoto = () => {
-  //   console.log('dekrement');
-  //   dispatch(decrement());
-  //   reSize();
-  // };
-
   //
   const filters = [
     { label: 'Tagovi', options: tagoviOptions },
@@ -110,6 +129,7 @@ export default function Photos() {
   // Handle onClick
   const handlePhotoClick = index => {
     dispatch(setSelectedPhotoIndex(index));
+    dispatch(setSelectedPhoto(filteredPhotos[index]));
     setCardVisible(true);
   };
   // Reset all photo sizes
@@ -140,9 +160,10 @@ export default function Photos() {
         {filteredPhotos.map((photo, index) => (
           <div
             key={photo.id}
-            className={`photo ${
-              selectedPhotoIndex === index ? 'selected' : ''
-            }`}
+            className="photo"
+            // className={`photo ${
+            //   selectedPhotoIndex === index ? 'selected' : ''
+            // }`}
           >
             {selectedPhotoIndex === index && (
               <div className="selected-div1">
@@ -152,11 +173,6 @@ export default function Photos() {
                 <p>{photo.kategorija}</p>
                 <p>{photo.opis}</p>
                 <p>{photo.signatura}</p>
-                {/* <button onClick={() => handleShowOnMapClick(photo)}>
-                  Show on Map
-                </button>
-
-                <button onClick={handleNextPhoto}>next</button> */}
               </div>
             )}
             <img
@@ -165,12 +181,29 @@ export default function Photos() {
                 `/${photo.signatura}`
               }
               alt={photo.naziv}
-              onClick={() => handlePhotoClick(index)}
+              onClick={() => openModal(index)}
             />
+            <ModalPhoto
+              isOpen={isModalOpen}
+              closeModal={closeModal}
+              thumbnailUrl={
+                process.env.REACT_APP_SERVER_PUB +
+                `/${photo.signatura}`
+              } // Pass the URL of the image
+              signatura={signatura} // Pass the alt text
+              currentPhotoIndex={currentPhotoIndex}
+              filteredPhotos={filteredPhotos}
+            >
+              {/* Optionally, you can add content inside the modal */}
+              <div>
+                <h2>Additional Content</h2>
+                <div className="selected-div2"></div>
+              </div>
+            </ModalPhoto>
             {selectedPhotoIndex === index && (
-              <div className="selected-div2">
+              <div>
                 {/* <Link to="">Pokaži na karti</Link> */}
-                {photos.map(photo => (
+                {/* {photos.map(photo => (
                   <div key={photo.id}>
                     <img src={photo.url} alt={photo.name} />
                     <Link to={`/map/${photo.id}`}>Show on Map</Link>
@@ -185,7 +218,7 @@ export default function Photos() {
                       Show on Map
                     </button>
                   </div>
-                ))}
+                ))} */}
               </div>
             )}{' '}
           </div>

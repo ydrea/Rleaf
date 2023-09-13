@@ -3,48 +3,49 @@ import './form.css';
 import Message from './Message';
 
 //
-const Form = ({ uploadedFile, exifR }) => {
+const Form = ({ uploadedFile, exifR, id, signatura }) => {
   const [pod, podSet] = useState();
   const [confirmationMsg, setConfirmationMsg] = useState('');
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
 
-    console.log(formData.entries().next().value);
-    const data = Object.fromEntries(formData);
+    // Extract only the fields you want to update
+    const updatedFields = {
+      naziv: e.currentTarget.naziv.value,
+      naziv_eng: e.currentTarget.naziv_eng.value,
+      opis: e.currentTarget.opis.value,
+      opis_eng: e.currentTarget.opis_eng.value,
+      lokacija: e.currentTarget.lokacija.value,
+      datum: e.currentTarget.datum.value,
+      kategorija: e.currentTarget.kategorija.value,
+      autor: e.currentTarget.autor.value,
 
-    // Handle exifR properties gracefully with default values
-    const location = exifR ? exifR.Location : '';
-    const dateCreated = exifR ? exifR.DateCreated : '';
-    const artist = exifR ? exifR.Artist : '';
-    const copyright = exifR ? exifR.Copyright : '';
-    const subject = exifR ? JSON.stringify(exifR.subject) : '';
-    const longitude = exifR ? exifR.longitude : '';
-    const latitude = exifR ? exifR.latitude : '';
+      copyright: e.currentTarget.copyright.value,
+      copyright_holder: e.currentTarget.copyright_holder.value,
+      tagovi: e.currentTarget.tagovi.value,
+      DOI: e.currentTarget.DOI.value,
+      // Add other fields as needed
+    };
 
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_SERVER}/novi`,
+        `${process.env.REACT_APP_SERVER}/patch/${signatura}`,
         {
-          method: 'POST',
-          body: JSON.stringify({
-            ...data,
-            lokacija: location,
-            datum: dateCreated,
-            autor: artist,
-            copyright,
-            tagovi: subject,
-            lon: longitude,
-            lat: latitude,
-          }),
+          method: 'PATCH',
+          body: JSON.stringify(updatedFields),
           headers: { 'Content-Type': 'application/json' },
         }
       );
 
-      setConfirmationMsg('Record successfully submitted!');
+      console.log(res);
+      if (res.status === 200) {
+        setConfirmationMsg('Record successfully updated!');
+      } else {
+        console.error('Failed to update record');
+      }
     } catch (err) {
-      console.error(err.msg, 'nece');
+      console.error('Error:', err);
     }
   };
 

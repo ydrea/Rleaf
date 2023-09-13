@@ -110,12 +110,17 @@ export default function PhotosEDIT() {
           {/* Pass the 'signatura' and thumbnail URL to the Modal */}
           <img src={thumbnailUrl} alt={selectedPhoto?.naziv} />
           <p>Signatura: {selectedPhoto?.signatura}</p>
+          {/* Check if selectedPhoto exists before accessing 'id' */}
+          {selectedPhoto && <p>id: {selectedPhoto.id}</p>}
           {/* Pass your Form component or other content here */}
           <Form
             uploadedFile={selectedPhotoForEdit}
             exifR={exifRForEdit}
+            id={selectedPhoto?.id}
+            signatura={selectedPhoto?.signatura}
           />
         </Modal>
+
         {filteredPhotos.map((photo, index) => (
           <div
             key={photo.id}

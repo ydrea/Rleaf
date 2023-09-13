@@ -19,7 +19,7 @@ export default function GalleryElement() {
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const selectedPhoto = photos[selectedPhotoIndex];
   const { signatura } = useParams(); // Retrieve 'signatura' from the URL parameter
-
+  console.log('GalleryElement rendered');
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
@@ -45,7 +45,7 @@ export default function GalleryElement() {
   return (
     <div className="gallery">
       {selectedPhoto && (
-        <Photo photo={selectedPhoto} signatura={signatura} />
+        <Photo selectedPhoto={selectedPhoto} signatura={signatura} />
       )}
       {/* {selectedPhoto && (
         <div>

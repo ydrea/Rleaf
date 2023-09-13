@@ -1,6 +1,6 @@
 import Home from './pages/Home';
 import About from './pages/About';
-import { Map } from './pages/Map';
+import Map from './pages/Map';
 import Contact from './pages/Contact';
 import Ewap from './pages/projects/ewap';
 import Banija from './pages/projects/banija';
@@ -17,14 +17,18 @@ import Private from './pages/protected/Private';
 //
 import { useEffect } from 'react';
 import { store } from './redux/store';
-import Photos from './pages/Gallery';
+import Photos from './pages/Photos';
 import GalleryElement from './pages/GalleryElement';
+import Photo from './pages/Photo';
 
 function App() {
   //
 
   useEffect(() => {
-    // console.dir(window);
+    console.log(
+      'REACT_APP_SERVER_PUB:',
+      process.env.REACT_APP_SERVER_PUB
+    );
   });
   return (
     <Layout>
@@ -41,12 +45,11 @@ function App() {
         <Route path="/mapa/:signatura" element={<Map />} />
         <Route path="/mapa" element={<Map />} />
 
+        <Route path="/photo" element={<Photo />} />
+
         <Route path="/photos" element={<Photos />} />
-        <Route
-          path="/photos/:signatura"
-          element={<GalleryElement />}
-        />
-        <Route path="/photos/:popUp" element={<Photos />} />
+
+        {/* <Route path="/photos/:popUp" element={<Photos />} /> */}
         {/* 
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/gallery/:signatura" element={<Gallery />} />

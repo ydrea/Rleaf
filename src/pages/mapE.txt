@@ -2,3 +2,30 @@ MapA: ima (nakrcane) legende,  neresponzivni markeri
 MapB: marker pliva na photos
 MapD: isto kao B
 MapC: ras pad
+
+// Assuming you have imported the necessary functions and components
+import { useSelector, useDispatch } from 'react-redux';
+import { selectSelectedPhotoIndex, increment, decrement } from '../redux/rtk/gallerySlice';
+
+// ... other imports
+
+export default function Photos() {
+  const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
+  const dispatch = useDispatch();
+
+  // ... other code
+
+  const navigateOutApp = () => {
+    const url = `/Photo?selectedPhotoIndex=${encodeURIComponent(selectedPhotoIndex)}`;
+    window.open(url, '_blank', 'noreferrer');
+  };
+
+  return (
+    <div className="gallery">
+      {/* ... your component code */}
+      <button type="button" onClick={navigateOutApp}>
+        open in new tab
+      </button>
+    </div>
+  );
+}

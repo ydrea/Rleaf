@@ -27,6 +27,7 @@
     "proj4": "^2.9.0",
     "proj4leaflet": "^1.0.2",
     "prop-types": "^15.8.1",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",
@@ -78,6 +79,5 @@
     "transform": {
       "^.+\\.js$": "babel-jest"
     }
-  },
-  "proxy": "http://localhost:5000/"
+  }
 }
