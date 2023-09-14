@@ -59,18 +59,18 @@ function Selekt({ filters }) {
   };
   //
   const cusTom = {
-    control: styles => ({ ...styles, backgroundColor: '8c8d85' }),
+    control: styles => ({ ...styles, backgroundColor: '#8c8d85' }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       console.log('selekt', data, isDisabled, isFocused, isSelected);
       return { ...styles, color: 'black' };
     },
+    placeholder: styles => ({ ...styles, color: 'white' }), // Change 'red' to your desired color
   };
-
   //
   return (
     <Select
       styles={cusTom}
-      placeholder="Select Filters"
+      placeholder="unesi/odaberi kriterije za filtriranje"
       isSearchable
       isMulti
       options={filters}

@@ -6,8 +6,9 @@
 .photo-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 2vw;
 flex-direction: row;
+padding-left: 2vw;
 }
 
 /* Adjust the layout of other images as needed */

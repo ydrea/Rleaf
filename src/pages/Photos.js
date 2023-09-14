@@ -112,14 +112,7 @@ export default function Photos() {
   }, [dispatch]);
 
   //Get pics json
-  const pici = pics;
-  const zip = photos.map((e, i) => {
-    let foo = pici.find(bar => bar.signatura === e.signatura);
-    if (foo && foo.pici) {
-      e.pici = foo.pici; // Use 'foo' instead of 'bar' to access the found object
-    }
-    return e;
-  });
+  const zip = pics;
   console.log('fubar', zip);
   //send it to show on map
   const handleShowOnMapClick = photo => {
@@ -130,6 +123,9 @@ export default function Photos() {
 
   return (
     <div className="gallery">
+      <div className="naslov-container">
+        <h1>opservatorij</h1>
+      </div>
       <div className="photo-filters">
         {/* filter options */}
         <Selekt
