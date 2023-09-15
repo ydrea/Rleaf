@@ -85,13 +85,20 @@ align-items: baseline;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-  justify-content: center;
+  justify-content:baseline ;
   }
   .naslov-container h1 {
     letter-spacing: .4rem;
     font-size: 120px;
     font-weight: 100;
+    margin-top: -10vh;
+    margin-bottom: -3vh;
   }
+  .naslov-container p {
+    /* letter-spacing: .4rem; */
+    font-size: 20px;
+    font-weight: 100;
+ padding-left: 2vw; }
   
 /* Media query to control layout for smaller screens */
 @media (max-width: 768px) {
