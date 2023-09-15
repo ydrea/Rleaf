@@ -11,6 +11,8 @@ import { Fileupload } from './pages/Fileupload';
 //
 import './App.css';
 import Layout from './Layout';
+import PhotosLayout from './PhotosLayout';
+
 //
 import { Route, Routes } from 'react-router-dom';
 import Private from './pages/protected/Private';
@@ -39,20 +41,12 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects/banija" element={<Banija />} />
         <Route path="/projects/ewap" element={<Ewap />} />
-
         <Route path="/mapa/:signatura" element={<Map />} />
         <Route path="/mapa" element={<Map />} />
-
-        <Route path="/photo/:signatura" element={<Photo />} />
-
-        <Route path="/photos" element={<Photos />} />
-
-        {/* <Route path="/photos/:popUp" element={<Photos />} /> */}
-        {/* 
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/gallery/:signatura" element={<Gallery />} />
-        <Route path="/gallery/:popUp" element={<Gallery />} /> */}
-
+        <Route path="/photos" element={<PhotosLayout />}>
+          <Route index element={<Photos />} />
+          <Route path=":signatura" element={<Photo />} />
+        </Route>{' '}
         <Route path="/login" element={<Login />} />
       </Routes>
     </Layout>
