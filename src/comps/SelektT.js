@@ -41,7 +41,7 @@ function TagoviSelekt({ tagoviOptions }) {
   return (
     <Select
       styles={cusTom}
-      placeholder="filter"
+      placeholder="ključne riječi"
       isSearchable
       isMulti
       options={tagoviOptions}

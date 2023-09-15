@@ -91,11 +91,11 @@ const PhotosLayout = () => {
         </p>
       </div>{' '}
       <div className="filters-container">
-        <Selekt
+        {/* <Selekt
           filters={filters}
           selectedOptions={selectedFilters}
           onChange={handleFilterChange}
-        />
+        /> */}
         <KategorijeSelekt kategorijeOptions={kategorijeOptions} />
         <TagoviSelekt tagoviOptions={tagoviOptions} />
       </div>

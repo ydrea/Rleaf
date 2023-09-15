@@ -41,7 +41,7 @@ function KategorijeSelekt({ kategorijeOptions }) {
   return (
     <Select
       styles={cusTom}
-      placeholder="tema"
+      placeholder="kategorije"
       isSearchable
       isMulti
       options={kategorijeOptions}

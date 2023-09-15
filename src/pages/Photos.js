@@ -56,7 +56,7 @@ export default function Photos() {
             </div>
           ))
         ) : (
-          <p>No photos to display</p>
+          <p>loading...</p>
         )}
       </div>
     </div>
