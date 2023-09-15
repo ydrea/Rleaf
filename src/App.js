@@ -43,7 +43,7 @@ function App() {
         <Route path="/mapa/:signatura" element={<Map />} />
         <Route path="/mapa" element={<Map />} />
 
-        <Route path="/modal" element={<Photo />} />
+        <Route path="/photo/:signatura" element={<Photo />} />
 
         <Route path="/photos" element={<Photos />} />
 

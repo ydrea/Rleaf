@@ -6,7 +6,9 @@
 .photo-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 3vw;
+  padding-left: 3vw;
+  padding-top: 3vw;
 flex-direction: row;
 }
 
@@ -34,11 +36,17 @@ flex-direction: row;
   height: auto;
 margin-top: 11.5vh;
 }
-
-.selected-div2, .selected-div1 {
+.selected-div1 {
+  position: absolute;
+right: 0; top: 0;
+z-index: 222;
+}
+.selected-div2 {
+  /* position: fixed; */
+  font-size: 20px;
+right: 0; bottom: 0;
+z-index: 922;
   width: 88vw; 
-  color: red; 
-display: none;
 justify-content: space-between;
 margin-top: -3vh;
 align-items: baseline;
@@ -59,4 +67,36 @@ align-items: baseline;
 }
 .photo:hover .overlay {
   opacity: 0;
+}
+
+/* CSS for the parent container */
+.filters-container {
+  display: flex; /* Use flexbox layout */
+  width: 60%; /* Make the container 50% wide */
+  justify-content: flex-start; /* Align items to the left */
+  flex-wrap: wrap; /* Allow items to wrap to the next row if needed */
+}
+
+/* Style for each individual select */
+.filters-container > div {
+  flex: 1; /* Each select takes up the full width of the container */}
+
+/* Media query to control layout for smaller screens */
+@media (max-width: 768px) {
+  /* Adjust layout for smaller screens, e.g., make each select full width */
+  .filters-container > div {
+    width: 100%;
+    margin-right: 0; /* Remove margin for full width */
+  }
+}
+.naslov-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+justify-content: center;
+}
+.naslov-container h1 {
+  letter-spacing: .4rem;
+  font-size: 120px;
+  font-weight: 100;
 }

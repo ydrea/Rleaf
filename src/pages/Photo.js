@@ -1,36 +1,38 @@
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectPhotos,
-  selectSelectedPhoto,
-  selectSelectedPhotoIndex,
   getPhotos,
   setSelectedPhotoIndex,
-  selectedPhotoIndex,
+  selectSelectedPhotoIndex,
   increment,
   decrement,
 } from '../redux/rtk/gallerySlice';
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
-import queryString from 'query-string';
-import { useEffect, useState } from 'react';
-
+import { useParams } from 'react-router-dom';
 import './photo.css';
 
 export default function Photo() {
-  const photos = useSelector(selectPhotos);
-  const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
   const dispatch = useDispatch();
+  const { signatura } = useParams();
 
-  const selectedPhoto = useSelector(selectSelectedPhoto);
+  // Use useSelector to access selectedPhotoIndex from the Redux store
+  const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
 
   useEffect(() => {
+    // Fetch photos if not already loaded
     dispatch(getPhotos());
+
+    // No need to set selectedPhotoIndex here; it's managed in the Redux store
   }, [dispatch]);
 
-  console.log(selectedPhoto);
+  // Retrieve the selected photo
+  const photos = useSelector(selectPhotos);
+  const selectedPhoto = photos[selectedPhotoIndex];
+
+  if (!selectedPhoto) {
+    // Handle the case where the photo with the specified signatura is not found
+    return <div>Photo not found</div>;
+  }
 
   return (
     <div className="cont">
@@ -48,17 +50,22 @@ export default function Photo() {
         </button>
         <div>
           <img
-            style={{ maxWidth: '90vw' }}
+            style={{ maxWidth: '60vw' }}
             src={
               selectedPhoto
                 ? `${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`
-                : ``
+                : ''
             }
-            // alt={signatura}
+            alt={selectedPhoto.naziv}
           />
-          <div>Txt</div>
+          <div className="selected-div1">
+            <p>{selectedPhoto.naziv}</p>
+            <p>{selectedPhoto.tagovi}</p>
+            <p>{selectedPhoto.kategorija}</p>
+            <p>{selectedPhoto.opis}</p>
+            <p>{selectedPhoto.signatura}</p>
+          </div>
         </div>
-        {/* <button className="center">Show on Map</button> */}
 
         <button
           className="next"

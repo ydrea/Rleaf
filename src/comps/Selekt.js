@@ -59,23 +59,45 @@ function Selekt({ filters }) {
   };
   //
   const cusTom = {
-    control: styles => ({ ...styles, backgroundColor: '8c8d85' }),
+    control: styles => ({
+      ...styles,
+      backgroundColor: 'transparent', // Make the background transparent
+      border: 'none', // Remove the default border
+      borderBottom: '1px solid white', // Add the white bottom border
+      borderRadius: '0', // Remove border radius if needed
+    }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       console.log('selekt', data, isDisabled, isFocused, isSelected);
       return { ...styles, color: 'black' };
     },
+    placeholder: styles => ({
+      ...styles,
+      color: 'white', // Set the placeholder text color to white
+    }),
+    dropdownIndicator: provided => ({ ...provided, display: 'none' }),
+    indicatorSeparator: provided => ({
+      ...provided,
+      display: 'none',
+    }),
   };
-
   //
   return (
     <Select
       styles={cusTom}
-      placeholder="Select Filters"
+      placeholder="projekt"
       isSearchable
       isMulti
-      options={filters}
-      value={filterSelected}
-      onChange={handleFilterChange}
+      options={[
+        { value: 'Banija', label: 'Banija' },
+        { value: 'EWAP', label: 'EWAP' },
+        // Add more options as needed
+      ]}
+      // value={[
+      //   { value: 'Banija', label: 'Banija' },
+      //   { value: 'EWAP', label: 'EWAP' },
+      //   // Add more selected options if needed
+      // ]}
+      // onChange={handleFilterChange}
     />
   );
 }

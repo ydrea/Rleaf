@@ -118,13 +118,13 @@ const Form = ({ uploadedFile, exifR, id, signatura }) => {
             <option value="tradicijska_gradnja">
               tradicijska_gradnja
             </option>
-            <option value="vjerski_objekti">vjerski_objekti</option>
-            <option value="vazni_objekti">važni_objekti</option>
+            <option value="vjerski_objekti">vjerski objekti</option>
+            <option value="vazni_objekti">važni objekti</option>
             <option value="spomenici">spomenici</option>
             <option value="gospodarski_objekti">
               gospodarski_objekti
             </option>
-            <option value="prirodni_resursi">prirodni_resursi</option>
+            <option value="prirodni_resursi">prirodni resursi</option>
             <option value="stanovnistvo">stanovništvo</option>
             <option value="poljoprivreda">poljoprivreda</option>
             <option value="stocarstvo">stočarstvo</option>
