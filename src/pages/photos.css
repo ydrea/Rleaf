@@ -71,10 +71,11 @@ align-items: baseline;
 /* CSS for the parent container */
 .filters-container {
   display: flex; /* Use flexbox layout */
-  width: 60%; /* Make the container 50% wide */
+  width: 40%; /* Make the container 50% wide */
   justify-content: flex-start; /* Align items to the left */
-  flex-wrap: wrap; /* Allow items to wrap to the next row if 
-  needed */
+  flex-wrap: wrap; 
+  margin-bottom: 3vh;
+  padding-left: 20vw;
 
 }
 
@@ -98,7 +99,9 @@ align-items: baseline;
     /* letter-spacing: .4rem; */
     font-size: 20px;
     font-weight: 100;
- padding-left: 2vw; }
+ padding-left: 20vw;
+ padding-right: 20vw;
+ }
   
 /* Media query to control layout for smaller screens */
 @media (max-width: 768px) {

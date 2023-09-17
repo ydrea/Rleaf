@@ -20,6 +20,7 @@ import {
 } from '../maps/wms';
 // import { markeri } from '../maps/markeri';
 
+import chroma from 'chroma-js'; // Import Chroma.js
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { transition } from '../transition';
@@ -43,12 +44,12 @@ const myIcon = new Icon({
   iconSize: [28, 28],
 });
 //
-
 //temaKZ
 function onEachFeature(feature, layer) {
   layer.bindPopup(feature.properties.code_opis);
 }
 
+//
 export default function Map() {
   const [lajeri, lajeriSet] = useState([
     { name: 't1', visible: true },
@@ -58,8 +59,32 @@ export default function Map() {
   const [markeri, markeriSet] = useState([]);
   const [selectedLayer, setSelectedLayer] = useState();
 
-  const mapRef = useRef();
+  // const mapRef = useRef();
   const markerRef = useRef([]);
+  //
+  const geojsonData = geojson; // Assign the imported GeoJSON directly
+  // Extract unique 'code_opis' values from your GeoJSON data
+  const uniqueCodeOpisValues = [
+    ...new Set(
+      geojsonData.features.map(
+        feature => feature.properties.code_opis
+      )
+    ),
+  ];
+
+  // Generate 6 random color codes
+  const randomColorCodes = Array.from({ length: 6 }, () =>
+    chroma.random().hex()
+  );
+
+  // Create a color mapping for 'code_opis' values
+  const colorMapping = {};
+  uniqueCodeOpisValues.forEach((codeOpis, index) => {
+    colorMapping[codeOpis] = randomColorCodes[index];
+  });
+  function getColor(feature) {
+    return colorMapping[feature.properties.code_opis];
+  }
 
   //show on map
   const { signatura } = useParams(); // Get the photoId from the URL parameter
@@ -70,6 +95,7 @@ export default function Map() {
   );
 
   //ajeeee
+
   // Inside your component
 
   useEffect(() => {
@@ -80,7 +106,7 @@ export default function Map() {
   }, [selectedPhoto]);
 
   useEffect(() => {
-    if (selectedPhoto && mapRef.current) {
+    if (selectedPhoto) {
       const geocode = [
         selectedPhoto.geom.coordinates[1],
         selectedPhoto.geom.coordinates[0],
@@ -162,22 +188,21 @@ export default function Map() {
   }, []);
 
   //deep inside
-  useEffect(() => {
-    console.log('Map Ref:', mapRef.current);
-    // Rest of the code
-  }, []);
 
+  // Set up an event listener for base layer changes
+  const handleBaseLayerChange = e => {
+    setSelectedLayer(e.name);
+  };
   // Deep inside your useEffect
   useEffect(() => {
     const fetchLegend = async () => {
-      const map = mapRef.current;
-      if (map) {
-        map.on('baselayerchange', e => {
-          console.log(e.name);
-          setSelectedLayer(e.name);
-        });
+      // const map = mapRef.current;
+      if (selectedLayer) {
+        console.log(e.name);
+        setSelectedLayer(e.name);
       }
     };
+
     fetchLegend();
   }, []);
 
@@ -197,10 +222,10 @@ export default function Map() {
       }}
     >
       {/* <CustomZoom /> */}
-      <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} />
+      {/* <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} /> */}
 
       <MapContainer
-        ref={mapRef}
+        // ref={mapRef}
         center={[45.2, 16.2]}
         zoom={8}
         style={{ height: '80vh' }}
@@ -218,7 +243,7 @@ export default function Map() {
             selectedLayer={selectedLayer}
           />
         )}
-        <LayersControl>
+        <LayersControl onChange={handleBaseLayerChange}>
           <BaseLayer checked name="OSM">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           </BaseLayer>
@@ -259,9 +284,25 @@ export default function Map() {
             />
           </Overlay>
           <LayersControl>
+            <GeoJSON
+              data={geojsonData}
+              style={feature => ({
+                fillColor: getColor(feature, colorMapping),
+                weight: 1,
+                opacity: 1,
+                color: 'white',
+                fillOpacity: 0.8,
+              })}
+              onEachFeature={(feature, layer) => {
+                // Bind popup to each feature
+                layer.bindPopup(feature.properties.code_opis);
+              }}
+            />
+
+            {/*             
             <BaseLayer name="tema_koristenje_zemljista">
               <GeoJSON data={geojson} onEachFeature={onEachFeature} />
-            </BaseLayer>
+            </BaseLayer> */}
             <BaseLayer name="tema_zastita_prirode">
               <TemaZP />
             </BaseLayer>

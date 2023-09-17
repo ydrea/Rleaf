@@ -46,7 +46,7 @@ function App() {
         <Route path="/photos" element={<PhotosLayout />}>
           <Route index element={<Photos />} />
           <Route path=":signatura" element={<Photo />} />
-        </Route>{' '}
+        </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
     </Layout>

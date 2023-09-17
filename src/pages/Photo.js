@@ -10,7 +10,9 @@ import {
 } from '../redux/rtk/gallerySlice';
 import { useParams } from 'react-router-dom';
 import './photo.css';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
+//
 export default function Photo() {
   const dispatch = useDispatch();
   const { signatura } = useParams();
@@ -37,7 +39,7 @@ export default function Photo() {
   return (
     <div className="cont">
       <div className="image-wrapper">
-        <button
+        <FaChevronLeft
           className="prev"
           onClick={() => {
             if (selectedPhotoIndex > 0) {
@@ -45,9 +47,7 @@ export default function Photo() {
             }
           }}
           disabled={selectedPhotoIndex === 0}
-        >
-          prev
-        </button>
+        />
         <div>
           <img
             style={{ maxWidth: '60vw' }}
@@ -67,7 +67,7 @@ export default function Photo() {
           </div>
         </div>
 
-        <button
+        <FaChevronRight
           className="next"
           onClick={() => {
             if (selectedPhotoIndex < photos.length - 1) {
@@ -75,9 +75,7 @@ export default function Photo() {
             }
           }}
           disabled={selectedPhotoIndex === photos.length - 1}
-        >
-          next
-        </button>
+        />
       </div>
     </div>
   );

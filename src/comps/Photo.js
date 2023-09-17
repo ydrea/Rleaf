@@ -2,6 +2,7 @@ import './photo.css';
 import { useDispatch } from 'react-redux';
 import { increment, decrement } from '../redux/rtk/gallerySlice';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //
 export function Photo({ selectedPhoto, signatura }) {
   const dispatch = useDispatch();
@@ -16,14 +17,14 @@ export function Photo({ selectedPhoto, signatura }) {
   return (
     <div className="cont">
       <div className="image-wrapper">
-        <button
+        <FontAwesomeIcon
           className="prev"
           onClick={() => {
             dispatch(decrement());
           }}
         >
           prev
-        </button>
+        </FontAwesomeIcon>
         <div>
           <img
             style={{ maxWidth: '90vw' }}
@@ -35,18 +36,21 @@ export function Photo({ selectedPhoto, signatura }) {
             {selectedPhoto.geom},{' '}
           </div>
         </div>
-        <button className="center" onClick={handleShowOnMap}>
+        {/* <FontAwesomeIcon
+          icon={faChevronRight}
+          className="center"
+          onClick={handleShowOnMap}
+        >
           Show on Map
-        </button>
-
-        <button
+        </FontAwesomeIcon> */}
+        <FontAwesomeIcon
           className="next"
           onClick={() => {
             dispatch(increment());
           }}
         >
           next
-        </button>
+        </FontAwesomeIcon>
       </div>
     </div>
   );

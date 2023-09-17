@@ -61,8 +61,8 @@ export const Nav = () => {
       ],
     },
     { label: 'karta', to: '/mapa' },
-    { label: 'fototeka', to: '/photos' },
-    { label: '         kontakt', to: '/contact' },
+    { label: 'fototeka          ', to: '/photos' },
+    { label: 'kontakt', to: '/contact' },
     { label: 'admin', to: '/login' },
   ];
 

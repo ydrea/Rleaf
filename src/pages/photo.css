@@ -9,22 +9,19 @@
  }
  .prev, .center,
  .next {
+  color: #fff;
     cursor:pointer;
-   background-color: #8c8d85;
-    position: absolute;
-    bottom: 1vh;
+    position: fixed;
+    bottom: 51vh;
      height: 8vh;
-   width: 16vw;
-    z-index: 1;
+   width: 3vw;
+    z-index: 9999;
  }
  .prev {
-   left: 0;
- }
- .center{
-  left: 50vw
+   left: 0vw;
  }
  .next{
-   right: 0;
+   right: 0vw;
  }       
  #big-one {
    display: block;
