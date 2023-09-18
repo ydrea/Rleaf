@@ -22,7 +22,7 @@ function KategorijeSelekt({ kategorijeOptions }) {
       ...styles,
       backgroundColor: 'transparent', // Make the background transparent
       border: 'none', // Remove the default border
-      borderBottom: '1px solid white', // Add the white bottom border
+      borderTop: '1px solid white', // Add the white bottom border
       borderRadius: '0', // Remove border radius if needed
     }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -31,20 +31,20 @@ function KategorijeSelekt({ kategorijeOptions }) {
     },
     placeholder: styles => ({
       ...styles,
-      color: 'white', // Set the placeholder text color to white
+      color: 'black',
+      marginTop: '-13px',
+      marginLeft: '-8px',
+      fontSize: '18px',
     }),
     dropdownIndicator: provided => ({ ...provided, display: 'none' }),
     indicatorSeparator: provided => ({
       ...provided,
       display: 'none',
     }),
+    menu: styles => ({ ...styles, zIndex: '999' }),
   };
-
   return (
     <div>
-      <label htmlFor="kategorije-select" style={{ color: 'black' }}>
-        kategorije
-      </label>
       <Select
         styles={cusTom}
         placeholder="unesi/odaberi"
@@ -54,6 +54,15 @@ function KategorijeSelekt({ kategorijeOptions }) {
         value={filterSelected}
         onChange={handleFilterChange}
       />
+      <label
+        htmlFor="kategorije-select"
+        style={{
+          fontSize: '18px',
+          color: 'white',
+        }}
+      >
+        kategorije
+      </label>
     </div>
   );
 }

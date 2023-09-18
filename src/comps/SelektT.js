@@ -15,12 +15,14 @@ function TagoviSelekt({ tagoviOptions }) {
     );
     dispatch(setFilters(selectedFilterValues));
   };
+
+  //
   const cusTom = {
     control: styles => ({
       ...styles,
       backgroundColor: 'transparent', // Make the background transparent
       border: 'none', // Remove the default border
-      borderBottom: '1px solid white', // Add the white bottom border
+      borderTop: '1px solid white', // Add the white bottom border
       borderRadius: '0', // Remove border radius if needed
     }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -29,21 +31,21 @@ function TagoviSelekt({ tagoviOptions }) {
     },
     placeholder: styles => ({
       ...styles,
-      color: 'white', // Set the placeholder text color to white
+      color: 'black',
+      marginTop: '-13px',
+      marginLeft: '-8px',
+      fontSize: '18px',
     }),
     dropdownIndicator: provided => ({ ...provided, display: 'none' }),
     indicatorSeparator: provided => ({
       ...provided,
       display: 'none',
     }),
+    menu: styles => ({ ...styles, zIndex: '999' }),
   };
 
   return (
     <div>
-      <label htmlFor="keyword-select" style={{ color: 'black' }}>
-        ključne riječi
-      </label>
-
       <Select
         styles={cusTom}
         placeholder="unesi/odaberi"
@@ -53,6 +55,12 @@ function TagoviSelekt({ tagoviOptions }) {
         value={filterSelected}
         onChange={handleFilterChange}
       />
+      <label
+        htmlFor="keyword-select"
+        style={{ color: 'white', fontSize: '18px' }}
+      >
+        ključne riječi
+      </label>
     </div>
   );
 }

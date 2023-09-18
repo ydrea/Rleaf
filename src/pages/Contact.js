@@ -3,7 +3,14 @@ import Footer from '../comps/Footer';
 
 function Contact() {
   return (
-    <div id="contact" style={{ fontSize: '20px' }}>
+    <div
+      id="contact"
+      style={{
+        fontSize: '20px',
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
+      }}
+    >
       <div className="naslov-container">
         <h1>opservatorij</h1>
         <div className="line-div" />

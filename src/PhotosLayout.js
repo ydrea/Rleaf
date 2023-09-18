@@ -18,6 +18,7 @@ import {
 } from './redux/rtk/gallerySlice';
 import './pages/photos.css';
 import Photo from './pages/Photo';
+import Footer from './comps/Footer';
 
 //
 const PhotosLayout = () => {
@@ -90,6 +91,7 @@ const PhotosLayout = () => {
           informacijama i, gdje je to moguće, preciznim geografskim
           koordinatama.
         </p>
+        <div className="line-div1" />{' '}
       </div>{' '}
       <div className="filters-container">
         {/* <Selekt
@@ -102,7 +104,7 @@ const PhotosLayout = () => {
       </div>
       <Outlet filteredPhotos={filteredPhotos} />{' '}
       {/* This will render child routes */}
-      <div className="line-div" />{' '}
+      <div className="line-div2" /> <Footer />
     </div>
   );
 };
