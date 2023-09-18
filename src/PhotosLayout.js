@@ -82,7 +82,7 @@ const PhotosLayout = () => {
     <div>
       <div className="naslov-container">
         <h1>opservatorij</h1>
-        <div className="line-div" />{' '}
+        <div className="line-div0" />{' '}
         <p>
           Dobrodošli u medijateku "Opservatorija krajobraza". Naša
           kolekcija čuva slikovne priče krajobraza, dokumentirajući ih

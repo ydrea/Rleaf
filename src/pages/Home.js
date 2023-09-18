@@ -8,7 +8,7 @@ import { useInView } from 'react-intersection-observer';
 function Home() {
   const ref = useRef();
   const { ref: rockRef, inView: jelNije } = useInView({
-    rootMargin: '0px 0px -3% 0px',
+    rootMargin: '0px 0px -11% 0px',
     triggerOnce: true, //
   });
 
@@ -32,11 +32,11 @@ function Home() {
       {jelNije ? (
         <div className="naslov-container">
           <h1>opservatorij</h1>
-          <div className="line-div" />
-          <p>
+          <div className="line-div0" />
+          {/* <p>
             Interdisciplinarna platforma posvećena istraživanju i
             razumijevanju krajobraza
-          </p>
+          </p> */}
         </div>
       ) : (
         <div className="cont0">
@@ -45,17 +45,15 @@ function Home() {
             <div className="vozi"> Opservatorij</div>
             <div className="aepali">krajobraza</div>
           </div>
-
+          {/* 
           <div className="podnaslov">
-            Interdisciplinarna platforma posvećena istraživanju i
-            razumijevanju krajobraza
-            <div className="line-div1" ref={rockRef} />
-          </div>
+            <div className="line-div2" />
+          </div> */}
         </div>
       )}
       {/* </div> */}
       {/* //Sections */}
-      <div className="S1">
+      <div className="S1" ref={rockRef}>
         'Opservatorij' je platforma koja djeluje kao virtualni
         kolaborativni subjekt koji okuplja stručnjake različitih
         profila. U središtu naše pažnje je koncept krajobraza koji se

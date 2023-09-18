@@ -7,18 +7,18 @@ line-height: 160%; 35.2px
 letter-spacing: 1.1px;
  */
 .about {
-/* position: relative; */
+/* position: relative; */ 
 width: 100%;
 display: flex;
 flex-direction: column;
 align-items: center;
-
 }
 .one {
     height: 140vh;
     font-size: 22px;
     letter-spacing: 1.1px;
     margin-left: 5vw;
+    margin-top: 5vw;
       }
 .one li {
   list-style-type: none;

@@ -89,7 +89,7 @@ margin-right: 2vw;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-  justify-content:baseline ;
+  justify-content: baseline;
   }
   .naslov-container h1 {
     letter-spacing: 11px;
@@ -105,6 +105,16 @@ margin-right: 2vw;
  padding-left: 17vw;
  padding-right: 17vw;
  padding-top: 7vh;
+}
+
+.line-div0 {
+  border-top: 1px solid white;
+  position: absolute;
+  top: 160px;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  /* height: 0.6rem; */
 }
 .line-div1{
   border-top: 1px solid white;
