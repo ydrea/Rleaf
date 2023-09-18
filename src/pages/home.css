@@ -68,8 +68,8 @@
     margin-top: 0.6rem; 
   }
   
-  .line {
-    border-top: 2px solid white;
+  .line-div1 {
+    border-top: 1px solid white;
     position: absolute; /* Change to absolute positioning */
     top: 100%; /* Position it just below .podnaslov */
     box-sizing: border-box;

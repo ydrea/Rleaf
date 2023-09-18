@@ -81,6 +81,7 @@ const PhotosLayout = () => {
     <div>
       <div className="naslov-container">
         <h1>opservatorij</h1>
+        <div className="line-div" />{' '}
         <p>
           Dobrodošli u medijateku "Opservatorija krajobraza". Naša
           kolekcija čuva slikovne priče krajobraza, dokumentirajući ih
@@ -101,6 +102,7 @@ const PhotosLayout = () => {
       </div>
       <Outlet filteredPhotos={filteredPhotos} />{' '}
       {/* This will render child routes */}
+      <div className="line-div" />{' '}
     </div>
   );
 };

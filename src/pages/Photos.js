@@ -28,6 +28,14 @@ export default function Photos() {
 
   console.log(filteredPhotos);
   //
+  const removeFileExtension = fileName => {
+    const lastDotIndex = fileName.lastIndexOf('.');
+    if (lastDotIndex === -1) {
+      return fileName; // No file extension found
+    }
+    return fileName.substring(0, lastDotIndex);
+  };
+  //
   const handlePhotoClick = index => {
     dispatch(setSelectedPhotoIndex(index));
     showPhotoSet(true);
@@ -43,7 +51,9 @@ export default function Photos() {
           filteredPhotos.map((photo, index) => (
             <div key={photo.id} className="photo">
               {index && (
-                <div className="selected-div2">{photo.signatura}</div>
+                <div className="selected-div2">
+                  {removeFileExtension(photo.signatura)}
+                </div>
               )}
               <img
                 src={

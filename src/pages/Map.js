@@ -178,12 +178,20 @@ export default function Map() {
 
   return (
     <div
-      style={{
-        height: '80vh',
-        width: '60vw',
-        paddingLeft: '15vw',
-      }}
+    // style={{
+    //   height: '80vh',
+    //   width: '60vw',
+    //   paddingLeft: '15vw',
+    // }}
     >
+      <div className="naslov-container">
+        <h1>opservatorij</h1>
+        <div className="line-div" />
+        <p>
+          Interdisciplinarna platforma posvećena istraživanju i
+          razumijevanju krajobraza
+        </p>
+      </div>
       {/* <CustomZoom /> */}
       {/* <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} /> */}
 

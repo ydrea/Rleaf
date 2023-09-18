@@ -39,15 +39,21 @@ function TagoviSelekt({ tagoviOptions }) {
   };
 
   return (
-    <Select
-      styles={cusTom}
-      placeholder="ključne riječi"
-      isSearchable
-      isMulti
-      options={tagoviOptions}
-      value={filterSelected}
-      onChange={handleFilterChange}
-    />
+    <div>
+      <label htmlFor="keyword-select" style={{ color: 'black' }}>
+        ključne riječi
+      </label>
+
+      <Select
+        styles={cusTom}
+        placeholder="unesi/odaberi"
+        isSearchable
+        isMulti
+        options={tagoviOptions}
+        value={filterSelected}
+        onChange={handleFilterChange}
+      />
+    </div>
   );
 }
 

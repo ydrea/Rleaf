@@ -76,12 +76,14 @@ align-items: baseline;
   flex-wrap: wrap; 
   margin-bottom: 3vh;
   padding-left: 20vw;
-
 }
-
 /* Style for each individual select */
 .filters-container > div {
-  flex: 1; /* Each select takes up the full width of the container */}
+  flex: 1;
+margin-right: 2vw;
+}
+
+
   .naslov-container {
     display: inline-flex;
     flex-direction: column;

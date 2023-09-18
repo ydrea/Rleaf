@@ -9,7 +9,7 @@ function Home() {
   const ref = useRef();
   const { ref: rockRef, inView: jelNije } = useInView({
     rootMargin: '0px 0px -3% 0px',
-    triggerOnce: false, //
+    triggerOnce: true, //
   });
 
   console.log('jelNije:', jelNije); //
@@ -29,20 +29,31 @@ function Home() {
   //
   return (
     <div className="home">
-      {/* <section className="section"> */}{' '}
-      <div className="cont0">
-        <img src="home0.png" className="img0" />
-        <div className="txt0">
-          <div className="vozi"> Opservatorij</div>
-          <div className="aepali">krajobraza</div>
+      {jelNije ? (
+        <div className="naslov-container">
+          <h1>opservatorij</h1>
+          <div className="line-div" />
+          <p>
+            Interdisciplinarna platforma posvećena istraživanju i
+            razumijevanju krajobraza
+          </p>
         </div>
+      ) : (
+        <div className="cont0">
+          <img src="home0.png" className="img0" />
+          <div className="txt0">
+            <div className="vozi"> Opservatorij</div>
+            <div className="aepali">krajobraza</div>
+          </div>
 
-        <div className="podnaslov">
-          Interdisciplinarna platforma posvećena istraživanju i
-          razumijevanju krajobraza
-          <div className="line" ref={rockRef} />
+          <div className="podnaslov">
+            Interdisciplinarna platforma posvećena istraživanju i
+            razumijevanju krajobraza
+            <div className="line-div1" ref={rockRef} />
+          </div>
         </div>
-      </div>
+      )}
+      {/* </div> */}
       {/* //Sections */}
       <div className="S1">
         'Opservatorij' je platforma koja djeluje kao virtualni

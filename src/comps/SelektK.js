@@ -15,6 +15,8 @@ function KategorijeSelekt({ kategorijeOptions }) {
     );
     dispatch(setFilters(selectedFilterValues));
   };
+
+  //
   const cusTom = {
     control: styles => ({
       ...styles,
@@ -39,15 +41,20 @@ function KategorijeSelekt({ kategorijeOptions }) {
   };
 
   return (
-    <Select
-      styles={cusTom}
-      placeholder="kategorije"
-      isSearchable
-      isMulti
-      options={kategorijeOptions}
-      value={filterSelected}
-      onChange={handleFilterChange}
-    />
+    <div>
+      <label htmlFor="kategorije-select" style={{ color: 'black' }}>
+        kategorije
+      </label>
+      <Select
+        styles={cusTom}
+        placeholder="unesi/odaberi"
+        isSearchable
+        isMulti
+        options={kategorijeOptions}
+        value={filterSelected}
+        onChange={handleFilterChange}
+      />
+    </div>
   );
 }
 
