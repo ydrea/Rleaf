@@ -117,6 +117,18 @@ export default function Map() {
     }
   }, [selectedPhoto]);
 
+  //popni gaaa
+  const openMarkerPopup = () => {
+    if (markerRef.current) {
+      markerRef.current.leafletElement.openPopup();
+    }
+  };
+  useEffect(() => {
+    if (shouldZoomAndClick) {
+      openMarkerPopup();
+    }
+  }, [shouldZoomAndClick]);
+
   //external control
   const onLayerToggle = layerName => {
     lajeriSet(prevLayers =>
@@ -128,6 +140,27 @@ export default function Map() {
     );
   };
   //toggle popup
+
+  const togglePopup = () => {
+    document.querySelectorAll('.marker-x')?.[1].click();
+  };
+
+  const openPopup = () => {
+    if (document.querySelector('.popupcl')) {
+      // popup is already open because the popup div exists
+      // that div i.e. the popup, will be removed from dom by leaflet when we close the popup
+      // already open so return
+      return;
+    }
+    // I'm using shadow (see <Marker /> below) and react-leaflet assigns the className to both the marker and the shadow
+    // Must use [0] or just document.querySelector(".marker-x") if not using shadow
+    document.querySelectorAll('.marker-x')?.[1].click();
+  };
+
+  const [position, setPos] = useState(null);
+  useEffect(() => {
+    if (position !== null) openPopup();
+  }, [position]);
 
   //
   //tipofthespear

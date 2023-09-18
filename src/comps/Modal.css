@@ -23,8 +23,8 @@
   overflow: auto;
 }
 .modal img {
-  /* width: 20%; */
-  height: 80%;
+  width: 20%;
+  /* height: 80%; */
 }
 /* Close button */
 .modal-close-button {
