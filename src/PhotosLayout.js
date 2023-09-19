@@ -99,12 +99,20 @@ const PhotosLayout = () => {
           selectedOptions={selectedFilters}
           onChange={handleFilterChange}
         /> */}
-        <KategorijeSelekt kategorijeOptions={kategorijeOptions} />
-        <TagoviSelekt tagoviOptions={tagoviOptions} />
+        <div className="select-container">
+          <KategorijeSelekt
+            kategorijeOptions={kategorijeOptions}
+            className="select"
+          />
+          <TagoviSelekt
+            tagoviOptions={tagoviOptions}
+            className="select"
+          />
+        </div>
+        <div className="line-div2" />
       </div>
       <Outlet filteredPhotos={filteredPhotos} />{' '}
       {/* This will render child routes */}
-      <div className="line-div2" />
       <Footer />
     </div>
   );

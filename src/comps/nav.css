@@ -153,7 +153,7 @@ white-space: pre !important;
 .line-div {
   border-top: 1px solid white;
   position: absolute;
-  top: 150px;
+  top: 85%;
   left: 0;
   box-sizing: border-box;
   width: 100%;

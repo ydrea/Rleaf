@@ -48,7 +48,7 @@ export default function Photo() {
           }}
           disabled={selectedPhotoIndex === 0}
         />
-        <div>
+        <div className="img-cnt">
           <img
             style={{ maxWidth: '60vw' }}
             src={
@@ -59,15 +59,45 @@ export default function Photo() {
             alt={selectedPhoto.naziv}
           />
           <div className="selected-div1">
-            {selectedPhoto.tagovi && (
-              <p>ključne riječi: {selectedPhoto.tagovi}</p>
+            {selectedPhoto.signatura && (
+              <>
+                <div className="t">signatura:</div>
+                <div className="d">{selectedPhoto.signatura}</div>
+              </>
             )}
             {selectedPhoto.kategorija && (
-              <p>kategorija: {selectedPhoto.kategorija}</p>
+              <>
+                <div className="t">kategorija:</div>
+                <div className="d">{selectedPhoto.kategorija}</div>
+              </>
+            )}{' '}
+            {selectedPhoto.lokacija && (
+              <>
+                <div className="t">lokacija:</div>
+                <div className="d">{selectedPhoto.lokacija}</div>
+              </>
             )}
-            {selectedPhoto.opis && <p>opis: {selectedPhoto.opis}</p>}
-            {selectedPhoto.signatura && (
-              <p>signatura: {selectedPhoto.signatura}</p>
+            {selectedPhoto.opis && (
+              <>
+                <div className="t">opis:</div>
+                <div className="d">{selectedPhoto.opis}</div>
+              </>
+            )}
+            {selectedPhoto.autor && (
+              <>
+                <div className="t">autor:</div>
+                <div className="d">{selectedPhoto.autor}</div>
+              </>
+            )}
+            {selectedPhoto.tagovi && (
+              <div className="rep">
+                <div className="ilb">
+                  {' '}
+                  <div className="r">ključne riječi </div>
+                  <div className="e"> | </div>
+                  <div className="p">{selectedPhoto.tagovi}</div>
+                </div>{' '}
+              </div>
             )}
           </div>
         </div>

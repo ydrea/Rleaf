@@ -36,10 +36,8 @@ flex-direction: row;
   height: auto;
 margin-top: 11.5vh;
 }
-.selected-div1 {
-display: block;
-  z-index: 222;
-}
+
+
 .selected-div2 {
   font-size: 18px;
 /* right: 0; bottom: 2vh; */
@@ -70,18 +68,28 @@ align-items: baseline;
 /* CSS for the parent container */
 .filters-container {
   display: flex; /* Use flexbox layout */
-  width: 40%; /* Make the container 50% wide */
+  width: 100%; /* Make the container 50% wide */
   justify-content: flex-start; /* Align items to the left */
   flex-wrap: wrap; 
   margin-bottom: 3vh;
-  padding-left: 17vw;
+  /* padding-left: 17vw; */
 padding-top: 10.4vh;
 position: relative;
 }
-/* Style for each individual select */
-.filters-container > div {
-  flex: 1;
-margin-right: 2vw;
+/* Style fo* Style for the select container */
+.select-container {
+  margin-left: 17vw;
+  width: 50%;
+  display: flex;
+  justify-content: space-between; /* Add space between the selects */
+  align-items: center; /* Center the selects vertically */
+}
+
+/* Style for each individual select within the select container */
+.select-container select {
+  flex: 1; /* Allow the selects to take equal width within the container */
+  max-width: calc(50% - 1.5vw); /* Calculate the max width with spacing */
+  margin-right: 3vw; /* Add right margin for spacing */
 }
 
 
@@ -129,7 +137,7 @@ margin-right: 2vw;
 .line-div2{
   border-top: 1px solid white;
   position: absolute;
-  top: 74%;
+  top: 94%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
