@@ -11,8 +11,15 @@
    align-items: center;
    position: relative;
  }
+
 .img-cnt {
-  width: 60vw;
+  width: 64.5vw;
+  padding-left: 3.3vw;
+/* margin-left: 5vw; */
+}
+
+.img-cnt img {
+  width: 64.5vw;
 }
  .prev, .center,
  .next {
@@ -73,4 +80,5 @@
   grid-row: 3;
 display: inline-block;
 margin-top: 2vh;
+padding-left: .4vw;
 }

@@ -50,7 +50,7 @@ export default function Photo() {
         />
         <div className="img-cnt">
           <img
-            style={{ maxWidth: '60vw' }}
+            // style={{ maxWidth: '70vw' }}
             src={
               selectedPhoto
                 ? `${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`
