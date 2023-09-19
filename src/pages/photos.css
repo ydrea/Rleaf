@@ -79,7 +79,7 @@ position: relative;
 /* Style fo* Style for the select container */
 .select-container {
   margin-left: 19vw;
-  width: 50%;
+  width: 64.6%;
   display: flex;
   justify-content: space-between; /* Add space between the selects */
   align-items: center; /* Center the selects vertically */
