@@ -22,6 +22,7 @@ function KategorijeSelekt({ kategorijeOptions }) {
       ...styles,
       backgroundColor: 'transparent',
       border: 'none',
+      // Remove the default border
       borderTop: '1px solid white',
       borderRadius: '0',
     }),
