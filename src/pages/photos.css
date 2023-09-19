@@ -76,6 +76,7 @@ align-items: baseline;
   margin-bottom: 3vh;
   padding-left: 17vw;
 padding-top: 10.4vh;
+position: relative;
 }
 /* Style for each individual select */
 .filters-container > div {
@@ -89,6 +90,7 @@ margin-right: 2vw;
     flex-direction: column;
     align-items: center;
   justify-content: baseline;
+  position: relative;
   }
   .naslov-container h1 {
     letter-spacing: 11px;
@@ -109,7 +111,7 @@ margin-right: 2vw;
 .line-div0 {
   border-top: 1px solid white;
   position: absolute;
-  top: 160px;
+  top: 25%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -118,20 +120,20 @@ margin-right: 2vw;
 .line-div1{
   border-top: 1px solid white;
   position: absolute;
-  top: 300px;
+  top: 93%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
-  height: 0.6rem;
+  /* height: 0.6rem; */
 }
 .line-div2{
   border-top: 1px solid white;
   position: absolute;
-  top: 430px;
+  top: 74%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
-  height: 0.6rem;
+  /* height: 0.6rem; */
 }  
 /* Media query to control layout for smaller screens */
 @media (max-width: 768px) {
