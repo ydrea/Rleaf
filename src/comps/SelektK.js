@@ -24,10 +24,11 @@ function KategorijeSelekt({ kategorijeOptions }) {
       border: 'none',
       borderTop: '1px solid white',
       borderRadius: '0',
+      cursor: 'pointer',
     }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       console.log('selekt', data, isDisabled, isFocused, isSelected);
-      return { ...styles, color: 'black' };
+      return { ...styles, color: 'black', cursor: 'pointer' };
     },
     placeholder: styles => ({
       ...styles,
@@ -41,7 +42,7 @@ function KategorijeSelekt({ kategorijeOptions }) {
       ...provided,
       display: 'none',
     }),
-    menu: styles => ({ ...styles, zIndex: '999' }),
+    menu: styles => ({ ...styles, zIndex: '999', cursor: 'pointer' }),
   };
   return (
     <div>

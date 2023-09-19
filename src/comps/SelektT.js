@@ -23,11 +23,13 @@ function TagoviSelekt({ tagoviOptions }) {
       backgroundColor: 'transparent', // Make the background transparent
       border: 'none', // Remove the default border
       borderTop: '1px solid white', // Add the white bottom border
-      borderRadius: '0', // Remove border radius if needed
+      borderRadius: '0',
+      cursor: 'pointer',
+      // Remove border radius if needed
     }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       console.log('selekt', data, isDisabled, isFocused, isSelected);
-      return { ...styles, color: 'black' };
+      return { ...styles, color: 'black', cursor: 'pointer' };
     },
     placeholder: styles => ({
       ...styles,
@@ -41,7 +43,7 @@ function TagoviSelekt({ tagoviOptions }) {
       ...provided,
       display: 'none',
     }),
-    menu: styles => ({ ...styles, zIndex: '999' }),
+    menu: styles => ({ ...styles, zIndex: '999', cursor: 'pointer' }),
   };
 
   return (
