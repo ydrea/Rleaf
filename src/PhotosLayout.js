@@ -104,7 +104,8 @@ const PhotosLayout = () => {
       </div>
       <Outlet filteredPhotos={filteredPhotos} />{' '}
       {/* This will render child routes */}
-      <div className="line-div2" /> <Footer />
+      <div className="line-div2" />
+      <Footer />
     </div>
   );
 };
