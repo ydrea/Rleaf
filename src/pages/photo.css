@@ -1,12 +1,17 @@
 .cont{
     display: flex;
+    flex-direction: column;
  }
+ 
  .image-wrapper {
+  display: flex;
+  flex-direction: column;
    margin: auto;
-   display: inline-block;
+   /* display: inline-block; */
    align-items: center;
    position: relative;
  }
+
  .prev, .center,
  .next {
   color: #fff;

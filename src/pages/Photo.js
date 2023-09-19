@@ -59,11 +59,16 @@ export default function Photo() {
             alt={selectedPhoto.naziv}
           />
           <div className="selected-div1">
-            <p>{selectedPhoto.naziv}</p>
-            <p>{selectedPhoto.tagovi}</p>
-            <p>{selectedPhoto.kategorija}</p>
-            <p>{selectedPhoto.opis}</p>
-            <p>{selectedPhoto.signatura}</p>
+            {selectedPhoto.tagovi && (
+              <p>ključne riječi: {selectedPhoto.tagovi}</p>
+            )}
+            {selectedPhoto.kategorija && (
+              <p>kategorija: {selectedPhoto.kategorija}</p>
+            )}
+            {selectedPhoto.opis && <p>opis: {selectedPhoto.opis}</p>}
+            {selectedPhoto.signatura && (
+              <p>signatura: {selectedPhoto.signatura}</p>
+            )}
           </div>
         </div>
 

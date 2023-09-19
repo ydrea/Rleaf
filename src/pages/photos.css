@@ -37,9 +37,8 @@ flex-direction: row;
 margin-top: 11.5vh;
 }
 .selected-div1 {
-  position: absolute;
-right: -15vw; top: 0;
-z-index: 222;
+display: block;
+  z-index: 222;
 }
 .selected-div2 {
   font-size: 18px;

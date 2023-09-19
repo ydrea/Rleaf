@@ -20,10 +20,10 @@ function KategorijeSelekt({ kategorijeOptions }) {
   const cusTom = {
     control: styles => ({
       ...styles,
-      backgroundColor: 'transparent', // Make the background transparent
-      border: 'none', // Remove the default border
-      borderTop: '1px solid white', // Add the white bottom border
-      borderRadius: '0', // Remove border radius if needed
+      backgroundColor: 'transparent',
+      border: 'none',
+      borderTop: '1px solid white',
+      borderRadius: '0',
     }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       console.log('selekt', data, isDisabled, isFocused, isSelected);
