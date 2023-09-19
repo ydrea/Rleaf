@@ -90,13 +90,10 @@ export default function Photo() {
               </>
             )}
             {selectedPhoto.tagovi && (
-              <div className="rep">
-                <div className="ilb">
-                  {' '}
-                  <div className="r">ključne riječi </div>
-                  <div className="e"> | </div>
-                  <div className="p">{selectedPhoto.tagovi}</div>
-                </div>{' '}
+              <div className="tag">
+                {/* <div className="rep"> */}
+                ključne riječi | {selectedPhoto.tagovi}
+                {/* </div> */}
               </div>
             )}
           </div>

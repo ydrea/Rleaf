@@ -48,7 +48,7 @@
 .selected-div1 {
   display: grid;
   grid-template-columns: repeat(5, 1fr); 
-  grid-template-rows: 1fr 1fr;           
+  grid-template-rows: 1fr 1fr 1fr;           
   gap: 0px 11px;                            
 }
 
@@ -69,16 +69,8 @@
   padding: 5px;
   text-align: left;
   }
-
-  .rep {
-   display: block;
-    padding-top: 6vh;
-  }
-
-  .ilb {
-    display: inline-block;
- position: relative; }
-.r, .e, .p {
-padding-right: 1vw;
-display: inline !important;
+.tag {
+  grid-row: 3;
+display: inline-block;
+margin-top: 2vh;
 }

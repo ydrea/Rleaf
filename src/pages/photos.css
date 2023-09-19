@@ -6,8 +6,8 @@
 .photo-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 3vw;
-  padding-left: 17vw;
+  gap: .5vw;
+  padding-left: 19vw;
   padding-top: 3vw;
 flex-direction: row;
 }
@@ -78,7 +78,7 @@ position: relative;
 }
 /* Style fo* Style for the select container */
 .select-container {
-  margin-left: 17vw;
+  margin-left: 19vw;
   width: 50%;
   display: flex;
   justify-content: space-between; /* Add space between the selects */
@@ -101,25 +101,26 @@ position: relative;
   position: relative;
   }
   .naslov-container h1 {
-    letter-spacing: 11px;
-    font-size: 140px;
+    letter-spacing: 10px;
+    font-size: 141px;
     font-weight: 100;
     margin-top: -16vh;
     margin-bottom: -3vh;
-  }
+padding-left: 4vw;  
+}
   .naslov-container p {
-    /* letter-spacing: .4rem; */
+    /* letter-spacing: .2rem; */
     font-size: 18px;
     font-weight: 100;
- padding-left: 17vw;
- padding-right: 17vw;
+ padding-left: 19vw;
+ padding-right: 14vw;
  padding-top: 7vh;
 }
 
 .line-div0 {
   border-top: 1px solid white;
   position: absolute;
-  top: 25%;
+  top: 21%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -128,7 +129,7 @@ position: relative;
 .line-div1{
   border-top: 1px solid white;
   position: absolute;
-  top: 93%;
+  top: 92%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -137,7 +138,7 @@ position: relative;
 .line-div2{
   border-top: 1px solid white;
   position: absolute;
-  top: 94%;
+  top: 96%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
