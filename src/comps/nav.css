@@ -160,7 +160,7 @@ white-space: pre !important;
   /* height: 0.6rem; */
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 1190px) {
   .NavbarItems {
     position: relative;
     /* background-color: red; */

@@ -12,6 +12,6 @@ position: relative; bottom: 0;
 }
 
 .footer p {
-  max-width: 65vw;
-  padding-left: 4vw;
+  max-width: 65vw;margin-left: 22vw;
+  margin-right: 13vw;
 }

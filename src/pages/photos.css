@@ -7,25 +7,25 @@
   display: flex;
   flex-wrap: wrap;
   gap: .5vw;
-  padding-left: 19vw;
+  margin-left: 22vw;
+  margin-right: 12vw;
   padding-top: 3vw;
-flex-direction: row;
+  flex-direction: row;
 }
 
 /* Adjust the layout of other images as needed */
 .photo {
-  position: relative;
   display: flex;
   flex-direction: column-reverse;
-  width: 200px;
-  height: 150px;
+  width: 12.5rem;
   overflow: hidden;
   transition: transform 0.2s ease;
 }
 
 .photo img {
-  width: 100%;
-  height: 100%;
+  /* min-width: 10vw; */
+  max-width: 100%;
+  height: auto;
   -o-object-fit: cover;
   object-fit: cover;
 }
@@ -49,78 +49,59 @@ align-items: baseline;
 }
 
 
-.photo .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: grey;
-  opacity: .6;
-  z-index: 5;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-.photo:hover .overlay {
-  opacity: 0;
-}
-
-/* CSS for the parent container */
 .filters-container {
-  display: flex; /* Use flexbox layout */
-  width: 100%; /* Make the container 50% wide */
-  justify-content: flex-start; /* Align items to the left */
+  display: flex;
+  width: 100%; 
+  justify-content: flex-start; 
   flex-wrap: wrap; 
   margin-bottom: 3vh;
-  /* padding-left: 17vw; */
-padding-top: 10.4vh;
-position: relative;
+  padding-top: 10vh;
+  position: relative;
 }
-/* Style fo* Style for the select container */
 .select-container {
-  margin-left: 19vw;
-  width: 64.6%;
+  margin-left: 22vw;
+  margin-right: 14vw;
+  width: 60%;
   display: flex;
-  justify-content: space-between; /* Add space between the selects */
-  align-items: center; /* Center the selects vertically */
-}
+  justify-content: space-around;
+  align-items: center;
+  }
 
-/* Style for each individual select within the select container */
 .select-container select {
-  flex: 1; /* Allow the selects to take equal width within the container */
-  max-width: calc(50% - 1.5vw); /* Calculate the max width with spacing */
-  margin-right: 3vw; /* Add right margin for spacing */
-}
+  flex: 1;
+  max-width: calc(50% );
+  margin-right: 3vw;
+  }
 
-
-  .naslov-container {
-    display: inline-flex;
+ .naslov-container {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-  justify-content: baseline;
+    /* align-items: center; */
+  /* justify-content: baseline; */
   position: relative;
   }
+
   .naslov-container h1 {
-    letter-spacing: 10px;
-    font-size: 141px;
+    letter-spacing: .06em;
+    font-size: 10vw;
     font-weight: 100;
-    margin-top: -16vh;
-    margin-bottom: -3vh;
-padding-left: 4vw;  
-}
+    margin-top: -14vh;
+    /* margin-bottom: -3vh; */
+    margin-left: 22vw;
+  }
   .naslov-container p {
-    /* letter-spacing: .2rem; */
-    font-size: 18px;
+    position: relative; 
+    font-size: clamp(3vh, 4vh);
     font-weight: 100;
- padding-left: 19vw;
- padding-right: 14vw;
- padding-top: 7vh;
+    margin-left: 22vw;
+    margin-right: 18vw;
+    margin-top: -8vh;
 }
 
 .line-div0 {
   border-top: 1px solid white;
   position: absolute;
-  top: 21%;
+  top: 22%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -129,7 +110,7 @@ padding-left: 4vw;
 .line-div1{
   border-top: 1px solid white;
   position: absolute;
-  top: 92%;
+  top: 96%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -144,11 +125,48 @@ padding-left: 4vw;
   width: 100%;
   /* height: 0.6rem; */
 }  
-/* Media query to control layout for smaller screens */
+
 @media (max-width: 768px) {
-  /* Adjust layout for smaller screens, e.g., make each select full width */
   .filters-container > div {
     width: 100%;
-    margin-right: 0; /* Remove margin for full width */
   }
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  /* .naslov-container h1 {
+    font-size: 4vw;
+    margin-top: -2vh;
+    margin-bottom: -1vh;
+    margin-left: 2vw;
+  } */
+
+  .naslov-container p {
+    font-size: 3vw;
+    margin-left: 10vw;
+    margin-right: 8vw;
+    padding-top: 3vh;
+  }
+}
+.line-div2, .line-div1, .line-div0 {
+  display: none;
+}
+.photo { 
+ width: 12rem;
+}
+
+@media (max-width: 600px) {
+  .filters-container > div {
+    width: 100%;
+    margin-right: 0; 
+      }
+.naslov-container p {
+  font-size: 2.5vh;
+}
+.line-div2, .line-div1, .line-div0 {
+  display: none;
+}
+.photo { 
+  width: 10rem;
+}
+}
+
 }
