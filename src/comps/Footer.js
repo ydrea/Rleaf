@@ -11,12 +11,15 @@ export default function Footer() {
       </a>
       (mnation */}
       <img src="../../logoBmp.png" />
-      Uvjeti korištenja "Sve fotografije i tekstovi objavljeni na ovom
-      portalu podliježu CC BY-NC-SA 4.0 licenci. Ova licenca dopušta
-      nekomercijalno umnožavanje, dijeljenje i mijenjanje, uz
-      navođenje autorstva na način koji je specificirao autor i uz
-      daljnje dijeljenje pod istim uvjetima. Obratite nam se ukoliko
-      su vam potrebne fotografije u izvornoj veličini. "
+      <p>
+        {' '}
+        Uvjeti korištenja "Sve fotografije i tekstovi objavljeni na
+        ovom portalu podliježu CC BY-NC-SA 4.0 licenci. Ova licenca
+        dopušta nekomercijalno umnožavanje, dijeljenje i mijenjanje,
+        uz navođenje autorstva na način koji je specificirao autor i
+        uz daljnje dijeljenje pod istim uvjetima. Obratite nam se
+        ukoliko su vam potrebne fotografije u izvornoj veličini. "
+      </p>
     </div>
   );
 }

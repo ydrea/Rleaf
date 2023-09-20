@@ -10,3 +10,8 @@
   background-color: #8C8D85;
 position: relative; bottom: 0;
 }
+
+.footer p {
+  max-width: 65vw;
+  padding-left: 4vw;
+}
