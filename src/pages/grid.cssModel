@@ -1,0 +1,45 @@
+/* Define a grid container */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+  grid-gap: 1rem; /* Adjust the gap as needed */
+}
+
+/* Apply CSS to .naslov-container and .filters-container */
+.naslov-container,
+.filters-container {
+  grid-column: span 1; /* Each container spans one column */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1rem; /* Add padding as needed */
+}
+
+/* Apply CSS to .photos-container */
+.photos-container {
+  grid-column: span 2; /* .photos-container spans two columns */
+  /* Your existing styles for .photos-container */
+}
+
+/* Apply CSS to .line-div elements */
+.line-div0,
+.line-div1,
+.line-div2 {
+  position: relative;
+}
+
+.line-div0::before,
+.line-div1::before,
+.line-div2::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 50%; /* Adjust as needed to cut into the text */
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent; /* Set the desired background color */
+}

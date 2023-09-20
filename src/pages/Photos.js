@@ -25,6 +25,7 @@ export default function Photos() {
   const filteredPhotos = useSelector(state =>
     selectFilteredPhotos(state, selectedFilters)
   );
+  //
 
   console.log(filteredPhotos);
   //
