@@ -1,0 +1,25 @@
+.leaflet-tile-pane {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
+  .icon {
+    font-weight: 400;
+    transform-origin: 10px 10px;
+  }
+  
+  .custom-control-container {
+    display: grid;
+    height: 56.4444px;
+    width: 400.792px;
+    font-family: "Roboto Mono", monospace;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #DBDBDB;
+    font-variant-caps: small-caps;
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    color-scheme: light dark;
+  }
+  

@@ -23,7 +23,7 @@
 }
  .prev, .center,
  .next {
-  color: #fff;
+  color: #000;
     cursor:pointer;
     position: fixed;
     bottom: 51vh;

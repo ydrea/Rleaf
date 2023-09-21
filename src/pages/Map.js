@@ -127,6 +127,7 @@ export default function Map() {
       )
     );
   };
+
   //toggle popup
 
   //
@@ -194,7 +195,7 @@ export default function Map() {
         </p> */}
       </div>
       {/* <CustomZoom /> */}
-      {/* <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} /> */}
+      <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} />
 
       <MapContainer
         // ref={mapRef}
@@ -309,7 +310,17 @@ export default function Map() {
               }
             }}
           >
-            <Popup>
+            <Popup
+              eventHandlers={{
+                mouseover: e => {
+                  e.target.openPopup();
+                },
+                mouseout: e => {
+                  e.target.closePopup();
+                },
+              }}
+              interactive
+            >
               {i.popUp}
               <Link to={{ pathname: '/photos', params: i.popUp }}>
                 <img

@@ -6814,6 +6814,12 @@
   dependencies:
     "leaflet" "^1.0.1"
 
+"leaflet-groupedlayercontrol@github:ismyrnow/leaflet-groupedlayercontrol":
+  "resolved" "git+ssh://git@github.com/ismyrnow/leaflet-groupedlayercontrol.git#0e49250c8d00702066c173e24ae202f478423ac2"
+  "version" "0.6.1"
+  dependencies:
+    "leaflet" "^1.0.1"
+
 "leaflet-wfst@^2.0.1-beta.27":
   "integrity" "sha512-zqs+ooIw9mjqnUPytxt3nWVKda02ceWt2yR9FMNiZxRv/hNKgZq6/dvirT1TMWlFmULLIfkCKik+zIrjGIVNjQ=="
   "resolved" "https://registry.npmjs.org/leaflet-wfst/-/leaflet-wfst-2.0.1-beta.27.tgz"
@@ -6831,7 +6837,7 @@
   dependencies:
     "uglify-js" "^2.7.3"
 
-"leaflet@^1.0.1", "leaflet@^1.2.0", "leaflet@^1.3.1", "leaflet@^1.8.0", "leaflet@^1.9.0", "leaflet@^1.9.3":
+"leaflet@^1.0.1", "leaflet@^1.2.0", "leaflet@^1.3.1", "leaflet@^1.8.0", "leaflet@^1.9.0", "leaflet@^1.9.4":
   "integrity" "sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA=="
   "resolved" "https://registry.npmjs.org/leaflet/-/leaflet-1.9.4.tgz"
   "version" "1.9.4"

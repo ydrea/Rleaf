@@ -20,6 +20,7 @@ import Private from './pages/protected/Private';
 import { useEffect } from 'react';
 import Photos from './pages/Photos';
 import Photo from './pages/Photo';
+import Karta from './pages/Karta';
 
 function App() {
   //
@@ -41,8 +42,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects/banija" element={<Banija />} />
         <Route path="/projects/ewap" element={<Ewap />} />
-        <Route path="/mapa/:signatura" element={<Map />} />
-        <Route path="/mapa" element={<Map />} />
+        <Route path="/mapa/:signatura" element={<Karta />} />
+        <Route path="/mapa" element={<Karta />} />
         <Route path="/photos" element={<PhotosLayout />}>
           <Route index element={<Photos />} />
           <Route path=":signatura" element={<Photo />} />
