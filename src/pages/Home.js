@@ -30,14 +30,16 @@ function Home() {
   return (
     <div className="home">
       {jelNije ? (
-        <div className="naslov-container">
-          <h1>opservatorij</h1>
-          <div className="line-div0" />
-          {/* <p>
+        <>
+          <div className="naslov-container">
+            <h1>opservatorij</h1>
+            {/* <p>
             Interdisciplinarna platforma posvećena istraživanju i
             razumijevanju krajobraza
           </p> */}
-        </div>
+          </div>
+          <div className="line-div4" />
+        </>
       ) : (
         <div className="cont0">
           <img src="home0.png" className="img0" />

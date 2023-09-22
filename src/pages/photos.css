@@ -6,9 +6,9 @@
 .photo-container {
   display: flex;
   flex-wrap: wrap;
-  gap: .5vw;
-  margin-left: 22vw;
-  margin-right: 12vw;
+  gap: 1.2vw;
+  margin-left: 12vw;
+  margin-right: 10vw;
   padding-top: 3vw;
   flex-direction: row;
 }
@@ -52,14 +52,16 @@
     font-weight: 100;
     margin-top: -14vh;
     margin-left: 10vw;
-  }
+    color: #fff;  
+}
   .naslov-container p {
     position: relative; 
     font-size: clamp(3vh, 4vh);
     font-weight: 100;
-    margin-left: 22vw;
-    margin-right: 18vw;
-    margin-top: -8vh;
+    margin-left: 12vw;
+    margin-right: 10vw;
+    margin-top: -7.5vh;
+    width: 78vw;
 }
 
 .filters-container {
@@ -72,11 +74,11 @@
   position: relative;
 }
 .select-container {
-  margin-left: 22vw;
-  margin-right: 14vw;
-  width: 60%;
+  margin-left: 12vw;
+  margin-right: 10vw;
+  width: 80%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   }
 
@@ -90,7 +92,7 @@
 .line-div0 {
   border-top: 1px solid #000;
   position: absolute;
-  top: 22%;
+  top: 25%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -115,6 +117,24 @@
   /* height: 0.6rem; */
 }  
 
+.line-div3 {
+  border-top: 1px solid #000;
+  position: absolute;
+  top: 23%;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  /* height: 0.6rem; */
+}
+.line-div4 {
+  border-top: 1px solid #000;
+  position: absolute;
+  top: 26%;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  /* height: 0.6rem; */
+}
 @media (max-width: 768px) {
   .filters-container > div {
     width: 100%;
@@ -135,7 +155,7 @@
     padding-top: 3vh;
   }
 }
-.line-div2, .line-div1, .line-div0 {
+.line-div2, .line-div1, .line-div0, .line-div3, .line-div4 {
   display: none;
 }
 .photo { 

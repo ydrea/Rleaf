@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './karta.css';
-
+import Footer from '../comps/Footer';
 const Karta = () => {
   const mapRef = useRef(null); // Create a ref to store the map instance
 
@@ -95,16 +95,10 @@ const Karta = () => {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        // marginLeft: '22vw',
-      }}
-    >
+    <div className="gallery">
       <div className="naslov-container">
         <h1>opservatorij</h1>
-        <div className="line-div" />
+        <div className="line-div3" />
         {/* <p>
           Interdisciplinarna platforma posvećena istraživanju i
           razumijevanju krajobraza
@@ -125,6 +119,7 @@ const Karta = () => {
           style={{ height: '400px', width: '60vw' }}
         ></div>
       </div>
+      <Footer />{' '}
     </div>
   );
 };

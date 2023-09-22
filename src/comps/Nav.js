@@ -51,7 +51,7 @@ export const Nav = () => {
 
   const menuItems = [
     { label: 'početna', to: '/' },
-    { label: 'o opservatoriju', to: '/about' },
+    { label: 'o nama', to: '/about' },
     {
       label: 'projekti',
       to: '/projects',

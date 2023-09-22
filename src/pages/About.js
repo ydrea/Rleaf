@@ -5,12 +5,12 @@ export default function About() {
     <div className="about">
       <div className="naslov-container">
         <h1>opservatorij</h1>
-        <div className="line-div0" />
         {/* <p>
           Interdisciplinarna platforma posvećena istraživanju i
           razumijevanju krajobraza
         </p> */}
       </div>
+      <div className="line-div4" />
       <div className="one">
         Opservatorij krajobraza je interdisciplinarna platforma za
         istraživanje krajobraza i razvoj temeljen na krajobrazu. 2023.

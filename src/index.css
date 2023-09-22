@@ -33,7 +33,7 @@ html, body, #root {
   width: 100%; 
   margin: 0;
   padding: 0;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'DMMono', monospace;
  
   background-color: #DBDBDB;/* color: #fff; */
 }  

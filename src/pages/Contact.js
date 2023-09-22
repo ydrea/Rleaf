@@ -7,12 +7,12 @@ function Contact() {
     <div className="contact">
       <div className="naslov-container">
         <h1>opservatorij</h1>
-        <div className="line-div0" />
         {/* <p>
           Interdisciplinarna platforma posvećena istraživanju i
           razumijevanju krajobraza
         </p> */}
       </div>
+      <div className="line-div4" />
       <div className="un">
         {' '}
         <p>
