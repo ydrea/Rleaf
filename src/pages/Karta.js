@@ -98,7 +98,7 @@ const Karta = () => {
     <div className="gallery">
       <div className="naslov-container">
         <h1>opservatorij</h1>
-        <div className="line-div3" />
+        <div className="line-div0" />
         {/* <p>
           Interdisciplinarna platforma posvećena istraživanju i
           razumijevanju krajobraza

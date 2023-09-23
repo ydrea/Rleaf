@@ -1,8 +1,6 @@
 // import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Selekt from './comps/Selekt';
-import KategorijeSelekt from './comps/SelektK';
-import TagoviSelekt from './comps/SelektT';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
@@ -30,56 +28,9 @@ const PhotosLayout = () => {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [showPhoto, showPhotoSet] = useState(false);
   //
-
-  useEffect(() => {
-    dispatch(getPhotos());
-  }, [dispatch]);
-
-  //filtri
-  const tagoviSet = new Set();
-  const kategorijeSet = new Set();
-
-  photos.forEach(photo => {
-    const tagoviArray = photo.tagovi.split(',');
-
-    tagoviArray.forEach(tag => {
-      tagoviSet.add(tag.trim());
-    });
-
-    kategorijeSet.add(photo.kategorija);
-  });
-
-  const tagoviOptions = Array.from(tagoviSet).map(tag => ({
-    value: tag,
-    label: tag,
-  }));
-
-  const kategorijeOptions = Array.from(kategorijeSet).map(
-    kategorija => ({
-      value: kategorija,
-      label: kategorija,
-    })
-  );
-
-  const filters = [
-    { label: 'Tagovi', options: tagoviOptions },
-    { label: 'KATEGORIJE', options: kategorijeOptions },
-  ];
-
-  const filteredPhotos = useSelector(state =>
-    selectFilteredPhotos(state, selectedFilters)
-  );
-
-  console.log(filteredPhotos);
-
-  const handleFilterChange = selectedOptions => {
-    setSelectedFilters(selectedOptions);
-    dispatch(setFilters(selectedOptions));
-  };
-
   //
   return (
-    <div>
+    <div className="gallery">
       <div className="naslov-container">
         <h1>opservatorij</h1>
         <div className="line-div0" />{' '}
@@ -93,24 +44,6 @@ const PhotosLayout = () => {
         </p>
         <div className="line-div1" />{' '}
       </div>{' '}
-      <div className="filters-container">
-        {/* <Selekt
-          filters={filters}
-          selectedOptions={selectedFilters}
-          onChange={handleFilterChange}
-        /> */}
-        <div className="select-container">
-          <KategorijeSelekt
-            kategorijeOptions={kategorijeOptions}
-            className="select"
-          />
-          <TagoviSelekt
-            tagoviOptions={tagoviOptions}
-            className="select"
-          />
-        </div>
-        <div className="line-div2" />
-      </div>
       <Outlet filteredPhotos={filteredPhotos} />{' '}
       {/* This will render child routes */}
       <Footer />

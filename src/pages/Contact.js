@@ -4,7 +4,7 @@ import Footer from '../comps/Footer';
 
 function Contact() {
   return (
-    <div className="contact">
+    <div className="gallery">
       <div className="naslov-container">
         <h1>opservatorij</h1>
         {/* <p>

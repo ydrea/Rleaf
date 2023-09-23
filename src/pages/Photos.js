@@ -13,6 +13,8 @@ import {
 } from '../redux/rtk/gallerySlice';
 import './photos.css';
 import Photo from './Photo';
+import KategorijeSelekt from '../comps/SelektK';
+import TagoviSelekt from '../comps/SelektT';
 
 export default function Photos() {
   const navigate = useNavigate();
@@ -27,8 +29,48 @@ export default function Photos() {
   );
   //
 
+  useEffect(() => {
+    dispatch(getPhotos());
+  }, [dispatch]);
+
+  //filtri
+  const tagoviSet = new Set();
+  const kategorijeSet = new Set();
+
+  photos.forEach(photo => {
+    const tagoviArray = photo.tagovi.split(',');
+
+    tagoviArray.forEach(tag => {
+      tagoviSet.add(tag.trim());
+    });
+
+    kategorijeSet.add(photo.kategorija);
+  });
+
+  const tagoviOptions = Array.from(tagoviSet).map(tag => ({
+    value: tag,
+    label: tag,
+  }));
+
+  const kategorijeOptions = Array.from(kategorijeSet).map(
+    kategorija => ({
+      value: kategorija,
+      label: kategorija,
+    })
+  );
+
+  const filters = [
+    { label: 'Tagovi', options: tagoviOptions },
+    { label: 'KATEGORIJE', options: kategorijeOptions },
+  ];
+
   console.log(filteredPhotos);
-  //
+
+  const handleFilterChange = selectedOptions => {
+    setSelectedFilters(selectedOptions);
+    dispatch(setFilters(selectedOptions));
+  };
+
   const removeFileExtension = fileName => {
     const lastDotIndex = fileName.lastIndexOf('.');
     if (lastDotIndex === -1) {
@@ -47,6 +89,25 @@ export default function Photos() {
   return (
     <div className="gallery">
       {/* filter options */}
+      <div className="filters-container">
+        {/* <Selekt
+          filters={filters}
+          selectedOptions={selectedFilters}
+          onChange={handleFilterChange}
+        /> */}
+        <div className="select-container">
+          <KategorijeSelekt
+            kategorijeOptions={kategorijeOptions}
+            className="select"
+          />
+          <TagoviSelekt
+            tagoviOptions={tagoviOptions}
+            className="select"
+          />
+        </div>
+        <div className="line-div2" />
+      </div>
+
       <div className="photo-container">
         {filteredPhotos && filteredPhotos.length > 0 ? (
           filteredPhotos.map((photo, index) => (
