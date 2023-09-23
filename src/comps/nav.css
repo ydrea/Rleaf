@@ -55,7 +55,7 @@ height: 10vh;
   display: flex;
   align-items: center;
   text-decoration: none;
-  margin: 0.7rem 0.7rem;
+  padding: .2rem 1.2rem;
   font-size: 1.3rem;
 position: relative;
 white-space: pre !important; 

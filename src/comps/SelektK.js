@@ -22,7 +22,7 @@ function KategorijeSelekt({ kategorijeOptions }) {
       ...styles,
       backgroundColor: 'transparent',
       border: 'none',
-      borderTop: '1px solid white',
+      borderTop: '1px solid black',
       borderRadius: '0',
       cursor: 'pointer',
     }),
@@ -35,14 +35,20 @@ function KategorijeSelekt({ kategorijeOptions }) {
       color: 'black',
       marginTop: '-13px',
       marginLeft: '-8px',
-      fontSize: '18px',
+      fontSize: '22px',
     }),
     dropdownIndicator: provided => ({ ...provided, display: 'none' }),
     indicatorSeparator: provided => ({
       ...provided,
       display: 'none',
     }),
-    menu: styles => ({ ...styles, zIndex: '999', cursor: 'pointer' }),
+    menu: styles => ({
+      ...styles,
+      zIndex: '999',
+      cursor: 'pointer',
+      width: '16vw',
+      height: 'auto',
+    }),
   };
   return (
     <div>
@@ -58,8 +64,8 @@ function KategorijeSelekt({ kategorijeOptions }) {
       <label
         htmlFor="kategorije-select"
         style={{
-          fontSize: '18px',
-          color: 'white',
+          fontSize: '22px',
+          color: '#545550',
         }}
       >
         kategorije

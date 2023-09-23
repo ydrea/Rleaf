@@ -20,12 +20,11 @@ function TagoviSelekt({ tagoviOptions }) {
   const cusTom = {
     control: styles => ({
       ...styles,
-      backgroundColor: 'transparent', // Make the background transparent
-      border: 'none', // Remove the default border
-      borderTop: '1px solid white', // Add the white bottom border
+      backgroundColor: 'transparent',
+      border: 'none',
+      borderTop: '1px solid black',
       borderRadius: '0',
       cursor: 'pointer',
-      // Remove border radius if needed
     }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       console.log('selekt', data, isDisabled, isFocused, isSelected);
@@ -36,7 +35,7 @@ function TagoviSelekt({ tagoviOptions }) {
       color: 'black',
       marginTop: '-13px',
       marginLeft: '-8px',
-      fontSize: '18px',
+      fontSize: '22px',
     }),
     dropdownIndicator: provided => ({ ...provided, display: 'none' }),
     indicatorSeparator: provided => ({
@@ -59,7 +58,7 @@ function TagoviSelekt({ tagoviOptions }) {
       />
       <label
         htmlFor="keyword-select"
-        style={{ color: 'white', fontSize: '18px' }}
+        style={{ color: '#545550', fontSize: '22px' }}
       >
         ključne riječi
       </label>

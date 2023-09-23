@@ -12,6 +12,7 @@ position: relative; bottom: 0;
 }
 
 .footer p {
-  max-width: 65vw;margin-left: 22vw;
-  margin-right: 13vw;
+  max-width: 75vw;
+  padding-left: 2.1vw;
+  /* margin-right: 13vw; */
 }

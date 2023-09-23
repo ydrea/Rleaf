@@ -6,8 +6,8 @@
 .photo-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2vw;
-  margin-left: 12vw;
+  gap: 1vw;
+  margin-left: 13.4vw;
   margin-right: 10vw;
   padding-top: 3vw;
   flex-direction: row;
@@ -33,7 +33,7 @@
 
 
 .selected-div2 {
-  font-size: 18px;
+  font-size: 22px;
   z-index: 922;
   width: 88vw; 
   justify-content: space-between;
@@ -47,21 +47,21 @@
   }
 
   .naslov-container h1 {
-    letter-spacing: .06em;
+    letter-spacing: .047em;
     font-size: 10vw;
     font-weight: 100;
     margin-top: -14vh;
-    margin-left: 10vw;
+    margin-left: 12.5vw;
     color: #fff;  
 }
   .naslov-container p {
     position: relative; 
-    font-size: clamp(3vh, 4vh);
+    font-size: 22px;
     font-weight: 100;
-    margin-left: 12vw;
-    margin-right: 10vw;
-    margin-top: -7.5vh;
-    width: 78vw;
+    margin-left: 13.4vw;
+    /* margin-right: 11; */
+    margin-top: -13.5vh;
+    width: 75vw;
 }
 
 .filters-container {
@@ -74,9 +74,9 @@
   position: relative;
 }
 .select-container {
-  margin-left: 12vw;
-  margin-right: 10vw;
-  width: 80%;
+  margin-left: 13.4vw;
+  /* margin-right: 11vw; */
+  width: 75.5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,8 +84,8 @@
 
 .select-container select {
   flex: 1;
-  max-width: calc(50% );
-  margin-right: 3vw;
+  max-width: 75%;
+  margin-right: 1vw;
   }
 
 
@@ -110,7 +110,7 @@
 .line-div2{
   border-top: 1px solid #000;
   position: absolute;
-  top: 96%;
+  top: 100%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -149,7 +149,7 @@
   } */
 
   .naslov-container p {
-    font-size: 3vw;
+    /* font-size: 3vw; */
     margin-left: 10vw;
     margin-right: 8vw;
     padding-top: 3vh;
