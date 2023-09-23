@@ -56,24 +56,25 @@ function Home() {
       {/* </div> */}
       {/* //Sections */}
       <div className="S1" ref={rockRef}>
-        'Opservatorij' je platforma koja djeluje kao virtualni
-        kolaborativni subjekt koji okuplja stručnjake različitih
-        profila. U središtu naše pažnje je koncept krajobraza koji se
-        sve više prepoznaje kao ključna komponenta globalnog nasljeđa
-        i održivog razvoja. Naša misija je pružiti integralan pristup
-        razumijevanju krajobraza kroz kombinaciju prirodnih,
-        kulturno-povijesnih i vizualnih čimbenika.
+        'Opservatorij krajobraza' je kolaborativna platforma koja
+        okuplja znanstvenike i stručnjake različitih profila. U
+        središtu naše pažnje je koncept krajobraza koji se sve više
+        prepoznaje kao ključna komponenta globalnog nasljeđa i
+        održivog razvoja. Uspostavljen zbog nedovoljne istraženosti,
+        neprisutnosti podataka, niskog stupnja svijesti o
+        karakteristikama te sveukupnoj neiskorištenosti potencijala
+        hrvatskog krajobraza. Naša misija je pružiti integralan
+        pristup razumijevanju, prezentaciji i očuvanju krajobraza te
+        promišljati razvoj temeljen na krajobrazu.
       </div>
       <div className="S2">
         <div className="cont2">
           <img src="home2.png" className="img2" />
           <div className="txt2">
-            Pilot područje Opservatorija je Banovina ili Banija,
-            marginalizirana regija Hrvatske, izrazito pogođena ratnim
-            stradanjima tijekom 1990-ih i jakim potresom 2020. godine,
-            a pilot projekti koje provodi tim Opservatorija su
-            Opservatorij krajobraza Banovina/Banije i EWAP: Ugrožena
-            drvena arhitektura Banovine/Banije, Pokuplja i Posavine.
+            ‘Opservatorij’ se bavi dokumentiranjem, monitoringom,
+            edukacijom te promoviranjem interdisciplinarnih metoda.
+            Smatramo da je zaštita i razumijevanje krajobraza ključna
+            za otpornost i regeneraciju zajednica.
           </div>
         </div>
       </div>
@@ -92,19 +93,17 @@ function Home() {
           <div className="txt4">
             Za sve informacije vezane uz ‘Opservatorij krajobraza’,
             slobodno nas kontaktirajte putem e-maila na
-            [info@croatianlandscape.hr] ili telefonom na [+385 xx xxx
-            xxxx].
-            <div style={{ color: 'black' }}>
-              Zanima vas više o našem radu i misiji? Pretplatite se na
-              naš newsletter i budite u tijeku s našim istraživanjima
-              i aktivnostima. Unesite svoju e-mail adresu i pridružite
-              se putovanju prema očuvanju i razumijevanju krajobraza."
-            </div>
+            [info@croatianlandscape.hr] ili telefonom na [+385 95
+            9123055]. Zanima vas više o našem radu i misiji?
+            Pretplatite se na naš newsletter i budite u tijeku s našim
+            istraživanjima i aktivnostima. Unesite svoju e-mail adresu
+            i pridružite se putovanju prema razumijevanju i očuvanju
+            krajobraza.
           </div>
         </div>
-        <div>
-          <Footer className="foo" />
-        </div>
+      </div>
+      <div>
+        <Footer className="foo" />
       </div>
     </div>
   );
