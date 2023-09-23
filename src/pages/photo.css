@@ -13,13 +13,13 @@
  }
 
 .img-cnt {
-  width: 64.5vw;
-  padding-left: 3.3vw;
+  width: 80vw;
+  /* padding-left: 3.3vw; */
 /* margin-left: 5vw; */
 }
 
 .img-cnt img {
-  width: 64.5vw;
+  width: 80vw;
 }
  .prev, .center,
  .next {
@@ -77,7 +77,8 @@
   text-align: left;
   }
 .tag {
-  grid-row: 3;
+grid-row: 3;
+grid-column: 1/6;
 display: inline-block;
 margin-top: 2vh;
 padding-left: .4vw;

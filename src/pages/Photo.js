@@ -8,13 +8,14 @@ import {
   increment,
   decrement,
 } from '../redux/rtk/gallerySlice';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './photo.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 //
 export default function Photo() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { signatura } = useParams();
 
   // Use useSelector to access selectedPhotoIndex from the Redux store
@@ -36,8 +37,24 @@ export default function Photo() {
     return <div>Photo not found</div>;
   }
 
+  const handleBackToGallery = () => {
+    navigate('/photos');
+  };
+  const handleShowOnMap = () => {};
+
   return (
     <div className="cont">
+      <div className="filters-container">
+        <div
+          className="select-container"
+          onClick={handleBackToGallery}
+        >
+          natrag u galeriju
+        </div>
+        <div className="select-container" onClick={handleShowOnMap}>
+          pokaži na karti
+        </div>
+      </div>
       <div className="image-wrapper">
         <FaChevronLeft
           className="prev"

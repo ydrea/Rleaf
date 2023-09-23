@@ -28,6 +28,9 @@ const PhotosLayout = () => {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [showPhoto, showPhotoSet] = useState(false);
   //
+  const filteredPhotos = useSelector(state =>
+    selectFilteredPhotos(state, selectedFilters)
+  );
   //
   return (
     <div className="gallery">
