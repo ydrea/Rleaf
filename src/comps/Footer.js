@@ -18,7 +18,7 @@ export default function Footer() {
         dopušta nekomercijalno umnožavanje, dijeljenje i mijenjanje,
         uz navođenje autorstva na način koji je specificirao autor i
         uz daljnje dijeljenje pod istim uvjetima. Obratite nam se
-        ukoliko su vam potrebne fotografije u izvornoj veličini. "
+        ukoliko su vam potrebne fotografije u izvornoj veličini."
       </p>
     </div>
   );

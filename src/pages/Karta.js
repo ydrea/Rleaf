@@ -4,6 +4,8 @@ import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './karta.css';
+import Footer from '../comps/Footer';
+import ReactDOMServer from 'react-dom/server';
 
 const myIcon = L.icon({
   iconUrl: require('../assets/ikona.png'),
@@ -56,22 +58,38 @@ const Karta = () => {
         const popupContent = (
           <div>
             {markerData.popupContent}
-            <Link
+            {/* <Link
               to={{
                 pathname: '/photos',
                 params: markerData.signatura,
               }}
-            >
-              <img
-                width="233px"
-                src={`${process.env.REACT_APP_SERVER_PUB}/${markerData.signatura}`}
-                alt={markerData.signatura}
-              />
-            </Link>
+            > */}
+            <img
+              width="233px"
+              src={`${process.env.REACT_APP_SERVER_PUB}/${markerData.signatura}`}
+              alt={markerData.signatura}
+            />
+            {/* </Link> */}
           </div>
         );
 
-        marker.bindPopup(popupContent); // Bind the popup content
+        const popupHtml = ReactDOMServer.renderToString(popupContent);
+
+        marker.bindPopup(popupHtml); // Bind the popup content
+        console.log(popupHtml);
+        //markDown
+        marker.on('click', () => {
+          // Display the image in a modal or a designated area on your page
+          const image = document.createElement('img');
+          image.src = `${process.env.REACT_APP_SERVER_PUB}/${markerData.signatura}`;
+          image.alt = markerData.signatura;
+          // Append the image to a modal or a specific container
+          const modalContainer =
+            document.getElementById('modal-container');
+          modalContainer.innerHTML = ''; // Clear previous content
+          modalContainer.appendChild(image);
+        });
+        //
 
         marker.addTo(map);
         return marker;
@@ -101,33 +119,62 @@ const Karta = () => {
         }
       );
       const mapInstance = L.map('map-container', {
-        center: [46.2, 16],
-        zoom: 13,
+        center: [45.2, 16.2],
+        zoom: 8,
         layers: [osm],
         zoomControl: false,
       });
 
+      //base
       osm.addTo(mapInstance);
 
       const url1 =
         'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0';
-      const wmsLayer1 = L.tileLayer
+
+      const temaS = L.tileLayer
         .wms(url1, {
           layers: 'tema_stanovnistvo',
+          transparent: 'true',
           format: 'image/png',
-          transparent: true,
-          version: '1.3.0',
-          attribution: 'WMS Service Attribution',
+        })
+        .addTo(mapInstance);
+      const temaP = L.tileLayer
+        .wms(url1, {
+          layers: 'tema_potres',
+          transparent: 'true',
+          format: 'image/png',
+        })
+        .addTo(mapInstance);
+      const temaKZ = L.tileLayer
+        .wms(url1, {
+          layers: 'tema_koristenje_zemljista',
+          transparent: 'true',
+          format: 'image/png',
+        })
+        .addTo(mapInstance);
+      const temaZP = L.tileLayer
+        .wms(url1, {
+          layers: 'tema_zastita_prirode',
+          transparent: 'true',
+          format: 'image/png',
         })
         .addTo(mapInstance);
 
+      //baseMaps
       const baseMaps = {
         OSM: osm,
         Dark: dark,
       };
 
-      const overlayMaps = { Stanovništvo: wmsLayer1 };
+      //overlayMaps
+      const overlayMaps = {
+        Stanovništvo: temaS,
+        Potres: temaP,
+        'Korištenje zemljišta': temaKZ,
+        'Zaštita prirode': temaZP,
+      };
 
+      //cont rol
       L.control
         .layers(baseMaps, overlayMaps, { collapsed: false })
         .addTo(mapInstance);
@@ -180,6 +227,8 @@ const Karta = () => {
         id="map-container"
         style={{ height: '400px', width: '60vw' }}
       />
+      <div id="modal-container"></div>
+      <Footer />{' '}
     </div>
   );
 };

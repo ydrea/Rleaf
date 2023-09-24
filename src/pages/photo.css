@@ -13,13 +13,13 @@
  }
 
 .img-cnt {
-  width: 80vw;
-  /* padding-left: 3.3vw; */
+  width: 75vw;
+  padding-left: 2.3vw;
 /* margin-left: 5vw; */
 }
 
 .img-cnt img {
-  width: 80vw;
+  width: 75vw;
 }
  .prev, .center,
  .next {
@@ -53,6 +53,7 @@
 
 /* Define the grid container */
 .selected-div1 {
+  font-size: 22px;
   display: grid;
   grid-template-columns: repeat(5, 1fr); 
   grid-template-rows: 1fr 1fr 1fr;           

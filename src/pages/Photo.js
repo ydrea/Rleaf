@@ -40,7 +40,15 @@ export default function Photo() {
   const handleBackToGallery = () => {
     navigate('/photos');
   };
-  const handleShowOnMap = () => {};
+
+  //
+  const handleShowOnMap = () => {
+    // Dispatch an action to set the selected marker in Redux
+    dispatch(setSelectedMarker(selectedPhoto.signatura));
+
+    // Navigate back to the map view
+    navigate('/map');
+  };
 
   return (
     <div className="cont">
