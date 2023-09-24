@@ -1,47 +1,47 @@
-.home {
-  font-size: 30px;
+.home {display: block;
 }
 
 .cont0 {
   position: relative;
+  height: 33rem;
+  flex-shrink: 0;
+  margin-left: 10vw;
 }
-
-.img0 {
-  object-fit: cover;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: none;
-  place-items: center;
-  z-index: 0;
-  height: 80vh;
-}
-
-.txt0 {
-  text-align: center;
-  z-index: 33;
-  position: relative;
-}
-
-.vozi,
-.aepali {
-  color: #fff;
-  font-size: 140px;
-  z-index: 100;
-  position: absolute;
-  left: 20vw;
-  bottom: 17.5rem;
-}
-
-.podnaslov {
-  position: relative;
+.vozi {
   display: flex;
   justify-content: center;
-  width: 100%;
-  z-index: 3;
-  font-size: 30px;
-  margin-top: 0.6rem;
+   color: #fff;
+  font-size: 9.6875rem;
+  width: 80rem;  z-index: 3;
+  position: absolute;
+  top: 0rem;
+font-style: normal;
+font-weight: 500;
+line-height: 140%; 
+letter-spacing: 0.53281rem;
+}
+
+.pali {
+  color: #fff;
+  font-size: 9.6875rem;
+  z-index: 100;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 80rem;  z-index: 3;
+    top: 12rem;
+font-style: normal;
+font-weight: 500;
+line-height: 140%; /* 13.5625rem */
+letter-spacing: 0.53281rem;
+}
+.podnaslov {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 80rem;  z-index: 3;
+  font-size: 1.6rem;
+bottom: 0;
 }
 
 .line-div1 {
@@ -56,15 +56,19 @@
 }
 
 .S1 {
+  position: relative; top: 10rem;
   font-size: 1.8rem;
-  height: 80vh;
-  padding-top: 20vh;
-  padding-left: 4vw;
+  color: #7e7e77;
+  width: 76vw;
+  height: 47rem;
+  /* padding-top: 20vh; */
+  margin-left: 13vw;
   white-space: pre-line;
 }
 
 .S2 {
-  height: 80vh;
+  position: relative; 
+  height: 47rem;
   align-items: center;
 }
 
@@ -74,42 +78,44 @@
 
 .img2 {
   object-fit: cover;
-  width: 100%;
+  width: 87%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   display: grid;
-  place-items: center;
+  margin-left: 13vw;
   z-index: 0;
 }
 
 .txt2 {
+ font-size: 1.8rem;
   color: #fff;
   position: absolute;
   padding-right: 1rem;
   right: 0;
   text-align: left;
   z-index: 33;
-  max-width: 53%;
+  max-width: 43%;
   width: 100%;
   bottom: 30vh;
 }
 
 .S3 {
-  height: 120vh;
+  height: 47rem;
   display: block;
 }
 
 .cont3 {
   position: relative;
-  top: 28vh;
+  top: 10vh;
+  margin-left: 13vw;
   min-height: 80vh;
   min-width: 50%;
 }
 
 .img3 {
   position: absolute;
-  top: 39%;
+  top: 10%;
   left: 0;
   width: 50%;
   height: auto;
@@ -117,28 +123,35 @@
 }
 
 .txt3 {
+  font-size: 1.8rem;
+  color: #7e7e77;
   position: absolute;
-  top: 109%;
-  left: 1vw;
+  top: 70%;
+  left: 43vw;
   width: 50%;
   text-align: left;
 }
 
 .S4 {
   display: block;
-  position: relative;
-  height: 80vh;
-  margin-top: 40vh;
+  /* position: relative; */
+  height: 47rem;
+  /* margin-top: 30rem; */
 }
 
 .txt4 {
-  width: 50%;
+  font-size: 1.8rem;
+  width: 43.5%;
   position: absolute;
-  right: 0;
+  left: 56vw;
 }
 
 .foo {
   display: block;
   position: absolute;
   top: 100vh;
+}
+.foo p {
+
+  color: #fff;
 }

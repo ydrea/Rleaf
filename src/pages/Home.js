@@ -29,33 +29,18 @@ function Home() {
   //
   return (
     <div className="home">
-      {jelNije ? (
-        <>
-          <div className="naslov-container">
-            <h1>opservatorij</h1>
-            {/* <p>
-            Interdisciplinarna platforma posvećena istraživanju i
-            razumijevanju krajobraza
-          </p> */}
-          </div>
-          <div className="line-div4" />
-        </>
-      ) : (
-        <div className="cont0">
-          <img src="home0.png" className="img0" />
-          <div className="txt0">
-            <div className="vozi"> Opservatorij</div>
-            <div className="aepali">krajobraza</div>
-          </div>
-          {/* 
-          <div className="podnaslov">
-            <div className="line-div2" />
-          </div> */}
+      {/* {jelNije ? ( */}
+      <div className="cont0">
+        <div className="vozi">opservatorij</div>
+        <div className="pali">krajobraza </div>
+        <div className="podnaslov">
+          Interdisciplinarna platforma posvećena istraživanju i
+          razumijevanju krajobraza
         </div>
-      )}
+      </div>
       {/* </div> */}
       {/* //Sections */}
-      <div className="S1" ref={rockRef}>
+      <div className="S1">
         'Opservatorij krajobraza' je kolaborativna platforma koja
         okuplja znanstvenike i stručnjake različitih profila. U
         središtu naše pažnje je koncept krajobraza koji se sve više
@@ -77,29 +62,26 @@ function Home() {
             za otpornost i regeneraciju zajednica.
           </div>
         </div>
-      </div>
-      <div className="fors">
-        {' '}
-        <div className="S3">
-          <div className="cont3">
-            <img src="home3.png" className="img3" />
-            <div className="txt3">
-              Pozivamo vas da se pridružite našem putovanju prema
-              očuvanju i razumijevanju krajobraza.
-            </div>{' '}
-          </div>
+      </div>{' '}
+      <div className="S3">
+        <div className="cont3">
+          <img src="home3.png" className="img3" />
+          <div className="txt3">
+            Pozivamo vas da se pridružite našem putovanju prema
+            očuvanju i razumijevanju krajobraza.
+          </div>{' '}
         </div>
-        <div className="S4">
-          <div className="txt4">
-            Za sve informacije vezane uz ‘Opservatorij krajobraza’,
-            slobodno nas kontaktirajte putem e-maila na
-            [info@croatianlandscape.hr] ili telefonom na [+385 95
-            9123055]. Zanima vas više o našem radu i misiji?
-            Pretplatite se na naš newsletter i budite u tijeku s našim
-            istraživanjima i aktivnostima. Unesite svoju e-mail adresu
-            i pridružite se putovanju prema razumijevanju i očuvanju
-            krajobraza.
-          </div>
+      </div>
+      <div className="S4">
+        <div className="txt4">
+          Za sve informacije vezane uz ‘Opservatorij krajobraza’,
+          slobodno nas kontaktirajte putem e-maila na
+          [info@croatianlandscape.hr] ili telefonom na [+385 95
+          9123055]. Zanima vas više o našem radu i misiji? Pretplatite
+          se na naš newsletter i budite u tijeku s našim
+          istraživanjima i aktivnostima. Unesite svoju e-mail adresu i
+          pridružite se putovanju prema razumijevanju i očuvanju
+          krajobraza.
         </div>
       </div>
       <div>

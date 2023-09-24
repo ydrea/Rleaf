@@ -63,13 +63,13 @@ white-space: pre !important;
 
 
 .first-letter-white {
-  color: #fff;
+  color: #18aa00;
 /* white-space: pre !important;  */
 }
 
 .nav-links:hover,
 .nav-links.clicked  {
-  color: #fff;
+  color: #18aa00;
   text-decoration: none;
 }
 
