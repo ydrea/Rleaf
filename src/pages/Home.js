@@ -69,7 +69,7 @@ function Home() {
             src="home3.png"
             style={{
               position: 'absolute',
-              top: '55px',
+              top: '0',
               left: '0',
               width: '50%',
               height: 'auto',

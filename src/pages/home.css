@@ -67,18 +67,19 @@ bottom: 0;
 }
 
 .S2 {
-  position: relative; 
-  height: 47rem;
+  /* position: relative;  */
+  height: 55.2rem;
   align-items: center;
 }
 
-.cont2 {
+ .cont2 {
   position: relative;
-}
+height: 55.2rem;
+} 
 
 .img2 {
   object-fit: cover;
-  width: 87%;
+  width: 87%; height: auto;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -101,21 +102,21 @@ bottom: 0;
 }
 
 .S3 {
-  height: 47rem;
+  height: 35rem;
   display: block;
 }
 
 .cont3 {
   position: relative;
-  top: 10vh;
+  top: 0vh;
   margin-left: 13vw;
-  min-height: 80vh;
+  height: 35rem;
   min-width: 50%;
 }
 
 .img3 {
   position: absolute;
-  top: 20px;
+  top: 0px;
   left: 0;
   width: 50%;
   height: auto;
@@ -126,7 +127,7 @@ bottom: 0;
   font-size: 1.8rem;
   color: #7e7e77;
   position: absolute;
-  top: 70%;
+  top: 61%;
   left: 43vw;
   width: 50%;
   text-align: left;
