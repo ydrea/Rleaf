@@ -90,11 +90,6 @@ export default function Photos() {
     <div className="gallery">
       {/* filter options */}
       <div className="filters-container">
-        {/* <Selekt
-          filters={filters}
-          selectedOptions={selectedFilters}
-          onChange={handleFilterChange}
-        /> */}
         <div className="select-container">
           <KategorijeSelekt
             kategorijeOptions={kategorijeOptions}

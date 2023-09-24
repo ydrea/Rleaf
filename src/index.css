@@ -1,34 +1,9 @@
-/* @font-face {
+@font-face {
   font-family: 'DM Mono';
   font-style: normal;
   font-weight: normal;
-  src: url('../public/fonts/DM_Mono/DMMono-Regular') format('ttf');
-  /* src: url('../public/fonts/FreeSans.woff') format('woff'); */
-    
-/* 
- @font-face {
-  font-family: 'FreeSans Oblique';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../public/fonts/freesans-2-cufonfonts-webfont/FreeSansOblique.woff') format('woff');
-  }
-  
-
-  @font-face {
-  font-family: 'FreeSans Bold';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../public/fonts/freesans-2-cufonfonts-webfont/FreeSansBold.woff') format('woff');
-  }
-  
-
-  @font-face {
-  font-family: 'FreeSans BoldOblique';
-  font-style: normal;
-  font-weight: normal;
-    src: url('../public/fonts/freesans-2-cufonfonts-webfont/FreeSansBoldOblique.woff') format('woff');
-  }  */
-
+  src: url('../public/fonts/DM_Mono/DMMono-Regular.woff') ;
+} 
 html, body, #root {
   width: 100%; 
   margin: 0;
