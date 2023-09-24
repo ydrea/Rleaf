@@ -6,7 +6,16 @@ import { Link } from 'react-router-dom';
 import './karta.css';
 import Footer from '../comps/Footer';
 import ReactDOMServer from 'react-dom/server';
+import { useSelector, useDispatch } from 'react-redux';
 
+import {
+  selectSelectedPhoto,
+  selectSelectedMarker,
+  setSelectedPhoto,
+  setSelectedMarker,
+} from '../redux/rtk/mapSlice';
+
+//
 const myIcon = L.icon({
   iconUrl: require('../assets/ikona.png'),
   iconSize: [28, 28],
@@ -17,6 +26,9 @@ const Karta = () => {
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [markerInstances, setMarkerInstances] = useState([]);
+  const selectedMark = useSelector(state => {
+    return state?.mapslice?.selectedMarker;
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,7 +88,7 @@ const Karta = () => {
         const popupHtml = ReactDOMServer.renderToString(popupContent);
 
         marker.bindPopup(popupHtml); // Bind the popup content
-        console.log(popupHtml);
+        // console.log(popupHtml);
         //markDown
         marker.on('click', () => {
           // Display the image in a modal or a designated area on your page
@@ -205,7 +217,33 @@ const Karta = () => {
       mapRef.current.zoomOut();
     }
   };
+  //
+  const triggerMarkerClick = signatura => {
+    if (map && markers.length > 0) {
+      // Find the marker instance with the matching signatura
+      const targetMarker = markerInstances.find(
+        marker => marker.options.popupContent === signatura
+      );
+      console.log(targetMarker);
+      if (targetMarker) {
+        // Programmatically trigger a click event on the marker
+        targetMarker.fire('click');
+      } else {
+        console.log(`Marker with signatura ${signatura} not found.`);
+      }
+    }
+  };
 
+  // Create a useEffect to listen for changes in selectedMark
+  useEffect(() => {
+    if (selectedMark) {
+      // Call the function to trigger marker click with
+      console.log('aaaaaaaaa', selectedMark);
+      triggerMarkerClick(selectedMark);
+    }
+  }, [selectedMark]);
+
+  //
   return (
     <div className="gallery">
       <div className="naslov-container">

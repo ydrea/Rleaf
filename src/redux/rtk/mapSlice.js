@@ -10,7 +10,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  selectedPhoto: null,
+  selectedImg: null,
   selectedMarker: null,
 };
 
@@ -19,7 +19,7 @@ const mapSlice = createSlice({
   initialState,
   reducers: {
     setSelectedPhoto: (state, action) => {
-      state.selectedPhoto = action.payload;
+      state.selectedImg = action.payload;
     },
     setSelectedMarker: (state, action) => {
       state.selectedMarker = action.payload;
@@ -29,5 +29,10 @@ const mapSlice = createSlice({
 
 export const { setSelectedPhoto, setSelectedMarker } =
   mapSlice.actions;
+
+export const selectSelectedPhoto = state =>
+  state.mapslice.selectedImg;
+export const selectSelectedMarker = state =>
+  state.mapslice.selectedMarker;
 
 export default mapSlice.reducer;

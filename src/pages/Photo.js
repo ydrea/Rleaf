@@ -11,13 +11,17 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import './photo.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-
+import {
+  setSelectedMarker,
+  selectSelectedPhoto,
+} from '../redux/rtk/mapSlice';
 //
 export default function Photo() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { signatura } = useParams();
 
+  // const selectedImg = useSelector(selectSelectedPhoto);
   // Use useSelector to access selectedPhotoIndex from the Redux store
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
 
@@ -44,10 +48,10 @@ export default function Photo() {
   //
   const handleShowOnMap = () => {
     // Dispatch an action to set the selected marker in Redux
-    dispatch(setSelectedMarker(selectedPhoto.signatura));
-
+    dispatch(setSelectedMarker(selectedImg.signatura));
+    console.log(selectedImg.signatura);
     // Navigate back to the map view
-    navigate('/map');
+    navigate(`/mapa/${signatura}`);
   };
 
   return (
@@ -59,9 +63,9 @@ export default function Photo() {
         >
           natrag u galeriju
         </div>
-        <div className="select-container" onClick={handleShowOnMap}>
+        {/* <div className="select-container" onClick={handleShowOnMap}>
           pokaži na karti
-        </div>
+        </div> */}
       </div>
       <div className="image-wrapper">
         <FaChevronLeft

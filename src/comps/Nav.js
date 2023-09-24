@@ -9,7 +9,11 @@ export const Dropdown = ({ submenus, dropdown }) => {
       {submenus.map((submenu, index) => (
         <li key={index} className="menu-items">
           {submenu.to ? (
-            <Link to={submenu.to} className="submenu-link">
+            <Link
+              to={submenu.to}
+              className={`submenu-link ${dropdown ? 'open' : ''}`}
+              aria-expanded={dropdown ? 'true' : 'false'}
+            >
               <span className="first-letter-white">
                 {submenu.label.charAt(0)}
               </span>
@@ -44,8 +48,10 @@ export const Nav = () => {
 
   const handleSubMenuClick = index => {
     setSubMenu(prev => ({
-      ...prev,
-      [index]: !prev[index],
+      ...Object.keys(prev).reduce((acc, key) => {
+        acc[key] = index === key ? !prev[key] : false;
+        return acc;
+      }, {}),
     }));
   };
 

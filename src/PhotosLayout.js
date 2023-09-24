@@ -37,7 +37,7 @@ const PhotosLayout = () => {
       <div className="naslov-container">
         <h1>opservatorij</h1>
         <div className="line-div0" />{' '}
-        <p>
+        <div className="teka">
           Fototeka predstavlja mjesto vizualne interpretacije i
           opservacije, omogućavajući tako znanstvenu komparaciju i
           sadržajnu usporedbu. Naš fotografski arhiv kroz različite
@@ -48,7 +48,7 @@ const PhotosLayout = () => {
           vizualnu vezu. Stvaranjem fotografskih tipologija
           istraživačima omogućavamo pronalaženje specifičnih stavki
           unutar jasno definiranih kategorija.
-        </p>
+        </div>
         <div className="line-div1" />{' '}
       </div>{' '}
       <Outlet filteredPhotos={filteredPhotos} />{' '}

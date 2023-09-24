@@ -76,7 +76,7 @@ white-space: pre !important;
 /* Style submenu links with href */
 .submenu-link {
   text-decoration: none;
-  color: #fff; /* Customize as needed */
+  color: #000; /* Customize as needed */
   display: flex;
   align-items: center;
   font-size: 1.3rem;
@@ -114,15 +114,16 @@ white-space: pre !important;
 .dropdown {
   position: absolute;
   /* right: 0; */
-  top: 7vh;
+  top: 5vh;
   /* left: auto; */
-    font-size: 0.875rem;
+    /* font-size: 0.875rem; */
   z-index: 9999;
-  min-width: 5rem;
+  min-width: 8rem;
+  min-height: 4rem;
   padding: 0.5rem 0.5rem;
   list-style: none;
-  /* background-color: #8c8d85; */
-  border-radius: 0.5rem;
+  background-color: #d8d8d8;
+  /* border-radius: 0.5rem; */
   display: none;
 }
 
@@ -168,7 +169,7 @@ white-space: pre !important;
   .nav-menu {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 100%;
     height: 90vh;
     position: absolute;
     top: 80px;
@@ -178,7 +179,7 @@ white-space: pre !important;
     transition: all 0.5s ease;
   }
   .nav-menu.active {
-    /* background: darkgray; */
+    background: darkgray;
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
@@ -188,14 +189,15 @@ white-space: pre !important;
     height: 50px;
   }
   .nav-links {
+ 
     text-align: center;
     /* padding: 1rem; */
     width: 100%;
     display: table;
   }
   .nav-links:hover {
-    /* background-color: #8C8D85;
-    color: #242424; */
+     background-color: white;
+    color: #242424; 
     border-radius: 0;
   }
   /* .navbar-logo {
@@ -232,7 +234,7 @@ white-space: pre !important;
     width: 50%;
     text-decoration: none;
     font-size: 1.5rem;
-    background-color: transparent;
+    background-color: black;
     color: #fff;
     padding: 14px 20px;
     border: 1px solid #fff;
