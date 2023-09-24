@@ -36,7 +36,7 @@ const PhotosLayout = () => {
     <div className="gallery">
       <div className="naslov-container">
         <h1>opservatorij</h1>
-        <div className="line-div0" />{' '}
+        <div className="line-div4" />
         <div className="teka">
           Fototeka predstavlja mjesto vizualne interpretacije i
           opservacije, omogućavajući tako znanstvenu komparaciju i

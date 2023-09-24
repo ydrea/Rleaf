@@ -26,7 +26,7 @@
   .three,
   .five,
   .six {
-    font-size: 18px; /* Adjust font size for smaller screens */
+    font-size: 18px; /* Adjust font size for smaller screens */ 
     width: 80%; /* Adjust width for smaller screens */
     margin-left: auto;
     margin-right: auto;
@@ -52,7 +52,7 @@
         height: 140vh;
         font-size: 22px;
         /* letter-spacing: 1.1px; */
-        margin-left: 16vw;
+        margin-left: 18vw;
         margin-right: 7vw;
         margin-top: 5vh;
           }

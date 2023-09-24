@@ -6,7 +6,7 @@
 .photo-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1vw;
+  gap: 3vw;
   margin-left: 13.4vw;
   margin-right: 10vw;
   padding-top: 3vw;
@@ -50,17 +50,23 @@
     letter-spacing: .047em;
     font-size: 10vw;
     font-weight: 100;
-    margin-top: -14vh;
+    margin-top: -10vh;
     margin-left: 12.5vw;
     color: #fff;  
-}
+    display: flex;
+    width: 76.65938rem;
+    height: 9.30713rem;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+  }
   .teka {
     position: relative; 
     font-size: 1.3rem;
     font-weight: 100;
-    margin-left: 13.4vw;
+    margin-left: 13vw;
     /* margin-right: 11; */
-    margin-top: -13.5vh;
+    margin-top: -16vh;
     width: 75vw;
 }
 
@@ -74,8 +80,8 @@
   position: relative;
 }
 .select-container {
- font-size: 22px;
-  margin-left: 13.4vw;
+ font-size: 1.2rem;
+  margin-left: 13.5vw;
   /* margin-right: 11vw; */
   width: 75%;
   display: flex;
@@ -86,14 +92,14 @@
 .select-container select {
   flex: 1;
   max-width: 75%;
-  margin-right: 1vw;
+  margin-left: 1vw;
   }
 
 
 .line-div0 {
   border-top: 1px solid #000;
   position: absolute;
-  top: 25%;
+  top: 33%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -102,7 +108,7 @@
 .line-div1{
   border-top: 1px solid #000;
   position: absolute;
-  top: 96%;
+  top: 100%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -130,7 +136,7 @@
 .line-div4 {
   border-top: 1px solid #000;
   position: absolute;
-  top: 27.5%;
+  top: 28.5%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -141,11 +147,12 @@
     width: 100%;
   }
 
+}
   .teka {
-    /* font-size: 3vw; */
-    margin-left: 10vw;
+    font-size: 1.2 rem;
+    /* margin-left: 12.7vw; */
     margin-right: 8vw;
-    padding-top: 3vh;
+    padding-top: 5vh;
   }
 /* Media query for smaller screens */
 @media screen and (max-width: 800px) {
@@ -156,10 +163,9 @@
     margin-left: 2vw;
   } */
 
-}
-.line-div2, .line-div1, .line-div0, .line-div3, .line-div4 {
-  display: none;
-}
+  .line-div2, .line-div1, .line-div0, .line-div3, .line-div4 {
+    display: none;
+  }
 .photo { 
  width: 12rem;
 }

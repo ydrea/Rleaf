@@ -7,8 +7,9 @@
     /* position: relative;  */
     }
   .un {
-    font-size: 22px;
-    letter-spacing: 1.1px;
-    margin-left: 5vw;
+    font-size: 1.8rem;
+    /* letter-spacing: 1.1px; */
+    margin-left: 14vw;
     margin-top: 5vw;
+    max-width: 75vw;
   }
