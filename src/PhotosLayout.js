@@ -39,18 +39,21 @@ const PhotosLayout = () => {
         <div className="line-div0" />
       </div>{' '}
       <div className="teka">
-        Fototeka predstavlja mjesto vizualne interpretacije i
-        opservacije, omogućavajući tako znanstvenu komparaciju i
-        sadržajnu usporedbu. Naš fotografski arhiv kroz različite
-        klasifikacije (kategorije i ključne riječi) omogućava
-        objektivne i znanstvene usporedbe subjekata koji dijele slične
-        vizualne karakteristike, ali omogućava i stvaranje odnosa
-        između sadržaja koji naizgled nemaju direktnu vizualnu vezu.
-        Stvaranjem fotografskih tipologija istraživačima omogućavamo
-        pronalaženje specifičnih stavki unutar jasno definiranih
-        kategorija.
+        <div className="tekast">
+          {' '}
+          Fototeka predstavlja mjesto vizualne interpretacije i
+          opservacije, omogućavajući tako znanstvenu komparaciju i
+          sadržajnu usporedbu. Naš fotografski arhiv kroz različite
+          klasifikacije (kategorije i ključne riječi) omogućava
+          objektivne i znanstvene usporedbe subjekata koji dijele
+          slične vizualne karakteristike, ali omogućava i stvaranje
+          odnosa između sadržaja koji naizgled nemaju direktnu
+          vizualnu vezu. Stvaranjem fotografskih tipologija
+          istraživačima omogućavamo pronalaženje specifičnih stavki
+          unutar jasno definiranih kategorija.
+        </div>
+        <div className="line-div1" />{' '}
       </div>
-      <div className="line-div1" />{' '}
       <Outlet filteredPhotos={filteredPhotos} />{' '}
       {/* This will render child routes */}
       <Footer />

@@ -2,13 +2,13 @@
   font-family: 'DM Mono';
   font-style: normal;
   font-weight: normal;
-  src: url('../public/fonts/DM_Mono/DMMono-Regular.woff') ;
+  src: url('../public/fonts/DMMono-Regular.ttf');
 } 
 html, body, #root {
   width: 100%; 
   margin: 0;
   padding: 0;
-  font-family: 'DMMono', monospace;
+  font-family: 'DM Mono', monospace;
  color: #7e7e77;
   background-color: #DBDBDB;/* color: #fff; */
 }  

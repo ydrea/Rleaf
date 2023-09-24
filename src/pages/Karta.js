@@ -198,6 +198,136 @@ const Karta = () => {
       // Add the sidebar to the map
 
       sidebar.addTo(mapInstance);
+
+      // // Create a new sidebar instance
+      // const sidebar = L.control.sidebar('sidebar', {
+      //   position: 'right',
+      //   autopan: true,
+      //   closeButton: true,
+      // });
+
+      // Add the sidebar to the map
+      sidebar.addTo(mapInstance);
+
+      // Function to set content in the sidebar
+      function setSidebarContent(content) {
+        const sidebarElement = document.getElementById('sidebar'); // Replace 'sidebar' with your actual sidebar element ID
+        sidebarElement.innerHTML = content;
+      }
+
+      // Example usage:
+      const sidebarContent = `
+  <h2>Map Layers</h2>
+  <h3>Base Maps</h3>
+  <input type="radio" name="baseMap" value="OSM" checked> OpenStreetMap (OSM)<br>
+  <input type="radio" name="baseMap" value="Dark"> Dark Map<br>
+  
+  <h3>Overlay Maps</h3>
+  <input type="checkbox" id="stanovnistvo"> Stanovništvo<br>
+  <input type="checkbox" id="potres"> Potres<br>
+  <input type="checkbox" id="koristenjeZemljista"> Korištenje zemljišta<br>
+  <input type="checkbox" id="zastitaPrirode"> Zaštita prirode<br>
+`;
+
+      setSidebarContent(sidebarContent);
+
+      /////////////////////////////////////////
+      //       // Add an image to the sidebar
+      //       sidebar.setContent(
+      //         '<h2>Map Legend</h2><img src="legend.png" alt="Legend">'
+      //       );
+      //       // Create a custom widget and add it to the sidebar
+      //       const customWidget = document.createElement('div');
+      //       customWidget.innerHTML =
+      //         '<h2>Custom Widget</h2><button onclick="customFunction()">Click Me</button>';
+      //       sidebar.setContent(customWidget);
+
+      //       // Add layer control elements to the sidebar
+      //       sidebar.setContent(`
+      // <h2>Map Layers</h2>
+      // <h3>Base Maps</h3>
+      // <input type="radio" name="baseMap" value="OSM" checked> OpenStreetMap (OSM)<br>
+      // <input type="radio" name="baseMap" value="Dark"> Dark Map<br>
+
+      // <h3>Overlay Maps</h3>
+      // <input type="checkbox" id="stanovnistvo"> Stanovništvo<br>
+      // <input type="checkbox" id="potres"> Potres<br>
+      // <input type="checkbox" id="koristenjeZemljista"> Korištenje zemljišta<br>
+      // <input type="checkbox" id="zastitaPrirode"> Zaštita prirode<br>
+      // `);
+      //       // Event listener for base map selection
+      //       document
+      //         .querySelectorAll('input[name="baseMap"]')
+      //         .forEach(input => {
+      //           input.addEventListener('change', function () {
+      //             const selectedBaseMap = this.value;
+      //             // Update the base map based on the selected option
+      //             mapInstance.removeLayer(baseMaps['OSM']);
+      //             mapInstance.removeLayer(baseMaps['Dark']);
+      //             mapInstance.addLayer(baseMaps[selectedBaseMap]);
+      //           });
+      //         });
+
+      //       // Event listeners for overlay layers
+      //       document
+      //         .getElementById('stanovnistvo')
+      //         .addEventListener('change', function () {
+      //           if (this.checked) {
+      //             mapInstance.addLayer(overlayMaps['Stanovništvo']);
+      //           } else {
+      //             mapInstance.removeLayer(overlayMaps['Stanovništvo']);
+      //           }
+      //         });
+
+      //       document
+      //         .getElementById('potres')
+      //         .addEventListener('change', function () {
+      //           if (this.checked) {
+      //             mapInstance.addLayer(overlayMaps['Potres']);
+      //           } else {
+      //             mapInstance.removeLayer(overlayMaps['Potres']);
+      //           }
+      //         });
+
+      //       document
+      //         .getElementById('koristenjeZemljista')
+      //         .addEventListener('change', function () {
+      //           if (this.checked) {
+      //             mapInstance.addLayer(overlayMaps['Korištenje zemljišta']);
+      //           } else {
+      //             mapInstance.removeLayer(
+      //               overlayMaps['Korištenje zemljišta']
+      //             );
+      //           }
+      //         });
+
+      //       document
+      //         .getElementById('zastitaPrirode')
+      //         .addEventListener('change', function () {
+      //           if (this.checked) {
+      //             mapInstance.addLayer(overlayMaps['Zaštita prirode']);
+      //           } else {
+      //             mapInstance.removeLayer(overlayMaps['Zaštita prirode']);
+      //           }
+      //         });
+      //       // Create a Leaflet popup
+      //       const popup = L.popup({
+      //         closeButton: false,
+      //         autoClose: false,
+      //       }).setContent(
+      //         '<h2>Map Information</h2><p>This is a map of...</p>'
+      //       );
+
+      //       // Bind the popup to a specific marker or map location
+      //       popup.addTo(mapInstance);
+
+      ///////////////////////////////
+
+      // Define a custom function for the button
+      function customFunction() {
+        // Your custom functionality here
+      }
+
       // // Create a custom sidebar tab with the layer control
       // const layerTabContent = '<h2>Layers</h2>';
       // const layerControlDiv = document.createElement('div');

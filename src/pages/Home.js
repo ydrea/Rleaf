@@ -65,16 +65,7 @@ function Home() {
       </div>{' '}
       <div className="S3">
         <div className="cont3">
-          <img
-            src="home3.png"
-            style={{
-              position: 'absolute',
-              top: '0',
-              left: '0',
-              width: '50%',
-              height: 'auto',
-            }}
-          />
+          <img className="img3" src="home3.png" />
           <div className="txt3">
             Pozivamo vas da se pridružite našem putovanju prema
             očuvanju i razumijevanju krajobraza.
