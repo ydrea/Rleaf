@@ -6820,6 +6820,11 @@
   dependencies:
     "leaflet" "^1.0.1"
 
+"leaflet-sidebar-v2@^3.2.3":
+  "integrity" "sha512-narzdn81Y/8YpgHR3jhs93LhrLq0AGSRo7CXHEICHfMeK6IHSbtFOF9CTSfueaumRK0TgvHkiiYJb9dTKta6ZQ=="
+  "resolved" "https://registry.npmjs.org/leaflet-sidebar-v2/-/leaflet-sidebar-v2-3.2.3.tgz"
+  "version" "3.2.3"
+
 "leaflet-wfst@^2.0.1-beta.27":
   "integrity" "sha512-zqs+ooIw9mjqnUPytxt3nWVKda02ceWt2yR9FMNiZxRv/hNKgZq6/dvirT1TMWlFmULLIfkCKik+zIrjGIVNjQ=="
   "resolved" "https://registry.npmjs.org/leaflet-wfst/-/leaflet-wfst-2.0.1-beta.27.tgz"

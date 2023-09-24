@@ -1,57 +1,100 @@
 
-.about {
-/* position: relative; */ 
-display: flex;
-flex-direction: column;
-align-items: center;
-}
-.one {
-    height: 140vh;
-    font-size: 22px;
-    /* letter-spacing: 1.1px; */
-    margin-left: 16vw;
-    margin-right: 7vw;
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+  .about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .one {
+    font-size: 18px; /* Adjust font size for smaller screens */
+    margin-left: 5vw; /* Adjust margin for smaller screens */
+    margin-right: 5vw; /* Adjust margin for smaller screens */
     margin-top: 5vh;
-      }
-.one li {
-  list-style-type: none;
-  }
-  .one li p {margin-bottom: -.1rem;}
-  .one li span{color: #000;}
-  
-
-.two {
-    height: 140vh;
   }
 
-
-  .three {
-    height: 140vh;
-    font-size: 22px;
-    width: 50%;
-    margin-left: auto;
+  .one li p {
+    margin-bottom: -0.1rem;
   }
 
+  .one li span {
+    color: #000;
+  }
 
-  .four {
-    height: 140vh;
-    background-color: #8c8d85;
-  }
-  .five {
-    height: 140vh;
-    font-size: 22px;
-    width: 50%; top: 0;
-    margin-right: auto;
-  padding-left: 1vw;
-  }
+  .three,
+  .five,
   .six {
-color: #000;
-    height: 140vh;
-    font-size: 22px;
-    width: 50%;
+    font-size: 18px; /* Adjust font size for smaller screens */
+    width: 80%; /* Adjust width for smaller screens */
     margin-left: auto;
+    margin-right: auto;
+  }
+
+  .five {
+    width: 80%; /* Adjust width for smaller screens */
+    margin-left: 3vw;
+    padding-left: 12vw;
+  }
 }
-.six p {
-margin-top: 2rem;
-  line-height: 160%;
-}
+
+/* For larger screens (desktop) */
+@media screen and (min-width: 769px) {
+
+  .about {
+    /* position: relative; */ 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+    .one {
+        height: 140vh;
+        font-size: 22px;
+        /* letter-spacing: 1.1px; */
+        margin-left: 16vw;
+        margin-right: 7vw;
+        margin-top: 5vh;
+          }
+    .one li {
+      list-style-type: none;
+      }
+      .one li p {margin-bottom: -.1rem;}
+      .one li span{color: #000;}
+      
+    
+    .two {
+        height: 140vh;
+      }
+    
+    
+      .three {
+        height: 140vh;
+        font-size: 22px;
+        width: 50%;
+        margin-left: auto;
+      }
+    
+    
+      .four {
+        height: 140vh;
+        background-color: #8c8d85;
+      }
+      .five {
+        height: 140vh;
+        font-size: 22px;
+        width: 50%; top: 0;
+        margin-right: auto;
+      padding-left: 1vw;
+      }
+      .six {
+    color: #000;
+        height: 140vh;
+        font-size: 22px;
+        width: 50%;
+        margin-left: auto;
+    }
+    .six p {
+    margin-top: 2rem;
+      line-height: 160%;
+    }}

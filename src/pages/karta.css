@@ -1,58 +1,84 @@
 /* .leaflet-tile-pane {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
-  } */
-  .icon {
-    font-weight: 400;
-    transform-origin: 10px 10px;
-  }
-  .custom-control-container {
-    /* Set the container to use CSS grid */
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* You can adjust the number of columns as needed */
-    gap: 10px; /* Adjust the gap between grid items as needed */
-    justify-items: center; /* Center items horizontally within each grid cell */
-    background-color: #DBDBDB; /* Change the background color as needed */
-    padding: 10px; /* Adjust padding as needed */
-  }
-  #custom-map-controls input[type="checkbox"],
+} */
+.icon {
+  font-weight: 400;
+  transform-origin: 10px 10px;
+}
+
+.custom-control-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  justify-items: center;
+  background-color: #DBDBDB;
+  padding: 10px;
+  position: static; /* Change to static positioning */
+  top: auto; /* Remove top property */
+  left: auto; /* Remove left property */
+  width: 75vw; /* Set the width to 75vw */
+  max-height: 10vh; /* Set the maximum height to 10vh */
+  align-self: flex-start; /* Align it to the top of its containing element */
+}
+
+/* Styles for checkboxes and radio buttons */
+#custom-map-controls input[type="checkbox"],
 #custom-map-controls input[type="radio"] {
-  /* Customize checkbox and radio styles here */
-  appearance: none; /* Remove the default styles */
-  -webkit-appearance: none; /* For older versions of WebKit */
-  background-color: #fff; /* Set the background color */
-  border: 2px solid #007bff; /* Set the border color */
-  border-radius: 4px; /* Round the corners */
-  width: 20px; /* Set the width */
-  height: 20px; /* Set the height */
-  margin-right: 5px; /* Add some spacing between the checkbox/radio and label */
-  cursor: pointer; /* Show a pointer cursor on hover */
-
-  /* Define styles for the checked state */
-  &:checked {
-    background-color: #007bff; /* Change background color when checked */
-    border: 2px solid #007bff; /* Change border color when checked */
-  }
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
+/* Styles for the checked state of checkboxes and radio buttons */
+#custom-map-controls input[type="checkbox"]:checked,
+#custom-map-controls input[type="radio"]:checked {
+  background-color: #007bff;
+  border: 2px solid #007bff;
+}
+
+/* Styles for labels of checkboxes and radio buttons */
 #custom-map-controls label {
-  /* Style the labels for checkboxes and radio buttons */
-  font-family: "Roboto Mono", monospace; /* Set font family */
-  color: #333; /* Set label text color */
-  font-size: 16px; /* Set font size */
-  cursor: pointer; /* Show a pointer cursor on hover */
+  font-family: "Roboto Mono", monospace;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-  .custom-control-container button {
-    /* Add styles for buttons within .custom-control-container */
-    color: #000; /* Change button text color as needed */
-    border: none; /* Remove button borders if not needed */
-    padding: 5px 10px; /* Adjust padding as needed */
-    cursor: pointer; /* Add cursor pointer on hover */
-  }
-  
-  .custom-control-container button:hover {
-    background-color: #0056b3; /* Change background color on hover */
-    /* Add more styles as needed */
-  }
-  
+/* Styles for buttons within .custom-control-container */
+.custom-control-container button {
+  color: #000;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  max-height: 40px; /* Adjust the maximum height as needed */
+}
+
+/* Styles for button hover state */
+.custom-control-container button:hover {
+  background-color: #0056b3;
+  /* Add more styles as needed */
+}
+/* Styles for checkboxes in the second row */
+#custom-map-controls input[type="checkbox"] {
+  grid-column: auto; /* Reset grid-column */
+  grid-row: 2; /* Place checkboxes in the second row */
+}
+/* Place radio buttons in the first row, one per column */
+#custom-map-controls input[type="radio"] {
+  grid-row: 1; /* Place in the first row */
+  /* You can specify grid-column here if needed */
+}
+
+
+/* Place buttons in the third column */
+#custom-map-controls button {
+  grid-column: 5; /* Position buttons in the third column */
+}

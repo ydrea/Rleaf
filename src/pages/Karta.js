@@ -7,6 +7,8 @@ import './karta.css';
 import Footer from '../comps/Footer';
 import ReactDOMServer from 'react-dom/server';
 import { useSelector, useDispatch } from 'react-redux';
+import 'leaflet-sidebar-v2/css/leaflet-sidebar.min.css';
+import 'leaflet-sidebar-v2/js/leaflet-sidebar.min.js';
 
 import {
   selectSelectedPhoto,
@@ -134,7 +136,7 @@ const Karta = () => {
         center: [45.2, 16.2],
         zoom: 8,
         layers: [osm],
-        zoomControl: false,
+        zoomControl: true,
       });
 
       //base
@@ -186,20 +188,45 @@ const Karta = () => {
         'Zaštita prirode': temaZP,
       };
 
-      //cont rol
-      L.control
-        .layers(baseMaps, overlayMaps, { collapsed: false })
-        .addTo(mapInstance);
+      // Create a new sidebar instance
+      const sidebar = L.control.sidebar('sidebar', {
+        position: 'right',
+        autopan: true, // Enable autopan
+        closeButton: true, // Show close button
+      });
 
-      const customMapControls = document.getElementById(
-        'custom-map-controls'
-      );
-      const controlContainer = mapInstance
-        .getContainer()
-        .querySelector('.leaflet-control-layers');
-      controlContainer.classList.add('custom-control-container');
-      customMapControls.appendChild(controlContainer);
-      controlContainer.style.backgroundColor = '#DBDBDB';
+      // Add the sidebar to the map
+
+      sidebar.addTo(mapInstance);
+      // // Create a custom sidebar tab with the layer control
+      // const layerTabContent = '<h2>Layers</h2>';
+      // const layerControlDiv = document.createElement('div');
+      // layerControlDiv.innerHTML = layerTabContent;
+
+      // Create the layer control and add it to the custom tab
+      // const layerControl = L.control.layers(baseMaps, overlayMaps, {
+      //   collapsed: false,
+      // });
+      // layerControl.addTo(layerControlDiv);
+
+      // // Add the custom tab to the sidebar
+      // sidebar.addPanel({
+      //   id: 'layerTab',
+      //   tab: '<i class="fas fa-layer-group"></i>',
+      //   pane: layerControlDiv,
+      //   title: 'Layers',
+      // });
+
+      // const customMapControls = document.getElementById(
+      //   'custom-map-controls'
+      // );
+
+      // const controlContainer = mapInstance
+      //   .getContainer()
+      //   .querySelector('.leaflet-control-layers');
+      // controlContainer.classList.add('custom-control-container');
+      // customMapControls.appendChild(controlContainer);
+      // controlContainer.style.backgroundColor = '#DBDBDB';
 
       setMap(mapInstance);
       mapRef.current = mapInstance;

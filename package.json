@@ -24,6 +24,7 @@
     "leaflet": "^1.9.4",
     "leaflet-easybutton": "^2.4.0",
     "leaflet-groupedlayercontrol": "github:ismyrnow/leaflet-groupedlayercontrol",
+    "leaflet-sidebar-v2": "^3.2.3",
     "leaflet-wfst": "^2.0.1-beta.27",
     "leaflet.wms": "^0.2.0",
     "proj4": "^2.9.0",
