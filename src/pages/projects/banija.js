@@ -7,7 +7,10 @@ const Banija = () => {
     <div className="P">
       <div className="projects-container">
         <img src="/proj1.jpg" />
-        <h1>Opservatorij krajobraza Banovine/Banije</h1>
+
+        <h1 style={{ color: 'white' }}>
+          Opservatorij krajobraza Banovine/Banije
+        </h1>
       </div>
       <div className="tekst">
         Opservatorij krajobraza Banovine/Banije je pilot projekt šireg

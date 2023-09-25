@@ -6,7 +6,9 @@ const Ewap = () => {
     <div className="P">
       <div className="projects-container">
         <img src="/proj2.jpg" />
-        <h1>Ugrožena drvena arhitektura Banovine/Banije</h1>
+        <h1 style={{ color: 'white' }}>
+          Ugrožena drvena arhitektura Banovine/Banije
+        </h1>
       </div>
       <div className="tekst">
         Projekt EWAP: Ugrožena drvena arhitektura Banovina/Banije,

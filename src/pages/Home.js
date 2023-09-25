@@ -34,8 +34,8 @@ function Home() {
         <div className="vozi">opservatorij</div>
         <div className="pali">krajobraza </div>
         <div className="podnaslov">
-          Interdisciplinarna platforma posvećena istraživanju i
-          razumijevanju krajobraza
+          Interdisciplinarna platforma posvećena istraživanju
+          krajobraza i razvoju temeljenom na krajobrazu{' '}
         </div>
       </div>
       {/* </div> */}
@@ -54,7 +54,10 @@ function Home() {
       </div>
       <div className="S2">
         <div className="cont2">
-          <img src="home2.png" className="img2" />
+          <div className="img-container">
+            <img src="home2.png" className="img2" />
+            <img className="img3" src="home3.png" />
+          </div>
           <div className="txt2">
             ‘Opservatorij’ se bavi dokumentiranjem, monitoringom,
             edukacijom te promoviranjem interdisciplinarnih metoda.
@@ -62,18 +65,12 @@ function Home() {
             za otpornost i regeneraciju zajednica.
           </div>
         </div>
-      </div>{' '}
-      <div className="S3">
-        <div className="cont3">
-          <img className="img3" src="home3.png" />
-          <div className="txt3">
-            Pozivamo vas da se pridružite našem putovanju prema
-            očuvanju i razumijevanju krajobraza.
-          </div>{' '}
-        </div>
       </div>
-      <div className="S4">
-        <div className="txt4">
+
+      <div className="txt3">
+        Pozivamo vas da se pridružite našem putovanju prema očuvanju i
+        razumijevanju krajobraza.
+        <p>
           Za sve informacije vezane uz ‘Opservatorij krajobraza’,
           slobodno nas kontaktirajte putem e-maila na
           [info@croatianlandscape.hr] ili telefonom na [+385 95
@@ -82,8 +79,14 @@ function Home() {
           istraživanjima i aktivnostima. Unesite svoju e-mail adresu i
           pridružite se putovanju prema razumijevanju i očuvanju
           krajobraza.
-        </div>
+        </p>
       </div>
+
+      <div className="S3"></div>
+      <div className="S4">
+        <div className="txt4"></div>
+      </div>
+
       <div>
         <Footer className="foo" />
       </div>

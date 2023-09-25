@@ -1,22 +1,33 @@
 .home {display: block;
 }
+/* Set max-width for containers to prevent overflow */
+.cont0, .S1, .S2, .S3 {
+  max-width: 100%;
+}
+
+/* Set max-width for specific containers if needed */
+.cont2, .cont3 {
+  max-width: 100%; /* Adjust as needed */
+}
+
 
 .cont0 {
-  position: relative;
-  height: 33rem;
-  flex-shrink: 0;
-  margin-left: 10vw;
+display: flex;  
+justify-content: center;
+
+height: 33rem;
+/* flex-shrink: 0; */
+padding-left: 5vw;
 }
 .vozi {
-  display: flex;
-  justify-content: center;
+  /* display: flex; */
    color: #fff;
   font-size: 9.6875rem;
   width: 80rem;  z-index: 3;
   position: absolute;
-  top: 0rem;
+  top: 2rem;
 font-style: normal;
-font-weight: 500;
+font-weight: 400;
 line-height: 140%; 
 letter-spacing: 0.53281rem;
 }
@@ -31,7 +42,7 @@ letter-spacing: 0.53281rem;
   width: 80rem;  z-index: 3;
     top: 12rem;
 font-style: normal;
-font-weight: 500;
+font-weight: 400;
 line-height: 140%; /* 13.5625rem */
 letter-spacing: 0.53281rem;
 }
@@ -57,14 +68,59 @@ bottom: 0;
 
 .S1 {
   position: relative; top: 10rem;
-  font-size: 1.8rem;
+  padding-left: 5vw;
+  width: 80rem; 
+
+  font-size: 1.6rem;
   color: #7e7e77;
-  width: 76vw;
+  /* width: 85vw; */
   height: 47rem;
   /* padding-top: 20vh; */
-  margin-left: 13vw;
+  /* margin-left: 10vw; */
   white-space: pre-line;
 }
+
+.img-container {
+  position: relative;
+  max-width: 95vw;
+  padding-left: 5vw;
+}
+/* ... Other CSS rules ... */
+
+.img2 {
+  position: relative; /* Add this to make img3 relative to img2 */
+  width: 100%;
+  object-fit: cover;
+  height: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: grid;
+}
+
+.img3 {
+
+  padding-left: 5vw;
+  position: absolute;
+  bottom: -17rem;
+  left: 0;
+  width: 50%; /* Keep this at 50% */
+  height: auto;
+}
+
+.txt3 {
+  font-size: 1.8rem;
+  color: #7e7e77;
+  position: absolute;
+  bottom: -162rem; /* Position txt3 at the bottom */
+  left: 55%; /* Center it horizontally */
+  /* transform: translateX(-50%); Center it horizontally */
+  width: 45%;
+  text-align: left;
+}
+
+/* ... Other CSS rules ... */
+
 
 .S2 {
   /* position: relative;  */
@@ -77,16 +133,16 @@ bottom: 0;
 height: 55.2rem;
 } 
 
-.img2 {
+/* .img2 {
   object-fit: cover;
-  width: 87%; height: auto;
+  width: 90%; height: auto;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   display: grid;
-  margin-left: 13vw;
+  margin-left: 10vw;
   z-index: 0;
-}
+} */
 
 .txt2 {
  font-size: 1.8rem;
@@ -100,57 +156,38 @@ height: 55.2rem;
   width: 100%;
   bottom: 30vh;
 }
-
+/* 
 .S3 {
   height: 35rem;
   display: block;
-}
+} */
 
 .cont3 {
-  position: relative;
-  top: 0vh;
-  margin-left: 13vw;
+  position: absolute;
+  bottom: -28.5rem;
+  margin-left: 10vw;
   height: 35rem;
-  min-width: 50%;
-}
-
-.img3 {
-  position: absolute;
-  top: 0px;
-  left: 0;
-  width: 50%;
-  height: auto;
-  /* z-index: 999; */
-}
-
-.txt3 {
-  font-size: 1.8rem;
-  color: #7e7e77;
-  position: absolute;
-  top: 61%;
-  left: 43vw;
-  width: 50%;
-  text-align: left;
+  width: 45%;
 }
 
 .S4 {
   display: block;
-  /* position: relative; */
+  position: relative; top: 30rem;
   height: 47rem;
-  /* margin-top: 30rem; */
 }
 
-.txt4 {
+/* .txt4 {
   font-size: 1.8rem;
   width: 43.5%;
   position: absolute;
-  left: 56vw;
-}
+  left: 50vw;
+} */
 
 .foo {
-  display: block;
+  /* display: block; */
   position: absolute;
-  top: 100vh;
+  /* top: 298rem; */
+bottom: -10rem;
 }
 .foo p {
 
