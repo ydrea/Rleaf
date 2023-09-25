@@ -22,7 +22,7 @@ height: 33rem;
   /* display: flex; */
    color: #fff;
   font-size: 9.6875rem;
-  width: 80rem;  z-index: 3;
+  width: 64vw;  z-index: 3;
   position: absolute; top: 25vh;
   display: flex;
   justify-content: center;
@@ -39,7 +39,7 @@ letter-spacing: 0.53281rem;
   position: absolute;
   display: flex;
   justify-content: center;
-  width: 80rem;  z-index: 3;
+  width: 64vw;  z-index: 3;
     top: 50vh;
 font-style: normal;
 font-weight: 400;
@@ -48,7 +48,7 @@ letter-spacing: 0.53281rem;
 }
 .podnaslov {
   position: absolute;
-  width: 90vw;  z-index: 3;
+  width: 64vw;  z-index: 3;
   font-size: 1.6rem;
   display: flex;
   justify-content: center;
@@ -69,9 +69,9 @@ letter-spacing: 0.53281rem;
 .S1 {
   padding-top: 50vh;
   padding-bottom: 10vh;
-  margin-left: 5vw;
+  margin-left: 17.5vw;
   margin-right: auto;
-  width: 80vw; 
+  width: 62vw; 
 
   font-size: 2.2rem;
   color: #7e7e77;
@@ -79,8 +79,8 @@ letter-spacing: 0.53281rem;
 
 .img-container {
   position: relative;
-  max-width: 95vw;
-  padding-left: 5vw;
+  max-width: 70vw;
+  padding-left: 17.5vw;
 
 }
 /* ... Other CSS rules ... */
@@ -98,11 +98,11 @@ letter-spacing: 0.53281rem;
 
 .img3 {
 
-  padding-left: 5vw;
+  /* padding-left: 5vw; */
   position: absolute;
-  bottom: -42vh;
-  left: 0;
-  width: 50%; 
+  bottom: -23vh;
+  left: 17.5;
+  width: 33.4%; 
   height: auto;
 }
 
@@ -110,9 +110,9 @@ letter-spacing: 0.53281rem;
   font-size: 1.7rem;
   color: #7e7e77;
   position: absolute;
-  bottom: -152vh; 
-  left: 55%; 
-  width: 40%;
+  bottom: -122vh; 
+  left: 51.3%; 
+  width: 26vw;
   margin-left: 1vw;
   margin-right: 4vw;
   text-align: left;
@@ -120,6 +120,7 @@ letter-spacing: 0.53281rem;
 
 .txt3 div{
   padding-top: 10vh;
+width: 31.2vw;
 }
 
 .S2 {
@@ -141,7 +142,7 @@ letter-spacing: 0.53281rem;
   right: 0;
   text-align: left;
   z-index: 33;
-  max-width: 40%;
+  max-width: 33%;
   width: 100%;
   bottom: 10vh;
 }
@@ -162,5 +163,5 @@ letter-spacing: 0.53281rem;
 .dno {
   position: relative;
   display: block;
-  bottom: -75rem;
+  bottom: -45rem;
 }
