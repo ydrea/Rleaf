@@ -14,22 +14,26 @@
 .cont0 {
 display: flex;  
 justify-content: center;
-height: 33rem;
-/* flex-shrink: 0; */
-/* padding-left: 5vw; */
+/* height: 33rem;  */
+
+/* display: flex; */
+/* width: 77.4375rem; */
+height: 15.75rem;
+/* flex-direction: column; */
+/* justify-content: center; */
+flex-shrink: 0;
 }
+
 .vozi {
-  /* display: flex; */
-   color: #fff;
+  color: #fff;
   font-size: 9.6875rem;
   width: 64vw;  z-index: 3;
   position: absolute; top: 25vh;
   display: flex;
   justify-content: center;
-  
-font-weight: 400;
-line-height: 140%; 
-letter-spacing: 0.53281rem;
+  font-weight: 400;
+  line-height: 140%; 
+  letter-spacing: 0.53281rem;
 }
 
 .pali {
@@ -40,16 +44,16 @@ letter-spacing: 0.53281rem;
   display: flex;
   justify-content: center;
   width: 64vw;  z-index: 3;
-    top: 50vh;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 13.5625rem */
-letter-spacing: 0.53281rem;
+  top: 50vh;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 13.5625rem */
+  letter-spacing: 0.53281rem;
 }
 .podnaslov {
   position: absolute;
   width: 64vw;  z-index: 3;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   display: flex;
   justify-content: center;
   bottom: 2vh;
@@ -67,19 +71,18 @@ letter-spacing: 0.53281rem;
 }
 
 .S1 {
-  padding-top: 50vh;
-  padding-bottom: 10vh;
+  padding-top: 55vh;
+  padding-bottom: 9vh;
   margin-left: 17.5vw;
   margin-right: auto;
-  width: 62vw; 
-
+  width: 65%; 
   font-size: 2.2rem;
   color: #7e7e77;
 }
 
 .img-container {
   position: relative;
-  max-width: 70vw;
+  max-width: 75vw;
   padding-left: 17.5vw;
 
 }
@@ -87,7 +90,7 @@ letter-spacing: 0.53281rem;
 
 .img2 {
   position: relative; 
-  width: 100%;
+  width: 75vw;
   object-fit: cover;
   height: auto;
   background-repeat: no-repeat;
@@ -96,13 +99,27 @@ letter-spacing: 0.53281rem;
   display: grid;
 }
 
+.txt2 {
+  font-size: 1.875rem;
+   color: #fff;
+   position: absolute;
+   /* padding-right: 1rem; */
+   right: 3vw;
+   text-align: left;
+   z-index: 33;
+   max-width: 35%;
+   width: 100%;
+   bottom: 10vh;
+ }
+ .txt2 p {
+  margin: 0;
+ }
+ 
 .img3 {
-
-  /* padding-left: 5vw; */
   position: absolute;
-  bottom: -23vh;
+  bottom: -31vh;
   left: 17.5;
-  width: 33.4%; 
+  width: 40%; 
   height: auto;
 }
 
@@ -110,21 +127,41 @@ letter-spacing: 0.53281rem;
   font-size: 1.7rem;
   color: #7e7e77;
   position: absolute;
-  bottom: -122vh; 
-  left: 51.3%; 
-  width: 26vw;
+  bottom: -123vh; 
+  left: 54vw; 
+  max-width: 26vw;
   margin-left: 1vw;
-  margin-right: 4vw;
+  /* margin-right: 4vw; */
   text-align: left;
 }
-
-.txt3 div{
-  padding-top: 10vh;
-width: 31.2vw;
+.ena {
+width: 26vw;
+font-size: 1.875rem;
+font-style: normal;
+font-weight: 400;
+line-height: 120%; /* 2.25rem */
+letter-spacing: 0.01875rem;
 }
-
+.dve {
+padding-top: 10vh;
+width: 26vw;
+font-size: 1.375rem;
+font-style: normal;
+font-weight: 500;
+line-height: 140%;
+letter-spacing: 0.01375rem;
+}
+.tli {
+  padding-top: 10vh;
+  width: 26vw;
+  font-size: 1.375rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: 0.01375rem;
+  }
+  
 .S2 {
-  /* position: relative;  */
   height: 55.2rem;
   align-items: center;
 }
@@ -133,24 +170,6 @@ width: 31.2vw;
   position: relative;
   height: 55.2rem;
 } 
-
-.txt2 {
- font-size: 1.875rem;
-  color: #fff;
-  position: absolute;
-  padding-right: 1rem;
-  right: 0;
-  text-align: left;
-  z-index: 33;
-  max-width: 33%;
-  width: 100%;
-  bottom: 10vh;
-}
-/* 
-.S3 {
-  height: 35rem;
-  display: block;
-} */
 
 .cont3 {
   position: absolute;
@@ -163,5 +182,5 @@ width: 31.2vw;
 .dno {
   position: relative;
   display: block;
-  bottom: -45rem;
+  bottom: -60rem;
 }

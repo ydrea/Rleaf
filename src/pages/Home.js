@@ -61,9 +61,9 @@ function Home() {
             <div className="txt2">
               <p>
                 {' '}
-                ‘Opservatorij’ se bavi dokumentiranjem, monitoringom,
-                edukacijom te promoviranjem interdisciplinarnih
-                metoda.
+                Pored istraživanja, ‘Opservatorij’ se bavi
+                dokumentiranjem, monitoringom, edukacijom te
+                promoviranjem interdisciplinarnih metoda.
               </p>
               <p>
                 Smatramo da je zaštita i razumijevanje krajobraza
@@ -73,22 +73,22 @@ function Home() {
           </div>
 
           <div className="txt3">
-            {/* <div> */}
-            Pozivamo vas da se pridružite našem putovanju prema
-            očuvanju i razumijevanju krajobraza.
-            <div>
+            <div className="ena">
+              Pozivamo vas da se pridružite našem putovanju prema
+              očuvanju i razumijevanju krajobraza.
+            </div>{' '}
+            <div className="dve">
               Za sve informacije vezane uz ‘Opservatorij krajobraza’,
               slobodno nas kontaktirajte putem e-maila na
               [info@croatianlandscape.hr] ili telefonom na [+385 95
               9123055].
             </div>
-            <div>
+            <div className="tli">
               Zanima vas više o našem radu i misiji? Pretplatite se na
               naš newsletter i budite u tijeku s našim istraživanjima
               i aktivnostima. Unesite svoju e-mail adresu i pridružite
               se putovanju prema razumijevanju i očuvanju krajobraza.
             </div>
-            {/* </div> */}
           </div>
         </div>
       </div>

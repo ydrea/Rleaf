@@ -67,7 +67,7 @@ export const Nav = () => {
       ],
     },
     { label: 'karta', to: '/mapa' },
-    { label: 'fototeka   ', to: '/photos' },
+    { label: 'fototeka    ', to: '/photos' },
     { label: 'kontakt', to: '/contact' },
     // { label: 'admin', to: '/login' },
   ];
@@ -121,9 +121,12 @@ export const Nav = () => {
               </li>
             ))}
           </ul>
-          <div className="navline-div" />
-        </nav>
+        </nav>{' '}
+        <div className="navline-div" />
       </div>
+      <div className="mline" />
+      <div className="nline" />
+      <div className="lline" />
     </>
   );
 };

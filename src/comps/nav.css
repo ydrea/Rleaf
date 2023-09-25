@@ -1,62 +1,107 @@
 .navbar {
-  /* display: flex; */
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   position: fixed;
   top: 0;
   left: 0;
   right: 0; 
   z-index: 999;
   background-color: #d8d8d8;
-height: 10vh;
+  height: 10vh;
   padding-bottom: 0;
 }
 
 .navbar-container {
   background-color: rgba(140, 141, 133, 0);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 10vh;
-  width: 100%; /* Use 100% width for responsiveness */
-  position: relative; /* Relative positioning for absolute children */
-}
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 20vh;
+  width: 100%; 
+  position: relative;
+  left: calc( 17.5vw - 3.22rem );
+  }
 
 .fa-typo3 {
+  color: #000;
+  z-index: 9999;
   margin-left: 0.5rem;
   font-size: 2vw;
-  position: relative; /* Add relative positioning */
-  top: -2vh; /* Adjust this value to position it higher on the y-axis */
-}
+  position: relative; 
+  top: -2vh; 
+  }
+
 .nav-menu {
   display: flex;
   grid-gap: 15px;
   list-style: none;
-  text-align: center;
+  text-align: left;
   justify-content: flex-start;
-  position: relative; /* Relative positioning for absolute children */
-}
+  position: relative;
 
-/* .navline-div serves as the element to cut through letters */
+/* .nav-menu ul  */
+padding-inline-start: 0 !important;
+}
 .navline-div {
   position: absolute;
-  top: 60%; /* Adjust as needed to position it at the center of the nav-menu */
-  left: 0;
+  top: 60%; 
   box-sizing: border-box;
   width: 100%;
-  height: 1px; /* Adjust line height as needed */
-  background-color: #18aa00; /* Adjust line color as needed */
-  /* transform: translateY(-50%); Center the line vertically */
-}
+  height: 2px; 
+  background-color: #18aa00; 
+  }
+
+  .mline {
+    z-index: 3333;
+    position: fixed;
+    left: 12.5vw;
+    top: 400px; 
+    box-sizing: border-box;
+    width: 1440px;
+    height: 3px; 
+    background-color: red;
+    display: flex;
+    justify-self: center;
+    align-self: center; 
+    }
 
 
+    .nline {
+      z-index: 3333;
+      position: fixed;
+      left: 17.5vw;
+      top: 450px; 
+      box-sizing: border-box;
+      width: 1440px;
+      height: 3px; 
+      background-color: blue;
+      display: flex;
+      justify-self: center;
+      align-self: center; 
+      }
+  
+      .lline {
+        z-index: 333;
+        position: fixed;
+        right: 17.5vw;
+        top: 340px; 
+        box-sizing: border-box;
+        width: 1440px;
+        height: 3px; 
+        background-color: yellow;
+        display: flex;
+        justify-self: center;
+        align-self: center; 
+        }
+  
+      
 .nav-links {
   color: #000;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   text-decoration: none;
-  padding: .2rem 1.2rem;
-  font-size: 1.3rem;
+  padding: .2rem 1.6rem;
+  font-size: 1.6rem;
 position: relative;
 white-space: pre !important; 
 }
@@ -76,35 +121,31 @@ white-space: pre !important;
 /* Style submenu links with href */
 .submenu-link {
   text-decoration: none;
-  color: #000; /* Customize as needed */
+  color: #000; 
   display: flex;
   align-items: center;
   font-size: 1.3rem;
 }
 
 .submenu-link:hover {
-  color: #000; /* Customize as needed */
+  color: #000; 
   text-decoration: none;
 }
 
 /* Style plain submenu items without href */
 .submenu-item {
-  /* Style plain submenu items here */
-  /* Example styles: */
-  color: #333; /* Customize as needed */
+  color: #333; 
   font-size: 1.3rem;
   display: flex;
   align-items: center;
 }
 
 .submenu-item:hover {
-  /* Style plain submenu items on hover here */
-  /* Example styles: */
-  background-color: #f2f2f2; /* Customize as needed */
+  background-color: #f2f2f2; 
+  
 }
 
 
-/* Style the submenu when the parent is hovered */
 .submenu-parent:hover .dropdown {
   display: block;
 }
@@ -114,12 +155,12 @@ white-space: pre !important;
 .dropdown {
   position: absolute;
   /* right: 0; */
-  top: 5vh;
+  top: 1vh;
   /* left: auto; */
     /* font-size: 0.875rem; */
   z-index: 9999;
   min-width: 8rem;
-  min-height: 4rem;
+  min-height: 6rem;
   padding: 0.5rem 0.5rem;
   list-style: none;
   background-color: #d8d8d8;
@@ -134,7 +175,7 @@ white-space: pre !important;
 .dropdown .dropdown-submenu {
   position: absolute;
   left: 100%;
-  top: -7px;
+  /* top: -7px; */
 }
 
 /* end.dropdown */
@@ -158,13 +199,11 @@ white-space: pre !important;
   left: 0;
   box-sizing: border-box;
   width: 100%;
-  /* height: 0.6rem; */
 }
 
 @media screen and (max-width: 1190px) {
   .NavbarItems {
     position: relative;
-    /* background-color: red; */
   }
   .nav-menu {
     display: flex;
@@ -200,12 +239,12 @@ white-space: pre !important;
     color: #242424; 
     border-radius: 0;
   }
-  /* .navbar-logo {
+  .navbar-logo {
     position: absolute;
     top: 0;
     left: 0;
     transform: translate(25%, 50%);
-  } */
+  }
   .menu-icon {
     display: block;
     position: absolute;
@@ -219,8 +258,9 @@ white-space: pre !important;
 .fa-typo3 {
   margin-left: 0.2rem;
   font-size: 2vw;
-  position: relative; /* Add relative positioning */
-  top: -25px; /* Adjust this value to position it higher on the y-axis */
+  position: relative; 
+  top: -25px; 
+  
 }
   .fa-times {
     color: #fff;
