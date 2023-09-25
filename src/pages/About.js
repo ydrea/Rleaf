@@ -30,7 +30,7 @@ export default function About() {
           <li>
             <p>dr.sc. Hrvoje Tomić</p>{' '}
             <span>
-              izvanredni profesor na Agronomskom fakultetu (UNIZG)
+              izvanredni profesor na Geodetskom fakultetu (UNIZG)
             </span>
           </li>
           <li>

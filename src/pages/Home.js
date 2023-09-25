@@ -57,37 +57,44 @@ function Home() {
           <div className="img-container">
             <img src="home2.png" className="img2" />
             <img className="img3" src="home3.png" />
-          </div>
-          <div className="txt2">
-            ‘Opservatorij’ se bavi dokumentiranjem, monitoringom,
-            edukacijom te promoviranjem interdisciplinarnih metoda.
-            Smatramo da je zaštita i razumijevanje krajobraza ključna
-            za otpornost i regeneraciju zajednica.
+
+            <div className="txt2">
+              <p>
+                {' '}
+                ‘Opservatorij’ se bavi dokumentiranjem, monitoringom,
+                edukacijom te promoviranjem interdisciplinarnih
+                metoda.
+              </p>
+              <p>
+                Smatramo da je zaštita i razumijevanje krajobraza
+                ključna za otpornost i regeneraciju zajednica.
+              </p>
+            </div>
           </div>
 
           <div className="txt3">
-            Pozivamo vas da se pridružite našem putovanju prema
-            očuvanju i razumijevanju krajobraza.
-            <p>
-              Za sve informacije vezane uz ‘Opservatorij krajobraza’,
-              slobodno nas kontaktirajte putem e-maila na
-              [info@croatianlandscape.hr] ili telefonom na [+385 95
-              9123055]. Zanima vas više o našem radu i misiji?
-              Pretplatite se na naš newsletter i budite u tijeku s
-              našim istraživanjima i aktivnostima. Unesite svoju
-              e-mail adresu i pridružite se putovanju prema
-              razumijevanju i očuvanju krajobraza.
-            </p>
+            <div>
+              Pozivamo vas da se pridružite našem putovanju prema
+              očuvanju i razumijevanju krajobraza.
+              <div>
+                Za sve informacije vezane uz ‘Opservatorij
+                krajobraza’, slobodno nas kontaktirajte putem e-maila
+                na [info@croatianlandscape.hr] ili telefonom na [+385
+                95 9123055].
+              </div>
+              <div>
+                Zanima vas više o našem radu i misiji? Pretplatite se
+                na naš newsletter i budite u tijeku s našim
+                istraživanjima i aktivnostima. Unesite svoju e-mail
+                adresu i pridružite se putovanju prema razumijevanju i
+                očuvanju krajobraza.
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="S3"></div>
-      <div className="S4">
-        <div className="txt4"></div>
-      </div>
-
-      <div>
+      <div className="dno">
         <Footer />
       </div>
     </div>

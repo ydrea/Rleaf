@@ -49,11 +49,11 @@
     align-items: center;
     }
     .one {
-        height: 140vh;
-        font-size: 22px;
-        /* letter-spacing: 1.1px; */
-        margin-left: 18vw;
-        margin-right: 7vw;
+      height: 100vh;
+      font-size: 1.7rem;
+      /* letter-spacing: 1.1px; */
+        margin-left: 13.4vw;
+        margin-right: 9vw;
         margin-top: 5vh;
           }
     .one li {
@@ -64,33 +64,33 @@
       
     
     .two {
-        height: 140vh;
+        height: 120vh;
       }
     
     
       .three {
-        height: 140vh;
-        font-size: 22px;
+        height: 100vh;
+        font-size: 1.7rem;
         width: 50%;
         margin-left: auto;
       }
     
     
       .four {
-        height: 140vh;
+        height: 120vh;
         background-color: #8c8d85;
       }
       .five {
-        height: 140vh;
-        font-size: 22px;
+        height: 100vh;
+        font-size: 1.7rem;
         width: 50%; top: 0;
         margin-right: auto;
       padding-left: 1vw;
       }
       .six {
     color: #000;
-        height: 140vh;
-        font-size: 22px;
+        height: 30vh;
+        font-size: 1.7rem;
         width: 50%;
         margin-left: auto;
     }
