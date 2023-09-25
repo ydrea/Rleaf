@@ -14,7 +14,6 @@
 .cont0 {
 display: flex;  
 justify-content: center;
-
 height: 33rem;
 /* flex-shrink: 0; */
 padding-left: 5vw;
@@ -24,9 +23,8 @@ padding-left: 5vw;
    color: #fff;
   font-size: 9.6875rem;
   width: 80rem;  z-index: 3;
-  position: absolute;
-  top: 2rem;
-font-style: normal;
+  position: absolute; top: 5rem;
+  
 font-weight: 400;
 line-height: 140%; 
 letter-spacing: 0.53281rem;
@@ -40,7 +38,7 @@ letter-spacing: 0.53281rem;
   display: flex;
   justify-content: center;
   width: 80rem;  z-index: 3;
-    top: 12rem;
+    top: 15rem;
 font-style: normal;
 font-weight: 400;
 line-height: 140%; /* 13.5625rem */
@@ -68,7 +66,7 @@ bottom: 0;
 
 .S1 {
   position: relative; top: 10rem;
-  padding-left: 5vw;
+  margin-left: 10vw;
   width: 80rem; 
 
   font-size: 1.6rem;
@@ -84,11 +82,13 @@ bottom: 0;
   position: relative;
   max-width: 95vw;
   padding-left: 5vw;
+
 }
 /* ... Other CSS rules ... */
 
 .img2 {
-  position: relative; /* Add this to make img3 relative to img2 */
+  position: relative; 
+  /* Add this to make img3 relative to img2 */
   width: 100%;
   object-fit: cover;
   height: auto;
@@ -102,7 +102,7 @@ bottom: 0;
 
   padding-left: 5vw;
   position: absolute;
-  bottom: -17rem;
+  bottom: -42vh;
   left: 0;
   width: 50%; /* Keep this at 50% */
   height: auto;
@@ -119,9 +119,6 @@ bottom: 0;
   text-align: left;
 }
 
-/* ... Other CSS rules ... */
-
-
 .S2 {
   /* position: relative;  */
   height: 55.2rem;
@@ -132,17 +129,6 @@ bottom: 0;
   position: relative;
 height: 55.2rem;
 } 
-
-/* .img2 {
-  object-fit: cover;
-  width: 90%; height: auto;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: grid;
-  margin-left: 10vw;
-  z-index: 0;
-} */
 
 .txt2 {
  font-size: 1.8rem;

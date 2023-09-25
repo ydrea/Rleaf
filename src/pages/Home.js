@@ -88,7 +88,7 @@ function Home() {
       </div>
 
       <div>
-        <Footer className="foo" />
+        <Footer />
       </div>
     </div>
   );
