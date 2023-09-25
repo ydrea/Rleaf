@@ -23,7 +23,7 @@ padding-left: 5vw;
    color: #fff;
   font-size: 9.6875rem;
   width: 80rem;  z-index: 3;
-  position: absolute; top: 5rem;
+  position: absolute; top: 25vh;
   
 font-weight: 400;
 line-height: 140%; 
@@ -38,7 +38,7 @@ letter-spacing: 0.53281rem;
   display: flex;
   justify-content: center;
   width: 80rem;  z-index: 3;
-    top: 15rem;
+    top: 50vh;
 font-style: normal;
 font-weight: 400;
 line-height: 140%; /* 13.5625rem */
@@ -46,11 +46,10 @@ letter-spacing: 0.53281rem;
 }
 .podnaslov {
   position: absolute;
-  display: flex;
-  justify-content: center;
-  width: 80rem;  z-index: 3;
+  width: 90vw;  z-index: 3;
   font-size: 1.6rem;
-bottom: 0;
+left: 5vw;
+  bottom: 2vh;
 }
 
 .line-div1 {
@@ -65,14 +64,16 @@ bottom: 0;
 }
 
 .S1 {
-  position: relative; top: 10rem;
-  margin-left: 10vw;
-  width: 80rem; 
+  padding-top: 25vh;
+  margin-bottom: 30vh;
+  margin-left: 5vw;
+  margin-right: auto;
+  width: 90vw; 
 
   font-size: 1.6rem;
   color: #7e7e77;
   /* width: 85vw; */
-  height: 47rem;
+  /* height: 47rem; */
   /* padding-top: 20vh; */
   /* margin-left: 10vw; */
   white-space: pre-line;
@@ -109,10 +110,10 @@ bottom: 0;
 }
 
 .txt3 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #7e7e77;
   position: absolute;
-  bottom: -162rem; /* Position txt3 at the bottom */
+  bottom: -125vh; /* Position txt3 at the bottom */
   left: 55%; /* Center it horizontally */
   /* transform: translateX(-50%); Center it horizontally */
   width: 45%;

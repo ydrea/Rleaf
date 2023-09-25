@@ -64,22 +64,22 @@ function Home() {
             Smatramo da je zaštita i razumijevanje krajobraza ključna
             za otpornost i regeneraciju zajednica.
           </div>
-        </div>
-      </div>
 
-      <div className="txt3">
-        Pozivamo vas da se pridružite našem putovanju prema očuvanju i
-        razumijevanju krajobraza.
-        <p>
-          Za sve informacije vezane uz ‘Opservatorij krajobraza’,
-          slobodno nas kontaktirajte putem e-maila na
-          [info@croatianlandscape.hr] ili telefonom na [+385 95
-          9123055]. Zanima vas više o našem radu i misiji? Pretplatite
-          se na naš newsletter i budite u tijeku s našim
-          istraživanjima i aktivnostima. Unesite svoju e-mail adresu i
-          pridružite se putovanju prema razumijevanju i očuvanju
-          krajobraza.
-        </p>
+          <div className="txt3">
+            Pozivamo vas da se pridružite našem putovanju prema
+            očuvanju i razumijevanju krajobraza.
+            <p>
+              Za sve informacije vezane uz ‘Opservatorij krajobraza’,
+              slobodno nas kontaktirajte putem e-maila na
+              [info@croatianlandscape.hr] ili telefonom na [+385 95
+              9123055]. Zanima vas više o našem radu i misiji?
+              Pretplatite se na naš newsletter i budite u tijeku s
+              našim istraživanjima i aktivnostima. Unesite svoju
+              e-mail adresu i pridružite se putovanju prema
+              razumijevanju i očuvanju krajobraza.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="S3"></div>
