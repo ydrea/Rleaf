@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export const Dropdown = ({ submenus, dropdown }) => {
+export const Dropdown = ({ submenus, dropdown, isDropdownOpen }) => {
   return (
-    <ul className={`dropdown ${dropdown ? 'show' : ''}`}>
+    <ul className={`dropdown ${isDropdownOpen ? 'show' : ''}`}>
       {submenus.map((submenu, index) => (
         <li key={index} className="menu-items">
           {submenu.to ? (
@@ -37,6 +37,17 @@ export const Nav = () => {
   const [click, setClick] = useState(false);
   const [hovered, setHovered] = useState(null);
   const [subMenu, setSubMenu] = useState({});
+
+  const [isDropdownOpen, isDropdownOpenSet] = useState(false);
+  // const handleSubMenuClick = index => {
+  //   // Open the dropdown
+  //   isDropdownOpenSet(true);
+
+  //   // Start a timeout to close the dropdown after, for example, 3000 milliseconds (3 seconds)
+  //   setTimeout(() => {
+  //     setIsDropdownOpen(false);
+  //   }, 300); // Adjust the duration as needed
+  // };
 
   const location = useLocation();
 
@@ -100,6 +111,7 @@ export const Nav = () => {
                       {item.label}
                     </Link>
                     <Dropdown
+                      isDropdownOpen={isDropdownOpen}
                       dropdown={subMenu[index]}
                       submenus={item.submenu}
                     />
