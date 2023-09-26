@@ -1,0 +1,167 @@
+.home {
+    display: block;
+  }
+  
+  /* Set max-width for containers to prevent overflow */
+  .cont0,
+  .S1,
+  .S2,
+  .S3 {
+    max-width: 100%;
+  }
+  
+  /* Set max-width for specific containers if needed */
+  .cont2,
+  .cont3 {
+    max-width: 100%;
+  }
+  
+  /* Container for grid layout */
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    /* gap: 2rem; */
+    justify-items: center;
+    text-align: left;
+    padding: 2rem;
+  }
+  
+  /* Header grid items */
+  .vozi,
+  .pali,
+  .podnaslov {
+    font-size: 2rem; /* Adjust font size */
+    z-index: 3;
+    position: relative;
+  }
+  
+  .vozi {
+    top: auto;
+    margin-top: 2rem; /* Add margin for spacing */
+  }
+  
+  .pali {
+    top: auto;
+    margin-top: 4rem; /* Add margin for spacing */
+  }
+  
+  .podnaslov {
+    bottom: auto;
+    margin-bottom: 2rem; /* Add margin for spacing */
+  }
+  
+  /* Line separator */
+  .line-div1 {
+    border-top: 1px solid white;
+    position: relative;
+    margin-top: 2rem; /* Add margin for spacing */
+  }
+  
+  /* Section 1 */
+  .S1 {
+    padding: 2rem;
+    font-size: 1.5rem; /* Adjust font size */
+    color: #7e7e77;
+    text-align: left; /* Center text */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Existing CSS styles ... */
+
+/* Section 2 */
+.S2 {
+    align-items: center;
+    position: relative; /* Add position relative to create a stacking context */
+  }
+  
+  
+  /* Image 2 */
+  .img2 {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: grid;
+    position: relative; /* Add position relative */
+  }
+  
+  /* Text 2 */
+  .txt2 {
+    z-index: 7;
+    font-size: 1.25rem; /* Adjust font size */
+    color: red;
+    text-align: left; /* Center text */
+    max-width: 50%;
+    position: absolute;
+    right: 0;
+    bottom: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stack text vertically */
+  }
+  
+  .txt2 p {
+    margin: 0;
+  }
+  
+  
+  /* Section 3 */
+.S3{
+    /* position: relative; */
+    display: block;
+width: 100%;}
+
+
+  /* Image 3 */
+  .img3 {
+    position: absolute; /* Change position to absolute */
+    width: 50%;
+    height: auto;
+    /* margin-top: 2rem;  */
+    bottom: -9.5rem; /* Align to the bottom of the parent (.img2) */
+    left:  0%; /* Adjust left position to center it horizontally */
+  }
+/* Text 3 */
+
+
+.txt3 {
+    position: absolute;
+    z-index: 9;
+    right: 0;
+    bottom: -7rem;
+    grid-row: 3; /* Place .txt3 in its own grid row */
+    font-size: 12.5rem; /* Adjust font size */
+    color: #7e7e77;
+    text-align: center; /* Center text */
+    width: 50%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  /* Text items in Section 3 */
+  .ena,
+  .dve,
+  .tli {
+    font-size: 1.25rem; /* Adjust font size */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 2.25rem */
+    letter-spacing: 0.01875rem;
+    text-align: left; /* Align text to the left within Section 3 */
+    margin: 1rem 0; /* Add margin for spacing */
+  }
+  
+  /* Footer */
+  .dno {
+    grid-row: 4; /* Place .dno in its own grid row at the bottom */
+    position: relative;
+    display: block;
+    bottom: auto;
+    margin-top: 2rem;
+  }
+  

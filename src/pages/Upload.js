@@ -23,21 +23,25 @@ export const Upload = () => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
   };
-  // prettier-ignore
+  //onSubmit
   const onSubmit = async e => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('file', file);
-    try 
-    { const res = await axios.post(`${process.env.REACT_APP_SERVER}/upload`, formData, {
-        headers: {'Content-Type': 'multipart/form-data' },
-    //progress
-      });
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER}/upload`,
+        formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+          //progress
+        }
+      );
       // Clear percentage
       const { fileName, filePath } = res.data;
       setUploadedFile({ fileName, filePath });
       setMessage(`img File ${fileName} Uploaded 2 ${filePath}`);
-    setFileUploaded(true)
+      setFileUploaded(true);
     } catch (err) {
       if (err.response.status === 500) {
         setMessage('There was a problem with the server');

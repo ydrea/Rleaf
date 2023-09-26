@@ -1,3 +1,48 @@
+.mline {
+  z-index: 3333;
+  position: fixed;
+  left: 12.5vw;
+  top: 400px; 
+  box-sizing: border-box;
+  width: 1440px;
+  height: 3px; 
+  background-color: red;
+  display: flex;
+  justify-self: center;
+  align-self: center; 
+  }
+
+
+  .nline {
+    z-index: 3333;
+    position: fixed;
+    left: 17.5vw;
+    top: 450px; 
+    box-sizing: border-box;
+    width: 1440px;
+    height: 3px; 
+    background-color: blue;
+    display: flex;
+    justify-self: center;
+    align-self: center; 
+    }
+
+    .lline {
+      z-index: 333;
+      position: fixed;
+      right: 17.5vw;
+      top: 340px; 
+      box-sizing: border-box;
+      width: 1440px;
+      height: 3px; 
+      background-color: yellow;
+      display: flex;
+      justify-self: center;
+      align-self: center; 
+      }
+
+
+
 .navbar {
   justify-content: flex-start;
   align-items: flex-start;
@@ -51,49 +96,6 @@ padding-inline-start: 0 !important;
   background-color: #18aa00; 
   }
 
-  .mline {
-    z-index: 3333;
-    position: fixed;
-    left: 12.5vw;
-    top: 400px; 
-    box-sizing: border-box;
-    width: 1440px;
-    height: 3px; 
-    background-color: red;
-    display: flex;
-    justify-self: center;
-    align-self: center; 
-    }
-
-
-    .nline {
-      z-index: 3333;
-      position: fixed;
-      left: 17.5vw;
-      top: 450px; 
-      box-sizing: border-box;
-      width: 1440px;
-      height: 3px; 
-      background-color: blue;
-      display: flex;
-      justify-self: center;
-      align-self: center; 
-      }
-  
-      .lline {
-        z-index: 333;
-        position: fixed;
-        right: 17.5vw;
-        top: 340px; 
-        box-sizing: border-box;
-        width: 1440px;
-        height: 3px; 
-        background-color: yellow;
-        display: flex;
-        justify-self: center;
-        align-self: center; 
-        }
-  
       
 .nav-links {
   color: #000;
@@ -101,7 +103,7 @@ padding-inline-start: 0 !important;
   align-items: flex-start;
   text-decoration: none;
   padding: .2rem 1.6rem;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 position: relative;
 white-space: pre !important; 
 }
@@ -155,7 +157,7 @@ white-space: pre !important;
 .dropdown {
   position: absolute;
   /* right: 0; */
-  top: 1vh;
+  top: 4vh;
   /* left: auto; */
     /* font-size: 0.875rem; */
   z-index: 9999;

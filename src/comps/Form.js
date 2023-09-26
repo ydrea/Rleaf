@@ -4,7 +4,7 @@ import Message from './Message';
 
 //
 const Form = ({ uploadedFile, exifR, id, signatura }) => {
-  const [pod, podSet] = useState();
+  // const [pod, podSet] = useState();
   const [confirmationMsg, setConfirmationMsg] = useState('');
 
   const handleSubmit = async e => {

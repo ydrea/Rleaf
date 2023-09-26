@@ -1,4 +1,5 @@
-.home {display: block;
+.home {display: flex;
+  flex-direction: column;
 }
 /* Set max-width for containers to prevent overflow */
 .cont0, .S1, .S2, .S3 {
@@ -71,7 +72,7 @@ flex-shrink: 0;
 }
 
 .S1 {
-  padding-top: 55vh;
+  padding-top: 750px;
   padding-bottom: 9vh;
   margin-left: 17.5vw;
   margin-right: auto;
@@ -127,7 +128,7 @@ flex-shrink: 0;
   font-size: 1.7rem;
   color: #7e7e77;
   position: absolute;
-  bottom: -123vh; 
+  bottom: -124vh; 
   left: 54vw; 
   max-width: 26vw;
   margin-left: 1vw;
@@ -182,5 +183,138 @@ letter-spacing: 0.01375rem;
 .dno {
   position: relative;
   display: block;
-  bottom: -90rem;
+  bottom: -110vh !important;
 }
+
+@media screen and (max-width: 1100px) {
+  /* Reset styles and set display to block for .home */
+  .home {
+    display: flex;
+  }
+
+  /* Set max-width for containers to prevent overflow */
+  .cont0,
+  .S1,
+  .S2,
+  .S3 {
+    max-width: 100%;
+  }
+
+  /* Set max-width for specific containers if needed */
+  .cont2,
+  .cont3 {
+    max-width: 100%;
+  }
+
+  /* Modify .cont0 for mobile */
+  .cont0 {
+    display: block;
+    height: auto;
+    text-align: center;
+  }
+
+  /* Modify .vozi and .pali for mobile */
+  .vozi,
+  .pali {
+    font-size: 4rem;
+    position: static;
+    width: 100%;
+    margin-top: 2rem;
+    z-index: auto;
+  }
+
+  /* Modify .podnaslov for mobile */
+  .podnaslov {
+    position: static;
+    width: 100%;
+    margin-top: 1rem;
+    z-index: auto;
+  }
+
+  /* Remove .line-div1 for mobile */
+  .line-div1 {
+    display: none;
+  }
+
+  /* Modify .S1 for mobile */
+  .S1 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    font-size: 1.5rem;
+    text-align: center; /* Changed to center text */
+    color: #7e7e77;
+  }
+
+  /* Modify .img-container for mobile */
+  .img-container {
+    max-width: 100%;
+    padding-left: 0;
+  }
+
+  /* Modify .img2 for mobile */
+  .img2 {
+    width: 100%;
+    height: auto;
+    background-size: contain;
+  }
+
+  /* Modify .txt2 for mobile */
+  .txt2 {
+    font-size: 1.25rem;
+    color: #fff;
+    position: static;
+    text-align: center;
+    max-width: 100%;
+    bottom: auto;
+  }
+
+  /* Modify .img3 for mobile */
+  .img3 {
+    position: static;
+    width: 100%;
+    height: auto;
+    left: 0;
+    margin-top: 2rem;
+  }
+
+  /* Modify .txt3 for mobile */
+  .txt3 {
+    font-size: 1.25rem;
+    color: #7e7e77;
+    position: static;
+    text-align: center;
+    max-width: 100%;
+    bottom: auto;
+    margin-left: 0;
+  }
+
+  /* Keep .ena, .dve, .tli, and .S2 for mobile */
+  .ena,
+  .dve,
+  .tli,
+  .S2 {
+    display: block;
+  }
+
+  /* Modify .cont2 and .cont3 for mobile */
+  .cont2,
+  .cont3 {
+    position: static;
+    height: auto;
+    width: 100%;
+  }
+
+  /* Keep .dno at the bottom of the page for mobile */
+  .dno {
+    display: block;
+    /* position: relative; */
+    /* height: 550rem; */
+    bottom: 0;
+  }
+}
+
+
+
