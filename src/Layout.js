@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Header } from './comps/Header';
-// import Footer from './comps/Footer';
+import Footer from './comps/Footer';
 import './layout.css';
 import { Nav } from './comps/Nav';
 //

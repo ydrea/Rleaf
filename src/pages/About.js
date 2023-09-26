@@ -82,7 +82,7 @@ export default function About() {
             style={{
               position: 'absolute',
               bottom: '0',
-              left: '50%',
+              left: '40%',
               width: '25vw',
               color: 'white',
               textAlign: 'left',
@@ -134,7 +134,7 @@ export default function About() {
             <div
               style={{
                 position: 'absolute',
-                bottom: '0',
+                bottom: '-25vh',
                 left: '1vw',
                 width: '25vw',
                 color: 'white',
@@ -168,7 +168,7 @@ export default function About() {
           (projekt Opservatorij krajobraza Banovine/Banije), Republika
           Hrvatska, Ministarstvo kulture i medija (pokroviteljstvo).
         </div>
-        <div className="six">
+        {/* <div className="six">
           <p>
             Za sve informacije vezane uz ‘Opservatorij krajobraza’,
             slobodno nas kontaktirajte putem e-maila na
@@ -179,7 +179,7 @@ export default function About() {
             i pridružite se putovanju prema razumijevanju i očuvanju
             krajobraza.
           </p>
-        </div>
+        </div> */}
         <Footer />{' '}
       </div>
     </div>
