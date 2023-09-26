@@ -407,7 +407,16 @@ const Karta = () => {
         <h1>opservatorij</h1>
         <div className="line-div0" />
       </div>
-      <div
+      <div className="txtcont">
+        Dobrodošli na interaktivnu kartu "Opservatorija krajobraza".
+        Ova karta predstavlja našu kontinuirano nadopunjujuću
+        kolekciju georeferenciranih podataka koja vam omogućuje uvid u
+        različite aspekte krajobraza. Upotrijebite alate za odabir
+        podloge, prilagodbu slojeva i filtriranje informacija kako
+        biste prilagodili prikaz prema vlastitim istraživačkim
+        potrebama.
+      </div>
+      {/* <div
         className="custom-control-container"
         id="custom-map-controls"
       >
@@ -417,10 +426,16 @@ const Karta = () => {
         <button id="minus" onClick={handleZoomOut}>
           -
         </button>
-      </div>
+      </div> */}
       <div
         id="map-container"
-        style={{ height: '400px', width: '60vw' }}
+        style={{
+          height: '400px',
+          width: '75vw',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          marginBottom: '2vh',
+        }}
       />
       <div id="modal-container"></div>
       <Footer />{' '}

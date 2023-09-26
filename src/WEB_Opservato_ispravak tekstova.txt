@@ -2,6 +2,35 @@
 [19:47, 25/09/2023] EKOMENA d.o.o Filip Šrajer: Unutar 1440 s obje strane uglavnom postoji dodatni pojas od još 96 px (5%), dakle ukupno 17,5% sa svake strane.
 [19:48, 25/09/2023] EKOMENA d.o.o Filip Šrajer: U taj pojas ulaze: velika slika na naslovnici (lijepi se na desni rub) i karta (lijepi se na oba ruba, u punoj širini 1440 px iliti 75% ekrana
 
+.custom-control-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  justify-items: center;
+  background-color: #DBDBDB;
+  padding: 10px;
+  position: static; /* Change to static positioning */
+  top: auto; /* Remove top property */
+  left: auto; /* Remove left property */
+  width: 75vw; /* Set the width to 75vw */
+  max-height: 10vh; /* Set the maximum height to 10vh */
+  align-self: flex-start; /* Align it to the top of its containing element */
+}
+
+/* Styles for checkboxes and radio buttons */
+#custom-map-controls input[type="checkbox"],
+#custom-map-controls input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+} */
 
 I VERZIJA
 * 'Opservatorij krajobraza' je kolaborativna platforma koja okuplja znanstvenike i stručnjake različitih profila. 

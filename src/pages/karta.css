@@ -6,37 +6,14 @@
   font-weight: 400;
   transform-origin: 10px 10px;
 }
-
-.custom-control-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 1fr 1fr;
-  gap: 10px;
-  justify-items: center;
-  background-color: #DBDBDB;
-  padding: 10px;
-  position: static; /* Change to static positioning */
-  top: auto; /* Remove top property */
-  left: auto; /* Remove left property */
-  width: 75vw; /* Set the width to 75vw */
-  max-height: 10vh; /* Set the maximum height to 10vh */
-  align-self: flex-start; /* Align it to the top of its containing element */
+.txtcont{
+display: block;
+font-size: 1.2rem;
+margin-left: 17.5vw;
+margin-right: 17.5vw;
+top: -30vh;
 }
-
-/* Styles for checkboxes and radio buttons */
-#custom-map-controls input[type="checkbox"],
-#custom-map-controls input[type="radio"] {
-  appearance: none;
-  -webkit-appearance: none;
-  background-color: #fff;
-  border: 2px solid #007bff;
-  border-radius: 4px;
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
+/* 
 /* Styles for the checked state of checkboxes and radio buttons */
 #custom-map-controls input[type="checkbox"]:checked,
 #custom-map-controls input[type="radio"]:checked {

@@ -7,8 +7,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4.1vw;
-  margin-left: 13.4vw;
-  margin-right: 10vw;
+  margin-left: 17.5vw;
+  margin-right: 17.5vw;
   padding-top: 3vw;
   flex-direction: row;
 }
@@ -35,7 +35,9 @@
 .selected-div2 {
   font-size: 22px;
   z-index: 922;
-  width: 88vw; 
+  margin-left: 17.5vw;
+  margin-right: 17.5vw;
+  width: 65vw; 
   justify-content: space-between;
   align-items: baseline;
 }

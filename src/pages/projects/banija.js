@@ -8,8 +8,9 @@ const Banija = () => {
       <div className="projects-container">
         <img src="/proj1.jpg" />
 
-        <h1 style={{ color: 'white' }}>
-          Opservatorij krajobraza Banovine/Banije
+        <h1 style={{ color: 'white', whiteSpace: 'pre-line' }}>
+          Opservatorij krajobraza
+          <br /> Banovine/Banije
         </h1>
       </div>
       <div className="tekst">
