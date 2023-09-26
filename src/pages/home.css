@@ -1,4 +1,5 @@
-.home {display: block;
+.home {
+  display: block;
 }
 /* Set max-width for containers to prevent overflow */
 .cont0, .S1, .S2, .S3 {
@@ -71,7 +72,7 @@ flex-shrink: 0;
 }
 
 .S1 {
-  padding-top: 55vh;
+  padding-top: 700px;
   padding-bottom: 9vh;
   margin-left: 17.5vw;
   margin-right: auto;
