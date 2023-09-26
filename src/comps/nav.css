@@ -16,10 +16,10 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 20vh;
+  height: 10vh;
   width: 100%; 
   position: relative;
-  left: calc( 17.5vw - 3.22rem );
+  left: calc( 17.5vw - 3rem );
   }
 
 .fa-typo3 {
@@ -55,12 +55,12 @@ padding-inline-start: 0 !important;
     z-index: 3333;
     position: fixed;
     left: 12.5vw;
-    top: 400px; 
+    top: 40px; 
     box-sizing: border-box;
     width: 1440px;
     height: 3px; 
     background-color: red;
-    display: flex;
+    display: none;
     justify-self: center;
     align-self: center; 
     }
@@ -70,7 +70,7 @@ padding-inline-start: 0 !important;
       z-index: 3333;
       position: fixed;
       left: 17.5vw;
-      top: 450px; 
+      top: 45px; 
       box-sizing: border-box;
       width: 1440px;
       height: 3px; 
@@ -84,7 +84,7 @@ padding-inline-start: 0 !important;
         z-index: 333;
         position: fixed;
         right: 17.5vw;
-        top: 340px; 
+        top: 34px; 
         box-sizing: border-box;
         width: 1440px;
         height: 3px; 
@@ -100,8 +100,8 @@ padding-inline-start: 0 !important;
   display: flex;
   align-items: flex-start;
   text-decoration: none;
-  padding: .2rem 1.6rem;
-  font-size: 1.6rem;
+  padding: .2rem 1.4rem;
+  font-size: 1.2rem;
 position: relative;
 white-space: pre !important; 
 }

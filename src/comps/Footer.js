@@ -1,6 +1,6 @@
 import React from 'react';
 import './footer.css';
-
+import logo from '../assets/Asset 5.svg';
 //
 export default function Footer() {
   return (
@@ -10,7 +10,7 @@ export default function Footer() {
         ydrea
       </a>
       (mnation */}
-      <img src="../../logoBmp.png" />
+      <img src={logo} />
       <p>
         {' '}
         Uvjeti korištenja "Sve fotografije i tekstovi objavljeni na
