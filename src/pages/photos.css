@@ -49,18 +49,24 @@
   }
 
   .naslov-container h1 {
-    letter-spacing: .047em;
-    font-size: 10vw;
-    font-weight: 100;
+    /* letter-spacing: .047em; */
+    /* font-size: 10vw; */
+    /* font-weight: 100; */
     margin-top: -10vh;
-    margin-left: 12.5vw;
+    margin-left: 17.5vw;
     color: #fff;  
     display: flex;
-    width: 76.65938rem;
-    height: 9.30713rem;
+    /* width: 76.65938rem; */
+    /* height: 9.30713rem; */
     flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
+
+    font-size: 9.6875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; /* 13.5625rem */
+    /* letter-spacing: 0.53281rem; */
   }
   .teka {
     position: relative; 
