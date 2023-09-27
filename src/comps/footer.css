@@ -8,13 +8,12 @@
   margin-top: auto !important;
   min-height: fit-content;
   background-color: #DBDBDB;
-  position: relative; 
+  /* position: relative;  */
   bottom: -15rem;
 }
 
 .footer p {
-  max-width: 65vw;
-  margin-left: 17.5vw;
-  margin-right: 17.5vw;
-  color: #7e7e77;
+  max-width: 75vw;
+  padding-left: 1.8vw;
+color: #7e7e77;
 }
