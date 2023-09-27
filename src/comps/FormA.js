@@ -4,7 +4,7 @@ import './form.css';
 import Modal from './Modal';
 
 //
-const Form = ({ uploadedFile, exifR }) => {
+const FormA = ({ uploadedFile, exifR }) => {
   const [pod, podSet] = useState();
   const [confirmationMsg, setConfirmationMsg] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -219,4 +219,4 @@ const Form = ({ uploadedFile, exifR }) => {
   );
 };
 
-export default Form;
+export default FormA;
