@@ -6,7 +6,7 @@
 .photo-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 4.1vw;
+  gap: 1.5vw;
   margin-left: 17.5vw;
   margin-right: 17.5vw;
   padding-top: 3vw;
@@ -70,15 +70,15 @@
   }
   .teka {
     position: relative; 
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 100;
     margin-top: -10vh;
-    width: 100%;
+    max-width: 100%;
 }
 .tekast {
-    margin-left: 13.4vw;
-width: 77.6vw;
-    /* margin-right: 11; */
+    margin-left: 17.5vw;
+width: 65vw;
+    margin-right: 17.5vw;
 
 }
 
@@ -93,9 +93,10 @@ width: 77.6vw;
 }
 .select-container {
  font-size: 1.2rem;
-  margin-left: 13.5vw;
+  margin-left: 17.5vw;
+  margin-right: 17.5vw;
   /* margin-right: 11vw; */
-  width: 75%;
+  width: 64%;
   display: flex;
   justify-content: space-between;
   align-items: center;

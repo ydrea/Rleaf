@@ -2,6 +2,26 @@
 [19:47, 25/09/2023] EKOMENA d.o.o Filip Šrajer: Unutar 1440 s obje strane uglavnom postoji dodatni pojas od još 96 px (5%), dakle ukupno 17,5% sa svake strane.
 [19:48, 25/09/2023] EKOMENA d.o.o Filip Šrajer: U taj pojas ulaze: velika slika na naslovnici (lijepi se na desni rub) i karta (lijepi se na oba ruba, u punoj širini 1440 px iliti 75% ekrana
 
+OPĆENITO
+- svako re-otvaranje trebalo bi voditi na vrh sekcije, a ne tamo gdje je netko stao
+NASLOVNICA
+- naslov treba isto biti bold kao i drugdje (ili sve drugo ne-bold, to nek odluči Gamba ali samo da je ujednačeno)
+- fale zelene i sive horizontale i vertikale
+- email i telefon da uredno pišu jedan ispod drugog kao kod Gambe
+- vjerojatno će trebati još vertikalno raširiti polje s glavnim tekstom, ali to može čekati gambin svg. 
+O NAMA 
+- nek otvara na vrh
+PROJEKTI
+- podijeliti tekstove u 2-3 odlomka
+KARTA
+- nek otvara na vrh
+- malo odvojiti tekst od karte, dodati horizontalne crte na vrhu i dnu karte
+- povećati kartu po visini za duplo (čini se kao da si od jučer smanjio, a ne povećao kartu)
+FOTOTEKA
+- pomakni "ključne riječi" malo desno, da se otprilike poravnaju sa zadnjim stupcem thumbnaila
+KONTAKT
+- nek otvara na vrh
+
 .custom-control-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

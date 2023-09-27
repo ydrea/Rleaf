@@ -32,7 +32,7 @@ flex-shrink: 0;
   position: absolute; top: 25vh;
   display: flex;
   justify-content: center;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 140%; 
   letter-spacing: 0.53281rem;
 }
@@ -47,7 +47,7 @@ flex-shrink: 0;
   width: 64vw;  z-index: 3;
   top: 50vh;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 140%; /* 13.5625rem */
   letter-spacing: 0.53281rem;
 }
