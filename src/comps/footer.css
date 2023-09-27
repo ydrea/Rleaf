@@ -13,7 +13,8 @@
 }
 
 .footer p {
-  max-width: 75vw;
-  padding-left: 1.8vw;
-color: #7e7e77;
+  max-width: 65vw;
+  margin-left: 17.5vw;
+  margin-right: 17.5vw;
+  color: #7e7e77;
 }
