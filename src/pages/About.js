@@ -168,18 +168,6 @@ export default function About() {
           (projekt Opservatorij krajobraza Banovine/Banije), Republika
           Hrvatska, Ministarstvo kulture i medija (pokroviteljstvo).
         </div>
-        {/* <div className="six">
-          <p>
-            Za sve informacije vezane uz ‘Opservatorij krajobraza’,
-            slobodno nas kontaktirajte putem e-maila na
-            [info@croatianlandscape.hr] ili telefonom na [+385 95
-            9123055]. Zanima vas više o našem radu i misiji?
-            Pretplatite se na naš newsletter i budite u tijeku s našim
-            istraživanjima i aktivnostima. Unesite svoju e-mail adresu
-            i pridružite se putovanju prema razumijevanju i očuvanju
-            krajobraza.
-          </p>
-        </div> */}
         <Footer />{' '}
       </div>
     </div>

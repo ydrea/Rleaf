@@ -124,9 +124,9 @@ export const Nav = () => {
         </nav>{' '}
         <div className="navline-div" />
       </div>
-      <div className="mline" />
+      {/* <div className="mline" />
       <div className="nline" />
-      <div className="lline" />
+      <div className="lline" /> */}
     </>
   );
 };

@@ -5,10 +5,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
+  margin-top: auto !important;
   min-height: fit-content;
   background-color: #DBDBDB;
-  /* position: relative;  */
+  position: relative; 
   bottom: -15rem;
 }
 
