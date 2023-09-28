@@ -22,6 +22,17 @@ FOTOTEKA
 KONTAKT
 - nek otvara na vrh
 
+
+-	Andrija riješi tagove da izgledaju uredni
+KARTA:
+-	sloj “administrativna_naselja” maknuti
+-	sloj “preklop_banijska_naselja” preimenovati u “sela i zaseoci”
+-	sloj „preklop_administrativne_jedinice“ preimenovati u „administrativne jedinice“ i prebaciti na vrh, prvi ispod crte
+-	sloj undefined preimenovati u “pokrov i korištenje zemljišta (CORINE)” i podesiti boje
+-	sloj “tema_zastita_prirode” preimenovati u “zaštita prirode” i učiniti da se na klik opisuje što jest
+-	sloj “tema_stanovnistvo” preimenovati u “broj stanovnika”, povećati krugove za 50%, učiniti da ih ne reže podloga i učiniti da se na klik opisuje koliko
+-	sloj “tema potres” preimenovati u “potres 2020: intenzitet (MMI/MCS)”
+
 .custom-control-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

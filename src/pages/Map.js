@@ -16,10 +16,10 @@ import { Icon } from 'leaflet';
 //prettier-ignore
 import {
   ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
-  PodRH, TemaZP, TemaP, TemaS
+  PodRH, TemaZP, TemaP, //TemaS
 } from '../maps/wms';
 // import { markeri } from '../maps/markeri';
-
+import { Stanovnistvo } from '../maps/wfs';
 import chroma from 'chroma-js'; // Import Chroma.js
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
@@ -277,17 +277,17 @@ export default function Map() {
               }}
             />
           </Overlay>
-          {/*             
-            <BaseLayer name="tema_koristenje_zemljista">
-              <GeoJSON data={geojson} onEachFeature={onEachFeature} />
-            </BaseLayer> */}
-          <Overlay name="tema_zastita_prirode">
+
+          <Overlay name="Koristenje zemljista">
+            <GeoJSON data={geojson} onEachFeature={onEachFeature} />
+          </Overlay>
+          <Overlay name="Zastita prirode">
             <TemaZP />
           </Overlay>
-          <Overlay name="tema_stanovnistvo">
-            <TemaS />
+          <Overlay name="Stanovnistvo">
+            <Stanovnistvo onEachFeature={onEachFeature} />
           </Overlay>
-          <Overlay name="tema_potres">
+          <Overlay name="Potres">
             <TemaP />
           </Overlay>
           {/* </LayersControl> */}

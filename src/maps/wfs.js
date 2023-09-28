@@ -14,7 +14,7 @@ const myIcon = new Icon({
 //
 
 export const Stanovnistvo = () => {
-  const [data, setData] = useState(null);
+  const [dataSt, setData] = useState(null);
   //prettier-ignore
   useEffect(()=>{axios.get(   
       baseURL+'TYPENAME=naselja_stanovnistvo' )
@@ -27,5 +27,5 @@ export const Stanovnistvo = () => {
       });
     },[])
 
-  return <>{data && <GeoJSON data={data} icon={myIcon} />}</>;
+  return <>{dataSt && <GeoJSON dataSt={data} icon={myIcon} />}</>;
 };
