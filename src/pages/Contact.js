@@ -8,7 +8,7 @@ function Contact() {
       <div className="naslov-container">
         <h1>opservatorij</h1>
       </div>
-      <div className="line-div4" />
+      <div className="line-div0" />
       <div className="un">
         {' '}
         <p>
@@ -16,6 +16,7 @@ function Contact() {
           Sveučilište u Zagrebu, Agronomski fakultet izv.prof.dr.sc.
           Goran Andlar Svetošimunska cesta 25 10000, Zagreb
         </p>
+        <hr className="gren" />
         <p>
           Za sve informacije vezane uz ‘Opservatorij krajobraza’,
           slobodno nas kontaktirajte putem e-maila na

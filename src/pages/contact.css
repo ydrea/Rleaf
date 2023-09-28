@@ -14,3 +14,12 @@
     margin-top: 5vw;
     max-width: 75vw;
   }
+
+  .gren {
+    background-color: green;
+    height: 3px;
+    /* width: 100vw; left: -1.5vw; */
+    display: block;
+    box-sizing: border-box;
+    /* position: absolute;  right: 12.5; */
+  }
