@@ -79,9 +79,12 @@ function Home() {
             </div>{' '}
             <div className="dve">
               Za sve informacije vezane uz ‘Opservatorij krajobraza’,
-              slobodno nas kontaktirajte putem e-maila na
-              [info@croatianlandscape.hr] ili telefonom na [+385 95
-              9123055].
+              slobodno nas kontaktirajte
+              <p>
+                putem e-maila na [
+                <span>info@croatianlandscape.hr</span>]
+              </p>{' '}
+              ili telefonom na [<span>+385 95 9123055</span>].
             </div>
             <div className="tli">
               Zanima vas više o našem radu i misiji? Pretplatite se na

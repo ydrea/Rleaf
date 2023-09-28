@@ -15,6 +15,7 @@ import './photos.css';
 import Photo from './Photo';
 import KategorijeSelekt from '../comps/SelektK';
 import TagoviSelekt from '../comps/SelektT';
+import Hline from '../comps/Line';
 
 export default function Photos() {
   const navigate = useNavigate();
@@ -100,9 +101,9 @@ export default function Photos() {
             className="select"
           />
         </div>
-        <div className="line-div2" />
+        {/* <div className="line-div2" /> */}
       </div>
-
+      <Hline color="#18aa00" height="2px" width="100%" />
       <div className="photo-container">
         {filteredPhotos && filteredPhotos.length > 0 ? (
           filteredPhotos.map((photo, index) => (
@@ -126,6 +127,7 @@ export default function Photos() {
           <p>loading...</p>
         )}
       </div>
+      <Hline color="#7e7e77" height="2px" width="100%" />{' '}
     </div>
   );
 }

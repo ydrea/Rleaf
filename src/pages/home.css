@@ -54,7 +54,7 @@ flex-shrink: 0;
 .podnaslov {
   position: absolute;
   width: 64vw;  z-index: 3;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   display: flex;
   justify-content: center;
   bottom: 2vh;
@@ -108,12 +108,12 @@ flex-shrink: 0;
    right: 3vw;
    text-align: left;
    z-index: 33;
-   max-width: 35%;
+   max-width: 33vw;
    width: 100%;
    bottom: 10vh;
  }
  .txt2 p {
-  margin: 0;
+  margin: 0.5;
  }
  
 .img3 {
@@ -125,19 +125,19 @@ flex-shrink: 0;
 }
 
 .txt3 {
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   color: #7e7e77;
   position: absolute;
-  bottom: -123vh; 
+  bottom: -109vh; 
   left: 54vw; 
-  max-width: 26vw;
+  /* max-width: 25vw; */
   margin-left: 1vw;
   /* margin-right: 4vw; */
   text-align: left;
 }
 .ena {
 width: 26vw;
-font-size: 1.875rem;
+font-size: 1.6rem;
 font-style: normal;
 font-weight: 400;
 line-height: 120%; /* 2.25rem */
@@ -145,16 +145,24 @@ letter-spacing: 0.01875rem;
 }
 .dve {
 padding-top: 10vh;
-width: 26vw;
+width: 35vw;
 font-size: 1.375rem;
 font-style: normal;
 font-weight: 500;
 line-height: 140%;
 letter-spacing: 0.01375rem;
 }
+
+.dve p {
+  margin: 0;
+}
+
+.dve span {
+  color: #fff;
+}
 .tli {
   padding-top: 10vh;
-  width: 26vw;
+  width: 35vw;
   font-size: 1.375rem;
   font-style: normal;
   font-weight: 500;

@@ -52,7 +52,7 @@ const PhotosLayout = () => {
           istraživačima omogućavamo pronalaženje specifičnih stavki
           unutar jasno definiranih kategorija.
         </div>
-        <div className="line-div1" />{' '}
+        {/* <div className="line-div1" />{' '} */}
       </div>
       <Outlet filteredPhotos={filteredPhotos} />{' '}
       {/* This will render child routes */}
