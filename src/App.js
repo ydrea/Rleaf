@@ -6,6 +6,7 @@ import Ewap from './pages/projects/ewap';
 import Banija from './pages/projects/banija';
 //
 import { Fileupload } from './pages/Upload';
+import PhotosEDIT from './pages/PhotosEDIT';
 import { Login } from './pages/Login';
 // import { Fileupload } from './pages/Fileupload';
 //
@@ -36,6 +37,8 @@ function App() {
       <Routes>
         <Route element={<Private />}>
           <Route path="/upload" element={<Fileupload />} />
+          <Route path="/edit" element={<PhotosEDIT />} />
+          <Route path="/edit/:id" element={<PhotosEDIT />} />
         </Route>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
