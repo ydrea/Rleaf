@@ -59,8 +59,6 @@ export default function Map() {
   //
   const [markeri, markeriSet] = useState([]);
   const [selectedLayer, setSelectedLayer] = useState();
-
-  // const mapRef = useRef();
   const markerRef = useRef([]);
   //
   const geojsonData = geojson; // Assign the imported GeoJSON directly

@@ -4,6 +4,22 @@ import L from 'leaflet';
 import geojson from '../data/temakz.geojson.json';
 import tileLayer from '../utils/tileLayer';
 //
+
+//   const wmsLayer = {
+//     id: '777',
+//     url: "http://localhost:8080/geoserver/ows?",
+//     layers: "public:my_layer",
+//     props: {
+//       version: "1.3",
+//       format: "image/png",
+//       transparent: true,
+//       tiles: true,
+//       zIndex: 150,
+//       uppercase: true,
+//       opacity: '0.8'
+//     }
+//   }
+
 // const center = [45.2, 16.2];
 
 // function onEachFeature(feature, layer) {

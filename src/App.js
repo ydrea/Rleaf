@@ -1,6 +1,6 @@
 import Home from './pages/Home';
 import About from './pages/About';
-import Map from './pages/Map';
+// import Map from './pages/Map';
 import Contact from './pages/Contact';
 import Ewap from './pages/projects/ewap';
 import Banija from './pages/projects/banija';
@@ -21,7 +21,7 @@ import Private from './pages/protected/Private';
 import { useEffect } from 'react';
 import Photos from './pages/Photos';
 import Photo from './pages/Photo';
-import Karta from './pages/Karta';
+import Map from './maps/karta/Karta';
 
 function App() {
   //
@@ -55,9 +55,3 @@ function App() {
   );
 }
 export default App;
-
-// import Demo from './pages/An';
-
-// export default function App() {
-//   return <Demo />;
-// }
