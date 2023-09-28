@@ -1,75 +1,89 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Message from './Message';
 import './form.css';
-import Modal from './Modal';
 
 //
-const Form = ({ uploadedFile, exifR }) => {
-  const [pod, podSet] = useState();
+const FormNOVI = ({ uploadedFile }) => {
   const [confirmationMsg, setConfirmationMsg] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  const [form, setForm] = useState({
+      signatura: uploadedFile.signatura ?? '',
+      naziv: uploadedFile.naziv ?? '',
+      naziv_eng: uploadedFile.naziv_eng ?? '',
+      opis: uploadedFile.opis ?? '',
+      opis_eng: uploadedFile.opis_eng ?? '',
+      lokacija: uploadedFile.lokacija ?? '',
+      datum_sni: uploadedFile.datum_sni ?? '',
+      kategorija: uploadedFile.kategorija ?? '',
+      autor: uploadedFile.autor ?? '',
+      copyright: uploadedFile.copyright ?? '',
+      copyright_holder: uploadedFile.copyright_holder ?? '',
+      tagovi: uploadedFile.tagovi ?? '',
+      doi: uploadedFile.doi ?? '',
+      lon: uploadedFile.lon ?? '',
+      lat: uploadedFile.lat ?? '',
+  })
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-  //
+  const updateFormField = useCallback((key, value) => {
+    setForm((currentForm) => ({
+      ...currentForm,
+      [key]: value,
+    }))
+  }, [])
+
+  const onChangeHandler = useCallback((e) => {
+    const { name, value } = e.target
+    updateFormField(name, value)
+    setConfirmationMsg('')
+  }, [updateFormField])
+
+  useEffect(() => {
+    let isMounted = true
+    const getCoordinates = async () => {
+      try {
+        const data = await fetch(`${process.env.REACT_APP_SERVER}/json_photos`).then((res) => res.json())
+        const photo = data.find((item) => item.signatura === uploadedFile.signatura)
+        const { coordinates: [lon, lat] } = JSON.parse(photo.geometry)
+        if (isMounted) {
+          setForm((currentForm) => ({
+            ...currentForm,
+            lon: `${lon}`,
+            lat: `${lat}`,
+          }))
+        }
+      } catch (e) {
+        //
+      }
+    }
+    getCoordinates()
+    return () => {
+      isMounted = false
+    }
+  }, [uploadedFile])
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-
-    console.log(formData.entries().next().value);
-    const data = Object.fromEntries(formData);
-
-    // Handle exifR properties gracefully with default values
-    const location = exifR ? exifR.Location : '';
-    const dateCreated = exifR ? exifR.DateCreated : '';
-    const artist = exifR ? exifR.Artist : '';
-    const copyright = exifR ? exifR.Copyright : '';
-    const subject = exifR ? JSON.stringify(exifR.subject) : '';
-    const longitude = exifR ? exifR.longitude : '';
-    const latitude = exifR ? exifR.latitude : '';
-
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_SERVER}/novi`,
+        `${process.env.REACT_APP_SERVER}/update/${uploadedFile.id}`,
         {
-          method: 'POST',
-          body: JSON.stringify({
-            ...data,
-            lokacija: location,
-            datum: dateCreated,
-            autor: artist,
-            copyright,
-            tagovi: subject,
-            lon: longitude,
-            lat: latitude,
-          }),
+          method: 'PUT',
+          body: JSON.stringify(form),
           headers: { 'Content-Type': 'application/json' },
         }
       );
-
-      setConfirmationMsg('Record successfully submitted!');
+      if (res.ok) {
+        setConfirmationMsg('Record successfully submitted!');
+      }
     } catch (err) {
       console.error(err.msg, 'nece');
     }
   };
 
-  useEffect(() => {
-    // currentTarget.reset();
-    console.log('PRops', uploadedFile);
-  }, [uploadedFile]);
-
   return (
     <div style={{ marginLeft: '30vw' }}>
-      <button onClick={openModal}>Edit Metadata</button>
-      <Modal isOpen={isModalOpen} closeModal={closeModal} />
       <form
-        style={{ display: 'flex', flexDirection: 'row' }}
+        style={{ display: 'flex', flexDirection: 'row', color: 'white' }}
         onSubmit={handleSubmit}
       >
         <div
@@ -84,39 +98,62 @@ const Form = ({ uploadedFile, exifR }) => {
             <input
               type="text"
               name="signatura"
-              defaultValue={uploadedFile.fileName}
+              disabled
+              value={form.signatura}
             />
           </div>
           <div className="form-control">
             <label>naziv</label>
-            <input type="text" name="naziv" />
+            <input
+              type="text"
+              name="naziv"
+              value={form.naziv}
+              onInput={onChangeHandler}
+            />
           </div>
           <div className="form-control">
             <label>naziv_eng</label>
-            <input type="text" name="naziv_eng" />
+            <input
+              type="text"
+              name="naziv_eng"
+              value={form.naziv_eng}
+              onInput={onChangeHandler}
+            />
           </div>
           <div className="form-control">
             <label>opis</label>
-            <input type="text" name="opis" />
+            <input
+              type="text"
+              name="opis"
+              value={form.opis}
+              onInput={onChangeHandler}
+            />
           </div>
           <div className="form-control">
             <label>opis_eng</label>
-            <input type="text" name="opis_eng" />
+            <input
+              type="text"
+              name="opis_eng"
+              value={form.opis_eng}
+              onInput={onChangeHandler}
+            />
           </div>
           <div className="form-control">
             <label>lokacija</label>
             <input
               type="text"
               name="lokacija"
-              defaultValue={exifR.Location}
+              value={form.lokacija}
+              onInput={onChangeHandler}
             />
           </div>{' '}
           <div className="form-control">
             <label>datum</label>
             <input
-              type="date"
-              name="datum"
-              defaultValue={exifR.DateCreated}
+              type="text"
+              name="datum_sni"
+              value={form.datum_sni}
+              onInput={onChangeHandler}
             />
           </div>
         </div>
@@ -129,7 +166,12 @@ const Form = ({ uploadedFile, exifR }) => {
         >
           <div className="form-control">
             <label>kategorija</label>
-            <select name="kategorija">
+            <select
+              name="kategorija"
+              value={form.kategorija}
+              onChange={onChangeHandler}
+            >
+              <option value="" disabled>Kategorija</option>
               <option value="infrastruktura">infrastruktura</option>
               <option value="ekologija">ekologija</option>
               <option value="tradicijska_gradnja">
@@ -155,7 +197,8 @@ const Form = ({ uploadedFile, exifR }) => {
             <input
               type="text"
               name="autor"
-              defaultValue={exifR.Artist}
+              value={form.autor}
+              onInput={onChangeHandler}
             />
           </div>
           <div className="form-control">
@@ -163,7 +206,8 @@ const Form = ({ uploadedFile, exifR }) => {
             <input
               type="text"
               name="copyright"
-              defaultValue={exifR.Copyright}
+              value={form.copyright}
+              onInput={onChangeHandler}
             />
           </div>
           <div className="form-control">
@@ -171,7 +215,8 @@ const Form = ({ uploadedFile, exifR }) => {
             <input
               type="text"
               name="copyright_holder"
-              defaultValue={'-'}
+              value={form.copyright_holder}
+              onInput={onChangeHandler}
             />
           </div>
           <div className="form-control">
@@ -179,15 +224,17 @@ const Form = ({ uploadedFile, exifR }) => {
             <input
               type="text"
               name="tagovi"
-              defaultValue={exifR.subject}
+              value={form.tagovi}
+              onInput={onChangeHandler}
             />
           </div>
           <div className="form-control">
             <label>DOI</label>
             <input
               type="text"
-              name="DOI"
-              defaultValue="10.5281/zenodo.8174233"
+              name="doi"
+              value={form.doi}
+              onInput={onChangeHandler}
             />
           </div>
           <div className="form-control">
@@ -195,7 +242,8 @@ const Form = ({ uploadedFile, exifR }) => {
             <input
               type="text"
               name="lon"
-              defaultValue={exifR.longitude}
+              value={form.lon}
+              onInput={onChangeHandler}
             />
           </div>
           <div className="form-control">
@@ -203,7 +251,8 @@ const Form = ({ uploadedFile, exifR }) => {
             <input
               type="text"
               name="lat"
-              defaultValue={exifR.latitude}
+              value={form.lat}
+              onInput={onChangeHandler}
             />
           </div>
           <div className="form-control">
@@ -213,10 +262,10 @@ const Form = ({ uploadedFile, exifR }) => {
         </div>
         {confirmationMsg && (
           <Message msg={confirmationMsg} type="confirmation" />
-        )}{' '}
+        )}
       </form>
     </div>
   );
 };
 
-export default Form;
+export default FormNOVI;
