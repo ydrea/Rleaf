@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
 import {
   getPhotos,
   selectPhotos,
@@ -45,11 +44,9 @@ const getFiltersFromPhotos = (photos) => {
 }
 
 export default function PhotosEDIT() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
-  const { id } = useParams()
-  const selectedId = parseInt(id || '', 10) || undefined
+  const [selectedId, setSelectedId] = useState(undefined)
 
   const selectedPhotoData = useMemo(() => {
     if (!photos?.length || !selectedId) {
@@ -90,18 +87,18 @@ export default function PhotosEDIT() {
       <div className="photo-container">
         <Modal
           isOpen={!!selectedId}
-          closeModal={() => navigate('/edit')}
+          closeModal={() => setSelectedId(undefined)}
           thumbnailUrl={selectedPhotoData ? `${process.env.REACT_APP_SERVER_PUB}/${selectedPhotoData.signatura}` : undefined}
           signatura={selectedPhotoData ? selectedPhotoData.signatura : undefined}
         >
           {selectedPhotoData ? (
             <>
-              {selectedPhotoData.signatura && (
+              {/* {selectedPhotoData.signatura && (
                 <img
                  src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhotoData.signatura}`}
                  alt={selectedPhotoData.naziv}
                 />
-              )}
+              )} */}
               <p>Signatura: {selectedPhotoData.signatura}</p>
               <p>id: {selectedPhotoData.id}</p>
               <FormNOVI
@@ -123,7 +120,7 @@ export default function PhotosEDIT() {
             className={`photo ${
               photo.id === selectedId ? 'selected' : ''
             }`}
-            onClick={() => navigate(`/edit/${photo.id}`)}
+            onClick={() => setSelectedId(photo.id)}
           >
             {photo.id === selectedId && (
               <div className="selected-div1">
