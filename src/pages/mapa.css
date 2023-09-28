@@ -1,9 +1,26 @@
+.kontenjer {
+    margin-right: 12.5vw;
+    margin-right: 17.5vw;
+  
+}
+
 .legend {
     position: fixed;
     top: 20vh; left: 0;
- 
-}
-
+ }
+ .icon {
+    font-weight: 400;
+    transform-origin: 10px 10px;
+  }
+  .txtcont{
+  display: block;
+  font-size: 1.2rem;
+  margin-left: 17.5vw;
+  margin-right: 17.5vw;
+  padding-bottom: 5vh;
+  margin-bottom: 5vh;
+  /* position: relative; top: 50vh; */
+  }
 .podmapom {
     background-color: rgb(28, 41, 54);
 }

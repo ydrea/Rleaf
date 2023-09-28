@@ -35,6 +35,7 @@ import './mapa.css';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setSelectedPhoto } from '../redux/rtk/mapSlice'; // Import the action
+import Hline from '../comps/Line';
 
 // foto layer
 //prettier-ignore
@@ -178,30 +179,31 @@ export default function Map() {
   const { BaseLayer, Overlay } = LayersControl;
 
   return (
-    <div
-      // className="home"
-      style={{
-        height: '80vh',
-        width: '60vw',
-        paddingLeft: '15vw',
-      }}
-    >
+    <div className="gallery">
       <div className="naslov-container">
         <h1>opservatorij</h1>
-        <div className="line-div" />
-        {/* <p>
-          Interdisciplinarna platforma posvećena istraživanju i
-          razumijevanju krajobraza
-        </p> */}
+        <div className="line-div0" />
       </div>
+      <div className="txtcont">
+        Dobrodošli na interaktivnu kartu "Opservatorija krajobraza".
+        Ova karta predstavlja našu kontinuirano nadopunjujuću
+        kolekciju georeferenciranih podataka koja vam omogućuje uvid u
+        različite aspekte krajobraza. Upotrijebite alate za odabir
+        podloge, prilagodbu slojeva i filtriranje informacija kako
+        biste prilagodili prikaz prema vlastitim istraživačkim
+        potrebama.
+      </div>
+      <Hline color="#18aa00" height="2px" width="100%" />
       {/* <CustomZoom /> */}
-      <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} />
-
+      {/* <CustomCtrl layers={lajeri} onLayerToggle={onLayerToggle} /> */}
       <MapContainer
-        // ref={mapRef}
+        // className="kontenjer"
         center={[45.2, 16.2]}
         zoom={8}
-        style={{ height: '80vh' }}
+        style={{
+          height: '80vh',
+          paddingLeft: '17.5vw',
+        }}
         zoomControl={false}
       >
         <ZoomControl position="bottomright" />
@@ -216,7 +218,10 @@ export default function Map() {
             selectedLayer={selectedLayer}
           />
         )}
-        <LayersControl onChange={handleBaseLayerChange}>
+        <LayersControl
+          collapsed={false}
+          onChange={handleBaseLayerChange}
+        >
           <BaseLayer checked name="OSM">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           </BaseLayer>
@@ -256,7 +261,7 @@ export default function Map() {
               }}
             />
           </Overlay>
-          <LayersControl>
+          <Overlay>
             <GeoJSON
               data={geojsonData}
               style={feature => ({
@@ -271,21 +276,21 @@ export default function Map() {
                 layer.bindPopup(feature.properties.code_opis);
               }}
             />
-
-            {/*             
+          </Overlay>
+          {/*             
             <BaseLayer name="tema_koristenje_zemljista">
               <GeoJSON data={geojson} onEachFeature={onEachFeature} />
             </BaseLayer> */}
-            <BaseLayer name="tema_zastita_prirode">
-              <TemaZP />
-            </BaseLayer>
-            <BaseLayer name="tema_stanovnistvo">
-              <TemaS />
-            </BaseLayer>
-            <BaseLayer name="tema_potres">
-              <TemaP />
-            </BaseLayer>
-          </LayersControl>
+          <Overlay name="tema_zastita_prirode">
+            <TemaZP />
+          </Overlay>
+          <Overlay name="tema_stanovnistvo">
+            <TemaS />
+          </Overlay>
+          <Overlay name="tema_potres">
+            <TemaP />
+          </Overlay>
+          {/* </LayersControl> */}
         </LayersControl>
         {/* {data && <GeoJSON data={data} />} */}
         {/* <MarkerClusterGroup> */}
@@ -311,24 +316,24 @@ export default function Map() {
             }}
           >
             <Popup
-              eventHandlers={{
-                mouseover: e => {
-                  e.target.openPopup();
-                },
-                mouseout: e => {
-                  e.target.closePopup();
-                },
-              }}
-              interactive
+            // eventHandlers={{
+            //   mouseover: e => {
+            //     e.target.openPopup();
+            //   },
+            //   mouseout: e => {
+            //     e.target.closePopup();
+            //   },
+            // }}
+            // interactive
             >
               {i.popUp}
-              <Link to={{ pathname: '/photos', params: i.popUp }}>
-                <img
-                  width="233px"
-                  src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
-                  alt={i.popUp}
-                />
-              </Link>
+              {/* <Link to={{ pathname: '/photos', params: i.popUp }}> */}
+              <img
+                width="233px"
+                src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
+                alt={i.popUp}
+              />
+              {/* </Link> */}
             </Popup>
           </Marker>
         ))}
@@ -347,6 +352,7 @@ export default function Map() {
             )
         )}
       </MapContainer>
+      <Hline color="#7e7e77" height="2px" width="100%" />{' '}
       <div style={{ background: 'transparent' }}>
         {selectedPhoto ? (
           <div>
@@ -359,7 +365,7 @@ export default function Map() {
             />
           </div>
         ) : (
-          <p style={{ color: '#8c8d85' }}>No photo selected</p>
+          <p style={{ color: '#8c8d85' }}>_</p>
         )}
       </div>
       <Footer />
