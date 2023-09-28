@@ -37,8 +37,6 @@ function App() {
       <Routes>
         <Route element={<Private />}>
           <Route path="/upload" element={<Fileupload />} />
-          <Route path="/edit" element={<PhotosEDIT />} />
-          <Route path="/edit/:id" element={<PhotosEDIT />} />
         </Route>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
