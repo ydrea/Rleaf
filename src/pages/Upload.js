@@ -9,10 +9,6 @@ import { getPhotos } from '../redux/rtk/gallerySlice';
 
 import './Fileupload.css';
 
-const delay = async (s = 1) => new Promise((resolve) => {
-  setTimeout(resolve, s * 1000)
-}) 
-
 const getExifData = async (file) => {
   try {
     const data = await exifr.parse(file, { iptc: true, xmp: true });
@@ -23,9 +19,23 @@ const getExifData = async (file) => {
   }
 };
 
+const parseExifDate = (value) => {
+  if (!value) {
+    return undefined
+  }
+  if (typeof value === 'string' && value.length === 8) {
+    return `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(6, 8)}`
+  }
+  try {
+    var d = new Date(value)
+    return new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().slice(0, 10)
+  } catch (e) {
+    return undefined
+  }
+}
+
 const saveExif = async (signatura, exif = {}) => {
   try {
-    await delay(Math.random() * 2 + 1)
     const res = await fetch(
       `${process.env.REACT_APP_SERVER}/novi`,
       {
@@ -33,7 +43,7 @@ const saveExif = async (signatura, exif = {}) => {
         body: JSON.stringify({
           signatura,
           lokacija: exif.Location ?? '',
-          datum_sni: exif.DateCreated ?? '',
+          datum_sni: parseExifDate(exif.DateCreated),
           autor: exif.Artist ?? '',
           copyright: exif.Copyright ?? '',
           tagovi: (Array.isArray(exif.subject) ? exif.subject : []).join(','),
@@ -70,7 +80,6 @@ const uploadFile = async (file) => {
   const formData = new FormData();
   formData.append('file', file);
   try {
-    await delay(Math.random() * 2 + 1)
     const { data } = await axios.post(
       `${process.env.REACT_APP_SERVER}/upload`,
       formData,

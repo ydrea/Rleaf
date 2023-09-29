@@ -20,10 +20,13 @@
   margin-bottom: 5px;
 }
 
+.form-control select,
+.form-control input[type=date],
 .form-control input[type=text],
 .form-control input[type=password] {
   width: 60%;
   padding: 5px;
+  box-sizing: border-box;
 }
 
 button {
@@ -38,6 +41,8 @@ button {
   .form-control {
     flex-direction: column;
   }
+  .form-control select,
+  .form-control input[type=date],
   .form-control input[type=text],
   .form-control input[type=password] {
     width: inherit;

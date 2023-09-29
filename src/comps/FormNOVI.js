@@ -1,9 +1,24 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Message from './Message';
+import { getPhotos } from '../redux/rtk/gallerySlice';
 import './form.css';
+
+export const formatDateValue = (value) => {
+  if (!value) {
+    return ''
+  }
+  try {
+    var d = new Date(value)
+    return new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().slice(0, 10)
+  } catch (e) {
+    return ''
+  }
+}
 
 //
 const FormNOVI = ({ uploadedFile }) => {
+  const dispatch = useDispatch();
   const [confirmationMsg, setConfirmationMsg] = useState('');
 
   const [form, setForm] = useState({
@@ -13,7 +28,7 @@ const FormNOVI = ({ uploadedFile }) => {
       opis: uploadedFile.opis ?? '',
       opis_eng: uploadedFile.opis_eng ?? '',
       lokacija: uploadedFile.lokacija ?? '',
-      datum_sni: uploadedFile.datum_sni ?? '',
+      datum_sni: uploadedFile.datum_sni ?? undefined,
       kategorija: uploadedFile.kategorija ?? '',
       autor: uploadedFile.autor ?? '',
       copyright: uploadedFile.copyright ?? '',
@@ -32,8 +47,12 @@ const FormNOVI = ({ uploadedFile }) => {
   }, [])
 
   const onChangeHandler = useCallback((e) => {
-    const { name, value } = e.target
-    updateFormField(name, value)
+    const { name, type, value } = e.target
+    let newValue = value
+    if (type === 'date') {
+      newValue = value || undefined
+    }
+    updateFormField(name, newValue)
     setConfirmationMsg('')
   }, [updateFormField])
 
@@ -74,6 +93,8 @@ const FormNOVI = ({ uploadedFile }) => {
       );
       if (res.ok) {
         setConfirmationMsg('Record successfully submitted!');
+
+        dispatch(getPhotos());
       }
     } catch (err) {
       console.error(err.msg, 'nece');
@@ -150,9 +171,9 @@ const FormNOVI = ({ uploadedFile }) => {
           <div className="form-control">
             <label>datum</label>
             <input
-              type="text"
+              type="date"
               name="datum_sni"
-              value={form.datum_sni}
+              value={formatDateValue(form.datum_sni)}
               onInput={onChangeHandler}
             />
           </div>
