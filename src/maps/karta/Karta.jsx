@@ -94,7 +94,7 @@ layers: "preklop_banijska_naselja",
   }
   const temast = {
     id: '777',
-    name: 'broej stanovnika',
+    name: 'broj stanovnika',
     url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
 layers: "tema_stanovnistvo",
     props: {
@@ -185,7 +185,6 @@ layers: "tema_drvena_arhitektura",
 //         opacity: '0.8'
 //       }
 //     },
-//     // Add more wmsLayer objects for additional layers if needed
 //   ];
   
   return (
@@ -194,7 +193,10 @@ layers: "tema_drvena_arhitektura",
         <h1>opservatorij</h1>
         <div className="line-div0" />
       </div>
-      <div className="txtcont">
+      <div style= {{
+      marginLeft: '17.5%',
+      marginRight: '12.5%',
+      }}>
         Dobrodošli na interaktivnu kartu "Opservatorija krajobraza".
         Ova karta predstavlja našu kontinuirano nadopunjujuću
         kolekciju georeferenciranih podataka koja vam omogućuje uvid u
@@ -209,10 +211,9 @@ layers: "tema_drvena_arhitektura",
 center={[45.2, 16.2]}
 zoom={11}
 style={{
-    maxWidth: '75%',
+  width: '100%',
   height: '80vh',
-  marginLeft: '17.5%',
-  marginRight: '12.5%',
+  
 }}
 zoomControl={false}
 >    
@@ -243,29 +244,29 @@ zoomControl={false}
   <Overlay key={selaiz.id} name={selaiz.name}>
     <BetterWMS
       key={selaiz.id}
-      id={selaiz.id}
+       id={selaiz.id}
       url={selaiz.url}
-      layers={selaiz.layers}
-      {...selaiz.props}
+   layers={selaiz.layers}
+       {...selaiz.props}
     />
   </Overlay>
   <Overlay key={temast.id} name={temast.name}>
     <BetterWMS
       key={temast.id}
-      id={temast.id}
+       id={temast.id}
       url={temast.url}
-      layers={temast.layers}
-      {...temast.props}
+   layers={temast.layers}
+       {...temast.props}
     />
   </Overlay>
 
   <Overlay key={temakz.id} name={temakz.name}>
     <BetterWMS
       key={temakz.id}
-      id={temakz.id}
+       id={temakz.id}
       url={temakz.url}
-      layers={temakz.layers}
-      {...temakz.props}
+   layers={temakz.layers}
+       {...temakz.props}
     />
     </Overlay>
   <Overlay key={temazp.id} name={temazp.name}>

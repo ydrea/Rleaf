@@ -8,7 +8,7 @@ function Contact() {
       <div className="naslov-container">
         <h1>opservatorij</h1>
       </div>
-      <div className="line-div0" />
+      <div className="line-div4" />
       <div className="un">
         {' '}
         <p>
