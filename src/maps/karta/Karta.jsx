@@ -127,7 +127,7 @@ layers: "tema_koristenje_zemljista",
     id: '779',
     name: 'zaštita prirode',
     url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
-layers: "zastita_prirode",
+layers: "tema_zastita_prirode",
     props: {
       version: "1.1",
       format: "image/png",
