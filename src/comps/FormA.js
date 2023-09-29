@@ -130,24 +130,24 @@ const FormA = ({ uploadedFile, exifR }) => {
           <div className="form-control">
             <label>kategorija</label>
             <select name="kategorija">
-              <option value="infrastruktura">infrastruktura</option>
-              <option value="ekologija">ekologija</option>
+              <option value="infrastruktura">Infrastruktura</option>
+              <option value="ekologija">Ekologija</option>
               <option value="tradicijska_gradnja">
-                tradicijska_gradnja
+                Tradicijska gradnja
               </option>
-              <option value="vjerski_objekti">vjerski_objekti</option>
-              <option value="vazni_objekti">važni_objekti</option>
-              <option value="spomenici">spomenici</option>
+              <option value="vjerski_objekti">Vjerski objekti</option>
+              <option value="vazni_objekti">Važni objekti</option>
+              <option value="spomenici">Spomenici</option>
               <option value="gospodarski_objekti">
-                gospodarski_objekti
+                Gospodarski objekti
               </option>
               <option value="prirodni_resursi">
-                prirodni_resursi
+                Prirodni resursi
               </option>
-              <option value="stanovnistvo">stanovništvo</option>
-              <option value="poljoprivreda">poljoprivreda</option>
-              <option value="stocarstvo">stočarstvo</option>
-              <option value="arhitektura">arhitektura</option>
+              <option value="stanovnistvo">Stanovništvo</option>
+              <option value="poljoprivreda">Poljoprivreda</option>
+              <option value="stocarstvo">Stočarstvo</option>
+              <option value="arhitektura">Arhitektura</option>
             </select>
           </div>{' '}
           <div className="form-control">
