@@ -272,19 +272,19 @@ zoomControl={false}
   <Overlay key={temazp.id} name={temazp.name}>
     <BetterWMS
       key={temazp.id}
-      id={temazp.id}
+       id={temazp.id}
       url={temazp.url}
-      layers={temazp.layers}
-      {...temazp.props}
+   layers={temazp.layers}
+       {...temazp.props}
     />
     </Overlay>
     <Overlay key={temap.id} name={temap.name}>
     <BetterWMS
       key={temap.id}
-      id={temap.id}
+       id={temap.id}
       url={temap.url}
-      layers={temap.layers}
-      {...temap.props}
+   layers={temap.layers}
+       {...temap.props}
     />
     </Overlay>
 
@@ -300,7 +300,9 @@ zoomControl={false}
   </LayersControl>
  
 </MapContainer>
- </div></div> );
+ </div>
+ <Footer/>
+ </div> );
 }
 
 export default Map;
