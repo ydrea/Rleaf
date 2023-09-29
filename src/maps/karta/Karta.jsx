@@ -61,13 +61,44 @@ function Map() {
 //
   //and out
   const { BaseLayer, Overlay } = LayersControl;
+  const adminna = {
+    id: '775',
+    name: 'administrativne jedinice',
+    url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+layers: "preklop_administrativne_jedinice",
+    props: {
+      version: "1.1",
+      format: "image/png",
+      transparent: true,
+      tiles: true,
+      zIndex: 150,
+      uppercase: true,
+      opacity: '0.8'
+    }
+  }
+
+  const selaiz = {
+    id: '776',
+    name: 'sela i zaseoci',
+    url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+layers: "preklop_banijska_naselja",
+    props: {
+      version: "1.1",
+      format: "image/png",
+      transparent: true,
+      tiles: true,
+      zIndex: 150,
+      uppercase: true,
+      opacity: '0.8'
+    }
+  }
   const temast = {
     id: '777',
-    name: 'Stanovništvo',
-    url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+    name: 'broej stanovnika',
+    url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
 layers: "tema_stanovnistvo",
     props: {
-      version: "1.3",
+      version: "1.1",
       format: "image/png",
       transparent: true,
       tiles: true,
@@ -91,7 +122,56 @@ layers: "tema_koristenje_zemljista",
       opacity: '0.8'
     }
   }
-// const wmsLayers = [
+
+  const temazp = {
+    id: '779',
+    name: 'zaštita prirode',
+    url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+layers: "zastita_prirode",
+    props: {
+      version: "1.1",
+      format: "image/png",
+      transparent: true,
+      tiles: true,
+      zIndex: 150,
+      uppercase: true,
+      opacity: '0.8'
+    }
+  }
+  const temap = {
+    id: '780',
+    name: '  potres 2020: intenzitet (MMI/MCS)',
+    url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+layers: "tema_potres",
+    props: {
+      version: "1.1",
+      format: "image/png",
+      transparent: true,
+      tiles: true,
+      zIndex: 150,
+      uppercase: true,
+      opacity: '0.8'
+    }
+  }
+  
+  const temada = {
+    id: '781',
+    name: 'drvena arhitektura',
+    url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+layers: "tema_drvena_arhitektura",
+    props: {
+      version: "1.1",
+      format: "image/png",
+      transparent: true,
+      tiles: true,
+      zIndex: 150,
+      uppercase: true,
+      opacity: '0.8'
+    }
+  }
+  
+  
+  // const wmsLayers = [
 //     {
 //     //   id: '777',
 //       layers: ["tema_drvena_arhitektura","tema_potres", "tema_stanovnistvo", "tema_zastita_prirode", "tema_koristenje_zemljista", "preklop_banijska_naselja", "preklop_administrativne_jedinice"],
@@ -151,6 +231,24 @@ zoomControl={false}
 
 
   {/* Overlays */}
+  <Overlay key={adminna.id} name={adminna.name}>
+    <BetterWMS
+      key={adminna.id}
+       id={adminna.id}
+      url={adminna.url}
+   layers={adminna.layers}
+       {...adminna.props}
+    />
+  </Overlay>
+  <Overlay key={selaiz.id} name={selaiz.name}>
+    <BetterWMS
+      key={selaiz.id}
+      id={selaiz.id}
+      url={selaiz.url}
+      layers={selaiz.layers}
+      {...selaiz.props}
+    />
+  </Overlay>
   <Overlay key={temast.id} name={temast.name}>
     <BetterWMS
       key={temast.id}
@@ -160,6 +258,7 @@ zoomControl={false}
       {...temast.props}
     />
   </Overlay>
+
   <Overlay key={temakz.id} name={temakz.name}>
     <BetterWMS
       key={temakz.id}
@@ -169,7 +268,34 @@ zoomControl={false}
       {...temakz.props}
     />
     </Overlay>
+  <Overlay key={temazp.id} name={temazp.name}>
+    <BetterWMS
+      key={temazp.id}
+      id={temazp.id}
+      url={temazp.url}
+      layers={temazp.layers}
+      {...temazp.props}
+    />
+    </Overlay>
+    <Overlay key={temap.id} name={temap.name}>
+    <BetterWMS
+      key={temap.id}
+      id={temap.id}
+      url={temap.url}
+      layers={temap.layers}
+      {...temap.props}
+    />
+    </Overlay>
 
+    <Overlay key={temada.id} name={temada.name}>
+    <BetterWMS
+      key={temada.id}
+       id={temada.id}
+      url={temada.url}
+   layers={temada.layers}
+       {...temada.props}
+    />
+    </Overlay>
   </LayersControl>
  
 </MapContainer>
