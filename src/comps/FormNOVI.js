@@ -4,17 +4,19 @@ import Message from './Message';
 import { getPhotos } from '../redux/rtk/gallerySlice';
 import './form.css';
 
-export const formatDateValue = (value) => {
+export const formatDateValue = value => {
   if (!value) {
-    return ''
+    return '';
   }
   try {
-    var d = new Date(value)
-    return new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().slice(0, 10)
+    var d = new Date(value);
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000)
+      .toISOString()
+      .slice(0, 10);
   } catch (e) {
-    return ''
+    return '';
   }
-}
+};
 
 //
 const FormNOVI = ({ uploadedFile }) => {
@@ -22,69 +24,78 @@ const FormNOVI = ({ uploadedFile }) => {
   const [confirmationMsg, setConfirmationMsg] = useState('');
 
   const [form, setForm] = useState({
-      signatura: uploadedFile.signatura ?? '',
-      naziv: uploadedFile.naziv ?? '',
-      naziv_eng: uploadedFile.naziv_eng ?? '',
-      opis: uploadedFile.opis ?? '',
-      opis_eng: uploadedFile.opis_eng ?? '',
-      lokacija: uploadedFile.lokacija ?? '',
-      datum_sni: uploadedFile.datum_sni ?? undefined,
-      kategorija: uploadedFile.kategorija ?? '',
-      autor: uploadedFile.autor ?? '',
-      copyright: uploadedFile.copyright ?? '',
-      copyright_holder: uploadedFile.copyright_holder ?? '',
-      tagovi: uploadedFile.tagovi ?? '',
-      doi: uploadedFile.doi ?? '',
-      lon: uploadedFile.lon ?? '',
-      lat: uploadedFile.lat ?? '',
-  })
+    signatura: uploadedFile.signatura ?? '',
+    naziv: uploadedFile.naziv ?? '',
+    naziv_eng: uploadedFile.naziv_eng ?? '',
+    opis: uploadedFile.opis ?? '',
+    opis_eng: uploadedFile.opis_eng ?? '',
+    lokacija: uploadedFile.lokacija ?? '',
+    datum_sni: uploadedFile.datum_sni ?? undefined,
+    kategorija: uploadedFile.kategorija ?? '',
+    autor: uploadedFile.autor ?? '',
+    copyright: uploadedFile.copyright ?? '',
+    copyright_holder: uploadedFile.copyright_holder ?? '',
+    tagovi: uploadedFile.tagovi ?? '',
+    doi: uploadedFile.doi ?? '',
+    lon: uploadedFile.lon ?? '',
+    lat: uploadedFile.lat ?? '',
+  });
 
   const updateFormField = useCallback((key, value) => {
-    setForm((currentForm) => ({
+    setForm(currentForm => ({
       ...currentForm,
       [key]: value,
-    }))
-  }, [])
+    }));
+  }, []);
 
-  const onChangeHandler = useCallback((e) => {
-    const { name, type, value } = e.target
-    let newValue = value
-    if (type === 'date') {
-      newValue = value || undefined
-    }
-    updateFormField(name, newValue)
-    setConfirmationMsg('')
-  }, [updateFormField])
+  const onChangeHandler = useCallback(
+    e => {
+      const { name, type, value } = e.target;
+      let newValue = value;
+      if (type === 'date') {
+        newValue = value || undefined;
+      }
+      updateFormField(name, newValue);
+      setConfirmationMsg('');
+    },
+    [updateFormField]
+  );
 
   useEffect(() => {
-    let isMounted = true
+    let isMounted = true;
     const getCoordinates = async () => {
       try {
-        const data = await fetch(`${process.env.REACT_APP_SERVER}/json_photos`).then((res) => res.json())
-        const photo = data.find((item) => item.id === uploadedFile.id)
-        const { coordinates: [lon, lat] } = JSON.parse(photo.geometry)
+        const data = await fetch(
+          `${process.env.REACT_APP_SERVER}/json_photos`
+        ).then(res => res.json());
+        const photo = data.find(
+          item => item.signatura === uploadedFile.signatura
+        );
+        const {
+          coordinates: [lon, lat],
+        } = JSON.parse(photo.geometry);
         if (isMounted) {
-          setForm((currentForm) => ({
+          setForm(currentForm => ({
             ...currentForm,
             lon: `${lon}`,
             lat: `${lat}`,
-          }))
+          }));
         }
       } catch (e) {
         if (isMounted) {
-          setForm((currentForm) => ({
+          setForm(currentForm => ({
             ...currentForm,
             lon: '',
             lat: '',
-          }))
+          }));
         }
       }
-    }
-    getCoordinates()
+    };
+    getCoordinates();
     return () => {
-      isMounted = false
-    }
-  }, [uploadedFile])
+      isMounted = false;
+    };
+  }, [uploadedFile]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -110,7 +121,11 @@ const FormNOVI = ({ uploadedFile }) => {
   return (
     <div style={{ marginLeft: '30vw' }}>
       <form
-        style={{ display: 'flex', flexDirection: 'row', color: 'white' }}
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          color: 'white',
+        }}
         onSubmit={handleSubmit}
       >
         <div
@@ -198,25 +213,27 @@ const FormNOVI = ({ uploadedFile }) => {
               value={form.kategorija}
               onChange={onChangeHandler}
             >
-              <option value="" disabled>Kategorija</option>
-              <option value="infrastruktura">infrastruktura</option>
-              <option value="ekologija">ekologija</option>
-              <option value="tradicijska_gradnja">
-                tradicijska_gradnja
+              <option value="" disabled>
+                Kategorija
               </option>
-              <option value="vjerski_objekti">vjerski_objekti</option>
-              <option value="vazni_objekti">važni_objekti</option>
-              <option value="spomenici">spomenici</option>
+              <option value="infrastruktura">Infrastruktura</option>
+              <option value="ekologija">Ekologija</option>
+              <option value="tradicijska_gradnja">
+                Tradicijska gradnja
+              </option>
+              <option value="vjerski_objekti">Vjerski objekti</option>
+              <option value="vazni_objekti">Važni objekti</option>
+              <option value="spomenici">Spomenici</option>
               <option value="gospodarski_objekti">
-                gospodarski_objekti
+                Gospodarski objekti
               </option>
               <option value="prirodni_resursi">
-                prirodni_resursi
+                Prirodni resursi
               </option>
-              <option value="stanovnistvo">stanovništvo</option>
-              <option value="poljoprivreda">poljoprivreda</option>
-              <option value="stocarstvo">stočarstvo</option>
-              <option value="arhitektura">arhitektura</option>
+              <option value="stanovnistvo">Stanovništvo</option>
+              <option value="poljoprivreda">Poljoprivreda</option>
+              <option value="stocarstvo">Stočarstvo</option>
+              <option value="arhitektura">Arhitektura</option>
             </select>
           </div>{' '}
           <div className="form-control">

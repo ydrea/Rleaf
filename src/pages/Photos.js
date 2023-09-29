@@ -30,6 +30,7 @@ export default function Photos() {
   );
   //
 
+  //
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);

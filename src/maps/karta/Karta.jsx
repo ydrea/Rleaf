@@ -19,13 +19,16 @@ import { Link, useParams } from 'react-router-dom';
 import Footer from '../../comps/Footer';
 import { useSelector } from 'react-redux';
 
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
+import "react-tabs/style/react-tabs.css";
 import {
     ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
     PodRH, TemaZP, TemaP, //TemaS
   } from '../wms';
 //
 const myIcon = new Icon({
-    iconUrl: require('../../assets/Asset 5.svg'),
+    iconUrl: require('../../assets/icon.png'),
     iconSize: [28, 28],
   });
   
@@ -169,6 +172,21 @@ layers: "tema_drvena_arhitektura",
       opacity: '0.8'
     }
   }
+  const temafk = {
+    id: '781',
+    name: 'FOTO KATALOG',
+    url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+layers: "preklop_foto_katalog",
+    props: {
+      version: "1.1",
+      format: "image/png",
+      transparent: true,
+      tiles: true,
+      zIndex: 150,
+      uppercase: true,
+      opacity: '0.8'
+    }
+  }
   
   
   // const wmsLayers = [
@@ -297,8 +315,67 @@ zoomControl={false}
        {...temada.props}
     />
     </Overlay>
+    {/* <Overlay key={temafk.id} name={temafk.name}>
+    <BetterWMS
+      key={temafk.id}
+       id={temafk.id}
+      url={temafk.url}
+   layers={temafk.layers}
+       {...temafk.props}
+    />
+    </Overlay> */}
   </LayersControl>
  
+
+  {markeri.map(i => (
+          <Marker
+            key={i.geocode[0] + Math.random()}
+            position={i.geocode}
+            icon={myIcon}
+            ref={ref => {
+              // Store the reference to each marker individually
+              if (ref) {
+                markerRef.current.push(ref);
+              }
+            }}
+          >
+            <Popup
+            // eventHandlers={{
+            //   mouseover: e => {
+            //     e.target.openPopup();
+            //   },
+            //   mouseout: e => {
+            //     e.target.closePopup();
+            //   },
+            // }}
+            // interactive
+            >
+              {i.popUp}
+              {/* <Link to={{ pathname: '/photos', params: i.popUp }}> */}
+              <img
+                width="233px"
+                src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
+                alt={i.popUp}
+              />
+              {/* </Link> */}
+            </Popup>
+          </Marker>
+        ))}
+        {console.log('Marker Ref:', markerRef.current)}
+        {/* </MarkerClusterGroup> */}
+        {/* {lajeri.map(
+          layer =>
+            layer.visible && (
+              <Marker
+                position={[45.21, 16.19]}
+                icon={myIcon}
+                key={layer.name}
+              >
+                <Popup>{layer.name}</Popup>
+              </Marker>
+            )
+        )} */}
+
 </MapContainer>
  </div>
  <Footer/>
