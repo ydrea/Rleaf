@@ -61,7 +61,7 @@ const FormNOVI = ({ uploadedFile }) => {
     const getCoordinates = async () => {
       try {
         const data = await fetch(`${process.env.REACT_APP_SERVER}/json_photos`).then((res) => res.json())
-        const photo = data.find((item) => item.signatura === uploadedFile.signatura)
+        const photo = data.find((item) => item.id === uploadedFile.id)
         const { coordinates: [lon, lat] } = JSON.parse(photo.geometry)
         if (isMounted) {
           setForm((currentForm) => ({
@@ -71,7 +71,13 @@ const FormNOVI = ({ uploadedFile }) => {
           }))
         }
       } catch (e) {
-        //
+        if (isMounted) {
+          setForm((currentForm) => ({
+            ...currentForm,
+            lon: '',
+            lat: '',
+          }))
+        }
       }
     }
     getCoordinates()
