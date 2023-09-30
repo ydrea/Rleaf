@@ -18,6 +18,7 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../../comps/Footer';
 import { useSelector } from 'react-redux';
+import extractLatLongFromJSON from '../../utils/latlngParse'
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
@@ -38,30 +39,45 @@ function Map() {
     const [selectedLayer, setSelectedLayer] = useState();
     const markerRef = useRef([]);
   
-  //tipofthespear
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_SERVER}/json_photos`
-        );
-        console.log(response.data);
-        const parsedData = response.data.map(item => {
-          const geo = JSON.parse(item.geometry);
+//tipofthespear
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER}/json_photos`
+      );
+      console.log(response.data);
+      const parsedData = response.data.map(item => {
+        const geo = JSON.parse(item.geometry);
+
+        const coordinates = extractLatLongFromJSON(geo);
+
+        if (coordinates && coordinates.latitude && coordinates.longitude) {
+          console.log('Latitude:', coordinates.latitude);
+          console.log('Longitude:', coordinates.longitude);
+
           return {
             popUp: item.signatura,
-            geocode: [geo.coordinates[1], geo.coordinates[0]],
+            geocode: [coordinates.latitude, coordinates.longitude],
           };
-        });
-        markeriSet(parsedData);
-        return parsedData;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-  }, []);
-//
+        } else {
+          console.error('Invalid JSON or missing coordinates:', geo);
+          return null;
+        }
+      });
+
+      // Filter out null entries from parsedData
+      const filteredData = parsedData.filter(item => item !== null);
+
+      markeriSet(filteredData);
+      return filteredData;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  fetchData();
+}, []);
+
   //and out
   const { BaseLayer, Overlay } = LayersControl;
   const adminna = {
