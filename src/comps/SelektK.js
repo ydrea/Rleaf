@@ -3,9 +3,22 @@ import Select from 'react-select';
 import { useDispatch } from 'react-redux';
 import { setFilters } from '../redux/rtk/gallerySlice';
 
-function KategorijeSelekt({ kategorijeOptions }) {
+function KategorijeSelekt() {
   const dispatch = useDispatch();
   const [filterSelected, setFilterSelected] = useState([]);
+
+  // Define your updated kategorijeOptions array here
+  const kategorijeOptions = [
+    {
+      value: 'vjerski_objekti',
+      label: 'Vjerski objekti',
+    },
+    {
+      value: 'neka_druga_kategorija',
+      label: 'New Label for Another Category',
+    },
+    // Add more options as needed
+  ];
 
   const handleFilterChange = selectedFilters => {
     setFilterSelected(selectedFilters);
@@ -50,14 +63,15 @@ function KategorijeSelekt({ kategorijeOptions }) {
       height: 'auto',
     }),
   };
+
   return (
     <div>
       <Select
         styles={cusTom}
-        placeholder="unesi/odaberi"
+        placeholder="Unesi/Odaberi"
         isSearchable
         isMulti
-        options={kategorijeOptions}
+        options={kategorijeOptions} // Update this with your updated array
         value={filterSelected}
         onChange={handleFilterChange}
       />
@@ -68,7 +82,7 @@ function KategorijeSelekt({ kategorijeOptions }) {
           color: '#545550',
         }}
       >
-        kategorije
+        Kategorije
       </label>
     </div>
   );

@@ -122,11 +122,34 @@ export const selectFilteredPhotos = state => {
     return allPhotos;
   }
 
-  return allPhotos.filter(
-    photo =>
-      selectedFilters.includes(photo.tagovi) ||
-      selectedFilters.includes(photo.kategorije)
-  );
+  // Create an array to store the filtered photos
+  let filteredPhotos = [...allPhotos];
+
+  // Filter by tags
+  if (selectedFilters.includes('Tagovi')) {
+    // Modify this condition based on how you store tags in your photos
+    filteredPhotos = filteredPhotos.filter(photo => {
+      console.log('Selected Filters:', selectedFilters);
+      console.log('Photo Tagovi:', photo.tagovi);
+      // Check if the photo's tag matches any of the selected filters
+      return selectedFilters.includes(photo.tagovi);
+    });
+  }
+
+  // Filter by categories
+  if (selectedFilters.includes('KATEGORIJE')) {
+    // Modify this condition based on how you store categories in your photos
+    filteredPhotos = filteredPhotos.filter(photo => {
+      console.log('Selected Filters:', selectedFilters);
+      console.log('Photo Kategorije:', photo.kategorije);
+      // Check if the photo's category matches any of the selected filters
+      return selectedFilters.includes(photo.kategorije);
+    });
+  }
+
+  console.log('Filtered Photos:', filteredPhotos);
+
+  return filteredPhotos;
 };
 
 export default gallerySlice.reducer;
