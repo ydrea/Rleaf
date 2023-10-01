@@ -68,9 +68,11 @@ export default function Photos() {
 
   console.log(filteredPhotos);
 
+  //
   const handleFilterChange = selectedOptions => {
     setSelectedFilters(selectedOptions);
     dispatch(setFilters(selectedOptions));
+    dispatch(selectFilteredPhotos(filteredPhotos));
   };
 
   const removeFileExtension = fileName => {

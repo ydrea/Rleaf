@@ -1,11 +1,28 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { useDispatch } from 'react-redux';
-import { setFilters } from '../redux/rtk/gallerySlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setFilters,
+  selectPhotos,
+  selectFilteredPhotos,
+} from '../redux/rtk/gallerySlice';
 
 function KategorijeSelekt({ kategorijeOptions }) {
   const dispatch = useDispatch();
   const [filterSelected, setFilterSelected] = useState([]);
+
+  // const handleFilterChange = selectedFilters => {
+  //   setFilterSelected(selectedFilters);
+
+  //   const selectedFilterValues = selectedFilters.map(
+  //     filter => filter.value
+  //   );
+  //   dispatch(setFilters(selectedFilterValues));
+  // };
+
+  const photos = useSelector(selectPhotos);
+
+  const filteredPhotos = useSelector(selectFilteredPhotos);
 
   const handleFilterChange = selectedFilters => {
     setFilterSelected(selectedFilters);
@@ -13,8 +30,29 @@ function KategorijeSelekt({ kategorijeOptions }) {
     const selectedFilterValues = selectedFilters.map(
       filter => filter.value
     );
+    console.log('Selected Filter Values:', selectedFilterValues);
+
+    // Dispatch the filtered photos to the store
     dispatch(setFilters(selectedFilterValues));
   };
+
+  // const handleFilterChange = selectedFilters => {
+  //   setFilterSelected(selectedFilters);
+
+  //   const selectedFilterValues = selectedFilters.map(
+  //     filter => filter.value
+  //   );
+
+  //   // Filter photos based on selected Kategorije
+  //   const filteredPhotos = photos.filter(photo => {
+  //     return selectedFilterValues.includes(photo.kategorija);
+  //   });
+
+  //   // Dispatch the filtered photos to the store
+  //   dispatch(setFilters(selectedFilterValues));
+  //   // Optionally, you can dispatch the filtered photos to the store
+  //   dispatch(selectFilteredPhotos(filteredPhotos));
+  // };
 
   //
   const cusTom = {
