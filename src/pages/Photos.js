@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   getPhotos,
   setSelectedPhotoIndex,
@@ -13,9 +13,19 @@ import {
 } from '../redux/rtk/gallerySlice';
 import './photos.css';
 import Photo from './Photo';
-import KategorijeSelekt from '../comps/SelektK';
-import TagoviSelekt from '../comps/SelektT';
+import KategorijeSelekt from '../comps/SelektK'; // Update import path
+import TagoviSelekt from '../comps/SelektT'; // Update import path
 import Hline from '../comps/Line';
+
+//
+const removeFileExtension = fileName => {
+  const lastDotIndex = fileName.lastIndexOf('.');
+  if (lastDotIndex === -1) {
+    return fileName; // No file extension found
+  }
+  return fileName.substring(0, lastDotIndex);
+};
+//
 
 export default function Photos() {
   const navigate = useNavigate();
@@ -28,64 +38,20 @@ export default function Photos() {
   const filteredPhotos = useSelector(state =>
     selectFilteredPhotos(state, selectedFilters)
   );
-  //
 
-  //
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
-
-  //filtri
-  const tagoviSet = new Set();
-  const kategorijeSet = new Set();
-
-  photos.forEach(photo => {
-    const tagoviArray = photo.tagovi.split(',');
-
-    tagoviArray.forEach(tag => {
-      tagoviSet.add(tag.trim());
-    });
-
-    kategorijeSet.add(photo.kategorija);
-  });
-
-  const tagoviOptions = Array.from(tagoviSet).map(tag => ({
-    value: tag,
-    label: tag,
-  }));
-
-  const kategorijeOptions = Array.from(kategorijeSet).map(
-    kategorija => ({
-      value: kategorija,
-      label: kategorija,
-    })
-  );
-
-  const filters = [
-    { label: 'Tagovi', options: tagoviOptions },
-    { label: 'KATEGORIJE', options: kategorijeOptions },
-  ];
-
-  console.log(filteredPhotos);
 
   const handleFilterChange = selectedOptions => {
     setSelectedFilters(selectedOptions);
     dispatch(setFilters(selectedOptions));
   };
 
-  const removeFileExtension = fileName => {
-    const lastDotIndex = fileName.lastIndexOf('.');
-    if (lastDotIndex === -1) {
-      return fileName; // No file extension found
-    }
-    return fileName.substring(0, lastDotIndex);
-  };
-  //
   const handlePhotoClick = index => {
     dispatch(setSelectedPhotoIndex(index));
     showPhotoSet(true);
     navigate(`/photos/${photos[index].signatura}`);
-    // Navigate to the individual photo route
   };
 
   return (
@@ -94,15 +60,12 @@ export default function Photos() {
       <div className="filters-container">
         <div className="select-container">
           <KategorijeSelekt
-            kategorijeOptions={kategorijeOptions}
-            className="select"
+            photos={photos} // Pass photos data to KategorijeSelekt
           />
           <TagoviSelekt
-            tagoviOptions={tagoviOptions}
-            className="select"
+            photos={photos} // Pass photos data to TagoviSelekt
           />
         </div>
-        {/* <div className="line-div2" /> */}
       </div>
       <Hline color="#18aa00" height="2px" width="100%" />
       <div className="photo-container">
@@ -128,7 +91,7 @@ export default function Photos() {
           <p>loading...</p>
         )}
       </div>
-      <Hline color="#7e7e77" height="2px" width="100%" />{' '}
+      <Hline color="#7e7e77" height="2px" width="100%" />
     </div>
   );
 }

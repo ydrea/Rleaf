@@ -1,11 +1,48 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+// import Select from 'react-select';
+// import { useDispatch } from 'react-redux';
+// import { setFilters } from '../redux/rtk/gallerySlice';
+
+// function TagoviSelekt({ tagoviOptions }) {
+//   const dispatch = useDispatch();
+//   const [filterSelected, setFilterSelected] = useState([]);
+
+//   const handleFilterChange = selectedFilters => {
+//     setFilterSelected(selectedFilters);
+
+//     const selectedFilterValues = selectedFilters.map(
+//       filter => filter.value
+//     );
+//     dispatch(setFilters(selectedFilterValues));
+//   };
+// TagoviSelekt.js
+
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
 import { setFilters } from '../redux/rtk/gallerySlice';
 
-function TagoviSelekt({ tagoviOptions }) {
+function TagoviSelekt({ photos }) {
   const dispatch = useDispatch();
   const [filterSelected, setFilterSelected] = useState([]);
+  const [tagoviOptions, setTagoviOptions] = useState([]);
+
+  useEffect(() => {
+    // Extract unique tagovi values from photos
+    const tagoviSet = new Set();
+    photos.forEach(photo => {
+      const tagoviArray = photo.tagovi.split(',');
+      tagoviArray.forEach(tag => tagoviSet.add(tag.trim()));
+    });
+
+    // Convert set to an array of options
+    const tagoviOptionsArray = Array.from(tagoviSet).map(tag => ({
+      value: tag,
+      label: tag,
+    }));
+
+    setTagoviOptions(tagoviOptionsArray);
+  }, [photos]);
 
   const handleFilterChange = selectedFilters => {
     setFilterSelected(selectedFilters);
@@ -16,8 +53,7 @@ function TagoviSelekt({ tagoviOptions }) {
     dispatch(setFilters(selectedFilterValues));
   };
 
-  //
-  const cusTom = {
+  const customStyles = {
     control: styles => ({
       ...styles,
       backgroundColor: 'transparent',
@@ -48,8 +84,8 @@ function TagoviSelekt({ tagoviOptions }) {
   return (
     <div>
       <Select
-        styles={cusTom}
-        placeholder="unesi/odaberi"
+        styles={customStyles}
+        placeholder="Unesi/Odaberi"
         isSearchable
         isMulti
         options={tagoviOptions}
@@ -57,13 +93,41 @@ function TagoviSelekt({ tagoviOptions }) {
         onChange={handleFilterChange}
       />
       <label
-        htmlFor="keyword-select"
-        style={{ color: '#545550', fontSize: '22px' }}
+        htmlFor="tagovi-select"
+        style={{
+          fontSize: '22px',
+          color: '#545550',
+        }}
       >
-        ključne riječi
+        Tagovi
       </label>
     </div>
   );
 }
 
 export default TagoviSelekt;
+
+//
+
+//   return (
+//     <div>
+//       <Select
+//         styles={cusTom}
+//         placeholder="unesi/odaberi"
+//         isSearchable
+//         isMulti
+//         options={tagoviOptions}
+//         value={filterSelected}
+//         onChange={handleFilterChange}
+//       />
+//       <label
+//         htmlFor="keyword-select"
+//         style={{ color: '#545550', fontSize: '22px' }}
+//       >
+//         ključne riječi
+//       </label>
+//     </div>
+//   );
+// }
+
+// export default TagoviSelekt;
