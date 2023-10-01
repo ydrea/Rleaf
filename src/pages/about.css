@@ -16,6 +16,18 @@
   }
 
 
+.naslov-container {
+  display: block;
+  max-width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.naslov-container h1 {
+  font-size: 3rem;
+  display: block;
+}
+
   .one li p {
     margin-bottom: -0.1rem;
   }
