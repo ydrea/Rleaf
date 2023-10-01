@@ -15,6 +15,7 @@ import Hline from '../../comps/Line';
 import { useRef, useEffect, useState } from 'react';
 import { Icon } from 'leaflet';
 import axios from 'axios';
+import extractLatLongFromJSON from './latlngParse'
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../../comps/Footer';
 import { useSelector } from 'react-redux';
@@ -39,28 +40,47 @@ function Map() {
     const markerRef = useRef([]);
   
   //tipofthespear
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_SERVER}/json_photos`
-        );
-        console.log(response.data);
-        const parsedData = response.data.map(item => {
-          const geo = JSON.parse(item.geometry);
+  //tipofthespear
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER}/json_photos`
+      );
+      console.log(response.data);
+      const parsedData = response.data.map(item => {
+        const geo = JSON.parse(item.geometry);
+
+        const coordinates = extractLatLongFromJSON(geo);
+
+        if (
+          coordinates &&
+          coordinates.latitude &&
+          coordinates.longitude
+        ) {
+          console.log('Latitude:', coordinates.latitude);
+          console.log('Longitude:', coordinates.longitude);
+
           return {
             popUp: item.signatura,
-            geocode: [geo.coordinates[1], geo.coordinates[0]],
+            geocode: [coordinates.latitude, coordinates.longitude],
           };
-        });
-        markeriSet(parsedData);
-        return parsedData;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-  }, []);
+        } else {
+          console.error('Invalid JSON or missing coordinates:', geo);
+          return null;
+        }
+      });
+
+      const filteredData = parsedData.filter(item => item !== null);
+
+      markeriSet(filteredData);
+      return filteredData;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  fetchData();
+}, []);
 //
   //and out
   const { BaseLayer, Overlay } = LayersControl;
