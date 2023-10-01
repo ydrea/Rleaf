@@ -35,7 +35,22 @@ function KategorijeSelekt({ kategorijeOptions }) {
     // Dispatch the filtered photos to the store
     dispatch(setFilters(selectedFilterValues));
   };
+  //
 
+  const customKategorijeOptions = [
+    { value: 'gospodarski_objekti', label: 'gospodarski objekti' },
+    { value: 'vazni_objekti', label: 'važni objekti' },
+    { value: 'vjerski_objekti', label: 'vjerski objekti' },
+    { value: 'arhitektura', label: 'arhitektura' },
+    { value: 'ekologija', label: 'ekologija' },
+    { value: 'tradicijska_gradnja', label: 'tradicijska gradnja' },
+    { value: 'spomenici', label: 'spomenici' },
+    { value: 'prirodni_resursi', label: 'prirodni resursi' },
+    { value: 'stanovnistvo', label: 'stanovništvo' },
+    { value: 'poljoprivreda', label: 'poljoprivreda' },
+    { value: 'stocarstvo', label: 'stocarstvo' },
+    { value: 'infrastruktura', label: 'infrastruktura' },
+  ];
   // const handleFilterChange = selectedFilters => {
   //   setFilterSelected(selectedFilters);
 
@@ -95,9 +110,10 @@ function KategorijeSelekt({ kategorijeOptions }) {
         placeholder="unesi/odaberi"
         isSearchable
         isMulti
-        options={kategorijeOptions}
+        options={customKategorijeOptions}
         value={filterSelected}
         onChange={handleFilterChange}
+        // getOptionLabel={customKategorijeOptions}
       />
       <label
         htmlFor="kategorije-select"
