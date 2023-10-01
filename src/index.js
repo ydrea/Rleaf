@@ -13,12 +13,10 @@ import ScrollToTop from './ScrollToTop';
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    {/* <ApiProvider api={apiSlice}> */}
     <BrowserRouter>
       <ScrollToTop />
       <App />
     </BrowserRouter>
-    {/* </ApiProvider> */}
   </Provider>
 );
 // //

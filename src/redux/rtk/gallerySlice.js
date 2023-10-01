@@ -122,11 +122,14 @@ export const selectFilteredPhotos = state => {
     return allPhotos;
   }
 
-  return allPhotos.filter(
-    photo =>
-      selectedFilters.includes(photo.tagovi) ||
-      selectedFilters.includes(photo.kategorije)
-  );
+  return allPhotos.filter(photo => {
+    // Check if any of the selected filters is in the 'tagovi' or 'kategorija' property of the photo.
+    return selectedFilters.some(filter => {
+      return (
+        photo.tagovi.includes(filter) || photo.kategorija === filter
+      );
+    });
+  });
 };
 
 export default gallerySlice.reducer;
