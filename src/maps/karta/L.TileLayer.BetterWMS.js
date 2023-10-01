@@ -35,11 +35,15 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   },
 
   getFeatureInfoUrl: function (latlng) {
-    // Construct a GetFeatureInfo request URL given a point
+    // Convert latlng to integers
     const point = this._map.latLngToContainerPoint(latlng);
     const size = this._map.getSize();
-    console.log(this.wmsParams);
-    // https://docs.geoserver.org/latest/en/user/services/wms/reference.html#wms-getfeatureinfo
+
+    // Ensure that X and Y coordinates are integers
+    const x = Math.round(point.x);
+    const y = Math.round(point.y);
+
+    // Other request parameters
     const params = {
       request: 'GetFeatureInfo',
       service: 'WMS',
@@ -54,10 +58,9 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       layers: this.wmsParams.layers,
       query_layers: this.wmsParams.layers,
       info_format: 'text/html',
+      x: x, // Use the rounded X coordinate
+      y: y, // Use the rounded Y coordinate
     };
-
-    params[params.version === '1.3.0' ? 'i' : 'x'] = point.x;
-    params[params.version === '1.3.0' ? 'j' : 'y'] = point.y;
 
     return this._url + L.Util.getParamString(params, this._url, true);
   },
