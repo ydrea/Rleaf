@@ -319,8 +319,59 @@ zoomControl={false}
     </Overlay>
   </LayersControl>
  
+  {markeri.map(i => (
+          <Marker
+            key={i.geocode[0] + Math.random()}
+            position={i.geocode}
+            icon={myIcon}
+            ref={ref => {
+              // Store the reference to each marker individually
+              if (ref) {
+                markerRef.current.push(ref);
+              }
+            }}
+          >
+            <Popup
+            // eventHandlers={{
+            //   mouseover: e => {
+            //     e.target.openPopup();
+            //   },
+            //   mouseout: e => {
+            //     e.target.closePopup();
+            //   },
+            // }}
+            // interactive
+            >
+              {i.popUp}
+              {/* <Link to={{ pathname: '/photos', params: i.popUp }}> */}
+              <img
+                width="233px"
+                src={`${process.env.REACT_APP_SERVER_PUB}/${i.popUp}`}
+                alt={i.popUp}
+              />
+              {/* </Link> */}
+            </Popup>
+          </Marker>
+        ))}
+        {console.log('Marker Ref:', markerRef.current)}
+        {/* </MarkerClusterGroup> */}
+        {/* {lajeri.map(
+          layer =>
+            layer.visible && (
+              <Marker
+                position={[45.21, 16.19]}
+                icon={myIcon}
+                key={layer.name}
+              >
+                <Popup>{layer.name}</Popup>
+              </Marker>
+            )
+        )} */}
+
 </MapContainer>
- </div></div> );
+ </div>
+ <Footer/>
+ </div> );
 }
 
 export default Map;
