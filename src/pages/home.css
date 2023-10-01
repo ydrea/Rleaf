@@ -2,14 +2,35 @@
   display: block;
 }
 /* Set max-width for containers to prevent overflow */
-.cont0, .S1, .S2, .S3 {
+/* .cont0, .S1, .S2, .S3 {
   max-width: 100%;
-}
+} */
 
 /* Set max-width for specific containers if needed */
-.cont2, .cont3 {
-  max-width: 100%; /* Adjust as needed */
+/* .cont2, .cont3 {
+  max-width: 100%; 
+  } */
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+.vozi, .pali {
+  font-size: 3rem; color: #fff;
+  align-items: center;
+  justify-content: center;
 }
+  
+  .S1, .S2, .cont0, .txt2 .txt3, .img-container, .img2, .img3, .ena, .dve, .tli {
+    font-size: 16px; /* Adjust font size for smaller screens */
+    margin-left: 5%; /* Adjust margin for smaller screens */
+    margin-right: 5%; /* Adjust margin for smaller screens */
+    margin-top: 5vh;
+    width: 90%;
+  }
+}
+
+
+/* For larger screens (desktop) */
+@media screen and (min-width: 769px) {
 
 
 .cont0 {
@@ -187,9 +208,10 @@ letter-spacing: 0.01375rem;
   height: 35rem;
   width: 45%;
 }
-
+ 
 .dno {
   position: relative;
   display: block;
   bottom: -90rem;
+}
 }

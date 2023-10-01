@@ -2,18 +2,19 @@
 
 /* For mobile devices */
 @media screen and (max-width: 768px) {
-  .about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+  .one,
+  .two, 
+  .three,
+  .four,
+  .five,
+  .six {
+    font-size: 16px; 
+    width: 90%; 
+    margin-left: 5%;
+    margin-right: 5%;
   }
 
-  .one {
-    font-size: 18px; /* Adjust font size for smaller screens */
-    margin-left: 5vw; /* Adjust margin for smaller screens */
-    margin-right: 5vw; /* Adjust margin for smaller screens */
-    margin-top: 5vh;
-  }
 
   .one li p {
     margin-bottom: -0.1rem;
@@ -22,21 +23,7 @@
   .one li span {
     color: #000;
   }
-
-  .three,
-  .five,
-  .six {
-    font-size: 18px; /* Adjust font size for smaller screens */ 
-    width: 80%; /* Adjust width for smaller screens */
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .five {
-    width: 80%; /* Adjust width for smaller screens */
-    margin-left: 3vw;
-    padding-left: 12vw;
-  }
+    
 }
 
 /* For larger screens (desktop) */
