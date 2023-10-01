@@ -1,8 +1,89 @@
 
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+
+
 .gallery {
   display: block;
+  max-width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
+.naslov-container {
+  display: block;
+  max-width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.naslov-container h1 {
+  font-size: 3rem !important;
+  display: block;
+  max-width: 90%;
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+}
+.teka {
+  margin-top: 20px !important;
+  }
+
+
+.tekast {
+  width: 90% !important; 
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+  font-size: 16px; 
+}
+.photo-container {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.45vw;
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+  padding-top: 3vw;
+  flex-direction: row;
+  position: relative;
+}
+.photo {
+  display: flex;
+  flex-direction: column-reverse;
+  min-width: 20rem;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+ 
+.photo img {
+  max-width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.select-container {
+ font-size: 1.1rem;
+ margin-left: 5% !important;
+ margin-right: 5% !important;
+ /* margin-right: 11vw; */
+  width: 90% !important;
+  display: flex;
+  /* flex-wrap: wrap;  */
+  justify-content: space-between;
+  align-items: flex-start;
+  }
+
+.select-container select {
+  flex: 1;
+  /* max-width: 75%; */
+  padding-top: 20px;
+  }
+
+
+}
 
 /* photos.css */
 
@@ -66,12 +147,12 @@ display: block;
     margin-top: -10vh;
     margin-left: 17.5vw;
     color: #fff;  
-    display: flex;
+    /* display: flex; */
     /* width: 76.65938rem; */
     /* height: 9.30713rem; */
-    flex-direction: column;
+    /* flex-direction: column;
     justify-content: center;
-    flex-shrink: 2;
+    flex-shrink: 2; */
 
     font-size: 9.6875rem;
     font-style: normal;
@@ -79,6 +160,7 @@ display: block;
     line-height: 140%; /* 13.5625rem */
     /* letter-spacing: 0.53281rem; */
   }
+
   .teka {
     position: relative; 
     font-size: 1.1rem;
@@ -99,14 +181,13 @@ width: 65vw;
   justify-content: flex-start; 
   flex-wrap: wrap; 
   margin-bottom: 3vh;
-  margin-top: 17vh;
   position: relative;
 }
 .select-container {
  font-size: 1.1rem;
   margin-left: 17.5vw;
   margin-right: 17.5vw;
-  /* margin-right: 11vw; */
+  margin-top: 10vh;
   width: 64%;
   display: flex;
   justify-content: space-between;

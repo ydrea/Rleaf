@@ -1,3 +1,21 @@
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+      
+.contact {
+      font-size: 16px; /* Adjust font size for smaller screens */
+      margin-left: 5%; /* Adjust margin for smaller screens */
+      margin-right: 5%; /* Adjust margin for smaller screens */
+      margin-top: 5vh;
+      width: 90%;
+    }
+  }
+  
+  
+  /* For larger screens (desktop) */
+  @media screen and (min-width: 769px) {
+  
+
 .contact {
     width: 100%;
     display: flex;
@@ -22,4 +40,4 @@
     display: block;
     box-sizing: border-box;
     /* position: absolute;  right: 12.5; */
-  }
+  }}

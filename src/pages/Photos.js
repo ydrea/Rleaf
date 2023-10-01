@@ -92,19 +92,19 @@ export default function Photos() {
   return (
     <div className="gallery">
       {/* filter options */}
-      <div className="filters-container">
-        <div className="select-container">
-          <KategorijeSelekt
-            kategorijeOptions={kategorijeOptions}
-            className="select"
-          />
-          <TagoviSelekt
-            tagoviOptions={tagoviOptions}
-            className="select"
-          />
-        </div>
-        {/* <div className="line-div2" /> */}
+      {/* <div className="filters-container"> */}
+      <div className="select-container">
+        <KategorijeSelekt
+          kategorijeOptions={kategorijeOptions}
+          className="select"
+        />
+        <TagoviSelekt
+          tagoviOptions={tagoviOptions}
+          className="select"
+        />
       </div>
+      {/* <div className="line-div2" /> */}
+      {/* </div> */}
       <Hline color="#18aa00" height="2px" width="100%" />
       <div className="photo-container">
         {filteredPhotos && filteredPhotos.length > 0 ? (
