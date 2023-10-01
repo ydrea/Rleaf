@@ -11,7 +11,7 @@
   align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5vw;
+  gap: 1.45vw;
   margin-left: 17.5vw;
   margin-right: 17.5vw;
   padding-top: 3vw;
@@ -44,7 +44,7 @@ display: block;
 }
 
 .selected-div2 {
-  font-size: 22px;
+  font-size: 1.1rem;
   z-index: 922;
   /* margin-left: 17.5vw; */
   /* margin-right: 17.5vw; */
@@ -81,7 +81,7 @@ display: block;
   }
   .teka {
     position: relative; 
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 100;
     margin-top: -10vh;
     max-width: 100%;
@@ -103,7 +103,7 @@ width: 65vw;
   position: relative;
 }
 .select-container {
- font-size: 1.2rem;
+ font-size: 1.1rem;
   margin-left: 17.5vw;
   margin-right: 17.5vw;
   /* margin-right: 11vw; */
