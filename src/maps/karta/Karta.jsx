@@ -346,7 +346,6 @@ zoomControl={false}
     </Overlay> */}
   </LayersControl>
  
-
   {markeri.map(i => (
           <Marker
             key={i.geocode[0] + Math.random()}
@@ -398,6 +397,8 @@ zoomControl={false}
 
 </MapContainer>
  </div>
+ <Footer/>
+ 
  <Footer/>
  </div> );
 }
