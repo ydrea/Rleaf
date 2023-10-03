@@ -11,177 +11,143 @@
   max-width: 100%; 
   } */
 
-/* For mobile devices */
-@media screen and (max-width: 768px) {
-.vozi, .pali {
-  font-size: 3rem; color: #fff;
-  align-items: center;
-  justify-content: center;
-}
-  
-  .S1, .S2, .cont0, .txt2 .txt3, .img-container, .img2, .img3, .ena, .dve, .tli {
-    font-size: 16px; /* Adjust font size for smaller screens */
-    margin-left: 5%; /* Adjust margin for smaller screens */
-    margin-right: 5%; /* Adjust margin for smaller screens */
-    margin-top: 5vh;
-    width: 90%;
-  }
-}
-
-
 /* For larger screens (desktop) */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 1200px) {
 
 
-.cont0 {
-display: flex;  
-justify-content: center;
-/* height: 33rem;  */
-
-/* display: flex; */
-/* width: 77.4375rem; */
-height: 15.75rem;
-/* flex-direction: column; */
-/* justify-content: center; */
-flex-shrink: 0;
-}
-
-.vozi {
-  color: #fff;
-  font-size: 9.6875rem;
-  width: 64vw;  z-index: 3;
-  position: absolute; top: 25vh;
-  display: flex;
+  .cont0 {
+  display: flex;  
   justify-content: center;
-  font-weight: 500;
-  line-height: 140%; 
-  letter-spacing: 0.53281rem;
-}
-
-.pali {
-  color: #fff;
-  font-size: 9.6875rem;
-  z-index: 100;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  width: 64vw;  z-index: 3;
-  top: 50vh;
+  /* height: 33rem;  */
+  /* position: relative; */
+  
+  /* display: flex; */
+  /* width: 77.4375rem; */
+  height: 15.75rem;
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  flex-shrink: 0;
+  }
+  
+  .vozi {
+    color: #fff;
+    font-size: 9.6875rem;
+    width: 64vw;  z-index: 3;
+    position: absolute; top: 25vh;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    line-height: 140%; 
+    letter-spacing: 0.53281rem;
+  }
+  
+  .pali {
+    color: #fff;
+    font-size: 9.6875rem;
+    z-index: 100;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 64vw;  z-index: 3;
+    top: 50vh;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; /* 13.5625rem */
+    letter-spacing: 0.53281rem;
+  }
+  .podnaslov {
+    position: absolute;
+    width: 64vw;  z-index: 3;
+    font-size: 1.15rem;
+    display: flex;
+    justify-content: center;
+    bottom: 2vh;
+  }
+  
+  .line-div1 {
+    border-top: 1px solid white;
+    position: absolute;
+    top: 100%;
+    box-sizing: border-box;
+    width: 100%;
+    height: 0.6rem;
+    margin-top: -0.40rem;
+    z-index: 4;
+  }
+  
+  .S1 {
+    padding-top: 700px;
+    padding-bottom: 9vh;
+    margin-left: 17.5vw;
+    margin-right: auto;
+    width: 65%; 
+    font-size: 1.6rem;
+    color: #7e7e77;
+  }
+  
+  .img-container {
+    position: relative;
+    max-width: 75vw;
+    padding-left: 17.5vw;
+  
+  }
+  /* ... Other CSS rules ... */
+  
+  .img2 {
+    position: relative; 
+    width: 75vw;
+    object-fit: cover;
+    height: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: grid;
+  }
+  
+  .txt2 {
+    font-size: 1.875rem;
+     color: #fff;
+     position: absolute;
+     /* padding-right: 1rem; */
+     right: 3vw;
+     text-align: left;
+     z-index: 33;
+     max-width: 33vw;
+     width: 100%;
+     bottom: 10%;
+   }
+   .txt2 p {
+    margin: 0.5;
+   }
+   
+  .img3 {
+    position: absolute;
+    bottom: -31vh;
+    left: 17.5;
+    width: 40%; 
+    height: auto;
+  }
+  
+  .txt3 {
+    font-size: 1.6rem;
+    color: #7e7e77;
+    position: absolute;
+    bottom: -109vh; 
+    left: 54vw; 
+    /* max-width: 25vw; */
+    margin-left: 1vw;
+    /* margin-right: 4vw; */
+    text-align: left;
+  }
+  .ena {
+  width: 26vw;
+  font-size: 1.6rem;
   font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 13.5625rem */
-  letter-spacing: 0.53281rem;
-}
-.podnaslov {
-  position: absolute;
-  width: 64vw;  z-index: 3;
-  font-size: 1.15rem;
-  display: flex;
-  justify-content: center;
-  bottom: 2vh;
-}
-
-.line-div1 {
-  border-top: 1px solid white;
-  position: absolute;
-  top: 100%;
-  box-sizing: border-box;
-  width: 100%;
-  height: 0.6rem;
-  margin-top: -0.40rem;
-  z-index: 4;
-}
-
-.S1 {
-  padding-top: 700px;
-  padding-bottom: 9vh;
-  margin-left: 17.5vw;
-  margin-right: auto;
-  width: 65%; 
-  font-size: 1.6rem;
-  color: #7e7e77;
-}
-
-.img-container {
-  position: relative;
-  max-width: 75vw;
-  padding-left: 17.5vw;
-
-}
-/* ... Other CSS rules ... */
-
-.img2 {
-  position: relative; 
-  width: 75vw;
-  object-fit: cover;
-  height: auto;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: grid;
-}
-
-.txt2 {
-  font-size: 1.875rem;
-   color: #fff;
-   position: absolute;
-   /* padding-right: 1rem; */
-   right: 3vw;
-   text-align: left;
-   z-index: 33;
-   max-width: 33vw;
-   width: 100%;
-   bottom: 10vh;
- }
- .txt2 p {
-  margin: 0.5;
- }
- 
-.img3 {
-  position: absolute;
-  bottom: -31vh;
-  left: 17.5;
-  width: 40%; 
-  height: auto;
-}
-
-.txt3 {
-  font-size: 1.6rem;
-  color: #7e7e77;
-  position: absolute;
-  bottom: -109vh; 
-  left: 54vw; 
-  /* max-width: 25vw; */
-  margin-left: 1vw;
-  /* margin-right: 4vw; */
-  text-align: left;
-}
-.ena {
-width: 26vw;
-font-size: 1.6rem;
-font-style: normal;
-font-weight: 400;
-line-height: 120%; /* 2.25rem */
-letter-spacing: 0.01875rem;
-}
-.dve {
-padding-top: 10vh;
-width: 35vw;
-font-size: 1.375rem;
-font-style: normal;
-font-weight: 500;
-line-height: 140%;
-letter-spacing: 0.01375rem;
-}
-
-.dve p {
-  margin: 0;
-}
-
-.dve span {
-  color: #fff;
-}
-.tli {
+  font-weight: 400;
+  line-height: 120%; /* 2.25rem */
+  letter-spacing: 0.01875rem;
+  }
+  .dve {
   padding-top: 10vh;
   width: 35vw;
   font-size: 1.375rem;
@@ -191,27 +157,140 @@ letter-spacing: 0.01375rem;
   letter-spacing: 0.01375rem;
   }
   
-.S2 {
-  height: 55.2rem;
+  .dve p {
+    margin: 0;
+  }
+  
+  .dve span {
+    color: #fff;
+  }
+  .tli {
+    padding-top: 10vh;
+    width: 35vw;
+    font-size: 1.375rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: 0.01375rem;
+    }
+    
+  .S2 {
+    height: 55.2rem;
+    align-items: center;
+  }
+  
+   .cont2 {
+    position: relative;
+    height: 55.2rem;
+  } 
+  
+  .cont3 {
+    position: absolute;
+    bottom: -28.5rem;
+    margin-left: 10vw;
+    height: 35rem;
+    width: 45%;
+  }
+   
+  .dno {
+    position: relative;
+    display: block;
+    bottom: -90rem;
+  }
+  }
+
+/* tableti */
+@media screen and (min-width:768px) and (max-width:1200px)
+{
+.vozi, .pali {
+  font-size: 5rem; 
+  color: #fff;
   align-items: center;
+  justify-content: center;
 }
+  
+  .S1, .S2, .cont0, .txt2 .txt3, .img-container, .ena, .dve, .tli {
+    font-size: 16px; 
+    margin-left: 5%; 
+    margin-right: 5%;
+    margin-top: 5vh;
+    width: 90%;
+  }
 
- .cont2 {
-  position: relative;
-  height: 55.2rem;
-} 
-
-.cont3 {
+  .img2 {
+    position: absolute;
+width: 100%;
+    clip-path: fill-box;
+    left: 0px; 
+  }
+.txt2 {
   position: absolute;
-  bottom: -28.5rem;
-  margin-left: 10vw;
-  height: 35rem;
-  width: 45%;
+  color: #fff;
+  z-index: 6;
+  left: 1rem;
+  top: 60rem;
+  width: 60%;
 }
- 
-.dno {
+  .img3{
+    position: absolute;
+    z-index: 4;
+    height: 40%;
+    top: 152%;
+    left: 0;
+  }
+.txt3 {
   position: relative;
-  display: block;
-  bottom: -90rem;
+  top: 65rem;
+}
+.dno {
+  position: absolute;
+  top: 260%;
+}
+
+}
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+.vozi, .pali {
+  font-size: 3rem; color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+  
+  .S1, .S2, .cont0, .txt2 .txt3, .img-container, .ena, .dve, .tli {
+    font-size: 16px; /* Adjust font size for smaller screens */
+    margin-left: 5%; /* Adjust margin for smaller screens */
+    margin-right: 5%; /* Adjust margin for smaller screens */
+    margin-top: 5vh;
+    width: 90%;
+  }
+
+  .img2 {
+    position: absolute;
+    height: 74%;
+    clip-path: fill-box;
+    left: 0px; 
+  }
+.txt2 {
+  position: absolute;
+  color: #fff;
+  z-index: 6;
+  left: 1rem;
+  width: 80%;
+}
+  .img3{
+    position: absolute;
+    z-index: 4;
+    height: 40%;
+    top: 60rem;
+    left: 0;
+  }
+.txt3 {
+  position: relative;
+  top: 29rem;
+}
+.dno {
+  position: absolute;
+  top: 99rem;
 }
 }
+

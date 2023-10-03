@@ -63,7 +63,7 @@
   -o-object-fit: cover;
   object-fit: cover;
 }
-
+ 
 .select-container {
  font-size: 1.1rem;
  margin-left: 5% !important;
@@ -92,7 +92,7 @@
   align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.45vw;
+  gap: 3.75%;
   margin-left: 17.5vw;
   margin-right: 17.5vw;
   padding-top: 3vw;
@@ -185,10 +185,10 @@ width: 65vw;
 }
 .select-container {
  font-size: 1.1rem;
-  margin-left: 17.5vw;
-  margin-right: 17.5vw;
+  margin-left: 17.5%;
+  margin-right: 18.5%;
   margin-top: 10vh;
-  width: 64%;
+  width: 63%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -247,6 +247,26 @@ width: 65vw;
   width: 100%;
   /* height: 0.6rem; */
 }
+
+/* tableti */
+@media screen and (min-width:768px) and (max-width:1200px)
+
+{
+.naslov-container {
+  display: block;
+  max-width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.naslov-container h1 {
+  font-size: 5rem !important;
+  display: block;
+}
+
+.line-div0 {display: none;}
+}
+
 @media (max-width: 1200px) {
   .filters-container > div {
     width: 100%;

@@ -19,7 +19,7 @@
   height: 10vh;
   width: 100%; 
   position: relative;
-  left: calc( 17.5vw - 3rem );
+  left: calc( 17.5vw - 2.5rem );
   }
 
 .fa-typo3 {
@@ -100,7 +100,7 @@ padding-inline-start: 0 !important;
   display: flex;
   align-items: flex-start;
   text-decoration: none;
-  padding: .2rem 1.4rem;
+  padding: .2rem 1.64rem;
   font-size: 1.2rem;
 position: relative;
 white-space: pre !important; 
@@ -161,7 +161,7 @@ white-space: pre !important;
   z-index: 9999;
   min-width: 8rem;
   min-height: 6rem;
-  padding: 0.5rem 0.5rem;
+  padding: 0.9rem 0.8rem;
   list-style: none;
   background-color: #d8d8d8;
   /* border-radius: 0.5rem; */
@@ -201,9 +201,13 @@ white-space: pre !important;
   width: 100%;
 }
 
-@media screen and (max-width: 1190px) {
+@media screen and (max-width: 1200px) {
   .NavbarItems {
     position: relative;
+  }
+  .navbar{max-width: 100% !important;}
+  .navbar-container {
+    left: 0;
   }
   .nav-menu {
     display: flex;
@@ -251,12 +255,12 @@ white-space: pre !important;
     top: -20px;
     right: 0;
     transform: translate(-100%, 60%);
-    font-size: 1.8rem;
+    font-size: 2rem;
     cursor: pointer;
   }
 
 .fa-typo3 {
-  margin-left: 0.2rem;
+  margin-left: 2.2rem;
   font-size: 2vw;
   position: relative; 
   top: -25px; 
