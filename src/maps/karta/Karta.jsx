@@ -1,4 +1,5 @@
-import 'leaflet/dist/leaflet.css'
+// import 'leaflet/dist/leaflet.css'
+import './karta.css'
 import 'leaflet/dist/leaflet.css';
 import {
   Marker,
@@ -231,10 +232,7 @@ layers: "preklop_foto_katalog",
         <h1>opservatorij</h1>
         <div className="line-div0" />
       </div>
-      <div style= {{
-      marginLeft: '17.5%',
-      marginRight: '12.5%',
-      }}>
+      <div className='kartxt'>
         Dobrodošli na interaktivnu kartu "Opservatorija krajobraza".
         Ova karta predstavlja našu kontinuirano nadopunjujuću
         kolekciju georeferenciranih podataka koja vam omogućuje uvid u

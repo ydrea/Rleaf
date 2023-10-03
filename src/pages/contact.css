@@ -1,19 +1,7 @@
 
-/* For mobile devices */
-@media screen and (max-width: 768px) {
-      
-.contact {
-      font-size: 16px; /* Adjust font size for smaller screens */
-      margin-left: 5%; /* Adjust margin for smaller screens */
-      margin-right: 5%; /* Adjust margin for smaller screens */
-      margin-top: 5vh;
-      width: 90%;
-    }
-  }
-  
   
   /* For larger screens (desktop) */
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1200px) {
   
 
 .contact {
@@ -26,7 +14,6 @@
     }
   .un {
     font-size: 1.6rem;
-    /* letter-spacing: 1.1px; */
     margin-left: 17.5vw;
     margin-right: 17.5vw;
     margin-top: 5vw;
@@ -41,3 +28,50 @@
     box-sizing: border-box;
     /* position: absolute;  right: 12.5; */
   }}
+
+  /* tableti */
+@media screen and (min-width:768px) and (max-width:1200px)
+
+{
+.naslov-container {
+  display: block;
+  max-width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.naslov-container h1 {
+  font-size: 5rem !important;
+  display: block;
+}
+}
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+      
+  .contact {
+    display: block;
+        margin-left: 5%; 
+        margin-right: 5%; 
+        margin-top: 5vh;
+        width: 90%;
+      }
+  
+      .un {
+        font-size: 16px; 
+        margin-left: 5%; 
+        margin-right: 5%; 
+        margin-top: 5vh;
+        /* width: 90vw; */
+      }
+     
+      .gren {
+        background-color: green;
+        height: 3px;
+        /* width: 100vw; left: -1.5vw; */
+        display: block;
+        box-sizing: border-box;
+        /* position: absolute;  right: 12.5; */
+      }
+    }
+    
