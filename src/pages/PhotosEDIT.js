@@ -43,7 +43,7 @@ const getFiltersFromPhotos = (photos) => {
   ];
 }
 
-export default function PhotosEDIT() {
+export default function PhotosEDIT({ onRemove }) {
   const dispatch = useDispatch();
   const photos = useSelector(selectPhotos);
   const [selectedId, setSelectedId] = useState(undefined)
@@ -69,6 +69,19 @@ export default function PhotosEDIT() {
     setSelectedFilters(selectedOptions);
     dispatch(setFilters(selectedOptions));
   };
+
+  const [isRemoving, setIsRemoving] = useState(false)
+  const handleRemove = async (photo) => {
+    const photoLabel = `id: ${photo.id}${photo.signatura ? ` (${photo.signatura})` : ''}`
+    if (window.confirm(`Izbrisati ${photoLabel}?`)) {
+      setIsRemoving(true)
+      const isRemoved = await onRemove(photo)
+      if (isRemoved) {
+        setSelectedId(undefined)
+      }
+      setIsRemoving(false)
+    }
+  }
 
   // Get photos
   useEffect(() => {
@@ -99,16 +112,25 @@ export default function PhotosEDIT() {
                  alt={selectedPhotoData.naziv}
                 />
               )} */}
-              <p>Signatura: {selectedPhotoData.signatura}</p>
-              <p>id: {selectedPhotoData.id}</p>
+              <p style={{ color: 'white' }}>
+                Signatura: {selectedPhotoData.signatura}
+                <br />
+                id: {selectedPhotoData.id}
+              </p>
+              {typeof onRemove === 'function' && (
+                <button
+                  type="button"
+                  disabled={isRemoving}
+                  onClick={() => handleRemove(selectedPhotoData)}>
+                    {isRemoving ? 'Brisanje...' : 'IZBRIŠI'}
+                  </button>
+              )}
               <FormNOVI
                 uploadedFile={selectedPhotoData}
               />
             </>
           ) : (
-            <p style={{
-              color: 'white'
-            }}>
+            <p style={{ color: 'white' }}>
               Photo with id <strong>{selectedId}</strong> not found!
             </p>
           )}
@@ -120,6 +142,12 @@ export default function PhotosEDIT() {
             className={`photo ${
               photo.id === selectedId ? 'selected' : ''
             }`}
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              minHeight: 60,
+              justifyContent: 'center',
+              cursor: 'pointer',
+            }}
             onClick={() => setSelectedId(photo.id)}
           >
             {photo.id === selectedId && (
@@ -131,11 +159,13 @@ export default function PhotosEDIT() {
                 <p>{photo.signatura}</p>
               </div>
             )}
-            {photo.signatura && (
+            {photo.signatura ? (
               <img
                 src={`${process.env.REACT_APP_SERVER_PUB}/${photo.signatura}`}
-                alt={photo.naziv}
+                alt={photo.naziv || photo.signatura}
               />
+            ) : (
+              <span>id: {photo.id}</span>
             )}
           </div>
         ))}

@@ -182,6 +182,29 @@ export const Fileupload = () => {
     dispatch(getPhotos());
   };
 
+  const handleRemove = async (photo) => {
+    setMessage('');
+    const photoLabel = `id: ${photo.id}${photo.signatura ? ` (${photo.signatura})` : ''}`
+    if (photo) {
+      try {
+        const res = await fetch(
+          `${process.env.REACT_APP_SERVER}/photos/${photo.id}`,
+          {
+            method: 'DELETE',
+          }
+        );
+        if (res.ok) {
+          setMessage(`Record ${photoLabel} successfully deleted!`);
+          dispatch(getPhotos());
+          return true
+        }
+      } catch (err) {
+        console.error(err.msg, 'nece');
+      }
+    }
+    return false
+  }
+
   useEffect(() => {
     let isMounted = true
     const emptyList = fileList.map(() => undefined)
@@ -268,7 +291,7 @@ export const Fileupload = () => {
         </>
       ) : null} */}
 
-      <PhotosEDIT />
+      <PhotosEDIT onRemove={handleRemove} />
     </>
   );
 };
