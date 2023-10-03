@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export const Dropdown = ({ submenus, dropdown }) => {
+export const Dropdown = ({ submenus, dropdown, closeMobileMenu }) => {
   return (
     <ul className={`dropdown ${dropdown ? 'show' : ''}`}>
       {submenus.map((submenu, index) => (
@@ -13,6 +13,7 @@ export const Dropdown = ({ submenus, dropdown }) => {
               to={submenu.to}
               className={`submenu-link ${dropdown ? 'open' : ''}`}
               aria-expanded={dropdown ? 'true' : 'false'}
+              onClick={closeMobileMenu} // Close mobile menu when a dropdown item is clicked
             >
               <span className="first-letter-white">
                 {submenu.label.charAt(0)}
@@ -37,6 +38,8 @@ export const Nav = () => {
   const [click, setClick] = useState(false);
   const [hovered, setHovered] = useState(null);
   const [subMenu, setSubMenu] = useState({});
+  const [dropdownItemClicked, setDropdownItemClicked] =
+    useState(false); // New state variable
 
   const location = useLocation();
 
@@ -44,6 +47,10 @@ export const Nav = () => {
   const closeMobileMenu = () => {
     setClick(false);
     setHovered(null);
+    // Close the mobile menu when a dropdown item is clicked
+    if (dropdownItemClicked) {
+      setDropdownItemClicked(false);
+    }
   };
 
   const handleSubMenuClick = index => {
@@ -53,6 +60,9 @@ export const Nav = () => {
         return acc;
       }, {}),
     }));
+
+    // Close the mobile menu when a dropdown item is clicked
+    setDropdownItemClicked(true);
   };
 
   const menuItems = [
@@ -102,6 +112,7 @@ export const Nav = () => {
                     <Dropdown
                       dropdown={subMenu[index]}
                       submenus={item.submenu}
+                      closeMobileMenu={closeMobileMenu} // Pass closeMobileMenu to Dropdown component
                     />
                   </>
                 ) : (
@@ -130,3 +141,4 @@ export const Nav = () => {
     </>
   );
 };
+``;
