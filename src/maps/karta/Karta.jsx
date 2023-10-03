@@ -396,8 +396,6 @@ zoomControl={false}
 </MapContainer>
  </div>
  <Footer/>
- 
- <Footer/>
  </div> );
 }
 
