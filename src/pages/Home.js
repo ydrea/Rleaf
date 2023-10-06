@@ -28,7 +28,7 @@ function Home() {
 
   //
   return (
-    <div className="content">
+    <div className="gallery">
       <div className="home">
         {/* {jelNije ? ( */}
         <div className="cont0">
@@ -98,7 +98,7 @@ function Home() {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
