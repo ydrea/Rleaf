@@ -98,7 +98,9 @@ function Home() {
           </div>
         </div>
       </div>
-      <Footer />
+      <div className="dno">
+        <Footer />
+      </div>
     </div>
   );
 }

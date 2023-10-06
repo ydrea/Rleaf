@@ -198,9 +198,10 @@
   }
    
   .dno {
-    /* position: absolute; */
+    position: absolute;
     display: block;
-    bottom: 0rem;
+    bottom: -190rem;
+    left: 30%;
   }
   }
 
@@ -270,6 +271,7 @@
     margin-left: 5%; 
     margin-right: 5%; 
     margin-top: 5vh;
+    margin-bottom: 1rem;
     /* width: 90%; */
   }
 
@@ -280,6 +282,7 @@
   }
 
   .img-container{ 
+    height: 500px;
     /* position: relative; */
   }
   .img2 {
