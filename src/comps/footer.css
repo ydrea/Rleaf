@@ -9,8 +9,8 @@
   margin-top: auto !important;
   min-height: fit-content;
   background-color: #DBDBDB;
-  /* position: relative;  */
-  bottom: -15rem;
+  position: relative; 
+  bottom: -5rem;
 }
 
 .footer p {
