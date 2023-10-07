@@ -44,6 +44,13 @@
   font-size: 5rem !important;
   display: block;
 }
+.un {
+  font-size: 1rem; 
+  margin-left: 5%; 
+  margin-right: 5%; 
+  margin-top: 5vh;
+  /* width: 90vw; */
+}
 }
 
 /* For mobile devices */
