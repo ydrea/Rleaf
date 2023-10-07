@@ -163,9 +163,8 @@ display: block;
 
   .teka {
     position: relative; 
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 100;
-    margin-top: -10vh;
     max-width: 100%;
 }
 .tekast {
@@ -184,7 +183,7 @@ width: 65vw;
   position: relative;
 }
 .select-container {
- font-size: 1.1rem;
+ font-size: 1rem;
   margin-left: 17.5%;
   margin-right: 18.5%;
   margin-top: 10vh;
@@ -192,6 +191,8 @@ width: 65vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; 
+
   }
 
 .select-container select {
