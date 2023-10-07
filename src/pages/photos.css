@@ -65,7 +65,7 @@
 }
  
 .select-container {
- font-size: 1.1rem;
+ font-size: 1rem;
  margin-left: 5% !important;
  margin-right: 5% !important;
  /* margin-right: 11vw; */
@@ -74,12 +74,13 @@
   /* flex-wrap: wrap;  */
   justify-content: space-between;
   align-items: flex-start;
-  }
+gap: 9vh;  
+}
 
 .select-container select {
   flex: 1;
   /* max-width: 75%; */
-  padding-top: 20px;
+margin-top: 40px;
   }
 
 

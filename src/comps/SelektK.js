@@ -48,7 +48,7 @@ function KategorijeSelekt({ kategorijeOptions }) {
     { value: 'prirodni_resursi', label: 'prirodni resursi' },
     { value: 'stanovnistvo', label: 'stanovništvo' },
     { value: 'poljoprivreda', label: 'poljoprivreda' },
-    { value: 'stocarstvo', label: 'stocarstvo' },
+    { value: 'stocarstvo', label: 'stočarstvo' },
     { value: 'infrastruktura', label: 'infrastruktura' },
   ];
   // const handleFilterChange = selectedFilters => {
@@ -97,9 +97,9 @@ function KategorijeSelekt({ kategorijeOptions }) {
     }),
     menu: styles => ({
       ...styles,
-      zIndex: '999',
+      zIndex: '9999',
       cursor: 'pointer',
-      width: '16vw',
+      width: '46vw',
       height: 'auto',
     }),
   };
