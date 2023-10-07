@@ -102,8 +102,8 @@ padding-inline-start: 0 !important;
   text-decoration: none;
   padding: .2rem 1.64rem;
   font-size: 1.2rem;
-position: relative;
-white-space: pre !important; 
+  position: relative;
+  white-space: pre !important; 
 }
 
 
@@ -125,10 +125,11 @@ white-space: pre !important;
   display: flex;
   align-items: center;
   font-size: 1.3rem;
+  padding-bottom: 1rem;
 }
 
 .submenu-link:hover {
-  color: #000; 
+  color: #18aa00;
   text-decoration: none;
 }
 
@@ -136,6 +137,7 @@ white-space: pre !important;
 .submenu-item {
   color: #333; 
   font-size: 1.3rem;
+  padding-bottom: 1rem;
   display: flex;
   align-items: center;
 }
@@ -160,11 +162,11 @@ white-space: pre !important;
     /* font-size: 0.875rem; */
   z-index: 9999;
   min-width: 8rem;
-  min-height: 6rem;
-  padding: 0.9rem 0.8rem;
+  min-height: 4rem;
+  padding: 1.6rem 0.8rem;
   list-style: none;
   background-color: #d8d8d8;
-  /* border-radius: 0.5rem; */
+  border-radius: 0.5rem;
   display: none;
 }
 
