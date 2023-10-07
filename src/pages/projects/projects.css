@@ -55,14 +55,14 @@ padding-left: 2vw;
       }
   
 .projects-container h1 {
-    position: absolute;
-    bottom: 3.2rem; left: 0;
-padding-left: 2vw;
+    /* position: absolute; */
+    margin-bottom: 3.2rem; margin-left: 0;
+    padding-left: 2vw;
     max-width: 50%;
     z-index: 1;
     margin-left: 17.5vw;
     margin-right: 17.5vw;
-
+    font-size: 1.6em;
 } 
 
 .tekst {
@@ -89,13 +89,14 @@ padding-left: 2vw;
       }
   
 .projects-container h1 {
-    position: absolute;
-    bottom: 3.2rem; left: 0;
-padding-left: 2vw;
+    /* position: absolute; */
+    /* bottom: 3.2rem; left: 0; */
+    padding-left: 2vw;
     max-width: 50%;
     z-index: 1;
-    margin-left: 17.5vw;
-    margin-right: 17.5vw;
+    font-size: 1.4em;
+    /* margin-left: 17.5vw;
+    margin-right: 17.5vw; */
 
 } 
 
