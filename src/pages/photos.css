@@ -82,14 +82,49 @@ gap: 9vh;
   /* max-width: 75%; */
 margin-top: 40px;
   }
-
-
 }
 
 /* photos.css */
+.my-masonry-grid {
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
+}
 
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  background: grey;
+  margin-bottom: 30px;
 
-.photo-container {
+}
+/* .photo-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+  gap: 3.75%;
+  margin-left: 17.5vw;
+  margin-right: 17.5vw;
+  padding-top: 3vw;
+  position: relative;
+}
+
+.photo {
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.photo img {
+  max-width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+  object-fit: cover;
+} */
+
+/* .photo-container {
   align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
@@ -116,7 +151,7 @@ margin-top: 40px;
   height: auto;
   -o-object-fit: cover;
   object-fit: cover;
-}
+} */
 
 .grey {
 display: block;

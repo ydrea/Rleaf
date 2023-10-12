@@ -16,6 +16,7 @@ import Photo from './Photo';
 import KategorijeSelekt from '../comps/SelektK';
 import TagoviSelekt from '../comps/SelektT';
 import Hline from '../comps/Line';
+import Masonry from 'react-masonry-css';
 
 export default function Photos() {
   const navigate = useNavigate();
@@ -110,21 +111,28 @@ export default function Photos() {
       <div className="photo-container">
         {filteredPhotos && filteredPhotos.length > 0 ? (
           filteredPhotos.map((photo, index) => (
-            <div key={photo.id} className="photo">
-              {index && (
-                <div className="selected-div2">
-                  {removeFileExtension(photo.signatura)}
-                </div>
-              )}
-              <img
-                src={
-                  process.env.REACT_APP_SERVER_PUB +
-                  `/${photo.signatura}`
-                }
-                alt={photo.naziv}
-                onClick={() => handlePhotoClick(index)}
-              />
-            </div>
+            <Masonry
+              breakpointCols={5}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+            >
+              {' '}
+              <div key={photo.id} className="photo">
+                {index && (
+                  <div className="selected-div2">
+                    {removeFileExtension(photo.signatura)}
+                  </div>
+                )}
+                <img
+                  src={
+                    process.env.REACT_APP_SERVER_PUB +
+                    `/${photo.signatura}`
+                  }
+                  alt={photo.naziv}
+                  onClick={() => handlePhotoClick(index)}
+                />
+              </div>
+            </Masonry>
           ))
         ) : (
           <p>loading...</p>

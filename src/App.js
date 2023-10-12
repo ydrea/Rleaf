@@ -22,6 +22,7 @@ import { useEffect } from 'react';
 import Photos from './pages/Photos';
 import Photo from './pages/Photo';
 import Map from './maps/karta/Karta';
+// import Map from './pages/MapG';
 
 function App() {
   //
