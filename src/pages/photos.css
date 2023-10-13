@@ -96,9 +96,10 @@ margin-top: 40px;
 }
 
 /* Style your items */
-.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+.my-masonry-grid_column > .photo img { /* change div to reference your elements you put in <Masonry> */
   background: grey;
   margin-bottom: 30px;
+  max-width: 13vw;
 
 }
 /* .photo-container {
