@@ -98,6 +98,21 @@ export default function Photos() {
     500: 1,
   };
   //
+  const photosPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Calculate the indices for the current page
+  const startIndex = (currentPage - 1) * photosPerPage;
+  const endIndex = startIndex + photosPerPage;
+
+  // Slice the photos array for the current page
+  const photosToDisplay = filteredPhotos.slice(startIndex, endIndex);
+
+  // Handle page change
+  const handlePageChange = newPage => {
+    setCurrentPage(newPage);
+  };
+  //
   return (
     <div className="gallery">
       {/* filter options */}
@@ -120,8 +135,8 @@ export default function Photos() {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {filteredPhotos && filteredPhotos.length > 0 ? (
-          filteredPhotos.map((photo, index) => (
+        {photosToDisplay && photosToDisplay.length > 0 ? (
+          photosToDisplay.map((photo, index) => (
             <div key={photo.id} className="photo">
               {index && (
                 <div className="selected-div2">
@@ -142,6 +157,20 @@ export default function Photos() {
           <p>loading...</p>
         )}
       </Masonry>{' '}
+      {/* Pagination controls */}
+      <div className="pagination">
+        {currentPage > 1 && (
+          <button onClick={() => handlePageChange(currentPage - 1)}>
+            Prethodna
+          </button>
+        )}
+        {photosToDisplay.length === photosPerPage && (
+          <button onClick={() => handlePageChange(currentPage + 1)}>
+            Sljedeća{' '}
+          </button>
+        )}
+      </div>
+      {/* </div> */}
       <Hline color="#7e7e77" height="2px" width="100%" />{' '}
     </div>
   );
