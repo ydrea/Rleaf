@@ -125,6 +125,22 @@ flex: 1;
   -o-object-fit: cover;
   object-fit: cover;
 }  
+.pagination-controls {
+  text-align: center;
+}
+
+.pagination-controls button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+}
+
+.pagination-controls button.active {
+  background: #18aa00;
+  color: #fff;
+}
 
 /* .photo-container {
   align-items: flex-start;
