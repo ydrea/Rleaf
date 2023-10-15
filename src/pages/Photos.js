@@ -79,7 +79,7 @@ export default function Photos() {
   const removeFileExtension = fileName => {
     const lastDotIndex = fileName.lastIndexOf('.');
     if (lastDotIndex === -1) {
-      return fileName; // No file extension found
+      return fileName; //
     }
     return fileName.substring(0, lastDotIndex);
   };
@@ -88,9 +88,12 @@ export default function Photos() {
     dispatch(setSelectedPhotoIndex(index));
     showPhotoSet(true);
     navigate(`/photos/${photos[index].signatura}`);
-    // Navigate to the individual photo route
   };
-
+  //
+  const breakpoints = {
+    default: 5,
+  };
+  //
   return (
     <div className="gallery">
       {/* filter options */}
@@ -106,38 +109,35 @@ export default function Photos() {
         />
       </div>
       {/* <div className="line-div2" /> */}
-      {/* </div> */}
       <Hline color="#18aa00" height="2px" width="100%" />
-      <div className="photo-container">
+      {/* </div> */}
+      <Masonry
+        breakpointCols={5}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
         {filteredPhotos && filteredPhotos.length > 0 ? (
           filteredPhotos.map((photo, index) => (
-            <Masonry
-              breakpointCols={5}
-              className="my-masonry-grid"
-              columnClassName="my-masonry-grid_column"
-            >
-              {' '}
-              <div key={photo.id} className="photo">
-                {index && (
-                  <div className="selected-div2">
-                    {removeFileExtension(photo.signatura)}
-                  </div>
-                )}
-                <img
-                  src={
-                    process.env.REACT_APP_SERVER_PUB +
-                    `/${photo.signatura}`
-                  }
-                  alt={photo.naziv}
-                  onClick={() => handlePhotoClick(index)}
-                />
-              </div>
-            </Masonry>
+            <div key={photo.id} className="photo">
+              {index && (
+                <div className="selected-div2">
+                  {removeFileExtension(photo.signatura)}
+                </div>
+              )}
+              <img
+                src={
+                  process.env.REACT_APP_SERVER_PUB +
+                  `/${photo.signatura}`
+                }
+                alt={photo.naziv}
+                onClick={() => handlePhotoClick(index)}
+              />
+            </div>
           ))
         ) : (
           <p>loading...</p>
         )}
-      </div>
+      </Masonry>{' '}
       <Hline color="#7e7e77" height="2px" width="100%" />{' '}
     </div>
   );
