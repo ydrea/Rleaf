@@ -97,7 +97,7 @@ export default function Photos() {
     500: 1,
   };
   //
-  const photosPerPage = 10;
+  const photosPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
 
   // Calculate the indices for the current page
