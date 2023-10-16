@@ -85,10 +85,13 @@ export default function Photos() {
   };
   //
   const handlePhotoClick = index => {
-    dispatch(setSelectedPhotoIndex(index));
+    const originalIndex = photos.indexOf(photosToDisplay[index]);
+
+    dispatch(setSelectedPhotoIndex(originalIndex));
     showPhotoSet(true);
-    navigate(`/photos/${photos[index].signatura}`);
+    navigate(`/photos/${photos[originalIndex].signatura}`);
   };
+
   //
   const breakpoints = {
     default: 4,
