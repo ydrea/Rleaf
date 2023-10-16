@@ -91,9 +91,8 @@ export default function Photos() {
   };
   //
   const breakpoints = {
-    default: 5,
-    1200: 4,
-    1000: 3,
+    default: 4,
+    1200: 3,
     768: 2,
     500: 1,
   };
@@ -129,7 +128,7 @@ export default function Photos() {
       </div>
       {/* <div className="line-div2" /> */}
       <Hline color="#18aa00" height="2px" width="100%" />
-      {/* </div> */}
+      {/* Masonry */}
       <Masonry
         breakpointCols={breakpoints}
         className="my-masonry-grid"

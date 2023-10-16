@@ -36,26 +36,27 @@
   margin-right: 5% !important;
   font-size: 16px; 
 }
+/* 
 .photo-container {
   align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.45vw;
+  gap: .45vw;
   margin-left: 5% !important;
   margin-right: 5% !important;
   padding-top: 3vw;
   flex-direction: row;
   position: relative;
-}
+}*/
+
 .photo {
   display: flex;
   flex-direction: column-reverse;
-  min-width: 20rem;
+  min-width: 15rem;
   overflow: hidden;
   transition: transform 0.2s ease;
   position: relative;
-}
-
+} 
  
 .photo img {
   max-width: 100%;
@@ -87,20 +88,22 @@ margin-top: 40px;
 /* photos.css */
 .my-masonry-grid {
   display: flex;
-  margin-left: -30px; /* gutter size offset */
-  /* width: auto; */
+  margin-left: 17.5vw; 
+ margin-right: 17.5vw;
+  width: auto;
 }
+
 .my-masonry-grid_column {
-  padding-left: 30px; /* gutter size */
+  padding-left: 0px;
+  margin-right: 0px;
   background-clip: padding-box;
-flex: 1;
+  flex: 1;
 }
 
 /* Style your items */
-.my-masonry-grid_column > .photo  { /* change div to reference your elements you put in <Masonry> */
-  /* background: grey; */
+.my-masonry-grid_column > .photo  { 
   margin-bottom: 30px;
-  max-width: 13vw;
+  max-width: 15vw;
 } 
 
 /* .photo-container {
@@ -179,7 +182,7 @@ display: block;
 }
 
 .selected-div2 {
-  font-size: 1.4rem;
+  font-size: 1rem;
   z-index: 9223;
   /* margin-left: 17.5vw; */
   /* margin-right: 17.5vw; */
