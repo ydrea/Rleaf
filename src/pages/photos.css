@@ -129,11 +129,11 @@ margin-top: 40px;
   object-fit: cover;
 }  
 
-.pagination-controls {
+.pagination {
   text-align: center;
 }
 
-.pagination-controls button {
+.pagination button {
   margin: 0 5px;
   padding: 5px 10px;
   background: #ddd;
@@ -141,7 +141,7 @@ margin-top: 40px;
   cursor: pointer;
 }
 
-.pagination-controls button.active {
+.pagination button.active {
   background: #18aa00;
   color: #fff;
 }

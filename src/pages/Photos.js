@@ -115,6 +115,14 @@ export default function Photos() {
     setCurrentPage(newPage);
   };
   //
+  const totalPages = Math.ceil(filteredPhotos.length / photosPerPage);
+
+  // Create an array of page numbers
+  const pageNumbers = Array.from(
+    { length: totalPages },
+    (_, index) => index + 1
+  );
+  //
   return (
     <div className="gallery">
       {/* filter options */}
@@ -160,25 +168,29 @@ export default function Photos() {
         )}
       </Masonry>{' '}
       {/* Pagination controls */}
-      <div className="select-container">
+      <div className="pagination">
         {currentPage > 1 && (
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            className="select"
-          >
+          <button onClick={() => handlePageChange(currentPage - 1)}>
             Prethodna
           </button>
         )}
-        {photosToDisplay.length === photosPerPage && (
+
+        {pageNumbers.map(pageNumber => (
           <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            className="select"
+            key={pageNumber}
+            onClick={() => handlePageChange(pageNumber)}
+            className={pageNumber === currentPage ? 'active' : ''}
           >
-            Sljedeća{' '}
+            {pageNumber}
+          </button>
+        ))}
+
+        {photosToDisplay.length === photosPerPage && (
+          <button onClick={() => handlePageChange(currentPage + 1)}>
+            Sljedeća
           </button>
         )}
       </div>
-      {/* </div> */}
       <Hline color="#7e7e77" height="2px" width="100%" />{' '}
     </div>
   );
