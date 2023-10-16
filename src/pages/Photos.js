@@ -160,14 +160,20 @@ export default function Photos() {
         )}
       </Masonry>{' '}
       {/* Pagination controls */}
-      <div className="pagination">
+      <div className="select-container">
         {currentPage > 1 && (
-          <button onClick={() => handlePageChange(currentPage - 1)}>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            className="select"
+          >
             Prethodna
           </button>
         )}
         {photosToDisplay.length === photosPerPage && (
-          <button onClick={() => handlePageChange(currentPage + 1)}>
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            className="select"
+          >
             Sljedeća{' '}
           </button>
         )}
