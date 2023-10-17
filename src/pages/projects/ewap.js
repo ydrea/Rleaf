@@ -8,13 +8,14 @@ const Ewap = () => {
         <img src="/proj2.jpg" />
         <h1 style={{ color: 'white' }}>
           Ugrožena drvena arhitektura
-          <br /> Banovine/Banije
+          <br /> Banovine/Banije,
+          <br /> Posavine i Pokuplja
         </h1>
       </div>
       <div className="tekst">
         <p>
           {' '}
-          Projekt EWAP: Ugrožena drvena arhitektura Banovina/Banije,
+          Projekt EWAP: Ugrožena drvena arhitektura Banovine/Banije,
           Posavine i Pokuplja 2023-2024 dio je globalnog programa
           dokumentacije ugrožene drvene arhitekture kojeg provodi
           Oxford Brookes University iz Velike Britanije.

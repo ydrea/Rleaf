@@ -13,18 +13,7 @@ function Home() {
   });
 
   console.log('jelNije:', jelNije); //
-
-  // Get the viewport height in pixels
-  const viewportHeight = window.innerHeight;
-
-  // Calculate the element's height in pixels
-  const elementHeight = 0.6667 * viewportHeight; // 66.67% in decimal form
-
-  console.log(elementHeight); // This will be the height in pixels
-  // Convert the element's height to vh units
-  const elementHeightInVh = (elementHeight / viewportHeight) * 100;
-
-  console.log(elementHeightInVh); // This will be the equivalent height in vh units
+  //
 
   //
   return (

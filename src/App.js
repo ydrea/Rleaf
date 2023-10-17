@@ -44,8 +44,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects/banija" element={<Banija />} />
         <Route path="/projects/ewap" element={<Ewap />} />
-        <Route path="/mapa/:signatura" element={<Map />} />
-        <Route path="/mapa" element={<Map />} />
+        <Route path="/maps/:signatura" element={<Map />} />
+        <Route path="/maps" element={<Map />} />
         <Route path="/photos" element={<PhotosLayout />}>
           <Route index element={<Photos />} />
           <Route path=":signatura" element={<Photo />} />

@@ -13,7 +13,7 @@ export const Dropdown = ({ submenus, dropdown, closeMobileMenu }) => {
               to={submenu.to}
               className={`submenu-link ${dropdown ? 'open' : ''}`}
               aria-expanded={dropdown ? 'true' : 'false'}
-              onClick={closeMobileMenu} // Close mobile menu when a dropdown item is clicked
+              onClick={closeMobileMenu}
             >
               <span className="first-letter-white">
                 {submenu.label.charAt(0)}
@@ -39,15 +39,13 @@ export const Nav = () => {
   const [hovered, setHovered] = useState(null);
   const [subMenu, setSubMenu] = useState({});
   const [dropdownItemClicked, setDropdownItemClicked] =
-    useState(false); // New state variable
-
+    useState(false);
   const location = useLocation();
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => {
     setClick(false);
     setHovered(null);
-    // Close the mobile menu when a dropdown item is clicked
     if (dropdownItemClicked) {
       setDropdownItemClicked(false);
     }
@@ -61,7 +59,6 @@ export const Nav = () => {
       }, {}),
     }));
 
-    // Close the mobile menu when a dropdown item is clicked
     setDropdownItemClicked(true);
   };
 
@@ -76,10 +73,9 @@ export const Nav = () => {
         { label: 'EWAP', to: 'projects/ewap' },
       ],
     },
-    { label: 'karta', to: '/mapa' },
+    { label: 'karte', to: '/maps' },
     { label: 'fototeka    ', to: '/photos' },
     { label: 'kontakt', to: '/contact' },
-    // { label: 'admin', to: '/login' },
   ];
 
   return (
@@ -112,7 +108,7 @@ export const Nav = () => {
                     <Dropdown
                       dropdown={subMenu[index]}
                       submenus={item.submenu}
-                      closeMobileMenu={closeMobileMenu} // Pass closeMobileMenu to Dropdown component
+                      closeMobileMenu={closeMobileMenu}
                     />
                   </>
                 ) : (
