@@ -9,6 +9,15 @@ import { getPhotos } from '../redux/rtk/gallerySlice';
 
 import './Fileupload.css';
 
+const decodeString = (value) => {
+  try {
+    return decodeURIComponent(escape(value));
+  } catch(e) {
+    //
+  }
+  return value;
+}
+
 const getExifData = async (file) => {
   try {
     const data = await exifr.parse(file, { iptc: true, xmp: true });
@@ -49,9 +58,9 @@ const saveExif = async (signatura, exif = {}) => {
           tagovi: (Array.isArray(exif.subject) ? exif.subject : []).join(','),
           lon: `${exif.longitude ?? ''}`,
           lat: `${exif.latitude ?? ''}`,
-          naziv: '',
+          naziv: decodeString(exif.Title ?? ''),
           naziv_eng: '',
-          opis: '',
+          opis: decodeString(exif.Caption ?? ''),
           opis_eng: '',
           kategorija: '',
           copyright_holder: '',
