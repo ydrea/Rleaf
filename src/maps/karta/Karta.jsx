@@ -10,6 +10,7 @@ import {
   LayersControl,
   ZoomControl,
   WMSTileLayer,
+  useMap
 } from 'react-leaflet';
 import BetterWMS from "./BetterWMS";
 import Hline from '../../comps/Line';
@@ -28,7 +29,31 @@ import {
     ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
     PodRH, TemaZP, TemaP, //TemaS
   } from '../wms';
-//
+
+  // import { Map} from 'react-leaflet'
+  import { OpenStreetMapProvider, GeoSearchControl } from 'leaflet-geosearch'
+  
+  // make new leaflet element
+  const Search = (props) => {
+      const map = useMap() // access to leaflet map
+      const { provider } = props
+  
+      useEffect(() => {
+          const searchControl = new GeoSearchControl({
+              provider,
+          })
+console.log(props.query);  
+          map.addControl(searchControl) // 
+          return () => map.removeControl(searchControl)
+      }, [props])
+  
+      return null // 
+  }
+  
+  
+  //
+
+
 const myIcon = new Icon({
     iconUrl: require('../../assets/icon.png'),
     iconSize: [28, 28],
@@ -40,7 +65,6 @@ function Map() {
     const [selectedLayer, setSelectedLayer] = useState();
     const markerRef = useRef([]);
   
-  //tipofthespear
   //tipofthespear
 useEffect(() => {
   const fetchData = async () => {
@@ -265,6 +289,10 @@ zoomControl={false}
             <PodRH />
           </BaseLayer>
           <FiksniElementi />
+
+  {/* Search */}
+
+          <Search provider={new OpenStreetMapProvider()} style={{zIndex: 1111}} />
 
 
   {/* Overlays */}
