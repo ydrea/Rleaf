@@ -4,22 +4,55 @@ import Footer from '../comps/Footer';
 import { Nav } from '../comps/Nav';
 import { useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
+
+import {
+  Button,
+  Element,
+  Events,
+  scroller,
+  scrollSpy,
+  Link,
+} from 'react-scroll';
+
 //
 function Home() {
-  const ref = useRef();
-  const { ref: rockRef, inView: jelNije } = useInView({
-    rootMargin: '0px 0px -11% 0px',
-    triggerOnce: true, //
-  });
+  useEffect(() => {
+    // Add a scroll event listener
+    window.addEventListener('scroll', handleScroll);
 
-  console.log('jelNije:', jelNije); //
-  //
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-  //
+  const handleScroll = () => {
+    // Implement your custom logic to determine when to trigger scrolling
+    // For example, you can check the scroll position and trigger scrolling
+    // when the user reaches a certain point on the page.
+
+    const scrollPosition = window.scrollY;
+    const triggerScrollPosition = 100; // Adjust this value to your needs
+
+    if (scrollPosition >= triggerScrollPosition) {
+      scroller.scrollTo('S1', {
+        duration: 1500,
+        delay: 0,
+        smooth: 'easeInOutQuint',
+      });
+    }
+  }; //
   return (
     <div className="gallery">
       <div className="home">
-        {/* {jelNije ? ( */}
+        <Link
+          to="S1"
+          // spy={true}
+          smooth={true}
+          offset={-200}
+          duration={500}
+          // onScroll={() => scrollToS(S1ref)}
+        />
         <div className="cont0">
           <div className="vozi">opservatorij</div>
           <div className="pali">krajobraza </div>
@@ -30,7 +63,7 @@ function Home() {
         </div>
         {/* </div> */}
         {/* //Sections */}
-        <div className="S1">
+        <div className="S1" ref={S1ref}>
           'Opservatorij krajobraza' je kolaborativna platforma koja
           okuplja znanstvenike i stručnjake različitih profila. U
           središtu naše pažnje je koncept krajobraza koji se sve više
@@ -42,11 +75,11 @@ function Home() {
           pristup razumijevanju, prezentaciji i očuvanju krajobraza te
           promišljati razvoj temeljen na krajobrazu.
         </div>
-        <div className="S2">
+        <div className="S2" ref={S2ref}>
           <div className="cont2">
             <div className="img-container">
               <img src="home2.png" className="img2" />
-              <img className="img3" src="home3.png" />
+              <img className="img3" ref={S3ref} src="home3.png" />
 
               <div className="txt2">
                 <p>
@@ -67,7 +100,7 @@ function Home() {
                 Pozivamo vas da se pridružite našem putovanju prema
                 očuvanju i razumijevanju krajobraza.
               </div>{' '}
-              <div className="dve">
+              <div className="dve" ref={S4ref}>
                 Za sve informacije vezane uz ‘Opservatorij
                 krajobraza’, slobodno nas kontaktirajte
                 <p>
