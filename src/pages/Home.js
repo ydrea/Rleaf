@@ -15,7 +15,36 @@ import {
 } from 'react-scroll';
 
 //
-function Home() {
+export default function Home() {
+  // useEffect(() => {
+  //   // Add a scroll event listener
+  //   window.addEventListener('scroll', handleScroll);
+
+  //   // Clean up the event listener on unmount
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
+
+  // const handleScroll = () => {
+  //   // Implement your custom logic to determine when to trigger scrolling
+  //   // For example, you can check the scroll position and trigger scrolling
+  //   // when the user reaches a certain point on the page.
+
+  //   const scrollPosition = window.scrollY;
+  //   const triggerScrollPosition = 100; // Adjust this value to your needs
+
+  //   if (scrollPosition >= triggerScrollPosition) {
+  //     scroller.scrollTo('S1', {
+  //       duration: 1500,
+  //       delay: 0,
+  //       smooth: 'easeInOutQuint',
+  //     });
+  //   }
+  // }; //
+
+  // export default function Home() {
+
   useEffect(() => {
     // Add a scroll event listener
     window.addEventListener('scroll', handleScroll);
@@ -32,16 +61,48 @@ function Home() {
     // when the user reaches a certain point on the page.
 
     const scrollPosition = window.scrollY;
-    const triggerScrollPosition = 100; // Adjust this value to your needs
+    const section1Top = document.getElementById('S1').offsetTop;
+    const section2Top = document.getElementById('S2').offsetTop;
+    const section3Top = document.getElementById('S3').offsetTop;
+    const section4Top = document.getElementById('S4').offsetTop;
 
-    if (scrollPosition >= triggerScrollPosition) {
+    // For example, you can trigger scrolling when the user scrolls to a specific section.
+    if (scrollPosition < section2Top) {
       scroller.scrollTo('S1', {
         duration: 1500,
-        delay: 0,
+        smooth: 'easeInOutQuint',
+      });
+    } else if (scrollPosition < section3Top) {
+      scroller.scrollTo('S2', {
+        duration: 1500,
+        smooth: 'easeInOutQuint',
+      });
+    } else if (scrollPosition < section3Top) {
+      scroller.scrollTo('S3', {
+        duration: 1500,
+        smooth: 'easeInOutQuint',
+      });
+    } else {
+      scroller.scrollTo('S4', {
+        duration: 1500,
         smooth: 'easeInOutQuint',
       });
     }
-  }; //
+  };
+
+  //   return (
+  //     <div className="gallery">
+  //       <div className="home">
+  //         <div id="S1">Section 1 content</div>
+  //         <div id="S2">Section 2 content</div>
+  //         <div id="S3">Section 3 content</div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+  // export default Home;
+
   return (
     <div className="gallery">
       <div className="home">
@@ -63,7 +124,7 @@ function Home() {
         </div>
         {/* </div> */}
         {/* //Sections */}
-        <div className="S1" ref={S1ref}>
+        <div className="S1" id="S1">
           'Opservatorij krajobraza' je kolaborativna platforma koja
           okuplja znanstvenike i stručnjake različitih profila. U
           središtu naše pažnje je koncept krajobraza koji se sve više
@@ -75,11 +136,11 @@ function Home() {
           pristup razumijevanju, prezentaciji i očuvanju krajobraza te
           promišljati razvoj temeljen na krajobrazu.
         </div>
-        <div className="S2" ref={S2ref}>
+        <div className="S2" id="S2">
           <div className="cont2">
             <div className="img-container">
               <img src="home2.png" className="img2" />
-              <img className="img3" ref={S3ref} src="home3.png" />
+              <img className="img3" id="S3" src="home3.png" />
 
               <div className="txt2">
                 <p>
@@ -100,7 +161,7 @@ function Home() {
                 Pozivamo vas da se pridružite našem putovanju prema
                 očuvanju i razumijevanju krajobraza.
               </div>{' '}
-              <div className="dve" ref={S4ref}>
+              <div className="dve" id="S4">
                 Za sve informacije vezane uz ‘Opservatorij
                 krajobraza’, slobodno nas kontaktirajte
                 <p>
@@ -126,5 +187,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;
