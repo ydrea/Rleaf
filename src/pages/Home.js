@@ -16,115 +16,26 @@ import {
 
 //
 export default function Home() {
-  // useEffect(() => {
-  //   // Add a scroll event listener
-  //   window.addEventListener('scroll', handleScroll);
-
-  //   // Clean up the event listener on unmount
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
-
-  // const handleScroll = () => {
-  //   // Implement your custom logic to determine when to trigger scrolling
-  //   // For example, you can check the scroll position and trigger scrolling
-  //   // when the user reaches a certain point on the page.
-
-  //   const scrollPosition = window.scrollY;
-  //   const triggerScrollPosition = 100; // Adjust this value to your needs
-
-  //   if (scrollPosition >= triggerScrollPosition) {
-  //     scroller.scrollTo('S1', {
-  //       duration: 1500,
-  //       delay: 0,
-  //       smooth: 'easeInOutQuint',
-  //     });
-  //   }
-  // }; //
-
-  // export default function Home() {
-
-  useEffect(() => {
-    // Add a scroll event listener
-    window.addEventListener('scroll', handleScroll);
-
-    // Clean up the event listener on unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const handleScroll = () => {
-    // Implement your custom logic to determine when to trigger scrolling
-    // For example, you can check the scroll position and trigger scrolling
-    // when the user reaches a certain point on the page.
-
-    const scrollPosition = window.scrollY;
-    const section1Top = document.getElementById('S1').offsetTop;
-    const section2Top = document.getElementById('S2').offsetTop;
-    const section3Top = document.getElementById('S3').offsetTop;
-    const section4Top = document.getElementById('S4').offsetTop;
-
-    // For example, you can trigger scrolling when the user scrolls to a specific section.
-    if (scrollPosition < section2Top) {
-      scroller.scrollTo('S1', {
-        duration: 1500,
-        smooth: 'easeInOutQuint',
-      });
-    } else if (scrollPosition < section3Top) {
-      scroller.scrollTo('S2', {
-        duration: 1500,
-        smooth: 'easeInOutQuint',
-      });
-    } else if (scrollPosition < section3Top) {
-      scroller.scrollTo('S3', {
-        duration: 1500,
-        smooth: 'easeInOutQuint',
-      });
-    } else {
-      scroller.scrollTo('S4', {
-        duration: 1500,
-        smooth: 'easeInOutQuint',
-      });
-    }
-  };
-
-  //   return (
-  //     <div className="gallery">
-  //       <div className="home">
-  //         <div id="S1">Section 1 content</div>
-  //         <div id="S2">Section 2 content</div>
-  //         <div id="S3">Section 3 content</div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // export default Home;
+  const section1Ref = useRef(null);
+  const section2Ref = useRef(null);
+  const section3Ref = useRef(null);
 
   return (
     <div className="gallery">
       <div className="home">
-        <Link
-          to="S1"
-          // spy={true}
-          smooth={true}
-          offset={-200}
-          duration={500}
-          // onScroll={() => scrollToS(S1ref)}
-        />
-        <div className="cont0">
-          <div className="vozi">opservatorij</div>
-          <div className="pali">krajobraza </div>
-          <div className="podnaslov">
-            Interdisciplinarna platforma posvećena istraživanju
-            krajobraza i razvoju temeljenom na krajobrazu{' '}
+        <section>
+          <div className="cont0">
+            <div className="vozi">opservatorij</div>
+            <div className="pali">krajobraza </div>
+            <div className="podnaslov">
+              Interdisciplinarna platforma posvećena istraživanju
+              krajobraza i razvoju temeljenom na krajobrazu{' '}
+            </div>
           </div>
-        </div>
+        </section>
         {/* </div> */}
         {/* //Sections */}
-        <div className="S1" id="S1">
+        <section className="S1" id="section1" ref={section1Ref}>
           'Opservatorij krajobraza' je kolaborativna platforma koja
           okuplja znanstvenike i stručnjake različitih profila. U
           središtu naše pažnje je koncept krajobraza koji se sve više
@@ -135,13 +46,13 @@ export default function Home() {
           hrvatskog krajobraza. Naša misija je pružiti integralan
           pristup razumijevanju, prezentaciji i očuvanju krajobraza te
           promišljati razvoj temeljen na krajobrazu.
-        </div>
-        <div className="S2" id="S2">
+        </section>
+        <div className="S2" id="section2" ref={section2Ref}>
           <div className="cont2">
             <div className="img-container">
-              <img src="home2.png" className="img2" />
-              <img className="img3" id="S3" src="home3.png" />
-
+              <section>
+                <img src="home2.png" className="img2" />
+              </section>{' '}
               <div className="txt2">
                 <p>
                   {' '}
@@ -154,6 +65,10 @@ export default function Home() {
                   ključna za otpornost i regeneraciju zajednica.
                 </p>
               </div>
+              <section>
+                {' '}
+                <img className="img3" src="home3.png" />
+              </section>
             </div>
 
             <div className="txt3">
@@ -170,13 +85,16 @@ export default function Home() {
                 </p>{' '}
                 ili telefonom na [<span>+385 95 9123055</span>].
               </div>
-              <div className="tli">
-                Zanima vas više o našem radu i misiji? Pretplatite se
-                na naš newsletter i budite u tijeku s našim
-                istraživanjima i aktivnostima. Unesite svoju e-mail
-                adresu i pridružite se putovanju prema razumijevanju i
-                očuvanju krajobraza.
-              </div>
+              <section>
+                {' '}
+                <div className="tli">
+                  Zanima vas više o našem radu i misiji? Pretplatite
+                  se na naš newsletter i budite u tijeku s našim
+                  istraživanjima i aktivnostima. Unesite svoju e-mail
+                  adresu i pridružite se putovanju prema razumijevanju
+                  i očuvanju krajobraza.
+                </div>
+              </section>
             </div>
           </div>
         </div>
