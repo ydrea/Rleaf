@@ -156,7 +156,7 @@ export default function Photos() {
               <img
                 src={
                   process.env.REACT_APP_SERVER_PUB +
-                  `/${photo.signatura}`
+                  `/thumbs/${photo.signatura}`
                 }
                 alt={photo.naziv}
                 onClick={() => handlePhotoClick(index)}
