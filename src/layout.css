@@ -2,3 +2,8 @@
   margin-top: 20vh;
 /* margin-left: 12.5vw; */
 }
+  
+section {
+  scroll-snap-align: start;
+
+}

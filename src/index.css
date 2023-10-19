@@ -13,7 +13,5 @@ html, body, #root {
   background-color: #DBDBDB;/* color: #fff; */
   /* scroll-behavior: smooth; */
   scroll-snap-type: y mandatory;
-}  
-section {
-  scroll-snap-align: start;
+/* padding-bottom: 20vh; */
 }
