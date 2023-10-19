@@ -129,7 +129,7 @@ export default function PhotosEDIT({ onRemove }) {
           closeModal={() => setSelectedId(undefined)}
           thumbnailUrl={
             selectedPhotoData
-              ? `${process.env.REACT_APP_SERVER_PUB}/${selectedPhotoData.signatura}`
+              ? `${process.env.REACT_APP_SERVER_PUB}/thumbs/${selectedPhotoData.signatura}`
               : undefined
           }
           signatura={
@@ -200,7 +200,7 @@ export default function PhotosEDIT({ onRemove }) {
               )}
               {photo.signatura ? (
                 <img
-                  src={`${process.env.REACT_APP_SERVER_PUB}/${photo.signatura}`}
+                  src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${photo.signatura}`}
                   alt={photo.naziv || photo.signatura}
                 />
               ) : (
