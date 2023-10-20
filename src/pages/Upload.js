@@ -276,7 +276,10 @@ export const Fileupload = () => {
   return (
     <>
       {message ? <Message msg={message} /> : null}
-      <form style={{ paddingTop: '100px' }} onSubmit={onSubmit}>
+      <form
+        style={{ paddingTop: '100px', paddingLeft: '200px' }}
+        onSubmit={onSubmit}
+      >
         <div className="custom-file mb-4">
           <input
             type="file"
@@ -324,7 +327,6 @@ export const Fileupload = () => {
           className="btn btn-primary btn-block mt-4"
         />
       </form>
-      <h1>123</h1>
       {/* {uploadedFileList.length === 1 && !!uploadedFileList[0] ? (
         <>
           <div className="row mt-5">
