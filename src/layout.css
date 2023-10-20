@@ -1,9 +1,11 @@
 .izkompenzuj {
-  margin-top: 20vh;
+  /* margin-top: 20vh; */
 /* margin-left: 12.5vw; */
 }
   
 section {
   scroll-snap-align: start;
+  scroll-margin-top: 30px;
+
 
 }

@@ -203,7 +203,7 @@ display: block;
     /* letter-spacing: .047em; */
     /* font-size: 10vw; */
     /* font-weight: 100; */
-    margin-top: -10vh;
+    margin-top: 10vh;
     margin-left: 17.5vw;
     color: #fff;  
     /* display: flex; */
@@ -264,7 +264,7 @@ width: 65vw;
 .line-div0 {
   border-top: 1px solid #18aa00;
   position: absolute;
-  top: 34%;
+  top: 60%;
   left: 0;
   box-sizing: border-box;
   width: 100%;
