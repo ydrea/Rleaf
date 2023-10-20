@@ -252,7 +252,7 @@ layers: "preklop_foto_katalog",
   
   return (
     <div className="gallery">
-      <div className="naslov-container">
+<section>      <div className="naslov-container">
         <h1>opservatorij</h1>
         <div className="line-div0" />
       </div>
@@ -266,7 +266,8 @@ layers: "preklop_foto_katalog",
         potrebama.
       </div>
       <Hline color="#18aa00" height="2px" width="100%" />
-<div>
+      </section><div>
+  <section>
 <MapContainer 
 center={[45.2, 16.2]}
 zoom={11}
@@ -422,8 +423,11 @@ zoomControl={false}
         )} */}
 
 </MapContainer>
- </div>
+</section></div>
+<section>
  <Footer/>
+  
+ </section>
  </div> );
 }
 

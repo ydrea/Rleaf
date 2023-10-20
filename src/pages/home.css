@@ -1,14 +1,4 @@
 
-/* Set max-width for containers to prevent overflow */
-/* .cont0, .S1, .S2, .S3 {
-  max-width: 100%;
-} */
-
-/* Set max-width for specific containers if needed */
-/* .cont2, .cont3 {
-  max-width: 100%; 
-  } */
-
 /* For larger screens (desktop) */
 @media screen and (min-width: 1200px) {
   .content {
@@ -81,7 +71,7 @@
   }
   
   .S1 {
-    padding-top: 700px;
+    padding-top: 50%;
     padding-bottom: 9vh;
     margin-left: 17.5vw;
     margin-right: auto;

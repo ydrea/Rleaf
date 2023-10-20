@@ -1,0 +1,12 @@
+.c-grid > .card {
+    position: relative;
+}
+.c-grid > .card::after {
+    content:'';
+    position: absolute;
+    background-color: black;
+width: 100%; height: 2px;
+}
+.c-grid > .card::before  {
+    position: absolute;
+}

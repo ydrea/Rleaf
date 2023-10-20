@@ -14,7 +14,7 @@ import ScrollToTop from './ScrollToTop';
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       <App />
     </BrowserRouter>
   </Provider>

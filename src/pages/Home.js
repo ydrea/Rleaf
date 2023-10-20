@@ -4,33 +4,38 @@ import Footer from '../comps/Footer';
 import { Nav } from '../comps/Nav';
 import { useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
+
+import {
+  Button,
+  Element,
+  Events,
+  scroller,
+  scrollSpy,
+  Link,
+} from 'react-scroll';
+
 //
-function Home() {
-  const ref = useRef();
-  const { ref: rockRef, inView: jelNije } = useInView({
-    rootMargin: '0px 0px -11% 0px',
-    triggerOnce: true, //
-  });
+export default function Home() {
+  const section1Ref = useRef(null);
+  const section2Ref = useRef(null);
+  const section3Ref = useRef(null);
 
-  console.log('jelNije:', jelNije); //
-  //
-
-  //
   return (
     <div className="gallery">
       <div className="home">
-        {/* {jelNije ? ( */}
-        <div className="cont0">
-          <div className="vozi">opservatorij</div>
-          <div className="pali">krajobraza </div>
-          <div className="podnaslov">
-            Interdisciplinarna platforma posvećena istraživanju
-            krajobraza i razvoju temeljenom na krajobrazu{' '}
+        <section>
+          <div className="cont0">
+            <div className="vozi">opservatorij</div>
+            <div className="pali">krajobraza </div>
+            <div className="podnaslov">
+              Interdisciplinarna platforma posvećena istraživanju
+              krajobraza i razvoju temeljenom na krajobrazu{' '}
+            </div>
           </div>
-        </div>
+        </section>
         {/* </div> */}
         {/* //Sections */}
-        <div className="S1">
+        <section className="S1" id="section1" ref={section1Ref}>
           'Opservatorij krajobraza' je kolaborativna platforma koja
           okuplja znanstvenike i stručnjake različitih profila. U
           središtu naše pažnje je koncept krajobraza koji se sve više
@@ -41,13 +46,13 @@ function Home() {
           hrvatskog krajobraza. Naša misija je pružiti integralan
           pristup razumijevanju, prezentaciji i očuvanju krajobraza te
           promišljati razvoj temeljen na krajobrazu.
-        </div>
-        <div className="S2">
+        </section>
+        <div className="S2" id="section2" ref={section2Ref}>
           <div className="cont2">
             <div className="img-container">
-              <img src="home2.png" className="img2" />
-              <img className="img3" src="home3.png" />
-
+              <section>
+                <img src="home2.png" className="img2" />
+              </section>{' '}
               <div className="txt2">
                 <p>
                   {' '}
@@ -60,6 +65,10 @@ function Home() {
                   ključna za otpornost i regeneraciju zajednica.
                 </p>
               </div>
+              <section>
+                {' '}
+                <img className="img3" src="home3.png" />
+              </section>
             </div>
 
             <div className="txt3">
@@ -67,7 +76,7 @@ function Home() {
                 Pozivamo vas da se pridružite našem putovanju prema
                 očuvanju i razumijevanju krajobraza.
               </div>{' '}
-              <div className="dve">
+              <div className="dve" id="S4">
                 Za sve informacije vezane uz ‘Opservatorij
                 krajobraza’, slobodno nas kontaktirajte
                 <p>
@@ -76,13 +85,16 @@ function Home() {
                 </p>{' '}
                 ili telefonom na [<span>+385 95 9123055</span>].
               </div>
-              <div className="tli">
-                Zanima vas više o našem radu i misiji? Pretplatite se
-                na naš newsletter i budite u tijeku s našim
-                istraživanjima i aktivnostima. Unesite svoju e-mail
-                adresu i pridružite se putovanju prema razumijevanju i
-                očuvanju krajobraza.
-              </div>
+              <section>
+                {' '}
+                <div className="tli">
+                  Zanima vas više o našem radu i misiji? Pretplatite
+                  se na naš newsletter i budite u tijeku s našim
+                  istraživanjima i aktivnostima. Unesite svoju e-mail
+                  adresu i pridružite se putovanju prema razumijevanju
+                  i očuvanju krajobraza.
+                </div>
+              </section>
             </div>
           </div>
         </div>
@@ -93,5 +105,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;
