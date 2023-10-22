@@ -151,6 +151,9 @@ export default function About() {
             i medija (pokroviteljstvo).
           </p>
         </div>
+      </section>{' '}
+      <section>
+        {' '}
         <Footer />{' '}
       </section>{' '}
     </div>

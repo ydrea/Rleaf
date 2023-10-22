@@ -23,13 +23,13 @@ margin-right: 17.5vw;
 
 .projects-container h1 {
     position: absolute;
-    bottom: 0; left: 0;
+    bottom: 5vh; left: 0;
 padding-left: 2vw;
     max-width: 50%;
     z-index: 1;
     margin-left: 17.5vw;
     margin-right: 17.5vw;
-
+color: white;
 } 
 
 .tekst {
