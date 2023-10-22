@@ -109,6 +109,7 @@ useEffect(() => {
 //
   //and out
   const { BaseLayer, Overlay } = LayersControl;
+//
   const adminna = {
     id: '775',
     name: 'administrativne jedinice',
@@ -385,17 +386,7 @@ zoomControl={false}
               }
             }}
           >
-            <Popup
-            // eventHandlers={{
-            //   mouseover: e => {
-            //     e.target.openPopup();
-            //   },
-            //   mouseout: e => {
-            //     e.target.closePopup();
-            //   },
-            // }}
-            // interactive
-            >
+            <Popup>
               {i.popUp}
               {/* <Link to={{ pathname: '/photos', params: i.popUp }}> */}
               <img

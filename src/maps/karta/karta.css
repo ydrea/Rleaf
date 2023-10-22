@@ -3,3 +3,23 @@
     margin-right:  17.5% !important;
     width: 65%;
 }
+
+.markersList {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    max-width: 350px;
+    margin: auto;
+    color: salmon;
+background-color: blue;  
+}
+  
+  .markerItem {
+    /* margin-top: -10px; */
+    padding: 5px;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .markerItem:hover {
+    border-bottom: 1px solid salmon;
+  }
