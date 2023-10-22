@@ -52,24 +52,24 @@ export default function Home() {
             <div className="img-container">
               <section>
                 <img src="home2.png" className="img2" />
+                <div className="txt2">
+                  <p>
+                    {' '}
+                    Pored istraživanja, ‘Opservatorij’ se bavi
+                    dokumentiranjem, monitoringom, edukacijom te
+                    promoviranjem interdisciplinarnih metoda.
+                  </p>
+                  <p>
+                    Smatramo da je zaštita i razumijevanje krajobraza
+                    ključna za otpornost i regeneraciju zajednica.
+                  </p>
+                </div>
               </section>{' '}
-              <div className="txt2">
-                <p>
-                  {' '}
-                  Pored istraživanja, ‘Opservatorij’ se bavi
-                  dokumentiranjem, monitoringom, edukacijom te
-                  promoviranjem interdisciplinarnih metoda.
-                </p>
-                <p>
-                  Smatramo da je zaštita i razumijevanje krajobraza
-                  ključna za otpornost i regeneraciju zajednica.
-                </p>
-              </div>
-              <section>
-                {' '}
-                <img className="img3" src="home3.png" />
-              </section>
             </div>
+            <section>
+              {' '}
+              <img className="img3" src="home3.png" />
+            </section>
 
             <div className="txt3">
               <div className="ena">

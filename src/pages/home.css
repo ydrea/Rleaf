@@ -89,7 +89,7 @@
   /* ... Other CSS rules ... */
   
   .img2 {
-    position: relative; 
+    /* position: relative;  */
     width: 75vw;
     object-fit: cover;
     height: auto;
@@ -100,7 +100,7 @@
   }
   
   .txt2 {
-    font-size: 1.875rem;
+    font-size: 1.6rem;
      color: #fff;
      position: absolute;
      /* padding-right: 1rem; */
@@ -109,17 +109,15 @@
      z-index: 33;
      max-width: 33vw;
      width: 100%;
-     bottom: 10%;
+     bottom: 15%;
    }
    .txt2 p {
     margin: 0.5;
    }
    
   .img3 {
-    position: absolute;
-    bottom: -31vh;
-    left: 17.5;
-    width: 40%; 
+    margin-left: 17.5% !important;
+    width: 35%; 
     height: auto;
   }
   
