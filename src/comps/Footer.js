@@ -1,6 +1,6 @@
 import React from 'react';
 import './footer.css';
-import logo from '../assets/Asset 0.svg';
+import logo from '../assets/asset5.svg';
 import Hline from './Line';
 //
 export default function Footer() {
