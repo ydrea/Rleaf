@@ -277,7 +277,7 @@ export const Fileupload = () => {
     <>
       {message ? <Message msg={message} /> : null}
       <form
-        style={{ paddingTop: '100px', paddingLeft: '200px' }}
+        style={{ paddingTop: '15%', paddingLeft: '17.5%' }}
         onSubmit={onSubmit}
       >
         <div className="custom-file mb-4">

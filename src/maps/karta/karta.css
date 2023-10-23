@@ -11,11 +11,10 @@
     max-width: 350px;
     margin: auto;
     color: salmon;
-background-color: blue;  
 }
   
   .markerItem {
-    /* margin-top: -10px; */
+    margin-top: 10px;
     padding: 5px;
     border-bottom: 1px solid transparent;
   }

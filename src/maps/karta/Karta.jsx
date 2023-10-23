@@ -49,8 +49,79 @@ console.log(props.query);
   
       return null // 
   }
+
+  //fly  
+
+  const points = [
+    {
+      id: '1',
+      lat: 45.22284,
+      lng: 16.21003,
+      title: 'Marker 1',
+    },
+    {
+      id: '2',
+      lat: 45.22292,
+      lng: 16.00897,
+      title: 'Marker 2',
+    },
+    {
+      id: '3',
+      lat: 45.29639,
+      lng: 16.10912,
+      title: 'Marker 3',
+    },
+    
+  ];
   
+  const ListMarkers = ({ onItemClick }) => {
+    return (
+      <div className='markersList'>
+        {points.map(({ title }, index) => (
+          <div
+            className='markerItem'
+            key={index}
+            onClick={e => {
+              e.preventDefault();
+              onItemClick(index);
+            }}
+          >
+            {title}
+          </div>
+        ))}
+      </div>
+    );
+  };
   
+  const MyMarkers = ({ data, selectedIndex }) => {
+    return data.map((item, index) => (
+      <PointMarker
+        key={index}
+        content={item.title}
+        center={{ lat: item.lat, lng: item.lng }}
+        openPopup={selectedIndex === index}
+      />
+    ));
+  };
+  
+  const PointMarker = ({ center, content, openPopup }) => {
+    const map = useMap();
+    const markerRef = useRef(null);
+  
+    useEffect(() => {
+      if (openPopup) {
+        map.flyToBounds([center]);
+        markerRef.current.openPopup();
+      }
+    }, [map, center, openPopup]);
+  
+    return (
+      <Marker ref={markerRef} position={center}>
+        <Popup>{content}</Popup>
+      </Marker>
+    );
+  };
+    
   //
 
 
@@ -60,11 +131,20 @@ const myIcon = new Icon({
   });
   
 //
+// const MapWrapper = () => {
+  
+
 function Map() {
     const [markeri, markeriSet] = useState([]);
     const [selectedLayer, setSelectedLayer] = useState();
     const markerRef = useRef([]);
   
+    const [selected, setSelected] = useState();
+
+  function handleItemClick(index) {
+    setSelected(index);
+  }
+
   //tipofthespear
 useEffect(() => {
   const fetchData = async () => {
@@ -413,8 +493,11 @@ zoomControl={false}
             )
         )} */}
 
+<MyMarkers selectedIndex={selected} data={points} />
 </MapContainer>
 </section></div>
+<ListMarkers data={points} onItemClick={handleItemClick} />
+
 <section>
  <Footer/>
   
