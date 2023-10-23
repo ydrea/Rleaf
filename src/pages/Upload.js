@@ -64,19 +64,24 @@ const saveExif = async (signatura, exif = {}) => {
             ''
         ),
         tagovi: (Array.isArray(exif.subject)
-          ? exif.subject
-          : []
-        ).join(','),
+          ? exif.subject.join(',')
+          : exif.subject
+        ) ?? '',
         lon: `${exif.longitude ?? ''}`,
         lat: `${exif.latitude ?? ''}`,
         naziv: decodeString(
-          exif.Title ?? exif.title?.value ?? exif.ObjectName ?? ''
+          exif.XPTitle ||
+            exif.Title ||
+            exif.title?.value ||
+            exif.ObjectName ||
+            ''
         ),
         naziv_eng: '',
         opis: decodeString(
-          exif.ImageDescription ??
-            exif.description?.value ??
-            exif.Caption ??
+          exif.XPSubject ||
+            exif.ImageDescription ||
+            exif.description?.value ||
+            exif.Caption ||
             ''
         ),
         opis_eng: '',
