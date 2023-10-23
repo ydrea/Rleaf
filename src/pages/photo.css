@@ -13,13 +13,12 @@
  }
 
 .img-cnt {
-  width: 75vw;
-  padding-left: 2.3vw;
-/* margin-left: 5vw; */
+  width: 65vw;
+  margin-left: 17.5vw;
+  margin-right: 17.5vw;
 }
-
-.img-cnt img {
-  width: 75vw;
+.img-photo {
+width: 100%;
 }
  .prev, .center,
  .next {

@@ -469,13 +469,13 @@ zoomControl={false}
           >
             <Popup>
               {i.popUp}
-              <Link to={{ pathname: '/photos', params: i.popUp }}>
+              {/* <Link to={{ pathname: '/photo', params: i.popUp }}> */}
               <img
                 width="233px"
                 src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${i.popUp}`}
                 alt={i.popUp}
               />
-              </Link>
+              {/* </Link> */}
             </Popup>
           </Marker>
         ))}

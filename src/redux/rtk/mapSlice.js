@@ -15,7 +15,7 @@ const initialState = {
 };
 
 const mapSlice = createSlice({
-  name: 'mapslice',
+  name: 'mapSlice',
   initialState,
   reducers: {
     setSelectedPhoto: (state, action) => {
@@ -31,8 +31,8 @@ export const { setSelectedPhoto, setSelectedMarker } =
   mapSlice.actions;
 
 export const selectSelectedPhoto = state =>
-  state.mapslice.selectedImg;
+  state.mapSlice.selectedImg;
 export const selectSelectedMarker = state =>
-  state.mapslice.selectedMarker;
+  state.mapSlice.selectedMarker;
 
 export default mapSlice.reducer;

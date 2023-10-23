@@ -21,15 +21,11 @@ export default function Photo() {
   const navigate = useNavigate();
   const { signatura } = useParams();
 
-  // const selectedImg = useSelector(selectSelectedPhoto);
-  // Use useSelector to access selectedPhotoIndex from the Redux store
+  const selectedImg = useSelector(selectSelectedPhoto);
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
 
   useEffect(() => {
-    // Fetch photos if not already loaded
     dispatch(getPhotos());
-
-    // No need to set selectedPhotoIndex here; it's managed in the Redux store
   }, [dispatch]);
 
   // Retrieve the selected photo
@@ -37,7 +33,6 @@ export default function Photo() {
   const selectedPhoto = photos[selectedPhotoIndex];
 
   if (!selectedPhoto) {
-    // Handle the case where the photo with the specified signatura is not found
     return <div>Photo not found</div>;
   }
 
@@ -50,7 +45,7 @@ export default function Photo() {
     // Dispatch an action to set the selected marker in Redux
     dispatch(setSelectedMarker(selectedImg.signatura));
     console.log(selectedImg.signatura);
-    // Navigate back to the map view
+
     navigate(`/mapa/${signatura}`);
   };
 
@@ -63,9 +58,9 @@ export default function Photo() {
         >
           natrag u galeriju
         </div>
-        {/* <div className="select-container" onClick={handleShowOnMap}>
+        <div className="select-container" onClick={handleShowOnMap}>
           pokaži na karti
-        </div> */}
+        </div>
       </div>
       <div className="image-wrapper">
         <FaChevronLeft
@@ -79,7 +74,7 @@ export default function Photo() {
         />
         <div className="img-cnt">
           <img
-            // style={{ maxWidth: '70vw' }}
+            className="img-photo"
             src={
               selectedPhoto
                 ? `${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`
