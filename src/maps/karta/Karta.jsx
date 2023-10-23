@@ -333,7 +333,8 @@ layers: "preklop_foto_katalog",
   
   return (
     <div className="gallery">
-<section>      <div className="naslov-container">
+<section>      
+  <div className="naslov-container">
         <h1>opservatorij</h1>
         <div className="line-div0" />
       </div>
@@ -346,19 +347,20 @@ layers: "preklop_foto_katalog",
         biste prilagodili prikaz prema vlastitim istraživačkim
         potrebama.
       </div>
+      </section>
+      <section>    
       <Hline color="#18aa00" height="2px" width="100%" />
-      </section><div>
-  <section>
+ 
 <MapContainer 
 center={[45.2, 16.2]}
 zoom={11}
 style={{
   width: '100%',
-  height: '80vh',
+  height: '100vh',
   
 }}
 zoomControl={false}
->    
+> 
 <ZoomControl position="bottomright" />
 <LayersControl
           collapsed={false}
@@ -495,10 +497,10 @@ zoomControl={false}
 
 <MyMarkers selectedIndex={selected} data={points} />
 </MapContainer>
-</section></div>
+</section>
+<section>
 <ListMarkers data={points} onItemClick={handleItemClick} />
 
-<section>
  <Footer/>
   
  </section>
