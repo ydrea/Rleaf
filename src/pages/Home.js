@@ -33,7 +33,6 @@ export default function Home() {
         {/* //Sections */}
         <section className="S1">
           <img src={diag} className="diag" />
-          <img src={gridHV} className="gridhv" />
           'Opservatorij krajobraza' je kolaborativna platforma koja
           okuplja znanstvenike i stručnjake različitih profila. U
           središtu naše pažnje je koncept krajobraza koji se sve više
@@ -49,6 +48,7 @@ export default function Home() {
           <div className="cont2">
             <div className="img-container">
               <section>
+                <img src={gridHV} className="gridhv" />
                 <img src="home2.png" className="img2" />
                 <div className="txt2">
                   <p>
@@ -97,7 +97,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
+      <div className="dno">
+        <Footer />
+      </div>
     </div>
   );
 }

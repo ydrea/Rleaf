@@ -33,7 +33,7 @@
   .pali {
     color: #fff;
     font-size: 9.6875rem;
-    z-index: 100;
+    /* z-index: 100; */
     position: absolute;
     display: flex;
     justify-content: center;
@@ -55,8 +55,9 @@
   
   .gridv, .gridh {
     position: absolute;
-    top: 0; left: 0; 
-    width: 100%;
+    top: 20%; 
+    /* left: 17.5vw; 
+    width: 65%; */
     object-fit: cover;
     height: auto;
     background-repeat: no-repeat;
@@ -79,13 +80,27 @@
   }
   
   .S1 {
-    padding-top: 50%;
-    padding-bottom: 9vh;
+    position: relative;
+    padding-top: 550px;
+    /* padding-bottom: 9vh; */
     margin-left: 17.5vw;
     margin-right: auto;
     width: 65%; 
     font-size: 1.6rem;
     color: #7e7e77;
+  }
+  .diag {
+    position: absolute;
+    top: 20%; 
+    /* left: 17.5vw; 
+    width: 75%; */
+    object-fit: cover;
+    height: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: grid;
+  
   }
   
   .img-container {
@@ -106,7 +121,9 @@
     background-size: cover;
     display: grid;
   }
-  
+  .gridhv {
+    position: absolute;
+  }
   .txt2 {
     font-size: 1.6rem;
      color: #fff;
