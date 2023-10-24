@@ -6,16 +6,15 @@
     flex-direction: column;
   min-height: 100vh;
   }
-  
   .home { flex-grow: 1;
   }
 
   .cont0 {
   display: flex;  
   justify-content: center;
-  /* position: relative; */
+  position: relative;
   
-  height: 15.75rem;
+  height: 100vh;
   flex-shrink: 0;
   }
   
@@ -54,6 +53,20 @@
     bottom: 2vh;
   }
   
+  .gridv, .gridh {
+    position: absolute;
+    top: 0; left: 0; 
+    width: 100%;
+    object-fit: cover;
+    height: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: grid;
+  }
+  .gridv {z-index: 4;}
+  .gridh {z-index: 2;}
+
   .line-div1 {
     border-top: 1px solid white;
     position: absolute;

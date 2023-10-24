@@ -3,7 +3,7 @@ import './home.css';
 import Footer from '../comps/Footer';
 import { Nav } from '../comps/Nav';
 import { useEffect, useState, useRef } from 'react';
-
+//
 import gridHV from '../assets/GRID H V.svg';
 import gridH from '../assets/GRID H.svg';
 import gridV from '../assets/GRID V.svg';
@@ -26,8 +26,8 @@ export default function Home() {
               Interdisciplinarna platforma posvećena istraživanju
               krajobraza i razvoju temeljenom na krajobrazu{' '}
             </div>
-            <img src={gridH} className="gridH" />
-            <img src={gridV} className="gridV" />
+            <img src={gridH} className="gridh" />
+            <img src={gridV} className="gridv" />
           </div>
         </section>
         {/* //Sections */}
