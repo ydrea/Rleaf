@@ -148,11 +148,9 @@ export default function Photos() {
         {photosToDisplay && photosToDisplay.length > 0 ? (
           photosToDisplay.map((photo, index) => (
             <div key={photo.id} className="photo">
-              {index && (
-                <div className="selected-div2">
-                  {removeFileExtension(photo.signatura)}
-                </div>
-              )}
+              <div className="selected-div2">
+                {removeFileExtension(photo.signatura)}
+              </div>
               <img
                 src={
                   process.env.REACT_APP_SERVER_PUB +
