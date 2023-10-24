@@ -13,14 +13,9 @@
   .cont0 {
   display: flex;  
   justify-content: center;
-  /* height: 33rem;  */
   /* position: relative; */
   
-  /* display: flex; */
-  /* width: 77.4375rem; */
   height: 15.75rem;
-  /* flex-direction: column; */
-  /* justify-content: center; */
   flex-shrink: 0;
   }
   

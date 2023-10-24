@@ -3,17 +3,12 @@ import './home.css';
 import Footer from '../comps/Footer';
 import { Nav } from '../comps/Nav';
 import { useEffect, useState, useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
 
-import {
-  Button,
-  Element,
-  Events,
-  scroller,
-  scrollSpy,
-  Link,
-} from 'react-scroll';
-
+import gridHV from '../assets/GRID H V.svg';
+import gridH from '../assets/GRID H.svg';
+import gridV from '../assets/GRID V.svg';
+import diag from '../assets/DIA G.svg';
+//
 //
 export default function Home() {
   const section1Ref = useRef(null);
@@ -31,11 +26,14 @@ export default function Home() {
               Interdisciplinarna platforma posvećena istraživanju
               krajobraza i razvoju temeljenom na krajobrazu{' '}
             </div>
+            <img src={gridH} className="gridH" />
+            <img src={gridV} className="gridV" />
           </div>
         </section>
-        {/* </div> */}
         {/* //Sections */}
-        <section className="S1" id="section1" ref={section1Ref}>
+        <section className="S1">
+          <img src={diag} />
+          <img src={gridHV} />
           'Opservatorij krajobraza' je kolaborativna platforma koja
           okuplja znanstvenike i stručnjake različitih profila. U
           središtu naše pažnje je koncept krajobraza koji se sve više
@@ -99,9 +97,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="dno">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }
