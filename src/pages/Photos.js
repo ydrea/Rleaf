@@ -127,71 +127,73 @@ export default function Photos() {
     <div className="gallery">
       {/* filter options */}
       {/* <div className="filters-container"> */}
-      <div className="select-container">
-        <KategorijeSelekt
-          kategorijeOptions={kategorijeOptions}
-          className="select"
-        />
-        <TagoviSelekt
-          tagoviOptions={tagoviOptions}
-          className="select"
-        />
-      </div>
-      {/* <div className="line-div2" /> */}
-      <Hline color="#18aa00" height="2px" width="100%" />
-      {/* Masonry */}
-      <Masonry
-        breakpointCols={breakpoints}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {photosToDisplay && photosToDisplay.length > 0 ? (
-          photosToDisplay.map((photo, index) => (
-            <div key={photo.id} className="photo">
-              {index && (
-                <div className="selected-div2">
-                  {removeFileExtension(photo.signatura)}
-                </div>
-              )}
-              <img
-                src={
-                  process.env.REACT_APP_SERVER_PUB +
-                  `/thumbs/${photo.signatura}`
-                }
-                alt={photo.naziv}
-                onClick={() => handlePhotoClick(index)}
-              />
-            </div>
-          ))
-        ) : (
-          <p>loading...</p>
-        )}
-      </Masonry>{' '}
-      {/* Pagination controls */}
-      <div className="pagination">
-        {currentPage > 1 && (
-          <button onClick={() => handlePageChange(currentPage - 1)}>
-            Prethodna
-          </button>
-        )}
+      <section>
+        <div className="select-container">
+          <KategorijeSelekt
+            kategorijeOptions={kategorijeOptions}
+            className="select"
+          />
+          <TagoviSelekt
+            tagoviOptions={tagoviOptions}
+            className="select"
+          />
+        </div>
+        {/* <div className="line-div2" /> */}
+        <Hline color="#18aa00" height="2px" width="100%" />
+        {/* Masonry */}
+        <Masonry
+          breakpointCols={breakpoints}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {photosToDisplay && photosToDisplay.length > 0 ? (
+            photosToDisplay.map((photo, index) => (
+              <div key={photo.id} className="photo">
+                {index && (
+                  <div className="selected-div2">
+                    {removeFileExtension(photo.signatura)}
+                  </div>
+                )}
+                <img
+                  src={
+                    process.env.REACT_APP_SERVER_PUB +
+                    `/thumbs/${photo.signatura}`
+                  }
+                  alt={photo.naziv}
+                  onClick={() => handlePhotoClick(index)}
+                />
+              </div>
+            ))
+          ) : (
+            <p>loading...</p>
+          )}
+        </Masonry>{' '}
+        {/* Pagination controls */}
+        <div className="pagination">
+          {currentPage > 1 && (
+            <button onClick={() => handlePageChange(currentPage - 1)}>
+              Prethodna
+            </button>
+          )}
 
-        {pageNumbers.map(pageNumber => (
-          <button
-            key={pageNumber}
-            onClick={() => handlePageChange(pageNumber)}
-            className={pageNumber === currentPage ? 'active' : ''}
-          >
-            {pageNumber}
-          </button>
-        ))}
+          {pageNumbers.map(pageNumber => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={pageNumber === currentPage ? 'active' : ''}
+            >
+              {pageNumber}
+            </button>
+          ))}
 
-        {photosToDisplay.length === photosPerPage && (
-          <button onClick={() => handlePageChange(currentPage + 1)}>
-            Sljedeća
-          </button>
-        )}
-      </div>
-      <Hline color="#7e7e77" height="2px" width="100%" />{' '}
+          {photosToDisplay.length === photosPerPage && (
+            <button onClick={() => handlePageChange(currentPage + 1)}>
+              Sljedeća
+            </button>
+          )}
+        </div>
+        <Hline color="#7e7e77" height="2px" width="100%" />{' '}
+      </section>{' '}
     </div>
   );
 }

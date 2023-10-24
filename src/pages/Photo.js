@@ -42,11 +42,10 @@ export default function Photo() {
 
   //
   const handleShowOnMap = () => {
-    // Dispatch an action to set the selected marker in Redux
-    dispatch(setSelectedMarker(selectedImg.signatura));
-    console.log(selectedImg.signatura);
+    dispatch(setSelectedMarker(selectedPhoto.signatura));
+    console.log(selectedPhoto.signatura);
 
-    navigate(`/mapa/${signatura}`);
+    navigate(`/maps/${selectedPhoto.signatura}`);
   };
 
   return (

@@ -42,21 +42,21 @@ import {
 } from 'leaflet-geosearch';
 
 // make new leaflet element
-const Search = props => {
-  const map = useMap(); // access to leaflet map
-  const { provider } = props;
+// const Search = props => {
+//   const map = useMap(); // access to leaflet map
+//   const { provider } = props;
 
-  useEffect(() => {
-    const searchControl = new GeoSearchControl({
-      provider,
-    });
-    console.log(props.query);
-    map.addControl(searchControl); //
-    return () => map.removeControl(searchControl);
-  }, [props]);
+//   useEffect(() => {
+//     const searchControl = new GeoSearchControl({
+//       provider,
+//     });
+//     console.log(props.query);
+//     map.addControl(searchControl); //
+//     return () => map.removeControl(searchControl);
+//   }, [props]);
 
-  return null; //
-};
+//   return null; //
+// };
 
 //fly
 
@@ -99,8 +99,7 @@ const ListMarkers = ({ onItemClick }) => {
     </div>
   );
 };
-
-const MyMarkers = ({ markeri, selectedImg, selectedIndex }) => {
+const MyMarkers = ({ markeri, selectedPhoto, selectedIndex }) => {
   if (!markeri) {
     return null;
   }
@@ -111,7 +110,7 @@ const MyMarkers = ({ markeri, selectedImg, selectedIndex }) => {
       content={item.popUp}
       center={{ lat: item.geocode[0], lng: item.geocode[1] }}
       openPopup={selectedIndex === index}
-      selectedImg={selectedImg}
+      selectedPhoto={selectedPhoto}
     />
   ));
 };
@@ -148,6 +147,7 @@ function Map() {
   const [markeri, markeriSet] = useState([]);
   const [selectedLayer, setSelectedLayer] = useState();
   const markerRef = useRef([]);
+  const { selectedPhoto } = useParams();
 
   const [selected, setSelected] = useState();
 
@@ -384,11 +384,10 @@ function Map() {
             <FiksniElementi />
 
             {/* Search */}
-
-            <Search
+            {/* <Search
               provider={new OpenStreetMapProvider()}
               style={{ zIndex: 1111 }}
-            />
+            /> */}
 
             {/* Overlays */}
             <Overlay key={adminna.id} name={adminna.name}>
@@ -505,7 +504,11 @@ function Map() {
             )
         )} */}
 
-          <MyMarkers selectedIndex={selected} data={markeri} />
+          <MyMarkers
+            selectedIndex={selected}
+            data={markeri}
+            selectedPhoto={selectedPhoto}
+          />
         </MapContainer>
       </section>
       <section>

@@ -56,11 +56,11 @@ const PhotosLayout = () => {
           {/* <div className="line-div1" />{' '} */}
         </div>
       </section>{' '}
+      <Outlet filteredPhotos={filteredPhotos} />{' '}
+      {/* This will render child routes */}
       <section>
-        <Outlet filteredPhotos={filteredPhotos} />{' '}
-        {/* This will render child routes */}
+        <Footer />
       </section>
-      <Footer />
     </div>
   );
 };
