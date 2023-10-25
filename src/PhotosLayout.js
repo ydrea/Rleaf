@@ -42,16 +42,16 @@ const PhotosLayout = () => {
         <div className="teka">
           <div className="tekast">
             {' '}
-            Fototeka predstavlja mjesto vizualne interpretacije i
-            opservacije, omogućavajući tako znanstvenu komparaciju i
-            sadržajnu usporedbu. Naš fotografski arhiv kroz različite
-            klasifikacije (kategorije i ključne riječi) omogućava
-            objektivne i znanstvene usporedbe subjekata koji dijele
-            slične vizualne karakteristike, ali omogućava i stvaranje
-            odnosa između sadržaja koji naizgled nemaju direktnu
-            vizualnu vezu. Stvaranjem fotografskih tipologija
-            istraživačima omogućavamo pronalaženje specifičnih stavki
-            unutar jasno definiranih kategorija.
+            Dobrodošli u fototeku, odabrani fotografski arhiv koji
+            kroz pretraživanje i klasifikaciju sadržaja omogućava
+            različite vrste stručnih i znanstvenih usporedbi. Kroz
+            različite kategorije poput arhitekture, ekologije,
+            gospodarstva, infrastrukture, poljoprivrede, prirodnih
+            resursa, spomenika, stanovništva, stočarstva, a pogotovo
+            kroz ključne riječi omogućeno je pretraživanje obimne
+            fotografske građe kojom se mogu analizirati grupni i
+            pojedinačni elementi unutar krajobraza, ali i sve
+            društvene kontradikcije koje iz njega proizlaze.{' '}
           </div>
           {/* <div className="line-div1" />{' '} */}
         </div>

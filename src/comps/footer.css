@@ -10,7 +10,7 @@
   min-height: fit-content;
   background-color: #DBDBDB;
   position: relative; 
-  bottom: -5rem;
+  /* bottom: -5rem; */
 }
 
 .footer p {

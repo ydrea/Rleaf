@@ -15,7 +15,6 @@ import {
   setSelectedMarker,
   selectSelectedPhoto,
 } from '../redux/rtk/mapSlice';
-import ScrollToHashElement from './ToHash';
 //
 export default function Photo() {
   const dispatch = useDispatch();
@@ -68,7 +67,6 @@ export default function Photo() {
           pokaži na karti
         </div> */}
       </div>
-      <ScrollToHashElement />
       <div className="image-wrapper">
         <FaChevronLeft
           className="prev"
@@ -79,7 +77,7 @@ export default function Photo() {
           }}
           disabled={selectedPhotoIndex === 0}
         />
-        <div className="img-cnt">
+        <div id="imgcnt" className="img-cnt">
           <img
             src={
               selectedPhoto

@@ -22,9 +22,8 @@ import { useEffect } from 'react';
 import Photos from './pages/Photos';
 import Photo from './pages/Photo';
 import Map from './maps/karta/Karta';
-// import MapWrapper from './maps/karta/showOnMap';
-// import Map from './pages/MapG';
-
+// import ScrollToHashElement from './ToHash';
+import ScrollToAnchor from './pages/ScrollToAnchor';
 function App() {
   //
 

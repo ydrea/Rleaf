@@ -89,7 +89,7 @@ export default function Photos() {
 
     dispatch(setSelectedPhotoIndex(originalIndex));
     showPhotoSet(true);
-    navigate(`/photos/${photos[originalIndex].signatura}`);
+    navigate(`/photos/${photos[originalIndex].signatura}#imgcnt`);
   };
 
   //
