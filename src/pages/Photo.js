@@ -15,6 +15,8 @@ import {
   setSelectedMarker,
   selectSelectedPhoto,
 } from '../redux/rtk/mapSlice';
+import Hline from '../comps/Line';
+
 //
 export default function Photo() {
   const dispatch = useDispatch();
@@ -136,7 +138,8 @@ export default function Photo() {
           }}
           disabled={selectedPhotoIndex === photos.length - 1}
         />
-      </div>
+      </div>{' '}
+      <Hline color="#7e7e77" height="2px" width="100%" />{' '}
     </div>
   );
 }

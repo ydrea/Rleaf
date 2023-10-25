@@ -7,12 +7,7 @@ const Banija = () => {
     <div className="P">
       <section>
         <div className="projects-container">
-          <img src="/proj1.jpg" />
-
-          <h1>
-            Opservatorij krajobraza
-            <br /> Banovine/Banije
-          </h1>
+          <img src="/projBanija.jpg" />
         </div>
       </section>
       <section>
