@@ -7,7 +7,7 @@
   right: 0; 
   z-index: 999;
   background-color: #d8d8d8;
-  height: 10vh;
+  height: 5vh;
   padding-bottom: 0;
 }
 
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 10vh;
+  height: 5vh;
   width: 100%; 
   position: relative;
   left: calc( 17.5vw - 2.5rem );
@@ -44,7 +44,7 @@ padding-inline-start: 0 !important;
 }
 .navline-div {
   position: absolute;
-  top: 60%; 
+  top: 100%; 
   box-sizing: border-box;
   width: 100%;
   height: 2px; 
@@ -117,7 +117,7 @@ padding-inline-start: 0 !important;
   color: #18aa00;
   text-decoration: none;
 }
-
+ 
 /* Style submenu links with href */
 .submenu-link {
   text-decoration: none;
