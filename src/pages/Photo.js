@@ -88,45 +88,6 @@ export default function Photo() {
             }
             alt={selectedPhoto.naziv}
           />
-          <div className="selected-div1">
-            {selectedPhoto.signatura && (
-              <>
-                <div className="t">signatura:</div>
-                <div className="d">{selectedPhoto.signatura}</div>
-              </>
-            )}
-            {selectedPhoto.kategorija && (
-              <>
-                <div className="t">kategorija:</div>
-                <div className="d">{selectedPhoto.kategorija}</div>
-              </>
-            )}{' '}
-            {selectedPhoto.lokacija && (
-              <>
-                <div className="t">lokacija:</div>
-                <div className="d">{selectedPhoto.lokacija}</div>
-              </>
-            )}
-            {selectedPhoto.opis && (
-              <>
-                <div className="t">opis:</div>
-                <div className="d">{selectedPhoto.opis}</div>
-              </>
-            )}
-            {selectedPhoto.autor && (
-              <>
-                <div className="t">autor:</div>
-                <div className="d">{selectedPhoto.autor}</div>
-              </>
-            )}
-            {selectedPhoto.tagovi && (
-              <div className="tag">
-                {/* <div className="rep"> */}
-                ključne riječi | {selectedPhoto.tagovi}
-                {/* </div> */}
-              </div>
-            )}
-          </div>
         </div>
 
         <FaChevronRight
@@ -139,6 +100,45 @@ export default function Photo() {
           disabled={selectedPhotoIndex === photos.length - 1}
         />
       </div>{' '}
+      <div className="selected-div1">
+        {selectedPhoto.signatura && (
+          <>
+            <div className="t">signatura:</div>
+            <div className="d">{selectedPhoto.signatura}</div>
+          </>
+        )}
+        {selectedPhoto.kategorija && (
+          <>
+            <div className="t">kategorija:</div>
+            <div className="d">{selectedPhoto.kategorija}</div>
+          </>
+        )}{' '}
+        {selectedPhoto.lokacija && (
+          <>
+            <div className="t">lokacija:</div>
+            <div className="d">{selectedPhoto.lokacija}</div>
+          </>
+        )}
+        {selectedPhoto.opis && (
+          <>
+            <div className="t">opis:</div>
+            <div className="d">{selectedPhoto.opis}</div>
+          </>
+        )}
+        {selectedPhoto.autor && (
+          <>
+            <div className="t">autor:</div>
+            <div className="d">{selectedPhoto.autor}</div>
+          </>
+        )}
+        {selectedPhoto.tagovi && (
+          <div className="tag">
+            {/* <div className="rep"> */}
+            ključne riječi | {selectedPhoto.tagovi}
+            {/* </div> */}
+          </div>
+        )}
+      </div>
       <Hline color="#7e7e77" height="2px" width="100%" />{' '}
     </div>
   );
