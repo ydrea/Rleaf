@@ -54,6 +54,7 @@
   }
   
   .gridv, .gridh {
+    visibility: hidden;
     position: absolute;
     top: 5vh; left: 0; 
     width: 75%;
@@ -79,18 +80,20 @@
     z-index: 4;
   }
    .diag {
+    visibility: hidden;
     width: 75%;
     margin-left: 17.5vw;
     position: relative;
-    left: 0; top: 0vh;
+    left: 0; top: -8.5vh;
    }
 
    .gridhv {
-z-index: 8;
+    visibility: hidden;
+    z-index: 8;
     width: 75%;
     margin-left: 17.5vw;
     position: relative;
-    left: 0; top: -.5vh;
+    left: 0; top: -5vh;
 
    }
   .S1 {
