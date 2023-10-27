@@ -55,14 +55,14 @@ padding-inline-start: 0 !important;
     z-index: 3333;
     position: fixed;
     left: 12.5vw;
-    top: 40px; 
+    top: 340px; 
     box-sizing: border-box;
     width: 1440px;
     height: 3px; 
     background-color: red;
     display: none;
     justify-self: center;
-    align-self: center; 
+    align-self: center;
     }
 
 

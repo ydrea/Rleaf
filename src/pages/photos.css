@@ -217,7 +217,7 @@ display: block;
     font-style: normal;
     font-weight: 500;
     line-height: 140%; /* 13.5625rem */
-    /* letter-spacing: 0.53281rem; */
+    letter-spacing: 0.53281rem;
   }
 
   .teka {
