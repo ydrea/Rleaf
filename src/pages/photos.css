@@ -176,7 +176,7 @@ margin-top: 40px;
 } */
 
 .grey {
-display: block;
+  display: block;
   position: absolute; top: 0;
   border-top: 3px solid grey;
   width: 100rem; z-index: 1111;
@@ -203,7 +203,7 @@ display: block;
     /* letter-spacing: .047em; */
     /* font-size: 10vw; */
     /* font-weight: 100; */
-    margin-top: 10vh;
+    margin-top: 5vh;
     margin-left: 17.5vw;
     color: #fff;  
     /* display: flex; */
@@ -216,7 +216,7 @@ display: block;
     font-size: 9.6875rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 140%; /* 13.5625rem */
+    /* line-height: 140%; */
     letter-spacing: 0.53281rem;
   }
 

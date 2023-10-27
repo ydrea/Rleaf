@@ -4,13 +4,14 @@ import Footer from '../../comps/Footer';
 const Ewap = () => {
   return (
     <div className="P">
-      <section>
-        <div className="projects-container">
+      <div className="projects-container">
+        <section>
           <img src="/projEWAP.jpeg" />
-        </div>
-      </section>{' '}
-      <section>
-        <div className="tekst">
+        </section>{' '}
+      </div>
+      <div className="tekst">
+        <section>
+          {' '}
           <p>
             {' '}
             Projekt EWAP: Ugrožena drvena arhitektura Banovine/Banije,
@@ -43,8 +44,8 @@ const Ewap = () => {
           , a na interaktivnoj karti na stranicama Opservatorija naći
           će se fotografije kuća, okućnica i naselja obrađivanih kroz
           projekt.
-        </div>
-      </section>
+        </section>
+      </div>
       <Footer style={{ position: 'absolute', bottom: '0' }} />{' '}
     </div>
   );

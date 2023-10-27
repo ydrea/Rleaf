@@ -5,14 +5,13 @@ import './projects.css';
 const Banija = () => {
   return (
     <div className="P">
-      <section>
-        <div className="projects-container">
+      <div className="projects-container">
+        <section>
           <img src="/projBanija.jpg" />
-        </div>
-      </section>
-      <section>
-        {' '}
-        <div className="tekst">
+        </section>
+      </div>
+      <div className="tekst">
+        <section>
           <p>
             Opservatorij krajobraza Banovine/Banije je pilot projekt
             šireg programa Opservatorija, a njegova je svrha uspostava
@@ -47,8 +46,8 @@ const Banija = () => {
             krajobraza Banovine/Banije podržali su Srpsko narodno
             vijeće i Ministarstvo kulture i medija RH.
           </p>
-        </div>
-      </section>
+        </section>
+      </div>
       <Footer style={{ position: 'absolute', bottom: '0' }} />
     </div>
   );
