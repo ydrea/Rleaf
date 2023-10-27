@@ -4,6 +4,7 @@ import Footer from '../comps/Footer';
 import { Nav } from '../comps/Nav';
 import { useEffect, useState, useRef } from 'react';
 //
+import Hline from '../comps/Line';
 import gridHV from '../assets/GRID H V.svg';
 import gridH from '../assets/GRID H.svg';
 import gridV from '../assets/GRID V.svg';
@@ -31,19 +32,22 @@ export default function Home() {
           </div>
         </section>
         {/* //Sections */}
-        <section className="S1">
+        <section>
           <img src={diag} className="diag" />
           <img src={gridHV} className="gridhv" />
-          'Opservatorij krajobraza' je kolaborativna platforma koja
-          okuplja znanstvenike i stručnjake različitih profila. U
-          središtu naše pažnje je koncept krajobraza koji se sve više
-          prepoznaje kao ključna komponenta globalnog nasljeđa i
-          održivog razvoja. Uspostavljen zbog nedovoljne istraženosti,
-          neprisutnosti podataka, niskog stupnja svijesti o
-          karakteristikama te sveukupnoj neiskorištenosti potencijala
-          hrvatskog krajobraza. Naša misija je pružiti integralan
-          pristup razumijevanju, prezentaciji i očuvanju krajobraza te
-          promišljati razvoj temeljen na krajobrazu.
+          <div className="S1">
+            {' '}
+            'Opservatorij krajobraza' je kolaborativna platforma koja
+            okuplja znanstvenike i stručnjake različitih profila. U
+            središtu naše pažnje je koncept krajobraza koji se sve
+            više prepoznaje kao ključna komponenta globalnog nasljeđa
+            i održivog razvoja. Uspostavljen zbog nedovoljne
+            istraženosti, neprisutnosti podataka, niskog stupnja
+            svijesti o karakteristikama te sveukupnoj neiskorištenosti
+            potencijala hrvatskog krajobraza. Naša misija je pružiti
+            integralan pristup razumijevanju, prezentaciji i očuvanju
+            krajobraza te promišljati razvoj temeljen na krajobrazu.
+          </div>
         </section>
         <div className="S2" id="section2" ref={section2Ref}>
           <div className="cont2">
@@ -96,8 +100,11 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* <Hline color="#7e7e77" height="2px" width="100%" />{' '} */}
+      </div>{' '}
+      <div className="dno">
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }

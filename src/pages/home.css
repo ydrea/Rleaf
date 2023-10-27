@@ -55,8 +55,9 @@
   
   .gridv, .gridh {
     position: absolute;
-    top: 0; left: 0; 
-    width: 100%;
+    top: 5vh; left: 0; 
+    width: 75%;
+    margin-left: 17.5vw;
     object-fit: cover;
     height: auto;
     background-repeat: no-repeat;
@@ -77,9 +78,23 @@
     margin-top: -0.40rem;
     z-index: 4;
   }
-  
+   .diag {
+    width: 75%;
+    margin-left: 17.5vw;
+    position: relative;
+    left: 0; top: 0vh;
+   }
+
+   .gridhv {
+z-index: 8;
+    width: 75%;
+    margin-left: 17.5vw;
+    position: relative;
+    left: 0; top: -.5vh;
+
+   }
   .S1 {
-    padding-top: 50%;
+    margin-top: -68.7%;
     padding-bottom: 9vh;
     margin-left: 17.5vw;
     margin-right: auto;
@@ -196,7 +211,7 @@
   .dno {
     position: absolute;
     display: block;
-    bottom: -190rem;
+    bottom: -200rem;
     left: 30%;
   }
   }
@@ -245,7 +260,7 @@
 }
 .dno {
   position: absolute;
-  top: 260%;
+  top: 220%;
 }
 
 }

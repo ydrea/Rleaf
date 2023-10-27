@@ -11,7 +11,7 @@ export default function Footer() {
           {' '}
           <img src={logo} alt="Logo" className="logo" />
           <p className="roll">
-            Opservatorij krajobraza, YYYY
+            Opservatorij krajobraza, 2023.
             <br />
             Uvjeti korištenja: Sve fotografije i tekstovi objavljeni
             na ovom portalu podliježu CC BY-NC-SA 4.0 licenci. Ova

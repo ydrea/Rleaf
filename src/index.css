@@ -12,5 +12,5 @@ html, body, #root {
  color: #7e7e77;
   background-color: #DBDBDB;/* color: #fff; */
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }

@@ -3,13 +3,13 @@
     flex-direction: column;
  }
  
- .image-wrapper {
-  display: flex;
-  flex-direction: column;
-   /* margin-left: 17.5%; */
+ .image-wrapper { 
+  /* display: flex;
+  flex-direction: column; */
+   margin-left: 17.5vw;
    /* display: inline-block; */
-   align-items: center;
-   justify-content: center;
+   /* align-items: center;
+   justify-content: center; */
    position: relative;
  }
 
