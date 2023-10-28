@@ -1,25 +1,25 @@
 .navbar {
-  justify-content: flex-start;
-  align-items: flex-start;
+  /* justify-content: flex-start;
+  align-items: flex-start; */
   position: fixed;
   top: 0;
   left: 0;
   right: 0; 
   z-index: 999;
   background-color: #d8d8d8;
-  height: 5vh;
+  height: 6vh;
   padding-bottom: 0;
 }
 
 .navbar-container {
   background-color: rgba(140, 141, 133, 0);
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: 5vh;
-  width: 100%; 
-  position: relative;
-  left: calc( 17.5vw - 2.5rem );
+  justify-content: center;
+  align-items: center;
+  height: 6vh;
+  width: 64%; 
+  position: relative; 
+  left: 17.5%;
   }
 
 .fa-typo3 {

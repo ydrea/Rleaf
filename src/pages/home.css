@@ -1,30 +1,23 @@
 
 /* For larger screens (desktop) */
 @media screen and (min-width: 1200px) {
-  .content {
-    display: flex;
-    flex-direction: column;
-  min-height: 100vh;
-  }
-  .home { flex-grow: 1;
-  }
-
-  .cont0 {
-  display: flex;  
-  justify-content: center;
-  position: relative;
-  
-  height: 100vh;
-  flex-shrink: 0;
+.home {display: block;}
+  .cont0, .cont1 {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+    /* margin-left: 17.5%; */
+  /* height: 100vh; */
   }
   
   .vozi {
     color: #fff;
     font-size: 9.6875rem;
-    width: 64vw;  z-index: 3;
-    position: absolute; top: 25vh;
-    display: flex;
-    justify-content: center;
+    width: 75vw;  
+    z-index: 3;
+    text-align: center;
+    margin-top: 15vh;
     font-weight: 500;
     line-height: 140%; 
     letter-spacing: 0.53281rem;
@@ -33,34 +26,31 @@
   .pali {
     color: #fff;
     font-size: 9.6875rem;
-    z-index: 100;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    width: 64vw;  z-index: 3;
-    top: 50vh;
-    font-style: normal;
+    width: 64vw;
+    z-index: 3;
+    text-align: center;
     font-weight: 500;
     line-height: 140%; /* 13.5625rem */
     letter-spacing: 0.53281rem;
   }
   .podnaslov {
-    position: absolute;
-    width: 64vw;  z-index: 3;
-    font-size: 1.15rem;
-    display: flex;
-    justify-content: center;
-    bottom: 2vh;
+    font-size: 1.2rem;
+    width: 75vw;
+    text-align: center;
+    margin-top: 11%;
   }
-  
+  .gridcnt {
+    position: relative;
+    top: -17vh; left: 0; 
+}
   .gridv, .gridh {
-    visibility: hidden;
+    /* visibility: hidden; */
     position: absolute;
-    top: 5vh; left: 0; 
-    width: 75%;
-    margin-left: 17.5vw;
+    /* top: -.4vh; left: 0;  */
+    width: 100%;
+    /* margin-left: 17.5vw; */
     object-fit: cover;
-    height: auto;
+    /* height: auto; */
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -76,24 +66,30 @@
     box-sizing: border-box;
     width: 100%;
     height: 0.6rem;
-    margin-top: -0.40rem;
+    margin-top: 0.40rem;
     z-index: 4;
   }
    .diag {
     visibility: hidden;
     width: 75%;
-    margin-left: 17.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    /* margin-left: 17.5vw;
     position: relative;
-    left: 0; top: -8.5vh;
+    left: 0; top: -8.5vh; */
    }
 
    .gridhv {
-    visibility: hidden;
+    /* visibility: hidden; */
     z-index: 8;
     width: 75%;
+    height: 74%;
     margin-left: 17.5vw;
     position: relative;
-    left: 0; top: -5vh;
+    left: 0; top: 0;
 
    }
   .S1 {
@@ -101,14 +97,17 @@
     padding-bottom: 9vh;
     margin-left: 17.5vw;
     margin-right: auto;
-    width: 65%; 
+    width: 64%; 
     font-size: 1.6rem;
     color: #7e7e77;
   }
   
   .img-container {
-    position: relative;
-    max-width: 75vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+        max-width: 75vw;
     padding-left: 17.5vw;
   
   }
@@ -130,7 +129,7 @@
      color: #fff;
      position: absolute;
      /* padding-right: 1rem; */
-     right: 3vw;
+     right: 8vw;
      text-align: left;
      z-index: 33;
      max-width: 33vw;
@@ -142,7 +141,7 @@
    }
    
   .img3 {
-    margin-left: 17.5% !important;
+    margin-left: 17.5%;
     width: 35%; 
     height: auto;
   }
@@ -150,16 +149,16 @@
   .txt3 {
     font-size: 1.6rem;
     color: #7e7e77;
-    position: absolute;
-    bottom: -109vh; 
-    left: 54vw; 
-    /* max-width: 25vw; */
-    margin-left: 1vw;
-    /* margin-right: 4vw; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+     margin-left: 45vw;
+    margin-right: auto;
     text-align: left;
   }
   .ena {
-  width: 26vw;
+  width: 35vw;
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
@@ -192,12 +191,13 @@
     line-height: 140%;
     letter-spacing: 0.01375rem;
     }
-    
+/*     
   .S2 {
     height: 55.2rem;
     align-items: center;
   }
-  
+  */
+   
    .cont2 {
     position: relative;
     height: 55.2rem;
@@ -209,8 +209,7 @@
     margin-left: 10vw;
     height: 35rem;
     width: 45%;
-  }
-   
+  } 
   .dno {
     position: absolute;
     display: block;

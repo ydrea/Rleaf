@@ -20,6 +20,11 @@ export default function Home() {
     <div className="gallery">
       <div className="home">
         <section>
+          <div className="gridcnt">
+            {' '}
+            <img src={gridH} className="gridh" />
+            <img src={gridV} className="gridv" />
+          </div>
           <div className="cont0">
             <div className="vozi">opservatorij</div>
             <div className="pali">krajobraza </div>
@@ -27,11 +32,10 @@ export default function Home() {
               Interdisciplinarna platforma posvećena istraživanju
               krajobraza i razvoju temeljenom na krajobrazu{' '}
             </div>
-            <img src={gridH} className="gridh" />
-            <img src={gridV} className="gridv" />
           </div>
         </section>
         {/* //Sections */}
+
         <section>
           <img src={diag} className="diag" />
           <img src={gridHV} className="gridhv" />
