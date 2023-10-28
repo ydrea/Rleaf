@@ -37,8 +37,6 @@ export default function Home() {
         {/* //Sections */}
 
         <section>
-          <img src={diag} className="diag" />
-          <img src={gridHV} className="gridhv" />
           <div className="S1">
             {' '}
             'Opservatorij krajobraza' je kolaborativna platforma koja
@@ -53,9 +51,11 @@ export default function Home() {
             krajobraza te promišljati razvoj temeljen na krajobrazu.
           </div>
         </section>
-        <div className="S2" id="section2" ref={section2Ref}>
+        <div className="S2" id="section2">
           <div className="cont2">
             <div className="img-container">
+              <img src={diag} className="diag" />
+              <img src={gridHV} className="gridhv" />
               <section>
                 <img src="home2.png" className="img2" />
                 <div className="txt2">
