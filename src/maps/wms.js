@@ -21,16 +21,16 @@ export const TemaEWAP = () => {
   return <>{<WMSTileLayer url={url} {...wmsLayerOptions} />}</>;
 };
 
-// https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_hidrologija
-export const PodRH = () => {
+// https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_dark
+export const PodRd = () => {
   const [legendUrl, setLegendUrl] = useState(
-    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_hidrologija&TRANSPARENT=true'
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_dark&TRANSPARENT=true'
   );
   const url =
     'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1401309.737,5146724.677,2219713.38,5899537.848&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE';
 
   const wmsLayerOptions = {
-    layers: 'podloge_reljef_hidrologija',
+    layers: 'podloge_reljef_dark',
     format: 'image/png',
     transparent: true,
     version: '1.3.0',
@@ -70,7 +70,178 @@ export const PodRH = () => {
       >
         {/* <img
           src={legendUrl}
-          alt="Legend for podloge_reljef_hidrologija"
+          alt="Legend for podloge_reljef_dark"
+        /> */}
+      </div>
+    </>
+  );
+};
+//
+
+// https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_visine
+export const PodRvi = () => {
+  const [legendUrl, setLegendUrl] = useState(
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_visine&TRANSPARENT=true'
+  );
+  const url =
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1401309.737,5146724.677,2219713.38,5899537.848&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE';
+
+  const wmsLayerOptions = {
+    layers: 'podloge_reljef_visine',
+    format: 'image/png',
+    transparent: true,
+    version: '1.3.0',
+    attribution: 'WMS Service Attribution',
+  };
+  useEffect(() => {
+    const fetchLegend = async () => {
+      try {
+        const response = await axios.get(legendUrl, {
+          responseType: 'blob',
+        });
+        const legendImageUrl = URL.createObjectURL(response.data);
+        setLegendUrl(legendImageUrl);
+      } catch (error) {
+        console.error('Error fetching legend:', error);
+      }
+    };
+
+    fetchLegend(); // Trigger the fetchLegend function when the component mounts.
+  }, []);
+
+  return (
+    <>
+      {' '}
+      {<WMSTileLayer url={url} {...wmsLayerOptions} />}
+      <div
+        style={{
+          background: 'transparent',
+          maxWidth: 'auto',
+          maxHeight: '60vh',
+          position: 'absolute',
+          top: '0vh',
+          left: '1vw',
+          // paddingRight: '5vw',
+          zIndex: '1000',
+        }}
+      >
+        {/* <img
+          src={legendUrl}
+          alt="Legend for podloge_reljef_visine"
+        /> */}
+      </div>
+    </>
+  );
+};
+
+//
+
+// https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_vanilla_hs
+export const PodRV = () => {
+  const [legendUrl, setLegendUrl] = useState(
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_reljef_vanilla_hs&TRANSPARENT=true'
+  );
+  const url =
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1401309.737,5146724.677,2219713.38,5899537.848&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE';
+
+  const wmsLayerOptions = {
+    layers: 'podloge_reljef_vanilla_hs',
+    format: 'image/png',
+    transparent: true,
+    version: '1.3.0',
+    attribution: 'WMS Service Attribution',
+  };
+  useEffect(() => {
+    const fetchLegend = async () => {
+      try {
+        const response = await axios.get(legendUrl, {
+          responseType: 'blob',
+        });
+        const legendImageUrl = URL.createObjectURL(response.data);
+        setLegendUrl(legendImageUrl);
+      } catch (error) {
+        console.error('Error fetching legend:', error);
+      }
+    };
+
+    fetchLegend(); // Trigger the fetchLegend function when the component mounts.
+  }, []);
+
+  return (
+    <>
+      {' '}
+      {<WMSTileLayer url={url} {...wmsLayerOptions} />}
+      <div
+        style={{
+          background: 'transparent',
+          maxWidth: 'auto',
+          maxHeight: '60vh',
+          position: 'absolute',
+          top: '0vh',
+          left: '1vw',
+          // paddingRight: '5vw',
+          zIndex: '1000',
+        }}
+      >
+        {/* <img
+          src={legendUrl}
+          alt="Legend for podloge_reljef_vanilla_hs"
+        /> */}
+      </div>
+    </>
+  );
+};
+//
+// https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_kartografija
+export const PodK = () => {
+  const [legendUrl, setLegendUrl] = useState(
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=podloge_kartografija&TRANSPARENT=true'
+  );
+  const url =
+    'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1401309.737,5146724.677,2219713.38,5899537.848&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE';
+
+  const wmsLayerOptions = {
+    layers: 'podloge_kartografija',
+    format: 'image/png',
+    transparent: true,
+    version: '1.3.0',
+    attribution: 'WMS Service Attribution',
+  };
+  useEffect(() => {
+    const fetchLegend = async () => {
+      try {
+        const response = await axios.get(legendUrl, {
+          responseType: 'blob',
+        });
+        const legendImageUrl = URL.createObjectURL(response.data);
+        setLegendUrl(legendImageUrl);
+      } catch (error) {
+        console.error('Error fetching legend:', error);
+      }
+    };
+
+    fetchLegend(); // Trigger the fetchLegend function when the component mounts.
+  }, []);
+
+  return (
+    <>
+      {' '}
+      {<WMSTileLayer url={url} {...wmsLayerOptions} />}
+      <div
+        style={{
+          background: 'transparent',
+          maxWidth: 'auto',
+          maxHeight: '60vh',
+          position: 'absolute',
+          top: '0vh',
+          left: '1vw',
+          // paddingRight: '5vw',
+          zIndex: '1000',
+        }}
+      >
+        {/* <img
+          src={legendUrl}
+          alt="Legend for podloge_kartografija"
         /> */}
       </div>
     </>

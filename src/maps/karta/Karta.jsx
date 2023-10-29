@@ -22,12 +22,10 @@ import { Link, useParams } from 'react-router-dom';
 import Footer from '../../comps/Footer';
 import { useSelector } from 'react-redux';
 
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-
 import "react-tabs/style/react-tabs.css";
 import {
     ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
-    PodRH, TemaZP, TemaP, //TemaS
+    PodRV, PodRvi, PodRd, PodK, TemaZP, TemaP, //TemaS
   } from '../wms';
 
   // import { Map} from 'react-leaflet'
@@ -283,11 +281,11 @@ layers: "tema_potres",
     }
   }
   
-  const temada = {
+  const temadz = {
     id: '781',
-    name: 'drvena arhitektura',
+    name: 'drvene zgrade',
     url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
-layers: "tema_drvena_arhitektura",
+layers: "preklop_drvene_zgrade",
     props: {
       version: "1.1",
       format: "image/png",
@@ -364,19 +362,31 @@ zoomControl={false}
 <ZoomControl position="bottomright" />
 <LayersControl
           collapsed={false}
-> 
-<BaseLayer checked name="OSM">
+>
+
+  
+          <BaseLayer checked name="topografija">
+            <PodK />
+          </BaseLayer> 
+<BaseLayer  name="reljef vanilija">
+            {/* <TileLayer url="podloge_reljef_vanilla_hs" /> */}
+<PodRV/>          
+</BaseLayer>
+<BaseLayer name="OSM">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           </BaseLayer>
  
-          <BaseLayer name="podloge_reljef_hidrologija">
-            <PodRH />
+          <BaseLayer name="podloge_reljef_dark">
+            <PodRd />
+          </BaseLayer>
+          <BaseLayer name="podloge_reljef_visine">
+            <PodRvi />
           </BaseLayer>
           <FiksniElementi />
 
   {/* Search */}
 
-          <Search provider={new OpenStreetMapProvider()} style={{zIndex: 1111}} />
+          {/* <Search provider={new OpenStreetMapProvider()} style={{zIndex: 1111}} /> */}
 
 
   {/* Overlays */}
@@ -436,13 +446,13 @@ zoomControl={false}
     />
     </Overlay>
 
-    <Overlay key={temada.id} name={temada.name}>
+    <Overlay key={temadz.id} name={temadz.name}>
     <BetterWMS
-      key={temada.id}
-       id={temada.id}
-      url={temada.url}
-   layers={temada.layers}
-       {...temada.props}
+      key={temadz.id}
+       id={temadz.id}
+      url={temadz.url}
+   layers={temadz.layers}
+       {...temadz.props}
     />
     </Overlay>
     {/* <Overlay key={temafk.id} name={temafk.name}>
