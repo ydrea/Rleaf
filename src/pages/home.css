@@ -2,24 +2,23 @@
 /* For larger screens (desktop) */
 @media screen and (min-width: 1200px) {
 .home {
-display: block;
-/* display: inline; */
-  /* max-width: 100% !important; */
-/* overflow: hidden; */
+display: flex;
+flex-direction: column;
+/* align-items: center; */
+justify-content: center;
 }
 
 .S0 {
 display: flex;
 flex-direction: column;
-align-items: center;
+/* align-items: center; */
 justify-content: center;
-
   }
   
   .vozi {
     color: #fff;
     font-size: 9.6875rem;
-    width: 75vw;  
+    /* width: 75vw;   */
     z-index: 3;
     text-align: center;
     margin-top: 15vh;
@@ -29,10 +28,9 @@ justify-content: center;
   }
   
   .pali {
-    
     color: #fff;
     font-size: 9.6875rem;
-    width: 64vw;
+    /* width: 64vw; */
     z-index: 3;
     text-align: center;
     font-weight: 500;
@@ -43,25 +41,35 @@ justify-content: center;
     font-size: 1.2rem;
     width: 70vw;
     text-align: center;
-    margin-top: 13%;
+    margin-top: 10%;
   }
-  .gridcnt {
 
+  .gri-cnt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
     position: relative;
-    top: 10%; 
-    left: 17.5%; 
+    top: 5.1vh; 
+    /* left: 17.5%;  */
 
   }
-  .gridv, .gridh {
+  .griv, .grih {
     position: absolute;
-    top: 6vh; left: 0; 
-    max-width: 65%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  /*     
+      top: 6vh; left: 0;  */
+    max-width: 75%;
     object-fit: cover;
     height: auto;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    display: grid;
+    display: flex;
   }
   .gridv {z-index: 4;}
   .gridh {z-index: 2;}
