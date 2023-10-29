@@ -40,17 +40,24 @@ justify-content: center;
     margin-top: 11%;
   }
   .gridcnt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    top: -17vh; left: 0; 
+    top: 10%; 
+    left: 17.5vw; 
 }
   .gridv, .gridh {
-    /* visibility: hidden; */
-    position: absolute;
-    /* top: -.4vh; left: 0;  */
-    width: 100%;
-    /* margin-left: 17.5vw; */
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+        position: absolute;
+    top: 6vh; left: 0; 
+    width: 65%;
     object-fit: cover;
-    /* height: auto; */
+    height: auto;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -69,26 +76,18 @@ justify-content: center;
     margin-top: 0.40rem;
     z-index: 4;
   }
-   .diag {
-     /* visibility: hidden; */
-    width: 75%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
     /* margin-left: 17.5vw;
     position: relative;
     left: 0; top: -8.5vh; */
-   }
+      
 
-
-  .S1 {
-    margin-top: -68.7%;
-    padding-bottom: 9vh;
+   .S1 {
+    margin-top: 50vh;
+    padding-bottom: 5vh;
     margin-left: 17.5vw;
-    margin-right: auto;
-    width: 64%; 
+    /* padding-left: 1vw; */
+    /* margin-right: auto; */
+    width: 65%; 
     font-size: 1.6rem;
     color: #7e7e77;
   }
@@ -98,20 +97,23 @@ justify-content: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-        max-width: 75vw;
-    padding-left: 17.5vw;
-  position: relative;
+        /* max-width: 75vw; */
+    padding-left: 12vw;
+  position: relative; 
+    
   }
-  .gridhv {
-    /* visibility: hidden; */
-    z-index: 8;
-    width: 75%;
-    height: 74%;
-    margin-left: 17.5vw;
-    position: absolute;
-    left: 0; top: -20vh;
-
-   }  
+  /* ... Other CSS rules ... */
+  .S2 {
+    height: 55.2rem;
+    align-items: center;
+  }
+ 
+   
+   .cont2 {
+    position: relative;
+    height: 55.2rem;
+  } 
+  
   .img2 {
     /* position: relative;  */
     width: 75vw;
@@ -122,24 +124,39 @@ justify-content: center;
     background-size: cover;
     display: grid;
   }
-  
-  .txt2 {
+
+  .gridhv {
+    z-index: 8;
+    width: 75%;
+    height: auto;
+    position: absolute;
+        left: 17.5; top: 0;
+   }
+
+   .txt2 {
     font-size: 1.6rem;
      color: #fff;
      position: absolute;
      /* padding-right: 1rem; */
-     right: 8vw;
+     right: 9vw;
      text-align: left;
      z-index: 33;
      max-width: 33vw;
      width: 100%;
-     bottom: 15%;
+     bottom: 15vh;
    }
    .txt2 p {
     margin: 0.5;
    }
    
-  .img3 {
+   .cont3 {
+    position: absolute;
+    bottom: -28.5rem;
+    margin-left: 10vw;
+    height: 35rem;
+    width: 45%;
+  } 
+   .img3 {
     margin-left: 17.5%;
     width: 35%; 
     height: auto;
@@ -153,7 +170,7 @@ justify-content: center;
     align-items: center;
     justify-content: center;
      margin-left: 45vw;
-    margin-right: auto;
+    /* margin-right: auto; */
     text-align: left;
   }
   .ena {
@@ -190,30 +207,14 @@ justify-content: center;
     line-height: 140%;
     letter-spacing: 0.01375rem;
     }
-/*     
-  .S2 {
-    height: 55.2rem;
-    align-items: center;
-  }
-  */
-   
-   .cont2 {
-    position: relative;
-    /* height: 55.2rem; */
-  } 
+    
   
-  .cont3 {
-    position: absolute;
-    bottom: -28.5rem;
-    margin-left: 10vw;
-    height: 35rem;
-    width: 45%;
-  } 
+
   .dno {
-    position: absolute;
+    /* position: relative; */
     display: block;
-    bottom: -200rem;
-    left: 30%;
+    padding-top: 100rem;
+    /* left: 30%; */
   }
   }
 
