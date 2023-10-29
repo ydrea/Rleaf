@@ -53,7 +53,7 @@ justify-content: center;
     flex-direction: column;
     align-items: center;
     justify-content: center; */
-        position: absolute;
+    position: absolute;
     top: 6vh; left: 0; 
     width: 65%;
     object-fit: cover;
@@ -97,21 +97,18 @@ justify-content: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-        /* max-width: 75vw; */
     padding-left: 12vw;
-  position: relative; 
-    
-  }
-  /* ... Other CSS rules ... */
-  .S2 {
-    height: 55.2rem;
+    position: relative; 
+    }
+  
+    .S2 {
+    /* height: 55.2rem; */
     align-items: center;
   }
- 
    
    .cont2 {
-    position: relative;
-    height: 55.2rem;
+    /* position: relative; */
+    /* height: 55.2rem; */
   } 
   
   .img2 {
@@ -137,8 +134,7 @@ justify-content: center;
     font-size: 1.6rem;
      color: #fff;
      position: absolute;
-     /* padding-right: 1rem; */
-     right: 9vw;
+     left: 59vw;
      text-align: left;
      z-index: 33;
      max-width: 33vw;
@@ -149,12 +145,9 @@ justify-content: center;
     margin: 0.5;
    }
    
-   .cont3 {
-    position: absolute;
-    bottom: -28.5rem;
-    margin-left: 10vw;
-    height: 35rem;
-    width: 45%;
+   .S3 {
+    display: flex;
+    flex-direction: column;
   } 
    .img3 {
     margin-left: 17.5%;
@@ -208,13 +201,9 @@ justify-content: center;
     letter-spacing: 0.01375rem;
     }
     
-  
-
   .dno {
-    /* position: relative; */
     display: block;
-    padding-top: 100rem;
-    /* left: 30%; */
+    padding-top: 10rem;
   }
   }
 

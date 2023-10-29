@@ -52,30 +52,29 @@ export default function Home() {
           </div>
         </section>
         <div className="S2" id="section2" ref={section2Ref}>
-          <div className="cont2">
-            <div className="img-container">
-              <section>
-                <img src="home2.png" className="img2" />
-                <img src={gridHV} className="gridhv" />{' '}
-                <div className="txt2">
-                  <p>
-                    {' '}
-                    Pored istraživanja, ‘Opservatorij’ se bavi
-                    dokumentiranjem, monitoringom, edukacijom te
-                    promoviranjem interdisciplinarnih metoda.
-                  </p>
-                  <p>
-                    Smatramo da je zaštita i razumijevanje krajobraza
-                    ključna za otpornost i regeneraciju zajednica.
-                  </p>
-                </div>
-              </section>{' '}
-            </div>
+          <div className="img-container">
+            <section>
+              <img src="home2.png" className="img2" />
+              <img src={gridHV} className="gridhv" />{' '}
+              <div className="txt2">
+                <p>
+                  {' '}
+                  Pored istraživanja, ‘Opservatorij’ se bavi
+                  dokumentiranjem, monitoringom, edukacijom te
+                  promoviranjem interdisciplinarnih metoda.
+                </p>
+                <p>
+                  Smatramo da je zaštita i razumijevanje krajobraza
+                  ključna za otpornost i regeneraciju zajednica.
+                </p>
+              </div>
+            </section>{' '}
+          </div>
+          <div className="S3">
             <section>
               {' '}
               <img className="img3" src="home3.png" />
             </section>
-
             <div className="txt3">
               <div className="ena">
                 Pozivamo vas da se pridružite našem putovanju prema
