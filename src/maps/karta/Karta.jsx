@@ -274,7 +274,7 @@ layers: "preklop_administrativne_jedinice",
 //
   const selaiz = {
     id: '776',
-    name: 'sela i zaseoci',
+    name: 'naselja i zaseoci Banovine/Banije',
     url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
 layers: "preklop_banijska_naselja",
     props: {
@@ -431,26 +431,22 @@ zoomControl={false}
 <LayersControl
           collapsed={false}
 >
-
-  
-          <BaseLayer checked name="topografija">
+<BaseLayer checked name="topografija">
             <PodK />
           </BaseLayer> 
-<BaseLayer  name="reljef vanilija">
-            {/* <TileLayer url="podloge_reljef_vanilla_hs" /> */}
-<PodRV/>          
-</BaseLayer>
+<BaseLayer  name="reljef">
+            <PodRV/>          
+          </BaseLayer>
+<BaseLayer name="reljef (visine)">
+            <PodRvi />
+          </BaseLayer>
+<BaseLayer name="reljef (tamni)">
+            <PodRd />
+          </BaseLayer>
 <BaseLayer name="OSM">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           </BaseLayer>
- 
-          <BaseLayer name="podloge_reljef_dark">
-            <PodRd />
-          </BaseLayer>
-          <BaseLayer name="podloge_reljef_visine">
-            <PodRvi />
-          </BaseLayer>
-          <FiksniElementi />
+<FiksniElementi />
 
   {/* Search */}
 
