@@ -188,6 +188,74 @@ useEffect(() => {
   //and out
   const { BaseLayer, Overlay } = LayersControl;
 //
+const temastr = {
+  id: '771',
+  name: 'demografski trend 2011-2021',
+  url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+layers: "tema_stanovnistvo_11_21_trend",
+  props: {
+    version: "1.1",
+    format: "image/png",
+    transparent: true,
+    tiles: true,
+    zIndex: 150,
+    uppercase: true,
+    opacity: '0.8'
+  }
+}
+
+//
+const temadgu = {
+  id: '772',
+  name: 'udio drvene arhitekture',
+  url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+layers: "tema_drv_gradnja_udio",
+  props: {
+    version: "1.1",
+    format: "image/png",
+    transparent: true,
+    tiles: true,
+    zIndex: 150,
+    uppercase: true,
+    opacity: '0.8'
+  }
+}
+
+
+//
+const gradovirh = {
+  id: '773',
+  name: 'gradovi RH',
+  url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+layers: "preklop_gradoviRH",
+  props: {
+    version: "1.1",
+    format: "image/png",
+    transparent: true,
+    tiles: true,
+    zIndex: 150,
+    uppercase: true,
+    opacity: '0.8'
+  }
+}
+
+//
+const vode = {
+  id: '774',
+  name: 'vode',
+  url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
+layers: "preklop_vode",
+  props: {
+    version: "1.1",
+    format: "image/png",
+    transparent: true,
+    tiles: true,
+    zIndex: 150,
+    uppercase: true,
+    opacity: '0.8'
+  }
+}
+//
   const adminna = {
     id: '775',
     name: 'administrativne jedinice',
@@ -203,7 +271,7 @@ layers: "preklop_administrativne_jedinice",
       opacity: '0.8'
     }
   }
-
+//
   const selaiz = {
     id: '776',
     name: 'sela i zaseoci',
@@ -221,9 +289,9 @@ layers: "preklop_banijska_naselja",
   }
   const temast = {
     id: '777',
-    name: 'broj stanovnika',
+    name: 'broj stanovnika 2021',
     url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
-layers: "tema_stanovnistvo",
+layers: "tema_stanovnistvo_2021",
     props: {
       version: "1.1",
       format: "image/png",
@@ -236,7 +304,7 @@ layers: "tema_stanovnistvo",
   }
   const temakz = {
     id: '778',
-    name: 'pokrov i korištenje zemljišta (CORINE)',
+    name: 'poljop. korištenje zemljišta (CORINE)',
     url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
 layers: "tema_koristenje_zemljista",
     props: {
@@ -252,7 +320,7 @@ layers: "tema_koristenje_zemljista",
 
   const temazp = {
     id: '779',
-    name: 'zaštita prirode',
+    name: 'zaštićeni dijelovi prirode',
     url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
 layers: "tema_zastita_prirode",
     props: {
@@ -390,13 +458,29 @@ zoomControl={false}
 
 
   {/* Overlays */}
-  <Overlay key={adminna.id} name={adminna.name}>
+  <Overlay key={gradovirh.id} name={gradovirh.name}>
+    <BetterWMS
+      key={gradovirh.id}
+       id={gradovirh.id}
+      url={gradovirh.url}
+   layers={gradovirh.layers}
+       {...gradovirh.props}
+    />
+  </Overlay>  <Overlay key={adminna.id} name={adminna.name}>
     <BetterWMS
       key={adminna.id}
        id={adminna.id}
       url={adminna.url}
    layers={adminna.layers}
        {...adminna.props}
+    />
+  </Overlay>  <Overlay key={vode.id} name={vode.name}>
+    <BetterWMS
+      key={vode.id}
+       id={vode.id}
+      url={vode.url}
+   layers={vode.layers}
+       {...vode.props}
     />
   </Overlay>
   <Overlay key={selaiz.id} name={selaiz.name}>
@@ -406,15 +490,6 @@ zoomControl={false}
       url={selaiz.url}
    layers={selaiz.layers}
        {...selaiz.props}
-    />
-  </Overlay>
-  <Overlay key={temast.id} name={temast.name}>
-    <BetterWMS
-      key={temast.id}
-       id={temast.id}
-      url={temast.url}
-   layers={temast.layers}
-       {...temast.props}
     />
   </Overlay>
 
@@ -445,6 +520,24 @@ zoomControl={false}
        {...temap.props}
     />
     </Overlay>
+    <Overlay key={temast.id} name={temast.name}>
+    <BetterWMS
+      key={temast.id}
+       id={temast.id}
+      url={temast.url}
+   layers={temast.layers}
+       {...temast.props}
+    />
+  </Overlay>
+  <Overlay key={temastr.id} name={temastr.name}>
+    <BetterWMS
+      key={temastr.id}
+       id={temastr.id}
+      url={temastr.url}
+   layers={temastr.layers}
+       {...temastr.props}
+    />
+  </Overlay>
 
     <Overlay key={temadz.id} name={temadz.name}>
     <BetterWMS
@@ -453,6 +546,15 @@ zoomControl={false}
       url={temadz.url}
    layers={temadz.layers}
        {...temadz.props}
+    />
+    </Overlay>
+    <Overlay key={temadgu.id} name={temadgu.name}>
+    <BetterWMS
+      key={temadgu.id}
+       id={temadgu.id}
+      url={temadgu.url}
+   layers={temadgu.layers}
+       {...temadgu.props}
     />
     </Overlay>
     {/* <Overlay key={temafk.id} name={temafk.name}>

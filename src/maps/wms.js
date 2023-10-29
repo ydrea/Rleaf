@@ -304,7 +304,7 @@ export const FiksniElementi = () => {
 
   const wmsLayerOptions = {
     zIndex: 6,
-    layers: 'fiksni_elementi',
+    layers: 'fiksni_elementi_2_0',
     format: 'image/png',
     transparent: true,
     version: '1.3.0',
