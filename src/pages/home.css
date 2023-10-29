@@ -2,10 +2,10 @@
 /* For larger screens (desktop) */
 @media screen and (min-width: 1200px) {
 .home {
-  display: block;
-  max-width: 
-  max-content;
-  /* 100vw !important; */
+display: block;
+/* display: inline; */
+  /* max-width: 100% !important; */
+/* overflow: hidden; */
 }
 
 .S0 {
@@ -13,8 +13,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-    /* margin-left: 17.5%; */
-  /* height: 100vh; */
+
   }
   
   .vozi {
@@ -30,6 +29,7 @@ justify-content: center;
   }
   
   .pali {
+    
     color: #fff;
     font-size: 9.6875rem;
     width: 64vw;
@@ -41,27 +41,21 @@ justify-content: center;
   }
   .podnaslov {
     font-size: 1.2rem;
-    width: 75vw;
+    width: 70vw;
     text-align: center;
-    margin-top: 11%;
+    margin-top: 13%;
   }
   .gridcnt {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+
     position: relative;
     top: 10%; 
-    left: 17.5vw; 
-}
+    left: 17.5%; 
+
+  }
   .gridv, .gridh {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; */
     position: absolute;
     top: 6vh; left: 0; 
-    width: 65%;
+    max-width: 65%;
     object-fit: cover;
     height: auto;
     background-repeat: no-repeat;
@@ -72,27 +66,16 @@ justify-content: center;
   .gridv {z-index: 4;}
   .gridh {z-index: 2;}
 
-  .line-div1 {
-    border-top: 1px solid white;
-    position: absolute;
-    top: 100%;
-    box-sizing: border-box;
-    width: 100%;
-    height: 0.6rem;
-    margin-top: 0.40rem;
-    z-index: 4;
-  }
+  /* Margin */
     /* margin-left: 17.5vw;
     position: relative;
     left: 0; top: -8.5vh; */
       
 
    .S1 {
-    margin-top: 50vh;
-    padding-bottom: 5vh;
-    margin-left: 17.5vw;
-    /* padding-left: 1vw; */
-    /* margin-right: auto; */
+    margin-top: 60vh;
+    margin-bottom: 10vh;
+    margin-left: 17.5%;
     width: 65%; 
     font-size: 1.6rem;
     color: #7e7e77;
@@ -112,12 +95,12 @@ justify-content: center;
     align-items: center;
     justify-content: center;
       position: relative; 
-      left: 5vw;
+      left: 5vw; top: -0vw;
       width: 100%;
   } 
   
   .img2 {
-    width: 75vw;
+    width: 75%;
     object-fit: cover;
     height: auto;
     background-repeat: no-repeat;
@@ -128,7 +111,7 @@ justify-content: center;
 
   .gridhv {
     z-index: 8;
-    width: 100%;
+    width: 75%;
     height: 93%;
     position: absolute;
         left: 17.5; top: 0;
@@ -257,6 +240,7 @@ justify-content: center;
 .dno {
   position: absolute;
   top: 220%;
+  max-width: 40%;
 }
 
 }

@@ -17,7 +17,7 @@ export default function Home() {
   const section3Ref = useRef(null);
 
   return (
-    <div>
+    <div className="gallery" style={{ overflow: 'hidden' }}>
       <div className="home">
         <section>
           <div className="gridcnt">
