@@ -132,11 +132,6 @@ const MapWrapper = () => {
 
 export default MapWrapper;
 
-// ChatGPT
-// It seems like you've provided a React component named MapWrapper that utilizes the react-leaflet library to create an interactive map. This component displays a map with markers and a list of markers that can be clicked to control the map's behavior. Here's a breakdown of your code:
-
-// You import the necessary modules and styles for creating the map.
-
 // You define the center and an array of points (markers) with latitude, longitude, and titles.
 
 // ListMarkers component: This component is used to display a list of markers. When a marker in the list is clicked, it calls the onItemClick function with the index of the clicked marker.

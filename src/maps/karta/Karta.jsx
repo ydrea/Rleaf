@@ -28,26 +28,6 @@ import {
     PodRV, PodRvi, PodRd, PodK, TemaZP, TemaP, //TemaS
   } from '../wms';
 
-  // import { Map} from 'react-leaflet'
-  import { OpenStreetMapProvider, GeoSearchControl } from 'leaflet-geosearch'
-  
-  // make new leaflet element
-  const Search = (props) => {
-      const map = useMap() // access to leaflet map
-      const { provider } = props
-  
-      useEffect(() => {
-          const searchControl = new GeoSearchControl({
-              provider,
-          })
-console.log(props.query);  
-          map.addControl(searchControl) // 
-          return () => map.removeControl(searchControl)
-      }, [props])
-  
-      return null // 
-  }
-
   //fly  
 
   const points = [
@@ -192,9 +172,9 @@ const temastr = {
   id: '771',
   name: 'demografski trend 2011-2021',
   url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
-layers: "tema_stanovnistvo_11_21_trend",
+layers: "tema_stanovnisto_11_21_trend",
   props: {
-    version: "1.1",
+    version: "1.1", 
     format: "image/png",
     transparent: true,
     tiles: true,
@@ -577,7 +557,7 @@ zoomControl={false}
           >
             <Popup>
               {i.popUp}
-              <Link to={{ pathname: '/photos', params: i.popUp }}>
+              <Link to={{ pathname: `/photos/`+ `${i.popUp}` }}>
               <img
                 width="233px"
                 src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${i.popUp}`}
