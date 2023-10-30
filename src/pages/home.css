@@ -38,11 +38,13 @@ justify-content: center;
     letter-spacing: 0.53281rem;
   }
   .podnaslov {
-    font-size: 1.2rem;
+    background-color: white;
+    font-size: 1.6rem;
     width: 70vw;
     text-align: center;
-    margin-top: calc( 8%+50px);
+    margin-top: 90vh;
   padding-top: 10px;
+  z-index: 777;
   }
 
   .gri-cnt {
@@ -82,12 +84,13 @@ justify-content: center;
       
 
    .S1 {
-    margin-top: 60vh;
+    margin-top: 70vh;
     margin-bottom: 10vh;
     margin-left: 17.5%;
     width: 65%; 
     font-size: 1.6rem;
     color: #7e7e77;
+  z-index: 777;
   }
   
   
@@ -104,7 +107,7 @@ justify-content: center;
     align-items: center;
     justify-content: center;
       position: relative; 
-      left: 5vw; top: -0vw;
+      left: 0vw; top: -0vw;
       width: 100%;
   } 
   
@@ -145,10 +148,14 @@ justify-content: center;
  .S3 {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
   } 
    .img3 {
-    margin-left: 17.5%;
-    width: 35%; 
+    margin-left: 12vw;
+    width: 100%;
+max-width: 40vw;
+    float: left; 
     height: auto;
   }
   
@@ -159,7 +166,7 @@ justify-content: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-     margin-left: 45vw;
+     margin-left: 52vw;
     /* margin-right: auto; */
     text-align: left;
   }

@@ -10,6 +10,7 @@ import gridH from '../assets/GRID H.svg';
 import gridV from '../assets/GRID V.svg';
 import diag from '../assets/DIA G.svg';
 //
+import head from '../assets/EXPO EXPO/Opservatorij krajobraza V3.jpg';
 //
 export default function Home() {
   const section1Ref = useRef(null);
@@ -23,11 +24,11 @@ export default function Home() {
           <img src={gridV} className="gridv" /> */}
         <div className="S0">
           <div className="gri-cnt">
-            {' '}
+            <img src={head} className="grih" />{' '}
             <img src={gridH} className="grih" />
             <img src={gridV} className="griv" />
-            <div className="vozi">opservatorij</div>
-            <div className="pali">krajobraza </div>
+            {/* <div className="vozi">opservatorij</div>
+            <div className="pali">krajobraza </div> */}
             <div className="podnaslov">
               Interdisciplinarna platforma posvećena istraživanju
               krajobraza i razvoju temeljenom na krajobrazu{' '}
