@@ -204,14 +204,14 @@ margin-top: 40px;
     /* font-size: 10vw; */
     /* font-weight: 100; */
     margin-top: 5vh;
-    margin-left: 17.5vw;
+    /* margin-left: 17.5vw; */
     color: #fff;  
-    /* display: flex; */
+    display: flex;
     /* width: 76.65938rem; */
     /* height: 9.30713rem; */
-    /* flex-direction: column;
-    justify-content: center;
-    flex-shrink: 2; */
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 2;
 
     font-size: 9.6875rem;
     font-style: normal;
