@@ -20,7 +20,10 @@ import axios from 'axios';
 import extractLatLongFromJSON from './latlngParse'
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../../comps/Footer';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectSelectedPhoto, setSelectedPhotoIndex, setSelectedPhoto } from '../../redux/rtk/gallerySlice';
+
 
 import "react-tabs/style/react-tabs.css";
 import {
@@ -119,6 +122,19 @@ function Map() {
   
     const [selected, setSelected] = useState();
 
+// 
+const selectedPhoto = useSelector(selectSelectedPhoto);
+const dispatch = useDispatch();
+
+const handleThumbnailClick = (photo) => {
+  dispatch(setSelectedPhoto(photo));
+};
+// Inside your map component
+const handleSelectPhoto = (index) => {
+  dispatch(setSelectedPhotoIndex(index));
+};
+
+//
   function handleItemClick(index) {
     setSelected(index);
   }
@@ -544,7 +560,7 @@ zoomControl={false}
     </Overlay> */}
   </LayersControl>
  
-  {markeri.map(i => (
+  {markeri.map((i, index) => (
           <Marker
             key={i.geocode[0] + Math.random()}
             position={i.geocode}
@@ -562,6 +578,7 @@ zoomControl={false}
                 width="233px"
                 src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${i.popUp}`}
                 alt={i.popUp}
+                onClick={()=> handleSelectPhoto(index) }
               />
               </Link>
             </Popup>
