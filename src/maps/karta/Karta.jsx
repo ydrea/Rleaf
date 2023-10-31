@@ -18,12 +18,14 @@ import { useRef, useEffect, useState } from 'react';
 import { Icon } from 'leaflet';
 import axios from 'axios';
 import extractLatLongFromJSON from './latlngParse'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Footer from '../../comps/Footer';
 // import { useSelector } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSelectedPhoto, setSelectedPhotoIndex, setSelectedPhoto } from '../../redux/rtk/gallerySlice';
+import { selectSelectedPhoto, setSelectedPhotoIndex, setSelectedPhoto, selectPhotos, 
+  getPhotos } from '../../redux/rtk/gallerySlice';
 
+import {ReactComponent as ico} from '../../assets/logo.svg'
 
 import "react-tabs/style/react-tabs.css";
 import {
@@ -103,36 +105,56 @@ import {
     );
   };
     
-  //
-
-
+  //icon
 const myIcon = new Icon({
-    iconUrl: require('../../assets/icon.png'),
+    iconUrl: ico, 
+    // require('../../assets/icon.png'),
     iconSize: [28, 28],
   });
   
 //
-// const MapWrapper = () => {
+// MAP
+//
   
 
 function Map() {
     const [markeri, markeriSet] = useState([]);
     const [selectedLayer, setSelectedLayer] = useState();
     const markerRef = useRef([]);
-  
+const navigate = useNavigate()
+    const photos = useSelector(selectPhotos);  
     const [selected, setSelected] = useState();
-
+    const [showPhoto, showPhotoSet] = useState(false);
+  
 // 
 const selectedPhoto = useSelector(selectSelectedPhoto);
 const dispatch = useDispatch();
+// console.log(selectedPhoto.signatura);
 
-const handleThumbnailClick = (photo) => {
-  dispatch(setSelectedPhoto(photo));
-};
-// Inside your map component
-const handleSelectPhoto = (index) => {
-  dispatch(setSelectedPhotoIndex(index));
-};
+// 
+  //
+  const handleSelectPhoto = index => {
+    const originalIndex = photos.indexOf(markeri[index]);
+    
+    if (originalIndex !== -1) {
+      // Check if the object exists before accessing the 'popUp' property
+      const photo = photos[originalIndex];
+      if (photo && photo.popUp) {
+        dispatch(setSelectedPhotoIndex(originalIndex));
+        showPhotoSet(true);
+        navigate(`/photos/${photo.popUp}#imgcnt`);
+      } else {
+        console.error('Invalid photo data:', photo);
+      }
+    } else {
+      console.error('Original index not found:', originalIndex);
+    }
+  };
+  
+  //
+  useEffect(() => {
+    dispatch(getPhotos());
+  }, [dispatch]);
 
 //
   function handleItemClick(index) {
@@ -571,7 +593,7 @@ zoomControl={false}
               }
             }}
           >
-            <Popup>
+            <Popup  >
               {i.popUp}
               <Link to={{ pathname: `/photos/`+ `${i.popUp}` }}>
               <img

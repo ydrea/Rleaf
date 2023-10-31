@@ -101,7 +101,7 @@ export default function Home() {
                 </div>
               </section>
             </div>
-            {/* <Hline color="#7e7e77" height="2px" width="100%" />{' '} */}
+            <Hline color="#7e7e77" height="2px" width="100%" />{' '}
           </div>{' '}
           <div className="dno">
             <Footer />
