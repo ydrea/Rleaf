@@ -126,6 +126,46 @@ const MapWrapper = () => {
         data={points}
         onItemClick={handleItemClick}
       />
+      {markeri.map((i, index) => (
+        <Marker
+          key={i.geocode[0] + Math.random()}
+          position={i.geocode}
+          icon={myIcon}
+          ref={ref => {
+            if (ref) {
+              markerRef.current.push(ref);
+            }
+          }}
+        >
+          <Popup>
+            {i.popUp}
+            {/* <Link to={{ pathname: `/photos/`+ `${i.popUp}` }}> */}
+            <img
+              width="233px"
+              src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${i.popUp}`}
+              alt={i.popUp}
+              // onClick={()=> handleSelectPhoto(index) }
+            />
+            {/* </Link> */}
+          </Popup>
+        </Marker>
+      ))}
+      {/* {console.log('Marker Ref:', markerRef.current)} */}
+      {/* </MarkerClusterGroup> */}
+      {/* {lajeri.map(
+          layer =>
+            layer.visible && (
+              <Marker
+                position={[45.21, 16.19]}
+                icon={myIcon}
+                key={layer.name}
+              >
+                <Popup>{layer.name}</Popup>
+              </Marker>
+            )
+        )} */}
+
+      {/* <MyMarkers selectedIndex={selected} data={points} /> */}
     </>
   );
 };

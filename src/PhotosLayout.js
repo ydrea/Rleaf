@@ -17,7 +17,7 @@ import {
 import './pages/photos.css';
 import Photo from './pages/Photo';
 import Footer from './comps/Footer';
-
+import Hline from './comps/Line';
 //
 const PhotosLayout = () => {
   const navigate = useNavigate();
@@ -56,6 +56,7 @@ const PhotosLayout = () => {
           {/* <div className="line-div1" />{' '} */}
         </div>
       </section>{' '}
+      <Hline color="#18aa00" height="1px" width="100%" />{' '}
       <section>
         <Outlet filteredPhotos={filteredPhotos} />{' '}
         {/* This will render child routes */}

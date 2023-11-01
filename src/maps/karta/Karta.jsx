@@ -383,7 +383,7 @@ layers: "preklop_drvene_zgrade",
     }
   }
   const temafk = {
-    id: '781',
+    id: '782',
     name: 'FOTO KATALOG',
     url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
 layers: "preklop_foto_katalog",
@@ -571,7 +571,7 @@ zoomControl={false}
        {...temadgu.props}
     />
     </Overlay>
-    {/* <Overlay key={temafk.id} name={temafk.name}>
+    <Overlay key={temafk.id} name={temafk.name}>
     <BetterWMS
       key={temafk.id}
        id={temafk.id}
@@ -579,49 +579,9 @@ zoomControl={false}
    layers={temafk.layers}
        {...temafk.props}
     />
-    </Overlay> */}
+    </Overlay>
   </LayersControl>
  
-  {markeri.map((i, index) => (
-          <Marker
-            key={i.geocode[0] + Math.random()}
-            position={i.geocode}
-            icon={myIcon}
-            ref={ref => {
-              if (ref) {
-                markerRef.current.push(ref);
-              }
-            }}
-          >
-            <Popup  >
-              {i.popUp}
-              {/* <Link to={{ pathname: `/photos/`+ `${i.popUp}` }}> */}
-              <img
-                width="233px"
-                src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${i.popUp}`}
-                alt={i.popUp}
-                // onClick={()=> handleSelectPhoto(index) }
-              />
-              {/* </Link> */}
-            </Popup>
-          </Marker>
-        ))}
-        {console.log('Marker Ref:', markerRef.current)}
-        {/* </MarkerClusterGroup> */}
-        {/* {lajeri.map(
-          layer =>
-            layer.visible && (
-              <Marker
-                position={[45.21, 16.19]}
-                icon={myIcon}
-                key={layer.name}
-              >
-                <Popup>{layer.name}</Popup>
-              </Marker>
-            )
-        )} */}
-
-{/* <MyMarkers selectedIndex={selected} data={points} /> */}
 </MapContainer>
 </section>
 <Hline color="#7e7e77" height="2px" width="100%" />{' '}<section>

@@ -73,7 +73,7 @@ export const Nav = () => {
         { label: 'EWAP', to: 'projects/ewap' },
       ],
     },
-    { label: 'karte', to: '/maps' },
+    { label: 'karta', to: '/maps' },
     { label: 'fototeka    ', to: '/photos' },
     { label: 'kontakt', to: '/contact' },
   ];

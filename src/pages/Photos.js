@@ -162,7 +162,7 @@ export default function Photos() {
             </div>
           ))
         ) : (
-          <p>loading...</p>
+          <p>Nema fotografije po zadanim kriterijima</p>
         )}
       </Masonry>{' '}
       {/* Pagination controls */}

@@ -58,16 +58,13 @@ export default function Photo() {
 
   return (
     <div className="cont">
-      <div className="filters-container">
+      <div id="imgcnt" className="comands-container">
+        <div onClick={handleBackToGallery}>natrag u galeriju</div>
         <div
-          className="select-container"
-          onClick={handleBackToGallery}
+        //  onClick={handleShowOnMap}
         >
-          natrag u galeriju
-        </div>
-        {/* <div className="select-container" onClick={handleShowOnMap}>
           pokaži na karti
-        </div> */}
+        </div>
       </div>
       <div className="image-wrapper">
         <FaChevronLeft
@@ -79,7 +76,7 @@ export default function Photo() {
           }}
           disabled={selectedPhotoIndex === 0}
         />
-        <div id="imgcnt" className="img-cnt">
+        <div className="img-cnt">
           <img
             src={
               selectedPhoto

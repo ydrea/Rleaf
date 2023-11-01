@@ -7,7 +7,7 @@ export const getPhotos = createAsyncThunk(
   async () => {
     const rez = await fetch(url);
     const rezult = await rez.json();
-    console.log(rezult);
+    // console.log(rezult);
     return rezult;
   }
 );
@@ -123,7 +123,6 @@ export const selectFilteredPhotos = state => {
   }
 
   return allPhotos.filter(photo => {
-    // Check if any of the selected filters is in the 'tagovi' or 'kategorija' property of the photo.
     return selectedFilters.some(filter => {
       return (
         photo.tagovi.includes(filter) || photo.kategorija === filter

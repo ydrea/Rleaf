@@ -197,6 +197,8 @@ margin-top: 40px;
     display: flex;
     flex-direction: column;
     position: relative;
+    max-height: 34.5vh;
+    /* height: min-content; */
   }
 
   .naslov-container h1 {
@@ -221,7 +223,7 @@ margin-top: 40px;
   }
 
   .teka {
-    position: relative; 
+    /* position: relative;  */
     font-size: 1rem;
     font-weight: 100;
     max-width: 100%;
@@ -264,7 +266,7 @@ width: 65vw;
 .line-div0 {
   border-top: 1px solid #18aa00;
   position: absolute;
-  top: 60%;
+  top: 77%;
   left: 0;
   box-sizing: border-box;
   width: 100%;

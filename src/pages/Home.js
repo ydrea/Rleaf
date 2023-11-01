@@ -24,15 +24,7 @@ export default function Home() {
           <img src={gridV} className="gridv" /> */}
         <div className="S0">
           <div className="gri-cnt">
-            <img src={head} className="grih" />{' '}
-            <img src={gridH} className="grih" />
-            <img src={gridV} className="griv" />
-            {/* <div className="vozi">opservatorij</div>
-            <div className="pali">krajobraza </div> */}
-            <div className="podnaslov">
-              Interdisciplinarna platforma posvećena istraživanju
-              krajobraza i razvoju temeljenom na krajobrazu{' '}
-            </div>{' '}
+            <img src="home0.png" alt="home" />
           </div>
           {/* //Sections */}
           <section>
@@ -101,8 +93,8 @@ export default function Home() {
                 </div>
               </section>
             </div>
-            <Hline color="#7e7e77" height="2px" width="100%" />{' '}
-          </div>{' '}
+          </div>
+          <Hline color="#7e7e77" height="2px" width="100%" />{' '}
           <div className="dno">
             <Footer />
           </div>

@@ -57,7 +57,8 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       width: size.x,
       layers: this.wmsParams.layers,
       query_layers: this.wmsParams.layers,
-      info_format: 'text/html',
+      info_format: 'text/plain',
+      // info_format: 'application/json',
       x: x, // Use the rounded X coordinate
       y: y, // Use the rounded Y coordinate
     };
