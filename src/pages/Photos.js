@@ -168,24 +168,45 @@ export default function Photos() {
       {/* Pagination controls */}
       <div className="pagination">
         {currentPage > 1 && (
+          <button onClick={() => handlePageChange(1)}>First</button>
+        )}
+
+        {currentPage > 1 && (
           <button onClick={() => handlePageChange(currentPage - 1)}>
-            Prethodna
+            Prev
           </button>
         )}
 
-        {pageNumbers.map(pageNumber => (
-          <button
-            key={pageNumber}
-            onClick={() => handlePageChange(pageNumber)}
-            className={pageNumber === currentPage ? 'active' : ''}
-          >
-            {pageNumber}
-          </button>
-        ))}
+        {pageNumbers.map(pageNumber => {
+          if (
+            pageNumber >= currentPage - 3 &&
+            pageNumber <= currentPage + 3 &&
+            pageNumber !== 0
+          ) {
+            return (
+              <button
+                key={pageNumber}
+                onClick={() => handlePageChange(pageNumber)}
+                className={pageNumber === currentPage ? 'active' : ''}
+              >
+                {pageNumber}
+              </button>
+            );
+          }
+          return null;
+        })}
 
-        {photosToDisplay.length === photosPerPage && (
+        {currentPage < pageNumbers.length && (
           <button onClick={() => handlePageChange(currentPage + 1)}>
-            Sljedeća
+            Next
+          </button>
+        )}
+
+        {currentPage < pageNumbers.length && (
+          <button
+            onClick={() => handlePageChange(pageNumbers.length)}
+          >
+            Last
           </button>
         )}
       </div>

@@ -595,14 +595,14 @@ zoomControl={false}
           >
             <Popup  >
               {i.popUp}
-              <Link to={{ pathname: `/photos/`+ `${i.popUp}` }}>
+              {/* <Link to={{ pathname: `/photos/`+ `${i.popUp}` }}> */}
               <img
                 width="233px"
                 src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${i.popUp}`}
                 alt={i.popUp}
-                onClick={()=> handleSelectPhoto(index) }
+                // onClick={()=> handleSelectPhoto(index) }
               />
-              </Link>
+              {/* </Link> */}
             </Popup>
           </Marker>
         ))}
@@ -621,11 +621,11 @@ zoomControl={false}
             )
         )} */}
 
-<MyMarkers selectedIndex={selected} data={points} />
+{/* <MyMarkers selectedIndex={selected} data={points} /> */}
 </MapContainer>
 </section>
-<section>
-<ListMarkers data={points} onItemClick={handleItemClick} />
+<Hline color="#7e7e77" height="2px" width="100%" />{' '}<section>
+{/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
 
  <Footer/>
   
