@@ -9,38 +9,31 @@ margin-right: 17.5%;
 
 .S0 {
 margin-top: 2%;  
-height: 100%;
+height: 100vh;
 }
   
-
- .S1 {
-  height: 100%;
+.S1 {
+  height: 100vh;
     font-size: 1.6rem;
     color: #7e7e77;
-  z-index: 777;
-  }
-  
+  display: flex;
+flex-direction: column;
+}
+.S1 p {
+  margin-top: auto;
+  margin-bottom: 2vh;
+}  
   
 .S2 {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
-height: 95vh;
+height: 100vh;
 }
   
   .img-container {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-      position: relative;  */
-      /* left: 0vw; top: -1%; */
-      width: 100%;
-  } 
+  position: relative;
+} 
   
   .img2 {
-    width: 90%;
+    width: 100%;
     object-fit: cover;
     height: auto;
     background-repeat: no-repeat;
@@ -51,8 +44,8 @@ height: 95vh;
 
   .gridhv {
     z-index: 8;
-    width: 90%;
-    height: 93%;
+    width: 100%;
+    height: auto;
     position: absolute;
         left: 17.5; top: 0;
    }
@@ -61,13 +54,13 @@ height: 95vh;
     font-size: 1.3rem;
      color: #fff;
      position: absolute;
-     left: 50%;
      text-align: left;
      z-index: 33;
-     max-width: 33vw;
+
+     max-width: 35vw;
      width: 100%;
      bottom: 10vh;
-     right: 15vw;
+     left: 45%;
    }
    .txt2 p {
     margin: 0.5;
@@ -75,30 +68,23 @@ height: 95vh;
    
 
  .S3 {
-  height: 100%;
+  height: 100vh;
  }
    .img3 {
-    /* margin-left: 17.5vw; */
     width: 100%;
-max-width: 34vw;
+max-width: 30vw;
     float: left; 
-    /* height: auto; */
   }
   
   .txt3 {
     font-size: 1.1rem;
     color: #7e7e77;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; */
-     /* margin-left: 52vw; */
-    /* margin-right: auto; */
     text-align: left;
     float: right;
+  
   }
   .ena {
-  width: 35vw;
+  width: 33vw;
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 400;

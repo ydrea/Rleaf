@@ -24,17 +24,18 @@ export default function Home() {
         <img src="home0.png" alt="home" />
       </section>
       <section className="S1">
-        {' '}
-        'Opservatorij krajobraza' je kolaborativna platforma koja
-        okuplja znanstvenike i stručnjake različitih profila. U
-        središtu naše pažnje je koncept krajobraza koji se sve više
-        prepoznaje kao ključna komponenta globalnog nasljeđa i
-        održivog razvoja. Uspostavljen zbog nedovoljne istraženosti,
-        neprisutnosti podataka, niskog stupnja svijesti o
-        karakteristikama te sveukupnoj neiskorištenosti potencijala
-        hrvatskog krajobraza. Naša misija je pružiti integralan
-        pristup razumijevanju, prezentaciji i očuvanju krajobraza te
-        promišljati razvoj temeljen na krajobrazu.
+        <p>
+          'Opservatorij krajobraza' je kolaborativna platforma koja
+          okuplja znanstvenike i stručnjake različitih profila. U
+          središtu naše pažnje je koncept krajobraza koji se sve više
+          prepoznaje kao ključna komponenta globalnog nasljeđa i
+          održivog razvoja. Uspostavljen zbog nedovoljne istraženosti,
+          neprisutnosti podataka, niskog stupnja svijesti o
+          karakteristikama te sveukupnoj neiskorištenosti potencijala
+          hrvatskog krajobraza. Naša misija je pružiti integralan
+          pristup razumijevanju, prezentaciji i očuvanju krajobraza te
+          promišljati razvoj temeljen na krajobrazu.
+        </p>
       </section>
       <section className="S2">
         <div className="img-container">
