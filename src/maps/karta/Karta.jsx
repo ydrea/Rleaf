@@ -433,7 +433,7 @@ layers: "preklop_foto_katalog",
         potrebama.
       </div>
       </section>
-      
+       
       <section>    
       <Hline color="#18aa00" height="2px" width="100%" />
  
@@ -573,7 +573,7 @@ zoomControl={false}
        {...temadgu.props}
     />
     </Overlay>
-    <Overlay key={temafk.id} name={temafk.name}>
+    {/* <Overlay key={temafk.id} name={temafk.name}>
     <BetterWMS
       key={temafk.id}
        id={temafk.id}
@@ -581,9 +581,29 @@ zoomControl={false}
    layers={temafk.layers}
        {...temafk.props}
     />
-    </Overlay>
-  </LayersControl>
- </MapContainer>
+    </Overlay> */}
+    {/* Add your Markers in Overlays */}
+        <Overlay key="markers" name="Markers">
+          {markeri.map((i, index) => (
+            <Marker
+              key={i.geocode[0] + Math.random()}
+              position={i.geocode}
+              icon={myIcon}
+            >
+              <Popup>
+                {i.popUp}
+                <img
+                  width="233px"
+                  src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${i.popUp}`}
+                  alt={i.popUp}
+                />
+              </Popup>
+            </Marker>
+          ))}
+        </Overlay>
+      </LayersControl>
+    </MapContainer>
+
 </section>
 <Hline color="#7e7e77" height="2px" width="100%" />{' '}<section>
 {/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
