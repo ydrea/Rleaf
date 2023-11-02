@@ -10,7 +10,68 @@
         /* margin-left: 17.5%; */
       /* height: 100vh; */
       }
+      .vozi {
+        color: #fff;
+        font-size: 9.6875rem;
+        /* width: 75vw;   */
+        z-index: 3;
+        text-align: center;
+        margin-top: 15vh;
+        font-weight: 500;
+        line-height: 140%; 
+        letter-spacing: 0.53281rem;
+      }
       
+      .pali {
+        color: #fff;
+        font-size: 9.6875rem;
+        /* width: 64vw; */
+        z-index: 3;
+        text-align: center;
+        font-weight: 500;
+        line-height: 140%; /* 13.5625rem */
+        letter-spacing: 0.53281rem;
+      }
+      .podnaslov {
+        display: flex;
+    color: white;
+    font-weight: 600;
+        font-size: 1.1rem;
+        width: max-content;
+        text-align: center;
+        margin-top: 90vh;
+      padding: 10px 50px;
+      z-index: 777;
+      }
+    
+      .gri-cnt {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+        position: relative;
+        top: 5.1vh; 
+        /* left: 17.5%;  */
+    
+      }
+      .griv, .grih {
+        position: absolute;
+    
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        max-width: 75%;
+        object-fit: cover;
+        height: auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        display: flex;
+      }
+      .gridv {z-index: 4 !important;}
+      .gridh {z-index: 2 !important;}
+    
       .vozi {
         color: #fff;
         font-size: 9.6875rem;

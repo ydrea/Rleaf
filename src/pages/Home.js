@@ -44,24 +44,24 @@ export default function Home() {
             </div>
           </section>
           <div className="S2">
-            <div className="img-container">
-              {/* <section> */}
-              <img src="home2.png" className="img2" />
-              <img src={gridHV} className="gridhv" />{' '}
-              <div className="txt2">
-                <p>
-                  {' '}
-                  Pored istraživanja, ‘Opservatorij’ se bavi
-                  dokumentiranjem, monitoringom, edukacijom te
-                  promoviranjem interdisciplinarnih metoda.
-                </p>
-                <p>
-                  Smatramo da je zaštita i razumijevanje krajobraza
-                  ključna za otpornost i regeneraciju zajednica.
-                </p>
+            <section>
+              <div className="img-container">
+                <img src="home2.png" className="img2" />
+                <img src={gridHV} className="gridhv" />{' '}
+                <div className="txt2">
+                  <p>
+                    {' '}
+                    Pored istraživanja, ‘Opservatorij’ se bavi
+                    dokumentiranjem, monitoringom, edukacijom te
+                    promoviranjem interdisciplinarnih metoda.
+                  </p>
+                  <p>
+                    Smatramo da je zaštita i razumijevanje krajobraza
+                    ključna za otpornost i regeneraciju zajednica.
+                  </p>
+                </div>
               </div>
-              {/* </section>{' '} */}
-            </div>
+            </section>{' '}
           </div>
           <div className="S3">
             <section>

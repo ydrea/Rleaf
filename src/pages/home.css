@@ -13,69 +13,8 @@ display: flex;
 flex-direction: column;
 /* align-items: center; */
 justify-content: center;
-  }
+margin-top: 2vh;  }
   
-  .vozi {
-    color: #fff;
-    font-size: 9.6875rem;
-    /* width: 75vw;   */
-    z-index: 3;
-    text-align: center;
-    margin-top: 15vh;
-    font-weight: 500;
-    line-height: 140%; 
-    letter-spacing: 0.53281rem;
-  }
-  
-  .pali {
-    color: #fff;
-    font-size: 9.6875rem;
-    /* width: 64vw; */
-    z-index: 3;
-    text-align: center;
-    font-weight: 500;
-    line-height: 140%; /* 13.5625rem */
-    letter-spacing: 0.53281rem;
-  }
-  .podnaslov {
-    display: flex;
-color: white;
-font-weight: 600;
-    font-size: 1.1rem;
-    width: max-content;
-    text-align: center;
-    margin-top: 90vh;
-  padding: 10px 50px;
-  z-index: 777;
-  }
-
-  .gri-cnt {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: center; */
-    position: relative;
-    top: 5.1vh; 
-    /* left: 17.5%;  */
-
-  }
-  .griv, .grih {
-    position: absolute;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    max-width: 75%;
-    object-fit: cover;
-    height: auto;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    display: flex;
-  }
-  .gridv {z-index: 4 !important;}
-  .gridh {z-index: 2 !important;}
 
   /* Margin */
     /* margin-left: 17.5vw;
@@ -84,8 +23,9 @@ font-weight: 600;
       
 
    .S1 {
-    margin-top: 70vh;
-    margin-bottom: 10vh;
+    height: 95%;
+    margin-top: 30%;
+    margin-bottom: 5%;
     margin-left: 17.5%;
     width: 65%; 
     font-size: 1.6rem;
@@ -107,12 +47,12 @@ font-weight: 600;
     align-items: center;
     justify-content: center;
       position: relative; 
-      left: 0vw; top: -0vw;
+      left: 0vw; top: -1%;
       width: 100%;
   } 
   
   .img2 {
-    width: 65%;
+    width: 90%;
     object-fit: cover;
     height: auto;
     background-repeat: no-repeat;
@@ -123,22 +63,23 @@ font-weight: 600;
 
   .gridhv {
     z-index: 8;
-    width: 75%;
+    width: 90%;
     height: 93%;
     position: absolute;
         left: 17.5; top: 0;
    }
 
    .txt2 {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
      color: #fff;
      position: absolute;
-     left: 50vw;
+     left: 50%;
      text-align: left;
      z-index: 33;
      max-width: 33vw;
      width: 100%;
      bottom: 10vh;
+     right: 15vw;
    }
    .txt2 p {
     margin: 0.5;
@@ -161,7 +102,7 @@ max-width: 34vw;
   }
   
   .txt3 {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     color: #7e7e77;
     display: flex;
     flex-direction: column;
