@@ -1,9 +1,10 @@
 import React from 'react';
 import Footer from '../../comps/Footer';
+import Hline from '../../comps/Line';
 
 const Ewap = () => {
   return (
-    <div className="P">
+    <div className="gallery">
       <div className="projects-container">
         <section>
           <img src="/projEWAP.jpeg" />
@@ -45,6 +46,9 @@ const Ewap = () => {
           će se fotografije kuća, okućnica i naselja obrađivanih kroz
           projekt.
         </section>
+        <div>
+          <Hline color="#7e7e77" height="2px" width="100%" />{' '}
+        </div>
       </div>
       <Footer style={{ position: 'absolute', bottom: '0' }} />{' '}
     </div>

@@ -400,21 +400,6 @@ layers: "preklop_foto_katalog",
   }
   
   
-  // const wmsLayers = [
-//     {
-//     //   id: '777',
-//       layers: ["tema_drvena_arhitektura","tema_potres", "tema_stanovnistvo", "tema_zastita_prirode", "tema_koristenje_zemljista", "preklop_banijska_naselja", "preklop_administrativne_jedinice"],
-//       props: {
-//         version: "1.3",
-//         format: "image/png",
-//         transparent: true,
-//         tiles: true,
-//         zIndex: 150,
-//         uppercase: true,
-//         opacity: '0.8'
-//       }
-//     },
-//   ];
   
   return (
     <div className="gallery">
