@@ -394,7 +394,8 @@ layers: "preklop_foto_katalog",
       tiles: true,
       zIndex: 150,
       uppercase: true,
-      opacity: '0.8'
+      opacity: '0.8',
+      // maxZoom: 8
     }
   }
   
@@ -581,8 +582,7 @@ zoomControl={false}
     />
     </Overlay>
   </LayersControl>
- 
-</MapContainer>
+ </MapContainer>
 </section>
 <Hline color="#7e7e77" height="2px" width="100%" />{' '}<section>
 {/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
