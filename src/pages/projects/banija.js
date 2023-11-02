@@ -5,11 +5,11 @@ import './projects.css';
 const Banija = () => {
   return (
     <div className="P">
-      <div className="projects-container">
-        <section>
+      <section>
+        <div className="projects-container">
           <img src="/projBanija.jpg" />
-        </section>
-      </div>
+        </div>
+      </section>
       <div className="tekst">
         <section>
           <p>

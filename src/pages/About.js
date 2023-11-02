@@ -8,8 +8,8 @@ export default function About() {
           <h1>opservatorij</h1>
           <div className="line-div0" />
         </div>{' '}
-      </section>
-      <section>
+        {/* </section>
+      <section> */}
         <div className="one">
           Opservatorij krajobraza je interdisciplinarna platforma za
           istraživanje krajobraza i razvoj temeljen na krajobrazu.

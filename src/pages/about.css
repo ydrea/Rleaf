@@ -58,6 +58,7 @@
       
 .about2 {
   position: relative;
+height: 100vh;
 }    
 .about2 img {
     width: 100%;
@@ -71,7 +72,7 @@
 }
 .aboutxt2{
     position: absolute;
-    bottom: 0%;
+    bottom: 10%;
     left: 1%;
     width: 25vw;
     color: white;
@@ -96,7 +97,7 @@
     
     
       .four {
-        height: 100vh;
+        height: 90vh;
         background-color: #8c8d85;
         width: 65%;
         margin-left: 17.5%;
@@ -121,7 +122,7 @@
     }
     .six p {
     margin-top: 2rem;
-margin-bottom: 2rem;
+margin-bottom: 4rem;
     line-height: 160%;
     }}
 
@@ -152,13 +153,13 @@ margin-bottom: 2rem;
 
   position: relative;
   width: 90%;
-  height: 90%;
+  height: 100%;
 
 }  
 .about1 img,
 .about2 img {
   width: 100%; 
-  height: auto; 
+  max-height: 100vh; 
   object-fit: cover; 
   left: 0;
 }
