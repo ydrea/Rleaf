@@ -24,6 +24,7 @@ export default function Home() {
         <img src="home0.png" alt="home" />
       </section>
       <section className="S1">
+        {/* <img src={diag} className="diag" /> */}
         <p>
           'Opservatorij krajobraza' je kolaborativna platforma koja
           okuplja znanstvenike i stručnjake različitih profila. U
@@ -80,7 +81,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Hline color="#7e7e77" height="2px" width="100%" />{' '}
+      {/* <Hline color="#7e7e77" height="2px" width="100%" />{' '} */}
       <div className="dno">
         <Footer />
       </div>

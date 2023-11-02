@@ -12,6 +12,7 @@ margin-top: 5vh;
 height: 100vh;
 }
   .S0 img {
+    margin-top: 5vh;
     max-width: 65vw;
     width: 100%;
   }
@@ -24,7 +25,7 @@ flex-direction: column;
 }
 .S1 p {
   margin-top: auto;
-  margin-bottom: 2vh;
+  margin-bottom: 8vh;
 }  
   
 .S2 {
@@ -87,7 +88,7 @@ max-width: 30vw;
   
   }
   .ena {
-  width: 33vw;
+  width: 30vw;
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 400;
@@ -111,6 +112,7 @@ max-width: 30vw;
   .dve span {
     color: #fff;
   }
+  
   .tli {
     padding-top: 10vh;
     width: 35vw;
@@ -123,7 +125,7 @@ max-width: 30vw;
     
   .dno {
     display: block;
-    padding-top: 10rem;
+    padding-top: 1rem;
   }
   }
 
