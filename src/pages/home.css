@@ -8,17 +8,13 @@ margin-right: 17.5%;
 }
 
 .S0 {
-margin-top: 2%;  }
+margin-top: 2%;  
+height: 100%;
+}
   
 
-
-   .S1 {
-    height: 95vh;
-    /* margin-top: 30%; */
-    /* margin-bottom: 5%; */
-    /* margin-left: 17.5%; */
-    /* width: 65%;  */
-    float: inline-end;
+ .S1 {
+  height: 100%;
     font-size: 1.6rem;
     color: #7e7e77;
   z-index: 777;
@@ -79,13 +75,8 @@ height: 95vh;
    
 
  .S3 {
-    /* display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-  max-width: 65vw; */
-height: 95%;  } 
-
+  height: 100%;
+ }
    .img3 {
     /* margin-left: 17.5vw; */
     width: 100%;
@@ -95,7 +86,7 @@ max-width: 34vw;
   }
   
   .txt3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: #7e7e77;
     /* display: flex;
     flex-direction: column;
@@ -108,7 +99,7 @@ max-width: 34vw;
   }
   .ena {
   width: 35vw;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-style: normal;
   font-weight: 400;
   line-height: 120%; /* 2.25rem */
@@ -117,7 +108,7 @@ max-width: 34vw;
   .dve {
   padding-top: 10vh;
   width: 35vw;
-  font-size: 1.375rem;
+  font-size: 1.1rem;
   font-style: normal;
   font-weight: 500;
   line-height: 140%;
@@ -134,7 +125,7 @@ max-width: 34vw;
   .tli {
     padding-top: 10vh;
     width: 35vw;
-    font-size: 1.375rem;
+    font-size: 1.1rem;
     font-style: normal;
     font-weight: 500;
     line-height: 140%;
