@@ -69,14 +69,11 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     if (err) {
       console.log(err);
       return;
-    } // do nothing if there's an error
-
-    // Create a new HTML element to parse the content
+    }
     var tempDiv = document.createElement('div');
     tempDiv.innerHTML = content;
 
-    // Filter out rows without values
-    var rows = tempDiv.querySelectorAll('tr'); // Assuming rows are in <tr> elements
+    var rows = tempDiv.querySelectorAll('tr'); //
 
     for (var i = 0; i < rows.length; i++) {
       var row = rows[i];
@@ -102,7 +99,6 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
         );
       });
 
-      // If the row has no values, remove it
       if (!hasValue) {
         row.parentNode.removeChild(row);
       }

@@ -11,6 +11,8 @@ html, body, #root {
   font-family: 'DM Mono', monospace;
  color: #7e7e77;
   background-color: #DBDBDB;/* color: #fff; */
+}
+html {
   scroll-behavior: smooth;
-  /* scroll-snap-type: y proximity; */
+  scroll-snap-type: y mandatory;
 }

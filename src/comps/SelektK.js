@@ -119,7 +119,7 @@ function KategorijeSelekt({ kategorijeOptions }) {
         htmlFor="kategorije-select"
         style={{
           fontSize: '22px',
-          color: '#545550',
+          color: '#7e7e77',
         }}
       >
         kategorije

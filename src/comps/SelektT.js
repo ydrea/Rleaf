@@ -58,7 +58,7 @@ function TagoviSelekt({ tagoviOptions }) {
       />
       <label
         htmlFor="keyword-select"
-        style={{ color: '#545550', fontSize: '22px' }}
+        style={{ color: '#7e7e77', fontSize: '22px' }}
       >
         ključne riječi
       </label>
