@@ -129,22 +129,6 @@ margin-top: 40px;
   object-fit: cover;
 }  
 
-.pagination {
-  text-align: center;
-}
-
-.pagination button {
-  margin: 0 5px;
-  padding: 5px 10px;
-  background: #ddd;
-  border: none;
-  cursor: pointer;
-}
-
-.pagination button.active {
-  background: #18aa00;
-  color: #fff;
-}
 
 /* .photo-container {
   align-items: flex-start;
@@ -175,6 +159,32 @@ margin-top: 40px;
   object-fit: cover;
 } */
 
+.selected-div2 {
+  font-size: 1.1rem;
+  z-index: 9223;
+  /* margin-left: 17.5vw; */
+  /* margin-right: 17.5vw; */
+  /* width: 65vw;  */
+  justify-content: space-between;
+  align-items: baseline;
+  color: #7e7e77;
+}
+.pagination {
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background: #18aa00;
+  color: #fff;
+}
 .grey {
   display: block;
   position: absolute; top: 0;
@@ -182,44 +192,35 @@ margin-top: 40px;
   width: 100rem; z-index: 1111;
 }
 
-.selected-div2 {
-  font-size: 1rem;
-  z-index: 9223;
-  /* margin-left: 17.5vw; */
-  /* margin-right: 17.5vw; */
-  /* width: 65vw;  */
-  justify-content: space-between;
-  align-items: baseline;
-  color: #000;
-}
 
  .naslov-container {
     display: flex;
     flex-direction: column;
     position: relative;
-    max-height: 34.5vh;
+    height: 34.5vh;
     /* height: min-content; */
   }
 
   .naslov-container h1 {
-    /* letter-spacing: .047em; */
-    /* font-size: 10vw; */
-    /* font-weight: 100; */
     margin-top: 5vh;
-    /* margin-left: 17.5vw; */
     color: #fff;  
     display: flex;
-    /* width: 76.65938rem; */
-    /* height: 9.30713rem; */
     flex-direction: column;
     align-items: center;
-    flex-shrink: 2;
-
+    /* flex-shrink: 2; */
     font-size: 9.6875rem;
     font-style: normal;
     font-weight: 500;
-    /* line-height: 140%; */
     letter-spacing: 0.53281rem;
+  }
+
+  .line-div0 {
+    border-top: 1px solid #18aa00;
+    position: absolute;
+top: 200px;    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    /* height: 0.6rem; */
   }
 
   .teka {
@@ -263,15 +264,6 @@ width: 65vw;
   }
 
 
-.line-div0 {
-  border-top: 1px solid #18aa00;
-  position: absolute;
-  top: 77%;
-  left: 0;
-  box-sizing: border-box;
-  width: 100%;
-  /* height: 0.6rem; */
-}
 .line-div1{
   border-top: 1px solid #18aa00;
   position: absolute;
