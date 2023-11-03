@@ -168,12 +168,12 @@ export default function Photos() {
       {/* Pagination controls */}
       <div className="pagination">
         {currentPage > 1 && (
-          <button onClick={() => handlePageChange(1)}>First</button>
+          <button onClick={() => handlePageChange(1)}>Početna</button>
         )}
 
         {currentPage > 1 && (
           <button onClick={() => handlePageChange(currentPage - 1)}>
-            Prev
+            Prethodna
           </button>
         )}
 
@@ -198,7 +198,7 @@ export default function Photos() {
 
         {currentPage < pageNumbers.length && (
           <button onClick={() => handlePageChange(currentPage + 1)}>
-            Next
+            Sljedeća
           </button>
         )}
 
@@ -206,7 +206,7 @@ export default function Photos() {
           <button
             onClick={() => handlePageChange(pageNumbers.length)}
           >
-            Last
+            Posljednja
           </button>
         )}
       </div>

@@ -1,6 +1,6 @@
 import L from 'leaflet';
 import axios from 'axios';
-
+import isValidURL from '../../utils/isvalidUrl';
 //
 L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   onAdd: function (map) {
@@ -57,9 +57,9 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       width: size.x,
       layers: this.wmsParams.layers,
       query_layers: this.wmsParams.layers,
-      info_format: 'text/plain',
+      // info_format: 'text/plain',
 
-      // info_format: 'text/html',
+      info_format: 'text/html',
       // info_format: 'application/json',
       x: x, // Use the rounded X coordinate
       y: y, // Use the rounded Y coordinate
@@ -69,101 +69,49 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   },
 
   //////////
-  // showGetFeatureInfo: function (err, latlng, content) {
-  //   if (err) {
-  //     console.log(err);
-  //     return;
-  //   }
-  //   var tempDiv = document.createElement('div');
-  //   tempDiv.innerHTML = content;
-
-  //   var rows = tempDiv.querySelectorAll('tr'); //
-
-  //   for (var i = 0; i < rows.length; i++) {
-  //     var row = rows[i];
-  //     var cells = row.querySelectorAll('td');
-
-  //     var isFotoUrl = cells[0].textContent.trim() === 'foto_url';
-
-  //     if (isFotoUrl) {
-  //       var imgUrl = cells[1].textContent.trim();
-  //       imgUrl = imgUrl.replace(/["']/g, '');
-  //       var link = document.createElement('a');
-  //       link.href = imgUrl;
-  //       link.target = '_blank';
-  //       link.textContent = imgUrl;
-  //       cells[1] = link;
-  //     }
-
-  //     // Check if any cell has a value that is not 'NULL' or empty
-  //     var hasValue = Array.from(cells).some(function (cell) {
-  //       return (
-  //         cell.textContent.trim() !== '' &&
-  //         cell.textContent.trim() !== 'NULL'
-  //       );
-  //     });
-
-  //     if (!hasValue) {
-  //       row.parentNode.removeChild(row);
-  //     }
-  //   }
-
-  //   // Create a new HTML content with filtered rows
-  //   var filteredContent = tempDiv.innerHTML;
-
-  //   // Display the filtered HTML content in the popup
-  //   L.popup({ maxWidth: 400 })
-  //     .setLatLng(latlng)
-  //     .setContent(filteredContent)
-  //     .openOn(this._map);
-  // },
-  ////////////////////
-  // showGetFeatureInfo: function (err, latlng, content) {
-  //   if (err) {
-  //     console.log(err);
-  //     return;
-  //   } // do nothing if there's an error
-  //   console.log(content);
-
-  //   // Otherwise show the content in a popup, or something.
-  //   L.popup({ maxWidth: 800 })
-  //     .setLatLng(latlng)
-  //     .setContent(content)
-  //     .openOn(this._map);
-  // },
   showGetFeatureInfo: function (err, latlng, content) {
     if (err) {
       console.log(err);
       return;
-    } // do nothing if there's an error
+    }
 
-    // Create a new HTML element to parse the content
     var tempDiv = document.createElement('div');
     tempDiv.innerHTML = content;
-
-    // Filter out rows without values
-    var rows = tempDiv.querySelectorAll('tr'); // Assuming rows are in <tr> elements
-
+    // console.log(tempDiv);
+    var rows = tempDiv.querySelectorAll('tr');
+    // console.log(rows);
     for (var i = 0; i < rows.length; i++) {
       var row = rows[i];
-      var cells = row.querySelectorAll('td'); // Assuming values are in <td> elements
-
-      // Check if the "key" cell contains 'foto_url'
+      // console.log(row);
+      var cells = row.querySelectorAll('td');
+      // console.log(cells);// Check if the "key" cell contains 'foto_url'
       var isFotoUrl = cells[0].textContent.trim() === 'foto_url';
 
       if (isFotoUrl) {
-        // If "key" is 'foto_url', create an image element for displaying the image
+        console.log('aa');
+        // Extract the "value" cell
         var imgUrl = cells[1].textContent.trim();
-        imgUrl = imgUrl.replace(/["']/g, ''); // Remove surrounding quotes if they exist
+        imgUrl = imgUrl.replace(/["']/g, '');
+
+        // Create a new table row for the image
+        var newRow = document.createElement('tr');
+        var newCell = document.createElement('td');
 
         var image = document.createElement('img');
         image.src = imgUrl;
-        image.alt = 'Image'; // Set alternative text for the image
-        image.style.maxWidth = '222px'; // Optionally set a max width for the image
-        console.log(imgUrl);
-        // Clear the "value" cell and append the image
-        cells[1].innerHTML = '';
-        cells[1].appendChild(image);
+        image.alt = 'Image';
+        image.style.maxWidth = '100%';
+        image.style.height = '200px'; // Set the height of the image
+        image.style.width = '300px'; // Set the width of the image
+
+        newCell.appendChild(image);
+        newRow.appendChild(newCell);
+
+        // Append the new row to the table
+        row.parentNode.parentNode.appendChild(newRow);
+
+        // Remove the original row
+        row.parentNode.removeChild(row);
       }
 
       // Check if any cell has a value that is not 'NULL' or empty
@@ -180,18 +128,30 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       }
     }
 
-    // Create a new HTML content with filtered rows
     var filteredContent = tempDiv.innerHTML;
-
-    // Display the filtered HTML content in the popup
-    L.popup({ maxWidth: 800 })
+    console.log(filteredContent);
+    L.popup({ maxWidth: 400 })
       .setLatLng(latlng)
       .setContent(filteredContent)
       .openOn(this._map);
   },
+  ////////////////////
+  // showGetFeatureInfo: function (err, latlng, content) {
+  //   if (err) {
+  //     console.log(err);
+  //     return;
+  //   } // do nothing if there's an error
+  //   console.log(content);
+
+  //   // Otherwise show the content in a popup, or something.
+  //   L.popup({ maxWidth: 800 })
+  //     .setLatLng(latlng)
+  //     .setContent(content)
+  //     .openOn(this._map);
+  // },
+  /////////////
 });
 
 L.TileLayer.betterWms = function (url, options) {
-  console.log(url, options);
   return new L.TileLayer.BetterWMS(url, options);
 };

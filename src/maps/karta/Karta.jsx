@@ -451,7 +451,7 @@ zoomControl={false}
 <LayersControl
           collapsed={false}
 >
-<BaseLayer checked name="topografija">
+<BaseLayer name="topografija">
             <PodK />
           </BaseLayer> 
 <BaseLayer  name="reljef">
@@ -463,7 +463,7 @@ zoomControl={false}
 <BaseLayer name="reljef (tamni)">
             <PodRd />
           </BaseLayer>
-<BaseLayer name="OSM">
+<BaseLayer checked name="OSM">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           </BaseLayer>
 <FiksniElementi />
@@ -573,7 +573,7 @@ zoomControl={false}
        {...temadgu.props}
     />
     </Overlay>
-    {/* <Overlay key={temafk.id} name={temafk.name}>
+    <Overlay key={temafk.id} name={temafk.name}>
     <BetterWMS
       key={temafk.id}
        id={temafk.id}
@@ -581,10 +581,10 @@ zoomControl={false}
    layers={temafk.layers}
        {...temafk.props}
     />
-    </Overlay> */}
-    {/* Add your Markers in Overlays */}
-        <Overlay key="markers" name="Markers">
-          {markeri.map((i, index) => (
+    </Overlay>
+      </LayersControl>
+    </MapContainer>
+    {/* {markeri.map((i) => (
             <Marker
               key={i.geocode[0] + Math.random()}
               position={i.geocode}
@@ -593,17 +593,13 @@ zoomControl={false}
               <Popup>
                 {i.popUp}
                 <img
-                  width="233px"
+                  width="250px"
                   src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${i.popUp}`}
                   alt={i.popUp}
                 />
               </Popup>
             </Marker>
-          ))}
-        </Overlay>
-      </LayersControl>
-    </MapContainer>
-
+          ))} */}
 </section>
 <Hline color="#7e7e77" height="2px" width="100%" />{' '}<section>
 {/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
