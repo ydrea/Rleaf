@@ -77,59 +77,52 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 
     var tempDiv = document.createElement('div');
     tempDiv.innerHTML = content;
-    // console.log(tempDiv);
     var rows = tempDiv.querySelectorAll('tr');
-    // console.log(rows);
+
     for (var i = 0; i < rows.length; i++) {
       var row = rows[i];
-      // console.log(row);
-      var cells = row.querySelectorAll('td');
-      // console.log(cells);// Check if the "key" cell contains 'foto_url'
-      var isFotoUrl = cells[0].textContent.trim() === 'foto_url';
+      var cells = row.querySelectorAll('th');
+      if (
+        cells.length > 0 &&
+        cells[0].textContent.trim() === 'foto_url'
+      ) {
+        console.log('yea!');
+        // Extract the "value" cell if it exists
+        var tdCells = row.querySelectorAll('td');
+        if (tdCells.length > 0) {
+          var imgUrl = tdCells[0].textContent.trim();
+          imgUrl = imgUrl.replace(/["']/g, '');
+          console.log(imgUrl);
 
-      if (isFotoUrl) {
-        console.log('aa');
-        // Extract the "value" cell
-        var imgUrl = cells[1].textContent.trim();
-        imgUrl = imgUrl.replace(/["']/g, '');
+          // Create a new table row for the image
+          var newRow = document.createElement('tr');
+          var newCell = document.createElement('td');
 
-        // Create a new table row for the image
-        var newRow = document.createElement('tr');
-        var newCell = document.createElement('td');
+          var image = document.createElement('img');
+          image.src = imgUrl;
+          image.alt = 'Image';
+          image.style.maxWidth = '100%';
+          image.style.height = '200px'; // Set the height of the image
+          image.style.width = '300px'; // Set the width of the image
 
-        var image = document.createElement('img');
-        image.src = imgUrl;
-        image.alt = 'Image';
-        image.style.maxWidth = '100%';
-        image.style.height = '200px'; // Set the height of the image
-        image.style.width = '300px'; // Set the width of the image
+          newCell.appendChild(image);
+          newRow.appendChild(newCell);
 
-        newCell.appendChild(image);
-        newRow.appendChild(newCell);
+          // Append the new row to the table
+          row.parentNode.parentNode.appendChild(newRow);
 
-        // Append the new row to the table
-        row.parentNode.parentNode.appendChild(newRow);
-
-        // Remove the original row
-        row.parentNode.removeChild(row);
-      }
-
-      // Check if any cell has a value that is not 'NULL' or empty
-      var hasValue = Array.from(cells).some(function (cell) {
-        return (
-          cell.textContent.trim() !== '' &&
-          cell.textContent.trim() !== 'NULL'
-        );
-      });
-
-      // If the row has no values, remove it
-      if (!hasValue) {
-        row.parentNode.removeChild(row);
+          // Remove the original row
+          row.parentNode.removeChild(row);
+        } else {
+          console.log('No associated TD cell found for "foto_url".');
+        }
+      } else {
+        console.log('No "foto_url" header found in this row.');
       }
     }
 
     var filteredContent = tempDiv.innerHTML;
-    console.log(filteredContent);
+    // console.log(filteredContent);
     L.popup({ maxWidth: 400 })
       .setLatLng(latlng)
       .setContent(filteredContent)
