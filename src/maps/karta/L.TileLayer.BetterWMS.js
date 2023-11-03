@@ -95,11 +95,13 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 
           var newRow = document.createElement('tr');
           var newCell = document.createElement('td');
-
+          newCell.style.width = '100%';
           var image = document.createElement('img');
           image.src = imgUrl;
           image.alt = 'Image';
-          image.style.width = '177%';
+          image.style.width = '200%';
+
+          image.style.margin = '1% 10%';
           newCell.appendChild(image);
 
           newRow.appendChild(newCell);
