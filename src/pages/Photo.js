@@ -56,6 +56,17 @@ export default function Photo() {
     navigate(`/mapa/${signatura}`);
   };
 
+  //
+
+  const removeFileExtension = fileName => {
+    const lastDotIndex = fileName.lastIndexOf('.');
+    if (lastDotIndex === -1) {
+      return fileName; //
+    }
+    return fileName.substring(0, lastDotIndex);
+  };
+  //
+
   return (
     <div className="cont">
       <div id="imgcnt" className="comands-container">
@@ -101,7 +112,9 @@ export default function Photo() {
         {selectedPhoto.signatura && (
           <>
             <div className="t">signatura:</div>
-            <div className="d">{selectedPhoto.signatura}</div>
+            <div className="d">
+              {removeFileExtension(selectedPhoto.signatura)}
+            </div>
           </>
         )}
         {selectedPhoto.kategorija && (
