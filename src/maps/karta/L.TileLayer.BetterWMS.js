@@ -102,8 +102,8 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
           image.src = imgUrl;
           image.alt = 'Image';
           image.style.maxWidth = '100%';
-          image.style.height = '200px'; // Set the height of the image
-          image.style.width = '300px'; // Set the width of the image
+          image.style.height = '200px';
+          image.style.width = '300px';
 
           newCell.appendChild(image);
           newRow.appendChild(newCell);
@@ -119,10 +119,22 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       } else {
         console.log('No "foto_url" header found in this row.');
       }
+      // Check if any cell has a value that is not 'NULL' or empty
+      var hasValue = Array.from(cells).some(function (cell) {
+        return (
+          cell.textContent.trim() !== '' &&
+          cell.textContent.trim() !== 'NULL'
+        );
+      });
+
+      // If the row has no values, remove it
+      if (!hasValue) {
+        row.parentNode.removeChild(row);
+      }
     }
 
     var filteredContent = tempDiv.innerHTML;
-    // console.log(filteredContent);
+    console.log(filteredContent);
     L.popup({ maxWidth: 400 })
       .setLatLng(latlng)
       .setContent(filteredContent)
