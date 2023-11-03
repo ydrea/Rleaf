@@ -58,7 +58,6 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       layers: this.wmsParams.layers,
       query_layers: this.wmsParams.layers,
       // info_format: 'text/plain',
-
       info_format: 'text/html',
       // info_format: 'application/json',
       x: x, // Use the rounded X coordinate
@@ -69,6 +68,10 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   },
 
   //////////
+  // ...
+
+  // ...
+
   showGetFeatureInfo: function (err, latlng, content) {
     if (err) {
       console.log(err);
@@ -81,55 +84,32 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 
     for (var i = 0; i < rows.length; i++) {
       var row = rows[i];
-      var cells = row.querySelectorAll('th');
-      if (
-        cells.length > 0 &&
-        cells[0].textContent.trim() === 'foto_url'
-      ) {
-        console.log('yea!');
-        // Extract the "value" cell if it exists
-        var tdCells = row.querySelectorAll('td');
-        if (tdCells.length > 0) {
-          var imgUrl = tdCells[0].textContent.trim();
-          imgUrl = imgUrl.replace(/["']/g, '');
+      var cells = row.querySelectorAll('th, td');
+      if (cells.length >= 2) {
+        var header = cells[0].textContent.trim();
+        var value = cells[1].textContent.trim();
+        if (header === 'foto_url') {
+          console.log('yea!');
+          var imgUrl = value.replace(/["']/g, '');
           console.log(imgUrl);
 
-          // Create a new table row for the image
           var newRow = document.createElement('tr');
           var newCell = document.createElement('td');
 
           var image = document.createElement('img');
           image.src = imgUrl;
           image.alt = 'Image';
-          image.style.maxWidth = '100%';
-          image.style.height = '200px';
-          image.style.width = '300px';
-
+          image.style.width = '177%';
           newCell.appendChild(image);
+
           newRow.appendChild(newCell);
 
-          // Append the new row to the table
-          row.parentNode.parentNode.appendChild(newRow);
-
-          // Remove the original row
-          row.parentNode.removeChild(row);
+          row.parentNode.replaceChild(newRow, row);
         } else {
-          console.log('No associated TD cell found for "foto_url".');
+          if (value === 'NULL' || value === '') {
+            row.parentNode.removeChild(row);
+          }
         }
-      } else {
-        console.log('No "foto_url" header found in this row.');
-      }
-      // Check if any cell has a value that is not 'NULL' or empty
-      var hasValue = Array.from(cells).some(function (cell) {
-        return (
-          cell.textContent.trim() !== '' &&
-          cell.textContent.trim() !== 'NULL'
-        );
-      });
-
-      // If the row has no values, remove it
-      if (!hasValue) {
-        row.parentNode.removeChild(row);
       }
     }
 
@@ -140,6 +120,10 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       .setContent(filteredContent)
       .openOn(this._map);
   },
+
+  // ...
+
+  // ...
   ////////////////////
   // showGetFeatureInfo: function (err, latlng, content) {
   //   if (err) {
