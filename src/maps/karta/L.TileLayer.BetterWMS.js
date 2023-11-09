@@ -70,7 +70,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   //////////
   // ...
 
-  // ...
+  // with imgs
 
   showGetFeatureInfo: function (err, latlng, content) {
     if (err) {
