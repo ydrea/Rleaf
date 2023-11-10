@@ -110,11 +110,9 @@ export const selectSelectedPhoto = state => {
 		return photos[selectedPhotoIndex];
 	}
 
-	return null; // Return null or handle this case accordingly
+	return null; //
 };
 
-//Filteri
-//Filteri
 // Filteri
 export const selectFilteredPhotos = state => {
 	const selectedFilters = state.gallery.selectedFilters || [];

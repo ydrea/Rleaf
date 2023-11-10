@@ -68,6 +68,7 @@ function KategorijeSelekt() {
 		const filteredPhotos = photos.filter(photo => {
 			return selectedFilterValues.includes(photo.kategorija);
 		});
+		console.log(filteredPhotos.length);
 
 		dispatch(setFilters(selectedFilterValues));
 	};
