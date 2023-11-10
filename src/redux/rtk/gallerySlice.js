@@ -114,6 +114,9 @@ export const selectSelectedPhoto = state => {
 };
 
 //Filteri
+//Filteri
+// Filteri
+// Filteri
 export const selectFilteredPhotos = state => {
 	const selectedFilters = state.gallery.selectedFilters || [];
 	const allPhotos = state.gallery.photos;
@@ -124,19 +127,52 @@ export const selectFilteredPhotos = state => {
 
 	return allPhotos.filter(photo => {
 		return selectedFilters.some(filter => {
-			// Check both photo.tagovi and photo.kategorija
 			const tagoviIncluded =
 				photo.tagovi && photo.tagovi.includes(filter);
 			const kategorijaMatches =
-				photo.kategorija && photo.kategorija.includes(filter);
+				photo.kategorija &&
+				(photo.kategorija === filter ||
+					photo.kategorija
+						.split(',')
+						.map(category => category.trim())
+						.includes(filter));
 
 			console.log('Photo:', photo);
 			console.log('Filter:', filter);
 			console.log('tagoviIncluded:', tagoviIncluded);
 			console.log('kategorijaMatches:', kategorijaMatches);
+			console.log('Filter Value:', filter.value);
+			console.log('Filter Label:', filter.label);
+			console.log('Photo Kategorija:', photo.kategorija);
 
 			return tagoviIncluded || kategorijaMatches;
 		});
 	});
 };
+
+// export const selectFilteredPhotos = state => {
+// 	const selectedFilters = state.gallery.selectedFilters || [];
+// 	const allPhotos = state.gallery.photos;
+
+// 	if (selectedFilters.length === 0) {
+// 		return allPhotos;
+// 	}
+
+// 	return allPhotos.filter(photo => {
+// 		return selectedFilters.some(filter => {
+// 			// Check both photo.tagovi and photo.kategorija
+// 			const tagoviIncluded =
+// 				photo.tagovi && photo.tagovi.includes(filter);
+// 			const kategorijaMatches =
+// 				photo.kategorija && photo.kategorija.includes(filter);
+
+// 			console.log('Photo:', photo);
+// 			console.log('Filter:', filter);
+// 			console.log('tagoviIncluded:', tagoviIncluded);
+// 			console.log('kategorijaMatches:', kategorijaMatches);
+
+// 			return tagoviIncluded || kategorijaMatches;
+// 		});
+// 	});
+// };
 export default gallerySlice.reducer;

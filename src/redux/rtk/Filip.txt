@@ -1,0 +1,28 @@
+
+//Filteri
+export const selectFilteredPhotos = state => {
+	const selectedFilters = state.gallery.selectedFilters || [];
+	const allPhotos = state.gallery.photos;
+
+	if (selectedFilters.length === 0) {
+		return allPhotos;
+	}
+
+	return allPhotos.filter(photo => {
+		return selectedFilters.some(filter => {
+			// Check both photo.tagovi and photo.kategorija
+			const tagoviIncluded =
+				photo.tagovi && photo.tagovi.includes(filter);
+			const kategorijaMatches =
+				photo.kategorija && photo.kategorija.includes(filter);
+
+			console.log('Photo:', photo);
+			console.log('Filter:', filter);
+			console.log('tagoviIncluded:', tagoviIncluded);
+			console.log('kategorijaMatches:', kategorijaMatches);
+
+			return tagoviIncluded || kategorijaMatches;
+		});
+	});
+
+

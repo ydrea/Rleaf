@@ -24,11 +24,45 @@ function KategorijeSelekt() {
 
 	const filteredPhotos = useSelector(selectFilteredPhotos);
 
+	// const handleFilterChange = selectedFilters => {
+	// 	setFilterSelected(selectedFilters);
+
+	// 	const selectedFilterValues = selectedFilters.map(
+	// 		filter => filter.value
+	// 	);
+
+	// 	// Filter photos based on selected Kategorije
+	// 	const filteredPhotos = photos.filter(photo => {
+	// 		return selectedFilterValues.includes(photo.kategorija);
+	// 	});
+
+	// 	// Dispatch the filtered photos to the store
+	// 	dispatch(setFilters(selectedFilterValues));
+	// 	// Optionally, you can dispatch the filtered photos to the store
+	// 	// dispatch(selectFilteredPhotos(filteredPhotos));
+	// };
+	// const handleFilterChange = selectedFilters => {
+	// 	console.log('Selected Filters:', selectedFilters); // Add this line
+
+	// 	setFilterSelected(selectedFilters);
+
+	// 	const selectedFilterValues = selectedFilters.map(
+	// 		filter => filter.value
+	// 	);
+
+	// 	// Filter photos based on selected Kategorije
+	// 	const filteredPhotos = photos.filter(photo => {
+	// 		return selectedFilterValues.includes(photo.kategorija);
+	// 	});
+
+	// 	// Dispatch the filtered photos to the store
+	// 	dispatch(setFilters(selectedFilterValues));
+	// };
 	const handleFilterChange = selectedFilters => {
 		setFilterSelected(selectedFilters);
 
 		const selectedFilterValues = selectedFilters.map(
-			filter => filter.value
+			filter => filter.label
 		);
 
 		// Filter photos based on selected Kategorije
@@ -112,6 +146,7 @@ function KategorijeSelekt() {
 	return (
 		<div>
 			<Select
+				id='kategorije-select' // Add this line
 				styles={cusTom}
 				placeholder='unesi/odaberi'
 				isSearchable
@@ -120,7 +155,7 @@ function KategorijeSelekt() {
 				value={filterSelected}
 				onChange={handleFilterChange}
 				getOptionValue={option => option.value}
-				// getOptionLabel={customKategorijeOptions}
+				getOptionLabel={option => option.label}
 			/>
 			<label
 				htmlFor='kategorije-select'
