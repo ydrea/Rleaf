@@ -121,7 +121,7 @@ function KategorijeSelekt() {
 		},
 		placeholder: styles => ({
 			...styles,
-			color: '#7e7e77',
+			color: '#18aa00',
 			marginTop: '-13px',
 			marginLeft: '-8px',
 			fontSize: '22px',
@@ -142,7 +142,7 @@ function KategorijeSelekt() {
 	return (
 		<div>
 			<Select
-				id='kategorije-select' // Add this line
+				id='kategorije-select'
 				styles={cusTom}
 				placeholder='unesi/odaberi'
 				isSearchable
