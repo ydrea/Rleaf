@@ -116,7 +116,6 @@ export const selectSelectedPhoto = state => {
 //Filteri
 //Filteri
 // Filteri
-// Filteri
 export const selectFilteredPhotos = state => {
 	const selectedFilters = state.gallery.selectedFilters || [];
 	const allPhotos = state.gallery.photos;
@@ -137,13 +136,13 @@ export const selectFilteredPhotos = state => {
 						.map(category => category.trim())
 						.includes(filter));
 
-			console.log('Photo:', photo);
-			console.log('Filter:', filter);
-			console.log('tagoviIncluded:', tagoviIncluded);
-			console.log('kategorijaMatches:', kategorijaMatches);
-			console.log('Filter Value:', filter.value);
-			console.log('Filter Label:', filter.label);
-			console.log('Photo Kategorija:', photo.kategorija);
+			// console.log('Photo:', photo);
+			// console.log('Filter:', filter);
+			// console.log('tagoviIncluded:', tagoviIncluded);
+			// console.log('kategorijaMatches:', kategorijaMatches);
+			// console.log('Filter Value:', filter.value);
+			// console.log('Filter Label:', filter.label);
+			// console.log('Photo Kategorija:', photo.kategorija);
 
 			return tagoviIncluded || kategorijaMatches;
 		});
