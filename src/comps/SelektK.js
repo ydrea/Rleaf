@@ -65,15 +65,11 @@ function KategorijeSelekt() {
 			filter => filter.label
 		);
 
-		// Filter photos based on selected Kategorije
 		const filteredPhotos = photos.filter(photo => {
 			return selectedFilterValues.includes(photo.kategorija);
 		});
 
-		// Dispatch the filtered photos to the store
 		dispatch(setFilters(selectedFilterValues));
-		// Optionally, you can dispatch the filtered photos to the store
-		// dispatch(selectFilteredPhotos(filteredPhotos));
 	};
 
 	//
