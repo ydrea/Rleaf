@@ -23,6 +23,14 @@ export default function Home() {
 			<section className='S0'>
 				<img src='home0.jpg' alt='home' className='zero' />
 				<img src={gridHV} alt='grid' className='zerog' />
+				<div className='zeroTxt'>
+					<div className='zeroTxtOne'>Opservatorij</div>
+					<div className='zeroTxtOne'>krajobraza</div>
+
+					<div className='zeroTxtThree'>
+						platforma za istraživanje i razvoj
+					</div>
+				</div>
 			</section>
 			<section className='S1'>
 				{/* <img src={diag} className="diag" /> */}

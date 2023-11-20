@@ -16,20 +16,42 @@ section {
 }
 /* START */
 .S0 {
-padding-top: 1%;
+padding-top: 3.5%;
 /* max-height: 95vh; */
 display: flex;
 }
   .zero {
-    /* margin-top: 5vh; */
     max-width: 65vw;
     width: 100%;
   }
-.zerog {
-  /* max-width: 65vw; */
+  .zerog {
     width: 100%;
-  margin-left: -100%;
-}
+    margin-left: -100%;
+  }
+  .zeroTxt {
+    display: flex;
+    flex-direction: column;
+    /* margin-left: -70%; */
+
+  }
+  .zeroTxtOne {
+    color: #000;
+    font-size: 6rem;
+    align-self: center;
+    }
+   .zeroTxtTwo {
+      color: #000;
+      font-size: 6rem;
+      align-self: center;
+      z-index: 2;
+    }
+    .zeroTxtThree {
+      color: #000;
+      font-size: 1.6rem;
+      align-self: center;
+      z-index: 3;
+    }
+
 
 .S1 {
   padding-top: 1%;
@@ -67,7 +89,6 @@ height: 95vh;
     margin-top: -7%;
     z-index: 8;
     width: 100%;
-    /* height: 95%; */
     margin-left: -100%;
    }
 
