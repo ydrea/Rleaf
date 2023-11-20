@@ -31,25 +31,30 @@ display: flex;
   .zeroTxt {
     display: flex;
     flex-direction: column;
-    /* margin-left: -70%; */
-
+    /* flex-grow: 1; */
+    margin-left: -100%;
+    justify-content: center;
+    align-items: center;
+    /* justify-self: center; */
+    padding: 1%;
   }
   .zeroTxtOne {
-    color: #000;
-    font-size: 6rem;
+    color: #fff;
+    font-size: 10rem;
     align-self: center;
     }
    .zeroTxtTwo {
-      color: #000;
-      font-size: 6rem;
+      color: #fff;
+      font-size: 10rem;
       align-self: center;
       z-index: 2;
     }
     .zeroTxtThree {
-      color: #000;
-      font-size: 1.6rem;
+      color: #fff;
+      font-size: 1.3rem;
       align-self: center;
       z-index: 3;
+      margin-top: auto;
     }
 
 

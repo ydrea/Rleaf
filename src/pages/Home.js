@@ -24,11 +24,11 @@ export default function Home() {
 				<img src='home0.jpg' alt='home' className='zero' />
 				<img src={gridHV} alt='grid' className='zerog' />
 				<div className='zeroTxt'>
-					<div className='zeroTxtOne'>Opservatorij</div>
+					<div className='zeroTxtOne'>opservatorij</div>
 					<div className='zeroTxtOne'>krajobraza</div>
 
 					<div className='zeroTxtThree'>
-						platforma za istraživanje i razvoj
+						platforma za istraživanje i razvoj temeljen na krajobrazu
 					</div>
 				</div>
 			</section>
