@@ -30,9 +30,10 @@ section {
   .zeroTxt {
     display: flex;
     flex-direction: column;
-    margin-left: -100%;
-    justify-content: center;
-    align-items: center;
+    margin-left: -91%;
+padding-top: 7vh;    
+align-items: center;
+
   }
   .zeroTxtOne {
     color: #fff;
@@ -40,7 +41,6 @@ section {
     }
    .zeroTxtTwo {
       color: #fff;
-      /* font-size: 10em; */
       z-index: 2;
     }
     .zeroTxtThree {
@@ -55,7 +55,7 @@ section {
 .S1 {
   /* padding-top: 1%; */
   height: 95vh;
-    font-size: 1.6rem;
+    font-size: 1.6vw;
     color: #7e7e77;
   display: flex;
 flex-direction: column;
