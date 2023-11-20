@@ -21,8 +21,8 @@ export default function Home() {
 		// <div className="gallery" style={{ overflow: 'hidden' }}>
 		<div className='home'>
 			<section className='S0'>
-				<img src='home0.jpg' alt='home' className='zero' />
-				<img src={gridHV} alt='grid' className='zerog' />
+				<img src='home0.jpg' className='zero' />
+				<img src={gridHV} className='zerog' />
 				<div className='zeroTxt'>
 					<div className='zeroTxtOne'>opservatorij</div>
 					<div className='zeroTxtOne'>krajobraza</div>
@@ -33,7 +33,7 @@ export default function Home() {
 				</div>
 			</section>
 			<section className='S1'>
-				{/* <img src={diag} className="diag" /> */}
+				{/* <img src={diag} className='diag' /> */}
 				<p>
 					'Opservatorij krajobraza' je kolaborativna platforma koja
 					okuplja znanstvenike i stručnjake različitih profila. U
@@ -48,21 +48,19 @@ export default function Home() {
 				</p>
 			</section>
 			<section className='S2'>
-				<div className='img-container'>
-					<img src='home2.png' className='img2' />
-					<img src={gridHV} className='gridhv' />{' '}
-					<div className='txt2'>
-						<p>
-							{' '}
-							Pored istraživanja, ‘Opservatorij’ se bavi
-							dokumentiranjem, monitoringom, edukacijom te
-							promoviranjem interdisciplinarnih metoda.
-						</p>
-						<p>
-							Smatramo da je zaštita i razumijevanje krajobraza
-							ključna za otpornost i regeneraciju zajednica.
-						</p>
-					</div>
+				<img src='home4.jpg' className='zero2' />
+				<img src={gridHV} className='zerog2' />{' '}
+				<div className='txt2'>
+					<p>
+						{' '}
+						Pored istraživanja, ‘Opservatorij’ se bavi
+						dokumentiranjem, monitoringom, edukacijom te promoviranjem
+						interdisciplinarnih metoda.
+					</p>
+					<p>
+						Smatramo da je zaštita i razumijevanje krajobraza ključna
+						za otpornost i regeneraciju zajednica.
+					</p>
 				</div>
 			</section>{' '}
 			<section className='S3'>

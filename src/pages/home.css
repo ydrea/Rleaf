@@ -15,11 +15,10 @@ section {
   max-height: 95vh;
 }
 /* START */
-.S0 {
-padding-top: 3.5%;
-/* max-height: 95vh; */
-display: flex;
-}
+  .S0 {
+  padding-top: 3em;
+  display: flex;
+  }
   .zero {
     max-width: 65vw;
     width: 100%;
@@ -31,27 +30,24 @@ display: flex;
   .zeroTxt {
     display: flex;
     flex-direction: column;
-    /* flex-grow: 1; */
     margin-left: -100%;
     justify-content: center;
     align-items: center;
-    /* justify-self: center; */
-    padding: 1%;
   }
   .zeroTxtOne {
     color: #fff;
-    font-size: 10rem;
+    font-size: 10em;
     align-self: center;
     }
    .zeroTxtTwo {
       color: #fff;
-      font-size: 10rem;
+      font-size: 10em;
       align-self: center;
       z-index: 2;
     }
     .zeroTxtThree {
       color: #fff;
-      font-size: 1.3rem;
+      font-size: 1.6rem;
       align-self: center;
       z-index: 3;
       margin-top: auto;
@@ -59,7 +55,7 @@ display: flex;
 
 
 .S1 {
-  padding-top: 1%;
+  /* padding-top: 1%; */
   height: 95vh;
     font-size: 1.6rem;
     color: #7e7e77;
@@ -68,35 +64,21 @@ flex-direction: column;
 }
 .S1 p {
   margin-top: auto;
-  margin-bottom: 8vh;
+  /* margin-bottom: 8vh; */
 }  
   
 .S2 {
-height: 95vh;
-}
-  
-  .img-container {
-  /* position: relative; */
+  padding-top: 3em;
   display: flex;
-} 
-  
-  .img2 {
-    width: 100%;
-    object-fit: cover;
-    height: auto;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    display: grid;
   }
-
-  .gridhv {
-    margin-top: -7%;
-    z-index: 8;
+  .zero2 {
+    min-width: 64.5vw;
+    width: 100%;
+  }
+  .zerog2 {
     width: 100%;
     margin-left: -100%;
-   }
-
+  }
    .txt2 {
     font-size: 1.3rem;
      color: #fff;
