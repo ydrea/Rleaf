@@ -10,17 +10,30 @@ margin-right: 17.5%;
 img {
   max-width: 100%;
 }
-.S0 {
-margin-top: 5vh;  
-height: 100vh;
+section {
+  margin-top: 4%;
+  max-height: 95vh;
 }
-  .S0 img {
-    margin-top: 5vh;
+/* START */
+.S0 {
+padding-top: 1%;
+/* max-height: 95vh; */
+display: flex;
+}
+  .zero {
+    /* margin-top: 5vh; */
     max-width: 65vw;
     width: 100%;
   }
+.zerog {
+  /* max-width: 65vw; */
+    width: 100%;
+  margin-left: -100%;
+}
+
 .S1 {
-  height: 100vh;
+  padding-top: 1%;
+  height: 95vh;
     font-size: 1.6rem;
     color: #7e7e77;
   display: flex;
@@ -32,11 +45,12 @@ flex-direction: column;
 }  
   
 .S2 {
-height: 100vh;
+height: 95vh;
 }
   
   .img-container {
-  position: relative;
+  /* position: relative; */
+  display: flex;
 } 
   
   .img2 {
@@ -50,25 +64,24 @@ height: 100vh;
   }
 
   .gridhv {
+    margin-top: -7%;
     z-index: 8;
     width: 100%;
-    height: 95%;
-    position: absolute;
-        left: 17.5; top: 0;
+    /* height: 95%; */
+    margin-left: -100%;
    }
 
    .txt2 {
     font-size: 1.3rem;
      color: #fff;
-     position: absolute;
      text-align: left;
      z-index: 33;
-padding: 5px;
      max-width: 35vw;
      width: 100%;
-     bottom: 10vh;
-     left: 45%;
-   }
+     margin-left: -30%;
+     margin-top: auto;
+    margin-bottom: 7%;
+    }
    .txt2 p {
     margin: 0.5;
    }

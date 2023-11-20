@@ -135,9 +135,9 @@ export const selectFilteredPhotos = state => {
 						.includes(filter));
 
 			// console.log('Photo:', photo);
-			console.log('Filter:', filter);
-			console.log('tagoviIncluded:', tagoviIncluded);
-			console.log('kategorijaMatches:', kategorijaMatches);
+			// console.log('Filter:', filter);
+			// console.log('tagoviIncluded:', tagoviIncluded);
+			// console.log('kategorijaMatches:', kategorijaMatches);
 			// console.log('Filter Value:', filter.value);
 			// console.log('Filter Label:', filter.label);
 			// console.log('Photo Kategorija:', photo.kategorija);
