@@ -16,7 +16,7 @@ section {
 }
 /* START */
   .S0 {
-  padding-top: 3em;
+  padding-top: 2em;
   display: flex;
   }
   .zero {
@@ -36,13 +36,11 @@ section {
   }
   .zeroTxtOne {
     color: #fff;
-    font-size: 10em;
-    align-self: center;
+    font-size: 7.5vw;
     }
    .zeroTxtTwo {
       color: #fff;
-      font-size: 10em;
-      align-self: center;
+      /* font-size: 10em; */
       z-index: 2;
     }
     .zeroTxtThree {
@@ -68,7 +66,7 @@ flex-direction: column;
 }  
   
 .S2 {
-  padding-top: 3em;
+  padding-top: 2em;
   display: flex;
   }
   .zero2 {
