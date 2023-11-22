@@ -123,29 +123,57 @@ export const selectFilteredPhotos = state => {
 	}
 
 	return allPhotos.filter(photo => {
-		return selectedFilters.some(filter => {
-			const tagoviIncluded =
-				photo.tagovi && photo.tagovi.includes(filter);
-			const kategorijaMatches =
+		const kategorijaMatches = selectedFilters.some(filter => {
+			return (
 				photo.kategorija &&
 				(photo.kategorija === filter ||
 					photo.kategorija
 						.split(',')
 						.map(category => category.trim())
-						.includes(filter));
-
-			// console.log('Photo:', photo);
-			console.log('Filter:', filter);
-			console.log('tagoviIncluded:', tagoviIncluded);
-			console.log('kategorijaMatches:', kategorijaMatches);
-			// console.log('Filter Value:', filter.value);
-			// console.log('Filter Label:', filter.label);
-			// console.log('Photo Kategorija:', photo.kategorija);
-
-			return tagoviIncluded || kategorijaMatches;
+						.includes(filter))
+			);
 		});
+
+		const tagoviIncluded = selectedFilters.some(filter => {
+			return photo.tagovi && photo.tagovi.includes(filter);
+		});
+
+		return kategorijaMatches || tagoviIncluded;
 	});
 };
+
+// export const selectFilteredPhotos = state => {
+// 	const selectedFilters = state.gallery.selectedFilters || [];
+// 	const allPhotos = state.gallery.photos;
+
+// 	if (selectedFilters.length === 0) {
+// 		return allPhotos;
+// 	}
+
+// 	return allPhotos.filter(photo => {
+// 		return selectedFilters.some(filter => {
+// 			const tagoviIncluded =
+// 				photo.tagovi && photo.tagovi.includes(filter);
+// 			const kategorijaMatches =
+// 				photo.kategorija &&
+// 				(photo.kategorija === filter ||
+// 					photo.kategorija
+// 						.split(',')
+// 						.map(category => category.trim())
+// 						.includes(filter));
+
+// 			// console.log('Photo:', photo);
+// 			console.log('Filter:', filter);
+// 			console.log('tagoviIncluded:', tagoviIncluded);
+// 			console.log('kategorijaMatches:', kategorijaMatches);
+// 			// console.log('Filter Value:', filter.value);
+// 			// console.log('Filter Label:', filter.label);
+// 			// console.log('Photo Kategorija:', photo.kategorija);
+
+// 			return tagoviIncluded || kategorijaMatches;
+// 		});
+// 	});
+// };
 
 // export const selectFilteredPhotos = state => {
 // 	const selectedFilters = state.gallery.selectedFilters || [];
