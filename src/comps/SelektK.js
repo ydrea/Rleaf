@@ -72,7 +72,14 @@ function KategorijeSelekt() {
 
 		dispatch(setFilters(selectedFilterValues));
 	};
+	//
 
+	const handleKategorijeFilterChange = selectedFilters => {
+		const selectedFilterValues = selectedFilters.map(
+			filter => filter.label
+		);
+		dispatch(setFilters({ kategorije: selectedFilterValues }));
+	};
 	//
 	const customKategorijeOptions = [
 		{ value: 'gospodarski_objekti', label: 'gospodarski objekti' },
@@ -150,7 +157,7 @@ function KategorijeSelekt() {
 				isMulti
 				options={customKategorijeOptions}
 				value={filterSelected}
-				onChange={handleFilterChange}
+				onChange={handleKategorijeFilterChange}
 				getOptionValue={option => option.value}
 				getOptionLabel={option => option.label}
 			/>

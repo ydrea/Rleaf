@@ -57,7 +57,12 @@ export const gallerySlice = createSlice({
 			state.selectedPhoto = action.payload;
 		},
 		setFilters: (state, action) => {
-			state.selectedFilters = action.payload;
+			// state.selectedFilters = action.payload;
+			const { kategorije, tagovi } = action.payload;
+			state.selectedFilters = {
+				kategorije: kategorije || state.selectedFilters.kategorije,
+				tagovi: tagovi || state.selectedFilters.tagovi,
+			};
 		},
 	},
 	extraReducers: {
@@ -115,32 +120,88 @@ export const selectSelectedPhoto = state => {
 
 // Filteri
 export const selectFilteredPhotos = state => {
-	const selectedFilters = state.gallery.selectedFilters || [];
+	const { kategorije, tagovi } = state.gallery.selectedFilters || {};
 	const allPhotos = state.gallery.photos;
 
-	if (selectedFilters.length === 0) {
+	if (!kategorije && !tagovi) {
 		return allPhotos;
 	}
 
 	return allPhotos.filter(photo => {
-		const kategorijaMatches = selectedFilters.some(filter => {
-			return (
-				photo.kategorija &&
-				(photo.kategorija === filter ||
-					photo.kategorija
-						.split(',')
-						.map(category => category.trim())
-						.includes(filter))
+		const kategorijaMatches =
+			!kategorije ||
+			kategorije.some(filter => {
+				const categories = photo.kategorija
+					? photo.kategorija
+							.split(',')
+							.map(category => category.trim())
+					: [];
+				return categories.includes(filter);
+			});
+
+		const tagoviIncluded =
+			!tagovi ||
+			tagovi.every(
+				filter => photo.tagovi && photo.tagovi.includes(filter)
 			);
-		});
 
-		const tagoviIncluded = selectedFilters.some(filter => {
-			return photo.tagovi && photo.tagovi.includes(filter);
-		});
-
-		return kategorijaMatches || tagoviIncluded;
+		return kategorijaMatches && tagoviIncluded;
 	});
 };
+
+// export const selectFilteredPhotos = state => {
+// 	const selectedFilters = state.gallery.selectedFilters || [];
+// 	const allPhotos = state.gallery.photos;
+
+// 	if (selectedFilters.length === 0) {
+// 		return allPhotos;
+// 	}
+
+// 	return allPhotos.filter(photo => {
+// 		const kategorijaMatches = selectedFilters.some(filter => {
+// 			const categories = photo.kategorija
+// 				? photo.kategorija.split(',').map(category => category.trim())
+// 				: [];
+// 			return categories.includes(filter);
+// 		});
+
+// 		const tagoviIncluded = selectedFilters.every(filter => {
+// 			return photo.tagovi && photo.tagovi.includes(filter);
+// 		});
+
+// 		// Change the logical operator from || (OR) to && (AND)
+// 		return kategorijaMatches && tagoviIncluded;
+// 	});
+// };
+
+// export const selectFilteredPhotos = state => {
+// 	const selectedFilters = state.gallery.selectedFilters || [];
+// 	const allPhotos = state.gallery.photos;
+
+// 	if (selectedFilters.length === 0) {
+// 		return allPhotos;
+// 	}
+
+// 	const filteredPhotos = allPhotos.filter(photo => {
+// 		const kategorijaMatches = selectedFilters.some(filter => {
+// 			const categories = photo.kategorija
+// 				? photo.kategorija.split(',').map(category => category.trim())
+// 				: [];
+// 			return categories.includes(filter);
+// 		});
+
+// 		const tagoviIncluded = selectedFilters.every(filter => {
+// 			return photo.tagovi && photo.tagovi.includes(filter);
+// 		});
+
+// 		return kategorijaMatches || tagoviIncluded;
+// 	});
+
+// 	console.log(filteredPhotos.length); // Log the number of filtered photos
+// 	console.log(filteredPhotos); // Log the array of filtered photos
+
+// 	return filteredPhotos;
+// };
 
 // export const selectFilteredPhotos = state => {
 // 	const selectedFilters = state.gallery.selectedFilters || [];
