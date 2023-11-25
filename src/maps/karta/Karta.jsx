@@ -47,14 +47,7 @@ import {
       lat: 45.22292,
       lng: 16.00897,
       title: 'Marker 2',
-    },
-    {
-      id: '3',
-      lat: 45.29639,
-      lng: 16.10912,
-      title: 'Marker 3',
-    },
-    
+    },    
   ];
   
   const ListMarkers = ({ onItemClick }) => {
@@ -601,10 +594,12 @@ zoomControl={false}
             </Marker>
           ))} */}
 </section>
-<Hline color="#7e7e77" height="2px" width="100%" />{' '}<section>
-{/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
+      <Hline color="#7e7e77" height="2px" width="100%" />{' '}
+      
+      <section>
+<ListMarkers data={points} onItemClick={handleItemClick} />
 
- <Footer/>
+ {/* <Footer/> */}
   
  </section>
  </div> );

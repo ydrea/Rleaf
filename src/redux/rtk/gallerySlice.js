@@ -148,6 +148,7 @@ export const selectFilteredPhotos = state => {
 		return kategorijaMatches && tagoviIncluded;
 	});
 };
+export default gallerySlice.reducer;
 
 // export const selectFilteredPhotos = state => {
 // 	const selectedFilters = state.gallery.selectedFilters || [];
@@ -261,4 +262,3 @@ export const selectFilteredPhotos = state => {
 // 		});
 // 	});
 // };
-export default gallerySlice.reducer;
