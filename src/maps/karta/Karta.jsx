@@ -602,7 +602,7 @@ zoomControl={false}
           ))} */}
 </section>
 <Hline color="#7e7e77" height="2px" width="100%" />{' '}<section>
-{/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
+<ListMarkers data={points} onItemClick={handleItemClick} />
 
  <Footer/>
   
