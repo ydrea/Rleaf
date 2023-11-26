@@ -33,7 +33,7 @@ import {
     PodRV, PodRvi, PodRd, PodK, TemaZP, TemaP, //TemaS
   } from '../wms';
 
-  //fly  
+  //fly 
 
   const points = [
     {
@@ -100,10 +100,10 @@ import {
     
   //icon
 const myIcon = new Icon({
-    iconUrl: ico, 
-    // require('../../assets/icon.png'),
-    iconSize: [28, 28],
-  });
+  iconUrl: require('../../assets/icon.png'),
+  iconSize: [28, 28],
+});
+
   
 //
 // MAP
@@ -112,28 +112,26 @@ const myIcon = new Icon({
 
 function Map() {
     const [markeri, markeriSet] = useState([]);
-    const [selectedLayer, setSelectedLayer] = useState();
     const markerRef = useRef([]);
 const navigate = useNavigate()
     const photos = useSelector(selectPhotos);  
     const [selected, setSelected] = useState();
     const [showPhoto, showPhotoSet] = useState(false);
   const dispatch = useDispatch(); 
+  //fly
 const selectedPhoto = useSelector(selectSelectedPhoto);
-  const parram = useParams();
-  const map = useMap();
-  //
+  const {signatura} = useParams();
+  const [selectedMarker, selectedMarkerSet] = useState(null)
+  const [selectedLayer, selectedLayerSet] = useState();
+    
+  // 
   useEffect(() => {
-    JSON.stringify(parram)
-    console.log(parram);
-    if (selectedPhoto) {
-      const centerZoom = selectedPhoto.geom
-      console.log(centerZoom);
-      map.flyToBounds(centerZoom)
+    if(signatura){
+    selectedLayerSet(temafk.id)
+ console.log(temafk);
     }
-  }, [parram])
-  
-// 
+  }, [])
+
   //
   const handleSelectPhoto = index => {
     const originalIndex = photos.indexOf(markeri[index]);
@@ -154,56 +152,12 @@ const selectedPhoto = useSelector(selectSelectedPhoto);
   };
   
   //
-  useEffect(() => {
-    dispatch(getPhotos());
-  }, [dispatch]);
 
 //
   function handleItemClick(index) {
     setSelected(index);
   }
 
-  //tipofthespear
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_SERVER}/json_photos`
-      );
-      console.log(response.data);
-      const parsedData = response.data.map(item => {
-        const geo = JSON.parse(item.geometry);
-
-        const coordinates = extractLatLongFromJSON(geo);
-
-        if (
-          coordinates &&
-          coordinates.latitude &&
-          coordinates.longitude
-        ) {
-          console.log('Latitude:', coordinates.latitude);
-          console.log('Longitude:', coordinates.longitude);
-
-          return {
-            popUp: item.signatura,
-            geocode: [coordinates.latitude, coordinates.longitude],
-          };
-        } else {
-          console.error('Invalid JSON or missing coordinates:', geo);
-          return null;
-        }
-      });
-
-      const filteredData = parsedData.filter(item => item !== null);
-
-      markeriSet(filteredData);
-      return filteredData;
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-  // fetchData();
-}, []);
 //
   //and out
   const { BaseLayer, Overlay } = LayersControl;
@@ -576,7 +530,7 @@ zoomControl={false}
        {...temadgu.props}
     />
     </Overlay>
-    <Overlay key={temafk.id} name={temafk.name}>
+    <Overlay key={temafk.id} name={temafk.name} checked={selectedLayer === temafk.id}>
     <BetterWMS
       key={temafk.id}
        id={temafk.id}
@@ -586,27 +540,15 @@ zoomControl={false}
     />
     </Overlay>
       </LayersControl>
-    </MapContainer>
-    {/* {markeri.map((i) => (
-            <Marker
-              key={i.geocode[0] + Math.random()}
-              position={i.geocode}
-              icon={myIcon}
-            >
-              <Popup>
-                {i.popUp}
-                <img
-                  width="250px"
-                  src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${i.popUp}`}
-                  alt={i.popUp}
-                />
-              </Popup>
-            </Marker>
-          ))} */}
+
+
+      <MyMarkers selectedIndex={selected} data={points} />
+
+        </MapContainer>
 </section>
       <Hline color="#7e7e77" height="2px" width="100%" /> <Footer/>      
       <section>
-{/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
+<ListMarkers data={points} onItemClick={handleItemClick} />
 
  {/* <Footer/> */}
   
