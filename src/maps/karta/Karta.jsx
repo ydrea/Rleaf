@@ -15,7 +15,7 @@ import {
 import BetterWMS from "./BetterWMS";
 import Hline from '../../comps/Line';
 import { useRef, useEffect, useState } from 'react';
-import { Icon } from 'leaflet';
+// import { Icon } from 'leaflet';
 import axios from 'axios';
 import extractLatLongFromJSON from './latlngParse'
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -98,11 +98,11 @@ import {
     );
   };
     
-  //icon
-const myIcon = new Icon({
-  iconUrl: require('../../assets/icon.png'),
-  iconSize: [28, 28],
-});
+//   //icon
+// const myIcon = new Icon({
+//   iconUrl: require('../../assets/icon.png'),
+//   iconSize: [28, 28],
+// });
 
   
 //
