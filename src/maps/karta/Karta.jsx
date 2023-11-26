@@ -118,12 +118,21 @@ const navigate = useNavigate()
     const photos = useSelector(selectPhotos);  
     const [selected, setSelected] = useState();
     const [showPhoto, showPhotoSet] = useState(false);
-  
-// 
+  const dispatch = useDispatch(); 
 const selectedPhoto = useSelector(selectSelectedPhoto);
-const dispatch = useDispatch();
-// console.log(selectedPhoto.signatura);
-
+  const parram = useParams();
+  const map = useMap();
+  //
+  useEffect(() => {
+    JSON.stringify(parram)
+    console.log(parram);
+    if (selectedPhoto) {
+      const centerZoom = selectedPhoto.geom
+      console.log(centerZoom);
+      map.flyToBounds(centerZoom)
+    }
+  }, [parram])
+  
 // 
   //
   const handleSelectPhoto = index => {
@@ -193,7 +202,7 @@ useEffect(() => {
       console.error('Error fetching data:', error);
     }
   };
-  fetchData();
+  // fetchData();
 }, []);
 //
   //and out
@@ -435,7 +444,8 @@ center={[45.2, 16.2]}
 zoom={11}
 style={{
   width: '100%',
-  height: '100vh',
+  height: '90vh',
+  cursor: 'crosshair'
   
 }}
 zoomControl={false}
@@ -594,10 +604,9 @@ zoomControl={false}
             </Marker>
           ))} */}
 </section>
-      <Hline color="#7e7e77" height="2px" width="100%" />{' '}
-      
+      <Hline color="#7e7e77" height="2px" width="100%" /> <Footer/>      
       <section>
-<ListMarkers data={points} onItemClick={handleItemClick} />
+{/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
 
  {/* <Footer/> */}
   

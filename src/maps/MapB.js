@@ -42,7 +42,7 @@ function onEachFeature(feature, layer) {
 	layer.bindPopup(feature.properties.code_opis);
 }
 
-export const Map = () => {
+export default function Map() {
 	const selectedPhoto = useSelector(selectAPhoto);
 
 	//prog. zoom
@@ -169,9 +169,9 @@ export const Map = () => {
 					<BaseLayer checked name='OSM'>
 						<TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
 					</BaseLayer>
-					<BaseLayer name='reljef'>
+					{/* <BaseLayer name='reljef'>
 						<PodRH />
-					</BaseLayer>
+					</BaseLayer> */}
 					<FiksniElementi />
 					<Overlay name='admin. naselja'>
 						<ANaselja />
@@ -242,4 +242,4 @@ export const Map = () => {
 			<Footer />{' '}
 		</div>
 	);
-};
+}

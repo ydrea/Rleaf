@@ -8,6 +8,10 @@
   grid-template-columns: 200px 200px;
   margin: 3vh 17.5vw;
 }
+
+.cc-link {
+  cursor: pointer;
+}
  
  .image-wrapper { 
   /* display: flex;

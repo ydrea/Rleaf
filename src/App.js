@@ -1,6 +1,6 @@
 import Home from './pages/Home';
 import About from './pages/About';
-// import Map from './pages/Map';
+// import Map from './pages/MapD';
 import Contact from './pages/Contact';
 import Ewap from './pages/projects/ewap';
 import Banija from './pages/projects/banija';
@@ -25,34 +25,34 @@ import Map from './maps/karta/Karta';
 // import ScrollToHashElement from './ToHash';
 import ScrollToAnchor from './pages/ScrollToAnchor';
 function App() {
-  //
+	//
 
-  useEffect(() => {
-    console.log(
-      'REACT_APP_SERVER_PUB:',
-      process.env.REACT_APP_SERVER_PUB
-    );
-  });
-  return (
-    <Layout>
-      <Routes>
-        <Route element={<Private />}>
-          <Route path="/upload" element={<Fileupload />} />
-        </Route>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/projects/banija" element={<Banija />} />
-        <Route path="/projects/ewap" element={<Ewap />} />
-        <Route path="/maps/:signatura" element={<Map />} />
-        <Route path="/maps" element={<Map />} />
-        <Route path="/photos" element={<PhotosLayout />}>
-          <Route index element={<Photos />} />
-          <Route path=":signatura" element={<Photo />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </Layout>
-  );
+	useEffect(() => {
+		console.log(
+			'REACT_APP_SERVER_PUB:',
+			process.env.REACT_APP_SERVER_PUB
+		);
+	});
+	return (
+		<Layout>
+			<Routes>
+				<Route element={<Private />}>
+					<Route path='/upload' element={<Fileupload />} />
+				</Route>
+				<Route path='/' element={<Home />} />
+				<Route path='/about' element={<About />} />
+				<Route path='/contact' element={<Contact />} />
+				<Route path='/projects/banija' element={<Banija />} />
+				<Route path='/projects/ewap' element={<Ewap />} />
+				<Route path='/maps/:signatura' element={<Map />} />
+				<Route path='/maps' element={<Map />} />
+				<Route path='/photos' element={<PhotosLayout />}>
+					<Route index element={<Photos />} />
+					<Route path=':signatura' element={<Photo />} />
+				</Route>
+				<Route path='/login' element={<Login />} />
+			</Routes>
+		</Layout>
+	);
 }
 export default App;
