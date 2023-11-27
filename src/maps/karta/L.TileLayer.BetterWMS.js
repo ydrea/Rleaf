@@ -141,7 +141,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 					image.alt = 'thumb';
 					image.style.minWidth = '300px';
 					image.style.width = '100%';
-					image.style.marginTop = '10px';
+					image.style.marginTop = '8px';
 
 					newCell.appendChild(image);
 					newRow.appendChild(newCell);
