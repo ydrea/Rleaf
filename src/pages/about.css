@@ -19,7 +19,7 @@ section {
 
 /* START */
     .one {
-      height: 75vh;
+      height: 50vh;
       font-size: 1.1rem;          
     
   margin-left: 17.5vw;
@@ -32,7 +32,7 @@ section {
     .one li {
       list-style-type: none;
       }
-      /* .one li p {margin-bottom: -.1rem;} */
+      .one li p {margin-bottom: -.1rem;}
       .one li span{color: #000;}
       
     
@@ -124,7 +124,7 @@ flex-direction: column;
         width: 35%;
         margin-left: 23%;
         margin-right: 47%;
-        padding-top: 15%;
+        padding-top: 5%;
         /* padding-left: 1%; */
       }
 
