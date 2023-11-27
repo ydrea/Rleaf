@@ -80,8 +80,8 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 	showGetFeatureInfo: function (
 		err,
 		latlng,
-		content,
-		signaturaFromUrl
+		content
+		// signaturaFromUrl
 	) {
 		if (err) {
 			console.log(err);
@@ -92,7 +92,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 		tempDiv.innerHTML = content;
 		var rows = tempDiv.querySelectorAll('tr');
 
-		var shouldFlyTo = false; // Initialize the flag
+		// var shouldFlyTo = false; // Initialize the flag
 
 		for (var i = 0; i < rows.length; i++) {
 			var row = rows[i];
@@ -107,17 +107,6 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 				if (header === 'signatura') {
 					console.log('Header:', header);
 					console.log('Value:', value);
-				}
-
-				if (
-					header === 'signatura'
-					// &&
-					// signaturaFromUrl &&
-					// value === signaturaFromUrl
-				) {
-					// Set the flag to true if the signatura matches
-					shouldFlyTo = true;
-					console.log('yea!');
 				}
 
 				if (header === 'foto_url') {
