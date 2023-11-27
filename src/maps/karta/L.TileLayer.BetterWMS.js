@@ -130,7 +130,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 					var image = document.createElement('img');
 					image.src = imgUrl;
 					image.alt = 'Image';
-					image.style.width = '400px';
+					image.style.minWidth = '400px';
 					// image.style.margin = '10px';
 					newCell.appendChild(image);
 					newRow.appendChild(newCell);
@@ -146,7 +146,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 
 		var filteredContent = tempDiv.innerHTML;
 		// console.log(filteredContent);
-		L.popup({ width: 400 })
+		L.popup({ minWidth: '500px', width: '100%' })
 			.setLatLng(latlng)
 			.setContent(filteredContent)
 			.openOn(this._map);
