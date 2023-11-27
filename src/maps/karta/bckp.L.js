@@ -1,20 +1,13 @@
 import L from 'leaflet';
 import axios from 'axios';
 import isValidURL from '../../utils/isvalidUrl';
-import getParameterByName from '../../utils/getUrlParams';
-//
-// Add this function outside of your L.TileLayer.BetterWMS definition
-function flyToLocation(map, latlng) {
-	map.flyTo(latlng, 15);
-}
-
 //
 L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 	onAdd: function (map) {
 		// Triggered when the layer is added to a map.
-		// Register a click listener, then do all the upstream WMS things
+		//   Register a click listener, then do all the upstream WMS things
 		L.TileLayer.WMS.prototype.onAdd.call(this, map);
-		map.on('click', this.getFeatureInfo, this); // Bind the function to the correct context
+		map.on('click', this.getFeatureInfo, this);
 	},
 
 	onRemove: function (map) {
@@ -24,7 +17,6 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 		map.off('click', this.getFeatureInfo, this);
 	},
 
-	//get em
 	getFeatureInfo: function (evt) {
 		// Make an Axios request to the server
 		var url = this.getFeatureInfoUrl(evt.latlng);
@@ -75,14 +67,12 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 		return this._url + L.Util.getParamString(params, this._url, true);
 	},
 
+	//////////
+	// ...
+
 	// with imgs
-	//with triggers
-	showGetFeatureInfo: function (
-		err,
-		latlng,
-		content,
-		signaturaFromUrl
-	) {
+
+	showGetFeatureInfo: function (err, latlng, content) {
 		if (err) {
 			console.log(err);
 			return;
@@ -92,47 +82,28 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 		tempDiv.innerHTML = content;
 		var rows = tempDiv.querySelectorAll('tr');
 
-		var shouldFlyTo = false; // Initialize the flag
-
 		for (var i = 0; i < rows.length; i++) {
 			var row = rows[i];
 			var cells = row.querySelectorAll('th, td');
-
-			// console.log(header);
-
 			if (cells.length >= 2) {
 				var header = cells[0].textContent.trim();
 				var value = cells[1].textContent.trim();
-
-				if (header === 'signatura') {
-					console.log('Header:', header);
-					console.log('Value:', value);
-				}
-
-				if (
-					header === 'signatura'
-					// &&
-					// signaturaFromUrl &&
-					// value === signaturaFromUrl
-				) {
-					// Set the flag to true if the signatura matches
-					shouldFlyTo = true;
-					console.log('yea!');
-				}
-
 				if (header === 'foto_url') {
+					console.log('yea!');
 					var imgUrl = value.replace(/["']/g, '');
 					console.log(imgUrl);
 
 					var newRow = document.createElement('tr');
 					var newCell = document.createElement('td');
-					newCell.style.width = '400px';
+					newCell.style.width = '100%';
 					var image = document.createElement('img');
 					image.src = imgUrl;
 					image.alt = 'Image';
-					image.style.width = '400px';
-					// image.style.margin = '10px';
+					image.style.width = '200%';
+
+					image.style.margin = '1% 10%';
 					newCell.appendChild(image);
+
 					newRow.appendChild(newCell);
 
 					row.parentNode.replaceChild(newRow, row);
@@ -145,15 +116,11 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 		}
 
 		var filteredContent = tempDiv.innerHTML;
-		// console.log(filteredContent);
-		L.popup({ width: 400 })
+		console.log(filteredContent);
+		L.popup({ maxWidth: 400 })
 			.setLatLng(latlng)
 			.setContent(filteredContent)
 			.openOn(this._map);
-
-		// if (shouldFlyTo) {
-		// 	flyToLocation(this._map, latlng);
-		// }
 	},
 
 	// ...

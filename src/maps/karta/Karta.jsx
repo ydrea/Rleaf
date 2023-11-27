@@ -15,7 +15,7 @@ import {
 import BetterWMS from "./BetterWMS";
 import Hline from '../../comps/Line';
 import { useRef, useEffect, useState } from 'react';
-// import { Icon } from 'leaflet';
+import { Icon } from 'leaflet';
 import axios from 'axios';
 import extractLatLongFromJSON from './latlngParse'
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -25,84 +25,36 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectSelectedPhoto, setSelectedPhotoIndex, setSelectedPhoto, selectPhotos, 
   getPhotos } from '../../redux/rtk/gallerySlice';
 
-import {ReactComponent as ico} from '../../assets/logo.svg'
-
 import "react-tabs/style/react-tabs.css";
 import {
     ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
     PodRV, PodRvi, PodRd, PodK, TemaZP, TemaP, //TemaS
   } from '../wms';
+import { parse } from 'wellknown';
 
   //fly 
-
-  const points = [
-    {
-      id: '1',
-      lat: 45.22284,
-      lng: 16.21003,
-      title: 'Marker 1',
-    },
-    {
-      id: '2',
-      lat: 45.22292,
-      lng: 16.00897,
-      title: 'Marker 2',
-    },    
-  ];
-  
-  const ListMarkers = ({ onItemClick }) => {
-    return (
-      <div className='markersList'>
-        {points.map(({ title }, index) => (
-          <div
-            className='markerItem'
-            key={index}
-            onClick={e => {
-              e.preventDefault();
-              onItemClick(index);
-            }}
-          >
-            {title}
-          </div>
-        ))}
-      </div>
-    );
-  };
-  
-  const MyMarkers = ({ data, selectedIndex }) => {
-    return data.map((item, index) => (
-      <PointMarker
-        key={index}
-        content={item.title}
-        center={{ lat: item.lat, lng: item.lng }}
-        openPopup={selectedIndex === index}
-      />
-    ));
-  };
-  
-  const PointMarker = ({ center, content, openPopup }) => {
+  const SingleMarker = () => {
+    const { signatura } = useParams(); // 
+     const markerData = useSelector(selectSelectedPhoto);
+     console.log(markerData);
+   
     const map = useMap();
     const markerRef = useRef(null);
-  
-    useEffect(() => {
-      if (openPopup) {
-        map.flyToBounds([center]);
-        markerRef.current.openPopup();
-      }
-    }, [map, center, openPopup]);
-  
+
+    
     return (
-      <Marker ref={markerRef} position={center}>
-        <Popup>{content}</Popup>
+      <Marker ref={markerRef}
+        // position={[markerData?.lat, markerData?.lng]}
+      >
+        {/* <Popup>{markerData?.signatura}</Popup> */}
       </Marker>
     );
   };
-    
-//   //icon
-// const myIcon = new Icon({
-//   iconUrl: require('../../assets/icon.png'),
-//   iconSize: [28, 28],
-// });
+  //icon
+const myIcon = new Icon({
+  iconUrl: require('../../assets/icon.png'),
+  iconSize: [28, 28],
+});
 
   
 //
@@ -112,25 +64,24 @@ import {
 
 function Map() {
     const [markeri, markeriSet] = useState([]);
-    const markerRef = useRef([]);
+    // const markerRef = useRef([]);
 const navigate = useNavigate()
     const photos = useSelector(selectPhotos);  
     const [selected, setSelected] = useState();
     const [showPhoto, showPhotoSet] = useState(false);
   const dispatch = useDispatch(); 
   //fly
-const selectedPhoto = useSelector(selectSelectedPhoto);
+// const selectedPhoto = useSelector(selectSelectedPhoto);
   const {signatura} = useParams();
-  const [selectedMarker, selectedMarkerSet] = useState(null)
+  // const [selectedMarker, selectedMarkerSet] = useState(null)
   const [selectedLayer, selectedLayerSet] = useState();
     
-  // 
+  // // 
   useEffect(() => {
-    if(signatura){
-    selectedLayerSet(temafk.id)
- console.log(temafk);
+    if (signatura) {
+      selectedLayerSet(temafk.id)
     }
-  }, [])
+  }, [signatura])
 
   //
   const handleSelectPhoto = index => {
@@ -154,9 +105,9 @@ const selectedPhoto = useSelector(selectSelectedPhoto);
   //
 
 //
-  function handleItemClick(index) {
-    setSelected(index);
-  }
+  // function handleItemClick(index) {
+  //   setSelected(index);
+  // }
 
 //
   //and out
@@ -541,14 +492,15 @@ zoomControl={false}
     </Overlay>
       </LayersControl>
 
+          {/* <SingleMarker/> */}
 
-      <MyMarkers selectedIndex={selected} data={points} />
+      {/* <MyMarkers selectedIndex={selected} data={points} /> */}
 
         </MapContainer>
 </section>
       <Hline color="#7e7e77" height="2px" width="100%" /> <Footer/>      
       <section>
-<ListMarkers data={points} onItemClick={handleItemClick} />
+{/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
 
  {/* <Footer/> */}
   

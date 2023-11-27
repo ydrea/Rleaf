@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
+	setSelectedPhoto,
 	selectPhotos,
 	getPhotos,
 	setSelectedPhotoIndex,
@@ -11,10 +12,6 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import './photo.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import {
-	setSelectedMarker,
-	selectSelectedPhoto,
-} from '../redux/rtk/mapSlice';
 import Hline from '../comps/Line';
 
 //
@@ -50,7 +47,7 @@ export default function Photo() {
 	//
 	const handleShowOnMap = () => {
 		// Dispatch an action to set the selected marker in Redux
-		dispatch(setSelectedMarker(selectedPhoto));
+		dispatch(setSelectedPhoto(selectedPhoto));
 		console.log(selectedPhoto);
 		// Navigate back to the map view
 		navigate(`/maps/${signatura}`);
