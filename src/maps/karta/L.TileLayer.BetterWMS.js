@@ -122,19 +122,27 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 
 				if (header === 'foto_url') {
 					var imgUrl = value.replace(/["']/g, '');
-					console.log(imgUrl);
+					var thumbUrl;
+					var publicIndex = imgUrl.indexOf('/public/');
+					if (publicIndex !== -1) {
+						thumbUrl =
+							imgUrl.slice(0, publicIndex + '/public/'.length) +
+							'thumbs/' +
+							imgUrl.slice(publicIndex + '/public/'.length);
+					}
+					console.log(imgUrl, thumbUrl);
 
 					var newRow = document.createElement('tr');
 					var newCell = document.createElement('td');
 					newCell.style.width = '400px';
 					var image = document.createElement('img');
-					image.src = imgUrl;
+					image.src = thumbUrl;
 					image.alt = 'Image';
 					image.style.minWidth = '400px';
 					// image.style.margin = '10px';
 					newCell.appendChild(image);
 					newRow.appendChild(newCell);
-
+					//
 					row.parentNode.replaceChild(newRow, row);
 				} else {
 					if (value === 'NULL' || value === '') {
