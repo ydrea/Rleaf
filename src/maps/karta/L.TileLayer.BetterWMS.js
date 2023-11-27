@@ -133,13 +133,16 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 					console.log(imgUrl, thumbUrl);
 
 					var newRow = document.createElement('tr');
+					newRow.style.width = '100%';
 					var newCell = document.createElement('td');
-					newCell.style.width = '400px';
+					newCell.colSpan = 2;
 					var image = document.createElement('img');
 					image.src = thumbUrl;
-					image.alt = 'Image';
-					image.style.minWidth = '400px';
-					// image.style.margin = '10px';
+					image.alt = 'thumb';
+					image.style.minWidth = '300px';
+					image.style.width = '100%';
+					image.style.marginTop = '10px';
+
 					newCell.appendChild(image);
 					newRow.appendChild(newCell);
 					//
