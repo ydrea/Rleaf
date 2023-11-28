@@ -3,6 +3,18 @@ import axios from 'axios';
 import isValidURL from '../../utils/isvalidUrl';
 import getParameterByName from '../../utils/getUrlParams';
 //
+// A global variable to store the latlng value
+let globalLatlng;
+
+// Function to set the latlng value
+export function setLatlng(latlng) {
+	globalLatlng = latlng;
+}
+
+// Function to retrieve the latlng value
+export function getLatlng() {
+	return globalLatlng;
+}
 // Add this function outside of your L.TileLayer.BetterWMS definition
 function flyToLocation(map, latlng) {
 	map.flyTo(latlng, 15);

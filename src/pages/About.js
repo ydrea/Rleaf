@@ -3,12 +3,12 @@ import './about.css';
 export default function About() {
 	return (
 		<div className='about'>
-			<section>
+			<section className='one'>
 				<div className='naslov-container'>
 					<h1>opservatorij</h1>
 					<div className='line-div0' />
 				</div>
-				<div className='one'>
+				<div className='oneT'>
 					Opservatorij krajobraza je interdisciplinarna platforma za
 					istraživanje krajobraza i razvoj temeljen na krajobrazu.
 					2023. godine počeo je sa radom kao virtualni kolaborativni

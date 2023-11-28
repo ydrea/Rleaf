@@ -19,7 +19,7 @@ section {
 
 /* START */
     .one {
-      height: 50vh;
+      height: 100vh;
       font-size: 1.1rem;          
     
   margin-left: 17.5vw;
@@ -101,7 +101,7 @@ flex-direction: column;
         width: 35%;
         margin-left: 47.5%;
         margin-right: 17.5%;
-        padding-top: 15%;
+        padding-top: 5%; 
         font-size: 1.1rem;
         font-style: normal;
         font-weight: 400;
