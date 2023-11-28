@@ -122,6 +122,10 @@ export default function PhotosEDIT({ onRemove }) {
 		(_, index) => index + 1
 	);
 	//
+	const sortedPhotos = [...photosToDisplay].sort(
+		(a, b) => b.id - a.id
+	);
+
 	return (
 		<div className='gallery'>
 			<div className='photo-filters'>
@@ -182,7 +186,7 @@ export default function PhotosEDIT({ onRemove }) {
 					className='my-masonry-grid'
 					columnClassName='my-masonry-grid_column'
 				>
-					{photosToDisplay.map((photo, index) => (
+					{sortedPhotos.map((photo, index) => (
 						<div
 							key={photo.id}
 							className={`photo ${

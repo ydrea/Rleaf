@@ -16,6 +16,26 @@ export default function extractLatLongFromJSON(data) {
 		return null;
 	}
 }
+const convertWkbToLatLng = () => {
+	try {
+		const geojson = wellknown.parse(wkbData);
+		console.log('Parsed GeoJSON:', geojson);
+
+		if (geojson && geojson.type === 'Point') {
+			const extractedCoords = extractLatLongFromJSON(geojson);
+			if (extractedCoords) {
+				setCoordinates(extractedCoords);
+			} else {
+				throw new Error('Invalid JSON format or missing coordinates');
+			}
+		} else {
+			throw new Error('Invalid GeoJSON format or geometry type');
+		}
+	} catch (error) {
+		console.error('Error converting WKB to LatLng:', error);
+		setCoordinates({ latitude: null, longitude: null });
+	}
+};
 
 // //tipofthespear
 // useEffect(() => {

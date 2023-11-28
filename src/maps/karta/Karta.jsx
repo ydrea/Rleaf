@@ -30,26 +30,99 @@ import {
     ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
     PodRV, PodRvi, PodRd, PodK, TemaZP, TemaP, //TemaS
   } from '../wms';
-import { parse } from 'wellknown';
-
   //fly 
-  const SingleMarker = () => {
+import wellknown from 'wellknown'
+
+const SingleMarker = () => {
+
+  const [wkbData, setWkbData] = useState('');
+  const [coordinates, setCoordinates] = useState({ latitude: null, longitude: null });
+
+
     const { signatura } = useParams(); // 
      const markerData = useSelector(selectSelectedPhoto);
-     console.log(markerData);
-   
+    console.log(markerData);
     const map = useMap();
     const markerRef = useRef(null);
 
+    // const convertWkbToLatLng = () => {
+    //   try {
+    //     const geojson = wellknown.parse(wkbData);
+    //     if (geojson && geojson.coordinates) {
+    //       const coords = geojson.coordinates;
+    //       setCoordinates({ latitude: coords[1], longitude: coords[0] });
+    //     } else {
+    //       console.error('Invalid WKB data:', wkbData);
+    //       setCoordinates({ latitude: null, longitude: null });
+    //     }
+    //   } catch (error) {
+    //     console.error('Error converting WKB to LatLng:', error);
+    //     setCoordinates({ latitude: null, longitude: null });
+    //   }
+    // };
+    const extractLatLongFromJSON = (data) => {
+      try {
+        if (
+          data.type === 'Point' &&
+          Array.isArray(data.coordinates) &&
+          data.coordinates.length === 2
+        ) {
+          const latitude = data.coordinates[1];
+          const longitude = data.coordinates[0];
+          return { latitude, longitude };
+        } else {
+          throw new Error('Invalid JSON format or missing coordinates');
+        }
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+        return null;
+      }
+    };
+    const convertWkbToLatLng = () => {
+      try {
+        const geojson = wellknown.parse(wkbData);
+        console.log('Parsed GeoJSON:', geojson);
     
+        if (geojson && geojson.type === 'Point') {
+          const extractedCoords = extractLatLongFromJSON(geojson);
+          if (extractedCoords) {
+            setCoordinates(extractedCoords);
+          } else {
+            throw new Error('Invalid JSON format or missing coordinates');
+          }
+        } else {
+          throw new Error('Invalid GeoJSON format or geometry type');
+        }
+      } catch (error) {
+        console.error('Error converting WKB to LatLng:', error);
+        setCoordinates({ latitude: null, longitude: null });
+      }
+    };
+    
+  useEffect(() => {
+      if (markerData && markerData.geom) {
+        const wktString = markerData.geom
+        console.log(wktString);
+        setWkbData(wktString)
+        convertWkbToLatLng()   
+      console.log(wkbData, coordinates);  
+        // if (lat !== undefined && lng !== undefined) {
+        //   map.flyTo([lng, lat]);
+        //   markerRef.current.openPopup();
+        // } else {
+        //   console.error("Invalid coordinates:", lat, lng);
+        // }
+      }
+    }, [signatura, markerData]);
+
+    const isValidCoordinates = coordinates.latitude !== null && coordinates.longitude !== null;
+
     return (
-      <Marker ref={markerRef}
-        // position={[markerData?.lat, markerData?.lng]}
-      >
-        {/* <Popup>{markerData?.signatura}</Popup> */}
+      <Marker ref={markerRef} position={isValidCoordinates ? [coordinates.latitude, coordinates.longitude] : [45.2, 16.2]}>
+        <Popup>{markerData?.signatura}</Popup>
       </Marker>
     );
-  };
+      };
   //icon
 const myIcon = new Icon({
   iconUrl: require('../../assets/icon.png'),
@@ -71,7 +144,7 @@ const navigate = useNavigate()
     const [showPhoto, showPhotoSet] = useState(false);
   const dispatch = useDispatch(); 
   //fly
-// const selectedPhoto = useSelector(selectSelectedPhoto);
+const selectedPhoto = useSelector(selectSelectedPhoto);
   const {signatura} = useParams();
   // const [selectedMarker, selectedMarkerSet] = useState(null)
   const [selectedLayer, selectedLayerSet] = useState();
@@ -80,6 +153,7 @@ const navigate = useNavigate()
   useEffect(() => {
     if (signatura) {
       selectedLayerSet(temafk.id)
+    console.log(selectedPhoto.geom);
     }
   }, [signatura])
 
@@ -492,7 +566,7 @@ zoomControl={false}
     </Overlay>
       </LayersControl>
 
-          {/* <SingleMarker/> */}
+          {signatura && <SingleMarker/> }
 
       {/* <MyMarkers selectedIndex={selected} data={points} /> */}
 
