@@ -20,26 +20,34 @@ export default function Photo() {
 	const navigate = useNavigate();
 	const { signatura } = useParams();
 
-	// const selectedImg = useSelector(selectSelectedPhoto);
-	// Use useSelector to access selectedPhotoIndex from the Redux store
 	const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
+	console.log(selectedPhotoIndex);
+	const photos = useSelector(selectPhotos);
 
 	useEffect(() => {
-		// Fetch photos if not already loaded
-		dispatch(getPhotos());
+		const fetchPhotos = () => {
+			dispatch(getPhotos());
 
-		// No need to set selectedPhotoIndex here; it's managed in the Redux store
-	}, [dispatch]);
+			const photoIndex = photos.findIndex((photo, index) => {
+				console.log(index, photo.signatura, signatura);
 
-	// Retrieve the selected photo
-	const photos = useSelector(selectPhotos);
+				return photo.signatura === signatura;
+			});
+
+			console.log(photoIndex, photos, signatura);
+			dispatch(setSelectedPhotoIndex(photoIndex));
+		};
+
+		fetchPhotos();
+	}, [dispatch, signatura]);
+
 	const selectedPhoto = photos[selectedPhotoIndex];
-
+	console.log(selectedPhoto);
 	if (!selectedPhoto) {
-		// Handle the case where the photo with the specified signatura is not found
 		return <div>Photo not found</div>;
 	}
 
+	//to gallery
 	const handleBackToGallery = () => {
 		navigate('/photos');
 	};

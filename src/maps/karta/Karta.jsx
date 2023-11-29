@@ -60,68 +60,30 @@ const SingleMarker = () => {
     //     setCoordinates({ latitude: null, longitude: null });
     //   }
     // };
-    const extractLatLongFromJSON = (data) => {
-      try {
-        if (
-          data.type === 'Point' &&
-          Array.isArray(data.coordinates) &&
-          data.coordinates.length === 2
-        ) {
-          const latitude = data.coordinates[1];
-          const longitude = data.coordinates[0];
-          return { latitude, longitude };
-        } else {
-          throw new Error('Invalid JSON format or missing coordinates');
-        }
-      } catch (error) {
-        console.error('Error parsing JSON:', error);
-        return null;
-      }
-    };
-    const convertWkbToLatLng = () => {
-      try {
-        const geojson = wellknown.parse(wkbData);
-        console.log('Parsed GeoJSON:', geojson);
     
-        if (geojson && geojson.type === 'Point') {
-          const extractedCoords = extractLatLongFromJSON(geojson);
-          if (extractedCoords) {
-            setCoordinates(extractedCoords);
-          } else {
-            throw new Error('Invalid JSON format or missing coordinates');
-          }
-        } else {
-          throw new Error('Invalid GeoJSON format or geometry type');
-        }
-      } catch (error) {
-        console.error('Error converting WKB to LatLng:', error);
-        setCoordinates({ latitude: null, longitude: null });
-      }
-    };
-    
-  useEffect(() => {
-      if (markerData && markerData.geom) {
-        const wktString = markerData.geom
-        console.log(wktString);
-        setWkbData(wktString)
-        convertWkbToLatLng()   
-      console.log(wkbData, coordinates);  
+  // useEffect(() => {
+  //     if (markerData && markerData.geom) {
+  //       const wktString = markerData.geom
+  //       console.log(wktString);
+  //       setWkbData(wktString)
+  //       convertWkbToLatLng()   
+  //     console.log(wkbData, coordinates);  
         // if (lat !== undefined && lng !== undefined) {
         //   map.flyTo([lng, lat]);
         //   markerRef.current.openPopup();
         // } else {
         //   console.error("Invalid coordinates:", lat, lng);
         // }
-      }
-    }, [signatura, markerData]);
+    //   }
+    // }, [signatura, markerData]);
 
-    const isValidCoordinates = coordinates.latitude !== null && coordinates.longitude !== null;
+    // const isValidCoordinates = coordinates.latitude !== null && coordinates.longitude !== null;
 
-    return (
-      <Marker ref={markerRef} position={isValidCoordinates ? [coordinates.latitude, coordinates.longitude] : [45.2, 16.2]}>
-        <Popup>{markerData?.signatura}</Popup>
-      </Marker>
-    );
+    // return (
+    //   <Marker ref={markerRef} position={isValidCoordinates ? [coordinates.latitude, coordinates.longitude] : [45.2, 16.2]}>
+    //     <Popup>{markerData?.signatura}</Popup>
+    //   </Marker>
+    // );
       };
   //icon
 const myIcon = new Icon({
@@ -151,9 +113,9 @@ const selectedPhoto = useSelector(selectSelectedPhoto);
     
   // // 
   useEffect(() => {
-    if (signatura) {
+    if (signatura ) {
       selectedLayerSet(temafk.id)
-    console.log(selectedPhoto.geom);
+    // console.log(selectedPhoto.geom);
     }
   }, [signatura])
 
@@ -566,7 +528,7 @@ zoomControl={false}
     </Overlay>
       </LayersControl>
 
-          {signatura && <SingleMarker/> }
+          {/* signatura && <SingleMarker/> */}
 
       {/* <MyMarkers selectedIndex={selected} data={points} /> */}
 

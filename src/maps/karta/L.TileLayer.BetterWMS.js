@@ -2,6 +2,7 @@ import L from 'leaflet';
 import axios from 'axios';
 import isValidURL from '../../utils/isvalidUrl';
 import getParameterByName from '../../utils/getUrlParams';
+
 //
 // A global variable to store the latlng value
 let globalLatlng;
@@ -89,17 +90,13 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 
 	// with imgs
 	//with triggers
-	showGetFeatureInfo: function (
-		err,
-		latlng,
-		content
-		// signaturaFromUrl
-	) {
+	showGetFeatureInfo: function (err, latlng, content) {
 		if (err) {
 			console.log(err);
 			return;
 		}
-
+		let signaturaFromUrl = null;
+		let baseUrl = 'http://localhost:3000';
 		var tempDiv = document.createElement('div');
 		tempDiv.innerHTML = content;
 		var rows = tempDiv.querySelectorAll('tr');
@@ -119,6 +116,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 				if (header === 'signatura') {
 					console.log('Header:', header);
 					console.log('Value:', value);
+					signaturaFromUrl = value;
 				}
 
 				if (header === 'foto_url') {
@@ -137,6 +135,12 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 					newRow.style.width = '100%';
 					var newCell = document.createElement('td');
 					newCell.colSpan = 2;
+
+					// Create an anchor element to link to the 'photos/:signatura' route
+
+					let imageUrl = `${baseUrl}/photos/${signaturaFromUrl}`;
+					var link = document.createElement('a');
+					link.href = imageUrl;
 					var image = document.createElement('img');
 					image.src = thumbUrl;
 					image.alt = 'thumb';
@@ -144,7 +148,10 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 					image.style.width = '100%';
 					image.style.marginTop = '8px';
 
-					newCell.appendChild(image);
+					link.appendChild(image);
+					newCell.appendChild(link);
+
+					// newCell.appendChild(image);
 					newRow.appendChild(newCell);
 					//
 					row.parentNode.replaceChild(newRow, row);
