@@ -31,6 +31,7 @@ export default function Photo() {
 			const photoIndex = photos.findIndex((photo, index) => {
 				console.log(index, photo.signatura, signatura);
 
+				dispatch(setSelectedPhoto(photo.signatura));
 				return photo.signatura === signatura;
 			});
 
@@ -55,8 +56,8 @@ export default function Photo() {
 	//
 	const handleShowOnMap = () => {
 		// Dispatch an action to set the selected marker in Redux
-		dispatch(setSelectedPhoto(selectedPhoto));
-		console.log(selectedPhoto);
+		dispatch(setSelectedPhoto(signatura));
+		// console.log(selectedPhoto);
 		// Navigate back to the map view
 		navigate(`/maps/${signatura}`);
 	};
