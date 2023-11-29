@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 	setSelectedPhoto,
@@ -20,30 +20,23 @@ export default function Photo() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { signatura } = useParams();
-
-	const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
-	console.log(selectedPhotoIndex);
-	const fphotos = useSelector(selectFilteredPhotos);
 	const photos = useSelector(selectPhotos);
+	const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
+	const fphotos = useSelector(selectFilteredPhotos);
+	// console.log(fphotos);
+
+	const fetchAllPhotos = async () => {
+		await dispatch(getPhotos());
+
+		console.log(photos);
+	};
 	//
 	useEffect(() => {
-		console.log(photos);
-		dispatch(getPhotos());
-	}, [dispatch]);
-
-	useEffect(() => {
-		console.log(photos);
-		const photoIndex = photos.findIndex((photo, index) => {
-			dispatch(setSelectedPhoto(photo.signatura));
-			return photo.signatura === signatura;
-		});
-
-		console.log(photoIndex, photos, signatura);
-		dispatch(setSelectedPhotoIndex(photoIndex));
-	}, [dispatch, photos, signatura]);
+		fetchAllPhotos();
+	}, []);
 
 	const selectedPhoto = fphotos[selectedPhotoIndex];
-	console.log(selectedPhoto);
+	console.log(selectedPhoto, selectedPhotoIndex);
 	if (!selectedPhoto) {
 		return <div>Photo not found</div>;
 	}
@@ -106,11 +99,11 @@ export default function Photo() {
 				<FaChevronRight
 					className='next'
 					onClick={() => {
-						if (selectedPhotoIndex < fphotos.length - 1) {
+						if (selectedPhotoIndex < photos.length - 1) {
 							dispatch(increment());
 						}
 					}}
-					disabled={selectedPhotoIndex === fphotos.length - 1}
+					disabled={selectedPhotoIndex === photos.length - 1}
 				/>
 			</div>{' '}
 			<div className='selected-div1'>
