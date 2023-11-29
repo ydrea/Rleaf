@@ -96,7 +96,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 			return;
 		}
 		let signaturaFromUrl = null;
-		let baseUrl = 'http://client.croatianlandscape.hr';
+		let baseUrl = 'http://localhost:3000';
 		var tempDiv = document.createElement('div');
 		tempDiv.innerHTML = content;
 		var rows = tempDiv.querySelectorAll('tr');

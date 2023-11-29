@@ -8,6 +8,7 @@ import {
 	selectSelectedPhotoIndex,
 	increment,
 	decrement,
+	selectFilteredPhotos,
 } from '../redux/rtk/gallerySlice';
 import { useParams, useNavigate } from 'react-router-dom';
 import './photo.css';
@@ -22,24 +23,25 @@ export default function Photo() {
 
 	const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
 	console.log(selectedPhotoIndex);
-	const photos = useSelector(selectPhotos);
+	const photos = useSelector(selectFilteredPhotos);
 
 	useEffect(() => {
 		const fetchPhotos = () => {
 			dispatch(getPhotos());
-
+			console.log(photos);
 			const photoIndex = photos.findIndex((photo, index) => {
-				console.log(index, photo.signatura, signatura);
+				// console.log(index, photo.signatura, signatura);
 
 				dispatch(setSelectedPhoto(photo.signatura));
 				return photo.signatura === signatura;
 			});
 
-			console.log(photoIndex, photos, signatura);
+			// console.log(photoIndex, photos, signatura);
 			dispatch(setSelectedPhotoIndex(photoIndex));
 		};
 
 		fetchPhotos();
+		console.log(photos);
 	}, [dispatch, signatura]);
 
 	const selectedPhoto = photos[selectedPhotoIndex];
@@ -78,6 +80,9 @@ export default function Photo() {
 			<div id='imgcnt' className='comands-container'>
 				<div onClick={handleBackToGallery} className='cc-link'>
 					natrag u galeriju
+				</div>
+				<div className='cc'>
+					{selectedPhotoIndex + 1} / {photos.length}
 				</div>
 				<div onClick={handleShowOnMap} className='cc-link'>
 					pokaži na karti

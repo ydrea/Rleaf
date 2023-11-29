@@ -5,10 +5,11 @@
 .comands-container {
   display: grid;
   grid-template-rows: 1;
-  grid-template-columns: 200px 200px;
+  grid-template-columns: 200px 200px 200px;
   margin: 3vh 17.5vw;
 }
 
+.cc {color: #18aa00;}
 .cc-link {
   cursor: pointer;
 }
