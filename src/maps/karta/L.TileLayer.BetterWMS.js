@@ -96,7 +96,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 			return;
 		}
 		let signaturaFromUrl = null;
-		let baseUrl = 'http://localhost:3000';
+		let baseUrl = 'https://client.croatianlandscape.hr';
 		var tempDiv = document.createElement('div');
 		tempDiv.innerHTML = content;
 		var rows = tempDiv.querySelectorAll('tr');
@@ -136,9 +136,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 					var newCell = document.createElement('td');
 					newCell.colSpan = 2;
 
-					// Create an anchor element to link to the 'photos/:signatura' route
-
-					let imageUrl = `${baseUrl}/photos/${signaturaFromUrl}`;
+					let imageUrl = `${baseUrl}/public/photos/${signaturaFromUrl}`;
 					var link = document.createElement('a');
 					link.href = imageUrl;
 					var image = document.createElement('img');
