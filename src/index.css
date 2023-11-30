@@ -16,3 +16,8 @@ html {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
 }
+
+@media (min-width: 1800px) {
+  html{
+  scroll-snap-type: y proximity;
+}}

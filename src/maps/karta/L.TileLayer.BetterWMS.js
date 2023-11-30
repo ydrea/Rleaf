@@ -106,12 +106,15 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 		for (var i = 0; i < rows.length; i++) {
 			var row = rows[i];
 			var cells = row.querySelectorAll('th, td');
-
 			// console.log(header);
 
 			if (cells.length >= 2) {
 				var header = cells[0].textContent.trim();
 				var value = cells[1].textContent.trim();
+				row.style.border = '1px solid #fff';
+				for (var j = 0; j < cells.length; j++) {
+					cells[j].style.border = '1px solid #fff';
+				}
 
 				if (header === 'signatura') {
 					console.log('Header:', header);
@@ -133,6 +136,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 
 					var newRow = document.createElement('tr');
 					newRow.style.width = '100%';
+					newRow.style.border = '1px solid #fff';
 					var newCell = document.createElement('td');
 					newCell.colSpan = 2;
 

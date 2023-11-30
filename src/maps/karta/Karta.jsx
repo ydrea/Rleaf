@@ -534,7 +534,8 @@ zoomControl={false}
 
         </MapContainer>
 </section>
-      <Hline color="#7e7e77" height="2px" width="100%" /> <Footer/>      
+      <Hline color="#7e7e77" height="2px" width="100%" />
+      {/* <Footer />       */}
       <section>
 {/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
 
