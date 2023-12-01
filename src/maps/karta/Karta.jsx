@@ -62,7 +62,7 @@ const SingleMarker = () => {
       if (signatura && markerData && markerData.geojson) {
 
         if (lat !== undefined && lng !== undefined) {
-          map.flyTo([lng, lat], 19);
+          map.flyTo([lng, lat], 21);
           // markerRef.current.fire('click');
         } else {
           console.error("Invalid coordinates:", lat, lng);
@@ -401,7 +401,7 @@ zoomControl={false}
             <PodRd />
           </BaseLayer>
 <BaseLayer checked name="OSM">
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" maxZoom={22} />
           </BaseLayer>
 <FiksniElementi />
 
