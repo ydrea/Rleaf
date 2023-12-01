@@ -62,7 +62,7 @@ const SingleMarker = () => {
       if (signatura && markerData && markerData.geojson) {
 
         if (lat !== undefined && lng !== undefined) {
-          map.flyTo([lng, lat], 21);
+          map.flyTo([lng, lat], 20);
           // markerRef.current.fire('click');
         } else {
           console.error("Invalid coordinates:", lat, lng);
@@ -389,7 +389,7 @@ zoomControl={false}
           collapsed={false}
 >
 <BaseLayer name="topografija">
-            <PodK />
+              <PodK />
           </BaseLayer> 
 <BaseLayer  name="reljef">
             <PodRV/>          
