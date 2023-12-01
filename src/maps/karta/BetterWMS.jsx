@@ -8,7 +8,7 @@ import {
 
 const BetterWMS = createTileLayerComponent(
   function createBetterWMSLayer({options, url, layers, ...props}, context) {
-
+// const handleClick =(e)=>{console.log(e);}
     const layer = new L.TileLayer.betterWms(url, {layers, ...props})
 
     return createElementObject(layer, context)

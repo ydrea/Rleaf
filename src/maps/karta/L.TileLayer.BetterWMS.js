@@ -1,25 +1,25 @@
 import L from 'leaflet';
 import axios from 'axios';
-import isValidURL from '../../utils/isvalidUrl';
-import getParameterByName from '../../utils/getUrlParams';
+// import isValidURL from '../../utils/isvalidUrl';
+// import getParameterByName from '../../utils/getUrlParams';
 
 //
 // A global variable to store the latlng value
-let globalLatlng;
+// let globalLatlng;
 
-// Function to set the latlng value
-export function setLatlng(latlng) {
-	globalLatlng = latlng;
-}
+// // Function to set the latlng value
+// export function setLatlng(latlng) {
+// 	globalLatlng = latlng;
+// }
 
-// Function to retrieve the latlng value
-export function getLatlng() {
-	return globalLatlng;
-}
-// Add this function outside of your L.TileLayer.BetterWMS definition
-function flyToLocation(map, latlng) {
-	map.flyTo(latlng, 15);
-}
+// // Function to retrieve the latlng value
+// export function getLatlng() {
+// 	return globalLatlng;
+// }
+// // Add this function outside of your L.TileLayer.BetterWMS definition
+// function flyToLocation(map, latlng) {
+// 	map.flyTo(latlng, 15);
+// }
 
 //
 L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
@@ -140,7 +140,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 					var newCell = document.createElement('td');
 					newCell.colSpan = 2;
 
-					let imageUrl = `${baseUrl}/public/photos/${signaturaFromUrl}`;
+					let imageUrl = `${baseUrl}/photos/${signaturaFromUrl}`;
 					var link = document.createElement('a');
 					link.href = imageUrl;
 					var image = document.createElement('img');

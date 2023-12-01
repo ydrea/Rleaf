@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-const url = `${process.env.REACT_APP_SERVER}/photosr`;
+const url = `${process.env.REACT_APP_SERVER}/photosrl`;
 
 export const getPhotos = createAsyncThunk(
 	'gallery/getPhotos',
@@ -98,14 +98,14 @@ export const selectPhotos = state => state.gallery.photos;
 export const selectSelectedPhotoIndex = state =>
 	state.gallery.selectedPhotoIndex;
 // ...
-// export const selectAPhoto = state => {
-// 	const selectedIdX = state.gallery.idX;
-// 	const selectedPhoto = state.gallery.photos.find(photo => {
-// 		const rank = parseInt(photo.rank_number);
-// 		return rank === selectedIdX;
-// 	});
-// 	return selectedPhoto;
-// };
+export const selectAPhoto = state => {
+	const selectedIdX = state.gallery.idX;
+	const selectedPhoto = state.gallery.photos.find(photo => {
+		const rank = parseInt(photo.rank_number);
+		return rank === selectedIdX;
+	});
+	return selectedPhoto;
+};
 //
 export const selectSelectedPhoto = state => {
 	const selectedPhotoIndex = state.gallery.selectedPhotoIndex;

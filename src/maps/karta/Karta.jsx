@@ -1,4 +1,6 @@
-// import 'leaflet/dist/leaflet.css'
+/* @refresh disable */
+// Your component code here
+
 import './karta.css'
 import 'leaflet/dist/leaflet.css';
 import {
@@ -36,46 +38,37 @@ import wellknown from 'wellknown'
 const SingleMarker = () => {
 
   const [wkbData, setWkbData] = useState('');
-  const [coordinates, setCoordinates] = useState({ latitude: null, longitude: null });
+  const [coordinate, setCoordinate] = useState({ latitude: null, longitude: null });
 
 
     const { signatura } = useParams(); // 
-     const markerData = useSelector(selectSelectedPhoto);
-    console.log(markerData);
-    const map = useMap();
+    const markerData = useSelector(selectSelectedPhoto);
+    console.log(signatura, markerData.geojson.coordinates); 
+    
+    const geojsonObject = JSON.parse(markerData.geojson);
+    const coordinates = geojsonObject.coordinates;
+    console.log(signatura, coordinates);
+    
+    const lat = parseFloat(coordinates[0]);
+    const lng = parseFloat(coordinates[1]);
+    
+    // Rest of your code...
+        const map = useMap();
     const markerRef = useRef(null);
 
-    // const convertWkbToLatLng = () => {
-    //   try {
-    //     const geojson = wellknown.parse(wkbData);
-    //     if (geojson && geojson.coordinates) {
-    //       const coords = geojson.coordinates;
-    //       setCoordinates({ latitude: coords[1], longitude: coords[0] });
-    //     } else {
-    //       console.error('Invalid WKB data:', wkbData);
-    //       setCoordinates({ latitude: null, longitude: null });
-    //     }
-    //   } catch (error) {
-    //     console.error('Error converting WKB to LatLng:', error);
-    //     setCoordinates({ latitude: null, longitude: null });
-    //   }
-    // };
+ 
     
-  // useEffect(() => {
-  //     if (markerData && markerData.geom) {
-  //       const wktString = markerData.geom
-  //       console.log(wktString);
-  //       setWkbData(wktString)
-  //       convertWkbToLatLng()   
-  //     console.log(wkbData, coordinates);  
-        // if (lat !== undefined && lng !== undefined) {
-        //   map.flyTo([lng, lat]);
-        //   markerRef.current.openPopup();
-        // } else {
-        //   console.error("Invalid coordinates:", lat, lng);
-        // }
-    //   }
-    // }, [signatura, markerData]);
+  useEffect(() => {
+      if (signatura && markerData && markerData.geojson) {
+
+        if (lat !== undefined && lng !== undefined) {
+          map.flyTo([lng, lat], 19);
+          // markerRef.current.fire('click');
+        } else {
+          console.error("Invalid coordinates:", lat, lng);
+        }
+      }
+    }, [signatura, markerData]);
 
     // const isValidCoordinates = coordinates.latitude !== null && coordinates.longitude !== null;
 
@@ -527,8 +520,8 @@ zoomControl={false}
     />
     </Overlay>
       </LayersControl>
-
-          {/* signatura && <SingleMarker/> */}
+{
+          signatura && <SingleMarker/>}
 
       {/* <MyMarkers selectedIndex={selected} data={points} /> */}
 
