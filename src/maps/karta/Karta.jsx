@@ -52,31 +52,29 @@ const SingleMarker = () => {
     const lat = parseFloat(coordinates[0]);
     const lng = parseFloat(coordinates[1]);
     
-    // Rest of your code...
+    // fly
         const map = useMap();
-    const markerRef = useRef(null);
-
- 
-    
+    const newCenterRef = useRef(null);
   useEffect(() => {
       if (signatura && markerData && markerData.geojson) {
 
         if (lat !== undefined && lng !== undefined) {
-          map.flyTo([lng, lat], 20);
-          // markerRef.current.fire('click');
+          map.flyTo([lng, lat], 18);
+          // newCenterRef.current.fire('click')
+                    // map.fireEvent('click', { latlng: L.LatLng(lat, lng) });
         } else {
           console.error("Invalid coordinates:", lat, lng);
         }
       }
-    }, [signatura, markerData]);
+    }, [signatura, markerData, lat, lng]);
 
-    // const isValidCoordinates = coordinates.latitude !== null && coordinates.longitude !== null;
+  //   const isValidCoordinates = lat !== null && lng !== null;
 
-    // return (
-    //   <Marker ref={markerRef} position={isValidCoordinates ? [coordinates.latitude, coordinates.longitude] : [45.2, 16.2]}>
-    //     <Popup>{markerData?.signatura}</Popup>
-    //   </Marker>
-    // );
+  // return (
+  //   <Marker ref={newCenterRef} position={isValidCoordinates ? [lat, lng] : [45.2, 16.2]}>
+  // <Popup > {'ti'} </Popup>
+  //     </Marker>
+  //   );
       };
   //icon
 const myIcon = new Icon({
