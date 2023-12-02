@@ -32,14 +32,8 @@ import {
     ANaselja, PAJedinice,  PBNaselja, FiksniElementi,
     PodRV, PodRvi, PodRd, PodK, TemaZP, TemaP, //TemaS
   } from '../wms';
-  //fly 
-import wellknown from 'wellknown'
 
 const SingleMarker = () => {
-
-  const [wkbData, setWkbData] = useState('');
-  const [coordinate, setCoordinate] = useState({ latitude: null, longitude: null });
-
 
     const { signatura } = useParams(); // 
     const markerData = useSelector(selectSelectedPhoto);
@@ -82,11 +76,9 @@ const myIcon = new Icon({
   iconSize: [28, 28],
 });
 
-  
 //
 // MAP
 //
-  
 
 function Map() {
     const [markeri, markeriSet] = useState([]);
