@@ -1,5 +1,3 @@
-/* @refresh disable */
-// Your component code here
 
 import './karta.css'
 import 'leaflet/dist/leaflet.css';
@@ -48,22 +46,27 @@ const SingleMarker = () => {
     
     // fly
         const map = useMap();
-    const newCenterRef = useRef(null);
+  const newCenterRef = useRef(null);
+  
   useEffect(() => {
       if (signatura && markerData && markerData.geojson) {
 
         if (lat !== undefined && lng !== undefined) {
-          map.flyTo([lng, lat], 18);
+          map.flyTo([lng, lat], 22);
           // newCenterRef.current.fire('click')
-                    // map.fireEvent('click', { latlng: L.LatLng(lat, lng) });
+                    // map.fireEvent('click', { latlng: L.latLng(lat, lng) });
         } else {
           console.error("Invalid coordinates:", lat, lng);
         }
       }
     }, [signatura, markerData, lat, lng]);
 
-  //   const isValidCoordinates = lat !== null && lng !== null;
-
+    const isValidCoordinates = lat !== null && lng !== null;
+  useEffect(() => {
+    if (isValidCoordinates) {
+    console.log(newCenterRef);
+  }
+},[lat, lng])
   // return (
   //   <Marker ref={newCenterRef} position={isValidCoordinates ? [lat, lng] : [45.2, 16.2]}>
   // <Popup > {'ti'} </Popup>
@@ -321,7 +324,7 @@ layers: "preklop_foto_katalog",
       zIndex: 150,
       uppercase: true,
       opacity: '0.8',
-      // maxZoom: 8
+      maxZoom: 28
     }
   }
   
@@ -365,7 +368,9 @@ layers: "preklop_foto_katalog",
  
 <MapContainer 
 center={[45.2, 16.2]}
-zoom={11}
+          zoom={11}
+          maxZoom={28}
+          maxNativeZoom={30}
 style={{
   width: '100%',
   height: '90vh',
@@ -391,7 +396,7 @@ zoomControl={false}
             <PodRd />
           </BaseLayer>
 <BaseLayer checked name="OSM">
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" maxZoom={22} />
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" maxZoom={22} maxNativeZoom={30}/>
           </BaseLayer>
 <FiksniElementi />
 
@@ -500,7 +505,7 @@ zoomControl={false}
        {...temadgu.props}
     />
     </Overlay>
-    <Overlay key={temafk.id} name={temafk.name} checked={selectedLayer === temafk.id}>
+            <Overlay key={temafk.id} name={temafk.name} checked={selectedLayer === temafk.id} maxNativeZoom={24} maxZoom={22}> 
     <BetterWMS
       key={temafk.id}
        id={temafk.id}
