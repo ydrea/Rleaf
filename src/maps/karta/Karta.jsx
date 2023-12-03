@@ -61,12 +61,13 @@ const SingleMarker = () => {
       }
     }, [signatura, markerData, lat, lng]);
 
-    const isValidCoordinates = lat !== null && lng !== null;
-  useEffect(() => {
-    if (isValidCoordinates) {
-    console.log(newCenterRef);
-  }
-},[lat, lng])
+//     const isValidCoordinates = lat !== null && lng !== null;
+//   useEffect(() => {
+//     if (isValidCoordinates) {
+//     console.log(newCenterRef);
+//   }
+  // },[lat, lng])
+  
   // return (
   //   <Marker ref={newCenterRef} position={isValidCoordinates ? [lat, lng] : [45.2, 16.2]}>
   // <Popup > {'ti'} </Popup>
