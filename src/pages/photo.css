@@ -5,13 +5,20 @@
 .comands-container {
   display: grid;
   grid-template-rows: 1;
-  grid-template-columns: 200px 200px 200px;
-  margin: 3vh 17.5vw;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 3vh; 
+  margin-bottom: 3vh; 
+  margin-left: 17.5vw;
+  margin-right: auto;
 }
 
-.cc {color: #18aa00;}
+.cc {color: #18aa00;
+margin: auto;
+}
 .cc-link {
   cursor: pointer;
+  margin: auto;
+
 }
  
  .image-wrapper { 
@@ -32,7 +39,7 @@
 /* margin-left: 5vw; */
 }
 
-.img-cnt img {max-height: 65vh;
+.img-cnt img {max-height: 75vh;
 }
  .prev, 
  /* .center, */

@@ -156,13 +156,13 @@ padding-inline-start: 0 !important;
 .dropdown {
   position: absolute;
   /* right: 0; */
-  top: 1vh;
+  top: 100%;
   /* left: auto; */
     /* font-size: 0.875rem; */
   z-index: 9999;
   min-width: 8rem;
-  min-height: 4rem;
-  padding: 1.6rem 0.8rem;
+  min-height: 3rem;
+  padding: 1rem 0.8em;
   list-style: none;
   background-color: #d8d8d8;
   border-radius: 0.5rem;

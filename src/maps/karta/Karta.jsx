@@ -384,7 +384,7 @@ zoomControl={false}
 <LayersControl
           collapsed={false}
 >
-<BaseLayer name="topografija">
+<BaseLayer checked name="topografija">
               <PodK />
           </BaseLayer> 
 <BaseLayer  name="reljef">
@@ -396,8 +396,8 @@ zoomControl={false}
 <BaseLayer name="reljef (tamni)">
             <PodRd />
           </BaseLayer>
-<BaseLayer checked name="OSM">
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" maxZoom={22} maxNativeZoom={30}/>
+<BaseLayer name="OSM">
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" maxZoom={20} maxNativeZoom={30}/>
           </BaseLayer>
 <FiksniElementi />
 

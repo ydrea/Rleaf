@@ -27,7 +27,7 @@ section {
     width: 100%;
     margin-left: -100%;
   } 
-  .zeroTxt {
+  .zeroTxt { 
     display: flex;
     flex-direction: column;
     margin-left: -91%;
@@ -68,6 +68,8 @@ flex-direction: column;
 .S2 {
   padding-top: 1%;
   display: flex;
+  margin-bottom: 10vh;
+  /* height: 90vh; */
   }
   .zero2 {
     min-width: 64.5vw;

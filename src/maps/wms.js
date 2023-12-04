@@ -35,7 +35,7 @@ export const PodRd = () => {
 		transparent: true,
 		version: '1.3.0',
 		attribution: 'WMS Service Attribution',
-		maxZoom: '22',
+		// maxZoom: '22',
 	};
 	useEffect(() => {
 		const fetchLegend = async () => {
@@ -93,7 +93,7 @@ export const PodRvi = () => {
 		transparent: true,
 		version: '1.3.0',
 		attribution: 'WMS Service Attribution',
-		maxZoom: '22',
+		maxZoom: 30,
 	};
 	useEffect(() => {
 		const fetchLegend = async () => {
