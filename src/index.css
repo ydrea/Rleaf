@@ -19,5 +19,7 @@ html {
 
 @media (min-width: 1800px) {
   html{
+
+  scroll-behavior: smooth;
   scroll-snap-type: y proximity;
 }}

@@ -34,7 +34,7 @@ const PhotosLayout = () => {
 	//
 	return (
 		<div className='gallery'>
-			<section>
+			<section className='#'>
 				<div className='naslov-container'>
 					<h1>opservatorij</h1>
 					<div className='line-div0' />
@@ -56,8 +56,8 @@ const PhotosLayout = () => {
 					{/* <div className="line-div1" />{' '} */}
 				</div>
 			</section>{' '}
-			<Hline color='#18aa00' height='1px' width='100%' />{' '}
 			<section>
+				<Hline color='#18aa00' height='1px' width='100%' />{' '}
 				<Outlet filteredPhotos={filteredPhotos} />{' '}
 				{/* This will render child routes */}
 			</section>

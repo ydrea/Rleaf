@@ -364,7 +364,7 @@ layers: "preklop_foto_katalog",
       </div>
       </section>
        
-      <section>    
+      <section className='#map'>    
       <Hline color="#18aa00" height="2px" width="100%" />
  
 <MapContainer 
@@ -525,10 +525,10 @@ zoomControl={false}
 </section>
       <Hline color="#7e7e77" height="2px" width="100%" />
       {/* <Footer />       */}
-      <section>
+      <section className='#'>
 {/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
 
- {/* <Footer/> */}
+ <Footer/>
   
  </section>
  </div> );

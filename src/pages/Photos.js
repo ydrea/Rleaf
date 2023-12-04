@@ -128,7 +128,7 @@ export default function Photos() {
 		<div className='gallery'>
 			{/* filter options */}
 			{/* <div className="filters-container"> */}
-			<div className='select-container'>
+			<section className='select-container'>
 				<KategorijeSelekt
 					kategorijeOptions={kategorijeOptions}
 					className='select'
@@ -137,7 +137,7 @@ export default function Photos() {
 					tagoviOptions={tagoviOptions}
 					className='select'
 				/>
-			</div>
+			</section>
 			{/* <div className="line-div2" /> */}
 			<Hline color='#18aa00' height='2px' width='100%' />
 			{/* Masonry */}

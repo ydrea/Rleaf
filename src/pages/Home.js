@@ -20,7 +20,7 @@ export default function Home() {
 	return (
 		// <div className="gallery" style={{ overflow: 'hidden' }}>
 		<div className='home'>
-			<section className='S0'>
+			<section className='S0 #'>
 				<img src='home0.jpg' className='zero' />
 				<img src={gridHV} className='zerog' />
 				<div className='zeroTxt'>
@@ -32,7 +32,7 @@ export default function Home() {
 					</div>
 				</div>
 			</section>
-			<section className='S1'>
+			<section className='S1 #'>
 				{/* <img src={diag} className='diag' /> */}
 				<p>
 					'Opservatorij krajobraza' je kolaborativna platforma koja
@@ -47,7 +47,7 @@ export default function Home() {
 					promišljati razvoj temeljen na krajobrazu.
 				</p>
 			</section>
-			<section className='S2'>
+			<section className='S2 #'>
 				<img src='home4.jpg' className='zero2' />
 				<img src={gridHV} className='zerog2' />{' '}
 				<div className='txt2'>
