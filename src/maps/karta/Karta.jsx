@@ -364,7 +364,7 @@ layers: "preklop_foto_katalog",
       </div>
       </section>
        
-      <section className='#map'>    
+      <section id='#map'>    
       <Hline color="#18aa00" height="2px" width="100%" />
  
 <MapContainer 
