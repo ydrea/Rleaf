@@ -8,7 +8,8 @@
 
 # production
 /build
-
+/photos
+/uploads
 # misc
 .DS_Store
 .env

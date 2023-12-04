@@ -10,7 +10,7 @@ import gridH from '../assets/GRID H.svg';
 import gridV from '../assets/GRID V.svg';
 import diag from '../assets/DIA G.svg';
 //
-import head from '../assets/EXPO EXPO/Opservatorij krajobraza V3.jpg';
+// import head from '../assets/EXPO EXPO/Opservatorij krajobraza V3.jpg';
 //
 export default function Home() {
 	const section1Ref = useRef(null);

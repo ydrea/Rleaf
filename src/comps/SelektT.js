@@ -40,7 +40,7 @@ function TagoviSelekt({ tagoviOptions }) {
 		},
 		placeholder: styles => ({
 			...styles,
-			color: '#7e7e77',
+			color: '#18aa00',
 			marginTop: '-13px',
 			marginLeft: '-8px',
 			fontSize: '22px',
