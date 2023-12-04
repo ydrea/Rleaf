@@ -13,13 +13,13 @@ import ScrollToAnchor from './pages/ScrollToAnchor';
 //
 
 createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <ScrollToTop />
-      <ScrollToAnchor />
-      <App />
-    </BrowserRouter>
-  </Provider>
+	<Provider store={store}>
+		<BrowserRouter>
+			<ScrollToAnchor />
+			<ScrollToTop />
+			<App />
+		</BrowserRouter>
+	</Provider>
 );
 // //
 // ReactDOM.render(
