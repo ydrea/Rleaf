@@ -15,8 +15,8 @@ import ScrollToAnchor from './pages/ScrollToAnchor';
 createRoot(document.getElementById('root')).render(
 	<Provider store={store}>
 		<BrowserRouter>
-			<ScrollToAnchor />
 			<ScrollToTop />
+			<ScrollToAnchor />
 			<App />
 		</BrowserRouter>
 	</Provider>
