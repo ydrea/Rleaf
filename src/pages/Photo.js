@@ -38,7 +38,7 @@ export default function Photo() {
 			return photo.signatura === signatura;
 		});
 
-		console.log(photoIndex, photos, signatura);
+		// console.log(photoIndex, photos, signatura);
 		dispatch(setSelectedPhotoIndex(photoIndex));
 	}, [dispatch, photos, signatura]);
 
