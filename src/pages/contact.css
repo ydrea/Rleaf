@@ -13,11 +13,11 @@
     /* position: relative;  */
     }
   .un {
-    font-size: 1.6rem;
+    font-size: 1.1rem;
     margin-left: 17.5vw;
     margin-right: 17.5vw;
-    margin-top: 7vw;
-    max-width: 75vw;
+    /* margin-top: 1vh; */
+    /* max-width: 75vw; */
   }
 
   .gren {
