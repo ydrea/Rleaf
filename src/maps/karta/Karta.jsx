@@ -528,7 +528,7 @@ zoomControl={false}
       <section className='#'>
 {/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
 
- <Footer/>
+ {/* <Footer/> */}
   
  </section>
  </div> );

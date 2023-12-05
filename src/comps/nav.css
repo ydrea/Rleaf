@@ -156,7 +156,7 @@ padding-inline-start: 0 !important;
 .dropdown {
   position: absolute;
   /* right: 0; */
-  top: 100%;
+  top: 90%;
   /* left: auto; */
     /* font-size: 0.875rem; */
   z-index: 9999;
