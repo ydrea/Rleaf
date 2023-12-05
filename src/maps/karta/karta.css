@@ -5,7 +5,9 @@ margin-bottom: 30vh; */
     margin-right:  17.5% !important;
     width: 65%;
 }
-
+.map {
+  display: block;
+}
 .markersList {
     display: flex;
     justify-content: space-between;

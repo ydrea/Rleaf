@@ -56,7 +56,7 @@ export default function Photo() {
 	//show on map
 	const handleShowOnMap = () => {
 		dispatch(setSelectedPhoto(signatura));
-		navigate(`/maps/${signatura}#map`);
+		navigate(`/maps/${signatura}#mapcnt`);
 	};
 
 	//remove .ext
