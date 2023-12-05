@@ -119,6 +119,7 @@ export const selectSelectedPhoto = state => {
 };
 
 // Filteri
+// Filteri
 export const selectFilteredPhotos = state => {
 	const { kategorije, tagovi } = state.gallery.selectedFilters || {};
 	const allPhotos = state.gallery.photos;
