@@ -70,8 +70,8 @@ export default function Photo() {
 	//
 
 	return (
-		<div className='cont'>
-			<div id='imgcnt' className='comands-container'>
+		<div id='imgcnt' className='cont'>
+			<div className='comands-container'>
 				<div onClick={handleBackToGallery} className='cc-link'>
 					natrag u galeriju
 				</div>

@@ -140,7 +140,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 					var newCell = document.createElement('td');
 					newCell.colSpan = 2;
 
-					let imageUrl = `${baseUrl}/photos/${signaturaFromUrl}`;
+					let imageUrl = `${baseUrl}/photos/${signaturaFromUrl}#img-cnt`;
 					var link = document.createElement('a');
 					link.href = imageUrl;
 					var image = document.createElement('img');

@@ -1,7 +1,8 @@
-.cont{
+.cont {
     display: flex;
     flex-direction: column;
- }
+    max-height: 100vh;
+  }
 .comands-container {
   display: grid;
   grid-template-rows: 1;
@@ -39,7 +40,8 @@ margin: auto;
 /* margin-left: 5vw; */
 }
 
-.img-cnt img {max-height: 75vh;
+.img-cnt img {
+  height: 75vh;
 }
  .prev, 
  /* .center, */
