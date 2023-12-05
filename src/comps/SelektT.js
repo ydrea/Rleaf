@@ -61,7 +61,7 @@ function TagoviSelekt({ tagoviOptions }) {
 				isSearchable
 				isMulti
 				options={tagoviOptions}
-				value={filterSelected}
+				value={filterSelected.tagovi}
 				onChange={handleTagoviFilterChange}
 			/>
 			<label

@@ -133,6 +133,15 @@ export default function Photos() {
 					kategorijeOptions={kategorijeOptions}
 					className='select'
 				/>
+				<div className='selectxt'>
+					Odabrano{' '}
+					<span // style={{ color: '#18aa00' }}
+					>
+						{filteredPhotos.length}
+					</span>{' '}
+					<br />
+					fotografija
+				</div>
 				<TagoviSelekt
 					tagoviOptions={tagoviOptions}
 					className='select'
@@ -212,7 +221,7 @@ export default function Photos() {
 				)}
 			</div>
 			<Hline color='#7e7e77' height='2px' width='100%' />
-			{/* <Footer /> */}
+			<Footer />
 		</div>
 	);
 }

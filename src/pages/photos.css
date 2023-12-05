@@ -245,7 +245,7 @@ width: 65vw;
   position: relative;
 }
 .select-container {
- font-size: 1rem;
+ /* font-size: 1rem; */
   margin-left: 17.5%;
   margin-right: 18.5%;
   margin-top: 8%;
@@ -262,6 +262,12 @@ width: 65vw;
   flex: 1;
   max-width: 75%;
   margin-left: 1vw;
+  }
+  .select-container .selectxt {
+    font-size: 22px;
+  }
+  .select-container .selectxt span {
+    color: #18aa00;
   }
 
 

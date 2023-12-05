@@ -156,7 +156,7 @@ function KategorijeSelekt() {
 				isSearchable
 				isMulti
 				options={customKategorijeOptions}
-				value={filterSelected}
+				value={filterSelected.kategorije}
 				onChange={handleKategorijeFilterChange}
 				getOptionValue={option => option.value}
 				getOptionLabel={option => option.label}
