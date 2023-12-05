@@ -53,6 +53,7 @@
     "react-transition-group": "^4.4.5",
     "reactstrap": "^9.2.0",
     "redux": "^4.2.1",
+    "reselect": "^5.0.1",
     "sass": "^1.62.1",
     "wellknown": "^0.5.0"
   },

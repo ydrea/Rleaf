@@ -8949,6 +8949,11 @@
   "resolved" "https://registry.npmjs.org/reselect/-/reselect-4.1.8.tgz"
   "version" "4.1.8"
 
+"reselect@^5.0.1":
+  "integrity" "sha512-D72j2ubjgHpvuCiORWkOUxndHJrxDaSolheiz5CO+roz8ka97/4msh2E8F5qay4GawR5vzBt5MkbDHT+Rdy/Wg=="
+  "resolved" "https://registry.npmjs.org/reselect/-/reselect-5.0.1.tgz"
+  "version" "5.0.1"
+
 "resolve-cwd@^3.0.0":
   "integrity" "sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg=="
   "resolved" "https://registry.npmjs.org/resolve-cwd/-/resolve-cwd-3.0.0.tgz"
