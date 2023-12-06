@@ -23,7 +23,7 @@ import Photos from './pages/Photos';
 import Photo from './pages/Photo';
 import Map from './maps/karta/Karta';
 // import ScrollToHashElement from './ToHash';
-import ScrollToAnchor from './pages/ScrollToAnchor';
+// import ScrollToAnchor from './pages/ScrollToAnchor';
 function App() {
 	//
 

@@ -12,6 +12,7 @@
     "@geoman-io/leaflet-geoman-free": "^2.14.2",
     "@react-leaflet/core": "^2.1.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "@xstate/react": "^4.0.0",
     "axios": "^1.4.0",
     "babel-plugin-macros": "^3.1.0",
     "chroma-js": "^2.4.2",
@@ -54,7 +55,8 @@
     "reactstrap": "^9.2.0",
     "redux": "^4.2.1",
     "sass": "^1.62.1",
-    "wellknown": "^0.5.0"
+    "wellknown": "^0.5.0",
+    "xstate": "^5.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
