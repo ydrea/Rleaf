@@ -13,7 +13,6 @@ import { Login } from './pages/Login';
 import './App.css';
 import Layout from './Layout';
 import PhotosLayout from './PhotosLayout';
-
 //
 import { Route, Routes } from 'react-router-dom';
 import Private from './pages/protected/Private';
@@ -22,8 +21,7 @@ import { useEffect } from 'react';
 import Photos from './pages/Photos';
 import Photo from './pages/Photo';
 import Map from './maps/karta/Karta';
-// import ScrollToHashElement from './ToHash';
-// import ScrollToAnchor from './pages/ScrollToAnchor';
+//
 function App() {
 	//
 

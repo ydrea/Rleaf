@@ -9,14 +9,16 @@ import { store } from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
 import ScrollToTop from './ScrollToTop';
 import ScrollToAnchor from './pages/ScrollToAnchor';
+import ConditionalScroll from './ScrollTo';
 
 //
 
 createRoot(document.getElementById('root')).render(
 	<Provider store={store}>
 		<BrowserRouter>
-			<ScrollToTop />
-			<ScrollToAnchor />
+			{/* <ScrollToTop />
+			<ScrollToAnchor /> */}
+			<ConditionalScroll />
 			<App />
 		</BrowserRouter>
 	</Provider>

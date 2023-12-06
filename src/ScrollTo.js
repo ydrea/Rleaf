@@ -7,7 +7,7 @@ export default function ConditionalScroll() {
 
 	useEffect(() => {
 		if (location.hash) {
-			lastHash.current = location.hash.slice(1); // safe hash for further use after navigation
+			lastHash.current = location.hash.slice(1); // s
 		}
 
 		if (

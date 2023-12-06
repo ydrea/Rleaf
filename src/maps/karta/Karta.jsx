@@ -52,7 +52,7 @@ const SingleMarker = () => {
       if (signatura && markerData && markerData.geojson) {
 
         if (lat !== undefined && lng !== undefined) {
-          map.flyTo([lng, lat], 22);
+          map.flyTo([lng, lat], 21);
           // newCenterRef.current.fire('click')
                     // map.fireEvent('click', { latlng: L.latLng(lat, lng) });
         } else {
@@ -506,7 +506,7 @@ zoomControl={false}
        {...temadgu.props}
     />
     </Overlay>
-            <Overlay key={temafk.id} name={temafk.name} checked={selectedLayer === temafk.id} maxNativeZoom={24} maxZoom={22}> 
+            <Overlay key={temafk.id} name={temafk.name} checked={selectedLayer === temafk.id} maxNativeZoom={23} maxZoom={21}> 
     <BetterWMS
       key={temafk.id}
        id={temafk.id}
@@ -525,7 +525,7 @@ zoomControl={false}
 </section>
       <Hline color="#7e7e77" height="2px" width="100%" />
       {/* <Footer />       */}
-      <section className='#'>
+      <section className='x'>
 {/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
 
  {/* <Footer/> */}
