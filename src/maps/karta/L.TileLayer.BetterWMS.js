@@ -139,8 +139,10 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 					newRow.style.border = '1px solid #fff';
 					var newCell = document.createElement('td');
 					newCell.colSpan = 2;
-
+					//imgurl
 					let imageUrl = `${baseUrl}/photos/${signaturaFromUrl}#img-cnt`;
+					this.imageUrl = imageUrl;
+
 					var link = document.createElement('a');
 					link.href = imageUrl;
 					var image = document.createElement('img');
