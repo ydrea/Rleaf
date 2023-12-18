@@ -27,13 +27,13 @@ export default function Photo() {
 	const photos = useSelector(selectPhotos);
 	//
 	useEffect(() => {
-		console.log(photos);
+		console.log(fphotos);
 		dispatch(getPhotos());
 	}, [dispatch]);
 
 	useEffect(() => {
-		console.log(photos);
-		const photoIndex = photos.findIndex((photo, index) => {
+		// console.log(photos);
+		const photoIndex = fphotos.findIndex((photo, index) => {
 			dispatch(setSelectedPhoto(photo.signatura));
 			return photo.signatura === signatura;
 		});

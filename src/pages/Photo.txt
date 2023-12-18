@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 	setSelectedPhoto,
@@ -20,23 +20,30 @@ export default function Photo() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { signatura } = useParams();
-	const photos = useSelector(selectPhotos);
+
 	const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex);
+	console.log(selectedPhotoIndex);
 	const fphotos = useSelector(selectFilteredPhotos);
-	// console.log(fphotos);
-
-	const fetchAllPhotos = async () => {
-		await dispatch(getPhotos());
-
-		console.log(photos);
-	};
+	const photos = useSelector(selectPhotos);
 	//
 	useEffect(() => {
-		fetchAllPhotos();
-	}, []);
+		console.log(fphotos);
+		dispatch(getPhotos());
+	}, [dispatch]);
+
+	useEffect(() => {
+		// console.log(photos);
+		const photoIndex = fphotos.findIndex((photo, index) => {
+			dispatch(setSelectedPhoto(photo.signatura));
+			return photo.signatura === signatura;
+		});
+
+		// console.log(photoIndex, photos, signatura);
+		dispatch(setSelectedPhotoIndex(photoIndex));
+	}, [dispatch, photos, signatura]);
 
 	const selectedPhoto = fphotos[selectedPhotoIndex];
-	console.log(selectedPhoto, selectedPhotoIndex);
+	console.log(selectedPhoto);
 	if (!selectedPhoto) {
 		return <div>Photo not found</div>;
 	}
@@ -49,7 +56,7 @@ export default function Photo() {
 	//show on map
 	const handleShowOnMap = () => {
 		dispatch(setSelectedPhoto(signatura));
-		navigate(`/maps/${signatura}`);
+		navigate(`/maps/${signatura}#mapcnt`);
 	};
 
 	//remove .ext
@@ -63,8 +70,8 @@ export default function Photo() {
 	//
 
 	return (
-		<div className='cont'>
-			<div id='imgcnt' className='comands-container'>
+		<div id='imgcnt' className='cont'>
+			<div className='comands-container'>
 				<div onClick={handleBackToGallery} className='cc-link'>
 					natrag u galeriju
 				</div>
@@ -99,11 +106,11 @@ export default function Photo() {
 				<FaChevronRight
 					className='next'
 					onClick={() => {
-						if (selectedPhotoIndex < photos.length - 1) {
+						if (selectedPhotoIndex < fphotos.length - 1) {
 							dispatch(increment());
 						}
 					}}
-					disabled={selectedPhotoIndex === photos.length - 1}
+					disabled={selectedPhotoIndex === fphotos.length - 1}
 				/>
 			</div>{' '}
 			<div className='selected-div1'>
