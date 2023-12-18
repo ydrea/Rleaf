@@ -56,12 +56,23 @@ export const gallerySlice = createSlice({
 		setSelectedPhoto: (state, action) => {
 			state.selectedPhoto = action.payload;
 		},
+		// setFilters: (state, action) => {
+		// 	// state.selectedFilters = action.payload;
+		// 	const { kategorije, tagovi } = action.payload;
+		// 	state.selectedFilters = {
+		// 		kategorije: kategorije || state.selectedFilters.kategorije,
+		// 		tagovi: tagovi || state.selectedFilters.tagovi,
+		// 	};
+		// },
 		setFilters: (state, action) => {
-			// state.selectedFilters = action.payload;
 			const { kategorije, tagovi } = action.payload;
 			state.selectedFilters = {
-				kategorije: kategorije || state.selectedFilters.kategorije,
-				tagovi: tagovi || state.selectedFilters.tagovi,
+				kategorije:
+					kategorije && kategorije.length > 0 ? kategorije : null,
+				tagovi:
+					tagovi !== undefined
+						? tagovi
+						: state.selectedFilters.tagovi,
 			};
 		},
 	},
@@ -118,7 +129,6 @@ export const selectSelectedPhoto = state => {
 	return null; //
 };
 
-// Filteri
 // Filteri
 export const selectFilteredPhotos = state => {
 	const { kategorije, tagovi } = state.gallery.selectedFilters || {};

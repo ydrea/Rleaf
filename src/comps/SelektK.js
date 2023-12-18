@@ -30,7 +30,6 @@ function KategorijeSelekt() {
 		dispatch(setFilters(selectedFilterValues));
 	};
 	//
-
 	const handleKategorijeFilterChange = selectedFilters => {
 		const selectedFilterValues = selectedFilters.map(
 			filter => filter.label

@@ -17,7 +17,6 @@ function TagoviSelekt({ tagoviOptions }) {
 	};
 
 	//
-
 	const handleTagoviFilterChange = selectedFilters => {
 		const selectedFilterValues = selectedFilters.map(
 			filter => filter.value

@@ -77,6 +77,13 @@ export default function Photos() {
 		dispatch(selectFilteredPhotos(filteredPhotos));
 	};
 
+	const handleKategorijeFilterChange = selectedFilters => {
+		const selectedFilterValues = selectedFilters.map(
+			filter => filter.label
+		);
+		dispatch(setFilters({ kategorije: selectedFilterValues }));
+	};
+
 	const removeFileExtension = fileName => {
 		const lastDotIndex = fileName.lastIndexOf('.');
 		if (lastDotIndex === -1) {
@@ -131,6 +138,7 @@ export default function Photos() {
 			<section className='select-container'>
 				<KategorijeSelekt
 					kategorijeOptions={kategorijeOptions}
+					handleFilterChange={handleKategorijeFilterChange} // Pass the specific handler
 					className='select'
 				/>
 				<div className='selectxt'>
