@@ -223,7 +223,9 @@ margin-right: 5%;
 display: block;
 margin-bottom: 10px;
 }
-
+.oneT {
+  margin-top: -100px;
+}
 .naslov-container {
   display: block;
   max-width: 90%;
