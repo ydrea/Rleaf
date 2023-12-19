@@ -1,6 +1,6 @@
 
 /* For larger screens (desktop) */
-@media screen and (min-width: 1200px) {
+/* @media screen and (min-width: 1200px) { */
 .home {
 display: block;
 margin-left: 17.5%;
@@ -151,81 +151,41 @@ max-width: 30vw;
     display: block;
     padding-top: 1rem;
   }
-  }
+  /* } */
 
 /* tableti */
-@media screen and (min-width:768px) and (max-width:1200px)
-{
-.vozi, .pali {
-  font-size: 5rem; 
-  color: #fff;
-  align-items: center;
-  justify-content: center;
+@media screen and (min-width:768px) and (max-width:1200px){ 
+.home{
+/* 
+margin-left: 5%;
+margin-right: 5%; */
 }
-  .S1, .S2, .cont0, .txt2 .txt3, .img-container, .ena, .dve, .tli {
-    font-size: 16px; 
-    margin-left: 5%; 
-    margin-right: 5%;
-    margin-top: 5vh;
-    width: 90%;
+  .zeroTxtThree {
+    font-size: 1.1rem;
+  }
+  .txt2 {
+    font-size: 1rem;
   }
 
-  .img2 {
-    position: absolute;
-    width: 100%;
-    clip-path: fill-box;
-    left: 0px; 
-  }
-.txt2 {
-  position: absolute;
-  color: #fff;
-  z-index: 6;
-  left: 1rem;
-  top: 60rem;
-  width: 60%;
-}
-  .img3{
-    position: absolute;
-    z-index: 4;
-    height: 40%;
-    top: 152%;
-    left: 0;
-  }
-.txt3 {
-  position: absolute;
-  top: 115rem;
-}
-.dno {
-  position: absolute;
-  top: 220%;
-  max-width: 40%;
-}
-
-}
+}  
 /* For mobile devices */
 @media screen and (max-width: 768px) {
-.vozi, .pali {
-  font-size: 2.5rem; color: #fff;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  /* max-width: 90vw; */
-  /* margin-left: 5vw;
-  margin-right: 5vw; */
-}
-.home{
-  margin-left: 0;
-  margin-right: 0;
-}
+  .zeroTxtThree {
+    font-size: .5rem;
+  }
+  .txt2 {
+    /* font-size: 1rem;
+  margin-top: 10vh; */
+  }
+
   
-  .S1,  .cont0 {
+  /* .S1,  .cont0 {
     font-size: 16px; 
     margin-left: 5%; 
     margin-right: 5%; 
     margin-top: 5vh;
     margin-bottom: 1rem;
-    /* width: 90%; */
-  }
+  } */
 
   .S2, .cont2{
     margin-left: 0;
