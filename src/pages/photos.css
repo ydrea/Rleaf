@@ -356,9 +356,11 @@ display: none !important;}
     width: 100%;
     margin-right: 0; 
       }
-.naslov-container p {
-  font-size: 2.5vh;
-}
+      .naslov-container h1 {
+        font-size: 2.5rem !important;
+        display: block;
+      }
+      
 .line-div2, .line-div1, .line-div0 {
   display: none;
 }
@@ -367,4 +369,12 @@ display: none !important;}
 }
 }
 
+/* Media query for smaller screens */
+@media screen and (max-width: 460px) {
+
+  .naslov-container h1 {
+    font-size: 1.5rem !important;
+    display: block;
+  }
+  }
 }

@@ -6,7 +6,6 @@
   align-items: center;
   justify-content: center;
   /* margin: 0, auto; */
-  /* margin-top: auto !important; */
   min-height: fit-content;
   background-color: #DBDBDB;
   position: relative; 
@@ -58,4 +57,17 @@ color: #7e7e77;
 .logo-container:hover .roll {
   left: 0; /* Move the text back to its original position on hover */
   opacity: 1; /* Show the text on hover */
+}
+
+@media screen and (max-width: 768px) {
+.footer {
+margin-top: 5vh !important;
+font-size: .8rem;
+}
+.footer p {
+  max-width: 100% !important;
+}
+.logo-container {
+  width: 80vw;
+}
 }
