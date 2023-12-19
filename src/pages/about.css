@@ -207,37 +207,22 @@ margin-left: 5%;
   margin-left: 5%;
 margin-right: 5%;
 }
-/*   height: 80vh;
-  font-size: 1.1rem;
-  width: 85%;
-  margin-left: 1%;
-  margin-right: 14%;
-padding-left: 1%;
-} */
 
 }
 
 /* For mobile devices */
 @media screen and (max-width: 768px) {
 
-.gallery {
+.about {
   max-width: 100%;
   margin-left: 5%;
   margin-right: 5%;
 }
-
-  .one,
-  .two, 
-  .three,
-  .four,
-  .five,
-  .six {
-    font-size: 1rem; 
-    max-width: 90% !important; 
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-
+.one, .three, .five, .six {
+  min-height: 900px;
+display: block;
+margin-bottom: 10px;
+}
 
 .naslov-container {
   display: block;
@@ -245,12 +230,6 @@ padding-left: 1%;
   margin-left: 5%;
   margin-right: 5%;
 }
-
-.naslov-container h1 {
-  font-size: 3rem;
-  display: block;
-}
-
   .one li p {
     margin-bottom: -0.1rem;
   }
@@ -260,43 +239,40 @@ padding-left: 1%;
   }
 
   .about1 {
-
-    position: relative;
+    /* display: none; */
     width: 90%;
-    height: 90%;
+    height: 100%;
   }  
   .about2 {
-
-    position: relative;
+    /* display: none; */
     width: 90%;
-    height: 90%;
+    height: 100%;
 
   }  
   .about1 img,
   .about2 img {
+ display: block;
     width: 100%; 
     height: auto; 
     object-fit: cover; 
-    left: 0;
+    /* left: 0; */
   }
   .about2 img {
     background-color: #8c8d85;
   }
   .aboutxt1 {
-    position: absolute;
-    top: 1rem; 
-    left: 2rem;
+    margin-top: -70px;
+    margin-left: 10px;
     color: #fff;
     z-index: 443;
-    font-size: 1.6rem !important; 
+    font-size: 1.6rem; 
   }
 
   .aboutxt2 {
-    position: absolute;
-    top: 1rem;
-    left: 2rem;
+    margin-top: -70px;
+    margin-left: 10px;
     color: #fff;
     z-index: 44;
-    font-size: 1.6rem !important;
+    font-size: 1.6rem;
   }
 }
