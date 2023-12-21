@@ -64,6 +64,20 @@ export const gallerySlice = createSlice({
 		// 		tagovi: tagovi || state.selectedFilters.tagovi,
 		// 	};
 		// },
+		// setFilters: (state, action) => {
+		// 	const { kategorije, tagovi } = action.payload;
+		// 	state.selectedFilters = {
+		// 		kategorije:
+		// 			kategorije !== undefined
+		// 				? kategorije
+		// 				: state.selectedFilters.kategorije,
+		// 		tagovi: Array.isArray(tagovi)
+		// 			? tagovi
+		// 			: [...state.selectedFilters?.tagovi, tagovi].filter(
+		// 					Boolean
+		// 			  ),
+		// 	};
+
 		setFilters: (state, action) => {
 			const { kategorije, tagovi } = action.payload;
 			state.selectedFilters = {
@@ -171,6 +185,8 @@ export const selectFilteredPhotos = state => {
 	});
 };
 
+export default gallerySlice.reducer;
+
 // 	return allPhotos.filter(photo => {
 // 		const kategorijaMatches =
 // 			!kategorije ||
@@ -192,8 +208,6 @@ export const selectFilteredPhotos = state => {
 // 		return kategorijaMatches && tagoviIncluded;
 // 	});
 // };
-export default gallerySlice.reducer;
-
 // export const selectFilteredPhotos = state => {
 // 	const selectedFilters = state.gallery.selectedFilters || [];
 // 	const allPhotos = state.gallery.photos;

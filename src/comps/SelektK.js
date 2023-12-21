@@ -79,12 +79,11 @@ function KategorijeSelekt() {
 				isSearchable
 				isMulti
 				options={customKategorijeOptions}
-				value={filterSelected.map(option => ({
-					label: option,
-					value: option,
-				}))}
+				value={filterSelected.kategorije}
 				onChange={handleKategorijeFilterChange}
-			/>
+				getOptionValue={option => option.value}
+				getOptionLabel={option => option.label}
+			/>{' '}
 			<label
 				htmlFor='kategorije-select'
 				style={{
