@@ -71,8 +71,10 @@ function TagoviSelekt({ tagoviOptions }) {
 				isSearchable
 				isMulti
 				options={tagoviOptions}
-				value={filterSelected}
+				value={filterSelected.tagovi}
 				onChange={handleTagoviFilterChange}
+				getOptionValue={option => option.value}
+				getOptionLabel={option => option.label}
 			/>
 			<label
 				htmlFor='keyword-select'

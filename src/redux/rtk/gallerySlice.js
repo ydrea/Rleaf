@@ -87,7 +87,7 @@ export const gallerySlice = createSlice({
 						: state.selectedFilters.kategorije,
 				tagovi: Array.isArray(tagovi)
 					? tagovi
-					: [tagovi].filter(Boolean), // Ensure tagovi is always an array
+					: [tagovi].filter(Boolean), //
 			};
 		},
 
