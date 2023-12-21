@@ -71,7 +71,10 @@ function TagoviSelekt({ tagoviOptions }) {
 				isSearchable
 				isMulti
 				options={tagoviOptions}
-				value={filterSelected.tagovi}
+				value={selectedFilters?.tagovi.map(option => ({
+					label: option,
+					value: option,
+				}))}
 				onChange={handleTagoviFilterChange}
 				getOptionValue={option => option.value}
 				getOptionLabel={option => option.label}
