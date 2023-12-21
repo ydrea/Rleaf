@@ -1,0 +1,280 @@
+
+
+/* For larger screens (desktop) */
+
+@media screen and (min-width: 1200px) {
+
+.about {
+  display: block;
+}
+
+img {
+  max-width: 100%;
+}
+section {
+  margin-top: 1%;
+  max-height: 100vh;
+
+}
+
+/* START */
+    .one {
+      height: 100vh;
+      font-size: 1.1rem;          
+    
+    }
+.oneT {
+  margin-left: 17.5vw;
+  margin-right: 17.5vw;
+
+}
+    .one ul {
+    
+      text-decoration: none;
+    }
+    .one li {
+      list-style-type: none;
+      }
+      .one li p {margin-bottom: -.1rem;}
+      .one li span{color: #000;}
+      
+    
+    .two {
+      height: 100vh;
+      width: 65%;
+      margin-left: 17.5%;
+      margin-right: 17.5%;
+    }
+
+.about1 {
+  display: flex;
+  align-items: center;
+  padding-top: 10%;
+}    
+.about1 img {
+    width: 100%;
+    height: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: grid;
+    place-items: center;
+    z-index: 0
+}
+.aboutxt1{
+margin-left: -35%;    
+margin-top: auto;
+width: 25vw;
+    color: white;
+    text-align: left;
+    font-size: 60px;
+    z-index: 33;
+}
+      
+.about2 {
+  position: relative;
+height: 100vh;
+}    
+.about2 img {
+    width: 100%;
+    height: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: grid;
+    place-items: center;
+    z-index: 0
+}
+.aboutxt2{
+    position: absolute;
+    bottom: 10%;
+    left: 1%;
+    width: 25vw;
+    color: white;
+    text-align: left;
+    font-size: 60px;
+    z-index: 33;
+}
+    
+      .three {
+display: flex;
+flex-direction: column;
+        height: 100vh;
+        /* font-size: 1.7rem; */
+        width: 35%;
+        margin-left: 47.5%;
+        margin-right: 17.5%;
+        padding-top: 5%; 
+        font-size: 1.1rem;
+        font-style: normal;
+        font-weight: 400;
+        /* line-height: 160%; */
+        letter-spacing: 0.01375rem;
+      }
+    
+    
+      .four {
+        height: 100vh;
+        background-color: #8c8d85;
+        width: 65%;
+        margin-left: 17.5%;
+        margin-right: 17.5%;
+      }
+      
+      .five {
+        height: 100vh;
+        font-size: 1.1rem;
+        width: 35%;
+        margin-left: 23%;
+        margin-right: 47%;
+        padding-top: 5%;
+        /* padding-left: 1%; */
+      }
+
+      .six {
+        color: #000;
+        height: 30vh;
+        font-size: 1rem;
+        width: 60%;
+        margin-left: auto;
+    }
+    .six p {
+    margin-top: 2rem;
+margin-bottom: 4rem;
+    line-height: 160%;
+    }}
+
+/* tableti */
+@media screen and (min-width:768px) and (max-width:1200px)
+
+{
+.naslov-container {
+  display: block;
+  max-width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
+  /* margin-bottom: 5%; */
+}
+
+.naslov-container h1 {
+  font-size: 5rem !important;
+  display: block;
+}
+.about1 {
+margin-left: 5%;
+  position: relative;
+  width: 90%;
+  height: 90%;
+}  
+.about2 {
+  margin-left: 5%;
+  position: relative;
+  width: 90%;
+  height: 100%;
+
+}  
+.about1 img,
+.about2 img {
+  width: 100%; 
+  max-height: 100vh; 
+  object-fit: cover; 
+  left: 0;
+}
+.about2 img {
+  background-color: #8c8d85;
+}
+.aboutxt1 {
+  position: absolute;
+  top: 13rem; 
+  left: 3rem;
+  color: #fff;
+  z-index: 443;
+  font-size: 2rem; 
+}
+
+.aboutxt2 {
+  position: absolute;
+  top: 13rem;
+  left: 3rem;
+  color: #fff;
+  z-index: 44;
+  font-size: 2rem !important;
+}
+.one,
+.three,
+.five {
+  margin-left: 5%;
+margin-right: 5%;
+}
+
+}
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+
+.about {
+  max-width: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.one, .three, .five, .six {
+  min-height: 900px;
+display: block;
+margin-bottom: 10px;
+}
+.oneT {
+  margin-top: -100px;
+}
+.naslov-container {
+  display: block;
+  max-width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+  .one li p {
+    margin-bottom: -0.1rem;
+  }
+
+  .one li span {
+    color: #000;
+  }
+
+  .about1 {
+    /* display: none; */
+    width: 90%;
+    height: 100%;
+  }  
+  .about2 {
+    /* display: none; */
+    width: 90%;
+    height: 100%;
+
+  }  
+  .about1 img,
+  .about2 img {
+ display: block;
+    width: 100%; 
+    height: auto; 
+    object-fit: cover; 
+    /* left: 0; */
+  }
+  .about2 img {
+    background-color: #8c8d85;
+  }
+  .aboutxt1 {
+    margin-top: -70px;
+    margin-left: 10px;
+    color: #fff;
+    z-index: 443;
+    font-size: 1.6rem; 
+  }
+
+  .aboutxt2 {
+    margin-top: -70px;
+    margin-left: 10px;
+    color: #fff;
+    z-index: 44;
+    font-size: 1.6rem;
+  }
+}

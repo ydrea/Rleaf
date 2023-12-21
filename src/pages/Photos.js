@@ -71,17 +71,33 @@ export default function Photos() {
 	console.log(filteredPhotos);
 
 	//
-	const handleFilterChange = selectedOptions => {
-		setSelectedFilters(selectedOptions);
-		dispatch(setFilters(selectedOptions));
-		dispatch(selectFilteredPhotos(filteredPhotos));
-	};
+	// const handleFilterChange = selectedOptions => {
+	// 	setSelectedFilters(selectedOptions);
+	// 	dispatch(setFilters(selectedOptions));
+	// 	dispatch(selectFilteredPhotos(filteredPhotos));
+	// };
 
 	const handleKategorijeFilterChange = selectedFilters => {
 		const selectedFilterValues = selectedFilters.map(
 			filter => filter.label
 		);
-		dispatch(setFilters({ kategorije: selectedFilterValues }));
+		dispatch(
+			setFilters({
+				kategorije: selectedFilterValues,
+				tagovi: selectedFilters.tagovi,
+			})
+		);
+	};
+	const handleTagoviFilterChange = selectedFilters => {
+		const selectedFilterValues = selectedFilters.map(
+			filter => filter.value
+		);
+		dispatch(
+			setFilters({
+				kategorije: selectedFilters.kategorije,
+				tagovi: selectedFilterValues,
+			})
+		);
 	};
 
 	const removeFileExtension = fileName => {
@@ -138,8 +154,7 @@ export default function Photos() {
 			<section className='select-container'>
 				<KategorijeSelekt
 					kategorijeOptions={kategorijeOptions}
-					handleFilterChange={handleKategorijeFilterChange} // Pass the specific handler
-					className='select'
+					handleKategorijeFilterChange={handleKategorijeFilterChange}
 				/>
 				<div className='selectxt'>
 					Odabrano{' '}
@@ -152,7 +167,7 @@ export default function Photos() {
 				</div>
 				<TagoviSelekt
 					tagoviOptions={tagoviOptions}
-					className='select'
+					handleTagoviFilterChange={handleTagoviFilterChange}
 				/>
 			</section>
 			{/* <div className="line-div2" /> */}

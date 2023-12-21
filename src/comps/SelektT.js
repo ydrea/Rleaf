@@ -1,28 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setFilters } from '../redux/rtk/gallerySlice';
 
-function TagoviSelekt({ tagoviOptions }) {
+const TagoviSelekt = ({ tagoviOptions }) => {
 	const dispatch = useDispatch();
 	const [filterSelected, setFilterSelected] = useState([]);
 
-	const handleFilterChange = selectedFilters => {
-		setFilterSelected(selectedFilters);
-
-		const selectedFilterValues = selectedFilters.map(
-			filter => filter.value
-		);
-		dispatch(setFilters(selectedFilterValues));
-	};
-
-	//
+	const selectedFilters = useSelector(
+		state => state.gallery.selectedFilters
+	);
 	const handleTagoviFilterChange = selectedFilters => {
 		const selectedFilterValues = selectedFilters.map(
 			filter => filter.value
 		);
 		dispatch(setFilters({ tagovi: selectedFilterValues }));
 	};
+	useEffect(() => {
+		// Update the local state when selectedFilters change in Redux
+		setFilterSelected(prevState => ({
+			...prevState,
+			tagovi:
+				selectedFilters?.tagovi.map(value => ({
+					value,
+					label: value,
+				})) || [],
+		}));
+	}, [selectedFilters]);
+
+	useEffect(() => {
+		console.log(tagoviOptions, selectedFilters);
+	}, [tagoviOptions]);
+	//
+	// const handleTagoviFilterChange = selectedFilters => {
+	// 	const selectedFilterValues = selectedFilters.map(
+	// 		filter => filter.value
+	// 	);
+	// 	dispatch(setFilters({ tagovi: selectedFilterValues }));
+	// };
 	//
 	const cusTom = {
 		control: styles => ({
@@ -71,6 +86,6 @@ function TagoviSelekt({ tagoviOptions }) {
 			</label>
 		</div>
 	);
-}
+};
 
 export default TagoviSelekt;

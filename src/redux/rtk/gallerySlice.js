@@ -68,13 +68,26 @@ export const gallerySlice = createSlice({
 			const { kategorije, tagovi } = action.payload;
 			state.selectedFilters = {
 				kategorije:
-					kategorije && kategorije.length > 0 ? kategorije : null,
-				tagovi:
-					tagovi !== undefined
-						? tagovi
-						: state.selectedFilters.tagovi,
+					kategorije !== undefined
+						? kategorije
+						: state.selectedFilters.kategorije,
+				tagovi: Array.isArray(tagovi)
+					? tagovi
+					: [tagovi].filter(Boolean), // Ensure tagovi is always an array
 			};
 		},
+
+		// setFilters: (state, action) => {
+		// 	const { kategorije, tagovi } = action.payload;
+		// 	state.selectedFilters = {
+		// 		kategorije:
+		// 			kategorije && kategorije.length > 0 ? kategorije : null,
+		// 		tagovi:
+		// 			tagovi !== undefined
+		// 				? tagovi
+		// 				: state.selectedFilters.tagovi,
+		// 	};
+		// },
 	},
 	extraReducers: {
 		[getPhotos.pending]: state => {
@@ -141,17 +154,15 @@ export const selectFilteredPhotos = state => {
 	return allPhotos.filter(photo => {
 		const kategorijaMatches =
 			!kategorije ||
-			kategorije.some(filter => {
-				const categories = photo.kategorija
-					? photo.kategorija
-							.split(',')
-							.map(category => category.trim())
-					: [];
-				return categories.includes(filter);
-			});
+			kategorije.length === 0 ||
+			kategorije.every(
+				filter =>
+					photo.kategorija && photo.kategorija.includes(filter)
+			);
 
 		const tagoviIncluded =
 			!tagovi ||
+			tagovi.length === 0 ||
 			tagovi.every(
 				filter => photo.tagovi && photo.tagovi.includes(filter)
 			);
@@ -159,6 +170,28 @@ export const selectFilteredPhotos = state => {
 		return kategorijaMatches && tagoviIncluded;
 	});
 };
+
+// 	return allPhotos.filter(photo => {
+// 		const kategorijaMatches =
+// 			!kategorije ||
+// 			kategorije.every(filter => {
+// 				const categories = photo.kategorija
+// 					? photo.kategorija
+// 							.split(',')
+// 							.map(category => category.trim())
+// 					: [];
+// 				return categories.includes(filter);
+// 			});
+
+// 		const tagoviIncluded =
+// 			!tagovi ||
+// 			tagovi.every(
+// 				filter => photo.tagovi && photo.tagovi.includes(filter)
+// 			);
+
+// 		return kategorijaMatches && tagoviIncluded;
+// 	});
+// };
 export default gallerySlice.reducer;
 
 // export const selectFilteredPhotos = state => {
