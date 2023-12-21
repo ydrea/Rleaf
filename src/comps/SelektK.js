@@ -10,17 +10,39 @@ function KategorijeSelekt() {
 	);
 	const [filterSelected, setFilterSelected] = useState([]);
 
-	useEffect(() => {
-		setFilterSelected(selectedFilters?.kategorije || []);
-	}, [selectedFilters]);
+	// useEffect(() => {
+	// 	setFilterSelected(selectedFilters?.kategorije || []);
+	// }, [selectedFilters]);
 
+	useEffect(() => {
+		// Initialize the state with selected filters when the component mounts
+		const initialSelectedFilters = selectedFilters?.tagovi || [];
+		setFilterSelected(
+			initialSelectedFilters.map(option => ({
+				label: option,
+				value: option,
+			}))
+		);
+	}, [selectedFilters]);
 	const handleKategorijeFilterChange = selectedFilters => {
 		const selectedFilterValues = selectedFilters.map(
 			filter => filter.label
 		);
-		dispatch(setFilters({ kategorije: selectedFilterValues }));
-		setFilterSelected(selectedFilterValues);
+		dispatch(
+			setFilters({
+				kategorije: selectedFilterValues,
+				tagovi: selectedFilters.tagovi, // Preserve existing 'tagovi' filters
+			})
+		);
 	};
+
+	// const handleKategorijeFilterChange = selectedFilters => {
+	// 	const selectedFilterValues = selectedFilters.map(
+	// 		filter => filter.label
+	// 	);
+	// 	dispatch(setFilters({ kategorije: selectedFilterValues }));
+	// 	setFilterSelected(selectedFilterValues);
+	// };
 
 	const customKategorijeOptions = [
 		{ value: 'gospodarski_objekti', label: 'gospodarski objekti' },

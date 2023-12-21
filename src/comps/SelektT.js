@@ -21,17 +21,37 @@ function TagoviSelekt({ tagoviOptions }) {
 		);
 	}, [selectedFilters]);
 
+	// const handleTagoviFilterChange = selectedFilters => {
+	// 	const selectedFilterValues = selectedFilters.map(
+	// 		filter => filter.value
+	// 	);
+	// 	dispatch(setFilters({ tagovi: selectedFilterValues }));
+	// 	// Update the local state when filters change
+	// 	setFilterSelected(
+	// 		selectedFilters.map(option => ({
+	// 			label: option.label,
+	// 			value: option.value,
+	// 		}))
+	// 	);
+	// };
+
 	const handleTagoviFilterChange = selectedFilters => {
-		const selectedFilterValues = selectedFilters.map(
+		const selectedTagoviValues = selectedFilters.map(
 			filter => filter.value
 		);
-		dispatch(setFilters({ tagovi: selectedFilterValues }));
+
 		// Update the local state when filters change
-		setFilterSelected(
-			selectedFilters.map(option => ({
-				label: option.label,
-				value: option.value,
-			}))
+		setFilterSelected(selectedTagoviValues);
+
+		// Get the existing 'kategorije' filters from the Redux state
+		const existingKategorijeFilters =
+			selectedFilters.kategorije || [];
+
+		dispatch(
+			setFilters({
+				kategorije: existingKategorijeFilters, // Preserve existing 'kategorije' filters
+				tagovi: selectedTagoviValues,
+			})
 		);
 	};
 
@@ -71,7 +91,10 @@ function TagoviSelekt({ tagoviOptions }) {
 				isSearchable
 				isMulti
 				options={tagoviOptions}
-				value={filterSelected}
+				value={filterSelected.map(tag => ({
+					label: tag,
+					value: tag,
+				}))}
 				onChange={handleTagoviFilterChange}
 			/>
 			<label

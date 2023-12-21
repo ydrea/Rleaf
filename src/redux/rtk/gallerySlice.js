@@ -29,7 +29,10 @@ const initialState = {
 	photos: [],
 	loading: false,
 	error: null,
-	selectedFilters: [],
+	selectedFilters: {
+		kategorije: [], // Initial value for kategorije
+		tagovi: [], // Initial value for tagovi
+	},
 };
 
 export const gallerySlice = createSlice({
@@ -64,6 +67,7 @@ export const gallerySlice = createSlice({
 		// 		tagovi: tagovi || state.selectedFilters.tagovi,
 		// 	};
 		// },
+
 		setFilters: (state, action) => {
 			const { kategorije, tagovi } = action.payload;
 			state.selectedFilters = {
@@ -71,11 +75,25 @@ export const gallerySlice = createSlice({
 					kategorije !== undefined
 						? kategorije
 						: state.selectedFilters.kategorije,
-				tagovi: Array.isArray(tagovi)
-					? tagovi
-					: [tagovi].filter(Boolean), // Ensure tagovi is always an array
+				tagovi:
+					tagovi !== undefined
+						? tagovi
+						: state.selectedFilters.tagovi,
 			};
 		},
+
+		// setFilters: (state, action) => {
+		// 	const { kategorije, tagovi } = action.payload;
+		// 	state.selectedFilters = {
+		// 		kategorije:
+		// 			kategorije !== undefined
+		// 				? kategorije
+		// 				: state.selectedFilters.kategorije,
+		// 		tagovi: Array.isArray(tagovi)
+		// 			? tagovi
+		// 			: [tagovi].filter(Boolean), // Ensure tagovi is always an array
+		// 	};
+		// },
 
 		// setFilters: (state, action) => {
 		// 	const { kategorije, tagovi } = action.payload;
