@@ -81,13 +81,15 @@ export const gallerySlice = createSlice({
 		setFilters: (state, action) => {
 			const { kategorije, tagovi } = action.payload;
 			state.selectedFilters = {
-				kategorije:
-					kategorije !== undefined
-						? kategorije
-						: state.selectedFilters.kategorije,
+				kategorije: Array.isArray(kategorije)
+					? kategorije
+					: (Array.isArray(state.selectedFilters.kategorije)
+							? [...state.selectedFilters.kategorije, kategorije]
+							: [kategorije]
+					  ).filter(Boolean),
 				tagovi: Array.isArray(tagovi)
 					? tagovi
-					: [tagovi].filter(Boolean), //
+					: [...state.selectedFilters.tagovi, tagovi].filter(Boolean),
 			};
 		},
 
