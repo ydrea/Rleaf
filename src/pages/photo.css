@@ -1,7 +1,7 @@
 .cont {
     display: flex;
     flex-direction: column;
-    max-height: 90vh;
+    max-height: 88vh;
   }
 .comands-container {
   display: grid;
@@ -28,6 +28,9 @@ margin: auto;
 */
 /* max-height: 400px; */
    margin-left: 17.5vw;
+border: #fff solid 5px;
+width: 45vw;
+/* margin-right: auto; */
    /* display: inline-block; */
    /* align-items: center;
    justify-content: center; */
@@ -50,8 +53,8 @@ margin: auto;
     cursor: pointer;
     position: fixed;
     bottom: 51vh;
-     height: 8vh;
-   width: 3vw;
+     height: 6vh;
+   width: 2vw;
     z-index: 9999;
  }
  .prev {

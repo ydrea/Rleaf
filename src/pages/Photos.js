@@ -244,7 +244,6 @@ export default function Photos() {
 				)}
 			</div>
 			<Hline color='#7e7e77' height='2px' width='100%' />
-			<Footer />
 		</div>
 	);
 }
