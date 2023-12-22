@@ -236,8 +236,8 @@ top: 200px;    left: 0;
   }
 
   .teka {
-    /* position: relative;  */
-    font-size: 1rem;
+margin-top: -6%;    
+font-size: 1rem;
     font-weight: 100;
     max-width: 100%;
 }
