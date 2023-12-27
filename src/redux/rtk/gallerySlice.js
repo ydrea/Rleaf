@@ -29,7 +29,10 @@ const initialState = {
 	photos: [],
 	loading: false,
 	error: null,
-	selectedFilters: [],
+	selectedFilters: {
+		kategorije: [],
+		tagovi: [],
+	},
 };
 
 export const gallerySlice = createSlice({
@@ -56,6 +59,18 @@ export const gallerySlice = createSlice({
 		setSelectedPhoto: (state, action) => {
 			state.selectedPhoto = action.payload;
 		},
+		setFilters: (state, action) => {
+			const { kategorije, tagovi } = action.payload;
+
+			state.selectedFilters = {
+				kategorije: (Array.isArray(kategorije)
+					? kategorije
+					: []
+				).filter(Boolean),
+				tagovi: (Array.isArray(tagovi) ? tagovi : []).filter(Boolean),
+			};
+		},
+
 		// setFilters: (state, action) => {
 		// 	// state.selectedFilters = action.payload;
 		// 	const { kategorije, tagovi } = action.payload;
@@ -77,24 +92,22 @@ export const gallerySlice = createSlice({
 		// 					Boolean
 		// 			  ),
 		// 	};
+		// setFilters: (state, action) => {
+		// 	const { kategorije, tagovi } = action.payload;
 
-		setFilters: (state, action) => {
-			const { kategorije, tagovi } = action.payload;
-			state.selectedFilters = {
-				kategorije: Array.isArray(kategorije)
-					? kategorije
-					: (Array.isArray(state.selectedFilters.kategorije)
-							? [...state.selectedFilters.kategorije, kategorije]
-							: [kategorije]
-					  ).filter(Boolean),
-				tagovi: Array.isArray(tagovi)
-					? tagovi
-					: (Array.isArray(state.selectedFilters.tagovi)
-							? [...state.selectedFilters.tagovi, tagovi]
-							: [tagovi]
-					  ).filter(Boolean),
-			};
-		},
+		// 	state.selectedFilters = {
+		// 		kategorije: Array.isArray(kategorije)
+		// 			? kategorije.filter(Boolean)
+		// 			: Array.isArray(state.selectedFilters.kategorije)
+		// 			? state.selectedFilters.kategorije
+		// 			: [],
+		// 		tagovi: Array.isArray(tagovi)
+		// 			? tagovi.filter(Boolean)
+		// 			: Array.isArray(state.selectedFilters.tagovi)
+		// 			? state.selectedFilters.tagovi
+		// 			: [],
+		// 	};
+		// },
 
 		// setFilters: (state, action) => {
 		// 	const { kategorije, tagovi } = action.payload;
