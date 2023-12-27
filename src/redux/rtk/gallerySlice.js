@@ -59,7 +59,33 @@ export const gallerySlice = createSlice({
 		setSelectedPhoto: (state, action) => {
 			state.selectedPhoto = action.payload;
 		},
+		//v min
+		// setFilters: (state, action) => {
+		// 	const { kategorije, tagovi } = action.payload;
 
+		// 	state.selectedFilters = {
+		// 		kategorije: Array.isArray(kategorije) ? kategorije.filter(Boolean) : [],
+		// 		tagovi: Array.isArray(tagovi) ? tagovi.filter(Boolean) : [],
+		// 	};
+		// },
+		//v max
+		// setFilters: (state, action) => {
+		// 	const { kategorije, tagovi } = action.payload;
+
+		// 	state.selectedFilters = {
+		// 		kategorije: Array.isArray(kategorije)
+		// 			? kategorije.filter(Boolean)
+		// 			: Array.isArray(state.selectedFilters.kategorije)
+		// 			? state.selectedFilters.kategorije
+		// 			: [],
+		// 		tagovi: Array.isArray(tagovi)
+		// 			? tagovi.filter(Boolean)
+		// 			: Array.isArray(state.selectedFilters.tagovi)
+		// 			? state.selectedFilters.tagovi
+		// 			: [],
+		// 	};
+		// },
+		//v mid
 		setFilters: (state, action) => {
 			const { kategorije, tagovi } = action.payload;
 
