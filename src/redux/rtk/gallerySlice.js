@@ -59,6 +59,7 @@ export const gallerySlice = createSlice({
 		setSelectedPhoto: (state, action) => {
 			state.selectedPhoto = action.payload;
 		},
+
 		setFilters: (state, action) => {
 			const { kategorije, tagovi } = action.payload;
 
@@ -67,11 +68,32 @@ export const gallerySlice = createSlice({
 
 			state.selectedFilters = {
 				kategorije: Array.isArray(kategorije)
-					? kategorije.filter(Boolean)
-					: [],
-				tagovi: Array.isArray(tagovi) ? tagovi.filter(Boolean) : [],
+					? kategorije
+					: (Array.isArray(state.selectedFilters.kategorije)
+							? [...state.selectedFilters.kategorije, kategorije]
+							: [kategorije]
+					  ).filter(Boolean),
+				tagovi: Array.isArray(tagovi)
+					? tagovi
+					: (Array.isArray(state.selectedFilters.tagovi)
+							? [...state.selectedFilters.tagovi, tagovi]
+							: [tagovi]
+					  ).filter(Boolean),
 			};
 		},
+		// setFilters: (state, action) => {
+		// 	const { kategorije, tagovi } = action.payload;
+
+		// 	console.log('kategorije:', kategorije);
+		// 	console.log('tagovi:', tagovi);
+
+		// 	state.selectedFilters = {
+		// 		kategorije: Array.isArray(kategorije)
+		// 			? kategorije.filter(Boolean)
+		// 			: [],
+		// 		tagovi: Array.isArray(tagovi) ? tagovi.filter(Boolean) : [],
+		// 	};
+		// },
 	},
 	extraReducers: {
 		[getPhotos.pending]: state => {
