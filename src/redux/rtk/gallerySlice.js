@@ -81,19 +81,6 @@ export const gallerySlice = createSlice({
 					  ).filter(Boolean),
 			};
 		},
-		// setFilters: (state, action) => {
-		// 	const { kategorije, tagovi } = action.payload;
-
-		// 	console.log('kategorije:', kategorije);
-		// 	console.log('tagovi:', tagovi);
-
-		// 	state.selectedFilters = {
-		// 		kategorije: Array.isArray(kategorije)
-		// 			? kategorije.filter(Boolean)
-		// 			: [],
-		// 		tagovi: Array.isArray(tagovi) ? tagovi.filter(Boolean) : [],
-		// 	};
-		// },
 	},
 	extraReducers: {
 		[getPhotos.pending]: state => {
