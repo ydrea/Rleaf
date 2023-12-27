@@ -62,64 +62,16 @@ export const gallerySlice = createSlice({
 		setFilters: (state, action) => {
 			const { kategorije, tagovi } = action.payload;
 
+			console.log('kategorije:', kategorije);
+			console.log('tagovi:', tagovi);
+
 			state.selectedFilters = {
-				kategorije: (Array.isArray(kategorije)
-					? kategorije
-					: []
-				).filter(Boolean),
-				tagovi: (Array.isArray(tagovi) ? tagovi : []).filter(Boolean),
+				kategorije: Array.isArray(kategorije)
+					? kategorije.filter(Boolean)
+					: [],
+				tagovi: Array.isArray(tagovi) ? tagovi.filter(Boolean) : [],
 			};
 		},
-
-		// setFilters: (state, action) => {
-		// 	// state.selectedFilters = action.payload;
-		// 	const { kategorije, tagovi } = action.payload;
-		// 	state.selectedFilters = {
-		// 		kategorije: kategorije || state.selectedFilters.kategorije,
-		// 		tagovi: tagovi || state.selectedFilters.tagovi,
-		// 	};
-		// },
-		// setFilters: (state, action) => {
-		// 	const { kategorije, tagovi } = action.payload;
-		// 	state.selectedFilters = {
-		// 		kategorije:
-		// 			kategorije !== undefined
-		// 				? kategorije
-		// 				: state.selectedFilters.kategorije,
-		// 		tagovi: Array.isArray(tagovi)
-		// 			? tagovi
-		// 			: [...state.selectedFilters?.tagovi, tagovi].filter(
-		// 					Boolean
-		// 			  ),
-		// 	};
-		// setFilters: (state, action) => {
-		// 	const { kategorije, tagovi } = action.payload;
-
-		// 	state.selectedFilters = {
-		// 		kategorije: Array.isArray(kategorije)
-		// 			? kategorije.filter(Boolean)
-		// 			: Array.isArray(state.selectedFilters.kategorije)
-		// 			? state.selectedFilters.kategorije
-		// 			: [],
-		// 		tagovi: Array.isArray(tagovi)
-		// 			? tagovi.filter(Boolean)
-		// 			: Array.isArray(state.selectedFilters.tagovi)
-		// 			? state.selectedFilters.tagovi
-		// 			: [],
-		// 	};
-		// },
-
-		// setFilters: (state, action) => {
-		// 	const { kategorije, tagovi } = action.payload;
-		// 	state.selectedFilters = {
-		// 		kategorije:
-		// 			kategorije && kategorije.length > 0 ? kategorije : null,
-		// 		tagovi:
-		// 			tagovi !== undefined
-		// 				? tagovi
-		// 				: state.selectedFilters.tagovi,
-		// 	};
-		// },
 	},
 	extraReducers: {
 		[getPhotos.pending]: state => {
