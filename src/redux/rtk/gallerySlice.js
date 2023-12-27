@@ -89,7 +89,10 @@ export const gallerySlice = createSlice({
 					  ).filter(Boolean),
 				tagovi: Array.isArray(tagovi)
 					? tagovi
-					: [...state.selectedFilters.tagovi, tagovi].filter(Boolean),
+					: (Array.isArray(state.selectedFilters.tagovi)
+							? [...state.selectedFilters.tagovi, tagovi]
+							: [tagovi]
+					  ).filter(Boolean),
 			};
 		},
 
