@@ -24,39 +24,31 @@ export default function Photos() {
 
   useEffect(() => {
     // Find the index of the photo with matching 'signatura'
-    const index = photos.findIndex(
-      photo => photo.signatura === signatura
-    );
+    const index = photos.findIndex((photo) => photo.signatura === signatura);
     if (index !== -1) {
       dispatch(setSelectedPhotoIndex(index));
     }
   }, [dispatch, photos, signatura]);
 
-  const handleThumbnailClick = index => {
+  const handleThumbnailClick = (index) => {
     dispatch(setSelectedPhotoIndex(index));
   };
 
   return (
-    <div className="gallery">
-      <div className="thumbnails">
-
-        //
-        </div>
-{photos.map((photo, index) => (
-  <div key={photo.signatura}>
-    <Link to={`/photo/${photo.signatura}?index=${index}`} target="_blank">
-      <img src={photo.imageUrl} alt={photo.signatura} />
-    </Link>
-  </div>
-))}
-            <img
-              src={`${process.env.REACT_APP_SERVER_PUB}/${photo.signatura}`}
-              alt={photo.naziv}
-              width="200px"
-            />
+    <div className='gallery'>
+      <div className='thumbnails'>//</div>
+      {photos.map((photo, index) => (
+        <div key={photo.signatura}>
+          <Link to={`/photo/${photo.signatura}?index=${index}`} target='_blank'>
+            <img src={photo.imageUrl} alt={photo.signatura} />
           </Link>
-        ))}
-      </div>
+        </div>
+      ))}
+      <img
+        src={`${process.env.REACT_APP_SERVER_PUB}/${photo.signatura}`}
+        alt={photo.naziv}
+        width='200px'
+      />
     </div>
   );
 }

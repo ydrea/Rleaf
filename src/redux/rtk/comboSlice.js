@@ -18,22 +18,19 @@ export const getNextPhotoDetails = createAsyncThunk(
   }
 );
 const gallerySlice = createSlice({
+  extraReducers: (builder) => ({
+    // ... other cases
 
-    
-    extraReducers: (builder) => {
-      // ... other cases
-  
-      [getNextPhotoDetails.pending]: (state) => {
-        state.loading = true;
-      },
-      [getNextPhotoDetails.fulfilled]: (state, action) => {
-        state.loading = false;
-        // You might handle the result here if needed (e.g., updated idX)
-      },
-      [getNextPhotoDetails.rejected]: (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      },
+    [getNextPhotoDetails.pending]: (state) => {
+      state.loading = true;
     },
-  });
-  
+    [getNextPhotoDetails.fulfilled]: (state, action) => {
+      state.loading = false;
+      // You might handle the result here if needed (e.g., updated idX)
+    },
+    [getNextPhotoDetails.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    },
+  }),
+});

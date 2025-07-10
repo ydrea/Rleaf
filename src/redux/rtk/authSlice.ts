@@ -1,12 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface AuthState {
+  password: string;
+  authorized: boolean;
+}
+
+const initialState: AuthState = {
+  password: '',
+  authorized: false,
+};
+
 export const authSlice = createSlice({
   name: 'login',
-  initialState: {
-    // username: 'Foo',
-    password: '',
-    authorized: false,
-  },
+  initialState,
   reducers: {
     // setUsername: (state, action) => {
     //   const value = action.payload;
@@ -16,16 +22,19 @@ export const authSlice = createSlice({
     //   const value = action.payload;
     //   state.password = value; // action.payload.password
     // },
-    logon: (state, action) => {
+    logon: (state) => {
       //  state.username = action.payload.username;
       // state.password = action.payload.password;
       state.authorized = true;
     },
-    logoff: state => (state.authorized = false),
+    logoff: (state) => {
+      state.authorized = false;
+    },
   },
 });
-export const { logon, logoff, setUsername, setPassword } =
-  authSlice.actions;
-export const selectValid = state => state.auth.authorized;
+
+export const { logon, logoff } = authSlice.actions;
+export const selectValid = (state: { auth: AuthState }) =>
+  state.auth.authorized;
 // export const selectPwd = state => state.auth.password;
 export default authSlice.reducer;

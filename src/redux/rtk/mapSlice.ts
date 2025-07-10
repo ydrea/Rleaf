@@ -8,7 +8,6 @@
 // 'https://landscape.agr.hr/qgis/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=application/json&srsName=epsg:4326&TYPENAME=naselja_stanovnistvo'
 
 import { createSlice } from '@reduxjs/toolkit';
-
 const initialState = {
   selectedImg: null,
   selectedMarker: null,
@@ -27,12 +26,12 @@ const mapSlice = createSlice({
   },
 });
 
-export const { setSelectedPhoto, setSelectedMarker } =
-  mapSlice.actions;
+console.log(mapSlice);
 
-export const selectSelectedPhoto = state =>
-  state.mapslice.selectedImg;
-export const selectSelectedMarker = state =>
+export const { setSelectedPhoto, setSelectedMarker } = mapSlice.actions;
+
+export const selectSelectedPhoto = (state: any) => state.mapslice.selectedImg;
+export const selectSelectedMarker = (state: any) =>
   state.mapslice.selectedMarker;
 
 export default mapSlice.reducer;
