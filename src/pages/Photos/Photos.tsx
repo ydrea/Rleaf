@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   getPhotos,
@@ -12,31 +12,13 @@ import KategorijeSelekt from '../../comps/SelektK';
 import TagoviSelekt from '../../comps/SelektT';
 import Hline from '../../comps/Line';
 import Masonry from 'react-masonry-css';
-
-type Photo = {
-  id: number;
-  signatura: string;
-  naziv: string;
-  naziv_eng: string;
-  opis: string;
-  opis_eng: string;
-  lokacija: string;
-  datum_sni: string | null;
-  kategorija: string;
-  autor: string;
-  copyright: string;
-  copyright_holder: string;
-  tagovi: string;
-  doi: string | null;
-  geom: string;
-  url_image: string | null;
-  url_thumb: string | null;
-};
+import { useAppDispatch } from '../../redux/hooks';
+import type { Photo } from '../../types/types';
 
 export const Photos = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const photos: Photo[] = useSelector(selectPhotos);
+  const dispatch = useAppDispatch();
+  const photos = useSelector(selectPhotos);
   const [, showPhotoSet] = useState(false);
   const filteredPhotos = useSelector(selectFilteredPhotos);
 

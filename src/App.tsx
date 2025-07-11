@@ -4,15 +4,15 @@ import { About } from './pages/About/About';
 import { Contact } from './pages/Contact/Contact';
 import { Ewap } from './pages/Projects/EWAP/EWAP';
 import { Banija } from './pages/Projects/Banija/Banija';
-import { Fileupload } from './pages/Upload';
-import { Login } from './pages/Login';
-import Layout from './Layout';
-import PhotosLayout from './PhotosLayout';
+import { Fileupload } from './pages/Upload/Upload';
+import { Login } from './pages/Login/Login';
+import { Layout } from './Layout';
+import { PhotosLayout } from './PhotosLayout';
 import { Route, Routes } from 'react-router-dom';
-import Private from './pages/protected/Private';
+import { Private } from './pages/Protected/Private';
 import { Photos } from './pages/Photos/Photos';
-import Photo from './pages/Photo';
-import Map from './maps/karta/Karta';
+import { Photo } from './pages/Photo/Photo';
+import { Karta } from './maps/karta/Karta';
 import './App.css';
 
 export const App = (): JSX.Element => {
@@ -31,8 +31,8 @@ export const App = (): JSX.Element => {
         <Route path='/contact' element={<Contact />} />
         <Route path='/projects/banija' element={<Banija />} />
         <Route path='/projects/ewap' element={<Ewap />} />
-        <Route path='/maps/:signatura' element={<Map />} />
-        <Route path='/maps' element={<Map />} />
+        <Route path='/maps/:signatura' element={<Karta />} />
+        <Route path='/maps' element={<Karta />} />
         <Route path='/photos' element={<PhotosLayout />}>
           <Route index element={<Photos />} />
           <Route path=':signatura' element={<Photo />} />

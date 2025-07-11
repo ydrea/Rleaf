@@ -49,7 +49,7 @@ const SingleMarker = () => {
 // MAP
 //
 
-function Map() {
+export const Karta = () => {
   const { signatura } = useParams();
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null);
 
@@ -441,6 +441,4 @@ function Map() {
       </section>
     </div>
   );
-}
-
-export default Map;
+};

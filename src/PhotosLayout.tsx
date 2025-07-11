@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Hline from './comps/Line';
 import './pages/Photos/Photos.css';
 //
-const PhotosLayout = () => {
+export const PhotosLayout = () => {
   return (
     <div className='gallery'>
       <section className='#'>
@@ -34,5 +34,3 @@ const PhotosLayout = () => {
     </div>
   );
 };
-
-export default PhotosLayout;

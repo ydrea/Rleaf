@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import Message from '../comps/Message';
+import { useState, useEffect } from 'react';
+import Message from '../../comps/Message';
 import axios from 'axios';
 import exifr from 'exifr';
-import { useDispatch } from 'react-redux';
-// import FormA from '../comps/FormA';
-import PhotosEDIT from './PhotosEDIT';
-import { getPhotos } from '../redux/rtk/gallerySlice';
 
-import './Fileupload.css';
+import PhotosEDIT from '../PhotosEdit/PhotosEdit';
+import { getPhotos } from '../../redux/rtk/gallerySlice';
+import { useAppDispatch } from '../../redux/hooks';
+import type { Photo } from '../../types/types';
+import './Upload.css';
 
-const decodeString = value => {
+const decodeString = (value: string) => {
   try {
     return decodeURIComponent(escape(value));
   } catch (e) {
@@ -18,7 +18,7 @@ const decodeString = value => {
   return value;
 };
 
-const getExifData = async file => {
+const getExifData = async (file: File) => {
   try {
     const data = await exifr.parse(file, { iptc: true, xmp: true });
     return data;
@@ -28,15 +28,12 @@ const getExifData = async file => {
   }
 };
 
-const parseExifDate = value => {
+const parseExifDate = (value: string | number | undefined) => {
   if (!value) {
     return undefined;
   }
   if (typeof value === 'string' && value.length === 8) {
-    return `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(
-      6,
-      8
-    )}`;
+    return `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(6, 8)}`;
   }
   try {
     var d = new Date(value);
@@ -48,7 +45,10 @@ const parseExifDate = value => {
   }
 };
 
-const saveExif = async (signatura, exif = {}) => {
+const saveExif = async (
+  signatura: string,
+  exif: Record<string, any>
+): Promise<{ data?: Photo; error?: any }> => {
   try {
     const res = await fetch(`${process.env.REACT_APP_SERVER}/novi`, {
       method: 'POST',
@@ -58,15 +58,12 @@ const saveExif = async (signatura, exif = {}) => {
         datum_sni: parseExifDate(exif.DateCreated),
         autor: exif.Artist ?? '',
         copyright: decodeString(
-          exif.Copyright ??
-            exif.rights?.value ??
-            exif.CopyrightNotice ??
-            ''
+          exif.Copyright ?? exif.rights?.value ?? exif.CopyrightNotice ?? ''
         ),
-        tagovi: (Array.isArray(exif.subject)
-          ? exif.subject.join(',')
-          : exif.subject
-        ) ?? '',
+        tagovi:
+          (Array.isArray(exif.subject)
+            ? exif.subject.join(',')
+            : exif.subject) ?? '',
         lon: `${exif.longitude ?? ''}`,
         lat: `${exif.latitude ?? ''}`,
         naziv: decodeString(
@@ -92,7 +89,7 @@ const saveExif = async (signatura, exif = {}) => {
       headers: { 'Content-Type': 'application/json' },
     });
     if (res.ok) {
-      const data = await res.json();
+      const data = (await res.json()) as Photo;
       return {
         data,
       };
@@ -100,16 +97,17 @@ const saveExif = async (signatura, exif = {}) => {
     return {
       error: 'Error!',
     };
-  } catch (err) {
+  } catch (err: any) {
     return {
-      error: err?.msg ?? 'Error!',
+      error: 'msg' in err ? err.msg : 'Error!',
     };
   }
 };
 
-const uploadFile = async file => {
+const uploadFile = async (file: File) => {
   const formData = new FormData();
   formData.append('file', file);
+
   try {
     const { data } = await axios.post(
       `${process.env.REACT_APP_SERVER}/upload`,
@@ -122,7 +120,7 @@ const uploadFile = async file => {
     return {
       data,
     };
-  } catch (err) {
+  } catch (err: any) {
     if (err.response && err.response.status === 500) {
       return {
         error: 'There was a problem with the server',
@@ -139,23 +137,28 @@ const uploadFile = async file => {
 };
 
 export const Fileupload = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const [fileList, setFileList] = useState([]);
-  const [uploadedFileList, setUploadedFileList] = useState([]);
+  const [fileList, setFileList] = useState<File[]>([]);
+  const [uploadedFileList, setUploadedFileList] = useState<any[]>([]);
   const [message, setMessage] = useState('');
-  const [exifList, setExifList] = useState([]);
-  const [savedExifList, setSavedExifList] = useState([]);
+  const [exifList, setExifList] = useState<any[]>([]);
+  const [savedExifList, setSavedExifList] = useState<
+    {
+      data?: Photo;
+      error?: any;
+    }[]
+  >([]);
 
   const [isSaving, setIsSaving] = useState(false);
   const submitIsDisabled = fileList.length === 0 || isSaving;
 
-  const onChange = e => {
-    const files = [...e.target.files];
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = [...(e.target.files ?? [])];
     setFileList(files);
   };
 
-  const onSubmit = async e => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (fileList.length === 0) {
@@ -165,17 +168,6 @@ export const Fileupload = () => {
     setIsSaving(true);
     setMessage('Saving...');
 
-    // if (fileList.length === 1) {
-    //   const { data, error } = await uploadFile(fileList[0])
-    //   if (error) {
-    //     setMessage(error)
-    //     return
-    //   }
-    //   setUploadedFileList([data])
-    //   setMessage(`Image File ${data.fileName} Uploaded to ${data.filePath}`);
-    //   return
-    // }
-
     const count = {
       files: fileList.length,
       uploads: 0,
@@ -183,11 +175,11 @@ export const Fileupload = () => {
     };
     await Promise.allSettled(
       fileList.map((file, fileIndex) => {
-        return uploadFile(file).then(uploadFileData => {
+        return uploadFile(file).then((uploadFileData) => {
           if (uploadFileData.data) {
             count.uploads += 1;
           }
-          setUploadedFileList(currentUploadedFileList =>
+          setUploadedFileList((currentUploadedFileList) =>
             currentUploadedFileList.map((item, index) => {
               if (index !== fileIndex) {
                 return item;
@@ -199,11 +191,11 @@ export const Fileupload = () => {
             return saveExif(
               uploadFileData.data.fileName,
               exifList[fileIndex]
-            ).then(saveExifData => {
+            ).then((saveExifData) => {
               if (saveExifData.data) {
                 count.saves += 1;
               }
-              setSavedExifList(currentSavedExifList =>
+              setSavedExifList((currentSavedExifList) =>
                 currentSavedExifList.map((item, index) => {
                   if (index !== fileIndex) {
                     return item;
@@ -222,7 +214,7 @@ export const Fileupload = () => {
     dispatch(getPhotos());
   };
 
-  const handleRemove = async photo => {
+  const handleRemove = async (photo: Photo) => {
     setMessage('');
     const photoLabel = `id: ${photo.id}${
       photo.signatura ? ` (${photo.signatura})` : ''
@@ -240,7 +232,7 @@ export const Fileupload = () => {
           dispatch(getPhotos());
           return true;
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error(err.msg, 'nece');
       }
     }
@@ -249,7 +241,7 @@ export const Fileupload = () => {
 
   useEffect(() => {
     let isMounted = true;
-    const emptyList = fileList.map(() => undefined);
+    const emptyList = fileList.map(() => ({}));
     setExifList(emptyList);
     setUploadedFileList(emptyList);
     setSavedExifList(emptyList);
@@ -258,11 +250,11 @@ export const Fileupload = () => {
 
     const getExif = async () => {
       const exifData = await Promise.allSettled(
-        fileList.map(file => getExifData(file))
+        fileList.map((file) => getExifData(file))
       );
       if (isMounted) {
         setExifList(
-          exifData.map(result => {
+          exifData.map((result) => {
             if (result.status === 'fulfilled') {
               return result.value ?? undefined;
             }
@@ -285,15 +277,15 @@ export const Fileupload = () => {
         style={{ paddingTop: '15%', paddingLeft: '17.5%' }}
         onSubmit={onSubmit}
       >
-        <div className="custom-file mb-4">
+        <div className='custom-file mb-4'>
           <input
-            type="file"
-            className="custom-file-input"
-            id="customFile"
+            type='file'
+            className='custom-file-input'
+            id='customFile'
             multiple
             onChange={onChange}
           />
-          <label className="custom-file-label" htmlFor="customFile">
+          <label className='custom-file-label' htmlFor='customFile'>
             Select files
           </label>
         </div>
@@ -326,10 +318,10 @@ export const Fileupload = () => {
         )}
 
         <input
-          type="submit"
-          value="Upload"
+          type='submit'
+          value='Upload'
           disabled={submitIsDisabled}
-          className="btn btn-primary btn-block mt-4"
+          className='btn btn-primary btn-block mt-4'
         />
       </form>
       {/* {uploadedFileList.length === 1 && !!uploadedFileList[0] ? (

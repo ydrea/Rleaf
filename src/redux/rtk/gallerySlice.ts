@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { Photo } from '../../types/types';
 
 const url = `${process.env.REACT_APP_SERVER}/photosrl`;
 
@@ -6,8 +7,8 @@ export const getPhotos = createAsyncThunk('gallery/getPhotos', async () => {
   const rez = await fetch(url);
   const rezult = await rez.json();
   // console.log(rezult);
-  return rezult;
-}) as unknown as any;
+  return rezult as Photo[];
+});
 
 export const getAPhoto = createAsyncThunk('gallery/getAPhoto', async (id) => {
   const rez = await fetch(`${process.env.REACT_APP_SERVER}/photosr/${id}`);
@@ -130,7 +131,7 @@ export const {
   setFilters,
 } = gallerySlice.actions;
 
-export const selectPhotos = (state: any) => state.gallery.photos;
+export const selectPhotos = (state: any) => state.gallery.photos as Photo[];
 export const selectSelectedPhotoIndex = (state: any) =>
   state.gallery.selectedPhotoIndex;
 // ...
@@ -155,7 +156,7 @@ export const selectSelectedPhoto = (state: any) => {
 };
 
 // Filteri
-export const selectFilteredPhotos = (state: any) => {
+export const selectFilteredPhotos = (state: any): Photo[] => {
   console.log('selectFilteredPhotos', state);
   const { kategorije, tagovi } = state.gallery.selectedFilters || {};
   const allPhotos = state.gallery.photos;

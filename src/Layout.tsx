@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { Nav } from './comps/Nav';
 import './layout.css';
 
-const Layout = ({ children }: { children: ReactNode }) => {
+export const Layout = ({ children }: { children: ReactNode }) => {
   //
   return (
     <>
@@ -13,5 +13,3 @@ const Layout = ({ children }: { children: ReactNode }) => {
     </>
   );
 };
-
-export default Layout;
