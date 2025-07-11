@@ -1,32 +1,25 @@
 import { useEffect } from 'react';
-import Home from './pages/Home';
-import About from './pages/About';
-// import Map from './pages/MapD';
-import Contact from './pages/Contact';
-import Ewap from './pages/projects/ewap';
-import Banija from './pages/projects/banija';
-//
+import { Home } from './pages/Home/Home';
+import { About } from './pages/About/About';
+import { Contact } from './pages/Contact/Contact';
+import { Ewap } from './pages/Projects/EWAP/EWAP';
+import { Banija } from './pages/Projects/Banija/Banija';
 import { Fileupload } from './pages/Upload';
 import { Login } from './pages/Login';
-// import { Fileupload } from './pages/Fileupload';
-//
-import './App.css';
 import Layout from './Layout';
 import PhotosLayout from './PhotosLayout';
-//
 import { Route, Routes } from 'react-router-dom';
 import Private from './pages/protected/Private';
-//
-import Photos from './pages/Photos';
+import { Photos } from './pages/Photos/Photos';
 import Photo from './pages/Photo';
 import Map from './maps/karta/Karta';
-//
-function App(): JSX.Element {
-  //
+import './App.css';
 
+export const App = (): JSX.Element => {
   useEffect(() => {
     console.log('REACT_APP_SERVER_PUB:', process.env.REACT_APP_SERVER_PUB);
   });
+
   return (
     <Layout>
       <Routes>
@@ -48,5 +41,4 @@ function App(): JSX.Element {
       </Routes>
     </Layout>
   );
-}
-export default App;
+};

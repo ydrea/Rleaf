@@ -8,7 +8,7 @@ import {
   selectSelectedPhotoIndex,
 } from '../redux/rtk/gallerySlice';
 import { Card } from '../comps/Card';
-import './photos.css';
+import './pages/Photos/Photos.css';
 
 export default function Photos() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ export default function Photos() {
   const [cardVisible, setCardVisible] = useState(false);
 
   // Handle onClick
-  const handlePhotoClick = index => {
+  const handlePhotoClick = (index) => {
     dispatch(setSelectedPhotoIndex(index));
     setCardVisible(true);
 
@@ -41,15 +41,12 @@ export default function Photos() {
   }, [dispatch]);
 
   return (
-    <div className="gallery">
-      <div className="photo-container">
+    <div className='gallery'>
+      <div className='photo-container'>
         {photos.map((photo, index) => (
-          <div key={photo.id} className="photo">
+          <div key={photo.id} className='photo'>
             <img
-              src={
-                process.env.REACT_APP_SERVER_PUB +
-                `/${photo.signatura}`
-              }
+              src={process.env.REACT_APP_SERVER_PUB + `/${photo.signatura}`}
               alt={photo.naziv}
               onClick={() => handlePhotoClick(index)}
             />

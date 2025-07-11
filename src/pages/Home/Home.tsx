@@ -1,10 +1,10 @@
 import 'leaflet/dist/leaflet.css';
 
-import Footer from '../comps/Footer';
-import gridHV from '../assets/GRID H V.svg';
-import './home.css';
+import { Footer } from '../../comps/Footer/Footer';
+import gridHV from '../../assets/GRID H V.svg';
+import './Home.css';
 
-export default function Home(): JSX.Element {
+export const Home = (): JSX.Element => {
   return (
     // <div className="gallery" style={{ overflow: 'hidden' }}>
     <div className='home'>
@@ -80,4 +80,4 @@ export default function Home(): JSX.Element {
       </div>
     </div>
   );
-}
+};

@@ -26,8 +26,6 @@ const mapSlice = createSlice({
   },
 });
 
-console.log(mapSlice);
-
 export const { setSelectedPhoto, setSelectedMarker } = mapSlice.actions;
 
 export const selectSelectedPhoto = (state: any) => state.mapslice.selectedImg;

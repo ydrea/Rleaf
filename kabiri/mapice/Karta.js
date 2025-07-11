@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './karta.css';
-import Footer from '../comps/Footer';
+import { Footer } from '../../comps/Footer/Footer';
 import ReactDOMServer from 'react-dom/server';
 import { useSelector, useDispatch } from 'react-redux';
 import 'leaflet-sidebar-v2/css/leaflet-sidebar.min.css';
@@ -28,7 +28,7 @@ const Karta = () => {
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [markerInstances, setMarkerInstances] = useState([]);
-  const selectedMark = useSelector(state => {
+  const selectedMark = useSelector((state) => {
     return state?.mapslice?.selectedMarker;
   });
 
@@ -39,7 +39,7 @@ const Karta = () => {
           `${process.env.REACT_APP_SERVER}/json_photos`
         );
 
-        const parsedData = response.data.map(item => {
+        const parsedData = response.data.map((item) => {
           const geo = JSON.parse(item.geometry);
           return {
             latLng: [geo.coordinates[1], geo.coordinates[0]],
@@ -60,12 +60,12 @@ const Karta = () => {
   useEffect(() => {
     if (map && markers.length > 0) {
       // Remove existing marker instances
-      markerInstances.forEach(marker => {
+      markerInstances.forEach((marker) => {
         marker.remove();
       });
 
       // Create new marker instances
-      const newMarkerInstances = markers.map(markerData => {
+      const newMarkerInstances = markers.map((markerData) => {
         const marker = L.marker(markerData.latLng, {
           icon: myIcon,
         });
@@ -79,7 +79,7 @@ const Karta = () => {
               }}
             > */}
             <img
-              width="233px"
+              width='233px'
               src={`${process.env.REACT_APP_SERVER_PUB}/${markerData.signatura}`}
               alt={markerData.signatura}
             />
@@ -98,8 +98,7 @@ const Karta = () => {
           image.src = `${process.env.REACT_APP_SERVER_PUB}/${markerData.signatura}`;
           image.alt = markerData.signatura;
           // Append the image to a modal or a specific container
-          const modalContainer =
-            document.getElementById('modal-container');
+          const modalContainer = document.getElementById('modal-container');
           modalContainer.innerHTML = ''; // Clear previous content
           modalContainer.appendChild(image);
         });
@@ -375,11 +374,11 @@ const Karta = () => {
     }
   };
   //
-  const triggerMarkerClick = signatura => {
+  const triggerMarkerClick = (signatura) => {
     if (map && markers.length > 0) {
       // Find the marker instance with the matching signatura
       const targetMarker = markerInstances.find(
-        marker => marker.options.popupContent === signatura
+        (marker) => marker.options.popupContent === signatura
       );
       console.log(targetMarker);
       if (targetMarker) {
@@ -402,18 +401,17 @@ const Karta = () => {
 
   //
   return (
-    <div className="gallery">
-      <div className="naslov-container">
+    <div className='gallery'>
+      <div className='naslov-container'>
         <h1>opservatorij</h1>
-        <div className="line-div0" />
+        <div className='line-div0' />
       </div>
-      <div className="txtcont">
-        Dobrodošli na interaktivnu kartu "Opservatorija krajobraza".
-        Ova karta predstavlja našu kontinuirano nadopunjujuću
-        kolekciju georeferenciranih podataka koja vam omogućuje uvid u
-        različite aspekte krajobraza. Upotrijebite alate za odabir
-        podloge, prilagodbu slojeva i filtriranje informacija kako
-        biste prilagodili prikaz prema vlastitim istraživačkim
+      <div className='txtcont'>
+        Dobrodošli na interaktivnu kartu "Opservatorija krajobraza". Ova karta
+        predstavlja našu kontinuirano nadopunjujuću kolekciju georeferenciranih
+        podataka koja vam omogućuje uvid u različite aspekte krajobraza.
+        Upotrijebite alate za odabir podloge, prilagodbu slojeva i filtriranje
+        informacija kako biste prilagodili prikaz prema vlastitim istraživačkim
         potrebama.
       </div>
       {/* <div
@@ -428,7 +426,7 @@ const Karta = () => {
         </button>
       </div> */}
       <div
-        id="map-container"
+        id='map-container'
         style={{
           height: '400px',
           width: '75vw',
@@ -437,7 +435,7 @@ const Karta = () => {
           marginBottom: '2vh',
         }}
       />
-      <div id="modal-container"></div>
+      <div id='modal-container'></div>
       <Footer />{' '}
     </div>
   );
