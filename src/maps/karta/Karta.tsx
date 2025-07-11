@@ -1,4 +1,3 @@
-import './karta.css';
 import 'leaflet/dist/leaflet.css';
 import {
   MapContainer,
@@ -8,13 +7,14 @@ import {
   useMap,
 } from 'react-leaflet';
 import BetterWMS from './BetterWMS';
-import Hline from '../../comps/Line';
+import { Hline } from '../../components/Hline/Hline';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectSelectedPhoto } from '../../redux/rtk/gallerySlice';
-
 import 'react-tabs/style/react-tabs.css';
+import { selectSelectedPhoto } from '../../redux/rtk/gallerySlice';
+import './Karta.css';
+
 import { FiksniElementi, PodRV, PodRvi, PodRd, PodK } from '../wms';
 
 const SingleMarker = () => {
@@ -57,7 +57,6 @@ export const Karta = () => {
   useEffect(() => {
     if (signatura) {
       selectedLayerSet(temafk.id);
-      // console.log(selectedPhoto.geom);
     }
   }, [signatura]);
 
@@ -309,9 +308,6 @@ export const Karta = () => {
               />
             </BaseLayer>
             <FiksniElementi />
-            {/* Search */}
-            {/* <Search provider={new OpenStreetMapProvider()} style={{zIndex: 1111}} /> */}
-            {/* Overlays */}
             <Overlay key={gradovirh.id} name={gradovirh.name}>
               <BetterWMS
                 key={gradovirh.id}

@@ -1,4 +1,4 @@
-import { Footer } from '../../../comps/Footer/Footer';
+import { Footer } from '../../../components/Footer/Footer';
 import './Banija.css';
 
 export const Banija = () => {

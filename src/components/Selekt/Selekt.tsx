@@ -1,6 +1,6 @@
 import Select, { type CSSObjectWithLabel } from 'react-select';
 
-function Selekt() {
+export const Selekt = () => {
   const cusTom = {
     control: (styles: CSSObjectWithLabel) => ({
       ...styles,
@@ -38,6 +38,4 @@ function Selekt() {
       ]}
     />
   );
-}
-
-export default Selekt;
+};

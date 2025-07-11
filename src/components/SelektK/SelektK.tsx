@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilters } from '../redux/rtk/gallerySlice';
+import { setFilters } from '../../redux/rtk/gallerySlice';
 import type { CSSObjectWithLabel } from 'react-select';
 
-function KategorijeSelekt() {
+export const KategorijeSelekt = () => {
   const dispatch = useDispatch();
   const selectedFilters = useSelector(
     (state: any) => state.gallery.selectedFilters
@@ -106,6 +106,4 @@ function KategorijeSelekt() {
       </label>
     </div>
   );
-}
-
-export default KategorijeSelekt;
+};

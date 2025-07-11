@@ -1,13 +1,22 @@
-import './nav.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export const Dropdown = ({ submenus, dropdown, closeMobileMenu }) => {
+import './Nav.css';
+
+export const Dropdown = ({
+  submenus,
+  dropdown,
+  closeMobileMenu,
+}: {
+  submenus: { label: string; to: string }[];
+  dropdown: boolean;
+  closeMobileMenu: () => void;
+}) => {
   return (
     <ul className={`dropdown ${dropdown ? 'show' : ''}`}>
       {submenus.map((submenu, index) => (
-        <li key={index} className="menu-items">
+        <li key={index} className='menu-items'>
           {submenu.to ? (
             <Link
               to={submenu.to}
@@ -15,14 +24,14 @@ export const Dropdown = ({ submenus, dropdown, closeMobileMenu }) => {
               aria-expanded={dropdown ? 'true' : 'false'}
               onClick={closeMobileMenu}
             >
-              <span className="first-letter-white">
+              <span className='first-letter-white'>
                 {submenu.label.charAt(0)}
               </span>
               {submenu.label.slice(1)}{' '}
             </Link>
           ) : (
-            <span className="submenu-item">
-              <span className="first-letter-white">
+            <span className='submenu-item'>
+              <span className='first-letter-white'>
                 {submenu.label.charAt(0)}
               </span>
               {submenu.label.slice(1)}{' '}
@@ -36,10 +45,9 @@ export const Dropdown = ({ submenus, dropdown, closeMobileMenu }) => {
 
 export const Nav = () => {
   const [click, setClick] = useState(false);
-  const [hovered, setHovered] = useState(null);
-  const [subMenu, setSubMenu] = useState({});
-  const [dropdownItemClicked, setDropdownItemClicked] =
-    useState(false);
+  const [, setHovered] = useState(null);
+  const [subMenu, setSubMenu] = useState<Record<string, boolean>>({});
+  const [dropdownItemClicked, setDropdownItemClicked] = useState(false);
   const location = useLocation();
 
   const handleClick = () => setClick(!click);
@@ -51,12 +59,12 @@ export const Nav = () => {
     }
   };
 
-  const handleSubMenuClick = index => {
-    setSubMenu(prev => ({
+  const handleSubMenuClick = (index: number) => {
+    setSubMenu((prev) => ({
       ...Object.keys(prev).reduce((acc, key) => {
-        acc[key] = index === key ? !prev[key] : false;
+        acc[key] = index.toString() === key ? !prev[key] : false;
         return acc;
-      }, {}),
+      }, {} as Record<string, boolean>),
     }));
 
     setDropdownItemClicked(true);
@@ -80,9 +88,9 @@ export const Nav = () => {
 
   return (
     <>
-      <div className="navbar">
-        <nav className="navbar-container">
-          <div className="menu-icon" onClick={handleClick}>
+      <div className='navbar'>
+        <nav className='navbar-container'>
+          <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
 
@@ -97,10 +105,9 @@ export const Nav = () => {
                 {item.submenu ? (
                   <>
                     <Link
-                      className="nav-links"
-                      aria-expanded={
-                        subMenu[index] ? 'true' : 'false'
-                      }
+                      to={'#'}
+                      className='nav-links'
+                      aria-expanded={subMenu[index] ? 'true' : 'false'}
                       onClick={() => handleSubMenuClick(index)}
                     >
                       {item.label}
@@ -119,7 +126,7 @@ export const Nav = () => {
                     }`}
                     onClick={closeMobileMenu}
                   >
-                    <span className="first-letter-white">
+                    <span className='first-letter-white'>
                       {item.label.charAt(0)}
                     </span>
                     {item.label.slice(1)}{' '}
@@ -129,11 +136,8 @@ export const Nav = () => {
             ))}
           </ul>
         </nav>{' '}
-        <div className="navline-div" />
+        <div className='navline-div' />
       </div>
-      {/* <div className="mline" />
-      <div className="nline" />
-      <div className="lline" /> */}
     </>
   );
 };

@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilters } from '../redux/rtk/gallerySlice';
+import { setFilters } from '../../redux/rtk/gallerySlice';
+import type { CSSObjectWithLabel, MultiValue } from 'react-select';
+import type { Filters, Option } from '../../types/types';
+import type { RootState } from '../../redux/store';
 
-function TagoviSelekt({ tagoviOptions }) {
+export const TagoviSelekt = ({
+  tagoviOptions,
+}: {
+  tagoviOptions: Option[];
+}) => {
   const dispatch = useDispatch();
-  const selectedFilters = useSelector((state) => state.gallery.selectedFilters);
-  const [filterSelected, setFilterSelected] = useState([]);
+  const selectedFilters = useSelector<RootState, Filters>(
+    (state) => state.gallery.selectedFilters
+  );
+  const [, setFilterSelected] = useState<Option[]>([]);
 
   useEffect(() => {
     // Initialize the state with selected filters when the component mounts
@@ -19,7 +28,7 @@ function TagoviSelekt({ tagoviOptions }) {
     );
   }, [selectedFilters]);
 
-  const handleTagoviFilterChange = (selectedFilters) => {
+  const handleTagoviFilterChange = (selectedFilters: MultiValue<Option>) => {
     const selectedFilterValues = selectedFilters.map((filter) => filter.value);
     dispatch(setFilters({ tagovi: selectedFilterValues }));
     // Update the local state when filters change
@@ -32,7 +41,7 @@ function TagoviSelekt({ tagoviOptions }) {
   };
 
   const cusTom = {
-    control: (styles) => ({
+    control: (styles: CSSObjectWithLabel) => ({
       ...styles,
       backgroundColor: 'transparent',
       border: 'none',
@@ -40,23 +49,29 @@ function TagoviSelekt({ tagoviOptions }) {
       borderRadius: '0',
       cursor: 'pointer',
     }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-      console.log('selekt', data, isDisabled, isFocused, isSelected);
+    option: (styles: CSSObjectWithLabel) => {
       return { ...styles, color: 'black', cursor: 'pointer' };
     },
-    placeholder: (styles) => ({
+    placeholder: (styles: CSSObjectWithLabel) => ({
       ...styles,
       color: '#18aa00',
       marginTop: '-13px',
       marginLeft: '-8px',
       fontSize: '22px',
     }),
-    dropdownIndicator: (provided) => ({ ...provided, display: 'none' }),
-    indicatorSeparator: (provided) => ({
+    dropdownIndicator: (provided: CSSObjectWithLabel) => ({
       ...provided,
       display: 'none',
     }),
-    menu: (styles) => ({ ...styles, zIndex: '999', cursor: 'pointer' }),
+    indicatorSeparator: (provided: CSSObjectWithLabel) => ({
+      ...provided,
+      display: 'none',
+    }),
+    menu: (styles: CSSObjectWithLabel) => ({
+      ...styles,
+      zIndex: '999',
+      cursor: 'pointer',
+    }),
   };
 
   return (
@@ -75,7 +90,9 @@ function TagoviSelekt({ tagoviOptions }) {
               }))
             : []
         }
-        onChange={handleTagoviFilterChange}
+        onChange={(newValue: MultiValue<Option>) => {
+          handleTagoviFilterChange(newValue);
+        }}
         getOptionValue={(option) => option.value}
         getOptionLabel={(option) => option.label}
       />
@@ -87,6 +104,4 @@ function TagoviSelekt({ tagoviOptions }) {
       </label>
     </div>
   );
-}
-
-export default TagoviSelekt;
+};

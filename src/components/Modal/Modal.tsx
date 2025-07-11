@@ -1,16 +1,24 @@
-import './Modal.css';
 import { useState, useEffect } from 'react';
 
+import './Modal.css';
+
+type Props = {
+  isOpen: boolean;
+  closeModal: () => void;
+  children: React.ReactNode;
+  thumbnailUrl?: string;
+  signatura?: string;
+};
+
 //
-const Modal = ({
+export const Modal = ({
   isOpen,
   closeModal,
   children,
   thumbnailUrl,
   signatura,
-}) => {
-  const [confirmationVisible, setConfirmationVisible] =
-    useState(false);
+}: Props) => {
+  const [confirmationVisible, setConfirmationVisible] = useState(false);
 
   useEffect(() => {
     if (confirmationVisible) {
@@ -27,19 +35,14 @@ const Modal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <button className="modal-close-button" onClick={closeModal}>
+    <div className='modal-overlay'>
+      <div className='modal'>
+        <button className='modal-close-button' onClick={closeModal}>
           X
         </button>
-        <img
-          src={thumbnailUrl}
-          alt={signatura}
-          style={{ width: '20%' }}
-        />
+        <img src={thumbnailUrl} alt={signatura} style={{ width: '20%' }} />
         {children}
       </div>
     </div>
   );
 };
-export default Modal;

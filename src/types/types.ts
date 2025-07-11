@@ -17,6 +17,9 @@ export type Photo = {
   doi: string;
   url_image: string | null;
   url_thumb: string | null;
+  lon?: string;
+  lat?: string;
+  geometry?: string;
 };
 
 export type Option = {
@@ -25,6 +28,6 @@ export type Option = {
 };
 
 export type Filters = {
-  label: string;
-  options: Option[];
-}[];
+  kategorije: string[];
+  tagovi: string[];
+};

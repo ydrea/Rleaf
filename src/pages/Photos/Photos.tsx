@@ -8,9 +8,9 @@ import {
   selectFilteredPhotos,
 } from '../../redux/rtk/gallerySlice';
 import './Photos.css';
-import KategorijeSelekt from '../../comps/SelektK';
-import TagoviSelekt from '../../comps/SelektT';
-import Hline from '../../comps/Line';
+import { KategorijeSelekt } from '../../components/SelektK/SelektK';
+import { TagoviSelekt } from '../../components/SelektT/SelektT';
+import { Hline } from '../../components/Hline/Hline';
 import Masonry from 'react-masonry-css';
 import { useAppDispatch } from '../../redux/hooks';
 import type { Photo } from '../../types/types';
@@ -27,8 +27,8 @@ export const Photos = () => {
   }, [dispatch]);
 
   //filtri
-  const tagoviSet = new Set();
-  const kategorijeSet = new Set();
+  const tagoviSet = new Set<string>();
+  const kategorijeSet = new Set<string>();
 
   photos.forEach((photo) => {
     const tagoviArray = photo.tagovi.split(',');
@@ -40,7 +40,7 @@ export const Photos = () => {
     kategorijeSet.add(photo.kategorija);
   });
 
-  const tagoviOptions = Array.from(tagoviSet).map((tag) => ({
+  const tagoviOptions = Array.from(tagoviSet).map((tag: string) => ({
     value: tag,
     label: tag,
   }));

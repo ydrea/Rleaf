@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css';
 
-import { Footer } from '../../comps/Footer/Footer';
+import { Footer } from '../../components/Footer/Footer';
 import gridHV from '../../assets/GRID H V.svg';
 import './Home.css';
 
@@ -74,7 +74,6 @@ export const Home = (): JSX.Element => {
           </div>
         </div>
       </section>
-      {/* <Hline color="#7e7e77" height="2px" width="100%" />{' '} */}
       <div className='dno'>
         <Footer />
       </div>

@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Hline from './comps/Line';
+import { Hline } from './components/Hline/Hline';
 import './pages/Photos/Photos.css';
 //
 export const PhotosLayout = () => {

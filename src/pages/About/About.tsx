@@ -1,4 +1,4 @@
-import { Footer } from '../../comps/Footer/Footer';
+import { Footer } from '../../components/Footer/Footer';
 import './About.css';
 
 export const About = () => {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Message from '../../comps/Message';
+import { Message } from '../../components/Message/Message';
 import axios from 'axios';
 import exifr from 'exifr';
 
@@ -324,22 +324,7 @@ export const Fileupload = () => {
           className='btn btn-primary btn-block mt-4'
         />
       </form>
-      {/* {uploadedFileList.length === 1 && !!uploadedFileList[0] ? (
-        <>
-          <div className="row mt-5">
-            <div className="col-md-6 m-auto">
-              <h3 className="text-center">{uploadedFileList[0].fileName}</h3>
-              <img
-                style={{ width: '60%' }}
-                src={`${process.env.REACT_APP_SERVER_PUB}/${uploadedFileList[0].fileName}`}
-                alt="dije"
-              />
-            </div>
-          </div>
-    
-          <FormA uploadedFile={uploadedFileList[0]} exifR={exifList[0]} />
-        </>
-      ) : null} */}
+
       <PhotosEDIT onRemove={handleRemove} />
     </>
   );

@@ -13,7 +13,7 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import './Photo.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import Hline from '../../comps/Line';
+import { Hline } from '../../components/Hline/Hline';
 import { useAppDispatch } from '../../redux/hooks';
 
 export const Photo = () => {

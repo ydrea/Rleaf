@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import Message from './Message';
-import { getPhotos } from '../redux/rtk/gallerySlice';
-import './form.css';
+import { Message } from '../Message/Message';
+import { getPhotos } from '../../redux/rtk/gallerySlice';
+import type { Photo } from '../../types/types';
+import { useAppDispatch } from '../../redux/hooks';
+import './Form.css';
 
-export const formatDateValue = value => {
+export const formatDateValue = (value: string) => {
   if (!value) {
     return '';
   }
@@ -19,8 +20,8 @@ export const formatDateValue = value => {
 };
 
 //
-const FormNOVI = ({ uploadedFile }) => {
-  const dispatch = useDispatch();
+export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
+  const dispatch = useAppDispatch();
   const [confirmationMsg, setConfirmationMsg] = useState('');
 
   const [form, setForm] = useState({
@@ -41,17 +42,21 @@ const FormNOVI = ({ uploadedFile }) => {
     lat: uploadedFile.lat ?? '',
   });
 
-  const updateFormField = useCallback((key, value) => {
-    setForm(currentForm => ({
-      ...currentForm,
-      [key]: value,
-    }));
-  }, []);
+  const updateFormField = useCallback(
+    (key: string, value: string | undefined) => {
+      setForm((currentForm) => ({
+        ...currentForm,
+        [key]: value,
+      }));
+    },
+    []
+  );
 
   const onChangeHandler = useCallback(
-    e => {
+    (e: React.ChangeEvent<any>) => {
       const { name, type, value } = e.target;
-      let newValue = value;
+      let newValue: string | undefined = value;
+
       if (type === 'date') {
         newValue = value || undefined;
       }
@@ -65,17 +70,17 @@ const FormNOVI = ({ uploadedFile }) => {
     let isMounted = true;
     const getCoordinates = async () => {
       try {
-        const data = await fetch(
+        const data: Photo[] = await fetch(
           `${process.env.REACT_APP_SERVER}/json_photos`
-        ).then(res => res.json());
+        ).then((res) => res.json());
         const photo = data.find(
-          item => item.signatura === uploadedFile.signatura
+          (item) => item.signatura === uploadedFile.signatura
         );
         const {
           coordinates: [lon, lat],
-        } = JSON.parse(photo.geometry);
+        } = JSON.parse(photo?.geometry ?? '');
         if (isMounted) {
-          setForm(currentForm => ({
+          setForm((currentForm) => ({
             ...currentForm,
             lon: `${lon}`,
             lat: `${lat}`,
@@ -83,7 +88,7 @@ const FormNOVI = ({ uploadedFile }) => {
         }
       } catch (e) {
         if (isMounted) {
-          setForm(currentForm => ({
+          setForm((currentForm) => ({
             ...currentForm,
             lon: '',
             lat: '',
@@ -97,7 +102,7 @@ const FormNOVI = ({ uploadedFile }) => {
     };
   }, [uploadedFile]);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await fetch(
@@ -113,8 +118,8 @@ const FormNOVI = ({ uploadedFile }) => {
 
         dispatch(getPhotos());
       }
-    } catch (err) {
-      console.error(err.msg, 'nece');
+    } catch (err: unknown) {
+      console.error(err, 'nece');
     }
   };
 
@@ -135,65 +140,65 @@ const FormNOVI = ({ uploadedFile }) => {
             width: 400,
           }}
         >
-          <div className="form-control">
+          <div className='form-control'>
             <label>signatura</label>
             <input
-              type="text"
-              name="signatura"
+              type='text'
+              name='signatura'
               disabled
               value={form.signatura}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>naziv</label>
             <input
-              type="text"
-              name="naziv"
+              type='text'
+              name='naziv'
               value={form.naziv}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>naziv_eng</label>
             <input
-              type="text"
-              name="naziv_eng"
+              type='text'
+              name='naziv_eng'
               value={form.naziv_eng}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>opis</label>
             <input
-              type="text"
-              name="opis"
+              type='text'
+              name='opis'
               value={form.opis}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>opis_eng</label>
             <input
-              type="text"
-              name="opis_eng"
+              type='text'
+              name='opis_eng'
               value={form.opis_eng}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>lokacija</label>
             <input
-              type="text"
-              name="lokacija"
+              type='text'
+              name='lokacija'
               value={form.lokacija}
               onInput={onChangeHandler}
             />
           </div>{' '}
-          <div className="form-control">
+          <div className='form-control'>
             <label>datum</label>
             <input
-              type="date"
-              name="datum_sni"
+              type='date'
+              name='datum_sni'
               value={formatDateValue(form.datum_sni)}
               onInput={onChangeHandler}
             />
@@ -206,110 +211,100 @@ const FormNOVI = ({ uploadedFile }) => {
             flexDirection: 'column',
           }}
         >
-          <div className="form-control">
+          <div className='form-control'>
             <label>kategorija</label>
             <select
-              name="kategorija"
+              name='kategorija'
               value={form.kategorija}
               onChange={onChangeHandler}
             >
-              <option value="" disabled>
+              <option value='' disabled>
                 Kategorija
               </option>
-              <option value="infrastruktura">Infrastruktura</option>
-              <option value="ekologija">Ekologija</option>
-              <option value="tradicijska_gradnja">
-                Tradicijska gradnja
-              </option>
-              <option value="vjerski_objekti">Vjerski objekti</option>
-              <option value="vazni_objekti">Važni objekti</option>
-              <option value="spomenici">Spomenici</option>
-              <option value="gospodarski_objekti">
-                Gospodarski objekti
-              </option>
-              <option value="prirodni_resursi">
-                Prirodni resursi
-              </option>
-              <option value="stanovnistvo">Stanovništvo</option>
-              <option value="poljoprivreda">Poljoprivreda</option>
-              <option value="stocarstvo">Stočarstvo</option>
-              <option value="arhitektura">Arhitektura</option>
+              <option value='infrastruktura'>Infrastruktura</option>
+              <option value='ekologija'>Ekologija</option>
+              <option value='tradicijska_gradnja'>Tradicijska gradnja</option>
+              <option value='vjerski_objekti'>Vjerski objekti</option>
+              <option value='vazni_objekti'>Važni objekti</option>
+              <option value='spomenici'>Spomenici</option>
+              <option value='gospodarski_objekti'>Gospodarski objekti</option>
+              <option value='prirodni_resursi'>Prirodni resursi</option>
+              <option value='stanovnistvo'>Stanovništvo</option>
+              <option value='poljoprivreda'>Poljoprivreda</option>
+              <option value='stocarstvo'>Stočarstvo</option>
+              <option value='arhitektura'>Arhitektura</option>
             </select>
           </div>{' '}
-          <div className="form-control">
+          <div className='form-control'>
             <label>autor</label>
             <input
-              type="text"
-              name="autor"
+              type='text'
+              name='autor'
               value={form.autor}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>copyright</label>
             <input
-              type="text"
-              name="copyright"
+              type='text'
+              name='copyright'
               value={form.copyright}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>copyright_holder</label>
             <input
-              type="text"
-              name="copyright_holder"
+              type='text'
+              name='copyright_holder'
               value={form.copyright_holder}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>Tag-ovi</label>
             <input
-              type="text"
-              name="tagovi"
+              type='text'
+              name='tagovi'
               value={form.tagovi}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>DOI</label>
             <input
-              type="text"
-              name="doi"
+              type='text'
+              name='doi'
               value={form.doi}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>lon</label>
             <input
-              type="text"
-              name="lon"
+              type='text'
+              name='lon'
               value={form.lon}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label>lat</label>
             <input
-              type="text"
-              name="lat"
+              type='text'
+              name='lat'
               value={form.lat}
               onInput={onChangeHandler}
             />
           </div>
-          <div className="form-control">
+          <div className='form-control'>
             <label></label>
-            <button type="submit">SPREMI</button>
+            <button type='submit'>SPREMI</button>
           </div>
         </div>
-        {confirmationMsg && (
-          <Message msg={confirmationMsg} type="confirmation" />
-        )}
+        {confirmationMsg && <Message msg={confirmationMsg} />}
       </form>
     </div>
   );
 };
-
-export default FormNOVI;

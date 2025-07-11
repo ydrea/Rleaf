@@ -7,9 +7,9 @@ import {
   selectPhotos,
   selectFilteredPhotos,
 } from '../../redux/rtk/gallerySlice';
-import Selekt from '../../comps/Selekt';
-import FormNOVI from '../../comps/FormNOVI';
-import Modal from '../../comps/Modal';
+import { Selekt } from '../../components/Selekt/Selekt';
+import { Form } from '../../components/Form/Form';
+import { Modal } from '../../components/Modal/Modal';
 import type { Photo } from '../../types/types';
 import { useAppDispatch } from '../../redux/hooks';
 import '../Photos/Photos.css';
@@ -125,7 +125,7 @@ export default function PhotosEDIT({
                   {isRemoving ? 'Brisanje...' : 'IZBRIŠI'}
                 </button>
               )}
-              <FormNOVI uploadedFile={selectedPhotoData} />
+              <Form uploadedFile={selectedPhotoData} />
             </>
           ) : (
             <p style={{ color: 'white' }}>
