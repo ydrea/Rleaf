@@ -1,4 +1,3 @@
-import { Footer } from '../../components/Footer/Footer';
 import './Contact.css';
 
 export const Contact = () => {
@@ -24,9 +23,8 @@ export const Contact = () => {
             istraživanjima i aktivnostima. Unesite svoju e-mail adresu i
             pridružite se putovanju prema razumijevanju i očuvanju krajobraza.
           </p>
-        </div>{' '}
-        <Footer />{' '}
-      </section>{' '}
+        </div>
+      </section>
     </div>
   );
 };

@@ -1,0 +1,48 @@
+.block-with-sticky-title
+  border-bottom: 1px solid #000
+  margin-top: 80px
+  padding-bottom: 48px
+
+  h1
+    padding-right: 1em
+
+  + .canvas-block
+    margin-top: 96px
+
+    @media (max-width: 640px)
+      margin-top: 48px
+
+  .block-with-sticky-title-content
+    border-left: 1px solid #000
+    flex: 1
+
+    padding-bottom: 48px
+    margin-bottom: -48px
+    margin-top: 16px
+    word-break: break-word
+
+    @media (min-width: 769px)
+      div
+        padding-left: 54px
+
+  .block-with-sticky-title-subtitle
+    font-size: 1.375rem
+    margin-right: 35%
+
+  @media (max-width: 768px)
+    flex-direction: column
+    margin-top: 84px
+
+    .block-with-sticky-title-content
+      border-top: 1px solid #000
+      border-left: none
+      padding: 48px 0
+      margin-top: 48px
+
+    .block-with-sticky-title-subtitle
+      margin-right: 0
+      margin-bottom: 48px
+      font-size: 1.1rem
+
+      @media (max-width: 768px)
+        margin-bottom: 0

@@ -1,0 +1,46 @@
+.footer .section-content
+  display: flex
+  justify-content: space-between
+  align-items: center
+  position: relative
+
+  @media (max-width: 1152px)
+    flex-direction: column
+    align-items: flex-start
+    gap: 48px
+
+  img
+    width: 380px
+    max-width: 380px
+    height: auto
+
+    @media (max-width: 900px)
+      width: 100%
+      align-self: center
+
+  a
+    color: #FFFFFF
+    text-decoration: none
+    align-self: flex-end
+
+    &:hover
+      text-decoration: underline
+
+    @media (max-width: 900px)
+      align-self: center
+
+    @media (max-width: 640px)
+      font-size: 1rem
+
+  .year-tab
+    left: 0
+    bottom: -60px
+    position: absolute
+    background: black
+    width: 480px
+    height: 60px
+    padding-left: 46px
+
+    @media (max-width: 640px)
+      width: auto
+      padding-right: 46px

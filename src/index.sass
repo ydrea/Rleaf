@@ -1,0 +1,91 @@
+// defaults 
+
+*
+  box-sizing: border-box
+
+:root
+  background-color: #ffffff
+  font-family: 'DM Mono', system-ui, Avenir, Helvetica, Arial, sans-serif
+  font-weight: 400
+  font-size: 1em
+  font-synthesis: none
+  line-height: 1.56
+  text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+// basic elements
+body
+  margin: 0
+
+h1
+  font-family: Poppins, system-ui, Avenir, Helvetica, Arial, sans-serif
+  font-size: 3.5rem
+  font-weight: 600
+  line-height: 1.1
+  margin: 0
+
+  @media (max-width: 1152px)
+    font-size: 3rem
+
+  @media (max-width: 900px)
+    font-size: 2rem
+
+p
+  margin: 0
+  font-size: 1.375rem
+
+  + p
+    margin-top: 1rem
+
+  @media (max-width: 640px)
+    font-size: 1rem
+
+a
+  color: inherit
+  text-decoration: none
+
+  &:hover
+    text-decoration: underline
+
+//  Layout
+
+#root
+  max-width: 1440px
+  margin: 0 auto
+  padding: 92px
+
+  @media (max-width: 1152px)
+    padding: 46px
+
+  @media (max-width: 640px)
+    padding: 32px
+
+.canvas-block
+  position: relative
+  margin-top: 80px
+
+  @media (max-width: 640px)
+    margin: 0 -32px
+
+  .canvas-container
+    overflow: hidden
+    position: relative
+    margin: 0 auto
+
+    canvas
+      cursor: default
+      position: absolute
+      top: 0
+      z-index: 1
+      background-size: cover
+      background-position: center
+      background-repeat: no-repeat
+
+  h1
+    position: absolute
+    top: 27px
+    z-index: 1000
+
+    @media (max-width: 640px)
+      left: 32px

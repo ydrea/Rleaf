@@ -23,14 +23,12 @@ export const PhotosLayout = () => {
             krajobraza, ali i sve društvene kontradikcije koje iz njega
             proizlaze.{' '}
           </div>
-          {/* <div className="line-div1" />{' '} */}
         </div>
       </section>{' '}
       <section>
-        <Hline color='#18aa00' height={1} width='100%' /> <Outlet />{' '}
-        {/* This will render child routes */}
+        <Hline color='#18aa00' height={1} width='100%' />
+        <Outlet />
       </section>
-      {/* <Footer /> */}
     </div>
   );
 };

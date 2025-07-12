@@ -278,7 +278,6 @@ export const Karta = () => {
           center={[45.2, 16.2]}
           zoom={11}
           maxZoom={28}
-          // maxNativeZoom={30}
           style={{
             width: '100%',
             height: '90vh',
@@ -411,8 +410,6 @@ export const Karta = () => {
               key={temafk.id}
               name={temafk.name}
               checked={selectedLayer === temafk.id}
-              // maxNativeZoom={23}
-              // maxZoom={21}
             >
               <BetterWMS
                 key={temafk.id}
@@ -424,17 +421,9 @@ export const Karta = () => {
             </Overlay>
           </LayersControl>
           {signatura && <SingleMarker />}
-
-          {/* <MyMarkers selectedIndex={selected} data={points} /> */}
         </MapContainer>
       </section>
       <Hline color='#7e7e77' height={2} width='100%' />
-      {/* <Footer />       */}
-      <section className='x'>
-        {/* <ListMarkers data={points} onItemClick={handleItemClick} /> */}
-
-        {/* <Footer/> */}
-      </section>
     </div>
   );
 };

@@ -1,5 +1,3 @@
-import { Footer } from '../../../components/Footer/Footer';
-
 export const Ewap = () => {
   return (
     <div className='P'>
@@ -42,7 +40,6 @@ export const Ewap = () => {
           fotografije kuća, okućnica i naselja obrađivanih kroz projekt.
         </section>
       </div>
-      <Footer />{' '}
     </div>
   );
 };

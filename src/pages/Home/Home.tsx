@@ -1,82 +1,112 @@
-import 'leaflet/dist/leaflet.css';
+import { Section } from '../../components/Section/Section';
+import { ThreeDScene } from '../../components/ThreeDScene/ThreeDScene';
+import { CroatiaGrid } from '../../components/CroatiaGrid/CroatiaGrid';
+import { CameraSubject } from '../../components/CameraSubject/CameraSubject';
+import { CroatiaTextArt } from '../../components/CroatiaTextArt/CroatiaTextArt';
+import { text1, text2, text3 } from '../../texts';
+import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle';
 
-import { Footer } from '../../components/Footer/Footer';
-import gridHV from '../../assets/GRID H V.svg';
-import './Home.css';
-
-export const Home = (): JSX.Element => {
+export const Home = () => {
   return (
-    // <div className="gallery" style={{ overflow: 'hidden' }}>
-    <div className='home'>
-      <section className='S0 #'>
-        <img src='home0.jpg' className='zero' alt='Home background' />
-        <img src={gridHV} className='zerog' alt='Grid overlay' />
-        <div className='zeroTxt'>
-          <div className='zeroTxtOne'>opservatorij</div>
-          <div className='zeroTxtOne'>krajobraza</div>
+    <>
+      <BlockWithStickyTitle
+        title='opservatorij krajobraza'
+        subtitle='interdisciplinarna platforma posvećena istraživanju krajobraza i razvoju temeljenom na krajobrazu'
+        text={text1}
+      />
 
-          <div className='zeroTxtThree'>
-            platforma za istraživanje i razvoj temeljen na krajobrazu
-          </div>
-        </div>
-      </section>
-      <section className='S1 #'>
-        {/* <img src={diag} className='diag' /> */}
+      <Section dark title='Zašto je važan krajobraz?'>
         <p>
-          'Opservatorij krajobraza' je kolaborativna platforma koja okuplja
-          znanstvenike i stručnjake različitih profila. U središtu naše pažnje
-          je koncept krajobraza koji se sve više prepoznaje kao ključna
-          komponenta globalnog nasljeđa i održivog razvoja. Uspostavljen zbog
-          nedovoljne istraženosti, neprisutnosti podataka, niskog stupnja
-          svijesti o karakteristikama te sveukupnoj neiskorištenosti potencijala
-          hrvatskog krajobraza. Naša misija je pružiti integralan pristup
-          razumijevanju, prezentaciji i očuvanju krajobraza te promišljati
-          razvoj temeljen na krajobrazu.
+          Koncept krajobraza posljednjih desetljeća dobiva sve veći globalni
+          značaj. Smatra se ključnim dijelom globalne baštine, javnim dobrom od
+          važnog interesa te potencijalnim pokretačem regeneracije, rasta i
+          oporavka zajednica. Kroz ovu ideju, prepoznaje se da sav prostor, ne
+          samo zaštićena područja, zaslužuje održiv razvoj.
         </p>
-      </section>
-      <section className='S2 #'>
-        <img src='home4.jpg' className='zero2' alt='Section 2 background' />
-        <img src={gridHV} className='zerog2' alt='Grid overlay' />{' '}
-        <div className='txt2'>
-          <p>
-            {' '}
-            Pored istraživanja, 'Opservatorij' se bavi dokumentiranjem,
-            monitoringom, edukacijom te promoviranjem interdisciplinarnih
-            metoda.
-          </p>
-          <p>
-            Smatramo da je zaštita i razumijevanje krajobraza ključna za
-            otpornost i regeneraciju zajednica.
-          </p>
-        </div>
-      </section>{' '}
-      <section className='S3'>
-        {' '}
-        <img className='img3' src='home3.png' alt='Section 3 image' />
-        <div className='txt3'>
-          <div className='ena'>
-            Pozivamo vas da se pridružite našem putovanju prema očuvanju i
-            razumijevanju krajobraza.
-          </div>{' '}
-          <div className='dve'>
-            Za sve informacije vezane uz 'Opservatorij krajobraza', slobodno nas
-            kontaktirajte
-            <p>
-              putem e-maila na [<span>info@croatianlandscape.hr</span>]
-            </p>{' '}
-            ili telefonom na [<span>+385 95 9123055</span>].
-          </div>{' '}
-          <div className='tli'>
-            Zanima vas više o našem radu i misiji? Pretplatite se na naš
-            newsletter i budite u tijeku s našim istraživanjima i aktivnostima.
-            Unesite svoju e-mail adresu i pridružite se putovanju prema
-            razumijevanju i očuvanju krajobraza.
-          </div>
-        </div>
-      </section>
-      <div className='dno'>
-        <Footer />
-      </div>
-    </div>
+
+        <p>
+          Koncept krajobraza razvija se kao odgovor na sve glasniju kritiku usko
+          sektorskog promatranja prostora te zabrinutost zbog neizvjesnosti koje
+          donose klimatske promjene i gubitak povezanosti između čovjeka i
+          okoliša. Danas, razumijevanje krajobraza podrazumijeva holistički
+          pristup koji u obzir uzima prirodne, kulturno-povijesne, vizualne,
+          materijalne i nematerijalne aspekte.
+        </p>
+
+        <p>
+          Primjena krajobraznog pristupa u istraživanjima, analizama i studijama
+          znači pristupati prostoru integrirano, povezujući znanja iz različitih
+          područja. Na globalnoj razini prepoznate su brojne metode i alati koji
+          podupiru ovaj pristup, a koji su sastavni dio paradigme održivog
+          razvoja. Međutim, unatoč njihovoj važnosti, suočavaju se s izazovima
+          pri implementaciji u sektorske politike i zakonodavne okvire. Upravo
+          zato pokrenut je Opservatorij krajobraza – eksperimentalna platforma
+          koja istražuje i savjetuje tijela državne i lokalne uprave u pogledu
+          implementacije krajobraznih tema.
+        </p>
+      </Section>
+
+      <BlockWithStickyTitle
+        title='opservatorij krajobraza Banovine / Banije'
+        subtitle='projekt(i)'
+        text={text2}
+      />
+
+      <BlockWithStickyTitle
+        title='ugrožena drvena arhitektura Banovine / Banije (Projekt EWAP)'
+        subtitle='projekt(i)'
+        text={text3}
+      />
+
+      <CroatiaGrid />
+
+      <Section>
+        Kartografski prikazi u ovoj rubrici rezultat su istraživačkog rada
+        Opservatorija krajobraza. Kroz mogućnost preklapanja tematskih slojeva,
+        karte omogućuju bolje razumijevanje prostora i odnosa koji ga oblikuju.
+        Dio sadržaja temelji se na postojećim izvorima, dok se drugi po prvi put
+        kartira kroz terenski rad i suradnju s lokalnim dionicima. Obrađuju se i
+        teme koje dosad nisu bile obuhvaćene kartama – specifična obilježja
+        krajobraza, prostorni obrasci i procesi koji često ostaju nevidljivi u
+        standardnim prikazima.
+      </Section>
+
+      <CameraSubject />
+
+      <Section>
+        Fototeka predstavlja mjesto vizualne interpretacije, opservacije i
+        usporedbe. Naš fotografski arhiv kroz različite klasifikacije
+        (kategorije i ključne riječi) omogućava objektivne i znanstvene
+        usporedbe subjekata koji dijele slične vizualne karakteristike, ali
+        omogućava i stvaranje odnosa između sadržaja koji naizgled nemaju
+        direktnu vizualnu vezu. Stvaranjem fotografskih tipologija istraživačima
+        omogućavamo pronalaženje specifičnih stavki unutar jasno definiranih
+        kategorija.
+      </Section>
+
+      <ThreeDScene />
+
+      <Section>
+        Ova rubrika okuplja trodimenzionalne modele izrađene u sklopu projekata
+        Opservatorija krajobraza. Modeli prikazuju pojedine objekte, prostorne
+        cjeline i elemente krajobraza koji su važni za razumijevanje prostorne
+        strukture, oblika i dinamike promjena. Sadržaj se temelji na
+        fotogrametriji i drugim metodama dokumentacije, a postupno se proširuje
+        u skladu s istraživačkim fokusima pojedinih projekata
+      </Section>
+
+      <CroatiaTextArt />
+
+      <Section>
+        U ovoj rubrici objavljujemo autorske tekstove nastale u okviru
+        Opservatorija krajobraza. Riječ je o člancima i analizama koje se bave
+        krajobrazima iz različitih perspektiva – prostorne, društvene, povijesne
+        i ekonomske. Obuhvaćene teme uključuju vode, naselja, šume,
+        poljoprivredu, degradirana područja, demografske promjene, lokalnu
+        ekonomiju i druge procese koji oblikuju prostor. Tekstovi donose stručne
+        uvide, opažanja s terena i kontekstualizaciju podataka prikupljenih kroz
+        istraživanja.
+      </Section>
+    </>
   );
 };

@@ -1,4 +1,3 @@
-import { Footer } from '../../../components/Footer/Footer';
 import './Banija.css';
 
 export const Banija = () => {
@@ -44,7 +43,6 @@ export const Banija = () => {
           </p>
         </section>
       </div>
-      <Footer />
     </div>
   );
 };

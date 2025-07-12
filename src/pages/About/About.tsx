@@ -1,4 +1,3 @@
-import { Footer } from '../../components/Footer/Footer';
 import './About.css';
 
 export const About = () => {
@@ -130,11 +129,7 @@ export const About = () => {
           vijeće (projekt Opservatorij krajobraza Banovine/Banije), Republika
           Hrvatska, Ministarstvo kulture i medija (pokroviteljstvo).
         </p>
-      </section>{' '}
-      <section>
-        {' '}
-        <Footer />{' '}
-      </section>{' '}
+      </section>
     </div>
   );
 };

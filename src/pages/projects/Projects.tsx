@@ -1,4 +1,3 @@
-import { Footer } from '../../components/Footer/Footer';
 import './Projects.css';
 
 export const Projects = () => {
@@ -57,8 +56,7 @@ export const Projects = () => {
           , a na interaktivnoj karti na stranicama Opservatorija naći će se
           fotografije kuća, okućnica i naselja obrađivanih kroz projekt.
         </div>
-      </div>{' '}
-      <Footer />{' '}
+      </div>
     </div>
   );
 };
