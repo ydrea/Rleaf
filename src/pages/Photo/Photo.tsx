@@ -96,7 +96,9 @@ export const Photo = () => {
           <img
             src={
               selectedPhoto
-                ? `${process.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`
+                ? `${import.meta.env.REACT_APP_SERVER_PUB}/${
+                    selectedPhoto.signatura
+                  }`
                 : ''
             }
             alt={selectedPhoto.naziv}

@@ -96,7 +96,9 @@ export default function PhotosEDIT({
           closeModal={() => setSelectedId(undefined)}
           thumbnailUrl={
             selectedPhotoData
-              ? `${process.env.REACT_APP_SERVER_PUB}/thumbs/${selectedPhotoData.signatura}`
+              ? `${import.meta.env.REACT_APP_SERVER_PUB}/thumbs/${
+                  selectedPhotoData.signatura
+                }`
               : undefined
           }
           signatura={
@@ -107,7 +109,7 @@ export default function PhotosEDIT({
             <>
               {/* {selectedPhotoData.signatura && (
                 <img
-                 src={`${process.env.REACT_APP_SERVER_PUB}/${selectedPhotoData.signatura}`}
+                 src={`${import.meta.env.REACT_APP_SERVER_PUB}/${selectedPhotoData.signatura}`}
                  alt={selectedPhotoData.naziv}
                 />
               )} */}
@@ -163,7 +165,9 @@ export default function PhotosEDIT({
               )}
               {photo.signatura ? (
                 <img
-                  src={`${process.env.REACT_APP_SERVER_PUB}/thumbs/${photo.signatura}`}
+                  src={`${import.meta.env.REACT_APP_SERVER_PUB}/thumbs/${
+                    photo.signatura
+                  }`}
                   alt={photo.naziv || photo.signatura}
                 />
               ) : (

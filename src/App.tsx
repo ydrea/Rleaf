@@ -17,7 +17,7 @@ import './App.css';
 
 export const App = (): JSX.Element => {
   useEffect(() => {
-    console.log('REACT_APP_SERVER_PUB:', process.env.REACT_APP_SERVER_PUB);
+    console.log('REACT_APP_SERVER_PUB:', import.meta.env.REACT_APP_SERVER_PUB);
   });
 
   return (

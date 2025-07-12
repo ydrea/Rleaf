@@ -71,7 +71,7 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
     const getCoordinates = async () => {
       try {
         const data: Photo[] = await fetch(
-          `${process.env.REACT_APP_SERVER}/json_photos`
+          `${import.meta.env.REACT_APP_SERVER}/json_photos`
         ).then((res) => res.json());
         const photo = data.find(
           (item) => item.signatura === uploadedFile.signatura
@@ -106,7 +106,7 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
     e.preventDefault();
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_SERVER}/update/${uploadedFile.id}`,
+        `${import.meta.env.REACT_APP_SERVER}/update/${uploadedFile.id}`,
         {
           method: 'PUT',
           body: JSON.stringify(form),

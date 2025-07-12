@@ -50,7 +50,7 @@ const saveExif = async (
   exif: Record<string, any>
 ): Promise<{ data?: Photo; error?: any }> => {
   try {
-    const res = await fetch(`${process.env.REACT_APP_SERVER}/novi`, {
+    const res = await fetch(`${import.meta.env.REACT_APP_SERVER}/novi`, {
       method: 'POST',
       body: JSON.stringify({
         signatura,
@@ -110,7 +110,7 @@ const uploadFile = async (file: File) => {
 
   try {
     const { data } = await axios.post(
-      `${process.env.REACT_APP_SERVER}/upload`,
+      `${import.meta.env.REACT_APP_SERVER}/upload`,
       formData,
       {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -222,7 +222,7 @@ export const Fileupload = () => {
     if (photo) {
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_SERVER}/photos/${photo.id}`,
+          `${import.meta.env.REACT_APP_SERVER}/photos/${photo.id}`,
           {
             method: 'DELETE',
           }

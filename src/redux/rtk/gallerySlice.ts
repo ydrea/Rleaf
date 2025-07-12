@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { Photo } from '../../types/types';
 
-const url = `${process.env.REACT_APP_SERVER}/photosrl`;
+const serverUrl = import.meta.env?.REACT_APP_SERVER ?? 'http://localhost:3000';
+
+const url = `${serverUrl}/photosrl`;
 
 export const getPhotos = createAsyncThunk('gallery/getPhotos', async () => {
   const rez = await fetch(url);
@@ -11,7 +13,7 @@ export const getPhotos = createAsyncThunk('gallery/getPhotos', async () => {
 });
 
 export const getAPhoto = createAsyncThunk('gallery/getAPhoto', async (id) => {
-  const rez = await fetch(`${process.env.REACT_APP_SERVER}/photosr/${id}`);
+  const rez = await fetch(`${serverUrl}/photosr/${id}`);
   const rezult = await rez.json();
   return rezult;
 });

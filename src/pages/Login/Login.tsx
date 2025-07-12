@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { logon, selectValid } from '../../redux/rtk/authSlice';
 
 export const Login = () => {
-  const fix = process.env.REACT_APP_PASS;
+  const fix = import.meta.env.REACT_APP_PASS;
   const [pass, passSet] = useState(localStorage.getItem('pass') || '');
   const valid = useSelector(selectValid);
   const dispatch = useDispatch();

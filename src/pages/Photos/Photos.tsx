@@ -122,7 +122,7 @@ export const Photos = () => {
             <div key={photo.id} className='photo'>
               <img
                 src={
-                  process.env.REACT_APP_SERVER_PUB +
+                  import.meta.env.REACT_APP_SERVER_PUB +
                   `/thumbs/${photo.signatura}`
                 }
                 alt={photo.naziv}
