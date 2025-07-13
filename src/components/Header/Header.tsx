@@ -30,7 +30,15 @@ export const Header = () => {
         </svg>
       </label>
       <menu className='main-menu' onClick={hideMobileMenu}>
-        <NavLink to='/projects'>projekti</NavLink>
+        <div className='menu-item-with-submenu' style={{ width: 134 }}>
+          <NavLink to='/projects'>projekti</NavLink>
+          <div className='submenu'>
+            <NavLink to='/projects/banija' style={{ width: 134 }}>
+              Banija
+            </NavLink>
+            <NavLink to='/projects/ewap'>EWAP</NavLink>
+          </div>
+        </div>
         <NavLink to='/maps'>mape</NavLink>
         <NavLink to='/photos'>fototeka</NavLink>
         <NavLink to='/3d-scenes'>3d scene</NavLink>

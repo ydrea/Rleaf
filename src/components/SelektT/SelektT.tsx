@@ -1,78 +1,69 @@
-import { useState, useEffect } from 'react';
-import Select from 'react-select';
-import { useDispatch, useSelector } from 'react-redux';
-import { setFilters } from '../../redux/rtk/gallerySlice';
-import type { CSSObjectWithLabel, MultiValue } from 'react-select';
-import type { Filters, Option } from '../../types/types';
-import type { RootState } from '../../redux/store';
+import { useState, useEffect } from 'react'
+import Select from 'react-select'
+import { useDispatch, useSelector } from 'react-redux'
+import type { CSSObjectWithLabel, MultiValue } from 'react-select'
 
-export const TagoviSelekt = ({
-  tagoviOptions,
-}: {
-  tagoviOptions: Option[];
-}) => {
-  const dispatch = useDispatch();
-  const selectedFilters = useSelector<RootState, Filters>(
-    (state) => state.gallery.selectedFilters
-  );
-  const [, setFilterSelected] = useState<Option[]>([]);
+import { setFilters } from '../../redux/rtk/gallerySlice'
+import type { Filters, Option } from '../../types/types'
+import type { RootState } from '../../redux/store'
+
+export const TagoviSelekt = ({ tagoviOptions }: { tagoviOptions: Option[] }) => {
+  const dispatch = useDispatch()
+  const selectedFilters = useSelector<RootState, Filters>((state) => state.gallery.selectedFilters)
+  const [, setFilterSelected] = useState<Option[]>([])
 
   useEffect(() => {
     // Initialize the state with selected filters when the component mounts
-    const initialSelectedFilters = selectedFilters?.tagovi || [];
+    const initialSelectedFilters = selectedFilters?.tagovi || []
     setFilterSelected(
       initialSelectedFilters.map((option) => ({
         label: option,
-        value: option,
+        value: option
       }))
-    );
-  }, [selectedFilters]);
+    )
+  }, [selectedFilters])
 
   const handleTagoviFilterChange = (selectedFilters: MultiValue<Option>) => {
-    const selectedFilterValues = selectedFilters.map((filter) => filter.value);
-    dispatch(setFilters({ tagovi: selectedFilterValues }));
+    const selectedFilterValues = selectedFilters.map((filter) => filter.value)
+    dispatch(setFilters({ tagovi: selectedFilterValues }))
     // Update the local state when filters change
     setFilterSelected(
       selectedFilters.map((option) => ({
         label: option.label,
-        value: option.value,
+        value: option.value
       }))
-    );
-  };
+    )
+  }
 
   const cusTom = {
-    control: (styles: CSSObjectWithLabel) => ({
+    option: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      backgroundColor: 'transparent',
-      border: 'none',
-      borderTop: '1px solid black',
-      borderRadius: '0',
-      cursor: 'pointer',
+      color: 'black',
+      cursor: 'pointer'
     }),
-    option: (styles: CSSObjectWithLabel) => {
-      return { ...styles, color: 'black', cursor: 'pointer' };
-    },
+    control: (styles: CSSObjectWithLabel) => ({
+      ...styles
+    }),
     placeholder: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      color: '#18aa00',
-      marginTop: '-13px',
-      marginLeft: '-8px',
-      fontSize: '22px',
+      fontSize: '22px'
     }),
     dropdownIndicator: (provided: CSSObjectWithLabel) => ({
       ...provided,
-      display: 'none',
+      display: 'none'
     }),
     indicatorSeparator: (provided: CSSObjectWithLabel) => ({
       ...provided,
-      display: 'none',
+      display: 'none'
     }),
     menu: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      zIndex: '999',
+      zIndex: '9999',
       cursor: 'pointer',
-    }),
-  };
+      minWidth: '300px',
+      height: 'auto'
+    })
+  }
 
   return (
     <div>
@@ -86,22 +77,19 @@ export const TagoviSelekt = ({
           selectedFilters?.tagovi
             ? selectedFilters?.tagovi.map((option) => ({
                 label: option,
-                value: option,
+                value: option
               }))
             : []
         }
         onChange={(newValue: MultiValue<Option>) => {
-          handleTagoviFilterChange(newValue);
+          handleTagoviFilterChange(newValue)
         }}
         getOptionValue={(option) => option.value}
         getOptionLabel={(option) => option.label}
       />
-      <label
-        htmlFor='keyword-select'
-        style={{ color: '#7e7e77', fontSize: '22px' }}
-      >
+      <label htmlFor='keyword-select' style={{ color: '#7e7e77', fontSize: '22px' }}>
         ključne riječi
       </label>
     </div>
-  );
-};
+  )
+}

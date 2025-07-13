@@ -1,27 +1,29 @@
-import { useState, useEffect } from 'react';
-import Select from 'react-select';
-import { useDispatch, useSelector } from 'react-redux';
-import { setFilters } from '../../redux/rtk/gallerySlice';
-import type { CSSObjectWithLabel } from 'react-select';
+import { useState, useEffect } from 'react'
+import Select from 'react-select'
+import { useDispatch, useSelector } from 'react-redux'
+import type { CSSObjectWithLabel } from 'react-select'
+
+import { setFilters } from '../../redux/rtk/gallerySlice'
 
 export const KategorijeSelekt = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const selectedFilters = useSelector(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (state: any) => state.gallery.selectedFilters
-  );
-  const [, setFilterSelected] = useState([]);
+  )
+  const [, setFilterSelected] = useState([])
 
   useEffect(() => {
-    setFilterSelected(selectedFilters?.kategorije || []);
-  }, [selectedFilters]);
+    setFilterSelected(selectedFilters?.kategorije || [])
+  }, [selectedFilters])
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleKategorijeFilterChange = (selectedFilters: any) => {
-    const selectedFilterValues = selectedFilters.map(
-      (filter: any) => filter.label
-    );
-    dispatch(setFilters({ kategorije: selectedFilterValues }));
-    setFilterSelected(selectedFilterValues);
-  };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const selectedFilterValues = selectedFilters.map((filter: any) => filter.label)
+    dispatch(setFilters({ kategorije: selectedFilterValues }))
+    setFilterSelected(selectedFilterValues)
+  }
 
   const customKategorijeOptions = [
     { value: 'gospodarski_objekti', label: 'gospodarski objekti' },
@@ -35,44 +37,38 @@ export const KategorijeSelekt = () => {
     { value: 'stanovnistvo', label: 'stanovništvo' },
     { value: 'poljoprivreda', label: 'poljoprivreda' },
     { value: 'stocarstvo', label: 'stočarstvo' },
-    { value: 'infrastruktura', label: 'infrastruktura' },
-  ];
+    { value: 'infrastruktura', label: 'infrastruktura' }
+  ]
 
   const cusTom = {
-    control: (styles: CSSObjectWithLabel) => ({
+    option: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      backgroundColor: 'transparent',
-      border: 'none',
-      borderTop: '1px solid black',
-      borderRadius: '0',
-      cursor: 'pointer',
+      color: 'black',
+      cursor: 'pointer'
     }),
-    option: (styles: CSSObjectWithLabel) => {
-      return { ...styles, color: 'black', cursor: 'pointer' };
-    },
+    control: (styles: CSSObjectWithLabel) => ({
+      ...styles
+    }),
     placeholder: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      color: '#18aa00',
-      marginTop: '-13px',
-      marginLeft: '-8px',
-      fontSize: '22px',
+      fontSize: '22px'
     }),
     dropdownIndicator: (provided: CSSObjectWithLabel) => ({
       ...provided,
-      display: 'none',
+      display: 'none'
     }),
     indicatorSeparator: (provided: CSSObjectWithLabel) => ({
       ...provided,
-      display: 'none',
+      display: 'none'
     }),
     menu: (styles: CSSObjectWithLabel) => ({
       ...styles,
       zIndex: '9999',
       cursor: 'pointer',
-      width: '46vw',
-      height: 'auto',
-    }),
-  };
+      minWidth: '300px',
+      height: 'auto'
+    })
+  }
 
   return (
     <div>
@@ -87,7 +83,7 @@ export const KategorijeSelekt = () => {
           selectedFilters?.kategorije
             ? selectedFilters?.kategorije.map((option: string) => ({
                 label: option,
-                value: option,
+                value: option
               }))
             : []
         }
@@ -99,11 +95,11 @@ export const KategorijeSelekt = () => {
         htmlFor='kategorije-select'
         style={{
           fontSize: '22px',
-          color: '#7e7e77',
+          color: '#7e7e77'
         }}
       >
         kategorije
       </label>
     </div>
-  );
-};
+  )
+}

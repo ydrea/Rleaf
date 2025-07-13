@@ -1,4 +1,4 @@
-import Select, { type CSSObjectWithLabel } from 'react-select';
+import Select, { type CSSObjectWithLabel } from 'react-select'
 
 export const Selekt = () => {
   const cusTom = {
@@ -7,24 +7,24 @@ export const Selekt = () => {
       backgroundColor: 'transparent', // Make the background transparent
       border: 'none', // Remove the default border
       borderBottom: '1px solid white', // Add the white bottom border
-      borderRadius: '0', // Remove border radius if needed
+      borderRadius: '0' // Remove border radius if needed
     }),
     option: (styles: CSSObjectWithLabel) => {
-      return { ...styles, color: 'black' };
+      return { ...styles, color: 'black' }
     },
     placeholder: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      color: 'white', // Set the placeholder text color to white
+      color: 'white' // Set the placeholder text color to white
     }),
     dropdownIndicator: (provided: CSSObjectWithLabel) => ({
       ...provided,
-      display: 'none',
+      display: 'none'
     }),
     indicatorSeparator: (provided: CSSObjectWithLabel) => ({
       ...provided,
-      display: 'none',
-    }),
-  };
+      display: 'none'
+    })
+  }
   //
   return (
     <Select
@@ -34,8 +34,8 @@ export const Selekt = () => {
       isMulti
       options={[
         { value: 'Banija', label: 'Banija' },
-        { value: 'EWAP', label: 'EWAP' },
+        { value: 'EWAP', label: 'EWAP' }
       ]}
     />
-  );
-};
+  )
+}

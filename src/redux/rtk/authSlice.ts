@@ -1,14 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 interface AuthState {
-  password: string;
-  authorized: boolean;
+  password: string
+  authorized: boolean
 }
 
 const initialState: AuthState = {
   password: '',
-  authorized: false,
-};
+  authorized: false
+}
 
 export const authSlice = createSlice({
   name: 'login',
@@ -25,16 +25,15 @@ export const authSlice = createSlice({
     logon: (state) => {
       //  state.username = action.payload.username;
       // state.password = action.payload.password;
-      state.authorized = true;
+      state.authorized = true
     },
     logoff: (state) => {
-      state.authorized = false;
-    },
-  },
-});
+      state.authorized = false
+    }
+  }
+})
 
-export const { logon, logoff } = authSlice.actions;
-export const selectValid = (state: { auth: AuthState }) =>
-  state.auth.authorized;
+export const { logon, logoff } = authSlice.actions
+export const selectValid = (state: { auth: AuthState }) => state.auth.authorized
 // export const selectPwd = state => state.auth.password;
-export default authSlice.reducer;
+export default authSlice.reducer

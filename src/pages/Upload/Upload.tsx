@@ -1,54 +1,53 @@
-import { useState, useEffect } from 'react';
-import { Message } from '../../components/Message/Message';
-import axios from 'axios';
-import exifr from 'exifr';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import exifr from 'exifr'
 
-import PhotosEDIT from '../PhotosEdit/PhotosEdit';
-import { getPhotos } from '../../redux/rtk/gallerySlice';
-import { useAppDispatch } from '../../redux/hooks';
-import type { Photo } from '../../types/types';
-import './Upload.css';
+import PhotosEDIT from '../PhotosEdit/PhotosEdit'
+import { Message } from '../../components/Message/Message'
+import { getPhotos } from '../../redux/rtk/gallerySlice'
+import { useAppDispatch } from '../../redux/hooks'
+import type { Photo } from '../../types/types'
+import './Upload.sass'
 
 const decodeString = (value: string) => {
   try {
-    return decodeURIComponent(escape(value));
-  } catch (e) {
+    return decodeURIComponent(escape(value))
+  } catch {
     //
   }
-  return value;
-};
+  return value
+}
 
 const getExifData = async (file: File) => {
   try {
-    const data = await exifr.parse(file, { iptc: true, xmp: true });
-    return data;
+    const data = await exifr.parse(file, { iptc: true, xmp: true })
+    return data
   } catch (err) {
-    console.error('Error parsing EXIF data:', err);
-    return undefined;
+    console.error('Error parsing EXIF data:', err)
+    return undefined
   }
-};
+}
 
 const parseExifDate = (value: string | number | undefined) => {
   if (!value) {
-    return undefined;
+    return undefined
   }
   if (typeof value === 'string' && value.length === 8) {
-    return `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(6, 8)}`;
+    return `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(6, 8)}`
   }
   try {
-    var d = new Date(value);
-    return new Date(d.getTime() - d.getTimezoneOffset() * 60000)
-      .toISOString()
-      .slice(0, 10);
-  } catch (e) {
-    return undefined;
+    const d = new Date(value)
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10)
+  } catch {
+    return undefined
   }
-};
+}
 
 const saveExif = async (
   signatura: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   exif: Record<string, any>
-): Promise<{ data?: Photo; error?: any }> => {
+) => {
   try {
     const res = await fetch(`${import.meta.env.REACT_APP_SERVER}/novi`, {
       method: 'POST',
@@ -57,226 +56,201 @@ const saveExif = async (
         lokacija: exif.Location ?? '',
         datum_sni: parseExifDate(exif.DateCreated),
         autor: exif.Artist ?? '',
-        copyright: decodeString(
-          exif.Copyright ?? exif.rights?.value ?? exif.CopyrightNotice ?? ''
-        ),
-        tagovi:
-          (Array.isArray(exif.subject)
-            ? exif.subject.join(',')
-            : exif.subject) ?? '',
+        copyright: decodeString(exif.Copyright ?? exif.rights?.value ?? exif.CopyrightNotice ?? ''),
+        tagovi: (Array.isArray(exif.subject) ? exif.subject.join(',') : exif.subject) ?? '',
         lon: `${exif.longitude ?? ''}`,
         lat: `${exif.latitude ?? ''}`,
         naziv: decodeString(
-          exif.XPTitle ||
-            exif.Title ||
-            exif.title?.value ||
-            exif.ObjectName ||
-            ''
+          exif.XPTitle || exif.Title || exif.title?.value || exif.ObjectName || ''
         ),
         naziv_eng: '',
         opis: decodeString(
-          exif.XPSubject ||
-            exif.ImageDescription ||
-            exif.description?.value ||
-            exif.Caption ||
-            ''
+          exif.XPSubject || exif.ImageDescription || exif.description?.value || exif.Caption || ''
         ),
         opis_eng: '',
         kategorija: '',
         copyright_holder: '',
-        doi: '',
+        doi: ''
       }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+      headers: { 'Content-Type': 'application/json' }
+    })
     if (res.ok) {
-      const data = (await res.json()) as Photo;
+      const data = (await res.json()) as Photo
       return {
-        data,
-      };
+        data
+      }
     }
     return {
-      error: 'Error!',
-    };
+      error: 'Error!'
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     return {
-      error: 'msg' in err ? err.msg : 'Error!',
-    };
+      error: err.msg ?? 'Error!'
+    }
   }
-};
+}
 
 const uploadFile = async (file: File) => {
-  const formData = new FormData();
-  formData.append('file', file);
+  const formData = new FormData()
+  formData.append('file', file)
 
   try {
-    const { data } = await axios.post(
-      `${import.meta.env.REACT_APP_SERVER}/upload`,
-      formData,
-      {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      }
-    );
+    const { data } = await axios.post(`${import.meta.env.REACT_APP_SERVER}/upload`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
 
     return {
-      data,
-    };
+      data
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     if (err.response && err.response.status === 500) {
       return {
-        error: 'There was a problem with the server',
-      };
+        error: 'There was a problem with the server'
+      }
     } else if (err.response) {
       return {
-        error: err.response.data.msg,
-      };
+        error: err.response.data.msg
+      }
     }
     return {
-      error: 'An error occurred while uploading the file',
-    };
+      error: 'An error occurred while uploading the file'
+    }
   }
-};
+}
 
 export const Fileupload = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  const [fileList, setFileList] = useState<File[]>([]);
-  const [uploadedFileList, setUploadedFileList] = useState<any[]>([]);
-  const [message, setMessage] = useState('');
-  const [exifList, setExifList] = useState<any[]>([]);
+  const [fileList, setFileList] = useState<File[]>([])
+  const [uploadedFileList, setUploadedFileList] = useState<Record<string, unknown>[]>([])
+  const [message, setMessage] = useState('')
+  const [exifList, setExifList] = useState<Record<string, unknown>[]>([])
   const [savedExifList, setSavedExifList] = useState<
     {
-      data?: Photo;
-      error?: any;
+      data?: Photo
+      error?: string
     }[]
-  >([]);
+  >([])
 
-  const [isSaving, setIsSaving] = useState(false);
-  const submitIsDisabled = fileList.length === 0 || isSaving;
+  const [isSaving, setIsSaving] = useState(false)
+  const submitIsDisabled = fileList.length === 0 || isSaving
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = [...(e.target.files ?? [])];
-    setFileList(files);
-  };
+    const files = [...(e.target.files ?? [])]
+    setFileList(files)
+  }
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (fileList.length === 0) {
-      return;
+      return
     }
 
-    setIsSaving(true);
-    setMessage('Saving...');
+    setIsSaving(true)
+    setMessage('Saving...')
 
     const count = {
       files: fileList.length,
       uploads: 0,
-      saves: 0,
-    };
+      saves: 0
+    }
     await Promise.allSettled(
       fileList.map((file, fileIndex) => {
         return uploadFile(file).then((uploadFileData) => {
           if (uploadFileData.data) {
-            count.uploads += 1;
+            count.uploads += 1
           }
           setUploadedFileList((currentUploadedFileList) =>
             currentUploadedFileList.map((item, index) => {
               if (index !== fileIndex) {
-                return item;
+                return item
               }
-              return uploadFileData;
+              return uploadFileData
             })
-          );
+          )
           if (uploadFileData.data) {
-            return saveExif(
-              uploadFileData.data.fileName,
-              exifList[fileIndex]
-            ).then((saveExifData) => {
-              if (saveExifData.data) {
-                count.saves += 1;
+            return saveExif(uploadFileData.data.fileName, exifList[fileIndex]).then(
+              (saveExifData) => {
+                if (saveExifData.data) {
+                  count.saves += 1
+                }
+                setSavedExifList((currentSavedExifList) =>
+                  currentSavedExifList.map((item, index) => {
+                    if (index !== fileIndex) {
+                      return item
+                    }
+                    return saveExifData
+                  })
+                )
               }
-              setSavedExifList((currentSavedExifList) =>
-                currentSavedExifList.map((item, index) => {
-                  if (index !== fileIndex) {
-                    return item;
-                  }
-                  return saveExifData;
-                })
-              );
-            });
+            )
           }
-        });
+        })
       })
-    );
+    )
 
-    setMessage(`${count.saves}/${count.files} images saved.`);
+    setMessage(`${count.saves}/${count.files} images saved.`)
 
-    dispatch(getPhotos());
-  };
+    dispatch(getPhotos())
+  }
 
   const handleRemove = async (photo: Photo) => {
-    setMessage('');
-    const photoLabel = `id: ${photo.id}${
-      photo.signatura ? ` (${photo.signatura})` : ''
-    }`;
+    setMessage('')
+    const photoLabel = `id: ${photo.id}${photo.signatura ? ` (${photo.signatura})` : ''}`
     if (photo) {
       try {
-        const res = await fetch(
-          `${import.meta.env.REACT_APP_SERVER}/photos/${photo.id}`,
-          {
-            method: 'DELETE',
-          }
-        );
+        const res = await fetch(`${import.meta.env.REACT_APP_SERVER}/photos/${photo.id}`, {
+          method: 'DELETE'
+        })
         if (res.ok) {
-          setMessage(`Record ${photoLabel} successfully deleted!`);
-          dispatch(getPhotos());
-          return true;
+          setMessage(`Record ${photoLabel} successfully deleted!`)
+          dispatch(getPhotos())
+          return true
         }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
-        console.error(err.msg, 'nece');
+        console.error(err.msg, 'nece')
       }
     }
-    return false;
-  };
+    return false
+  }
 
   useEffect(() => {
-    let isMounted = true;
-    const emptyList = fileList.map(() => ({}));
-    setExifList(emptyList);
-    setUploadedFileList(emptyList);
-    setSavedExifList(emptyList);
-    setIsSaving(false);
-    setMessage('');
+    let isMounted = true
+    const emptyList = fileList.map(() => ({}))
+    setExifList(emptyList)
+    setUploadedFileList(emptyList)
+    setSavedExifList(emptyList)
+    setIsSaving(false)
+    setMessage('')
 
     const getExif = async () => {
-      const exifData = await Promise.allSettled(
-        fileList.map((file) => getExifData(file))
-      );
+      const exifData = await Promise.allSettled(fileList.map((file) => getExifData(file)))
       if (isMounted) {
         setExifList(
           exifData.map((result) => {
             if (result.status === 'fulfilled') {
-              return result.value ?? undefined;
+              return result.value ?? undefined
             }
-            return undefined;
+            return undefined
           })
-        );
+        )
       }
-    };
-    getExif();
+    }
+    getExif()
 
     return () => {
-      isMounted = false;
-    };
-  }, [fileList]);
+      isMounted = false
+    }
+  }, [fileList])
 
   return (
     <>
       {message ? <Message msg={message} /> : null}
-      <form
-        style={{ paddingTop: '15%', paddingLeft: '17.5%' }}
-        onSubmit={onSubmit}
-      >
+      <form style={{ paddingTop: '15%', paddingLeft: '17.5%' }} onSubmit={onSubmit}>
         <div className='custom-file mb-4'>
           <input
             type='file'
@@ -327,5 +301,5 @@ export const Fileupload = () => {
 
       <PhotosEDIT onRemove={handleRemove} />
     </>
-  );
-};
+  )
+}

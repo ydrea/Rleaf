@@ -1,38 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
-import './Modal.css';
+import './Modal.sass'
 
 type Props = {
-  isOpen: boolean;
-  closeModal: () => void;
-  children: React.ReactNode;
-  thumbnailUrl?: string;
-  signatura?: string;
-};
+  isOpen: boolean
+  closeModal: () => void
+  children: React.ReactNode
+  thumbnailUrl?: string
+  signatura?: string
+}
 
 //
-export const Modal = ({
-  isOpen,
-  closeModal,
-  children,
-  thumbnailUrl,
-  signatura,
-}: Props) => {
-  const [confirmationVisible, setConfirmationVisible] = useState(false);
+export const Modal = ({ isOpen, closeModal, children, thumbnailUrl, signatura }: Props) => {
+  const [confirmationVisible, setConfirmationVisible] = useState(false)
 
   useEffect(() => {
     if (confirmationVisible) {
       // Automatically close the modal after 2 seconds
       const timeoutId = setTimeout(() => {
-        closeModal();
-        setConfirmationVisible(false);
-      }, 2000);
+        closeModal()
+        setConfirmationVisible(false)
+      }, 2000)
 
-      return () => clearTimeout(timeoutId);
+      return () => clearTimeout(timeoutId)
     }
-  }, [confirmationVisible, closeModal]);
+  }, [confirmationVisible, closeModal])
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <div className='modal-overlay'>
@@ -44,5 +38,5 @@ export const Modal = ({
         {children}
       </div>
     </div>
-  );
-};
+  )
+}

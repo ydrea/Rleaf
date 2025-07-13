@@ -16,8 +16,8 @@ export const text1 = (
     </p>
     <p>
       Za sve informacije vezane uz Opservatorij krajobraza, slobodno nas kontaktirajte putem e-maila
-      na <a href='mailto:info@croatianlandscape.hr'>[info@croatianlandscape.hr]</a> ili telefonom na{' '}
-      <a href='tel:+385959123055'>[+385 95 9123055]</a>.
+      na [<a href='mailto:info@croatianlandscape.hr'>info@croatianlandscape.hr</a>] ili telefonom na
+      [<a href='tel:+385959123055'>+385 95 9123055</a>].
     </p>
     <p>
       Želite saznati više o našem radu i misiji? Pretplatite se na naš newsletter i budite u tijeku

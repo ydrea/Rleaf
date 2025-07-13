@@ -1,28 +1,26 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Message } from '../Message/Message';
-import { getPhotos } from '../../redux/rtk/gallerySlice';
-import type { Photo } from '../../types/types';
-import { useAppDispatch } from '../../redux/hooks';
-import './Form.css';
+import { useCallback, useEffect, useState } from 'react'
 
-export const formatDateValue = (value: string) => {
+import { Message } from '../Message/Message'
+import { getPhotos } from '../../redux/rtk/gallerySlice'
+import type { Photo } from '../../types/types'
+import { useAppDispatch } from '../../redux/hooks'
+import './Form.sass'
+
+const formatDateValue = (value: string) => {
   if (!value) {
-    return '';
+    return ''
   }
   try {
-    var d = new Date(value);
-    return new Date(d.getTime() - d.getTimezoneOffset() * 60000)
-      .toISOString()
-      .slice(0, 10);
-  } catch (e) {
-    return '';
+    const d = new Date(value)
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10)
+  } catch {
+    return ''
   }
-};
+}
 
-//
 export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
-  const dispatch = useAppDispatch();
-  const [confirmationMsg, setConfirmationMsg] = useState('');
+  const dispatch = useAppDispatch()
+  const [confirmationMsg, setConfirmationMsg] = useState('')
 
   const [form, setForm] = useState({
     signatura: uploadedFile.signatura ?? '',
@@ -39,89 +37,82 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
     tagovi: uploadedFile.tagovi ?? '',
     doi: uploadedFile.doi ?? '',
     lon: uploadedFile.lon ?? '',
-    lat: uploadedFile.lat ?? '',
-  });
+    lat: uploadedFile.lat ?? ''
+  })
 
-  const updateFormField = useCallback(
-    (key: string, value: string | undefined) => {
-      setForm((currentForm) => ({
-        ...currentForm,
-        [key]: value,
-      }));
-    },
-    []
-  );
+  const updateFormField = useCallback((key: string, value: string | undefined) => {
+    setForm((currentForm) => ({
+      ...currentForm,
+      [key]: value
+    }))
+  }, [])
 
   const onChangeHandler = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (e: React.ChangeEvent<any>) => {
-      const { name, type, value } = e.target;
-      let newValue: string | undefined = value;
+      const { name, type, value } = e.target
+      let newValue: string | undefined = value
 
       if (type === 'date') {
-        newValue = value || undefined;
+        newValue = value || undefined
       }
-      updateFormField(name, newValue);
-      setConfirmationMsg('');
+      updateFormField(name, newValue)
+      setConfirmationMsg('')
     },
     [updateFormField]
-  );
+  )
 
   useEffect(() => {
-    let isMounted = true;
+    let isMounted = true
     const getCoordinates = async () => {
       try {
-        const data: Photo[] = await fetch(
-          `${import.meta.env.REACT_APP_SERVER}/json_photos`
-        ).then((res) => res.json());
-        const photo = data.find(
-          (item) => item.signatura === uploadedFile.signatura
-        );
+        const data: Photo[] = await fetch(`${import.meta.env.REACT_APP_SERVER}/json_photos`).then(
+          (res) => res.json()
+        )
+        const photo = data.find((item) => item.signatura === uploadedFile.signatura)
         const {
-          coordinates: [lon, lat],
-        } = JSON.parse(photo?.geometry ?? '');
+          coordinates: [lon, lat]
+        } = JSON.parse(photo?.geometry ?? '')
         if (isMounted) {
           setForm((currentForm) => ({
             ...currentForm,
             lon: `${lon}`,
-            lat: `${lat}`,
-          }));
+            lat: `${lat}`
+          }))
         }
-      } catch (e) {
+      } catch {
         if (isMounted) {
           setForm((currentForm) => ({
             ...currentForm,
             lon: '',
-            lat: '',
-          }));
+            lat: ''
+          }))
         }
       }
-    };
-    getCoordinates();
+    }
+    getCoordinates()
     return () => {
-      isMounted = false;
-    };
-  }, [uploadedFile]);
+      isMounted = false
+    }
+  }, [uploadedFile])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const res = await fetch(
-        `${import.meta.env.REACT_APP_SERVER}/update/${uploadedFile.id}`,
-        {
-          method: 'PUT',
-          body: JSON.stringify(form),
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      const res = await fetch(`${import.meta.env.REACT_APP_SERVER}/update/${uploadedFile.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(form),
+        headers: { 'Content-Type': 'application/json' }
+      })
       if (res.ok) {
-        setConfirmationMsg('Record successfully submitted!');
+        setConfirmationMsg('Record successfully submitted!')
 
-        dispatch(getPhotos());
+        dispatch(getPhotos())
       }
     } catch (err: unknown) {
-      console.error(err, 'nece');
+      console.error(err, 'nece')
     }
-  };
+  }
 
   return (
     <div style={{ marginLeft: '30vw' }}>
@@ -129,7 +120,7 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
         style={{
           display: 'flex',
           flexDirection: 'row',
-          color: 'white',
+          color: 'white'
         }}
         onSubmit={handleSubmit}
       >
@@ -137,62 +128,32 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            width: 400,
+            width: 400
           }}
         >
           <div className='form-control'>
             <label>signatura</label>
-            <input
-              type='text'
-              name='signatura'
-              disabled
-              value={form.signatura}
-            />
+            <input type='text' name='signatura' disabled value={form.signatura} />
           </div>
           <div className='form-control'>
             <label>naziv</label>
-            <input
-              type='text'
-              name='naziv'
-              value={form.naziv}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='naziv' value={form.naziv} onInput={onChangeHandler} />
           </div>
           <div className='form-control'>
             <label>naziv_eng</label>
-            <input
-              type='text'
-              name='naziv_eng'
-              value={form.naziv_eng}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='naziv_eng' value={form.naziv_eng} onInput={onChangeHandler} />
           </div>
           <div className='form-control'>
             <label>opis</label>
-            <input
-              type='text'
-              name='opis'
-              value={form.opis}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='opis' value={form.opis} onInput={onChangeHandler} />
           </div>
           <div className='form-control'>
             <label>opis_eng</label>
-            <input
-              type='text'
-              name='opis_eng'
-              value={form.opis_eng}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='opis_eng' value={form.opis_eng} onInput={onChangeHandler} />
           </div>
           <div className='form-control'>
             <label>lokacija</label>
-            <input
-              type='text'
-              name='lokacija'
-              value={form.lokacija}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='lokacija' value={form.lokacija} onInput={onChangeHandler} />
           </div>{' '}
           <div className='form-control'>
             <label>datum</label>
@@ -208,16 +169,12 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
           style={{
             display: 'flex',
             width: 400,
-            flexDirection: 'column',
+            flexDirection: 'column'
           }}
         >
           <div className='form-control'>
             <label>kategorija</label>
-            <select
-              name='kategorija'
-              value={form.kategorija}
-              onChange={onChangeHandler}
-            >
+            <select name='kategorija' value={form.kategorija} onChange={onChangeHandler}>
               <option value='' disabled>
                 Kategorija
               </option>
@@ -237,21 +194,11 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
           </div>{' '}
           <div className='form-control'>
             <label>autor</label>
-            <input
-              type='text'
-              name='autor'
-              value={form.autor}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='autor' value={form.autor} onInput={onChangeHandler} />
           </div>
           <div className='form-control'>
             <label>copyright</label>
-            <input
-              type='text'
-              name='copyright'
-              value={form.copyright}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='copyright' value={form.copyright} onInput={onChangeHandler} />
           </div>
           <div className='form-control'>
             <label>copyright_holder</label>
@@ -264,39 +211,19 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
           </div>
           <div className='form-control'>
             <label>Tag-ovi</label>
-            <input
-              type='text'
-              name='tagovi'
-              value={form.tagovi}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='tagovi' value={form.tagovi} onInput={onChangeHandler} />
           </div>
           <div className='form-control'>
             <label>DOI</label>
-            <input
-              type='text'
-              name='doi'
-              value={form.doi}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='doi' value={form.doi} onInput={onChangeHandler} />
           </div>
           <div className='form-control'>
             <label>lon</label>
-            <input
-              type='text'
-              name='lon'
-              value={form.lon}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='lon' value={form.lon} onInput={onChangeHandler} />
           </div>
           <div className='form-control'>
             <label>lat</label>
-            <input
-              type='text'
-              name='lat'
-              value={form.lat}
-              onInput={onChangeHandler}
-            />
+            <input type='text' name='lat' value={form.lat} onInput={onChangeHandler} />
           </div>
           <div className='form-control'>
             <label></label>
@@ -306,5 +233,5 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
         {confirmationMsg && <Message msg={confirmationMsg} />}
       </form>
     </div>
-  );
-};
+  )
+}

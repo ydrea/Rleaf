@@ -1,31 +1,31 @@
-import { type GridLayerOptions } from 'leaflet';
-import { BetterTileLayerWMS } from './L.TileLayer.BetterWMS';
-import {
-  createTileLayerComponent,
-  createElementObject,
-  updateGridLayer,
-} from '@react-leaflet/core';
+import { type GridLayerOptions } from 'leaflet'
+import { createTileLayerComponent, createElementObject, updateGridLayer } from '@react-leaflet/core'
+
+import { BetterTileLayerWMS } from './L.TileLayer.BetterWMS'
 
 interface BetterWMSProps extends GridLayerOptions {
-  url: string;
-  layers: string;
-  params?: any;
-  id: string;
+  url: string
+  layers: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params?: any
+  id: string
 }
 
 const BetterWMS = createTileLayerComponent(
   ({ url, layers, ...props }: BetterWMSProps, context) => {
-    const layer = new (BetterTileLayerWMS as any)(url, { layers, ...props });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const layer = new (BetterTileLayerWMS as any)(url, { layers, ...props })
 
-    return createElementObject(layer, context);
+    return createElementObject(layer, context)
   },
   (layer, props: BetterWMSProps, prevProps: BetterWMSProps) => {
-    updateGridLayer(layer, props, prevProps);
+    updateGridLayer(layer, props, prevProps)
 
     if (props.params != null && props.params !== prevProps.params) {
-      (layer as any).setParams(props.params);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(layer as any).setParams(props.params)
     }
   }
-);
+)
 
-export default BetterWMS;
+export default BetterWMS

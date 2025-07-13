@@ -1,19 +1,20 @@
-import { configureStore } from '@reduxjs/toolkit';
-import mapReducer from './rtk/mapSlice';
-import galleryReducer from './rtk/gallerySlice';
-import authReducer from './rtk/authSlice';
+import { configureStore } from '@reduxjs/toolkit'
+
+import mapReducer from './rtk/mapSlice'
+import galleryReducer from './rtk/gallerySlice'
+import authReducer from './rtk/authSlice'
 
 //
 export const store = configureStore({
   reducer: {
     gallery: galleryReducer,
     mapa: mapReducer,
-    auth: authReducer,
-  },
+    auth: authReducer
+  }
   //   middleware: getDefaultMiddleware =>
   //     getDefaultMiddleware().concat(gallerySlice.middleware),
-});
+})
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>
 
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch = typeof store.dispatch

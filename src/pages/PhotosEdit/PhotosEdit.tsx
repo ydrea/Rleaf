@@ -1,89 +1,76 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
-import Masonry from 'react-masonry-css';
+import { useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
+import Masonry from 'react-masonry-css'
 
-import {
-  getPhotos,
-  selectPhotos,
-  selectFilteredPhotos,
-} from '../../redux/rtk/gallerySlice';
-import { Selekt } from '../../components/Selekt/Selekt';
-import { Form } from '../../components/Form/Form';
-import { Modal } from '../../components/Modal/Modal';
-import type { Photo } from '../../types/types';
-import { useAppDispatch } from '../../redux/hooks';
-import '../Photos/Photos.css';
+import { getPhotos, selectPhotos, selectFilteredPhotos } from '../../redux/rtk/gallerySlice'
+import { Selekt } from '../../components/Selekt/Selekt'
+import { Form } from '../../components/Form/Form'
+import { Modal } from '../../components/Modal/Modal'
+import type { Photo } from '../../types/types'
+import { useAppDispatch } from '../../redux/hooks'
+import '../Photos/Photos.sass'
 
-export default function PhotosEDIT({
-  onRemove,
-}: {
-  onRemove: (photo: Photo) => Promise<boolean>;
-}) {
-  const dispatch = useAppDispatch();
-  const photos = useSelector(selectPhotos);
-  const [selectedId, setSelectedId] = useState<number | undefined>(undefined);
+export default function PhotosEDIT({ onRemove }: { onRemove: (photo: Photo) => Promise<boolean> }) {
+  const dispatch = useAppDispatch()
+  const photos = useSelector(selectPhotos)
+  const [selectedId, setSelectedId] = useState<number | undefined>(undefined)
 
   const selectedPhotoData = useMemo(() => {
     if (!photos?.length || !selectedId) {
-      return undefined;
+      return undefined
     }
-    return photos.find((photo) => photo.id === selectedId);
-  }, [photos, selectedId]);
+    return photos.find((photo) => photo.id === selectedId)
+  }, [photos, selectedId])
 
-  const filteredPhotos = useSelector((state) => selectFilteredPhotos(state));
+  const filteredPhotos = useSelector((state) => selectFilteredPhotos(state))
 
-  const [isRemoving, setIsRemoving] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false)
   const handleRemove = async (photo: Photo) => {
-    const photoLabel = `id: ${photo.id}${
-      photo.signatura ? ` (${photo.signatura})` : ''
-    }`;
+    const photoLabel = `id: ${photo.id}${photo.signatura ? ` (${photo.signatura})` : ''}`
     if (window.confirm(`Izbrisati ${photoLabel}?`)) {
-      setIsRemoving(true);
-      const isRemoved = await onRemove(photo);
+      setIsRemoving(true)
+      const isRemoved = await onRemove(photo)
       if (isRemoved) {
-        setSelectedId(undefined);
+        setSelectedId(undefined)
       }
-      setIsRemoving(false);
+      setIsRemoving(false)
     }
-  };
+  }
 
   // Get photos
   useEffect(() => {
-    dispatch(getPhotos());
-  }, [dispatch]);
+    dispatch(getPhotos())
+  }, [dispatch])
   //
   const breakpoints = {
     default: 4,
     1200: 3,
     768: 2,
-    500: 1,
-  };
+    500: 1
+  }
   //
-  const photosPerPage = 40;
-  const [currentPage, setCurrentPage] = useState(1);
+  const photosPerPage = 40
+  const [currentPage, setCurrentPage] = useState(1)
 
   // Calculate the indices for the current page
-  const startIndex = (currentPage - 1) * photosPerPage;
-  const endIndex = startIndex + photosPerPage;
+  const startIndex = (currentPage - 1) * photosPerPage
+  const endIndex = startIndex + photosPerPage
 
   // Slice the photos array for the current page
-  const photosToDisplay = filteredPhotos.slice(startIndex, endIndex);
+  const photosToDisplay = filteredPhotos.slice(startIndex, endIndex)
 
   // Handle page change
   const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
+    setCurrentPage(newPage)
+  }
   //
   //
-  const totalPages = Math.ceil(filteredPhotos.length / photosPerPage);
+  const totalPages = Math.ceil(filteredPhotos.length / photosPerPage)
 
   // Create an array of page numbers
-  const pageNumbers = Array.from(
-    { length: totalPages },
-    (_, index) => index + 1
-  );
+  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1)
   //
-  const sortedPhotos = [...photosToDisplay].sort((a, b) => b.id - a.id);
+  const sortedPhotos = [...photosToDisplay].sort((a, b) => b.id - a.id)
 
   return (
     <div className='gallery'>
@@ -96,14 +83,10 @@ export default function PhotosEDIT({
           closeModal={() => setSelectedId(undefined)}
           thumbnailUrl={
             selectedPhotoData
-              ? `${import.meta.env.REACT_APP_SERVER_PUB}/thumbs/${
-                  selectedPhotoData.signatura
-                }`
+              ? `${import.meta.env.REACT_APP_SERVER_PUB}/thumbs/${selectedPhotoData.signatura}`
               : undefined
           }
-          signatura={
-            selectedPhotoData ? selectedPhotoData.signatura : undefined
-          }
+          signatura={selectedPhotoData ? selectedPhotoData.signatura : undefined}
         >
           {selectedPhotoData ? (
             <>
@@ -149,7 +132,7 @@ export default function PhotosEDIT({
                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
                 minHeight: 60,
                 justifyContent: 'center',
-                cursor: 'pointer',
+                cursor: 'pointer'
               }}
               onClick={() => setSelectedId(photo.id)}
             >
@@ -165,9 +148,7 @@ export default function PhotosEDIT({
               )}
               {photo.signatura ? (
                 <img
-                  src={`${import.meta.env.REACT_APP_SERVER_PUB}/thumbs/${
-                    photo.signatura
-                  }`}
+                  src={`${import.meta.env.REACT_APP_SERVER_PUB}/thumbs/${photo.signatura}`}
                   alt={photo.naziv || photo.signatura}
                 />
               ) : (
@@ -180,9 +161,7 @@ export default function PhotosEDIT({
       {/* Pagination controls */}
       <div className='pagination'>
         {currentPage > 1 && (
-          <button onClick={() => handlePageChange(currentPage - 1)}>
-            Prethodna
-          </button>
+          <button onClick={() => handlePageChange(currentPage - 1)}>Prethodna</button>
         )}
 
         {pageNumbers.map((pageNumber) => (
@@ -196,11 +175,9 @@ export default function PhotosEDIT({
         ))}
 
         {photosToDisplay.length === photosPerPage && (
-          <button onClick={() => handlePageChange(currentPage + 1)}>
-            Sljedeća
-          </button>
+          <button onClick={() => handlePageChange(currentPage + 1)}>Sljedeća</button>
         )}
       </div>{' '}
     </div>
-  );
+  )
 }

@@ -1,30 +1,22 @@
-import './Contact.css';
+import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 
 export const Contact = () => {
   return (
-    <div className='gallery'>
-      <section>
-        <div className='naslov-container'>
-          <h1>opservatorij</h1>
-          <div className='line-div0' />
-        </div>
-        <div className='un'>
-          {' '}
-          <p>Opservatorij krajobraza </p>
-          <p>voditelj: izv.prof.dr.sc. Goran Andlar</p>
-          <p> Sveučilište u Zagrebu, Agronomski fakultet </p>
-          <p> Svetošimunska cesta 25 10000, Zagreb</p>
-          <hr className='gren' />
-          <p>
-            Za sve informacije vezane uz ‘Opservatorij krajobraza’, slobodno nas
-            kontaktirajte putem e-maila na [info@croatianlandscape.hr] ili
-            telefonom na [+385 95 9123055]. Zanima vas više o našem radu i
-            misiji? Pretplatite se na naš newsletter i budite u tijeku s našim
-            istraživanjima i aktivnostima. Unesite svoju e-mail adresu i
-            pridružite se putovanju prema razumijevanju i očuvanju krajobraza.
-          </p>
-        </div>
-      </section>
-    </div>
-  );
-};
+    <BlockWithStickyTitle title='kontakt'>
+      <p>Opservatorij krajobraza </p>
+      <p>voditelj: izv.prof.dr.sc. Goran Andlar</p>
+      <p> Sveučilište u Zagrebu, Agronomski fakultet </p>
+      <p> Svetošimunska cesta 25 10000, Zagreb</p>
+      <p>
+        Za sve informacije vezane uz Opservatorij krajobraza, slobodno nas kontaktirajte putem
+        e-maila na [<a href='mailto:info@croatianlandscape.hr'>info@croatianlandscape.hr</a>] ili
+        telefonom na [<a href='tel:+385959123055'>+385 95 9123055</a>].
+      </p>
+      <p>
+        Želite saznati više o našem radu i misiji? Pretplatite se na naš newsletter i budite u
+        tijeku s našim istraživanjima i aktivnostima. Unesite svoju e-mail adresu i pridružite se
+        našem istraživanju.
+      </p>
+    </BlockWithStickyTitle>
+  )
+}

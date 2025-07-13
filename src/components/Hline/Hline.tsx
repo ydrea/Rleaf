@@ -1,11 +1,11 @@
 export const Hline = ({
   color = 'black',
   height = 12,
-  width = '100px',
+  width = '100px'
 }: {
-  color?: string;
-  height?: number;
-  width?: string;
+  color?: string
+  height?: number
+  width?: string
 }) => {
   return (
     <hr
@@ -13,8 +13,8 @@ export const Hline = ({
         backgroundColor: color,
         height: height,
         width: width,
-        border: 'none',
+        border: 'none'
       }}
     />
-  );
-};
+  )
+}
