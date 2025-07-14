@@ -13,9 +13,6 @@ section
     font-size: 1rem
 
   &.dark
-    font-family: 'DM Mono'
-    letter-spacing: 0
-    line-height: 1.56
 
     .section-content
       background-color: #000000
@@ -36,11 +33,11 @@ section
       + .section-content::after
         content: ''
         position: absolute
-        top: 0
+        top: -56px
         left: calc(50% - 1px)
         width: 1px
         height: 56px
-        background-color: #FFFFFF
+        background-color: #000000
         z-index: 1000
 
   @media (max-width: 640px)
