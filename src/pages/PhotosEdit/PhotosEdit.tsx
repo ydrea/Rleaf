@@ -76,7 +76,7 @@ export const PhotosEdit = ({ onRemove }: { onRemove: (photo: Photo) => Promise<b
           closeModal={() => setSelectedId(undefined)}
           thumbnailUrl={
             selectedPhotoData
-              ? `${import.meta.env.REACT_APP_SERVER_PUB}/thumbs/${selectedPhotoData.signatura}`
+              ? `${import.meta.env.VITE_SERVER_PUB}/thumbs/${selectedPhotoData.signatura}`
               : undefined
           }
           signatura={selectedPhotoData ? selectedPhotoData.signatura : undefined}
@@ -134,7 +134,7 @@ export const PhotosEdit = ({ onRemove }: { onRemove: (photo: Photo) => Promise<b
               )}
               {photo.signatura ? (
                 <img
-                  src={`${import.meta.env.REACT_APP_SERVER_PUB}/thumbs/${photo.signatura}`}
+                  src={`${import.meta.env.VITE_SERVER_PUB}/thumbs/${photo.signatura}`}
                   alt={photo.naziv || photo.signatura}
                 />
               ) : (

@@ -107,7 +107,7 @@ export const Photos = () => {
           photosToDisplay.map((photo: Photo, index: number) => (
             <div key={photo.id} className='photo'>
               <img
-                src={import.meta.env.REACT_APP_SERVER_PUB + `/thumbs/${photo.signatura}`}
+                src={import.meta.env.VITE_SERVER_PUB + `/thumbs/${photo.signatura}`}
                 alt={photo.naziv}
                 onClick={() => handlePhotoClick(index)}
               />

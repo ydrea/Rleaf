@@ -39,7 +39,7 @@ export const Photo = () => {
     })
 
     dispatch(setSelectedPhotoIndex(photoIndex))
-  }, [dispatch, photos, signatura, fphotos])
+  }, [dispatch, photos, signatura])
 
   const selectedPhoto = fphotos[selectedPhotoIndex]
   console.log(selectedPhoto)
@@ -92,9 +92,7 @@ export const Photo = () => {
         <div className='img-cnt'>
           <img
             src={
-              selectedPhoto
-                ? `${import.meta.env.REACT_APP_SERVER_PUB}/${selectedPhoto.signatura}`
-                : ''
+              selectedPhoto ? `${import.meta.env.VITE_SERVER_PUB}/${selectedPhoto.signatura}` : ''
             }
             alt={selectedPhoto.naziv}
           />

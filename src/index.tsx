@@ -9,7 +9,7 @@ import './index.sass'
 
 export const App = () => {
   useEffect(() => {
-    console.log('REACT_APP_SERVER_PUB:', import.meta.env.REACT_APP_SERVER_PUB)
+    console.log('VITE_SERVER_PUB:', import.meta.env.VITE_SERVER_PUB)
   })
 
   return (

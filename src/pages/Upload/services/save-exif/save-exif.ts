@@ -8,7 +8,7 @@ export const saveExif = async (
   exif: Record<string, any>
 ) => {
   try {
-    const res = await fetch(`${import.meta.env.REACT_APP_SERVER}/novi`, {
+    const res = await fetch(`${import.meta.env.VITE_SERVER}/novi`, {
       method: 'POST',
       body: JSON.stringify({
         signatura,

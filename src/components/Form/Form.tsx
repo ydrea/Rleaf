@@ -66,7 +66,7 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
     let isMounted = true
     const getCoordinates = async () => {
       try {
-        const data: Photo[] = await fetch(`${import.meta.env.REACT_APP_SERVER}/json_photos`).then(
+        const data: Photo[] = await fetch(`${import.meta.env.VITE_SERVER}/json_photos`).then(
           (res) => res.json()
         )
         const photo = data.find((item) => item.signatura === uploadedFile.signatura)
@@ -99,7 +99,7 @@ export const Form = ({ uploadedFile }: { uploadedFile: Photo }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const res = await fetch(`${import.meta.env.REACT_APP_SERVER}/update/${uploadedFile.id}`, {
+      const res = await fetch(`${import.meta.env.VITE_SERVER}/update/${uploadedFile.id}`, {
         method: 'PUT',
         body: JSON.stringify(form),
         headers: { 'Content-Type': 'application/json' }

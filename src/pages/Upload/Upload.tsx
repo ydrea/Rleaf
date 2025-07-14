@@ -93,7 +93,7 @@ export const Fileupload = () => {
     const photoLabel = `id: ${photo.id}${photo.signatura ? ` (${photo.signatura})` : ''}`
     if (photo) {
       try {
-        const res = await fetch(`${import.meta.env.REACT_APP_SERVER}/photos/${photo.id}`, {
+        const res = await fetch(`${import.meta.env.VITE_SERVER}/photos/${photo.id}`, {
           method: 'DELETE'
         })
         if (res.ok) {

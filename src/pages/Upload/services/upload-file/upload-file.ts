@@ -5,7 +5,7 @@ export const uploadFile = async (file: File) => {
   formData.append('file', file)
 
   try {
-    const { data } = await axios.post(`${import.meta.env.REACT_APP_SERVER}/upload`, formData, {
+    const { data } = await axios.post(`${import.meta.env.VITE_SERVER}/upload`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
 
