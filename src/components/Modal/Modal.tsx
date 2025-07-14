@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type ReactNode } from 'react'
 
 import './Modal.sass'
 
 type Props = {
   isOpen: boolean
   closeModal: () => void
-  children: React.ReactNode
+  children?: ReactNode
   thumbnailUrl?: string
   signatura?: string
 }

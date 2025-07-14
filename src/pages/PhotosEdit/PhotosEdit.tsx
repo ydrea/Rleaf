@@ -6,11 +6,11 @@ import { getPhotos, selectPhotos, selectFilteredPhotos } from '../../redux/rtk/g
 import { Selekt } from '../../components/Selekt/Selekt'
 import { Form } from '../../components/Form/Form'
 import { Modal } from '../../components/Modal/Modal'
-import type { Photo } from '../../types/types'
 import { useAppDispatch } from '../../redux/hooks'
+import type { Photo } from '../../types/types'
 import '../Photos/Photos.sass'
 
-export default function PhotosEDIT({ onRemove }: { onRemove: (photo: Photo) => Promise<boolean> }) {
+export const PhotosEdit = ({ onRemove }: { onRemove: (photo: Photo) => Promise<boolean> }) => {
   const dispatch = useAppDispatch()
   const photos = useSelector(selectPhotos)
   const [selectedId, setSelectedId] = useState<number | undefined>(undefined)
@@ -37,39 +37,32 @@ export default function PhotosEDIT({ onRemove }: { onRemove: (photo: Photo) => P
     }
   }
 
-  // Get photos
   useEffect(() => {
     dispatch(getPhotos())
   }, [dispatch])
-  //
+
   const breakpoints = {
     default: 4,
     1200: 3,
     768: 2,
     500: 1
   }
-  //
+
   const photosPerPage = 40
   const [currentPage, setCurrentPage] = useState(1)
 
-  // Calculate the indices for the current page
   const startIndex = (currentPage - 1) * photosPerPage
   const endIndex = startIndex + photosPerPage
 
-  // Slice the photos array for the current page
   const photosToDisplay = filteredPhotos.slice(startIndex, endIndex)
 
-  // Handle page change
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage)
   }
-  //
-  //
+
   const totalPages = Math.ceil(filteredPhotos.length / photosPerPage)
 
-  // Create an array of page numbers
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1)
-  //
   const sortedPhotos = [...photosToDisplay].sort((a, b) => b.id - a.id)
 
   return (
@@ -90,12 +83,6 @@ export default function PhotosEDIT({ onRemove }: { onRemove: (photo: Photo) => P
         >
           {selectedPhotoData ? (
             <>
-              {/* {selectedPhotoData.signatura && (
-                <img
-                 src={`${import.meta.env.REACT_APP_SERVER_PUB}/${selectedPhotoData.signatura}`}
-                 alt={selectedPhotoData.naziv}
-                />
-              )} */}
               <p style={{ color: 'white' }}>
                 Signatura: {selectedPhotoData.signatura}
                 <br />
@@ -118,7 +105,6 @@ export default function PhotosEDIT({ onRemove }: { onRemove: (photo: Photo) => P
             </p>
           )}
         </Modal>
-        {/* Masonry */}
         <Masonry
           breakpointCols={breakpoints}
           className='my-masonry-grid'
@@ -158,7 +144,6 @@ export default function PhotosEDIT({ onRemove }: { onRemove: (photo: Photo) => P
           ))}
         </Masonry>
       </div>{' '}
-      {/* Pagination controls */}
       <div className='pagination'>
         {currentPage > 1 && (
           <button onClick={() => handlePageChange(currentPage - 1)}>Prethodna</button>
@@ -177,7 +162,7 @@ export default function PhotosEDIT({ onRemove }: { onRemove: (photo: Photo) => P
         {photosToDisplay.length === photosPerPage && (
           <button onClick={() => handlePageChange(currentPage + 1)}>Sljedeća</button>
         )}
-      </div>{' '}
+      </div>
     </div>
   )
 }

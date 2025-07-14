@@ -1,124 +1,14 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
-import exifr from 'exifr'
 
-import PhotosEDIT from '../PhotosEdit/PhotosEdit'
+import { PhotosEdit } from '../PhotosEdit/PhotosEdit'
 import { Message } from '../../components/Message/Message'
 import { getPhotos } from '../../redux/rtk/gallerySlice'
 import { useAppDispatch } from '../../redux/hooks'
 import type { Photo } from '../../types/types'
+import { getExifData } from './services/get-exif-data/get-exif-data'
+import { saveExif } from './services/save-exif/save-exif'
+import { uploadFile } from './services/upload-file/upload-file'
 import './Upload.sass'
-
-const decodeString = (value: string) => {
-  try {
-    return decodeURIComponent(escape(value))
-  } catch {
-    //
-  }
-  return value
-}
-
-const getExifData = async (file: File) => {
-  try {
-    const data = await exifr.parse(file, { iptc: true, xmp: true })
-    return data
-  } catch (err) {
-    console.error('Error parsing EXIF data:', err)
-    return undefined
-  }
-}
-
-const parseExifDate = (value: string | number | undefined) => {
-  if (!value) {
-    return undefined
-  }
-  if (typeof value === 'string' && value.length === 8) {
-    return `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(6, 8)}`
-  }
-  try {
-    const d = new Date(value)
-    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10)
-  } catch {
-    return undefined
-  }
-}
-
-const saveExif = async (
-  signatura: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  exif: Record<string, any>
-) => {
-  try {
-    const res = await fetch(`${import.meta.env.REACT_APP_SERVER}/novi`, {
-      method: 'POST',
-      body: JSON.stringify({
-        signatura,
-        lokacija: exif.Location ?? '',
-        datum_sni: parseExifDate(exif.DateCreated),
-        autor: exif.Artist ?? '',
-        copyright: decodeString(exif.Copyright ?? exif.rights?.value ?? exif.CopyrightNotice ?? ''),
-        tagovi: (Array.isArray(exif.subject) ? exif.subject.join(',') : exif.subject) ?? '',
-        lon: `${exif.longitude ?? ''}`,
-        lat: `${exif.latitude ?? ''}`,
-        naziv: decodeString(
-          exif.XPTitle || exif.Title || exif.title?.value || exif.ObjectName || ''
-        ),
-        naziv_eng: '',
-        opis: decodeString(
-          exif.XPSubject || exif.ImageDescription || exif.description?.value || exif.Caption || ''
-        ),
-        opis_eng: '',
-        kategorija: '',
-        copyright_holder: '',
-        doi: ''
-      }),
-      headers: { 'Content-Type': 'application/json' }
-    })
-    if (res.ok) {
-      const data = (await res.json()) as Photo
-      return {
-        data
-      }
-    }
-    return {
-      error: 'Error!'
-    }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    return {
-      error: err.msg ?? 'Error!'
-    }
-  }
-}
-
-const uploadFile = async (file: File) => {
-  const formData = new FormData()
-  formData.append('file', file)
-
-  try {
-    const { data } = await axios.post(`${import.meta.env.REACT_APP_SERVER}/upload`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    })
-
-    return {
-      data
-    }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    if (err.response && err.response.status === 500) {
-      return {
-        error: 'There was a problem with the server'
-      }
-    } else if (err.response) {
-      return {
-        error: err.response.data.msg
-      }
-    }
-    return {
-      error: 'An error occurred while uploading the file'
-    }
-  }
-}
 
 export const Fileupload = () => {
   const dispatch = useAppDispatch()
@@ -157,6 +47,7 @@ export const Fileupload = () => {
       uploads: 0,
       saves: 0
     }
+
     await Promise.allSettled(
       fileList.map((file, fileIndex) => {
         return uploadFile(file).then((uploadFileData) => {
@@ -299,7 +190,7 @@ export const Fileupload = () => {
         />
       </form>
 
-      <PhotosEDIT onRemove={handleRemove} />
+      <PhotosEdit onRemove={handleRemove} />
     </>
   )
 }

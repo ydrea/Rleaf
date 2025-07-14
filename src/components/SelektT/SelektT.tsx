@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react'
 import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,11 +25,11 @@ export const TagoviSelekt = ({ tagoviOptions }: { tagoviOptions: Option[] }) => 
   }, [selectedFilters])
 
   const handleTagoviFilterChange = (selectedFilters: MultiValue<Option>) => {
-    const selectedFilterValues = selectedFilters.map((filter) => filter.value)
+    const selectedFilterValues = selectedFilters.map((filter: any) => filter.value)
     dispatch(setFilters({ tagovi: selectedFilterValues }))
     // Update the local state when filters change
     setFilterSelected(
-      selectedFilters.map((option) => ({
+      selectedFilters.map((option: any) => ({
         label: option.label,
         value: option.value
       }))
@@ -84,8 +85,8 @@ export const TagoviSelekt = ({ tagoviOptions }: { tagoviOptions: Option[] }) => 
         onChange={(newValue: MultiValue<Option>) => {
           handleTagoviFilterChange(newValue)
         }}
-        getOptionValue={(option) => option.value}
-        getOptionLabel={(option) => option.label}
+        getOptionValue={(option: any) => option.value}
+        getOptionLabel={(option: any) => option.label}
       />
       <label htmlFor='keyword-select' style={{ color: '#7e7e77', fontSize: '22px' }}>
         ključne riječi

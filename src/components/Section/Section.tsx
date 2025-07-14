@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import './Section.sass'
 
 type Props = {
-  children: ReactNode
+  children?: ReactNode
   dark?: boolean
   title?: string
   className?: string

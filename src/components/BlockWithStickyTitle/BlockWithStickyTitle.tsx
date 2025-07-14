@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { useEffect, useState } from 'react'
+// @ts-expect-error react-stickynode is not typed
 import Sticky from 'react-stickynode'
 
 import { Flex } from '../Flex/Flex'
@@ -8,9 +9,9 @@ import './BlockWithStickyTitle.sass'
 
 type Props = {
   title: string
-  subtitle?: string
+  children?: ReactNode
+  subtitle?: ReactNode
   subtitleMargin?: string
-  children: ReactNode
 }
 
 let id = 0
@@ -49,7 +50,7 @@ export const BlockWithStickyTitle = ({ title, subtitle, subtitleMargin, children
         </Sticky>
 
         <div>
-          <Container id={`break-${id}`} h={1} mb={32} />
+          <Container id={`break-${id}`} h={1} mb={32} className='block-with-sticky-title-break' />
           {subtitle && (
             <div
               className='block-with-sticky-title-subtitle'

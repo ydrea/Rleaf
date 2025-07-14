@@ -1,8 +1,13 @@
 import { BlockWithStickyTitle } from '../../../components/BlockWithStickyTitle/BlockWithStickyTitle'
+import ewap from '../../../assets/ewap.jpg'
 
 export const Ewap = () => {
   return (
-    <BlockWithStickyTitle title='Ugrožena drvena arhitektura Banovine / Banije (Projekt EWAP)'>
+    <BlockWithStickyTitle
+      title='Ugrožena drvena arhitektura Banovine / Banije (Projekt EWAP)'
+      subtitle={<img src={ewap} alt='ewap' />}
+      subtitleMargin='54px'
+    >
       <p>
         Ugrožena drvena arhitektura Banovina/Banije, Posavine i Pokuplja 2023-2024 dio je globalnog
         programa dokumentacije ugrožene drvene arhitekture kojeg provodi Oxford Brookes University

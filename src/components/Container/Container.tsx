@@ -1,8 +1,8 @@
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 
 type Props = {
   id?: string
-  children?: React.ReactNode
+  children?: ReactNode
   m?: CSSProperties['margin']
   mt?: CSSProperties['marginTop']
   mb?: CSSProperties['marginBottom']

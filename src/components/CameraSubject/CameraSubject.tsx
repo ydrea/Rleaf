@@ -3,6 +3,7 @@ import type { MouseEvent, TouchEvent } from 'react'
 import { useMotionValue, animate } from 'framer-motion'
 
 import cameraSvg from '../../assets/camera.svg'
+import fototeka from '../../assets/fototeka.jpg'
 import { useCanvasSizing } from '../../services/use-canvas-sizing/use-canvas-sizing'
 
 const BLOCK_SIZE = 125
@@ -182,7 +183,7 @@ export const CameraSubject = ({ width = 1251, height = 876 }: Props) => {
           ref={canvasRef}
           width={width}
           height={height}
-          style={{ left: canvasLeft, width, height, backgroundImage: `url(fototeka.jpg)` }}
+          style={{ left: canvasLeft, width, height, backgroundImage: `url(${fototeka})` }}
           onMouseMove={handleMouseMove}
           onTouchMove={handleMouseMove}
         />

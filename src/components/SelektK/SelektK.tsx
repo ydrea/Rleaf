@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react'
 import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,19 +8,14 @@ import { setFilters } from '../../redux/rtk/gallerySlice'
 
 export const KategorijeSelekt = () => {
   const dispatch = useDispatch()
-  const selectedFilters = useSelector(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (state: any) => state.gallery.selectedFilters
-  )
+  const selectedFilters = useSelector((state: any) => state.gallery.selectedFilters)
   const [, setFilterSelected] = useState([])
 
   useEffect(() => {
     setFilterSelected(selectedFilters?.kategorije || [])
   }, [selectedFilters])
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleKategorijeFilterChange = (selectedFilters: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const selectedFilterValues = selectedFilters.map((filter: any) => filter.label)
     dispatch(setFilters({ kategorije: selectedFilterValues }))
     setFilterSelected(selectedFilterValues)
@@ -88,8 +84,8 @@ export const KategorijeSelekt = () => {
             : []
         }
         onChange={handleKategorijeFilterChange}
-        getOptionValue={(option) => option.value}
-        getOptionLabel={(option) => option.label}
+        getOptionValue={(option: any) => option.value}
+        getOptionLabel={(option: any) => option.label}
       />{' '}
       <label
         htmlFor='kategorije-select'

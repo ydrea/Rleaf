@@ -1,8 +1,13 @@
 import { BlockWithStickyTitle } from '../../../components/BlockWithStickyTitle/BlockWithStickyTitle'
+import banija from '../../../assets/banija.jpg'
 
 export const Banija = () => {
   return (
-    <BlockWithStickyTitle title='Opservatorij krajobraza Banovine / Banije'>
+    <BlockWithStickyTitle
+      title='Opservatorij krajobraza Banovine / Banije'
+      subtitle={<img src={banija} alt='banija' />}
+      subtitleMargin='54px'
+    >
       <p>
         Opservatorij krajobraza Banovine/Banije je pilot projekt šireg programa Opservatorija, a
         njegova je svrha uspostava i diseminacija znanja, promicanje tema krajobraza kao što su

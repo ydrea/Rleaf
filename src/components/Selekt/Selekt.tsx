@@ -25,7 +25,7 @@ export const Selekt = () => {
       display: 'none'
     })
   }
-  //
+
   return (
     <Select
       styles={cusTom}
