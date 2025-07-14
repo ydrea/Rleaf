@@ -97,7 +97,7 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
       return
     }
     let signaturaFromUrl = null
-    const baseUrl = 'https://client.croatianlandscape.hr'
+    const baseUrl = ''
     const tempDiv = document.createElement('div')
     tempDiv.innerHTML = content
     const rows = tempDiv.querySelectorAll('tr')

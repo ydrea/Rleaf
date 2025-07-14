@@ -6,13 +6,11 @@ import { useSelector } from 'react-redux'
 import { selectSelectedPhoto } from '../../../../redux/rtk/gallerySlice'
 
 export const SingleMarker = () => {
-  const { signatura } = useParams() //
+  const { signatura } = useParams()
   const markerData = useSelector(selectSelectedPhoto)
-  console.log(signatura, markerData.geojson.coordinates)
 
-  const geojsonObject = JSON.parse(markerData.geojson)
-  const coordinates = geojsonObject.coordinates
-  console.log(signatura, coordinates)
+  const geojsonObject = JSON.parse(markerData?.geojson ?? '{}')
+  const coordinates = geojsonObject?.coordinates ?? []
 
   const lat = parseFloat(coordinates[0])
   const lng = parseFloat(coordinates[1])
