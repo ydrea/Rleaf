@@ -69,6 +69,7 @@ export const TagoviSelekt = ({ tagoviOptions }: { tagoviOptions: Option[] }) => 
   return (
     <div>
       <Select
+        inputId='keyword-select'
         styles={cusTom}
         placeholder='unesi/odaberi'
         isSearchable

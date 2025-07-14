@@ -69,7 +69,7 @@ export const KategorijeSelekt = () => {
   return (
     <div>
       <Select
-        id='kategorije-select'
+        inputId='kategorije-select'
         styles={cusTom}
         placeholder='unesi/odaberi'
         isSearchable
@@ -86,7 +86,7 @@ export const KategorijeSelekt = () => {
         onChange={handleKategorijeFilterChange}
         getOptionValue={(option: any) => option.value}
         getOptionLabel={(option: any) => option.label}
-      />{' '}
+      />
       <label
         htmlFor='kategorije-select'
         style={{

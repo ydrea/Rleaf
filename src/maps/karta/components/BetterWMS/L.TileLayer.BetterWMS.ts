@@ -1,7 +1,5 @@
-import L from 'leaflet'
+import L, { type TileLayer } from 'leaflet'
 import axios from 'axios'
-// import isValidURL from '../../utils/isvalidUrl';
-// import getParameterByName from '../../utils/getUrlParams';
 
 //
 // A global variable to store the latlng value
@@ -196,4 +194,4 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
   //     .openOn(this._map);
   // },
   /////////////
-})
+}) as unknown as typeof TileLayer.WMS

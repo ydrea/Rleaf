@@ -1,57 +1,22 @@
-import { MapContainer, TileLayer, LayersControl, ZoomControl, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, LayersControl, ZoomControl } from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { useViewportSize } from '@mantine/hooks'
 import 'leaflet/dist/leaflet.css'
 import 'react-tabs/style/react-tabs.css'
 
-import { Hline } from '../../components/Hline/Hline'
-import BetterWMS from './BetterWMS'
 import { layers } from './constants'
-import { selectSelectedPhoto } from '../../redux/rtk/gallerySlice'
+import { BetterWMS } from './components/BetterWMS/BetterWMS'
+import { SingleMarker } from './components/SingleMarker/SingleMarker'
+import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import { FiksniElementi, PodRV, PodRvi, PodRd, PodK } from '../wms'
 import './Karta.sass'
-import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
-
-const SingleMarker = () => {
-  const { signatura } = useParams() //
-  const markerData = useSelector(selectSelectedPhoto)
-  console.log(signatura, markerData.geojson.coordinates)
-
-  const geojsonObject = JSON.parse(markerData.geojson)
-  const coordinates = geojsonObject.coordinates
-  console.log(signatura, coordinates)
-
-  const lat = parseFloat(coordinates[0])
-  const lng = parseFloat(coordinates[1])
-
-  // fly
-  const map = useMap()
-
-  useEffect(() => {
-    if (signatura && markerData && markerData.geojson) {
-      if (lat !== undefined && lng !== undefined) {
-        map.flyTo([lng, lat], 21)
-      } else {
-        console.error('Invalid coordinates:', lat, lng)
-      }
-    }
-  }, [signatura, markerData, lat, lng])
-
-  return null
-}
-
-//
-// MAP
-//
 
 export const Karta = () => {
   const { signatura } = useParams()
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
   const viewport = useViewportSize()
 
-  // //
   useEffect(() => {
     if (signatura) {
       selectedLayerSet(layers.temafk.id)
@@ -222,7 +187,6 @@ export const Karta = () => {
           {signatura && <SingleMarker />}
         </MapContainer>
       </section>
-      <Hline color='#7e7e77' height={2} width='100%' />
     </div>
   )
 }
