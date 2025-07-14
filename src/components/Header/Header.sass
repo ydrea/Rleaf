@@ -13,7 +13,7 @@
 
   #menu-button-checkbox:checked ~ .main-menu
     opacity: 1
-    z-index: 100
+    z-index: 1001
     pointer-events: auto
 
   .menu-button
@@ -41,7 +41,7 @@
       transition: opacity 0.5s ease-in, transform 0.15s ease-out
       opacity: 0
 
-    @media (max-width: 900px)
+    @media (max-width: 940px)
       display: block
 
   #menu-button-checkbox:checked + .menu-button .line-1
@@ -101,7 +101,7 @@
       @media (max-width: 1152px)
         padding: 15px 15px 0 15px
 
-    @media (max-width: 900px)
+    @media (max-width: 940px)
       flex-direction: column
       align-items: center
       justify-content: flex-start
@@ -135,6 +135,10 @@
   position: relative
   height: 100%
 
+  @media (max-width: 940px)
+    height: auto
+    width: 100% !important
+
   &:hover .submenu,
   &:focus-within .submenu,
   & a.active + .submenu
@@ -145,20 +149,34 @@
     height: 100%
     text-align: center
 
+    @media (max-width: 940px)
+      height: auto
+      width: 100% !important
+
     &:hover::before,
     &.active::before
       height: 41px
 
-.submenu
-  display: none
-  position: absolute
-  left: 0
-  bottom: 0
-  height: 52px
-  overflow: hidden
-  background: #fff
-  z-index: 100
-  padding: 0
-  margin: 0
-  list-style: none
-  width: calc(100vw - 192px)
+      @media (max-width: 940px)
+        height: auto
+
+  .submenu
+    display: none
+    position: absolute
+    left: 0
+    bottom: 0
+    height: 52px
+    overflow: hidden
+    background: #fff
+    z-index: 1001
+    padding: 0
+    margin: 0
+    width: calc(100vw - 192px)
+
+    @media (max-width: 940px)
+      display: flex
+      flex-direction: column
+      position: relative
+      width: 100%
+      height: auto
+      overflow: visible

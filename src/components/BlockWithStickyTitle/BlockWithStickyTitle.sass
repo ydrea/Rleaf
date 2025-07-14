@@ -21,6 +21,9 @@
     margin-top: 16px
     word-break: break-word
 
+    @media (max-width: 940px)
+      margin-top: 0
+
     @media (min-width: 769px)
       div
         padding-left: 54px
@@ -33,6 +36,12 @@
     flex-direction: column
     margin-top: 84px
 
+    .block-with-sticky-title-break
+      display: none
+
+      + .block-with-sticky-title-subtitle
+        margin-top: 32px
+
     .block-with-sticky-title-content
       border-top: 1px solid #000
       border-left: none
@@ -40,9 +49,6 @@
       margin-top: 48px
 
     .block-with-sticky-title-subtitle
-      margin-right: 0
-      margin-bottom: 48px
+      margin-right: 0 !important
+      margin-bottom: 0
       font-size: 1.1rem
-
-      @media (max-width: 768px)
-        margin-bottom: 0
