@@ -7,10 +7,11 @@ type Props = {
   dark?: boolean
   title?: string
   className?: string
+  style?: React.CSSProperties
 }
 
-export const Section = ({ children, dark, title, className }: Props) => (
-  <section className={`${dark ? 'dark' : ''}${className ? ` ${className}` : ''}`}>
+export const Section = ({ children, dark, title, className, style }: Props) => (
+  <section className={`${dark ? 'dark' : ''}${className ? ` ${className}` : ''}`} style={style}>
     {title && <h2>{title}</h2>}
     <div className='section-content'>{children}</div>
   </section>

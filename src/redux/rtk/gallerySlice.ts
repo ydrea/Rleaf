@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import type { Photo } from '../../types/types'
+import type { RootState } from '../store'
 
 const serverUrl = import.meta.env?.VITE_SERVER
 
@@ -22,7 +23,7 @@ const initialState = {
   selectedPhotoIndex: 0,
   selectedPhoto: null,
   idX: 0,
-  photos: [],
+  photos: [] as Photo[],
   loading: false,
   error: null,
   selectedFilters: {
@@ -100,8 +101,7 @@ export const gallerySlice = createSlice({
 export const { increment, decrement, setSelectedPhoto, setSelectedPhotoIndex, setFilters } =
   gallerySlice.actions
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const selectPhotos = (state: any) => state.gallery.photos as Photo[]
+export const selectPhotos = (state: RootState) => state.gallery.photos
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const selectSelectedPhotoIndex = (state: any) => state.gallery.selectedPhotoIndex
 // ...

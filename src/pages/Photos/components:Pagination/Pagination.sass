@@ -1,0 +1,32 @@
+.pagination
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-start
+  align-items: center
+  color: #000000
+  margin-top: 110px
+  border-top: 1px solid #000000
+
+  &.top
+    margin-top: 0
+    border-top: none
+    margin-bottom: 110px
+    border-bottom: 1px solid #000000
+
+  button
+    padding: 30px 16px 90px
+    border: none
+    border-radius: 0
+    background-color: transparent
+    cursor: pointer
+    font-size: 1.5rem
+    font-weight: 600
+    font-family: Poppins, sans-serif
+
+    &:hover,
+    &.active
+      background-color: #000000
+      color: #ffffff
+
+  &.top button
+    padding: 90px 16px 30px
