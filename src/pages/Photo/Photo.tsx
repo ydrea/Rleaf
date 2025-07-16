@@ -9,11 +9,8 @@ import {
   getPhotos,
   setSelectedPhotoIndex,
   selectSelectedPhotoIndex,
-  increment,
-  decrement,
   selectFilteredPhotos
 } from '../../redux/rtk/gallerySlice'
-import { Hline } from '../../components/Hline/Hline'
 import { useAppDispatch } from '../../redux/hooks'
 import './Photo.sass'
 
@@ -23,17 +20,15 @@ export const Photo = () => {
   const { signatura } = useParams()
 
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex)
-  console.log(selectedPhotoIndex)
-  const fphotos = useSelector(selectFilteredPhotos)
+  const filteredPhotos = useSelector(selectFilteredPhotos)
   const photos = useSelector(selectPhotos)
-  //
+
   useEffect(() => {
-    console.log(fphotos)
     dispatch(getPhotos())
   }, [dispatch])
 
   useEffect(() => {
-    const photoIndex = fphotos.findIndex((photo) => {
+    const photoIndex = filteredPhotos.findIndex((photo) => {
       dispatch(setSelectedPhoto(photo.signatura))
       return photo.signatura === signatura
     })
@@ -41,8 +36,8 @@ export const Photo = () => {
     dispatch(setSelectedPhotoIndex(photoIndex))
   }, [dispatch, photos, signatura])
 
-  const selectedPhoto = fphotos[selectedPhotoIndex]
-  console.log(selectedPhoto)
+  const selectedPhoto = filteredPhotos[selectedPhotoIndex]
+
   if (!selectedPhoto) {
     return <div>Photo not found</div>
   }
@@ -69,26 +64,28 @@ export const Photo = () => {
 
   return (
     <div id='imgcnt' className='cont'>
-      <div className='comands-container'>
+      <div className='navigation'>
         <div onClick={handleBackToGallery} className='cc-link'>
           natrag u galeriju
         </div>
         <div className='cc'>
-          {selectedPhotoIndex + 1} / {fphotos.length}
+          {selectedPhotoIndex + 1} / {filteredPhotos.length}
         </div>
         <div onClick={handleShowOnMap} className='cc-link'>
           pokaži na karti
         </div>
       </div>
       <div className='image-wrapper'>
-        <FaChevronLeft
-          className='prev'
-          onClick={() => {
-            if (selectedPhotoIndex > 0) {
-              dispatch(decrement())
-            }
-          }}
-        />
+        {selectedPhotoIndex > 0 && (
+          <div
+            className='next-prev-cnt prev'
+            onClick={() => {
+              navigate(`/photos/${filteredPhotos[selectedPhotoIndex - 1].signatura}`)
+            }}
+          >
+            <FaChevronLeft size={48} />
+          </div>
+        )}
         <div className='img-cnt'>
           <img
             src={
@@ -98,49 +95,50 @@ export const Photo = () => {
           />
         </div>
 
-        <FaChevronRight
-          className='next'
-          onClick={() => {
-            if (selectedPhotoIndex < fphotos.length - 1) {
-              dispatch(increment())
-            }
-          }}
-        />
-      </div>{' '}
-      <div className='selected-div1'>
+        {selectedPhotoIndex < filteredPhotos.length - 1 && (
+          <div
+            className='next-prev-cnt next'
+            onClick={() => {
+              navigate(`/photos/${filteredPhotos[selectedPhotoIndex + 1].signatura}`)
+            }}
+          >
+            <FaChevronRight size={48} />
+          </div>
+        )}
+      </div>
+      <div className='photo-data'>
         {selectedPhoto.signatura && (
-          <>
-            <div className='t'>signatura:</div>
-            <div className='d'>{removeFileExtension(selectedPhoto.signatura)}</div>
-          </>
+          <div className='photo-data-item'>
+            <div>signatura:</div>
+            <div>{removeFileExtension(selectedPhoto.signatura)}</div>
+          </div>
         )}
         {selectedPhoto.kategorija && (
-          <>
-            <div className='t'>kategorija:</div>
-            <div className='d'>{selectedPhoto.kategorija}</div>
-          </>
-        )}{' '}
+          <div className='photo-data-item'>
+            <div>kategorija:</div>
+            <div>{selectedPhoto.kategorija}</div>
+          </div>
+        )}
         {selectedPhoto.lokacija && (
-          <>
-            <div className='t'>lokacija:</div>
-            <div className='d'>{selectedPhoto.lokacija}</div>
-          </>
+          <div className='photo-data-item'>
+            <div>lokacija:</div>
+            <div>{selectedPhoto.lokacija}</div>
+          </div>
         )}
         {selectedPhoto.opis && (
-          <>
-            <div className='t'>opis:</div>
-            <div className='d'>{selectedPhoto.opis}</div>
-          </>
+          <div className='photo-data-item'>
+            <div>opis:</div>
+            <div>{selectedPhoto.opis}</div>
+          </div>
         )}
         {selectedPhoto.autor && (
-          <>
-            <div className='t'>autor:</div>
-            <div className='d'>{selectedPhoto.autor}</div>
-          </>
+          <div className='photo-data-item'>
+            <div>autor:</div>
+            <div>{selectedPhoto.autor}</div>
+          </div>
         )}
         {selectedPhoto.tagovi && <div className='tag'>ključne riječi | {selectedPhoto.tagovi}</div>}
       </div>
-      <Hline color='#7e7e77' height={2} width='100' />{' '}
     </div>
   )
 }

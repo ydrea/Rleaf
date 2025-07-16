@@ -8,13 +8,13 @@ import {
   selectPhotos,
   selectFilteredPhotos
 } from '../../redux/rtk/gallerySlice'
+import { Section } from '../../components/Section/Section'
 import type { Photo } from '../../types/types'
 import { Pagination } from './components:Pagination/Pagination'
 import { TagoviSelekt } from '../../components/SelektT/SelektT'
 import { useAppDispatch } from '../../redux/hooks'
 import { KategorijeSelekt } from '../../components/SelektK/SelektK'
 import './Photos.sass'
-import { Section } from '../../components/Section/Section'
 
 export const Photos = ({ photosPerPage = 20 }: { photosPerPage?: number }) => {
   const navigate = useNavigate()

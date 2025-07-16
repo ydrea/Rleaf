@@ -10,6 +10,13 @@
     div
       text-align: left
 
+  @media (max-width: 940px)
+    flex-direction: column
+    align-items: center
+
+    > div
+      text-align: center !important
+
 .loader
   text-align: center
   padding: 192px 0
@@ -27,6 +34,41 @@
   align-items: start
   scroll-margin-top: 60px
 
+  @media (max-width: 1024px)
+    grid-template-columns: repeat(auto-fill, minmax(274px, calc(50% - 1.5rem)))
+
+  @media (max-width: 768px)
+    display: flex
+    flex-direction: column
+    row-gap: 2rem
+    justify-content: center
+
+    .photo
+      overflow: hidden
+      width: 100%
+      max-width: 480px
+      height: 274px !important
+      padding-bottom: 0px !important
+      position: relative
+      margin: 0 auto
+
+      img
+        width: 100%
+        height: auto
+        max-height: none !important
+        max-width: none !important
+        object-fit: cover
+        position: relative
+        z-index: 1
+
+      .photo-data
+        position: absolute
+        width: 100%
+        bottom: 0
+        z-index: 2
+        background-color: #ffffffdd
+        padding: 1rem !important
+
   .photo
     display: flex
     flex-direction: column
@@ -35,12 +77,14 @@
     padding-bottom: 30px
     border-top: 1px solid #000
     border-bottom: 1px solid #000
-    filter: grayscale(100%)
     transition: filter 0.3s ease
     font-family: Poppins, sans-serif
 
-    &:hover
-      filter: grayscale(0%)
+    @media (min-width: 768px)
+      filter: grayscale(100%)
+
+      &:hover
+        filter: grayscale(0%)
 
     img
       max-width: 100%

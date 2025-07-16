@@ -10,10 +10,12 @@ export const Layout = () => {
 
   useEffect(() => {
     if (previousLocation.current !== location.pathname) {
-      window.scrollTo(0, 0)
+      if (!location.pathname.includes('photos')) {
+        window.scrollTo(0, 0)
+      }
       previousLocation.current = location.pathname
     }
-  }, [location])
+  }, [location.pathname])
 
   return (
     <>
