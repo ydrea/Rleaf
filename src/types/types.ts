@@ -20,6 +20,7 @@ export type Photo = {
   lon?: string
   lat?: string
   geometry?: string
+  rank_number?: string
 }
 
 export type Option = {

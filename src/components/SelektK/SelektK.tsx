@@ -39,35 +39,24 @@ export const KategorijeSelekt = () => {
   const cusTom = {
     option: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      color: 'black',
       cursor: 'pointer'
     }),
-    control: (styles: CSSObjectWithLabel) => ({
-      ...styles
-    }),
-    placeholder: (styles: CSSObjectWithLabel) => ({
+    container: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      fontSize: '22px'
-    }),
-    dropdownIndicator: (provided: CSSObjectWithLabel) => ({
-      ...provided,
-      display: 'none'
-    }),
-    indicatorSeparator: (provided: CSSObjectWithLabel) => ({
-      ...provided,
-      display: 'none'
+      width: '300px'
     }),
     menu: (styles: CSSObjectWithLabel) => ({
       ...styles,
       zIndex: '9999',
-      cursor: 'pointer',
-      minWidth: '300px',
-      height: 'auto'
-    })
+      cursor: 'pointer'
+    }),
+    indicatorSeparator: () => ({ display: 'none' }),
+    dropdownIndicator: () => ({ display: 'none' })
   }
 
   return (
-    <div>
+    <label>
+      kategorije
       <Select
         inputId='kategorije-select'
         styles={cusTom}
@@ -75,6 +64,9 @@ export const KategorijeSelekt = () => {
         isSearchable
         isMulti
         options={customKategorijeOptions}
+        onChange={handleKategorijeFilterChange}
+        getOptionValue={(option: any) => option.value}
+        getOptionLabel={(option: any) => option.label}
         value={
           selectedFilters?.kategorije
             ? selectedFilters?.kategorije.map((option: string) => ({
@@ -83,19 +75,7 @@ export const KategorijeSelekt = () => {
               }))
             : []
         }
-        onChange={handleKategorijeFilterChange}
-        getOptionValue={(option: any) => option.value}
-        getOptionLabel={(option: any) => option.label}
       />
-      <label
-        htmlFor='kategorije-select'
-        style={{
-          fontSize: '22px',
-          color: '#7e7e77'
-        }}
-      >
-        kategorije
-      </label>
-    </div>
+    </label>
   )
 }

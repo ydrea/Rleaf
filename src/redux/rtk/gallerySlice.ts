@@ -102,22 +102,20 @@ export const { increment, decrement, setSelectedPhoto, setSelectedPhotoIndex, se
   gallerySlice.actions
 
 export const selectPhotos = (state: RootState) => state.gallery.photos
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const selectSelectedPhotoIndex = (state: any) => state.gallery.selectedPhotoIndex
-// ...
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const selectAPhoto = (state: any) => {
+
+export const selectSelectedPhotoIndex = (state: RootState) => state.gallery.selectedPhotoIndex
+
+export const selectAPhoto = (state: RootState) => {
   const selectedIdX = state.gallery.idX
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const selectedPhoto = state.gallery.photos.find((photo: any) => {
-    const rank = parseInt(photo.rank_number)
+  const selectedPhoto = state.gallery.photos.find((photo: Photo) => {
+    const rank = parseInt(photo.rank_number ?? '0')
     return rank === selectedIdX
   })
+
   return selectedPhoto
 }
-//
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const selectSelectedPhoto = (state: any) => {
+
+export const selectSelectedPhoto = (state: RootState) => {
   const selectedPhotoIndex = state.gallery.selectedPhotoIndex
   const photos = state.gallery.photos
 
@@ -125,12 +123,11 @@ export const selectSelectedPhoto = (state: any) => {
     return photos[selectedPhotoIndex]
   }
 
-  return null //
+  return null
 }
 
 // Filteri
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const selectFilteredPhotos = (state: any): Photo[] => {
+export const selectFilteredPhotos = (state: RootState): Photo[] => {
   console.log('selectFilteredPhotos', state)
   const { kategorije, tagovi } = state.gallery.selectedFilters || {}
   const allPhotos = state.gallery.photos
@@ -139,19 +136,16 @@ export const selectFilteredPhotos = (state: any): Photo[] => {
     return allPhotos
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return allPhotos.filter((photo: any) => {
+  return allPhotos.filter((photo: Photo) => {
     const kategorijaMatches =
       !kategorije ||
       kategorije.length === 0 ||
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      kategorije.every((filter: any) => photo.kategorija && photo.kategorija.includes(filter))
+      kategorije.every((filter: string) => photo.kategorija && photo.kategorija.includes(filter))
 
     const tagoviIncluded =
       !tagovi ||
       tagovi.length === 0 ||
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      tagovi.every((filter: any) => photo.tagovi && photo.tagovi.includes(filter))
+      tagovi.every((filter: string) => photo.tagovi && photo.tagovi.includes(filter))
 
     return kategorijaMatches && tagoviIncluded
   })

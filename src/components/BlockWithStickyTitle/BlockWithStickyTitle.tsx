@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { useEffect, useState } from 'react'
 // @ts-expect-error react-stickynode is not typed
 import Sticky from 'react-stickynode'
+import { useViewportSize } from '@mantine/hooks'
 
 import { Flex } from '../Flex/Flex'
 import { Container } from '../Container/Container'
@@ -18,11 +19,16 @@ let id = 0
 
 export const BlockWithStickyTitle = ({ title, subtitle, subtitleMargin, children }: Props) => {
   id++
-  const [resized, setResized] = useState(0)
   const [stickyEnabled, setStickyEnabled] = useState(true)
+  const viewport = useViewportSize()
 
   useEffect(() => {
-    if (!setStickyEnabled) {
+    if (viewport.width < 768) {
+      setStickyEnabled(false)
+      return
+    }
+
+    if (stickyEnabled) {
       return
     }
 
@@ -31,16 +37,7 @@ export const BlockWithStickyTitle = ({ title, subtitle, subtitleMargin, children
     setTimeout(() => {
       setStickyEnabled(true)
     }, 1000)
-  }, [resized])
-
-  useEffect(() => {
-    const resizeHandler = () => setResized((value) => value + 1)
-    window.addEventListener('resize', resizeHandler)
-
-    return () => {
-      window.removeEventListener('resize', resizeHandler)
-    }
-  }, [])
+  }, [viewport.width, stickyEnabled])
 
   return (
     <Flex className='block-with-sticky-title'>
