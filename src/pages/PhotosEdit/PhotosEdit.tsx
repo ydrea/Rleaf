@@ -2,12 +2,13 @@ import { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Masonry from 'react-masonry-css'
 
-import { getPhotos, selectPhotos, selectFilteredPhotos } from '../../redux/rtk/gallerySlice'
 import { Selekt } from '../../components/Selekt/Selekt'
 import { Form } from '../../components/Form/Form'
 import { Modal } from '../../components/Modal/Modal'
 import { useAppDispatch } from '../../redux/hooks'
 import type { Photo } from '../../types/types'
+import type { RootState } from '../../redux/store'
+import { getPhotos, selectPhotos, selectFilteredPhotos } from '../../redux/rtk/gallerySlice'
 import '../Photos/Photos.sass'
 
 export const PhotosEdit = ({ onRemove }: { onRemove: (photo: Photo) => Promise<boolean> }) => {
@@ -22,7 +23,7 @@ export const PhotosEdit = ({ onRemove }: { onRemove: (photo: Photo) => Promise<b
     return photos.find((photo) => photo.id === selectedId)
   }, [photos, selectedId])
 
-  const filteredPhotos = useSelector((state) => selectFilteredPhotos(state))
+  const filteredPhotos = useSelector((state: RootState) => selectFilteredPhotos(state))
 
   const [isRemoving, setIsRemoving] = useState(false)
   const handleRemove = async (photo: Photo) => {
