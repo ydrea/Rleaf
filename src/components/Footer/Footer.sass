@@ -1,46 +1,49 @@
-.footer .section-content
-  display: flex
-  justify-content: space-between
-  align-items: center
-  position: relative
+.footer
+  margin-bottom: 60px
 
-  @media (max-width: 1152px)
-    flex-direction: column
-    align-items: flex-start
-    gap: 48px
+  .section-content
+    display: flex
+    justify-content: space-between
+    align-items: center
+    position: relative
 
-  img
-    width: 380px
-    max-width: 380px
-    height: auto
+    @media (max-width: 1152px)
+      flex-direction: column
+      align-items: flex-start
+      gap: 48px
 
-    @media (max-width: 940px)
-      width: 100%
-      align-self: center
+    img
+      width: 380px
+      max-width: 380px
+      height: auto
 
-  a
-    color: #FFFFFF
-    text-decoration: none
-    align-self: flex-end
+      @media (max-width: 940px)
+        width: 100%
+        align-self: center
 
-    &:hover
-      text-decoration: underline
+    a
+      color: #FFFFFF
+      text-decoration: none
+      align-self: flex-end
 
-    @media (max-width: 940px)
-      align-self: center
+      &:hover
+        text-decoration: underline
 
-    @media (max-width: 640px)
-      font-size: 1rem
+      @media (max-width: 940px)
+        align-self: center
 
-  .year-tab
-    left: 0
-    bottom: -60px
-    position: absolute
-    background: black
-    width: 480px
-    height: 60px
-    padding-left: 46px
+      @media (max-width: 640px)
+        font-size: 1rem
 
-    @media (max-width: 640px)
-      width: auto
-      padding-right: 46px
+    .year-tab
+      left: 0
+      bottom: -60px
+      position: absolute
+      background: black
+      width: 480px
+      height: 60px
+      padding-left: 46px
+
+      @media (max-width: 640px)
+        width: auto
+        padding-right: 46px
