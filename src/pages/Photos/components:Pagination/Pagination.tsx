@@ -9,7 +9,7 @@ type Props = {
   spread?: number
 }
 
-export const Pagination = ({ totalPages, top, spread = 5 }: Props) => {
+export const Pagination = ({ totalPages, top, spread = 4 }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const currentPage = Number(searchParams.get('page')) || 1
   const [clickedInThisPagination, setClickedInThisPagination] = useState(0)
@@ -41,22 +41,24 @@ export const Pagination = ({ totalPages, top, spread = 5 }: Props) => {
     })
   }
 
+  if (totalPages <= 1) {
+    return null
+  }
+
   return (
     <div className={`pagination ${top ? 'top' : ''}`}>
-      {currentPage > 1 && (
-        <div className='pagination-buttons-prev'>
-          <button onClick={() => handlePageChange(1)}>&lt;&lt;</button>
-          <button onClick={() => handlePageChange(currentPage - 1)}>&lt;</button>
-        </div>
-      )}
+      <div className='pagination-buttons-prev'>
+        {currentPage > 1 && (
+          <>
+            <button onClick={() => handlePageChange(1)}>&lt;&lt;</button>
+            <button onClick={() => handlePageChange(currentPage - 1)}>&lt;</button>
+          </>
+        )}
+      </div>
 
       <div className='pagination-pages'>
         {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => {
-          if (
-            pageNumber >= currentPage - spread &&
-            pageNumber <= currentPage + spread &&
-            pageNumber !== 0
-          ) {
+          if (pageNumber >= currentPage - spread && pageNumber <= currentPage + spread) {
             return (
               <button
                 key={pageNumber}
@@ -71,12 +73,14 @@ export const Pagination = ({ totalPages, top, spread = 5 }: Props) => {
         })}
       </div>
 
-      {currentPage < totalPages && (
-        <div className='pagination-buttons-next'>
-          <button onClick={() => handlePageChange(currentPage + 1)}>&gt;</button>
-          <button onClick={() => handlePageChange(totalPages)}>&gt;&gt;</button>
-        </div>
-      )}
+      <div className='pagination-buttons-next'>
+        {currentPage < totalPages && (
+          <>
+            <button onClick={() => handlePageChange(currentPage + 1)}>&gt;</button>
+            <button onClick={() => handlePageChange(totalPages)}>&gt;&gt;</button>
+          </>
+        )}
+      </div>
     </div>
   )
 }
