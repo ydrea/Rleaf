@@ -97,7 +97,6 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
       return
     }
     let signaturaFromUrl = null
-    const baseUrl = ''
     const tempDiv = document.createElement('div')
     tempDiv.innerHTML = content
     const rows = tempDiv.querySelectorAll('tr')
@@ -141,7 +140,7 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
           const newCell = document.createElement('td')
           newCell.colSpan = 2
           //imgurl
-          const imageUrl = `${baseUrl}/photos/${signaturaFromUrl}#img-cnt`
+          const imageUrl = `/photos/${signaturaFromUrl}`
 
           const link = document.createElement('a')
           link.href = imageUrl

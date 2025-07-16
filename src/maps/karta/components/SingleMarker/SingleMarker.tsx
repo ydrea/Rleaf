@@ -3,11 +3,13 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { selectSelectedPhoto } from '../../../../redux/rtk/gallerySlice'
+import type { RootState } from '../../../../redux/store'
 
 export const SingleMarker = () => {
   const { signatura } = useParams()
-  const markerData = useSelector(selectSelectedPhoto)
+  const markerData = useSelector((state: RootState) =>
+    state.gallery.photos.find((photo) => photo.signatura === signatura)
+  )
 
   const geojsonObject = JSON.parse(markerData?.geojson ?? '{}')
   const coordinates = geojsonObject?.coordinates ?? []

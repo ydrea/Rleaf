@@ -1,13 +1,17 @@
 import { MapContainer, TileLayer, LayersControl, ZoomControl } from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { useViewportSize } from '@mantine/hooks'
 import 'leaflet/dist/leaflet.css'
 import 'react-tabs/style/react-tabs.css'
 
 import { layers } from './constants'
 import { BetterWMS } from './components/BetterWMS/BetterWMS'
+import { getPhotos } from '../../redux/rtk/gallerySlice'
 import { SingleMarker } from './components/SingleMarker/SingleMarker'
+import { useAppDispatch } from '../../redux/hooks'
+import type { RootState } from '../../redux/store'
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import { FiksniElementi, PodRV, PodRvi, PodRd, PodK } from '../wms'
 import './Karta.sass'
@@ -16,12 +20,18 @@ export const Karta = () => {
   const { signatura } = useParams()
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
   const viewport = useViewportSize()
+  const photos = useSelector((state: RootState) => state.gallery.photos)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (signatura) {
       selectedLayerSet(layers.temafk.id)
+
+      if (photos.length === 0) {
+        dispatch(getPhotos())
+      }
     }
-  }, [signatura])
+  }, [signatura, dispatch, photos])
 
   const { BaseLayer, Overlay } = LayersControl
 
