@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 import type { RootState } from '../store'
 import type { Photo } from '../../types/types'
@@ -12,10 +12,10 @@ const mapSlice = createSlice({
   name: 'mapslice',
   initialState,
   reducers: {
-    setSelectedPhoto: (state, action) => {
+    setSelectedPhoto: (state, action: PayloadAction<Photo | null>) => {
       state.selectedImg = action.payload
     },
-    setSelectedMarker: (state, action) => {
+    setSelectedMarker: (state, action: PayloadAction<Photo | null>) => {
       state.selectedMarker = action.payload
     }
   }

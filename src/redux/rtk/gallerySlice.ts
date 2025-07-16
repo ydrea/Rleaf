@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 import type { Photo } from '../../types/types'
 import type { RootState } from '../store'
@@ -21,11 +21,11 @@ export const getAPhoto = createAsyncThunk<Photo, void>('gallery/getAPhoto', asyn
 
 const initialState = {
   selectedPhotoIndex: 0,
-  selectedPhoto: null,
+  selectedPhoto: null as Photo | null,
   idX: 0,
   photos: [] as Photo[],
   loading: false,
-  error: null,
+  error: null as string | null | undefined,
   selectedFilters: {
     kategorije: [] as string[],
     tagovi: [] as string[]
@@ -36,28 +36,14 @@ export const gallerySlice = createSlice({
   name: 'gallery',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.selectedPhotoIndex = Math.min(
-        state.selectedPhotoIndex + 1
-        // state.photos.length - 1
-      )
-    },
-    decrement: (state) => {
-      state.selectedPhotoIndex = Math.max(
-        state.selectedPhotoIndex - 1
-        // 0
-      )
-    },
-    // ... other reducers
-
-    setSelectedPhotoIndex: (state, action) => {
+    setSelectedPhotoIndex: (state, action: PayloadAction<number>) => {
       state.selectedPhotoIndex = action.payload
     },
-    setSelectedPhoto: (state, action) => {
+    setSelectedPhoto: (state, action: PayloadAction<Photo | null>) => {
       state.selectedPhoto = action.payload
     },
 
-    setFilters: (state, action) => {
+    setFilters: (state, action: PayloadAction<{ kategorije: string[]; tagovi: string[] }>) => {
       const { kategorije, tagovi } = action.payload
 
       state.selectedFilters = {
@@ -74,32 +60,27 @@ export const gallerySlice = createSlice({
       }
     }
   },
-  extraReducers: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [getPhotos.pending as any]: (state: any) => {
+  extraReducers: (builder) => {
+    builder.addCase(getPhotos.pending, (state) => {
       state.loading = true
       state.error = null
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [getPhotos.fulfilled as any]: (state: any, action: any) => {
+    })
+    builder.addCase(getPhotos.fulfilled, (state, action) => {
       state.photos = action.payload
       state.loading = false
       state.error = null
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [getPhotos.rejected as any]: (state: any, action: any) => {
+    })
+    builder.addCase(getPhotos.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [getAPhoto.fulfilled as any]: (state: any, action: any) => {
+    })
+    builder.addCase(getAPhoto.fulfilled, (state, action) => {
       state.selectedPhoto = action.payload
-    }
+    })
   }
 })
 
-export const { increment, decrement, setSelectedPhoto, setSelectedPhotoIndex, setFilters } =
-  gallerySlice.actions
+export const { setSelectedPhoto, setSelectedPhotoIndex, setFilters } = gallerySlice.actions
 
 export const selectPhotos = (state: RootState) => state.gallery.photos
 
@@ -128,7 +109,6 @@ export const selectSelectedPhoto = (state: RootState) => {
 
 // Filteri
 export const selectFilteredPhotos = (state: RootState): Photo[] => {
-  console.log('selectFilteredPhotos', state)
   const { kategorije, tagovi } = state.gallery.selectedFilters || {}
   const allPhotos = state.gallery.photos
 

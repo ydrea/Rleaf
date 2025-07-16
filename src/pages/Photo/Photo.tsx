@@ -29,12 +29,16 @@ export const Photo = () => {
 
   useEffect(() => {
     const photoIndex = filteredPhotos.findIndex((photo) => {
-      dispatch(setSelectedPhoto(photo.signatura))
-      return photo.signatura === signatura
+      if (photo.signatura === signatura) {
+        dispatch(setSelectedPhoto(photo))
+        return true
+      }
+
+      return false
     })
 
     dispatch(setSelectedPhotoIndex(photoIndex))
-  }, [dispatch, photos, signatura])
+  }, [dispatch, photos, signatura, filteredPhotos])
 
   const selectedPhoto = filteredPhotos[selectedPhotoIndex]
 
@@ -42,24 +46,12 @@ export const Photo = () => {
     return <div>Photo not found</div>
   }
 
-  //to gallery
   const handleBackToGallery = () => {
     navigate('/photos')
   }
 
-  //show on map
   const handleShowOnMap = () => {
-    dispatch(setSelectedPhoto(signatura))
     navigate(`/maps/${signatura}#mapcnt`)
-  }
-
-  //remove .ext
-  const removeFileExtension = (fileName: string) => {
-    const lastDotIndex = fileName.lastIndexOf('.')
-    if (lastDotIndex === -1) {
-      return fileName //
-    }
-    return fileName.substring(0, lastDotIndex)
   }
 
   return (
@@ -110,7 +102,7 @@ export const Photo = () => {
         {selectedPhoto.signatura && (
           <div className='photo-data-item'>
             <div>signatura:</div>
-            <div>{removeFileExtension(selectedPhoto.signatura)}</div>
+            <div>{selectedPhoto.signatura.replace(/\.[^.]*$/, '')}</div>
           </div>
         )}
         {selectedPhoto.kategorija && (
