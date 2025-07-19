@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
-import type { Photo } from '../../types/types'
+import type { Filters, Photo } from '../../types/types'
 import type { RootState } from '../store'
 
 const serverUrl = import.meta.env?.VITE_SERVER
@@ -43,7 +43,7 @@ export const gallerySlice = createSlice({
       state.selectedPhoto = action.payload
     },
 
-    setFilters: (state, action: PayloadAction<{ kategorije: string[]; tagovi: string[] }>) => {
+    setFilters: (state, action: PayloadAction<Filters>) => {
       const { kategorije, tagovi } = action.payload
 
       state.selectedFilters = {

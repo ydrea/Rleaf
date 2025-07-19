@@ -29,7 +29,8 @@ export const TagoviSelekt = ({ tagoviOptions }: Props) => {
   }, [selectedFilters])
 
   const handleTagoviFilterChange = (selectedFilters: MultiValue<Option>) => {
-    const selectedFilterValues = selectedFilters.map((filter: any) => filter.value)
+    const selectedFilterValues = selectedFilters.map((filter: Option) => filter.value)
+
     dispatch(setFilters({ tagovi: selectedFilterValues }))
     // Update the local state when filters change
     setFilterSelected(

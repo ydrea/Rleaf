@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import type { CSSObjectWithLabel } from 'react-select'
 
 import { setFilters } from '../../redux/rtk/gallerySlice'
+import type { Option } from '../../types/types'
 
 export const KategorijeSelekt = () => {
   const dispatch = useDispatch()
@@ -16,8 +17,8 @@ export const KategorijeSelekt = () => {
   }, [selectedFilters])
 
   const handleKategorijeFilterChange = (selectedFilters: any) => {
-    const selectedFilterValues = selectedFilters.map((filter: any) => filter.label)
-    dispatch(setFilters({ kategorije: selectedFilterValues }))
+    const selectedFilterValues = selectedFilters.map((filter: Option) => filter.label)
+    dispatch(setFilters({ kategorije: selectedFilterValues, tagovi: [] }))
     setFilterSelected(selectedFilterValues)
   }
 

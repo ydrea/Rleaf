@@ -29,6 +29,6 @@ export type Option = {
 }
 
 export type Filters = {
-  kategorije: string[]
-  tagovi: string[]
+  kategorije?: string[]
+  tagovi?: string[]
 }
