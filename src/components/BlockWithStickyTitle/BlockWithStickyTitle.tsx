@@ -1,11 +1,13 @@
 import type { ReactNode } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 // @ts-expect-error react-stickynode is not typed
 import Sticky from 'react-stickynode'
-import { useViewportSize } from '@mantine/hooks'
 
 import { Flex } from '../Flex/Flex'
+import { ReadMore } from '../ReadMore/ReadMore'
 import { Container } from '../Container/Container'
+import { useNumericId } from '../../services/use-numeric-id/use-numeric-id'
+import { useWindowWidth } from '../../services/use-window-width/use-window-width'
 import './BlockWithStickyTitle.sass'
 
 type Props = {
@@ -15,15 +17,19 @@ type Props = {
   subtitleMargin?: string
 }
 
-let id = 0
-
 export const BlockWithStickyTitle = ({ title, subtitle, subtitleMargin, children }: Props) => {
-  id++
+  const id = useNumericId()
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
   const [stickyEnabled, setStickyEnabled] = useState(true)
-  const viewport = useViewportSize()
+  const windowWidth = useWindowWidth()
 
   useEffect(() => {
-    if (viewport.width < 768) {
+    if (windowWidth <= 768) {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+
       setStickyEnabled(false)
       return
     }
@@ -34,10 +40,10 @@ export const BlockWithStickyTitle = ({ title, subtitle, subtitleMargin, children
 
     setStickyEnabled(false)
 
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       setStickyEnabled(true)
     }, 1000)
-  }, [viewport.width, stickyEnabled])
+  }, [windowWidth, stickyEnabled])
 
   return (
     <Flex className='block-with-sticky-title'>
@@ -60,7 +66,7 @@ export const BlockWithStickyTitle = ({ title, subtitle, subtitleMargin, children
       </Flex>
 
       <div className='block-with-sticky-title-content'>
-        <div>{children}</div>
+        <ReadMore id={id}>{children}</ReadMore>
       </div>
     </Flex>
   )
