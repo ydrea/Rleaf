@@ -1,22 +1,24 @@
 import { useRef } from 'react'
-import { useViewportSize, useThrottledValue } from '@mantine/hooks'
+
+import { useWindowWidth } from '../use-window-width/use-window-width'
 
 type Props = {
   width?: number
   blockSize?: number
+  blockSizeMultiplier?: number
 }
 
 export const useCanvasSizing = (props?: Props) => {
-  const { width = window.innerWidth, blockSize = 1 } = props ?? {}
-
+  const { width = window.innerWidth, blockSize = 1, blockSizeMultiplier = 1 } = props ?? {}
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const blockRef = useRef<HTMLDivElement>(null)
-  const viewportSize = useViewportSize()
-  const viewportWidth = useThrottledValue(viewportSize.width, 250)
+  const windowWidth = useWindowWidth()
 
-  const desktop = viewportWidth > 640
+  const blockSizeM = blockSize * blockSizeMultiplier
+
+  const desktop = windowWidth > 640
   const blockWidth = blockRef.current?.getBoundingClientRect().width ?? 0
-  const containerWidth = desktop ? Math.floor(blockWidth / blockSize) * blockSize + 1 : blockWidth
+  const containerWidth = desktop ? Math.floor(blockWidth / blockSizeM) * blockSizeM + 1 : blockWidth
   const leftOffset = -(width - containerWidth) / 2
   const canvasLeft = desktop ? Math.round(leftOffset / blockSize) * blockSize : leftOffset
 
@@ -24,9 +26,10 @@ export const useCanvasSizing = (props?: Props) => {
 
   return {
     containerWidth,
-    viewportWidth,
+    windowWidth,
     canvasLeft,
     canvasRef,
+    blockWidth,
     blockRef,
     ctx
   }
