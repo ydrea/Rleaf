@@ -2,7 +2,6 @@ import { MapContainer, TileLayer, LayersControl, ZoomControl } from 'react-leafl
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useViewportSize } from '@mantine/hooks'
 import 'leaflet/dist/leaflet.css'
 import 'react-tabs/style/react-tabs.css'
 
@@ -11,6 +10,7 @@ import { BetterWMS } from './components/BetterWMS/BetterWMS'
 import { getPhotos } from '../../redux/rtk/gallerySlice'
 import { SingleMarker } from './components/SingleMarker/SingleMarker'
 import { useAppDispatch } from '../../redux/hooks'
+import { useWindowWidth } from '../../services/use-window-width/use-window-width'
 import type { RootState } from '../../redux/store'
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import { FiksniElementi, PodRV, PodRvi, PodRd, PodK } from '../wms'
@@ -19,8 +19,8 @@ import './Karta.sass'
 export const Karta = () => {
   const { signatura } = useParams()
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
-  const viewport = useViewportSize()
   const photos = useSelector((state: RootState) => state.gallery.photos)
+  const windowWidth = useWindowWidth()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export const Karta = () => {
           zoomControl={false}
         >
           <ZoomControl position='bottomright' />
-          <LayersControl collapsed={viewport.width < 1248}>
+          <LayersControl collapsed={windowWidth < 1248}>
             <BaseLayer checked name='topografija'>
               <PodK />
             </BaseLayer>

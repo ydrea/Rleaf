@@ -1,4 +1,4 @@
-import { StrictMode, useEffect } from 'react'
+import { StrictMode } from 'react'
 import { Provider } from 'react-redux'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
@@ -8,10 +8,6 @@ import { router } from './router'
 import './index.sass'
 
 export const App = () => {
-  useEffect(() => {
-    console.log('VITE_SERVER_PUB:', import.meta.env.VITE_SERVER_PUB)
-  })
-
   return (
     <StrictMode>
       <Provider store={store}>

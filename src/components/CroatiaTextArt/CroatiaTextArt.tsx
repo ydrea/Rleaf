@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useThrottledValue } from '@mantine/hooks'
+import { useThrottledState } from '@mantine/hooks'
 
 import type { Character } from './services/process-ascii-art/process-ascii-art'
 import { processAsciiArt } from './services/process-ascii-art/process-ascii-art'
@@ -13,15 +13,14 @@ type Props = {
 export const CroatiaTextArt = ({ width = 1256, height = 879 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [characters, setCharacters] = useState<Character[]>([])
-  const [isMouseMoving, setIsMouseMoving] = useState(0)
-  const throttledValue = useThrottledValue(isMouseMoving, 100)
-  const { viewportWidth, containerWidth, canvasLeft, canvasRef, ctx, blockRef } = useCanvasSizing({
+  const [isMouseMoving, setIsMouseMoving] = useThrottledState(0, 100)
+  const { windowWidth, containerWidth, canvasLeft, canvasRef, ctx, blockRef } = useCanvasSizing({
     width
   })
 
   useEffect(() => {
     setCharacters(processAsciiArt())
-  }, [throttledValue])
+  }, [isMouseMoving])
 
   useEffect(() => {
     if (!ctx) {
@@ -40,7 +39,7 @@ export const CroatiaTextArt = ({ width = 1256, height = 879 }: Props) => {
       ctx.fillText(char.char, 0, 0)
       ctx.restore()
     })
-  }, [characters, height, width, viewportWidth, ctx])
+  }, [characters, height, width, windowWidth, ctx])
 
   const handleMouseMove = () => {
     setIsMouseMoving(isMouseMoving + 1)
