@@ -1,25 +1,23 @@
-.read-more-state
-  display: none
 
 .read-more
   opacity: 0
-  max-height: 0
-  font-size: 0
-  transition: 0.5s ease
+  pointer-events: none
+  transition: height 0.5s ease
   margin-top: 0
 
-  .read-more-state:checked ~ .read-more-wrap &
+  &.open
     opacity: 1
-    font-size: inherit
-    max-height: 200em
+    pointer-events: auto
     margin-top: 2rem
 
-.read-more-state:checked ~ .read-more-wrap .read-more-trigger
-  display: none
-
 .read-more-trigger
+  color: #000000
+  opacity: 0.85
+  font-size: 0.875em
   cursor: pointer
   position: relative
-  z-index: 10000
+  z-index: 1000
   text-align: right
   display: block
+  padding: 1em
+  margin-bottom: -1em
