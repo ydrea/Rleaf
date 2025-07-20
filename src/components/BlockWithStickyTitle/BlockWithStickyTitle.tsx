@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 // @ts-expect-error react-stickynode is not typed
 import Sticky from 'react-stickynode'
 
@@ -45,6 +45,14 @@ export const BlockWithStickyTitle = ({ title, subtitle, subtitleMargin, children
     }, 1000)
   }, [windowWidth, stickyEnabled])
 
+  const handleExpand = useCallback(() => {
+    setStickyEnabled(false)
+
+    setTimeout(() => {
+      setStickyEnabled(true)
+    }, 250)
+  }, [])
+
   return (
     <Flex className='block-with-sticky-title'>
       <Flex flex={1} direction='column' justifyContent='space-between'>
@@ -66,7 +74,9 @@ export const BlockWithStickyTitle = ({ title, subtitle, subtitleMargin, children
       </Flex>
 
       <div className='block-with-sticky-title-content'>
-        <ReadMore id={id}>{children}</ReadMore>
+        <ReadMore id={id} onExpand={handleExpand}>
+          {children}
+        </ReadMore>
       </div>
     </Flex>
   )

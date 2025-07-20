@@ -22,14 +22,6 @@ export const Home = () => {
         </p>
         <div className='read-more'>
           <p>
-            Opservatorij krajobraza je interdisciplinarna platforma koja s vizijom okuplja
-            znanstvenike i stručnjake radi zajedničkog istraživanja, dokumentiranja i poticanja
-            razvoja temeljenog na krajobrazu. Pokrenut zbog nedostatka podataka i niske svijesti o
-            vrijednostima hrvatskog krajobraza, Opservatorij ima misiju otkriti neiskorišteni
-            potencijal, unaprijediti svijest o njegovoj važnosti te savjetovati državna tijela i
-            samoupravu u pogledu implementacije
-          </p>
-          <p>
             U početnoj fazi, naš rad usmjeren je na nekoliko regija Hrvatske, gdje dokumentiramo,
             educiramo javnost i promoviramo interdisciplinarne metode istraživanja. Vjerujemo da
             razumijevanje i očuvanje krajobraza nisu samo ključni za očuvanje okoliša, već i za

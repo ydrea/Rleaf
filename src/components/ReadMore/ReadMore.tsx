@@ -1,18 +1,22 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 
-import './ReadMore.sass'
 import { useWindowWidth } from '../../services/use-window-width/use-window-width'
+import { calculateElementHeightWithClone } from '../../services/calculate-element-height/calculate-element-height'
+import './ReadMore.sass'
 
-export const ReadMore = ({ id, children }: { id: number; children: ReactNode }) => {
+type Props = {
+  id: number
+  children: ReactNode
+  onExpand?: (readMoreElement: HTMLElement) => void
+}
+
+export const ReadMore = ({ id, children, onExpand }: Props) => {
+  const readMoreBlockRef = useRef<HTMLElement | null>(null)
   const [totalHeight, setTotalHeight] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
-  const readMoreWrapRef = useRef<HTMLElement | null>(null)
-  const readMoreBlockRef = useRef<HTMLElement | null>(null)
   const windowWidth = useWindowWidth()
 
   useEffect(() => {
-    readMoreWrapRef.current = document.querySelector(`#read-more-wrap-${id}`) as HTMLElement | null
-
     readMoreBlockRef.current = document.querySelector(
       `#read-more-wrap-${id} .read-more`
     ) as HTMLElement | null
@@ -26,21 +30,32 @@ export const ReadMore = ({ id, children }: { id: number; children: ReactNode }) 
     const block = readMoreBlockRef.current
 
     if (block) {
-      block.style.height = 'auto'
-      block.style.transition = 'none'
-
-      setTimeout(() => {
-        if (block) {
-          const height = block.scrollHeight
-
+      calculateElementHeightWithClone(block)
+        .then((height) => {
           if (height > 0) {
             setTotalHeight(height)
           }
 
           block.style.height = '0px'
           block.style.transition = 'height 0.5s ease'
-        }
-      }, 500)
+        })
+        .catch(() => {
+          block.style.height = 'auto'
+          block.style.transition = 'none'
+
+          setTimeout(() => {
+            if (block) {
+              const fallbackHeight = block.scrollHeight
+
+              if (fallbackHeight > 0) {
+                setTotalHeight(fallbackHeight)
+              }
+
+              block.style.height = '0px'
+              block.style.transition = 'height 0.5s ease'
+            }
+          }, 100)
+        })
     }
   }, [windowWidth, isOpen])
 
@@ -49,6 +64,10 @@ export const ReadMore = ({ id, children }: { id: number; children: ReactNode }) 
       readMoreBlockRef.current.classList.add('open')
       readMoreBlockRef.current.style.height = `${totalHeight}px`
 
+      readMoreBlockRef.current.scrollIntoView({ behavior: 'smooth' })
+
+      onExpand?.(readMoreBlockRef.current)
+
       setTimeout(() => {
         if (readMoreBlockRef.current) {
           readMoreBlockRef.current.style.height = 'auto'
@@ -56,7 +75,7 @@ export const ReadMore = ({ id, children }: { id: number; children: ReactNode }) 
         }
       }, 1000)
     }
-  }, [isOpen, totalHeight])
+  }, [isOpen, totalHeight, onExpand])
 
   return (
     <>
