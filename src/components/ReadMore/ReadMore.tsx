@@ -27,7 +27,6 @@ export const ReadMore = ({ id, children }: { id: number; children: ReactNode }) 
 
     if (block) {
       block.style.height = 'auto'
-      block.style.position = 'absolute'
       block.style.transition = 'none'
 
       setTimeout(() => {
@@ -39,10 +38,9 @@ export const ReadMore = ({ id, children }: { id: number; children: ReactNode }) 
           }
 
           block.style.height = '0px'
-          block.style.position = 'static'
           block.style.transition = 'height 0.5s ease'
         }
-      }, 250)
+      }, 500)
     }
   }, [windowWidth, isOpen])
 
@@ -50,16 +48,13 @@ export const ReadMore = ({ id, children }: { id: number; children: ReactNode }) 
     if (isOpen && readMoreBlockRef.current) {
       readMoreBlockRef.current.classList.add('open')
       readMoreBlockRef.current.style.height = `${totalHeight}px`
-      readMoreWrapRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest'
-      })
 
       setTimeout(() => {
         if (readMoreBlockRef.current) {
           readMoreBlockRef.current.style.height = 'auto'
+          readMoreBlockRef.current.style.overflow = 'initial'
         }
-      }, 500)
+      }, 1000)
     }
   }, [isOpen, totalHeight])
 
@@ -67,9 +62,9 @@ export const ReadMore = ({ id, children }: { id: number; children: ReactNode }) 
     <>
       <div className='read-more-wrap' id={`read-more-wrap-${id}`}>
         {children}
-        {readMoreBlockRef.current && (
+        {readMoreBlockRef.current && !isOpen && (
           <a className='read-more-trigger' onClick={() => setIsOpen(true)}>
-            {isOpen ? '' : 'više...'}
+            više...
           </a>
         )}
       </div>
