@@ -56,7 +56,7 @@ export const Photos = ({ photosPerPage = 20 }: { photosPerPage?: number }) => {
 
     dispatch(setSelectedPhotoIndex(originalIndex))
     showPhotoSet(true)
-    navigate(`/photos/${photos[originalIndex].signatura}#imgcnt`)
+    navigate(`/photos/${photos[originalIndex].id}`)
   }
 
   // Calculate the indices for the current page

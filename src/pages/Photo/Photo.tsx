@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
@@ -17,11 +17,20 @@ import './Photo.sass'
 export const Photo = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { signatura } = useParams()
+  const { photoId } = useParams()
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex)
   const filteredPhotos = useSelector(selectFilteredPhotos)
   const photos = useSelector(selectPhotos)
+
+  const selectedPhoto = filteredPhotos[selectedPhotoIndex]
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [selectedPhoto])
 
   useEffect(() => {
     dispatch(getPhotos())
@@ -29,7 +38,7 @@ export const Photo = () => {
 
   useEffect(() => {
     const photoIndex = filteredPhotos.findIndex((photo) => {
-      if (photo.signatura === signatura) {
+      if (photo.id === Number(photoId)) {
         dispatch(setSelectedPhoto(photo))
         return true
       }
@@ -38,9 +47,7 @@ export const Photo = () => {
     })
 
     dispatch(setSelectedPhotoIndex(photoIndex))
-  }, [dispatch, photos, signatura, filteredPhotos])
-
-  const selectedPhoto = filteredPhotos[selectedPhotoIndex]
+  }, [dispatch, photos, photoId, filteredPhotos])
 
   if (!selectedPhoto) {
     return <div>Photo not found</div>
@@ -51,11 +58,11 @@ export const Photo = () => {
   }
 
   const handleShowOnMap = () => {
-    navigate(`/maps/${signatura}#mapcnt`)
+    navigate(`/maps/${photoId}`)
   }
 
   return (
-    <div id='imgcnt' className='cont'>
+    <div id='single-image-container' ref={containerRef}>
       <div className='navigation'>
         <div onClick={handleBackToGallery} className='cc-link'>
           natrag u galeriju
@@ -72,13 +79,13 @@ export const Photo = () => {
           <div
             className='next-prev-cnt prev'
             onClick={() => {
-              navigate(`/photos/${filteredPhotos[selectedPhotoIndex - 1].signatura}`)
+              navigate(`/photos/${filteredPhotos[selectedPhotoIndex - 1].id}`)
             }}
           >
             <FaChevronLeft size={48} />
           </div>
         )}
-        <div className='img-cnt'>
+        <div className='single-image'>
           <img
             src={
               selectedPhoto ? `${import.meta.env.VITE_SERVER_PUB}/${selectedPhoto.signatura}` : ''
@@ -91,7 +98,7 @@ export const Photo = () => {
           <div
             className='next-prev-cnt next'
             onClick={() => {
-              navigate(`/photos/${filteredPhotos[selectedPhotoIndex + 1].signatura}`)
+              navigate(`/photos/${filteredPhotos[selectedPhotoIndex + 1].id}`)
             }}
           >
             <FaChevronRight size={48} />

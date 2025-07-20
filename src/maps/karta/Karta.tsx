@@ -17,21 +17,21 @@ import { FiksniElementi, PodRV, PodRvi, PodRd, PodK } from '../wms'
 import './Karta.sass'
 
 export const Karta = () => {
-  const { signatura } = useParams()
+  const { photoId } = useParams()
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
   const photos = useSelector((state: RootState) => state.gallery.photos)
   const windowWidth = useWindowWidth()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (signatura) {
+    if (photoId) {
       selectedLayerSet(layers.temafk.id)
 
       if (photos.length === 0) {
         dispatch(getPhotos())
       }
     }
-  }, [signatura, dispatch, photos])
+  }, [photoId, dispatch, photos])
 
   const { BaseLayer, Overlay } = LayersControl
 
@@ -47,7 +47,7 @@ export const Karta = () => {
         </p>
       </BlockWithStickyTitle>
 
-      <section className='map' id='mapcnt'>
+      <section className='map' id='map-container'>
         <MapContainer
           center={[45.2, 16.2]}
           zoom={11}
@@ -194,7 +194,7 @@ export const Karta = () => {
               />
             </Overlay>
           </LayersControl>
-          {signatura && <SingleMarker />}
+          {photoId && <SingleMarker />}
         </MapContainer>
       </section>
     </div>

@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
         element: <Ewap />
       },
       {
-        path: 'maps/:signatura',
+        path: 'maps/:photoId',
         element: <Karta />
       },
       {
@@ -70,7 +70,7 @@ export const router = createBrowserRouter([
             element: <Photos />
           },
           {
-            path: 'photos/:signatura',
+            path: 'photos/:photoId',
             element: <Photo />
           }
         ]
