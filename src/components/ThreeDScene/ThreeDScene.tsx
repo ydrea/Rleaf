@@ -46,7 +46,7 @@ export const ThreeDScene = () => {
     const loader = new GLTFLoader()
 
     scene.background = new Color(0xffffff)
-    camera.position.set(2, 0, 7)
+    camera.position.set(0, 50, 300)
     renderer.setSize(container.clientWidth, 600)
     group.position.set(0, -1, 0)
     scene.add(group)
@@ -56,7 +56,7 @@ export const ThreeDScene = () => {
 
     container.appendChild(renderer.domElement)
 
-    loader.load('/terrain.glb', ({ scene: gltfScene }) => {
+    loader.load('/landscape.gltf', ({ scene: gltfScene }) => {
       group.add(gltfScene)
 
       gltfScene.traverse((child: Object3D) => {
