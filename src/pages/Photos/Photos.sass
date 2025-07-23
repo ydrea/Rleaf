@@ -1,0 +1,250 @@
+
+@media screen and (max-width: 768px)
+
+.naslov-container
+  display: block
+  max-width: 90%
+  margin-left: 5%
+  margin-right: 5%
+
+  & h1
+    font-size: 3rem !important
+    display: block
+    max-width: 90%
+    margin-left: 5% !important
+    margin-right: 5% !important
+
+.teka
+  margin-top: 20px !important
+
+  &st
+    width: 90% !important
+    margin-left: 5% !important
+    margin-right: 5% !important
+    font-size: 16px
+
+.photo
+  display: flex
+  flex-direction: column-reverse
+  min-width: 15rem
+  overflow: hidden
+  transition: transform 0.2s ease
+  position: relative
+
+  & img
+    max-width: 100%
+    height: auto
+    -o-object-fit: cover
+    object-fit: cover
+
+.my-masonry-grid
+  display: flex
+  width: 100%
+
+  &_column
+    padding-left: 0px
+    margin-right: 0px
+    background-clip: padding-box
+    flex: 1
+
+  &_column > .photo
+    margin-bottom: 30px
+    max-width: 15vw
+
+.photo
+  overflow: hidden
+  transition: transform 0.2s ease
+  position: relative
+
+  & img
+    max-width: 100%
+    height: auto
+    -o-object-fit: cover
+    object-fit: cover
+
+.selected-div2
+  font-size: 1.1rem
+  z-index: 9223
+  justify-content: space-between
+  align-items: baseline
+  color: #7e7e77
+
+.pagination
+  text-align: center
+
+  & button
+    margin: 0 5px
+    padding: 5px 10px
+    background: #ddd
+    border: none
+    cursor: pointer
+
+  & button.active
+    background: #000000
+    color: #fff
+
+.grey
+  display: block
+  position: absolute
+  top: 0
+  border-top: 3px solid grey
+  width: 100rem
+  z-index: 1111
+
+.grid-container
+  display: grid
+  grid-template-columns: [col1] 1fr [col2] 1fr [col3] 1fr
+  grid-template-rows: [row1] 100px [row2] 100px [row3] 100px
+  grid-gap: 10px
+
+.item
+  background-color: #ddd
+  padding: 10px
+
+.naslov-container
+  display: flex
+  flex-direction: column
+  position: relative
+  height: 22%
+
+  & h1
+    margin-top: 5vh
+    margin-left: .8vw
+    color: #fff
+    display: flex
+    flex-direction: column
+    align-items: center
+    flex-shrink: 2
+    font-size: 9rem
+    font-style: normal
+    font-weight: 500
+    letter-spacing: 0.53281rem
+
+  .line-div0
+    border-top: 1px solid #000000
+    position: absolute
+    top: 200px
+    left: 0
+    box-sizing: border-box
+    width: 100%
+
+  .teka
+    margin-top: -6vh
+    font-size: 1rem
+    font-weight: 100
+    max-width: 100%
+
+.tekast
+  margin-left: 17.5vw
+  width: 65vw
+  margin-right: 17.5vw
+
+.filters-container
+  display: flex
+  width: 100%
+  justify-content: flex-start
+  flex-wrap: wrap
+  margin-bottom: 3vh
+  position: relative
+
+.select-container
+  margin-top: 1em
+  padding-top: 1em
+  width: 100%
+  display: flex
+  justify-content: space-between
+  align-items: center
+  flex-wrap: wrap
+
+  & select
+    flex: 1
+    max-width: 75%
+    margin-left: 1vw
+
+    & .selectxt
+      font-size: 22px
+
+    & .selectxt span
+      color: #000000
+
+.line-div1
+  border-top: 1px solid #000000
+  position: absolute
+  top: 10rem
+  left: 0
+  box-sizing: border-box
+  width: 100%
+
+.line-div2
+  border-top: 1px solid #000000
+  position: absolute
+  top: 4rem
+  left: 0
+  box-sizing: border-box
+  width: 100%
+
+.line-div3
+  border-top: 1px solid #000
+  position: absolute
+  top: 23%
+  left: 0
+  box-sizing: border-box
+  width: 100%
+
+.line-div4
+  border-top: 1px solid #000000
+  position: absolute
+  top: 28.5%
+  left: 0
+  box-sizing: border-box
+  width: 100%
+
+@media screen and (min-width:768px) and (max-width:1200px)
+
+.naslov-container
+  display: block
+  max-width: 90%
+  margin-left: 5%
+  margin-right: 5%
+
+  & h1
+    font-size: 5rem !important
+    display: block
+
+.line-div0
+  display: none
+
+@media (max-width: 1200px)
+  .filters-container > div
+    width: 100%
+
+.line-div1
+  display: none !important
+
+@media screen and (max-width: 800px)
+  .line-div2, .line-div1, .line-div0, .line-div3, .line-div4
+    display: none
+
+.photo
+  width: 12rem
+
+@media (max-width: 600px)
+  .filters-container > div
+    width: 100%
+    margin-right: 0
+
+    .naslov-container h1
+      font-size: 2.5rem !important
+      display: block
+
+.line-div2, .line-div1, .line-div0
+  display: none
+
+.photo
+  width: 10rem
+
+@media screen and (max-width: 460px)
+
+  .naslov-container h1
+    font-size: 1.5rem !important
+    display: block
