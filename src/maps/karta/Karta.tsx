@@ -51,8 +51,8 @@ export const Karta = () => {
         >
           <ZoomControl position='bottomright' />
           <LayersControl collapsed={viewport.width < 1248}>
-            <BaseLayer checked name='topografija'>
-              <PodK />
+            <BaseLayer checked name='fiksni elementi'>
+              <FiksniElementi />
             </BaseLayer>
             <BaseLayer name='reljef'>
               <PodRV />
@@ -70,7 +70,7 @@ export const Karta = () => {
                 maxNativeZoom={30}
               />
             </BaseLayer>
-            <FiksniElementi />
+            <PodK />
             <Overlay key={layers.gradovirh.id} name={layers.gradovirh.name}>
               <BetterWMS
                 key={layers.gradovirh.id}
