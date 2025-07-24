@@ -40,7 +40,7 @@ export const Karta = () => {
       <section className='map' id='mapcnt'>
         <MapContainer
           center={[45.2, 16.2]}
-          zoom={11}
+          zoom={10}
           maxZoom={28}
           style={{
             width: '100%',
@@ -49,19 +49,25 @@ export const Karta = () => {
           }}
           zoomControl={false}
         >
+
           <ZoomControl position='bottomright' />
           <LayersControl collapsed={viewport.width < 1248}>
-            <BaseLayer checked name='fiksni elementi'>
-              <FiksniElementi />
-            </BaseLayer>
+
             <BaseLayer name='reljef'>
-              <PodRV />
+           <TileLayer url='https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg'
+           />
             </BaseLayer>
             <BaseLayer name='reljef (visine)'>
               <PodRvi />
             </BaseLayer>
-            <BaseLayer name='reljef (tamni)'>
-              <PodRd />
+             <BaseLayer name='ESRI'>
+              <TileLayer 
+              attribution='Source: Esri, Maxar, Earthstar Geographics)'
+              url=
+             'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' 
+            //  minZoom={8}
+             maxZoom={20}
+                maxNativeZoom={30}/>
             </BaseLayer>
             <BaseLayer name='OSM'>
               <TileLayer
@@ -70,7 +76,17 @@ export const Karta = () => {
                 maxNativeZoom={30}
               />
             </BaseLayer>
-            <PodK />
+{/* fiksni_elementi */}
+<TileLayer url='https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png' zIndex={999} />
+
+           <Overlay name='Kartogrfija CB'>
+              <TileLayer url='https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png' />
+            </Overlay>
+
+           <Overlay name='Kartogrfija DOF'>
+              <TileLayer url='https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png' />
+            </Overlay>
+
             <Overlay key={layers.gradovirh.id} name={layers.gradovirh.name}>
               <BetterWMS
                 key={layers.gradovirh.id}
