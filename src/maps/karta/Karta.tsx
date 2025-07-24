@@ -14,8 +14,11 @@ import './Karta.sass'
 
 export const Karta = () => {
   const { signatura } = useParams()
+  const [kartografije, kartografijeSet] = useState<string>('https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png')
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
   const viewport = useViewportSize()
+
+const handleBaseLayerChange = (e: any) => {}
 
   useEffect(() => {
     if (signatura) {
@@ -50,17 +53,18 @@ export const Karta = () => {
           zoomControl={false}
         >
 
+          <LayerHandler kartografijeSet={kartografijeSet} />
           <ZoomControl position='bottomright' />
-          <LayersControl collapsed={viewport.width < 1248}>
+          <LayersControl collapsed={viewport.width < 1248}
+          //  baselayerchange={handleBaseLayerChange  }
+          >
 
-            <BaseLayer name='reljef'>
+            <BaseLayer checked name='reljef'>
            <TileLayer url='https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg'
            />
             </BaseLayer>
-            <BaseLayer name='reljef (visine)'>
-              <PodRvi />
-            </BaseLayer>
-             <BaseLayer name='ESRI'>
+
+            <BaseLayer name='ESRI'>
               <TileLayer 
               attribution='Source: Esri, Maxar, Earthstar Geographics)'
               url=
@@ -69,25 +73,24 @@ export const Karta = () => {
              maxZoom={20}
                 maxNativeZoom={30}/>
             </BaseLayer>
-            <BaseLayer name='OSM'>
+
+           <Overlay name='Kartografija'>
+              <TileLayer url={kartografije} />
+            </Overlay>
+
+
+            {/* <BaseLayer name='OSM'>
               <TileLayer
                 url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 maxZoom={20}
                 maxNativeZoom={30}
               />
-            </BaseLayer>
+            </BaseLayer> */}
 {/* fiksni_elementi */}
 <TileLayer url='https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png' zIndex={999} />
 
-           <Overlay name='Kartogrfija CB'>
-              <TileLayer url='https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png' />
-            </Overlay>
 
-           <Overlay name='Kartogrfija DOF'>
-              <TileLayer url='https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png' />
-            </Overlay>
-
-            <Overlay key={layers.gradovirh.id} name={layers.gradovirh.name}>
+            {/* <Overlay key={layers.gradovirh.id} name={layers.gradovirh.name}>
               <BetterWMS
                 key={layers.gradovirh.id}
                 id={layers.gradovirh.id}
@@ -122,7 +125,7 @@ export const Karta = () => {
                 layers={layers.selaiz.layers}
                 {...layers.selaiz.props}
               />
-            </Overlay>
+            </Overlay> */}
             <Overlay key={layers.temakz.id} name={layers.temakz.name}>
               <BetterWMS
                 key={layers.temakz.id}
@@ -141,7 +144,7 @@ export const Karta = () => {
                 {...layers.temazp.props}
               />
             </Overlay>
-            <Overlay key={layers.temap.id} name={layers.temap.name}>
+            {/* <Overlay key={layers.temap.id} name={layers.temap.name}>
               <BetterWMS
                 key={layers.temap.id}
                 id={layers.temap.id}
@@ -158,8 +161,8 @@ export const Karta = () => {
                 layers={layers.temast.layers}
                 {...layers.temast.props}
               />
-            </Overlay>
-            <Overlay key={layers.temastr.id} name={layers.temastr.name}>
+            </Overlay> */}
+            {/* <Overlay key={layers.temastr.id} name={layers.temastr.name}>
               <BetterWMS
                 key={layers.temastr.id}
                 id={layers.temastr.id}
@@ -167,7 +170,7 @@ export const Karta = () => {
                 layers={layers.temastr.layers}
                 {...layers.temastr.props}
               />
-            </Overlay>
+            </Overlay> */}
             <Overlay key={layers.temadz.id} name={layers.temadz.name}>
               <BetterWMS
                 key={layers.temadz.id}
@@ -205,4 +208,34 @@ export const Karta = () => {
       </section>
     </div>
   )
+}
+
+
+// New component to handle layer changes
+const LayerHandler = ({ kartografijeSet }: { kartografijeSet: (url: string) => void }) => {
+  const map = useMap()
+
+  useEffect(() => {
+    const handleBaseLayerChange = (e: any) => {
+      if (e.name === 'reljef') {
+        kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png')
+      } else {
+        kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png')
+      }
+    }
+
+    map.on('baselayerchange', handleBaseLayerChange)
+
+    return () => {
+      map.off('baselayerchange', handleBaseLayerChange)
+    }
+  }, [map, kartografijeSet])
+
+  return null
+}
+
+import { useMap as useLeafletMap } from 'react-leaflet'
+
+function useMap() {
+  return useLeafletMap();
 }
