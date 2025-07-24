@@ -1,4 +1,4 @@
-# Fwd: Opservatorij - hitan sastanak
+# ToDO: Dodaj šemu karte za Baniju
 
 Dakle, prvo slijedi popis slojeva koje rabimo
 
