@@ -83,7 +83,7 @@ export const ReadMore = ({ id, children, onExpand }: Props) => {
         {children}
         {readMoreBlockRef.current && !isOpen && (
           <a className='read-more-trigger' onClick={() => setIsOpen(true)}>
-            više...
+            više
           </a>
         )}
       </div>

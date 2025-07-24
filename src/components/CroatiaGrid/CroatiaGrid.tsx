@@ -93,7 +93,7 @@ export const CroatiaGrid = ({ width = 1256, height = 762 }: Props) => {
 
   return (
     <div ref={blockRef} className='canvas-block croatia-grid'>
-      <h1 style={{ left: BLOCK_SIZE + (blockWidth - containerWidth) / 2 - 3 }}>karte</h1>
+      <h1 style={{ left: BLOCK_SIZE * 3 + (blockWidth - containerWidth) / 2 - 3 }}>karte</h1>
       <img
         ref={svgRef}
         src={croatiaSvg}

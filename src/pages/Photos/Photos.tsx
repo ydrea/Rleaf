@@ -80,7 +80,6 @@ export const Photos = ({ photosPerPage = 20 }: { photosPerPage?: number }) => {
       {loading && <Section className='loader'>Učitavanje...</Section>}
       {!loading && (
         <>
-          <Pagination totalPages={totalPages} top />
           <div className='photos-container' id='photos-container'>
             {photosToDisplay && photosToDisplay.length > 0 ? (
               photosToDisplay.map((photo: Photo, index: number) => (
