@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useMouse } from '@mantine/hooks'
 
 import { useWindowWidth } from '../../services/use-window-width/use-window-width'
 import { calculateElementHeightWithClone } from '../../services/calculate-element-height/calculate-element-height'
+
 import './ReadMore.sass'
 
 type Props = {
@@ -14,7 +16,10 @@ export const ReadMore = ({ id, children, onExpand }: Props) => {
   const readMoreBlockRef = useRef<HTMLElement | null>(null)
   const [totalHeight, setTotalHeight] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
   const windowWidth = useWindowWidth()
+
+  const { y: mouseY } = useMouse()
 
   useEffect(() => {
     readMoreBlockRef.current = document.querySelector(
@@ -60,11 +65,21 @@ export const ReadMore = ({ id, children, onExpand }: Props) => {
   }, [windowWidth, isOpen])
 
   useEffect(() => {
-    if (isOpen && readMoreBlockRef.current) {
+    if (isOpen && !isExpanded && readMoreBlockRef.current) {
+      const currentScrollPosition = window.scrollY
+      const currentWindowHeight = window.innerHeight
+      const fitsOnScreen = currentWindowHeight - mouseY >= totalHeight
+      const needsMorePixels = !fitsOnScreen ? totalHeight - (currentWindowHeight - mouseY) + 250 : 0
+
       readMoreBlockRef.current.classList.add('open')
       readMoreBlockRef.current.style.height = `${totalHeight}px`
 
-      readMoreBlockRef.current.scrollIntoView({ behavior: 'smooth' })
+      setTimeout(() => {
+        window.scrollTo({
+          top: currentScrollPosition + needsMorePixels,
+          behavior: 'smooth'
+        })
+      }, 150)
 
       onExpand?.(readMoreBlockRef.current)
 
@@ -74,8 +89,10 @@ export const ReadMore = ({ id, children, onExpand }: Props) => {
           readMoreBlockRef.current.style.overflow = 'initial'
         }
       }, 1000)
+
+      setIsExpanded(true)
     }
-  }, [isOpen, totalHeight, onExpand])
+  }, [isOpen, totalHeight, onExpand, mouseY, isExpanded])
 
   return (
     <>
