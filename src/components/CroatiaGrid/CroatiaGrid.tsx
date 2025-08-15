@@ -11,7 +11,7 @@ type Props = {
   height?: number
 }
 
-export const CroatiaGrid = ({ width = 1256, height = 762 }: Props) => {
+export const CroatiaGrid = ({ width = 1496, height = 762 }: Props) => {
   const svgRef = useRef<HTMLImageElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [mousePositionX, setMousePositionX] = useState(570)
@@ -60,7 +60,7 @@ export const CroatiaGrid = ({ width = 1256, height = 762 }: Props) => {
       ctx.stroke()
     }
 
-    const onTargetBlock = mousePositionX === 570 && mousePositionY === 266
+    const onTargetBlock = mousePositionX === 684 && mousePositionY === 266
 
     // selected block
     ctx.strokeStyle = onTargetBlock ? '#FF0000' : '#000000'

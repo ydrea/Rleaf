@@ -6,7 +6,7 @@ import cameraSvg from '../../assets/camera.svg'
 import fototeka from '../../assets/fototeka.jpg'
 import { useCanvasSizing } from '../../services/use-canvas-sizing/use-canvas-sizing'
 
-const BLOCK_SIZE = 125
+const BLOCK_SIZE = 124
 
 type Props = {
   width?: number
@@ -20,7 +20,7 @@ const mousePositionToHex = (mousePositionX: number) => {
   return mousePositionXClampedHex
 }
 
-export const CameraSubject = ({ width = 1251, height = 876 }: Props) => {
+export const CameraSubject = ({ width = 1496, height = 869 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const cameraSvgRef = useRef<HTMLImageElement>(null)
   const [svgLoaded, setSvgLoaded] = useState(false)
