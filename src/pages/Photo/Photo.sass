@@ -3,11 +3,12 @@
 
   .next-prev-cnt
     height: 100%
-    padding: 20px 12px
+    padding: 20px
     background-color: #FFFFFFCC
     position: absolute
     top: 0
     cursor: pointer
+    transition: opacity 0.2s ease-in-out
 
     @media (max-width: 768px)
       height: auto
@@ -15,13 +16,29 @@
 
     &.next
       right: 0
+      opacity: 0
 
     &.prev
       left: 0
+      opacity: 0
+
+    &:hover
+      opacity: 1
 
   .single-image img
     display: block
     margin: 0 auto
+    min-height: 100px
+    user-select: none
+    user-drag: none
+    -webkit-user-drag: none
+
+  .single-image.vertical
+    background: url('../../assets/vertical-image-bg.svg')
+
+    img
+      margin-right: 0
+      margin-left: auto
 
 .photo-data
   display: flex

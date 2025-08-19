@@ -47,14 +47,14 @@ export const Pagination = ({ totalPages, top, spread = 4 }: Props) => {
 
   return (
     <div className={`pagination ${top ? 'top' : ''}`}>
-      <div className='pagination-buttons-prev'>
-        {currentPage > 1 && (
+      {currentPage > 1 && (
+        <div className='pagination-buttons-prev'>
           <>
             <button onClick={() => handlePageChange(1)}>&lt;&lt;</button>
             <button onClick={() => handlePageChange(currentPage - 1)}>&lt;</button>
           </>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className='pagination-pages'>
         {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => {
@@ -73,14 +73,14 @@ export const Pagination = ({ totalPages, top, spread = 4 }: Props) => {
         })}
       </div>
 
-      <div className='pagination-buttons-next'>
-        {currentPage < totalPages && (
+      {currentPage < totalPages && (
+        <div className='pagination-buttons-next'>
           <>
             <button onClick={() => handlePageChange(currentPage + 1)}>&gt;</button>
             <button onClick={() => handlePageChange(totalPages)}>&gt;&gt;</button>
           </>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -1,3 +1,5 @@
+import { Link } from 'react-router'
+
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 
 export const About = () => {
@@ -34,12 +36,7 @@ export const About = () => {
         </li>
       </ul>
       <p>
-        Za dodatne informacije ili suradnju:{' '}
-        <a href='mailto:info@croatianlandscape.hr'>info@croatianlandscape.hr</a>
-      </p>
-      <p>
-        Više o pristupu i djelovanju potražite u rubrici{' '}
-        <a href='/o-nama'>Opservatorij krajobraza</a>.
+        Za dodatne informacije ili suradnju: <Link to='/contact'>Kontakt</Link>
       </p>
     </BlockWithStickyTitle>
   )

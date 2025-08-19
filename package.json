@@ -44,6 +44,7 @@
     "react-router-dom": "^7.6.3",
     "react-select": "^5.10.2",
     "react-stickynode": "^5.0.2",
+    "react-swipeable": "^7.0.2",
     "react-tabs": "^6.0.2",
     "redux": "^4.2.1",
     "three": "^0.178.0",

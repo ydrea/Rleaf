@@ -8,15 +8,16 @@ import {
   selectPhotos,
   selectFilteredPhotos
 } from '../../redux/rtk/gallerySlice'
-import { Section } from '../../components/Section/Section'
 import type { Photo } from '../../types/types'
-import { Pagination } from './components:Pagination/Pagination'
+import { Section } from '../../components/Section/Section'
+import { Pagination } from './components/Pagination/Pagination'
 import { TagoviSelekt } from '../../components/SelektT/SelektT'
 import { useAppDispatch } from '../../redux/hooks'
+import { PhotoThumbnail } from './components/PhotoThumbnail/PhotoThumbnail'
 import { KategorijeSelekt } from '../../components/SelektK/SelektK'
 import './Photos.sass'
 
-export const Photos = ({ photosPerPage = 20 }: { photosPerPage?: number }) => {
+export const Photos = ({ photosPerPage = 30 }: { photosPerPage?: number }) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const photos = useSelector(selectPhotos)
@@ -81,27 +82,14 @@ export const Photos = ({ photosPerPage = 20 }: { photosPerPage?: number }) => {
       {!loading && (
         <>
           <div className='photos-container' id='photos-container'>
-            {photosToDisplay && photosToDisplay.length > 0 ? (
+            {photosToDisplay?.length > 0 ? (
               photosToDisplay.map((photo: Photo, index: number) => (
-                <div key={photo.id} className='photo'>
-                  <img
-                    src={import.meta.env.VITE_SERVER_PUB + `/thumbs/${photo.signatura}`}
-                    alt={photo.naziv}
-                    onClick={() => handlePhotoClick(index)}
-                  />
-                  <ul className='photo-data'>
-                    {[
-                      photo.signatura.replace(/\.[^.]*$/, ''),
-                      photo.opis,
-                      photo.lokacija,
-                      new Date(photo.datum_sni).toLocaleDateString('hr-HR')
-                    ]
-                      .filter((text) => text && text.trim() !== '')
-                      .map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                  </ul>
-                </div>
+                <PhotoThumbnail
+                  key={photo.id}
+                  photo={photo}
+                  index={index}
+                  onClick={handlePhotoClick}
+                />
               ))
             ) : (
               <p>Nema fotografije po zadanim kriterijima</p>
