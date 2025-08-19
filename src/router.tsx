@@ -51,12 +51,14 @@ export const router = createBrowserRouter([
         element: <Ewap />
       },
       {
-        path: 'maps/:photoId',
-        element: <Karta />
-      },
-      {
         path: 'maps',
-        element: <Karta />
+        element: <Karta />,
+        children: [
+          {
+            path: ':photoId',
+            element: <Karta />
+          }
+        ]
       },
       {
         path: 'login',

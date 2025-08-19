@@ -26,14 +26,25 @@ export const Karta = () => {
   const [currentPhoto, currentPhotoSet] = useState<Photo | null>(null)
 
   useEffect(() => {
-    if (photoId) {
+    if (photoId && selectedLayer !== layers.temafk.id) {
       selectedLayerSet(layers.temafk.id)
 
       if (photos.length === 0) {
         dispatch(getPhotos())
       }
     }
-  }, [photoId, dispatch, photos])
+
+    if (photoId && photos.length > 0) {
+      const photo = photos.find((photo) => photo.id === Number(photoId))
+
+      if (photo) {
+        currentPhotoSet({
+          ...photo,
+          foto_url: photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
+        })
+      }
+    }
+  }, [photoId, dispatch, photos, selectedLayer])
 
   const { BaseLayer, Overlay } = LayersControl
 

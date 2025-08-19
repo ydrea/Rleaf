@@ -5,19 +5,18 @@ import type { RootState } from '../store'
 
 const serverUrl = import.meta.env?.VITE_SERVER
 
-const url = `${serverUrl}/photosrl`
-
 export const getPhotos = createAsyncThunk<Photo[], void>('gallery/getPhotos', async () => {
-  const rez = await fetch(url)
-  const rezult = await rez.json()
-  return rezult
+  const rez = await fetch(`${serverUrl}/photosrl`)
+  return rez.json() as Promise<Photo[]>
 })
 
-export const getAPhoto = createAsyncThunk<Photo, void>('gallery/getAPhoto', async (id) => {
-  const rez = await fetch(`${serverUrl}/photosr/${id}`)
-  const rezult = await rez.json()
-  return rezult
-})
+export const getAPhoto = createAsyncThunk<Photo, string | number>(
+  'gallery/getAPhoto',
+  async (id) => {
+    const rez = await fetch(`${serverUrl}/photosr/${id}`)
+    return rez.json() as Promise<Photo>
+  }
+)
 
 const initialState = {
   selectedPhotoIndex: 0,
