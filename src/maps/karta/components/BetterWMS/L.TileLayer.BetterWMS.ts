@@ -1,25 +1,7 @@
 import L, { type TileLayer } from 'leaflet'
 import axios from 'axios'
 
-//
-// A global variable to store the latlng value
-// let globalLatlng;
-
-// // Function to set the latlng value
-// export function setLatlng(latlng) {
-// 	globalLatlng = latlng;
-// }
-
-// // Function to retrieve the latlng value
-// export function getLatlng() {
-// 	return globalLatlng;
-// }
-// // Add this function outside of your L.TileLayer.BetterWMS definition
-// function flyToLocation(map, latlng) {
-// 	map.flyTo(latlng, 15);
-// }
-
-//
+import type { Photo } from '../../../../types/types'
 
 export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
   onAdd: function (map: L.Map) {
@@ -36,9 +18,13 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
     map.off('click', this.getFeatureInfo, this)
   },
 
-  //get em
   getFeatureInfo: function (evt: L.LeafletMouseEvent) {
-    // Make an Axios request to the server
+    const el = evt.originalEvent.target as HTMLElement | null
+
+    if (el?.closest('.photo-popup')) {
+      return
+    }
+
     const url = this.getFeatureInfoUrl(evt.latlng)
     const showResults = L.Util.bind(this.showGetFeatureInfo, this)
 
@@ -88,109 +74,30 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
     return this._url + L.Util.getParamString(params, this._url, true)
   },
 
-  // with imgs
-  //with triggers
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  showGetFeatureInfo: function (err: any, latlng: L.LatLng, content: string) {
+  showGetFeatureInfo: function (err: unknown, latlng: L.LatLng, content: string) {
     if (err) {
       console.log(err)
       return
     }
-    let signaturaFromUrl = null
+    const data = {} as Record<string, string>
     const tempDiv = document.createElement('div')
     tempDiv.innerHTML = content
+
     const rows = tempDiv.querySelectorAll('tr')
 
-    // var shouldFlyTo = false; // Initialize the flag
-
-    for (let i = 0; i < rows.length; i++) {
-      const row = rows[i]
+    for (const row of rows) {
       const cells = row.querySelectorAll('th, td')
-      // console.log(header);
 
       if (cells.length >= 2) {
         const header = cells?.[0].textContent?.trim()
-        const value = cells?.[1]?.textContent?.trim()
-        row.style.border = '1px solid #fff'
-        for (let j = 0; j < cells.length; j++) {
-          ;(cells[j] as HTMLElement).style.border = '1px solid #fff'
-        }
+        const value = cells?.[1]?.textContent?.trim() ?? ''
 
-        if (header === 'signatura') {
-          console.log('Header:', header)
-          console.log('Value:', value)
-          signaturaFromUrl = value
-        }
-
-        if (header === 'foto_url') {
-          const imgUrl = value?.replace(/["']/g, '')
-          let thumbUrl
-          const publicIndex = imgUrl?.indexOf('/public/')
-          if (publicIndex !== -1) {
-            thumbUrl =
-              imgUrl?.slice(0, (publicIndex ?? 0) + '/public/'.length) +
-              'thumbs/' +
-              imgUrl?.slice((publicIndex ?? 0) + '/public/'.length)
-          }
-          console.log(imgUrl, thumbUrl)
-
-          const newRow = document.createElement('tr')
-          newRow.style.width = '100%'
-          newRow.style.border = '1px solid #fff'
-          const newCell = document.createElement('td')
-          newCell.colSpan = 2
-          //imgurl
-          const imageUrl = `/photos/${signaturaFromUrl}`
-
-          const link = document.createElement('a')
-          link.href = imageUrl
-          const image = document.createElement('img')
-          image.src = thumbUrl ?? ''
-          image.alt = 'thumb'
-          image.style.minWidth = '300px'
-          image.style.width = '100%'
-          image.style.marginTop = '8px'
-
-          link.appendChild(image)
-          newCell.appendChild(link)
-
-          // newCell.appendChild(image);
-          newRow.appendChild(newCell)
-          //
-          row.parentNode?.replaceChild(newRow, row)
-        } else {
-          if (value === 'NULL' || value === '') {
-            row.parentNode?.removeChild(row)
-          }
+        if (header) {
+          data[header] = value
         }
       }
     }
 
-    const filteredContent = tempDiv.innerHTML
-    // console.log(filteredContent);
-    L.popup({ minWidth: 500 }).setLatLng(latlng).setContent(filteredContent).openOn(this._map)
-
-    // if (shouldFlyTo) {
-    // 	flyToLocation(this._map, latlng);
-    // }
+    this.options.onSelectPhoto?.(data as unknown as Photo)
   }
-
-  // ...
-
-  // ...
-  ////////////////////
-  // showGetFeatureInfo: function (err, latlng, content) {
-  //   if (err) {
-  //     console.log(err);
-  //     return;
-  //   } // do nothing if there's an error
-  //   console.log(content);
-
-  //   // Otherwise show the content in a popup, or something.
-  //   L.popup({ maxWidth: 800 })
-  //     .setLatLng(latlng)
-  //     .setContent(content)
-  //     .openOn(this._map);
-  // },
-  /////////////
 }) as unknown as typeof TileLayer.WMS

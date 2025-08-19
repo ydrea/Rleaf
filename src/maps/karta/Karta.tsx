@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css'
 import 'react-tabs/style/react-tabs.css'
 
 import { layers } from './constants'
+import type { Photo } from '../../types/types'
 import { BetterWMS } from './components/BetterWMS/BetterWMS'
 import { getPhotos } from '../../redux/rtk/gallerySlice'
 import { SingleMarker } from './components/SingleMarker/SingleMarker'
@@ -18,10 +19,11 @@ import './Karta.sass'
 
 export const Karta = () => {
   const { photoId } = useParams()
-  const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
-  const photos = useSelector((state: RootState) => state.gallery.photos)
-  const windowWidth = useWindowWidth()
   const dispatch = useAppDispatch()
+  const windowWidth = useWindowWidth()
+  const photos = useSelector((state: RootState) => state.gallery.photos)
+  const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
+  const [currentPhoto, currentPhotoSet] = useState<Photo | null>(null)
 
   useEffect(() => {
     if (photoId) {
@@ -59,8 +61,27 @@ export const Karta = () => {
           }}
           zoomControl={false}
         >
-          <ZoomControl position='bottomright' />
-          <LayersControl collapsed={windowWidth < 1248}>
+          {currentPhoto?.signatura && (
+            <div className='leaflet-bottom leaflet-right photo-popup'>
+              <ul>
+                <li>{currentPhoto?.signatura}</li>
+                <li>{currentPhoto?.naziv}</li>
+                <li>{currentPhoto?.opis}</li>
+                <li>{currentPhoto?.lokacija}</li>
+                <li>{currentPhoto?.datum_sni}</li>
+                <li>{currentPhoto?.kategorija}</li>
+                <li>{currentPhoto?.autor}</li>
+                <li>{currentPhoto?.tagovi}</li>
+              </ul>
+              {currentPhoto?.foto_url && (
+                <img src={currentPhoto?.foto_url} alt={currentPhoto?.naziv} />
+              )}
+            </div>
+          )}
+
+          <ZoomControl position='bottomleft' />
+
+          <LayersControl collapsed={windowWidth < 1248} position='topleft'>
             <BaseLayer checked name='topografija'>
               <PodK />
             </BaseLayer>
@@ -81,6 +102,9 @@ export const Karta = () => {
               />
             </BaseLayer>
             <FiksniElementi />
+          </LayersControl>
+
+          <LayersControl collapsed={windowWidth < 1248} position='topright'>
             <Overlay key={layers.gradovirh.id} name={layers.gradovirh.name}>
               <BetterWMS
                 key={layers.gradovirh.id}
@@ -190,6 +214,7 @@ export const Karta = () => {
                 id={layers.temafk.id}
                 url={layers.temafk.url}
                 layers={layers.temafk.layers}
+                onSelectPhoto={currentPhotoSet}
                 {...layers.temafk.props}
               />
             </Overlay>
