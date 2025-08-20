@@ -1,14 +1,19 @@
-import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, createSelector, type PayloadAction } from '@reduxjs/toolkit'
 
 import type { Filters, Photo } from '../../types/types'
 import type { RootState } from '../store'
 
 const serverUrl = import.meta.env?.VITE_SERVER
 
-export const getPhotos = createAsyncThunk<Photo[], void>('gallery/getPhotos', async () => {
-  const rez = await fetch(`${serverUrl}/photosrl`)
-  return rez.json() as Promise<Photo[]>
-})
+export const getPhotos = createAsyncThunk<Photo[], ((data: Photo[]) => void) | undefined>(
+  'gallery/getPhotos',
+  async (callback) => {
+    const rez = await fetch(`${serverUrl}/photosrl`)
+    const data = (await rez.json()) as Photo[]
+    callback?.(data)
+    return data
+  }
+)
 
 export const getAPhoto = createAsyncThunk<Photo, string | number>(
   'gallery/getAPhoto',
@@ -107,27 +112,29 @@ export const selectSelectedPhoto = (state: RootState) => {
 }
 
 // Filteri
-export const selectFilteredPhotos = (state: RootState): Photo[] => {
-  const { kategorije, tagovi } = state.gallery.selectedFilters || {}
-  const allPhotos = state.gallery.photos
+export const selectFilteredPhotos = createSelector(
+  [(state: RootState) => state.gallery.selectedFilters, (state: RootState) => state.gallery.photos],
+  (selectedFilters, allPhotos) => {
+    const { kategorije, tagovi } = selectedFilters || {}
 
-  if (!kategorije && !tagovi) {
-    return allPhotos
+    if (!kategorije && !tagovi) {
+      return allPhotos
+    }
+
+    return allPhotos.filter((photo: Photo) => {
+      const kategorijaMatches =
+        !kategorije ||
+        kategorije.length === 0 ||
+        kategorije.every((filter: string) => photo.kategorija && photo.kategorija.includes(filter))
+
+      const tagoviIncluded =
+        !tagovi ||
+        tagovi.length === 0 ||
+        tagovi.every((filter: string) => photo.tagovi && photo.tagovi.includes(filter))
+
+      return kategorijaMatches && tagoviIncluded
+    })
   }
-
-  return allPhotos.filter((photo: Photo) => {
-    const kategorijaMatches =
-      !kategorije ||
-      kategorije.length === 0 ||
-      kategorije.every((filter: string) => photo.kategorija && photo.kategorija.includes(filter))
-
-    const tagoviIncluded =
-      !tagovi ||
-      tagovi.length === 0 ||
-      tagovi.every((filter: string) => photo.tagovi && photo.tagovi.includes(filter))
-
-    return kategorijaMatches && tagoviIncluded
-  })
-}
+)
 
 export default gallerySlice.reducer

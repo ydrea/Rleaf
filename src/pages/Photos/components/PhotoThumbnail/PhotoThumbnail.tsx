@@ -1,4 +1,5 @@
 import type { Photo } from '../../../../types/types'
+import { ImageWithSuspense } from '../../../../components/ImageWithSuspense/ImageWithSuspense'
 
 type Props = {
   photo: Photo
@@ -19,7 +20,7 @@ export const PhotoThumbnail = ({ photo, index, onClick }: Props) => {
 
   return (
     <div key={photo.id} className='photo'>
-      <img
+      <ImageWithSuspense
         alt={naziv}
         onClick={handlePhotoClick}
         src={import.meta.env.VITE_SERVER_PUB + `/thumbs/${signatura}`}

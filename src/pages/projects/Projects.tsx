@@ -1,8 +1,10 @@
+import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithSuspense'
+
 export const Projects = () => {
   return (
     <div className='projects-container'>
       <div className='P1'>
-        <img src='proj1.jpg' className='proj1' />{' '}
+        <ImageWithSuspense src='proj1.jpg' className='proj1' />{' '}
         <div className='tekst1'>
           "Opservatorij krajobraza Banovine/Banije je pilot projekt šireg programa Opservatorija, a
           njegova je svrha uspostava i diseminacija znanja, promicanje tema krajobraza kao što su
@@ -25,7 +27,7 @@ export const Projects = () => {
         </div>
       </div>
       <div className='P2'>
-        <img src='proj2.jpg' className='proj2' />
+        <ImageWithSuspense src='proj2.jpg' className='proj2' />
         <div className='tekst2'>
           Projekt EWAP: Ugrožena drvena arhitektura Banovina/Banije, Posavine i Pokuplja 2023-2024
           dio je globalnog programa dokumentacije ugrožene drvene arhitekture kojeg provodi Oxford

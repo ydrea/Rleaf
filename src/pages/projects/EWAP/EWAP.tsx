@@ -1,11 +1,12 @@
-import { BlockWithStickyTitle } from '../../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import ewap from '../../../assets/ewap.jpg'
+import { BlockWithStickyTitle } from '../../../components/BlockWithStickyTitle/BlockWithStickyTitle'
+import { ImageWithSuspense } from '../../../components/ImageWithSuspense/ImageWithSuspense'
 
 export const Ewap = () => {
   return (
     <BlockWithStickyTitle
       title='Ugrožena drvena arhitektura Banovine / Banije (Projekt EWAP)'
-      subtitle={<img src={ewap} alt='ewap' />}
+      subtitle={<ImageWithSuspense src={ewap} alt='ewap' />}
       subtitleMargin='54px'
     >
       <p>

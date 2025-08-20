@@ -69,6 +69,14 @@ a, a:visited
 img
   max-width: 100%
 
+  &.loading
+    opacity: 0
+    transition: opacity 0.5s ease
+
+  &.loaded
+    opacity: 1
+    transition: opacity 0.5s ease
+
 //  Layout
 
 #root

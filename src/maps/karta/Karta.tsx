@@ -5,14 +5,15 @@ import { useSelector } from 'react-redux'
 import 'leaflet/dist/leaflet.css'
 import 'react-tabs/style/react-tabs.css'
 
-import { layers } from './constants'
 import type { Photo } from '../../types/types'
+import type { RootState } from '../../redux/store'
+import { layers } from './constants'
 import { BetterWMS } from './components/BetterWMS/BetterWMS'
 import { getPhotos } from '../../redux/rtk/gallerySlice'
 import { SingleMarker } from './components/SingleMarker/SingleMarker'
 import { useAppDispatch } from '../../redux/hooks'
 import { useWindowWidth } from '../../services/use-window-width/use-window-width'
-import type { RootState } from '../../redux/store'
+import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithSuspense'
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import { FiksniElementi, PodRV, PodRvi, PodRd, PodK } from '../wms'
 import './Karta.sass'
@@ -85,7 +86,7 @@ export const Karta = () => {
                 <li>{currentPhoto?.tagovi}</li>
               </ul>
               {currentPhoto?.foto_url && (
-                <img src={currentPhoto?.foto_url} alt={currentPhoto?.naziv} />
+                <ImageWithSuspense src={currentPhoto?.foto_url} alt={currentPhoto?.naziv} />
               )}
             </div>
           )}

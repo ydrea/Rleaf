@@ -15,6 +15,7 @@ import { TagoviSelekt } from '../../components/SelektT/SelektT'
 import { useAppDispatch } from '../../redux/hooks'
 import { PhotoThumbnail } from './components/PhotoThumbnail/PhotoThumbnail'
 import { KategorijeSelekt } from '../../components/SelektK/SelektK'
+import { Loader } from '../../components/Loader/Loader'
 import './Photos.sass'
 
 export const Photos = ({ photosPerPage = 30 }: { photosPerPage?: number }) => {
@@ -32,12 +33,10 @@ export const Photos = ({ photosPerPage = 30 }: { photosPerPage?: number }) => {
   }, [dispatch])
 
   useEffect(() => {
-    if (photos.length > 0) {
-      setTimeout(() => {
-        setLoading(false)
-      }, 500)
+    if (loading && photos.length > 0) {
+      setTimeout(() => setLoading(false), 500)
     }
-  }, [photos])
+  }, [photos, loading])
 
   const tagoviSet = new Set<string>()
 
@@ -78,7 +77,7 @@ export const Photos = ({ photosPerPage = 30 }: { photosPerPage?: number }) => {
         </div>
         <TagoviSelekt tagoviOptions={tagoviOptions} />
       </section>
-      {loading && <Section className='loader'>Učitavanje...</Section>}
+      {loading && <Loader />}
       {!loading && (
         <>
           <div className='photos-container' id='photos-container'>

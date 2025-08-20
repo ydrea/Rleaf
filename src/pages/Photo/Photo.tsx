@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { useSwipeable } from 'react-swipeable'
 
 import {
-  setSelectedPhoto,
   selectPhotos,
   getPhotos,
   setSelectedPhotoIndex,
@@ -13,6 +12,8 @@ import {
   selectFilteredPhotos
 } from '../../redux/rtk/gallerySlice'
 import { useAppDispatch } from '../../redux/hooks'
+import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithSuspense'
+import { Loader } from '../../components/Loader/Loader'
 import './Photo.sass'
 
 export const Photo = () => {
@@ -21,11 +22,13 @@ export const Photo = () => {
   const { photoId } = useParams()
   const containerRef = useRef<HTMLDivElement>(null)
   const [isVertical, setIsVertical] = useState(false)
+  const [notFound, setNotFound] = useState(false)
+  const [loading, setLoading] = useState(true)
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex)
   const filteredPhotos = useSelector(selectFilteredPhotos)
   const photos = useSelector(selectPhotos)
-  const imageRef = useRef<HTMLImageElement>(null)
-  const imageLoadersSet = useRef(false)
+
+  const selectedPhoto = filteredPhotos[selectedPhotoIndex]
 
   const handleBackToGallery = () => {
     navigate('/photos')
@@ -53,23 +56,11 @@ export const Photo = () => {
     trackMouse: true
   })
 
-  const selectedPhoto = filteredPhotos[selectedPhotoIndex]
-
-  const isVerticalImage = () => {
-    const width = imageRef.current?.width ?? 0
-    const height = imageRef.current?.height ?? 0
+  const isVerticalImage = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const width = e.currentTarget.width ?? 0
+    const height = e.currentTarget.height ?? 0
 
     setIsVertical(width < height)
-  }
-
-  if (imageRef.current && !imageLoadersSet.current) {
-    imageLoadersSet.current = true
-
-    if (imageRef.current.complete) {
-      isVerticalImage()
-    } else {
-      imageRef.current.onload = isVerticalImage
-    }
   }
 
   useEffect(() => {
@@ -79,24 +70,38 @@ export const Photo = () => {
   }, [selectedPhoto])
 
   useEffect(() => {
-    dispatch(getPhotos())
-  }, [dispatch])
+    if (filteredPhotos.length === 0 && loading) {
+      dispatch(getPhotos(() => setLoading(false)))
+    }
+
+    if (filteredPhotos.length > 0 && loading) {
+      setLoading(false)
+    }
+  }, [dispatch, filteredPhotos.length, loading])
 
   useEffect(() => {
-    const photoIndex = filteredPhotos.findIndex((photo) => {
-      if (photo.id === Number(photoId)) {
-        dispatch(setSelectedPhoto(photo))
-        return true
-      }
+    setIsVertical(false)
+  }, [photoId])
 
-      return false
-    })
+  useEffect(() => {
+    const photoIndex = filteredPhotos.findIndex((photo) => photo.id === Number(photoId))
 
     dispatch(setSelectedPhotoIndex(photoIndex))
+    setNotFound(filteredPhotos.length > 0 && photoIndex === -1)
   }, [dispatch, photos, photoId, filteredPhotos])
 
-  if (!selectedPhoto) {
-    return <div>Photo not found</div>
+  if (loading) {
+    return <Loader />
+  }
+
+  if (notFound) {
+    return (
+      <p style={{ textAlign: 'center', margin: '100px 0' }}>
+        Fotografija nije pronađena
+        <br />
+        <Link to='/photos'>Povratak u galeriju</Link>
+      </p>
+    )
   }
 
   return (
@@ -120,15 +125,15 @@ export const Photo = () => {
             </div>
           )}
 
-          <div className={`single-image ${isVertical ? 'vertical' : ''}`}>
-            <img
-              src={
-                selectedPhoto ? `${import.meta.env.VITE_SERVER_PUB}/${selectedPhoto.signatura}` : ''
-              }
-              alt={selectedPhoto.naziv}
-              ref={imageRef}
-            />
-          </div>
+          {selectedPhoto?.signatura && (
+            <div className={`single-image ${isVertical ? 'vertical' : ''}`}>
+              <ImageWithSuspense
+                src={`${import.meta.env.VITE_SERVER_PUB}/${selectedPhoto.signatura}`}
+                alt={selectedPhoto.naziv}
+                onLoad={isVerticalImage}
+              />
+            </div>
+          )}
 
           {selectedPhotoIndex < filteredPhotos.length - 1 && (
             <div className='next-prev-cnt next' onClick={navigateToNextImage}>
