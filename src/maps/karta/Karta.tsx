@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, LayersControl, ZoomControl } from 'react-leaflet'
+import { MapContainer, TileLayer, LayersControl, ZoomControl, Pane } from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useViewportSize } from '@mantine/hooks'
@@ -79,7 +79,7 @@ const handleBaseLayerChange = (e: any) => {}
             </Overlay>
 
 
-            {/* <BaseLayer name='OSM'>
+         {/* <BaseLayer name='OSM'>
               <TileLayer
                 url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 maxZoom={20}
@@ -88,7 +88,6 @@ const handleBaseLayerChange = (e: any) => {}
             </BaseLayer> */}
 {/* fiksni_elementi */}
 <TileLayer url='https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png' zIndex={999} />
-
 
             {/* <Overlay key={layers.gradovirh.id} name={layers.gradovirh.name}>
               <BetterWMS
