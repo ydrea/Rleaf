@@ -74,7 +74,7 @@ const handleBaseLayerChange = (e: any) => {}
                 maxNativeZoom={30}/>
             </BaseLayer>
 
-           <Overlay name='Kartografija'>
+           <Overlay checked name='Kartografija'>
               <TileLayer url={kartografije} />
             </Overlay>
 
