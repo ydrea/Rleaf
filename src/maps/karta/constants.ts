@@ -27,7 +27,7 @@ export const layers = {
       tiles: true,
       zIndex: 150,
       uppercase: true,
-      opacity: 0.8
+      opacity: 1
     }
   },
 

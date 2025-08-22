@@ -48,7 +48,8 @@
     "redux": "^4.2.1",
     "three": "^0.178.0",
     "three-stdlib": "^2.36.0",
-    "wellknown": "^0.5.0"
+    "wellknown": "^0.5.0",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

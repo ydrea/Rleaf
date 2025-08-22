@@ -65,7 +65,7 @@ const handleBaseLayerChange = (e: any) => {}
            />
             </BaseLayer>
 
-            <BaseLayer name='ESRI'>
+            <BaseLayer name='satelitska fotografija (ESRI)'>
               <TileLayer 
               attribution='Source: Esri, Maxar, Earthstar Geographics)'
               url=
@@ -79,53 +79,9 @@ const handleBaseLayerChange = (e: any) => {}
               <TileLayer url={kartografije} />
             </Overlay>
 
-
-         {/* <BaseLayer name='OSM'>
-              <TileLayer
-                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                maxZoom={20}
-                maxNativeZoom={30}
-              />
-            </BaseLayer> */}
 {/* fiksni_elementi */}
 <TileLayer url='https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png' zIndex={999} />
 
-            {/* <Overlay key={layers.gradovirh.id} name={layers.gradovirh.name}>
-              <BetterWMS
-                key={layers.gradovirh.id}
-                id={layers.gradovirh.id}
-                url={layers.gradovirh.url}
-                layers={layers.gradovirh.layers}
-                {...layers.gradovirh.props}
-              />
-            </Overlay>
-            <Overlay key={layers.adminna.id} name={layers.adminna.name}>
-              <BetterWMS
-                key={layers.adminna.id}
-                id={layers.adminna.id}
-                url={layers.adminna.url}
-                layers={layers.adminna.layers}
-                {...layers.adminna.props}
-              />
-            </Overlay>
-            <Overlay key={layers.vode.id} name={layers.vode.name}>
-              <BetterWMS
-                key={layers.vode.id}
-                id={layers.vode.id}
-                url={layers.vode.url}
-                layers={layers.vode.layers}
-                {...layers.vode.props}
-              />
-            </Overlay>
-            <Overlay key={layers.selaiz.id} name={layers.selaiz.name}>
-              <BetterWMS
-                key={layers.selaiz.id}
-                id={layers.selaiz.id}
-                url={layers.selaiz.url}
-                layers={layers.selaiz.layers}
-                {...layers.selaiz.props}
-              />
-            </Overlay> */}
             <Overlay key={layers.temakz.id} name={layers.temakz.name}>
               <BetterWMS
                 key={layers.temakz.id}
@@ -144,33 +100,7 @@ const handleBaseLayerChange = (e: any) => {}
                 {...layers.temazp.props}
               />
             </Overlay>
-            {/* <Overlay key={layers.temap.id} name={layers.temap.name}>
-              <BetterWMS
-                key={layers.temap.id}
-                id={layers.temap.id}
-                url={layers.temap.url}
-                layers={layers.temap.layers}
-                {...layers.temap.props}
-              />
-            </Overlay>
-            <Overlay key={layers.temast.id} name={layers.temast.name}>
-              <BetterWMS
-                key={layers.temast.id}
-                id={layers.temast.id}
-                url={layers.temast.url}
-                layers={layers.temast.layers}
-                {...layers.temast.props}
-              />
-            </Overlay> */}
-            {/* <Overlay key={layers.temastr.id} name={layers.temastr.name}>
-              <BetterWMS
-                key={layers.temastr.id}
-                id={layers.temastr.id}
-                url={layers.temastr.url}
-                layers={layers.temastr.layers}
-                {...layers.temastr.props}
-              />
-            </Overlay> */}
+
             <Overlay key={layers.temadz.id} name={layers.temadz.name}>
               <BetterWMS
                 key={layers.temadz.id}
