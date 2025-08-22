@@ -9,7 +9,7 @@ import { layers } from './constants'
 import { BetterWMS } from './components/BetterWMS/BetterWMS'
 import { SingleMarker } from './components/SingleMarker/SingleMarker'
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
-import { FiksniElementi, PodRV, PodRvi, PodRd, PodK } from '../wms'
+// import { FiksniElementi, PodRV, PodRvi, PodRd, PodK } from '../wms'
 import './Karta.sass'
 
 export const Karta = () => {
@@ -56,7 +56,8 @@ const handleBaseLayerChange = (e: any) => {}
           <LayerHandler kartografijeSet={kartografijeSet} />
           <ZoomControl position='bottomright' />
           <LayersControl collapsed={viewport.width < 1248}
-          //  baselayerchange={handleBaseLayerChange  }
+          
+//  baselayerchange={handleBaseLayerChange  }
           >
 
             <BaseLayer checked name='reljef'>
