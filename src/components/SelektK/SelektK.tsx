@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import type { CSSObjectWithLabel } from 'react-select'
 
 import { setFilters } from '../../redux/rtk/gallerySlice'
+import type { Option } from '../../types/types'
 
 export const KategorijeSelekt = () => {
   const dispatch = useDispatch()
@@ -16,8 +17,8 @@ export const KategorijeSelekt = () => {
   }, [selectedFilters])
 
   const handleKategorijeFilterChange = (selectedFilters: any) => {
-    const selectedFilterValues = selectedFilters.map((filter: any) => filter.label)
-    dispatch(setFilters({ kategorije: selectedFilterValues }))
+    const selectedFilterValues = selectedFilters.map((filter: Option) => filter.label)
+    dispatch(setFilters({ kategorije: selectedFilterValues, tagovi: [] }))
     setFilterSelected(selectedFilterValues)
   }
 
@@ -39,35 +40,24 @@ export const KategorijeSelekt = () => {
   const cusTom = {
     option: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      color: 'black',
       cursor: 'pointer'
     }),
-    control: (styles: CSSObjectWithLabel) => ({
-      ...styles
-    }),
-    placeholder: (styles: CSSObjectWithLabel) => ({
+    container: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      fontSize: '22px'
-    }),
-    dropdownIndicator: (provided: CSSObjectWithLabel) => ({
-      ...provided,
-      display: 'none'
-    }),
-    indicatorSeparator: (provided: CSSObjectWithLabel) => ({
-      ...provided,
-      display: 'none'
+      width: '300px'
     }),
     menu: (styles: CSSObjectWithLabel) => ({
       ...styles,
       zIndex: '9999',
-      cursor: 'pointer',
-      minWidth: '300px',
-      height: 'auto'
-    })
+      cursor: 'pointer'
+    }),
+    indicatorSeparator: () => ({ display: 'none' }),
+    dropdownIndicator: () => ({ display: 'none' })
   }
 
   return (
-    <div>
+    <label>
+      kategorije
       <Select
         inputId='kategorije-select'
         styles={cusTom}
@@ -75,6 +65,9 @@ export const KategorijeSelekt = () => {
         isSearchable
         isMulti
         options={customKategorijeOptions}
+        onChange={handleKategorijeFilterChange}
+        getOptionValue={(option: any) => option.value}
+        getOptionLabel={(option: any) => option.label}
         value={
           selectedFilters?.kategorije
             ? selectedFilters?.kategorije.map((option: string) => ({
@@ -83,19 +76,7 @@ export const KategorijeSelekt = () => {
               }))
             : []
         }
-        onChange={handleKategorijeFilterChange}
-        getOptionValue={(option: any) => option.value}
-        getOptionLabel={(option: any) => option.label}
       />
-      <label
-        htmlFor='kategorije-select'
-        style={{
-          fontSize: '22px',
-          color: '#7e7e77'
-        }}
-      >
-        kategorije
-      </label>
-    </div>
+    </label>
   )
 }

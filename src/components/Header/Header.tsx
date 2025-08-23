@@ -1,11 +1,15 @@
-import { useRef, useState } from 'react'
-import { NavLink } from 'react-router'
+import { useEffect, useRef, useState } from 'react'
+import { NavLink, useLocation } from 'react-router'
 
 import logo from '../../assets/logo.svg'
+import { useWindowWidth } from '../../services/use-window-width/use-window-width'
 import './Header.sass'
 
 export const Header = () => {
+  const location = useLocation()
   const checkBoxRef = useRef<HTMLInputElement>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const windowWidth = useWindowWidth()
 
   const hideMobileMenu = () => {
     if (checkBoxRef.current) {
@@ -13,7 +17,10 @@ export const Header = () => {
     }
   }
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  useEffect(() => {
+    hideMobileMenu()
+    setIsMobileMenuOpen(false)
+  }, [location, windowWidth])
 
   return (
     <>
@@ -38,18 +45,17 @@ export const Header = () => {
           </svg>
         </label>
         <menu className='main-menu' onClick={hideMobileMenu}>
-          <div className='menu-item-with-submenu' style={{ width: 134 }}>
+          <div className='menu-item-with-submenu'>
             <NavLink to='/projects'>projekti</NavLink>
             <div className='submenu'>
-              <NavLink to='/projects/banija' style={{ width: 134 }}>
-                Banija
-              </NavLink>
+              <NavLink to='/projects/banija'>Banija</NavLink>
               <NavLink to='/projects/ewap'>EWAP</NavLink>
             </div>
           </div>
           <NavLink to='/maps'>mape</NavLink>
           <NavLink to='/photos'>fototeka</NavLink>
           <NavLink to='/3d-scenes'>3d scene</NavLink>
+          <NavLink to='/essays'>eseji</NavLink>
           <NavLink to='/about'>o nama</NavLink>
           <NavLink to='/contact'>kontakt</NavLink>
         </menu>

@@ -6,7 +6,7 @@ import cameraSvg from '../../assets/camera.svg'
 import fototeka from '../../assets/fototeka.jpg'
 import { useCanvasSizing } from '../../services/use-canvas-sizing/use-canvas-sizing'
 
-const BLOCK_SIZE = 125
+const BLOCK_SIZE = 124
 
 type Props = {
   width?: number
@@ -20,14 +20,16 @@ const mousePositionToHex = (mousePositionX: number) => {
   return mousePositionXClampedHex
 }
 
-export const CameraSubject = ({ width = 1251, height = 876 }: Props) => {
+export const CameraSubject = ({ width = 1496, height = 869 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const cameraSvgRef = useRef<HTMLImageElement>(null)
   const [svgLoaded, setSvgLoaded] = useState(false)
-  const { viewportWidth, containerWidth, canvasLeft, canvasRef, ctx, blockRef } = useCanvasSizing({
-    width,
-    blockSize: BLOCK_SIZE
-  })
+  const { windowWidth, containerWidth, canvasLeft, canvasRef, ctx, blockRef, blockWidth } =
+    useCanvasSizing({
+      width,
+      blockSize: BLOCK_SIZE,
+      blockSizeMultiplier: 2
+    })
 
   const mousePositionX = useMotionValue(1)
   const mousePositionY = useMotionValue(1)
@@ -71,7 +73,7 @@ export const CameraSubject = ({ width = 1251, height = 876 }: Props) => {
     if (img) {
       ctx.drawImage(
         img,
-        width / 2 - img.width / 2 + (x * containerWidth) / 2,
+        width / 2 - img.width / 2 + (x * (containerWidth - BLOCK_SIZE)) / 2,
         height / 2 - img.height / 2 + BLOCK_SIZE + BLOCK_SIZE * y,
         img.width,
         img.height
@@ -137,17 +139,7 @@ export const CameraSubject = ({ width = 1251, height = 876 }: Props) => {
     }
 
     ctx.translate(-0.5, -0.5)
-  }, [
-    width,
-    height,
-    containerWidth,
-    animatedX,
-    animatedY,
-    viewportWidth,
-    canvasLeft,
-    ctx,
-    svgLoaded
-  ])
+  }, [width, height, containerWidth, animatedX, animatedY, windowWidth, canvasLeft, ctx, svgLoaded])
 
   const handleMouseMove = (e: MouseEvent | TouchEvent) => {
     const { clientX, clientY } = 'touches' in e ? e.touches[0] : e
@@ -165,9 +157,13 @@ export const CameraSubject = ({ width = 1251, height = 876 }: Props) => {
     animate(mousePositionY, yNorm, { type: 'tween', duration: 0.5, ease: 'backOut' })
   }
 
+  const handleMouseLeave = () => {
+    animate(mousePositionX, animatedX > 0 ? 1 : -1, { type: 'tween', duration: 2, ease: 'backOut' })
+  }
+
   return (
-    <div ref={blockRef} className='canvas-block'>
-      <h1>fototeka</h1>
+    <div ref={blockRef} className='canvas-block camera-subject'>
+      <h1 style={{ left: BLOCK_SIZE + (blockWidth - containerWidth) / 2 - 3 }}>fototeka</h1>
       <img
         ref={cameraSvgRef}
         src={cameraSvg}
@@ -183,9 +179,16 @@ export const CameraSubject = ({ width = 1251, height = 876 }: Props) => {
           ref={canvasRef}
           width={width}
           height={height}
-          style={{ left: canvasLeft, width, height, backgroundImage: `url(${fototeka})` }}
+          style={{
+            left: canvasLeft,
+            width,
+            height,
+            backgroundImage: `url(${fototeka})`
+          }}
           onMouseMove={handleMouseMove}
           onTouchMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          onTouchEnd={handleMouseLeave}
         />
       </div>
     </div>

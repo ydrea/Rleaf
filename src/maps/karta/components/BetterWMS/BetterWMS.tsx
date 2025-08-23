@@ -6,6 +6,7 @@ import {
   type LayerProps
 } from '@react-leaflet/core'
 
+import type { Photo } from '../../../../types/types'
 import { BetterTileLayerWMS } from './L.TileLayer.BetterWMS'
 
 interface BetterWMSProps extends LayerProps {
@@ -13,6 +14,7 @@ interface BetterWMSProps extends LayerProps {
   url: string
   layers: string
   params?: WMSParams
+  onSelectPhoto?: (photo: Photo) => void
 }
 
 export const BetterWMS = createTileLayerComponent<TileLayer.WMS, BetterWMSProps>(

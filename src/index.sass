@@ -26,9 +26,9 @@ h1
   margin: 0
 
   @media (max-width: 1152px)
-    font-size: 3rem
+    font-size: 2.375rem
 
-  @media (max-width: 940px)
+  @media (max-width: 960px)
     font-size: 2rem
 
 p, li, ul
@@ -38,14 +38,18 @@ p, li, ul
   @media (max-width: 640px)
     font-size: 1rem
 
+ul
+  list-style: none
+  margin-left: 2em
+
 p + p,
 ul + p,
 p + ul,
 img + p
-    margin-top: 2rem
+  margin-top: 1.5em
 
 li + li
-    margin-top: 1rem
+  margin-top: 1rem
 
 a, a:visited
   color: #646464
@@ -65,10 +69,18 @@ a, a:visited
 img
   max-width: 100%
 
+  &.loading
+    opacity: 0
+    transition: opacity 0.5s ease
+
+  &.loaded
+    opacity: 1
+    transition: opacity 0.5s ease
+
 //  Layout
 
 #root
-  max-width: 1440px
+  max-width: 1680px
   margin: 0 auto
   padding: 92px
 
@@ -101,8 +113,36 @@ img
 
   h1
     position: absolute
-    top: 27px
     z-index: 1000
 
     @media (max-width: 640px)
-      left: 32px
+      left: 32px !important
+
+.croatia-grid h1
+  top: 1.575em
+
+.camera-subject h1
+  top: 1.85em
+
+.three-d-scene h1
+  top: 1.32em
+
+@media (max-width: 1152px)
+  .croatia-grid h1
+    top: 2em
+
+  .camera-subject h1
+    top: 2.275em
+
+  .three-d-scene h1
+    top: 1.66em
+
+@media (max-width: 940px)
+  .croatia-grid h1
+    top: 2.5375em
+
+  .camera-subject h1
+    top: 2.875em
+
+  .three-d-scene h1
+    top: 2.175em

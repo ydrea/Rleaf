@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react'
+import { forwardRef, type CSSProperties, type ReactNode } from 'react'
 
 type Props = {
   id?: string
@@ -19,49 +19,37 @@ type Props = {
   flex?: CSSProperties['flex']
   style?: CSSProperties
   className?: string
+  ref?: React.RefObject<HTMLDivElement>
 }
 
-export const Container = ({
-  id,
-  children,
-  m,
-  mt,
-  mb,
-  ml,
-  mr,
-  p,
-  pt,
-  pb,
-  pl,
-  pr,
-  w,
-  h,
-  bg,
-  flex,
-  style,
-  className
-}: Props) => (
-  <div
-    id={id}
-    className={className}
-    style={{
-      margin: m,
-      marginTop: mt,
-      marginBottom: mb,
-      marginLeft: ml,
-      marginRight: mr,
-      padding: p,
-      paddingTop: pt,
-      paddingBottom: pb,
-      paddingLeft: pl,
-      paddingRight: pr,
-      width: w,
-      height: h,
-      backgroundColor: bg,
-      flex,
-      ...style
-    }}
-  >
-    {children}
-  </div>
+export const Container = forwardRef(
+  (
+    { id, children, m, mt, mb, ml, mr, p, pt, pb, pl, pr, w, h, bg, flex, style, className }: Props,
+    ref: React.Ref<HTMLDivElement>
+  ) => (
+    <div
+      ref={ref}
+      id={id}
+      className={className}
+      style={{
+        margin: m,
+        marginTop: mt,
+        marginBottom: mb,
+        marginLeft: ml,
+        marginRight: mr,
+        padding: p,
+        paddingTop: pt,
+        paddingBottom: pb,
+        paddingLeft: pl,
+        paddingRight: pr,
+        width: w,
+        height: h,
+        backgroundColor: bg,
+        flex,
+        ...style
+      }}
+    >
+      {children}
+    </div>
+  )
 )

@@ -17,9 +17,11 @@ export type Photo = {
   doi: string
   url_image: string | null
   url_thumb: string | null
+  foto_url: string | null
   lon?: string
   lat?: string
   geometry?: string
+  rank_number?: string
 }
 
 export type Option = {
@@ -28,6 +30,6 @@ export type Option = {
 }
 
 export type Filters = {
-  kategorije: string[]
-  tagovi: string[]
+  kategorije?: string[]
+  tagovi?: string[]
 }

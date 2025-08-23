@@ -17,8 +17,16 @@
     top: 46px
     left: 46px
     width: calc(100% - 92px)
-    z-index: 1000
+    z-index: 9999
     background: #fff
+
+    ~ .canvas-block
+      opacity: 0
+
+    @media (max-width: 640px)
+      left: 32px
+      top: 32px
+      width: calc(100% - 64px)
 
     &:before
       content: ''
@@ -41,6 +49,7 @@
     opacity: 1
     z-index: 9999
     pointer-events: auto
+    overflow: auto
 
   .menu-button
     display: none
@@ -67,7 +76,7 @@
       transition: opacity 0.5s ease-in, transform 0.15s ease-out
       opacity: 0
 
-    @media (max-width: 940px)
+    @media (max-width: 960px)
       display: block
 
   #menu-button-checkbox:checked + .menu-button .line-1
@@ -117,20 +126,23 @@
         height: 0
         background-image: url('../../assets/menu-bg.svg')
 
-        @media (max-width: 940px)
-          top: 69px
+        @media (max-width: 960px)
+          top: calc(50% - 27px)
 
       &:hover::before
         height: 82px
-        transition: height 0.2s ease-out
+        transition: height 0.2s cubic-bezier(0, 0.83, 1, 1)
 
       &.active::before
         height: 82px
 
-      @media (max-width: 1152px)
-        padding: 15px 15px 0 15px
+      @media (max-width: 1280px)
+        padding: 15px 15px 0 20px
 
-    @media (max-width: 940px)
+      @media (max-width: 1152px)
+        padding: 15px 10px 0 15px
+
+    @media (max-width: 960px)
       flex-direction: column
       align-items: center
       justify-content: space-between
@@ -147,6 +159,11 @@
       background-color: #fff
       transition: opacity 0.25s ease-out
       height: calc(100vh - 145px)
+
+      @media (max-width: 640px)
+        padding: 0 32px
+        top: 131px
+        height: calc(100vh - 130px)
 
       a
         display: flex
@@ -166,8 +183,12 @@
 .menu-item-with-submenu
   position: relative
   height: 100%
+  width: 134px
 
-  @media (max-width: 940px)
+  @media (max-width: 1280px)
+    width: 120px
+
+  @media (max-width: 960px)
     display: flex
     flex-direction: column
     height: auto
@@ -203,7 +224,7 @@
     height: 100%
     text-align: center
 
-    @media (max-width: 940px)
+    @media (max-width: 960px)
       height: auto
       width: 100% !important
       border-bottom: 1px solid #ccc !important
@@ -216,7 +237,7 @@
       height: 41px
       transition: height 0.4s ease-out !important
 
-      @media (max-width: 940px)
+      @media (max-width: 960px)
         height: auto
         top: 8px !important
 
@@ -233,7 +254,13 @@
     margin: 0
     width: calc(100vw - 192px)
 
-    @media (max-width: 940px)
+    a
+      width: 134px
+
+      @media (max-width: 1280px)
+        width: 120px
+
+    @media (max-width: 960px)
       display: flex
       flex-direction: column
       position: relative

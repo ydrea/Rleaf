@@ -1,11 +1,12 @@
-import { BlockWithStickyTitle } from '../../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import banija from '../../../assets/banija.jpg'
+import { BlockWithStickyTitle } from '../../../components/BlockWithStickyTitle/BlockWithStickyTitle'
+import { ImageWithSuspense } from '../../../components/ImageWithSuspense/ImageWithSuspense'
 
 export const Banija = () => {
   return (
     <BlockWithStickyTitle
       title='Opservatorij krajobraza Banovine / Banije'
-      subtitle={<img src={banija} alt='banija' />}
+      subtitle={<ImageWithSuspense src={banija} alt='banija' />}
       subtitleMargin='54px'
     >
       <p>

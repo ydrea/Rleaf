@@ -8,7 +8,11 @@ import { setFilters } from '../../redux/rtk/gallerySlice'
 import type { Filters, Option } from '../../types/types'
 import type { RootState } from '../../redux/store'
 
-export const TagoviSelekt = ({ tagoviOptions }: { tagoviOptions: Option[] }) => {
+type Props = {
+  tagoviOptions: Option[]
+}
+
+export const TagoviSelekt = ({ tagoviOptions }: Props) => {
   const dispatch = useDispatch()
   const selectedFilters = useSelector<RootState, Filters>((state) => state.gallery.selectedFilters)
   const [, setFilterSelected] = useState<Option[]>([])
@@ -25,7 +29,8 @@ export const TagoviSelekt = ({ tagoviOptions }: { tagoviOptions: Option[] }) => 
   }, [selectedFilters])
 
   const handleTagoviFilterChange = (selectedFilters: MultiValue<Option>) => {
-    const selectedFilterValues = selectedFilters.map((filter: any) => filter.value)
+    const selectedFilterValues = selectedFilters.map((filter: Option) => filter.value)
+
     dispatch(setFilters({ tagovi: selectedFilterValues }))
     // Update the local state when filters change
     setFilterSelected(
@@ -39,41 +44,33 @@ export const TagoviSelekt = ({ tagoviOptions }: { tagoviOptions: Option[] }) => 
   const cusTom = {
     option: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      color: 'black',
       cursor: 'pointer'
     }),
-    control: (styles: CSSObjectWithLabel) => ({
-      ...styles
-    }),
-    placeholder: (styles: CSSObjectWithLabel) => ({
+    container: (styles: CSSObjectWithLabel) => ({
       ...styles,
-      fontSize: '22px'
-    }),
-    dropdownIndicator: (provided: CSSObjectWithLabel) => ({
-      ...provided,
-      display: 'none'
-    }),
-    indicatorSeparator: (provided: CSSObjectWithLabel) => ({
-      ...provided,
-      display: 'none'
+      width: '300px'
     }),
     menu: (styles: CSSObjectWithLabel) => ({
       ...styles,
       zIndex: '9999',
-      cursor: 'pointer',
-      minWidth: '300px',
-      height: 'auto'
-    })
+      cursor: 'pointer'
+    }),
+    indicatorSeparator: () => ({ display: 'none' }),
+    dropdownIndicator: () => ({ display: 'none' })
   }
 
   return (
-    <div>
+    <label>
+      ključne riječi
       <Select
         inputId='keyword-select'
         styles={cusTom}
         placeholder='unesi/odaberi'
         isSearchable
         isMulti
+        onChange={handleTagoviFilterChange}
+        getOptionValue={(option: any) => option.value}
+        getOptionLabel={(option: any) => option.label}
         options={tagoviOptions}
         value={
           selectedFilters?.tagovi
@@ -83,15 +80,7 @@ export const TagoviSelekt = ({ tagoviOptions }: { tagoviOptions: Option[] }) => 
               }))
             : []
         }
-        onChange={(newValue: MultiValue<Option>) => {
-          handleTagoviFilterChange(newValue)
-        }}
-        getOptionValue={(option: any) => option.value}
-        getOptionLabel={(option: any) => option.label}
       />
-      <label htmlFor='keyword-select' style={{ color: '#7e7e77', fontSize: '22px' }}>
-        ključne riječi
-      </label>
-    </div>
+    </label>
   )
 }

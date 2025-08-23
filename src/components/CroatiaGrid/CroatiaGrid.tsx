@@ -11,16 +11,17 @@ type Props = {
   height?: number
 }
 
-export const CroatiaGrid = ({ width = 1256, height = 762 }: Props) => {
+export const CroatiaGrid = ({ width = 1496, height = 762 }: Props) => {
   const svgRef = useRef<HTMLImageElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [mousePositionX, setMousePositionX] = useState(570)
   const [mousePositionY, setMousePositionY] = useState(266)
   const [svgLoaded, setSvgLoaded] = useState(false)
-  const { viewportWidth, containerWidth, canvasLeft, canvasRef, ctx, blockRef } = useCanvasSizing({
-    width,
-    blockSize: BLOCK_SIZE
-  })
+  const { windowWidth, containerWidth, canvasLeft, canvasRef, ctx, blockRef, blockWidth } =
+    useCanvasSizing({
+      width,
+      blockSize: BLOCK_SIZE
+    })
 
   useEffect(() => {
     if (!ctx) {
@@ -59,7 +60,7 @@ export const CroatiaGrid = ({ width = 1256, height = 762 }: Props) => {
       ctx.stroke()
     }
 
-    const onTargetBlock = mousePositionX === 570 && mousePositionY === 266
+    const onTargetBlock = mousePositionX === 684 && mousePositionY === 266
 
     // selected block
     ctx.strokeStyle = onTargetBlock ? '#FF0000' : '#000000'
@@ -69,7 +70,7 @@ export const CroatiaGrid = ({ width = 1256, height = 762 }: Props) => {
     ctx.stroke()
 
     ctx.translate(-0.5, -0.5)
-  }, [width, height, mousePositionX, mousePositionY, viewportWidth, ctx, svgLoaded])
+  }, [width, height, mousePositionX, mousePositionY, windowWidth, ctx, svgLoaded])
 
   const handleMouseMove = (e: MouseEvent | TouchEvent) => {
     const { clientX, clientY } = 'touches' in e ? e.touches[0] : e
@@ -91,8 +92,8 @@ export const CroatiaGrid = ({ width = 1256, height = 762 }: Props) => {
   }
 
   return (
-    <div ref={blockRef} className='canvas-block'>
-      <h1>karte</h1>
+    <div ref={blockRef} className='canvas-block croatia-grid'>
+      <h1 style={{ left: BLOCK_SIZE * 3 + (blockWidth - containerWidth) / 2 - 3 }}>karte</h1>
       <img
         ref={svgRef}
         src={croatiaSvg}

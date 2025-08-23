@@ -1,5 +1,5 @@
 section
-  font-family: 'Poppins'
+  font-family: Poppins, sans-serif
   font-weight: 400
   font-size: 1.375rem
   line-height: 1.8
@@ -9,7 +9,7 @@ section
   &.leaflet-control-layers-list
     margin: 0
     max-width: 410px
-    padding: 20px
+    padding: 10px
     font-size: 1rem
 
   &.dark
@@ -20,6 +20,12 @@ section
       padding: 88px 96px
       position: relative
       width: 100%
+
+      .read-more-trigger
+        color: #FFFFFF
+        font-size: 0.875em
+        opacity: 0.85
+        margin-bottom: -3.5em
 
       @media (max-width: 640px)
         padding: 48px 32px
@@ -39,6 +45,9 @@ section
         height: 56px
         background-color: #000000
         z-index: 1000
+
+        @media (max-width: 768px)
+          display: none
 
   @media (max-width: 640px)
     margin: 48px 0

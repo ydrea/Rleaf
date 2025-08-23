@@ -1,146 +1,182 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { useSwipeable } from 'react-swipeable'
 
 import {
-  setSelectedPhoto,
   selectPhotos,
   getPhotos,
   setSelectedPhotoIndex,
   selectSelectedPhotoIndex,
-  increment,
-  decrement,
   selectFilteredPhotos
 } from '../../redux/rtk/gallerySlice'
-import { Hline } from '../../components/Hline/Hline'
 import { useAppDispatch } from '../../redux/hooks'
+import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithSuspense'
+import { Loader } from '../../components/Loader/Loader'
 import './Photo.sass'
 
 export const Photo = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { signatura } = useParams()
-
+  const { photoId } = useParams()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isVertical, setIsVertical] = useState(false)
+  const [notFound, setNotFound] = useState(false)
+  const [loading, setLoading] = useState(true)
   const selectedPhotoIndex = useSelector(selectSelectedPhotoIndex)
-  console.log(selectedPhotoIndex)
-  const fphotos = useSelector(selectFilteredPhotos)
+  const filteredPhotos = useSelector(selectFilteredPhotos)
   const photos = useSelector(selectPhotos)
-  //
-  useEffect(() => {
-    console.log(fphotos)
-    dispatch(getPhotos())
-  }, [dispatch])
 
-  useEffect(() => {
-    const photoIndex = fphotos.findIndex((photo) => {
-      dispatch(setSelectedPhoto(photo.signatura))
-      return photo.signatura === signatura
-    })
+  const selectedPhoto = filteredPhotos[selectedPhotoIndex]
 
-    dispatch(setSelectedPhotoIndex(photoIndex))
-  }, [dispatch, photos, signatura])
-
-  const selectedPhoto = fphotos[selectedPhotoIndex]
-  console.log(selectedPhoto)
-  if (!selectedPhoto) {
-    return <div>Photo not found</div>
-  }
-
-  //to gallery
   const handleBackToGallery = () => {
     navigate('/photos')
   }
 
-  //show on map
   const handleShowOnMap = () => {
-    dispatch(setSelectedPhoto(signatura))
-    navigate(`/maps/${signatura}#mapcnt`)
+    navigate(`/maps/${photoId}`)
   }
 
-  //remove .ext
-  const removeFileExtension = (fileName: string) => {
-    const lastDotIndex = fileName.lastIndexOf('.')
-    if (lastDotIndex === -1) {
-      return fileName //
+  const navigateToPreviousImage = () => {
+    if (selectedPhotoIndex > 0) {
+      navigate(`/photos/${filteredPhotos[selectedPhotoIndex - 1].id}`)
     }
-    return fileName.substring(0, lastDotIndex)
+  }
+
+  const navigateToNextImage = () => {
+    if (selectedPhotoIndex < filteredPhotos.length - 1) {
+      navigate(`/photos/${filteredPhotos[selectedPhotoIndex + 1].id}`)
+    }
+  }
+
+  const handlers = useSwipeable({
+    onSwipedLeft: navigateToNextImage,
+    onSwipedRight: navigateToPreviousImage,
+    trackMouse: true
+  })
+
+  const isVerticalImage = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const width = e.currentTarget.width ?? 0
+    const height = e.currentTarget.height ?? 0
+
+    setIsVertical(width < height)
+  }
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [selectedPhoto])
+
+  useEffect(() => {
+    if (filteredPhotos.length === 0 && loading) {
+      dispatch(getPhotos(() => setLoading(false)))
+    }
+
+    if (filteredPhotos.length > 0 && loading) {
+      setLoading(false)
+    }
+  }, [dispatch, filteredPhotos.length, loading])
+
+  useEffect(() => {
+    setIsVertical(false)
+  }, [photoId])
+
+  useEffect(() => {
+    const photoIndex = filteredPhotos.findIndex((photo) => photo.id === Number(photoId))
+
+    dispatch(setSelectedPhotoIndex(photoIndex))
+    setNotFound(filteredPhotos.length > 0 && photoIndex === -1)
+  }, [dispatch, photos, photoId, filteredPhotos])
+
+  if (loading) {
+    return <Loader />
+  }
+
+  if (notFound) {
+    return (
+      <p style={{ textAlign: 'center', margin: '100px 0' }}>
+        Fotografija nije pronađena
+        <br />
+        <Link to='/photos'>Povratak u galeriju</Link>
+      </p>
+    )
   }
 
   return (
-    <div id='imgcnt' className='cont'>
-      <div className='comands-container'>
-        <div onClick={handleBackToGallery} className='cc-link'>
-          natrag u galeriju
+    <div {...handlers}>
+      <div id='single-image-container' ref={containerRef}>
+        <div className='navigation'>
+          <div onClick={handleBackToGallery} className='cc-link'>
+            natrag u galeriju
+          </div>
+          <div className='cc'>
+            {selectedPhotoIndex + 1} / {filteredPhotos.length}
+          </div>
+          <div onClick={handleShowOnMap} className='cc-link'>
+            pokaži na karti
+          </div>
         </div>
-        <div className='cc'>
-          {selectedPhotoIndex + 1} / {fphotos.length}
-        </div>
-        <div onClick={handleShowOnMap} className='cc-link'>
-          pokaži na karti
-        </div>
-      </div>
-      <div className='image-wrapper'>
-        <FaChevronLeft
-          className='prev'
-          onClick={() => {
-            if (selectedPhotoIndex > 0) {
-              dispatch(decrement())
-            }
-          }}
-        />
-        <div className='img-cnt'>
-          <img
-            src={
-              selectedPhoto ? `${import.meta.env.VITE_SERVER_PUB}/${selectedPhoto.signatura}` : ''
-            }
-            alt={selectedPhoto.naziv}
-          />
-        </div>
+        <div className='image-wrapper'>
+          {selectedPhotoIndex > 0 && (
+            <div className='next-prev-cnt prev' onClick={navigateToPreviousImage}>
+              <FaChevronLeft size={48} />
+            </div>
+          )}
 
-        <FaChevronRight
-          className='next'
-          onClick={() => {
-            if (selectedPhotoIndex < fphotos.length - 1) {
-              dispatch(increment())
-            }
-          }}
-        />
-      </div>{' '}
-      <div className='selected-div1'>
-        {selectedPhoto.signatura && (
-          <>
-            <div className='t'>signatura:</div>
-            <div className='d'>{removeFileExtension(selectedPhoto.signatura)}</div>
-          </>
-        )}
-        {selectedPhoto.kategorija && (
-          <>
-            <div className='t'>kategorija:</div>
-            <div className='d'>{selectedPhoto.kategorija}</div>
-          </>
-        )}{' '}
-        {selectedPhoto.lokacija && (
-          <>
-            <div className='t'>lokacija:</div>
-            <div className='d'>{selectedPhoto.lokacija}</div>
-          </>
-        )}
-        {selectedPhoto.opis && (
-          <>
-            <div className='t'>opis:</div>
-            <div className='d'>{selectedPhoto.opis}</div>
-          </>
-        )}
-        {selectedPhoto.autor && (
-          <>
-            <div className='t'>autor:</div>
-            <div className='d'>{selectedPhoto.autor}</div>
-          </>
-        )}
-        {selectedPhoto.tagovi && <div className='tag'>ključne riječi | {selectedPhoto.tagovi}</div>}
+          {selectedPhoto?.signatura && (
+            <div className={`single-image ${isVertical ? 'vertical' : ''}`}>
+              <ImageWithSuspense
+                src={`${import.meta.env.VITE_SERVER_PUB}/${selectedPhoto.signatura}`}
+                alt={selectedPhoto.naziv}
+                onLoad={isVerticalImage}
+              />
+            </div>
+          )}
+
+          {selectedPhotoIndex < filteredPhotos.length - 1 && (
+            <div className='next-prev-cnt next' onClick={navigateToNextImage}>
+              <FaChevronRight size={48} />
+            </div>
+          )}
+        </div>
+        <div className='photo-data'>
+          {selectedPhoto.signatura && (
+            <div className='photo-data-item'>
+              <div>signatura:</div>
+              <div>{selectedPhoto.signatura.replace(/\.[^.]*$/, '')}</div>
+            </div>
+          )}
+          {selectedPhoto.kategorija && (
+            <div className='photo-data-item'>
+              <div>kategorija:</div>
+              <div>{selectedPhoto.kategorija}</div>
+            </div>
+          )}
+          {selectedPhoto.lokacija && (
+            <div className='photo-data-item'>
+              <div>lokacija:</div>
+              <div>{selectedPhoto.lokacija}</div>
+            </div>
+          )}
+          {selectedPhoto.opis && (
+            <div className='photo-data-item'>
+              <div>opis:</div>
+              <div>{selectedPhoto.opis}</div>
+            </div>
+          )}
+          {selectedPhoto.autor && (
+            <div className='photo-data-item'>
+              <div>autor:</div>
+              <div>{selectedPhoto.autor}</div>
+            </div>
+          )}
+          {selectedPhoto.tagovi && (
+            <div className='tag'>ključne riječi | {selectedPhoto.tagovi}</div>
+          )}
+        </div>
       </div>
-      <Hline color='#7e7e77' height={2} width='100' />{' '}
     </div>
   )
 }

@@ -39,6 +39,10 @@ export const router = createBrowserRouter([
         element: <Home />
       },
       {
+        path: 'essays',
+        element: <Home />
+      },
+      {
         path: 'projects/banija',
         element: <Banija />
       },
@@ -47,12 +51,14 @@ export const router = createBrowserRouter([
         element: <Ewap />
       },
       {
-        path: 'maps/:signatura',
-        element: <Karta />
-      },
-      {
         path: 'maps',
-        element: <Karta />
+        element: <Karta />,
+        children: [
+          {
+            path: ':photoId',
+            element: <Karta />
+          }
+        ]
       },
       {
         path: 'login',
@@ -66,7 +72,7 @@ export const router = createBrowserRouter([
             element: <Photos />
           },
           {
-            path: 'photos/:signatura',
+            path: 'photos/:photoId',
             element: <Photo />
           }
         ]

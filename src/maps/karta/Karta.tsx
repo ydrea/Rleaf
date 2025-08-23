@@ -1,30 +1,77 @@
-import { MapContainer, TileLayer, LayersControl, ZoomControl, Pane } from 'react-leaflet'
+import { MapContainer, TileLayer, LayersControl, ZoomControl } from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useViewportSize } from '@mantine/hooks'
+import { useSelector } from 'react-redux'
+import { useMap } from 'react-leaflet'
+import type { LayersControlEvent } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'react-tabs/style/react-tabs.css'
 
+import type { Photo } from '../../types/types'
+import type { RootState } from '../../redux/store'
 import { layers } from './constants'
 import { BetterWMS } from './components/BetterWMS/BetterWMS'
+import { getPhotos } from '../../redux/rtk/gallerySlice'
 import { SingleMarker } from './components/SingleMarker/SingleMarker'
+import { useAppDispatch } from '../../redux/hooks'
+import { useWindowWidth } from '../../services/use-window-width/use-window-width'
+import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithSuspense'
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
-// import { FiksniElementi, PodRV, PodRvi, PodRd, PodK } from '../wms'
 import './Karta.sass'
 
-export const Karta = () => {
-  const { signatura } = useParams()
-  const [kartografije, kartografijeSet] = useState<string>('https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png')
-  const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
-  const viewport = useViewportSize()
-
-const handleBaseLayerChange = (e: any) => {}
+const LayerHandler = ({ kartografijeSet }: { kartografijeSet: (url: string) => void }) => {
+  const map = useMap()
 
   useEffect(() => {
-    if (signatura) {
-      selectedLayerSet(layers.temafk.id)
+    const handleBaseLayerChange = (e: LayersControlEvent) => {
+      if (e.name === 'reljef') {
+        kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png')
+      } else {
+        kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png')
+      }
     }
-  }, [signatura])
+
+    map.on('baselayerchange', handleBaseLayerChange)
+
+    return () => {
+      map.off('baselayerchange', handleBaseLayerChange)
+    }
+  }, [map, kartografijeSet])
+
+  return null
+}
+
+export const Karta = () => {
+  const { photoId } = useParams()
+  const dispatch = useAppDispatch()
+  const windowWidth = useWindowWidth()
+  const photos = useSelector((state: RootState) => state.gallery.photos)
+  const [kartografije, kartografijeSet] = useState<string>(
+    'https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png'
+  )
+  const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
+  const [currentPhoto, currentPhotoSet] = useState<Photo | null>(null)
+
+  useEffect(() => {
+    if (photoId && selectedLayer !== layers.temafk.id) {
+      selectedLayerSet(layers.temafk.id)
+
+      if (photos.length === 0) {
+        dispatch(getPhotos())
+      }
+    }
+
+    if (photoId && photos.length > 0) {
+      const photo = photos.find((photo) => photo.id === Number(photoId))
+
+      if (photo) {
+        currentPhotoSet({
+          ...photo,
+          foto_url: photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
+        })
+      }
+    }
+  }, [photoId, dispatch, photos, selectedLayer])
 
   const { BaseLayer, Overlay } = LayersControl
 
@@ -40,7 +87,7 @@ const handleBaseLayerChange = (e: any) => {}
         </p>
       </BlockWithStickyTitle>
 
-      <section className='map' id='mapcnt'>
+      <section className='map' id='map-container'>
         <MapContainer
           center={[45.2, 16.2]}
           zoom={10}
@@ -52,35 +99,49 @@ const handleBaseLayerChange = (e: any) => {}
           }}
           zoomControl={false}
         >
+          {currentPhoto?.signatura && (
+            <div className='leaflet-bottom leaflet-right photo-popup'>
+              <ul>
+                <li>{currentPhoto?.signatura}</li>
+                <li>{currentPhoto?.naziv}</li>
+                <li>{currentPhoto?.opis}</li>
+                <li>{currentPhoto?.lokacija}</li>
+                <li>{currentPhoto?.datum_sni}</li>
+                <li>{currentPhoto?.kategorija}</li>
+                <li>{currentPhoto?.autor}</li>
+                <li>{currentPhoto?.tagovi}</li>
+              </ul>
+              {currentPhoto?.foto_url && (
+                <ImageWithSuspense src={currentPhoto?.foto_url} alt={currentPhoto?.naziv} />
+              )}
+            </div>
+          )}
 
           <LayerHandler kartografijeSet={kartografijeSet} />
           <ZoomControl position='bottomright' />
-          <LayersControl collapsed={viewport.width < 1248}
-          
-//  baselayerchange={handleBaseLayerChange  }
-          >
-
+          <LayersControl collapsed={windowWidth < 1248}>
             <BaseLayer checked name='reljef'>
-           <TileLayer url='https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg'
-           />
+              <TileLayer url='https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg' />
             </BaseLayer>
 
             <BaseLayer name='satelitska fotografija (ESRI)'>
-              <TileLayer 
-              attribution='Source: Esri, Maxar, Earthstar Geographics)'
-              url=
-             'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' 
-            //  minZoom={8}
-             maxZoom={20}
-                maxNativeZoom={30}/>
+              <TileLayer
+                attribution='Source: Esri, Maxar, Earthstar Geographics)'
+                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+                maxZoom={20}
+                maxNativeZoom={30}
+              />
             </BaseLayer>
 
-           <Overlay checked name='Kartografija'>
+            <Overlay checked name='Kartografija'>
               <TileLayer url={kartografije} />
             </Overlay>
 
-{/* fiksni_elementi */}
-<TileLayer url='https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png' zIndex={999} />
+            {/* fiksni_elementi */}
+            <TileLayer
+              url='https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png'
+              zIndex={999}
+            />
 
             <Overlay key={layers.temakz.id} name={layers.temakz.name}>
               <BetterWMS
@@ -129,45 +190,14 @@ const handleBaseLayerChange = (e: any) => {}
                 id={layers.temafk.id}
                 url={layers.temafk.url}
                 layers={layers.temafk.layers}
+                onSelectPhoto={currentPhotoSet}
                 {...layers.temafk.props}
               />
             </Overlay>
- 
-   
           </LayersControl>
-          {signatura && <SingleMarker />}
+          {photoId && <SingleMarker />}
         </MapContainer>
       </section>
     </div>
   )
-}
-
-
-// New component to handle layer changes
-const LayerHandler = ({ kartografijeSet }: { kartografijeSet: (url: string) => void }) => {
-  const map = useMap()
-
-  useEffect(() => {
-    const handleBaseLayerChange = (e: any) => {
-      if (e.name === 'reljef') {
-        kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png')
-      } else {
-        kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png')
-      }
-    }
-
-    map.on('baselayerchange', handleBaseLayerChange)
-
-    return () => {
-      map.off('baselayerchange', handleBaseLayerChange)
-    }
-  }, [map, kartografijeSet])
-
-  return null
-}
-
-import { useMap as useLeafletMap } from 'react-leaflet'
-
-function useMap() {
-  return useLeafletMap();
 }

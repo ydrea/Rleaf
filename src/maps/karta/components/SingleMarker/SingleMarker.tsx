@@ -3,11 +3,13 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { selectSelectedPhoto } from '../../../../redux/rtk/gallerySlice'
+import type { RootState } from '../../../../redux/store'
 
 export const SingleMarker = () => {
-  const { signatura } = useParams()
-  const markerData = useSelector(selectSelectedPhoto)
+  const { photoId } = useParams()
+  const markerData = useSelector((state: RootState) =>
+    state.gallery.photos.find((photo) => photo.id === Number(photoId))
+  )
 
   const geojsonObject = JSON.parse(markerData?.geojson ?? '{}')
   const coordinates = geojsonObject?.coordinates ?? []
@@ -19,14 +21,14 @@ export const SingleMarker = () => {
   const map = useMap()
 
   useEffect(() => {
-    if (signatura && markerData && markerData.geojson) {
+    if (photoId && markerData && markerData.geojson) {
       if (lat !== undefined && lng !== undefined) {
         map.flyTo([lng, lat], 21)
       } else {
         console.error('Invalid coordinates:', lat, lng)
       }
     }
-  }, [signatura, markerData, lat, lng, map])
+  }, [photoId, markerData, lat, lng, map])
 
   return null
 }
