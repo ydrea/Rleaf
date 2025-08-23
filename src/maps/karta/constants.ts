@@ -27,7 +27,7 @@ export const layers = {
       tiles: true,
       zIndex: 150,
       uppercase: true,
-      opacity: 0.8
+      opacity: 1
     }
   },
 
@@ -113,9 +113,9 @@ export const layers = {
 
   temakz: {
     id: '778',
-    name: 'poljop. korištenje zemljišta (CORINE)',
+    name: 'korištenje zemljišta',
     url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
-    layers: 'tema_koristenje_zemljista',
+    layers: 'tema_koristenje_zemljista_novo',
     props: {
       version: '1.1',
       format: 'image/png',
@@ -177,7 +177,7 @@ export const layers = {
 
   temafk: {
     id: '782',
-    name: 'FOTOTEKA',
+    name: 'Foto katalog',
     url: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE',
     layers: 'preklop_foto_katalog',
     props: {
@@ -187,7 +187,7 @@ export const layers = {
       tiles: true,
       zIndex: 150,
       uppercase: true,
-      opacity: 0.8,
+      opacity: 1,
       maxZoom: 28
     }
   }

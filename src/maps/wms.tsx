@@ -307,7 +307,7 @@ export const FiksniElementi = () => {
     'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE'
 
   const wmsLayerOptions = {
-    zIndex: 6,
+    // zIndex: 6,
     layers: 'fiksni_elementi_2_0',
     format: 'image/png',
     transparent: true,
@@ -323,9 +323,9 @@ export const FiksniElementi = () => {
 export const TemaKZ = () => {
   const url =
     'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1754872.467,5620507.321,1879303.557,5702013.38&WIDTH=382&HEIGHT=266&FORMAT=image/png&CRS=EPSG:3857&STYLE=default&SLD_VERSION=1.1.0&TILED=TRUE'
-
+  // https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=tema_koristenje_zemljista_novo&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0
   const wmsLayerOptions = {
-    layers: 'tema_koristenje_zemljista',
+    layers: 'tema_koristenje_zemljista_novo',
     format: 'image/png',
     transparent: true,
     version: '1.3.0',
