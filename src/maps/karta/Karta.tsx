@@ -18,11 +18,22 @@ import { useWindowWidth } from '../../services/use-window-width/use-window-width
 import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithSuspense'
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import './Karta.sass'
+import { useViewportSize } from '@mantine/hooks'
+import { MapLegends } from './components/Legends'
 
-const LayerHandler = ({ kartografijeSet }: { kartografijeSet: (url: string) => void }) => {
-  const map = useMap()
+const LayerHandler = ({ 
+  kartografijeSet, 
+  onLayersChange 
+}: { 
+  kartografijeSet: (url: string) => void;
+  onLayersChange: (activeLayers: Set<string>) => void;
+}) => {
+  const map = useMap();
 
   useEffect(() => {
+
+    const activeLayers = new Set<string>();
+
     const handleBaseLayerChange = (e: LayersControlEvent) => {
       if (e.name === 'reljef') {
         kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png')
@@ -31,12 +42,31 @@ const LayerHandler = ({ kartografijeSet }: { kartografijeSet: (url: string) => v
       }
     }
 
-    map.on('baselayerchange', handleBaseLayerChange)
+// Legends handling
+const handleOverlayChange = (e: any) => {
+  const layerId = e.layer.options.id;   // ✅ capture the correct ID
+
+  if (e.type === 'overlayadd') {
+    activeLayers.add(layerId);
+  } else if (e.type === 'overlayremove') {
+    activeLayers.delete(layerId);
+  }
+  onLayersChange(new Set(activeLayers));
+};
+
+ // Set up event listeners
+    map.on('baselayerchange', handleBaseLayerChange);
+    map.on('overlayadd', handleOverlayChange);
+    map.on('overlayremove', handleOverlayChange);
+
+    // map.on('baselayerchange', handleBaseLayerChange)
 
     return () => {
       map.off('baselayerchange', handleBaseLayerChange)
+      map.off('overlayadd', handleOverlayChange)
+      map.off('overlayremove', handleOverlayChange)
     }
-  }, [map, kartografijeSet])
+  }, [map, kartografijeSet, onLayersChange])
 
   return null
 }
@@ -49,8 +79,17 @@ export const Karta = () => {
   const [kartografije, kartografijeSet] = useState<string>(
     'https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png'
   )
+
+  const [activeLayers, setActiveLayers] = useState<Set<string>>(new Set()) // Move this up!
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
   const [currentPhoto, currentPhotoSet] = useState<Photo | null>(null)
+  const viewport = useViewportSize()
+
+
+  // Handle layer changes
+  const handleLayersChange = (layers: Set<string>) => {
+    setActiveLayers(layers);
+  };
 
   useEffect(() => {
     if (photoId && selectedLayer !== layers.temafk.id) {
@@ -62,7 +101,7 @@ export const Karta = () => {
     }
 
     if (photoId && photos.length > 0) {
-      const photo = photos.find((photo) => photo.id === Number(photoId))
+      const photo = photos.find((photo: any) => photo.id === Number(photoId))
 
       if (photo) {
         currentPhotoSet({
@@ -117,7 +156,8 @@ export const Karta = () => {
             </div>
           )}
 
-          <LayerHandler kartografijeSet={kartografijeSet} />
+          <LayerHandler kartografijeSet={kartografijeSet} 
+          onLayersChange={handleLayersChange} />
           <ZoomControl position='bottomright' />
           <LayersControl collapsed={windowWidth < 1248}>
             <BaseLayer checked name='reljef'>
@@ -197,7 +237,12 @@ export const Karta = () => {
           </LayersControl>
           {photoId && <SingleMarker />}
         </MapContainer>
+<MapLegends activeLayers={activeLayers}/>
       </section>
     </div>
   )
 }
+// function setActiveLayers(layers: Set<string>) {
+//   throw new Error('Function not implemented.')
+// }
+
