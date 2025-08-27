@@ -125,8 +125,8 @@ export const Karta = () => {
           potrebama.
         </p>
       </BlockWithStickyTitle>
-
-      <section className='map' id='map-container'>
+<div className='map'>
+      <section  id='map-container'>
         <MapContainer
           center={[45.2, 16.2]}
           zoom={10}
@@ -239,6 +239,7 @@ export const Karta = () => {
         </MapContainer>
 <MapLegends activeLayers={activeLayers}/>
       </section>
+</div>
     </div>
   )
 }
