@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
 import { useCanvasSizing } from '../../services/use-canvas-sizing/use-canvas-sizing'
 import { Loader } from '../Loader/Loader'
+import './SceneGLTF.sass'
 
 type Props = {
   width?: number
@@ -111,7 +112,7 @@ export const SceneGLTF = ({
   }, [width, height])
 
   return (
-    <div ref={blockRef} className='canvas-block three-d-scene'>
+    <div ref={blockRef} className='canvas-block scene-gltf'>
       <div
         style={{
           position: 'absolute',
