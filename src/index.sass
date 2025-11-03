@@ -53,18 +53,18 @@ li + li
 
 a, a:visited
   color: #646464
-  text-decoration-color: #00000033
-  text-decoration-thickness: 1.5px
+  text-decoration-color: #646464
+  text-decoration-thickness: 0.5px
   text-underline-offset: 2px
-  transition: text-decoration-color 0.2s ease-in-out
+  transition: text-decoration-color 0.2s ease-in-out, color 0.2s ease-in-out
 
-  &:visited
-    color: #909090
-    text-decoration-color: #00000022
+a:visited
+  color: #909090
+  text-decoration-color: #909090
 
-  &:hover
-    color: #000000
-    text-decoration-color: #000000
+a:hover
+  color: #000000
+  text-decoration-color: #000000
 
 img
   max-width: 100%
@@ -80,27 +80,27 @@ img
 //  Layout
 
 #root
+  margin: 0 auto
+  padding: 92px 0
+
+.container
   max-width: 1680px
   margin: 0 auto
-  padding: 92px
-
-  @media (max-width: 1152px)
-    padding: 46px
-
-  @media (max-width: 640px)
-    padding: 32px
+  padding: 0 92px
 
 .canvas-block
   position: relative
   margin-top: 80px
 
-  @media (max-width: 640px)
-    margin: 0 -32px
-
   .canvas-container
     overflow: hidden
     position: relative
     margin: 0 auto
+    opacity: 1
+    transition: opacity 0.5s ease
+
+    &.loading
+      opacity: 0
 
     canvas
       cursor: default

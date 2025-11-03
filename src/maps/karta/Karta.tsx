@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useMap } from 'react-leaflet'
-import type { LayersControlEvent } from 'leaflet'
+import type { LayerOptions, LayersControlEvent } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'react-tabs/style/react-tabs.css'
 
@@ -17,22 +17,20 @@ import { useAppDispatch } from '../../redux/hooks'
 import { useWindowWidth } from '../../services/use-window-width/use-window-width'
 import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithSuspense'
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
-import './Karta.sass'
-import { useViewportSize } from '@mantine/hooks'
 import { MapLegends } from './components/Legends'
+import './Karta.sass'
 
-const LayerHandler = ({ 
-  kartografijeSet, 
-  onLayersChange 
-}: { 
-  kartografijeSet: (url: string) => void;
-  onLayersChange: (activeLayers: Set<string>) => void;
+const LayerHandler = ({
+  kartografijeSet,
+  onLayersChange
+}: {
+  kartografijeSet: (url: string) => void
+  onLayersChange: (activeLayers: Set<string>) => void
 }) => {
-  const map = useMap();
+  const map = useMap()
 
   useEffect(() => {
-
-    const activeLayers = new Set<string>();
+    const activeLayers = new Set<string>()
 
     const handleBaseLayerChange = (e: LayersControlEvent) => {
       if (e.name === 'reljef') {
@@ -42,24 +40,23 @@ const LayerHandler = ({
       }
     }
 
-// Legends handling
-const handleOverlayChange = (e: any) => {
-  const layerId = e.layer.options.id;   // ✅ capture the correct ID
+    // Legends handling
+    const handleOverlayChange = (e: LayersControlEvent) => {
+      const options = e.layer.options as LayerOptions & { id: string }
+      const layerId = options.id // ✅ capture the correct ID
 
-  if (e.type === 'overlayadd') {
-    activeLayers.add(layerId);
-  } else if (e.type === 'overlayremove') {
-    activeLayers.delete(layerId);
-  }
-  onLayersChange(new Set(activeLayers));
-};
+      if (e.type === 'overlayadd') {
+        activeLayers.add(layerId)
+      } else if (e.type === 'overlayremove') {
+        activeLayers.delete(layerId)
+      }
+      onLayersChange(new Set(activeLayers))
+    }
 
- // Set up event listeners
-    map.on('baselayerchange', handleBaseLayerChange);
-    map.on('overlayadd', handleOverlayChange);
-    map.on('overlayremove', handleOverlayChange);
-
-    // map.on('baselayerchange', handleBaseLayerChange)
+    // Set up event listeners
+    map.on('baselayerchange', handleBaseLayerChange)
+    map.on('overlayadd', handleOverlayChange)
+    map.on('overlayremove', handleOverlayChange)
 
     return () => {
       map.off('baselayerchange', handleBaseLayerChange)
@@ -75,6 +72,7 @@ export const Karta = () => {
   const { photoId } = useParams()
   const dispatch = useAppDispatch()
   const windowWidth = useWindowWidth()
+  const [isVertical, setIsVertical] = useState(false)
   const photos = useSelector((state: RootState) => state.gallery.photos)
   const [kartografije, kartografijeSet] = useState<string>(
     'https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png'
@@ -82,14 +80,23 @@ export const Karta = () => {
 
   const [activeLayers, setActiveLayers] = useState<Set<string>>(new Set()) // Move this up!
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
-  const [currentPhoto, currentPhotoSet] = useState<Photo | null>(null)
-  const viewport = useViewportSize()
-
+  const [selectedPhoto, selectedPhotoSet] = useState<Photo | null>(null)
 
   // Handle layer changes
   const handleLayersChange = (layers: Set<string>) => {
-    setActiveLayers(layers);
-  };
+    setActiveLayers(layers)
+  }
+
+  const isVerticalImage = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const width = e.currentTarget.width ?? 0
+    const height = e.currentTarget.height ?? 0
+
+    setIsVertical(width < height)
+  }
+
+  useEffect(() => {
+    setIsVertical(false)
+  }, [photoId])
 
   useEffect(() => {
     if (photoId && selectedLayer !== layers.temafk.id) {
@@ -101,10 +108,10 @@ export const Karta = () => {
     }
 
     if (photoId && photos.length > 0) {
-      const photo = photos.find((photo: any) => photo.id === Number(photoId))
+      const photo = photos.find((photo: Photo) => photo.id === Number(photoId))
 
       if (photo) {
-        currentPhotoSet({
+        selectedPhotoSet({
           ...photo,
           foto_url: photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
         })
@@ -115,7 +122,7 @@ export const Karta = () => {
   const { BaseLayer, Overlay } = LayersControl
 
   return (
-    <div>
+    <>
       <BlockWithStickyTitle title='Mape'>
         <p>
           Dobrodošli na interaktivnu kartu "Opservatorija krajobraza". Ova karta predstavlja našu
@@ -125,125 +132,133 @@ export const Karta = () => {
           potrebama.
         </p>
       </BlockWithStickyTitle>
-<div className='map'>
-      <section  id='map-container'>
-        <MapContainer
-          center={[45.2, 16.2]}
-          zoom={10}
-          maxZoom={28}
-          style={{
-            width: '100%',
-            height: '90vh',
-            cursor: 'crosshair'
-          }}
-          zoomControl={false}
-        >
-          {currentPhoto?.signatura && (
-            <div className='leaflet-bottom leaflet-right photo-popup'>
-              <ul>
-                <li>{currentPhoto?.signatura}</li>
-                <li>{currentPhoto?.naziv}</li>
-                <li>{currentPhoto?.opis}</li>
-                <li>{currentPhoto?.lokacija}</li>
-                <li>{currentPhoto?.datum_sni}</li>
-                <li>{currentPhoto?.kategorija}</li>
-                <li>{currentPhoto?.autor}</li>
-                <li>{currentPhoto?.tagovi}</li>
-              </ul>
-              {currentPhoto?.foto_url && (
-                <ImageWithSuspense src={currentPhoto?.foto_url} alt={currentPhoto?.naziv} />
-              )}
-            </div>
-          )}
+      <div className='map'>
+        <section id='map-container'>
+          <MapContainer
+            center={[45.2, 16.2]}
+            zoom={10}
+            maxZoom={28}
+            style={{
+              width: '100%',
+              height: '90vh',
+              cursor: 'crosshair'
+            }}
+            zoomControl={false}
+          >
+            {selectedPhoto?.signatura && (
+              <div className='leaflet-bottom leaflet-right photo-popup'>
+                <ul>
+                  {selectedPhoto?.signatura && (
+                    <li>{selectedPhoto.signatura.replace(/\.[^.]*$/, '')}</li>
+                  )}
+                  {selectedPhoto?.kategorija && <li>kategorija: {selectedPhoto.kategorija}</li>}
+                  {selectedPhoto?.lokacija && <li>lokacija: {selectedPhoto.lokacija}</li>}
+                  {selectedPhoto?.opis && <li>opis: {selectedPhoto.opis}</li>}
+                  {selectedPhoto?.autor && <li>fotograf: {selectedPhoto.autor}</li>}
+                  {selectedPhoto?.tagovi && (
+                    <li>
+                      ključne riječi:{' '}
+                      {selectedPhoto?.tagovi
+                        .split(',')
+                        .map((tag) => tag.trim())
+                        .join(', ')}
+                    </li>
+                  )}
+                </ul>
+                {selectedPhoto?.foto_url && (
+                  <div className={`image-wrapper ${isVertical ? 'vertical' : ''}`}>
+                    <ImageWithSuspense
+                      src={selectedPhoto?.foto_url}
+                      alt={selectedPhoto?.naziv}
+                      onLoad={isVerticalImage}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
 
-          <LayerHandler kartografijeSet={kartografijeSet} 
-          onLayersChange={handleLayersChange} />
-          <ZoomControl position='bottomright' />
-          <LayersControl collapsed={windowWidth < 1248}>
-            <BaseLayer checked name='reljef'>
-              <TileLayer url='https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg' />
-            </BaseLayer>
+            <LayerHandler kartografijeSet={kartografijeSet} onLayersChange={handleLayersChange} />
+            <ZoomControl position='bottomright' />
+            <LayersControl collapsed={windowWidth < 1248}>
+              <BaseLayer checked name='reljef'>
+                <TileLayer url='https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg' />
+              </BaseLayer>
 
-            <BaseLayer name='satelitska fotografija (ESRI)'>
+              <BaseLayer name='satelitska fotografija (ESRI)'>
+                <TileLayer
+                  attribution='Source: Esri, Maxar, Earthstar Geographics)'
+                  url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+                  maxZoom={20}
+                  maxNativeZoom={30}
+                />
+              </BaseLayer>
+
+              <Overlay checked name='Kartografija'>
+                <TileLayer url={kartografije} />
+              </Overlay>
+
               <TileLayer
-                attribution='Source: Esri, Maxar, Earthstar Geographics)'
-                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-                maxZoom={20}
-                maxNativeZoom={30}
+                url='https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png'
+                zIndex={999}
               />
-            </BaseLayer>
 
-            <Overlay checked name='Kartografija'>
-              <TileLayer url={kartografije} />
-            </Overlay>
+              <Overlay key={layers.temakz.id} name={layers.temakz.name}>
+                <BetterWMS
+                  key={layers.temakz.id}
+                  id={layers.temakz.id}
+                  url={layers.temakz.url}
+                  layers={layers.temakz.layers}
+                  {...layers.temakz.props}
+                />
+              </Overlay>
+              <Overlay key={layers.temazp.id} name={layers.temazp.name}>
+                <BetterWMS
+                  key={layers.temazp.id}
+                  id={layers.temazp.id}
+                  url={layers.temazp.url}
+                  layers={layers.temazp.layers}
+                  {...layers.temazp.props}
+                />
+              </Overlay>
 
-            {/* fiksni_elementi */}
-            <TileLayer
-              url='https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png'
-              zIndex={999}
-            />
-
-            <Overlay key={layers.temakz.id} name={layers.temakz.name}>
-              <BetterWMS
-                key={layers.temakz.id}
-                id={layers.temakz.id}
-                url={layers.temakz.url}
-                layers={layers.temakz.layers}
-                {...layers.temakz.props}
-              />
-            </Overlay>
-            <Overlay key={layers.temazp.id} name={layers.temazp.name}>
-              <BetterWMS
-                key={layers.temazp.id}
-                id={layers.temazp.id}
-                url={layers.temazp.url}
-                layers={layers.temazp.layers}
-                {...layers.temazp.props}
-              />
-            </Overlay>
-
-            <Overlay key={layers.temadz.id} name={layers.temadz.name}>
-              <BetterWMS
-                key={layers.temadz.id}
-                id={layers.temadz.id}
-                url={layers.temadz.url}
-                layers={layers.temadz.layers}
-                {...layers.temadz.props}
-              />
-            </Overlay>
-            <Overlay key={layers.temadgu.id} name={layers.temadgu.name}>
-              <BetterWMS
-                key={layers.temadgu.id}
-                id={layers.temadgu.id}
-                url={layers.temadgu.url}
-                layers={layers.temadgu.layers}
-                {...layers.temadgu.props}
-              />
-            </Overlay>
-            <Overlay
-              key={layers.temafk.id}
-              name={layers.temafk.name}
-              checked={selectedLayer === layers.temafk.id}
-            >
-              <BetterWMS
+              <Overlay key={layers.temadz.id} name={layers.temadz.name}>
+                <BetterWMS
+                  key={layers.temadz.id}
+                  id={layers.temadz.id}
+                  url={layers.temadz.url}
+                  layers={layers.temadz.layers}
+                  {...layers.temadz.props}
+                />
+              </Overlay>
+              <Overlay key={layers.temadgu.id} name={layers.temadgu.name}>
+                <BetterWMS
+                  key={layers.temadgu.id}
+                  id={layers.temadgu.id}
+                  url={layers.temadgu.url}
+                  layers={layers.temadgu.layers}
+                  {...layers.temadgu.props}
+                />
+              </Overlay>
+              <Overlay
                 key={layers.temafk.id}
-                id={layers.temafk.id}
-                url={layers.temafk.url}
-                layers={layers.temafk.layers}
-                onSelectPhoto={currentPhotoSet}
-                {...layers.temafk.props}
-              />
-            </Overlay>
-          </LayersControl>
-          {photoId && <SingleMarker />}
-        </MapContainer>
-<MapLegends activeLayers={activeLayers}/>
-      </section>
-</div>
-    </div>
+                name={layers.temafk.name}
+                checked={selectedLayer === layers.temafk.id}
+              >
+                <BetterWMS
+                  key={layers.temafk.id}
+                  id={layers.temafk.id}
+                  url={layers.temafk.url}
+                  layers={layers.temafk.layers}
+                  onSelectPhoto={selectedPhotoSet}
+                  {...layers.temafk.props}
+                />
+              </Overlay>
+            </LayersControl>
+            {photoId && <SingleMarker />}
+          </MapContainer>
+          <MapLegends activeLayers={activeLayers} />
+        </section>
+      </div>
+    </>
   )
 }
-// function setActiveLayers(layers: Set<string>) {
-//   throw new Error('Function not implemented.')
-// }
-

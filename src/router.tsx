@@ -13,6 +13,7 @@ import { Private } from './pages/Protected/Private'
 import { Karta } from './maps/karta/Karta'
 import { Layout } from './components/Layout/Layout'
 import { Home } from './pages/Home/Home'
+import { ThreeDScenes } from './pages/ThreeDScenes/ThreeDScenes'
 
 export const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '3d-scenes',
-        element: <Home />
+        element: <ThreeDScenes />
       },
       {
         path: 'essays',

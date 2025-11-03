@@ -20,7 +20,7 @@ const mousePositionToHex = (mousePositionX: number) => {
   return mousePositionXClampedHex
 }
 
-export const CameraSubject = ({ width = 1496, height = 869 }: Props) => {
+export const CameraSubject = ({ width = 1489, height = 869 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const cameraSvgRef = useRef<HTMLImageElement>(null)
   const [svgLoaded, setSvgLoaded] = useState(false)
@@ -28,7 +28,8 @@ export const CameraSubject = ({ width = 1496, height = 869 }: Props) => {
     useCanvasSizing({
       width,
       blockSize: BLOCK_SIZE,
-      blockSizeMultiplier: 2
+      blockSizeMultiplier: 2,
+      extraContainerWidth: 1
     })
 
   const mousePositionX = useMotionValue(1)
@@ -163,7 +164,14 @@ export const CameraSubject = ({ width = 1496, height = 869 }: Props) => {
 
   return (
     <div ref={blockRef} className='canvas-block camera-subject'>
-      <h1 style={{ left: BLOCK_SIZE + (blockWidth - containerWidth) / 2 - 3 }}>fototeka</h1>
+      <h1
+        style={{
+          left:
+            (canvasLeft < 0 ? 0 : canvasLeft) + BLOCK_SIZE + (blockWidth - containerWidth) / 2 - 3
+        }}
+      >
+        fototeka
+      </h1>
       <img
         ref={cameraSvgRef}
         src={cameraSvg}

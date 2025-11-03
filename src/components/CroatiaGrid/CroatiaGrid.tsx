@@ -11,16 +11,16 @@ type Props = {
   height?: number
 }
 
-export const CroatiaGrid = ({ width = 1496, height = 762 }: Props) => {
+export const CroatiaGrid = ({ width = 1483, height = 761 }: Props) => {
   const svgRef = useRef<HTMLImageElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
   const [mousePositionX, setMousePositionX] = useState(570)
   const [mousePositionY, setMousePositionY] = useState(266)
   const [svgLoaded, setSvgLoaded] = useState(false)
   const { windowWidth, containerWidth, canvasLeft, canvasRef, ctx, blockRef, blockWidth } =
     useCanvasSizing({
       width,
-      blockSize: BLOCK_SIZE
+      blockSize: BLOCK_SIZE,
+      extraContainerWidth: 1
     })
 
   useEffect(() => {
@@ -93,7 +93,17 @@ export const CroatiaGrid = ({ width = 1496, height = 762 }: Props) => {
 
   return (
     <div ref={blockRef} className='canvas-block croatia-grid'>
-      <h1 style={{ left: BLOCK_SIZE * 3 + (blockWidth - containerWidth) / 2 - 3 }}>karte</h1>
+      <h1
+        style={{
+          left:
+            (canvasLeft < 0 ? 0 : canvasLeft) +
+            BLOCK_SIZE * 3 +
+            (blockWidth - containerWidth) / 2 -
+            3
+        }}
+      >
+        karte
+      </h1>
       <img
         ref={svgRef}
         src={croatiaSvg}
@@ -101,7 +111,6 @@ export const CroatiaGrid = ({ width = 1496, height = 762 }: Props) => {
         onLoad={() => setSvgLoaded(true)}
       />
       <div
-        ref={containerRef}
         className='canvas-container'
         style={{
           width: containerWidth,

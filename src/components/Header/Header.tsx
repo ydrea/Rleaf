@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router'
 
 import logo from '../../assets/logo.svg'
 import { useWindowWidth } from '../../services/use-window-width/use-window-width'
+import { Container } from '../Container/Container'
 import './Header.sass'
 
 export const Header = () => {
@@ -23,7 +24,7 @@ export const Header = () => {
   }, [location, windowWidth])
 
   return (
-    <>
+    <Container className='container'>
       <header id='header' className={isMobileMenuOpen ? 'fixed' : ''}>
         <NavLink to='/'>
           <img src={logo} alt='logo' width={167} />
@@ -61,6 +62,6 @@ export const Header = () => {
         </menu>
       </header>
       <div className='dummy-header' />
-    </>
+    </Container>
   )
 }

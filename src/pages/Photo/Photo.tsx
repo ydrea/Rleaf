@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate, Link, NavLink } from 'react-router-dom'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { useSwipeable } from 'react-swipeable'
+import { useHotkeys } from '@mantine/hooks'
 
 import {
   selectPhotos,
@@ -30,13 +31,12 @@ export const Photo = () => {
 
   const selectedPhoto = filteredPhotos[selectedPhotoIndex]
 
-  const handleBackToGallery = () => {
-    navigate('/photos')
-  }
-
-  const handleShowOnMap = () => {
-    navigate(`/maps/${photoId}`)
-  }
+  const tags = selectedPhoto
+    ? selectedPhoto.tagovi
+        .split(',')
+        .map((tag) => tag.trim())
+        .join(', ')
+    : ''
 
   const navigateToPreviousImage = () => {
     if (selectedPhotoIndex > 0) {
@@ -49,6 +49,11 @@ export const Photo = () => {
       navigate(`/photos/${filteredPhotos[selectedPhotoIndex + 1].id}`)
     }
   }
+
+  useHotkeys([
+    ['ArrowLeft', navigateToPreviousImage],
+    ['ArrowRight', navigateToNextImage]
+  ])
 
   const handlers = useSwipeable({
     onSwipedLeft: navigateToNextImage,
@@ -106,18 +111,7 @@ export const Photo = () => {
 
   return (
     <div {...handlers}>
-      <div id='single-image-container' ref={containerRef}>
-        <div className='navigation'>
-          <div onClick={handleBackToGallery} className='cc-link'>
-            natrag u galeriju
-          </div>
-          <div className='cc'>
-            {selectedPhotoIndex + 1} / {filteredPhotos.length}
-          </div>
-          <div onClick={handleShowOnMap} className='cc-link'>
-            pokaži na karti
-          </div>
-        </div>
+      <div className='single-image-container container' ref={containerRef}>
         <div className='image-wrapper'>
           {selectedPhotoIndex > 0 && (
             <div className='next-prev-cnt prev' onClick={navigateToPreviousImage}>
@@ -141,40 +135,28 @@ export const Photo = () => {
             </div>
           )}
         </div>
-        <div className='photo-data'>
-          {selectedPhoto.signatura && (
-            <div className='photo-data-item'>
-              <div>signatura:</div>
-              <div>{selectedPhoto.signatura.replace(/\.[^.]*$/, '')}</div>
-            </div>
-          )}
-          {selectedPhoto.kategorija && (
-            <div className='photo-data-item'>
-              <div>kategorija:</div>
-              <div>{selectedPhoto.kategorija}</div>
-            </div>
-          )}
-          {selectedPhoto.lokacija && (
-            <div className='photo-data-item'>
-              <div>lokacija:</div>
-              <div>{selectedPhoto.lokacija}</div>
-            </div>
-          )}
-          {selectedPhoto.opis && (
-            <div className='photo-data-item'>
-              <div>opis:</div>
-              <div>{selectedPhoto.opis}</div>
-            </div>
-          )}
-          {selectedPhoto.autor && (
-            <div className='photo-data-item'>
-              <div>autor:</div>
-              <div>{selectedPhoto.autor}</div>
-            </div>
-          )}
-          {selectedPhoto.tagovi && (
-            <div className='tag'>ključne riječi | {selectedPhoto.tagovi}</div>
-          )}
+        <div className='image-footer'>
+          <ul className='photo-data'>
+            {selectedPhoto.signatura && (
+              <li>signatura: {selectedPhoto.signatura.replace(/\.[^.]*$/, '')}</li>
+            )}
+            {selectedPhoto.kategorija && <li>kategorija: {selectedPhoto.kategorija}</li>}
+            {selectedPhoto.lokacija && <li>lokacija: {selectedPhoto.lokacija}</li>}
+            {selectedPhoto.opis && <li>opis: {selectedPhoto.opis}</li>}
+            {selectedPhoto.autor && <li>fotograf: {selectedPhoto.autor}</li>}
+            {tags && <li>ključne riječi: {tags}</li>}
+          </ul>
+          <ul className='photo-data'>
+            <li className='cc'>
+              {selectedPhotoIndex + 1} / {filteredPhotos.length}
+            </li>
+            <li>
+              <NavLink to={`/maps/${photoId}`}>pokaži na karti</NavLink>
+            </li>
+            <li>
+              <NavLink to='/photos'>natrag u galeriju</NavLink>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

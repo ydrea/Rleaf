@@ -54,30 +54,32 @@ export const BlockWithStickyTitle = ({ title, subtitle, subtitleMargin, children
   }, [])
 
   return (
-    <Flex className='block-with-sticky-title'>
-      <Flex flex={1} direction='column' justifyContent='space-between'>
-        <Sticky enabled={stickyEnabled} top={32} bottomBoundary={`#break-${id}`}>
-          <h1>{title}</h1>
-        </Sticky>
+    <Container className='container'>
+      <Flex className='block-with-sticky-title'>
+        <Flex flex={1} direction='column' justifyContent='space-between'>
+          <Sticky enabled={stickyEnabled} top={32} bottomBoundary={`#break-${id}`}>
+            <h1>{title}</h1>
+          </Sticky>
 
-        <div>
-          <Container id={`break-${id}`} h={1} mb={32} className='block-with-sticky-title-break' />
-          {subtitle && (
-            <div
-              className='block-with-sticky-title-subtitle'
-              style={{ marginRight: subtitleMargin }}
-            >
-              {subtitle}
-            </div>
-          )}
+          <div>
+            <Container id={`break-${id}`} h={1} mb={32} className='block-with-sticky-title-break' />
+            {subtitle && (
+              <div
+                className='block-with-sticky-title-subtitle'
+                style={{ marginRight: subtitleMargin }}
+              >
+                {subtitle}
+              </div>
+            )}
+          </div>
+        </Flex>
+
+        <div className='block-with-sticky-title-content'>
+          <ReadMore id={id} onExpand={handleExpand}>
+            {children}
+          </ReadMore>
         </div>
       </Flex>
-
-      <div className='block-with-sticky-title-content'>
-        <ReadMore id={id} onExpand={handleExpand}>
-          {children}
-        </ReadMore>
-      </div>
-    </Flex>
+    </Container>
   )
 }
