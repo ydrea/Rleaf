@@ -14,6 +14,6 @@ export const Loader = ({ progress }: Props) => (
     style={{ height: '100%', minHeight: '150px' }}
   >
     <FaCircleNotch style={{ animation: 'spin 1s linear infinite' }} size={24} color='#999' />
-    {progress ? <span>{progress}%</span> : null}
+    {progress !== undefined && progress !== Infinity ? <span>{progress}%</span> : null}
   </Flex>
 )
