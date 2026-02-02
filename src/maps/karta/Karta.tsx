@@ -211,7 +211,7 @@ export const Karta = () => {
                 {...layers.temadz.props}
               />
             </Overlay>
-            <Overlay key={layers.temadgu.id} name={layers.temadgu.name}>
+            {/* <Overlay key={layers.temadgu.id} name={layers.temadgu.name}>
               <BetterWMS
                 key={layers.temadgu.id}
                 id={layers.temadgu.id}
@@ -219,7 +219,7 @@ export const Karta = () => {
                 layers={layers.temadgu.layers}
                 {...layers.temadgu.props}
               />
-            </Overlay>
+            </Overlay> */}
             <Overlay
               key={layers.temafk.id}
               name={layers.temafk.name}
@@ -236,8 +236,9 @@ export const Karta = () => {
             </Overlay>
           </LayersControl>
           {photoId && <SingleMarker />}
-        </MapContainer>
 <MapLegends activeLayers={activeLayers}/>
+
+        </MapContainer>
       </section>
 </div>
     </div>

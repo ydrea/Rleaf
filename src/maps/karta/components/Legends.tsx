@@ -42,7 +42,7 @@ const MapLegends = ({ activeLayers }: { activeLayers: Set<string> }) => {
 
   return (
     <div className='map-legends'>
-      <h4>Legende:</h4>
+      {/* <h4>Legende:</h4> */}
       {Array.from(activeLayers).map((layerId) => (
         <Legend key={layerId} layerId={layerId} />
       ))}
