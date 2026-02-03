@@ -80,7 +80,7 @@ export const Karta = () => {
     'https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png'
   )
 
-  const [activeLayers, setActiveLayers] = useState<Set<string>>(new Set()) // Move this up!
+  const [activeLayers, setActiveLayers] = useState<Set<string>>(new Set()) // 
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
   const [currentPhoto, currentPhotoSet] = useState<Photo | null>(null)
   const viewport = useViewportSize()
@@ -113,6 +113,22 @@ export const Karta = () => {
   }, [photoId, dispatch, photos, selectedLayer])
 
   const { BaseLayer, Overlay } = LayersControl
+
+ 
+// simulateMarkerClick function 
+const simulateMarkerClick = () => {
+  // Find marker by class name and simulate click
+  setTimeout(() => {
+    const markerElement = document.querySelector('.custom-marker-container');
+    if (markerElement) {
+      markerElement.dispatchEvent(new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true
+      }));
+    }
+  }, 1000); //
+};
 
   return (
     <div>
