@@ -44,7 +44,7 @@ const LayerHandler = ({
 
 // Legends handling
 const handleOverlayChange = (e: any) => {
-  const layerId = e.layer.options.id;   // ✅ capture the correct ID
+  const layerId = e.layer.options.id;   // capture the correct ID
 
   if (e.type === 'overlayadd') {
     activeLayers.add(layerId);
@@ -115,21 +115,7 @@ export const Karta = () => {
   const { BaseLayer, Overlay } = LayersControl
 
  
-// simulateMarkerClick function 
-const simulateMarkerClick = () => {
-  // Find marker by class name and simulate click
-  setTimeout(() => {
-    const markerElement = document.querySelector('.custom-marker-container');
-    if (markerElement) {
-      markerElement.dispatchEvent(new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true
-      }));
-    }
-  }, 1000); //
-};
-
+// 
   return (
     <div>
       <BlockWithStickyTitle title='Mape'>
@@ -251,8 +237,10 @@ const simulateMarkerClick = () => {
               />
             </Overlay>
           </LayersControl>
+          
           {photoId && <SingleMarker />}
-<MapLegends activeLayers={activeLayers}/>
+          
+          <MapLegends activeLayers={activeLayers}/>
 
         </MapContainer>
       </section>

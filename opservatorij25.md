@@ -1,6 +1,6 @@
-# Fwd: Opservatorij - hitan sastanak
+# Fwd: Opservatorij 
 
-Dakle, prvo slijedi popis slojeva koje rabimo
+slijedi popis slojeva koje rabimo
 
 ## Pre renderirani tilesetovi:
 
@@ -23,7 +23,7 @@ Dakle, prvo slijedi popis slojeva koje rabimo
 
 ---
 
-## Šema karte
+## Shema karte
 
 **Centrirano na Baniju**  
 **Zoom levels:** 8-18

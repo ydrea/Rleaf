@@ -27,8 +27,23 @@ export const SingleMarker = () => {
       } else {
         console.error('Invalid coordinates:', lat, lng)
       }
+    simulateMarkerClick();
     }
   }, [photoId, markerData, lat, lng, map])
 
   return null
 }
+
+// helper function to handle simulateMarkerClick 
+export const simulateMarkerClick = () => {
+  setTimeout(() => {
+    const markerElement = document.querySelector('.custom-marker-container');
+    if (markerElement) {
+      markerElement.dispatchEvent(new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true
+      }));
+     }
+  }, 1000); //
+};
