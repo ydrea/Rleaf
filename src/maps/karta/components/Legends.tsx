@@ -5,7 +5,11 @@ import { layers } from '../constants'
     const legendUrls: { [key: string]: string } = {
       [layers.temakz.id]:
         'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=tema_koristenje_zemljista_novo&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0',
-      [layers.temazp.id]:
+        
+        //JSON
+        // 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=zasticena_podrucja&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0'
+
+        [layers.temazp.id]:
         'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=zasticena_podrucja&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0',
       [layers.temadz.id]:
         'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_drvene_zgrade&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0',

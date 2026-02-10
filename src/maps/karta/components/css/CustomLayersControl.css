@@ -1,0 +1,31 @@
+.custom-layer-legend {
+  margin: 5px 0 10px 25px;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.legend-item {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 4px;
+}
+.legend-item img {
+  max-width: 150px;
+  max-height: 80px;
+  display: block;
+  margin: 0 auto;
+}
+
+.leaflet-control-layers-overlays {
+  display: block !important;
+  flex-direction: column !important;
+}
+
+label {
+  margin-bottom: 0;
+}
+label + .custom-layer-legend {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
