@@ -229,9 +229,9 @@ export const layers = {
   },
   temadz: {
     id: 'temadz',
-    name: 'Digitalni zemljopis',
+    name: 'Drvene zgrade',
     url: 'https://landscape.agr.hr/qgis',
-    layers: 'preklop_drvene_zgrade', // MUST MATCH WMS SERVER
+    layers: 'preklop_drvene_zgrade', 
     legendLayer: 'preklop_drvene_zgrade',
     props: {
       format: 'image/png',
