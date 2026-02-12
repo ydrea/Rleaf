@@ -35,13 +35,14 @@ apache
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
+
 4. Enable required Apache modules and restart
 bash
 sudo a2enmod rewrite
 sudo a2ensite client.croatianlandscape.hr.conf
 sudo systemctl restart apache2
 5. Build and deploy your React app
-bash
+
 # On your local machine
 npm run build
 scp -r ./build/* user@your-server:/var/www/client.croatianlandscape.hr/
