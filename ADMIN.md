@@ -1,6 +1,83 @@
+# apache + node
+1. Update your React .env.production
+env
+VITE_SERVER_PUB=https://server.croatianlandscape.hr/public
+VITE_API_URL=https://server.croatianlandscape.hr
+2. Configure Apache for your React app
+Create/edit /etc/apache2/sites-available/client.croatianlandscape.hr.conf:
 
-Yes, you understand correctly! There are two approaches to solve this, but they work very differently. Let me walk you through both with their pros and cons.
+apache
+<VirtualHost *:80>
+    ServerName client.croatianlandscape.hr
+    ServerAlias www.client.croatianlandscape.hr
+    
+    # Your React build folder
+    DocumentRoot /var/www/client.croatianlandscape.hr
+    
+    <Directory /var/www/client.croatianlandscape.hr>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    
+    ErrorLog ${APACHE_LOG_DIR}/client_error.log
+    CustomLog ${APACHE_LOG_DIR}/client_access.log combined
+</VirtualHost>
+3. Create .htaccess in your React build folder
+At /var/www/client.croatianlandscape.hr/.htaccess:
 
+apache
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+4. Enable required Apache modules and restart
+bash
+sudo a2enmod rewrite
+sudo a2ensite client.croatianlandscape.hr.conf
+sudo systemctl restart apache2
+5. Build and deploy your React app
+bash
+# On your local machine
+npm run build
+scp -r ./build/* user@your-server:/var/www/client.croatianlandscape.hr/
+🔍 Verify It's Working
+Your API should respond at:
+
+https://server.croatianlandscape.hr/photos → returns JSON
+
+https://server.croatianlandscape.hr/json_photos → returns GeoJSON
+
+https://server.croatianlandscape.hr/public/BAN-002-91.jpg → returns image
+
+Your React app should respond at:
+
+https://client.croatianlandscape.hr → loads React
+
+https://client.croatianlandscape.hr/photos/BAN-002-91 → shows photo page
+
+https://client.croatianlandscape.hr/maps/BAN-002-91 → shows map with marker
+
+⚠️ Important
+The 404 you're getting at https://server.croatianlandscape.hr is normal because your Node server doesn't have a route for / (only /photos, /json_photos, etc.). That's fine!
+
+Your Node server should only respond to specific API endpoints, not serve HTML pages. That's your React app's job on client. subdomain.
+
+This is now a perfect, production-ready architecture:
+
+✅ React client on client. (served by Apache)
+
+✅ Node API on server. (your backend)
+
+✅ Clean separation of concerns
+
+✅ No more routing conflicts
+
+### alter
 SOLUTION 1: Apache Configuration (Recommended)
 Change the server to support client-side routing
 
