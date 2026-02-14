@@ -22,26 +22,45 @@
 ## 2. Developer Profile (User to Fill)
 
 ### Projects to Study
-*Please list your projects here. Include paths (if local) or URLs (if remote), and a brief description.*
+*Add your reference projects here. I will analyze them to understand your preferred coding style.*
 
-- **Project Name:** [e.g., Old Portfolio]
-  - **Location:** [e.g., https://github.com/username/repo or /path/to/local/folder]
-  - **Key Tech:** [e.g., Next.js, GraphQL]
-  - **Description:** [What should I look for here?]
+- **Project Name:** [e.g., My GIS Dashboard]
+  - **Location:** [e.g., /home/user/projects/gis-dash or https://github.com/user/gis-dash]
+  - **Key Patterns:** [e.g., "Check how I handle Leaflet popups" or "Look at the custom hooks"]
+  - **Description:** [Brief context about the project]
 
 - **Project Name:** 
   - **Location:** 
+  - **Key Patterns:** 
   - **Description:** 
 
-### Skills & Expo
-*List your technical skills, experience levels, and specific technologies you want me to align with.*
+### Skills & Preferences
+*Help me tailor my code generation to your level and style.*
 
-- **Core Skills:** [e.g., React, TypeScript, Node.js, Python]
-- **Specialized Skills:** [e.g., GIS/Mapping, Data Visualization, 3D/Three.js]
-- **Tools:** [e.g., Docker, Linux, Nginx]
-- **Preferred Patterns:** [e.g., Functional Programming, Clean Architecture]
+- **Core Stack:** [e.g., React, TS, Node]
+- **Expertise Level:** [e.g., Senior Frontend, Junior Backend]
+- **Specific Focus:** [e.g., "I want to learn Three.js" or "Keep CSS simple"]
+- **Preferred Tools:** [e.g., VS Code, Docker, Linux]
 
-## 3. Important Conventions & Notes
-- **File Structure:** Components in `src/`, Assets in `public/`.
-- **Routing:** Client-side routing requires server-side rewrites (try_files / index.html).
-- **Code Style:** TypeScript, SCSS modules (implied).
+## 3. Important Conventions & Architecture
+
+### File Structure Patterns
+- **Components:** `src/components/Name/Name.tsx` + `Name.sass` (Co-located styles).
+- **Services:** `src/services/feature-name/feature-name.ts` (Functional, isolated utilities).
+- **Redux:** 
+  - Slices: `src/redux/rtk/` (State logic)
+  - API: `src/redux/api/` (RTK Query definitions)
+- **Maps:** `src/maps/karta/` contains the core mapping logic and custom Leaflet components.
+
+### Map Configuration (Banija Region)
+- **Tilesets:**
+  - *Reljef:* `https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg`
+  - *Fiksni elementi:* `https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png`
+  - *Kartografija CB:* `https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png`
+  - *Kartografija DOF:* `https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png`
+- **WMS Layers:** Land use, Nature protection, Wooden architecture, Photo catalog (via `https://landscape.agr.hr/qgis`).
+
+### Deployment & Routing
+- **Server:** Linux VPS (Apache/Nginx).
+- **Routing:** Client-side routing (React Router) requires server-side rewrites (try_files / index.html).
+- **API:** Client (`client.croatianlandscape.hr`) talks to Server (`server.croatianlandscape.hr`).
