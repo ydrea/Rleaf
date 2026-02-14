@@ -59,7 +59,12 @@
   - *Fiksni elementi:* `https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png`
   - *Kartografija CB:* `https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png`
   - *Kartografija DOF:* `https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png`
-- **WMS Layers:** Land use, Nature protection, Wooden architecture, Photo catalog (via `https://landscape.agr.hr/qgis`).
+- **WMS Layers:** 
+  - *Land use* (`tema_koristenje_zemljista_novo`)
+  - *Nature protection* (`zasticena_podrucja`)
+  - *Wooden architecture* (`preklop_drvene_zgrade`)
+  - *Photo catalog* (`preklop_foto_katalog`)
+  - **Service:** `https://landscape.agr.hr/qgis`
 
 ### Deployment & Routing
 - **Server:** Linux VPS (Apache/Nginx).
@@ -67,11 +72,3 @@
 - **API:** Client (`client.croatianlandscape.hr`) talks to Server (`server.croatianlandscape.hr`).
 - **Environment Variables:** Vite handles `.env` files automatically. Do NOT import `dotenv` in client-side code (it causes browser crashes).
 - **TypeScript & Timers:** Use `ReturnType<typeof setTimeout>` instead of `NodeJS.Timeout` in browser-side code to avoid type errors or missing node types.
-
-### Linux/Wayland Troubleshooting
-- **Mouse Offset Issue:** If clicking in VS Code (Linux) selects the wrong line or the UI flickers, it's likely an XWayland fractional scaling issue.
-  - **Fix:** Enable native Wayland support in `~/.vscode-insiders/argv.json` (or `~/.vscode/argv.json`):
-    ```json
-    "ozone-platform-hint": "auto",
-    "password-store": "gnome-libsecret"
-    ```
