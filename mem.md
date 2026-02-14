@@ -7,7 +7,7 @@
 - **Framework:** React 18, Vite, TypeScript
 - **Maps:** Leaflet, React-Leaflet, Leaflet-Geoman, Leaflet-WMS
 - **State Management:** Redux Toolkit
-- **UI/Styling:** SCSS, FontAwesome, Framer Motion
+- **UI/Styling:** SCSS (.sass indented syntax), FontAwesome, Framer Motion
 - **Deployment:** Linux VPS (Apache/Nginx), aiming for clean URLs via rewrites.
 
 ### Key Configuration (from opservatorij25.md)
