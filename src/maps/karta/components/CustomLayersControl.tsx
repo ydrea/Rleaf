@@ -1,4 +1,4 @@
-// components/CustomLayersControl/CustomLayersControl.tsx
+// components/CustomLayersControl.tsx
 import { LayersControl, useMap } from 'react-leaflet'
 import { useEffect, useRef, useState, useCallback } from 'react'
 import L from 'leaflet'
@@ -36,7 +36,7 @@ export const CustomLayersControl = ({
   const [isExpanded, setIsExpanded] = useState(!collapsed)
   const [legendCache, setLegendCache] = useState<Map<string, LegendData>>(new Map())
   const [isAddingLegends, setIsAddingLegends] = useState(false)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Layer configuration with exact JSON legend URLs
 // Update the layerConfigs to use the same names as constants.ts
@@ -141,6 +141,12 @@ const layerConfigs = {
       return
     }
     
+    // Defensive check for getContainer
+    if (typeof controlRef.current.getContainer !== 'function') {
+      console.warn('controlRef.current.getContainer is not a function')
+      return
+    }
+
     const container = controlRef.current.getContainer()
     if (!container) {
       console.log('No container found')
@@ -243,7 +249,7 @@ const layerConfigs = {
 
   // Observe control expansion/collapse
   useEffect(() => {
-    if (!controlRef.current) return
+    if (!controlRef.current || typeof controlRef.current.getContainer !== 'function') return
     
     const container = controlRef.current.getContainer()
     if (!container) return
@@ -269,7 +275,7 @@ const layerConfigs = {
 
   // Listen for checkbox changes - DEBOUNCED
   useEffect(() => {
-    if (!controlRef.current || !isExpanded) return
+    if (!controlRef.current || !isExpanded || typeof controlRef.current.getContainer !== 'function') return
 
     const container = controlRef.current.getContainer()
     if (!container) return

@@ -18,7 +18,6 @@ import { useWindowWidth } from '../../services/use-window-width/use-window-width
 import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithSuspense'
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import './Karta.sass'
-import { useViewportSize } from '@mantine/hooks'
 // import { MapLegends } from './components/Legends'
 // import {WmsDebug} from './../WmsDebug'
 import { CustomLayersControl } from './components/CustomLayersControl'
@@ -82,10 +81,9 @@ export const Karta = () => {
     'https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png'
   )
 
-  const [activeLayers, setActiveLayers] = useState<Set<string>>(new Set()) // 
+  const [activeLayers, setActiveLayers] = useState<Set<string>>(new Set()) 
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
   const [currentPhoto, currentPhotoSet] = useState<Photo | null>(null)
-  const viewport = useViewportSize()
 
 
   //Wms Debug
@@ -148,7 +146,12 @@ const WMSDebug = () => {
 
   // Handle layer changes
   const handleLayersChange = (layers: Set<string>) => {
-    setActiveLayers(layers);
+    // Ensure we always have a Set
+    if (layers instanceof Set) {
+      setActiveLayers(layers);
+    } else {
+      setActiveLayers(new Set(layers));
+    }
   };
 
   useEffect(() => {

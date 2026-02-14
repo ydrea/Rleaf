@@ -1,6 +1,0 @@
-CustomLayersControl.tsx:411 Uncaught ReferenceError: addLegendDataToControl is not defined
-    at CustomLayersControl.tsx:411:9
-CustomLayersControl.tsx:411 Uncaught ReferenceError: addLegendDataToControl is not defined
-    at CustomLayersControl.tsx:411:9
-CustomLayersControl.tsx:411 Uncaught ReferenceError: addLegendDataToControl is not defined
-    at CustomLayersControl.tsx:411:9

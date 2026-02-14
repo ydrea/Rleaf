@@ -6,7 +6,6 @@ import { RouterProvider } from 'react-router-dom'
 import { store } from './redux/store'
 import { router } from './router'
 import './index.sass'
-import 'dotenv'
 
 export const App = () => {
   return (
