@@ -40,7 +40,7 @@
 - **Core Stack:** [e.g., React, TS, Node]
 - **Expertise Level:** [e.g., Senior Frontend, Junior Backend]
 - **Specific Focus:** [e.g., "I want to learn Three.js" or "Keep CSS simple"]
-- **Preferred Tools:** [e.g., VS Code, Docker, Linux]
+- **Preferred Tools:** VS Code (Insiders), Linux
 
 ## 3. Important Conventions & Architecture
 
