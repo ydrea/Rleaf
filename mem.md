@@ -53,6 +53,7 @@
 - **Maps:** `src/maps/karta/` contains the core mapping logic and custom Leaflet components.
 
 ### Map Configuration (Banija Region)
+- **Legend Handling:** Custom JSON legends are fetched from QGIS WMS (`GetLegendGraphic`) and rendered via `CustomLayersControl.tsx`.
 - **Tilesets:**
   - *Reljef:* `https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg`
   - *Fiksni elementi:* `https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png`

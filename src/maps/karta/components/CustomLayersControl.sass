@@ -1,3 +1,4 @@
+
 // CustomLayersControl.sass
 .custom-layer-legend
     margin: 5px 0 10px 25px
@@ -13,6 +14,7 @@
     color: #333
     border-bottom: 1px solid #eee
     padding-bottom: 4px
+    display: block
 
 .node-title
     font-weight: 600
@@ -21,6 +23,7 @@
     margin: 8px 0 4px 0
     padding-left: 4px
     border-left: 3px solid #ccc
+    display: block
 
 .legend-items
     display: flex
@@ -64,13 +67,12 @@
     padding: 8px
     text-align: center
 
-// Override the column-reverse from Karta.sass
-.leaflet-control-layers-expanded,
-.leaflet-control-layers-overlays
-    display: flex !important
-    flex-direction: column !important // Normal order, not reversed!
-.legend-header, .node-title
-    display: none !important
+// Override the column-reverse if present from other styles
+.leaflet-control-layers-expanded
+    .leaflet-control-layers-overlays
+        display: flex !important
+        flex-direction: column !important
+
 // Ensure proper spacing between layers with legends
 label
     margin-bottom: 0
