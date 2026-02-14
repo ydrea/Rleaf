@@ -67,9 +67,10 @@
 // Override the column-reverse from Karta.sass
 .leaflet-control-layers-expanded,
 .leaflet-control-layers-overlays
-    display: block !important
+    display: flex !important
     flex-direction: column !important // Normal order, not reversed!
-
+.legend-header, .node-title
+    display: none !important
 // Ensure proper spacing between layers with legends
 label
     margin-bottom: 0
