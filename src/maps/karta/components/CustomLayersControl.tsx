@@ -51,12 +51,12 @@ const layerConfigs = {
     legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=zasticena_podrucja&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
     wmsLayer: 'zasticena_podrucja'
   },
-  'Digitalni zemljopis': {
+  'Drvene zgrade': {
     id: 'temadz',
     legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_drvene_zgrade&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
     wmsLayer: 'preklop_drvene_zgrade'
   },
-  'Fotokarte': {
+  'FOTOTEKA': {
     id: 'temafk',
     legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_foto_katalog&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
     wmsLayer: 'preklop_foto_katalog'

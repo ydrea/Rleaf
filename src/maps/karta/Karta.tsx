@@ -306,7 +306,7 @@ const WMSDebug = () => {
           
           {/* <MapLegends activeLayers={activeLayers}/> */}
 
-          {/* <WMSDebug /> */}
+          { <WMSDebug /> }
         
         
         </MapContainer>

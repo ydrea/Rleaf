@@ -244,9 +244,9 @@ export const layers = {
   },
   temafk: {
     id: 'temafk',
-    name: 'Fotokarte',
+    name: 'FOTOTEKA',
     url: 'https://landscape.agr.hr/qgis',
-    layers: 'preklop_foto_katalog', // MUST MATCH WMS SERVER
+    layers: 'preklop_foto_katalog', //
     legendLayer: 'preklop_foto_katalog',
     props: {
       format: 'image/png',
