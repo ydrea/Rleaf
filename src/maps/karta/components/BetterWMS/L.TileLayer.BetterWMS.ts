@@ -1,106 +1,3 @@
-// import L, { type TileLayer } from 'leaflet'
-// import axios from 'axios'
-
-// import type { Photo } from '../../../../types/types'
-
-// export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
-//   onAdd: function (map: L.Map) {
-//     // Triggered when the layer is added to a map.
-//     // Register a click listener, then do all the upstream WMS things
-//     L.TileLayer.WMS.prototype.onAdd.call(this, map)
-//     map.on('click', this.getFeatureInfo, this) // Bind the function to the correct context
-//   },
-
-//   onRemove: function (map: L.Map) {
-//     // Triggered when the layer is removed from a map.
-//     //   Unregister a click listener, then do all the upstream WMS things
-//     L.TileLayer.WMS.prototype.onRemove.call(this, map)
-//     map.off('click', this.getFeatureInfo, this)
-//   },
-
-//   getFeatureInfo: function (evt: L.LeafletMouseEvent) {
-//     const el = evt.originalEvent.target as HTMLElement | null
-
-//     if (el?.closest('.photo-popup')) {
-//       return
-//     }
-
-//     const url = this.getFeatureInfoUrl(evt.latlng)
-//     const showResults = L.Util.bind(this.showGetFeatureInfo, this)
-
-//     axios
-//       .get(url)
-//       .then(function (response) {
-//         const err = typeof response.data === 'string' ? null : response.data
-//         // @ts-expect-error - unknown
-//         showResults(err, evt.latlng, response.data)
-//       })
-//       .catch(function (error) {
-//         // @ts-expect-error - unknown
-//         showResults(error)
-//       })
-//   },
-
-//   getFeatureInfoUrl: function (latlng: L.LatLng) {
-//     // Convert latlng to integers
-//     const point = this._map.latLngToContainerPoint(latlng)
-//     const size = this._map.getSize()
-
-//     // Ensure that X and Y coordinates are integers
-//     const x = Math.round(point.x)
-//     const y = Math.round(point.y)
-
-//     // Other request parameters
-//     const params = {
-//       request: 'GetFeatureInfo',
-//       service: 'WMS',
-//       crs: 'EPSG:4326',
-//       styles: this.wmsParams.styles,
-//       transparent: this.wmsParams.transparent,
-//       version: this.wmsParams.version,
-//       format: this.wmsParams.format,
-//       bbox: this._map.getBounds().toBBoxString(),
-//       height: size.y,
-//       width: size.x,
-//       layers: this.wmsParams.layers,
-//       query_layers: this.wmsParams.layers,
-//       // info_format: 'text/plain',
-//       info_format: 'text/html',
-//       // info_format: 'application/json',
-//       x: x, // Use the rounded X coordinate
-//       y: y // Use the rounded Y coordinate
-//     }
-
-//     return this._url + L.Util.getParamString(params, this._url, true)
-//   },
-
-//   showGetFeatureInfo: function (err: unknown, latlng: L.LatLng, content: string) {
-//     if (err) {
-//       console.log(err)
-//       return
-//     }
-//     const data = {} as Record<string, string>
-//     const tempDiv = document.createElement('div')
-//     tempDiv.innerHTML = content
-
-//     const rows = tempDiv.querySelectorAll('tr')
-
-//     for (const row of rows) {
-//       const cells = row.querySelectorAll('th, td')
-
-//       if (cells.length >= 2) {
-//         const header = cells?.[0].textContent?.trim()
-//         const value = cells?.[1]?.textContent?.trim() ?? ''
-
-//         if (header) {
-//           data[header] = value
-//         }
-//       }
-//     }
-
-//     this.options.onSelectPhoto?.(data as unknown as Photo)
-//   }
-// }) as unknown as typeof TileLayer.WMS
 import L, { type TileLayer } from 'leaflet'
 import axios from 'axios'
 
@@ -111,7 +8,8 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
     L.TileLayer.WMS.prototype.onAdd.call(this, map)
     map.on('click', this.getFeatureInfo, this)
     
-    // Add mousemove event to change cursor
+    // Add mousemove event to change cursor with debouncing
+    this._hoverTimeout = null
     map.on('mousemove', this.onMouseMove, this)
   },
 
@@ -120,65 +18,116 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
     map.off('click', this.getFeatureInfo, this)
     map.off('mousemove', this.onMouseMove, this)
     
+    // Clear any pending hover timeout
+    if (this._hoverTimeout) {
+      clearTimeout(this._hoverTimeout)
+    }
+    
     // Reset cursor when layer is removed
     map.getContainer().style.cursor = ''
   },
 
   onMouseMove: function (evt: L.LeafletMouseEvent) {
-    // Check if we're over a photo icon
-    const url = this.getFeatureInfoUrl(evt.latlng, { feature_count: 1 })
-    
-    if (!url) return
-    
-    // Use a small buffer for hover detection
-    const hoverUrl = url + '&BUFFER=5&FEATURE_COUNT=1'
-    
-    fetch(hoverUrl)
-      .then(res => res.json())
-      .then(data => {
-        const container = this._map.getContainer()
-        if (data.features && data.features.length > 0) {
-          // Change cursor to pointer when over a photo
-          container.style.cursor = 'pointer'
-        } else {
-          // Reset cursor when not over a photo
-          container.style.cursor = ''
-        }
-      })
-      .catch(() => {
-        this._map.getContainer().style.cursor = ''
-      })
-  },
-
-  getFeatureInfo: function (evt: L.LeafletMouseEvent) {
-    const el = evt.originalEvent.target as HTMLElement | null
-
-    if (el?.closest('.photo-popup')) {
-      return
+    // Debounce to avoid too many requests
+    if (this._hoverTimeout) {
+      clearTimeout(this._hoverTimeout)
     }
-
-    const url = this.getFeatureInfoUrl(evt.latlng)
-    const showResults = L.Util.bind(this.showGetFeatureInfo, this)
-
-    console.log('🔍 GetFeatureInfo clicked at:', evt.latlng)
-    console.log('📡 Request URL:', url)
-
-    axios
-      .get(url)
-      .then(function (response) {
-        console.log('📦 GetFeatureInfo response:', response.data)
-        
-        const err = typeof response.data === 'string' ? null : response.data
-        // @ts-expect-error - unknown
-        showResults(err, evt.latlng, response.data)
-      })
-      .catch(function (error) {
-        console.error('❌ GetFeatureInfo error:', error)
-        // @ts-expect-error - unknown
-        showResults(error)
-      })
+    
+    this._hoverTimeout = setTimeout(() => {
+      const url = this.getFeatureInfoUrl(evt.latlng, { feature_count: 1, buffer: 5 })
+      
+      if (!url) return
+      
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          const container = this._map.getContainer()
+          if (data.features && data.features.length > 0) {
+            container.style.cursor = 'pointer'
+          } else {
+            container.style.cursor = ''
+          }
+        })
+        .catch(() => {
+          this._map.getContainer().style.cursor = ''
+        })
+    }, 100) // Only check every 100ms
   },
 
+
+  ////////////////
+
+getFeatureInfo: function (evt: L.LeafletMouseEvent) {
+  const el = evt.originalEvent.target as HTMLElement | null
+
+  if (el?.closest('.photo-popup')) {
+    return
+  }
+
+  const url = this.getFeatureInfoUrl(evt.latlng)
+  
+  // Store latlng for later use
+  const clickLatLng = evt.latlng
+
+  console.log('🔍 GetFeatureInfo clicked at:', clickLatLng)
+  console.log('📡 Request URL:', url)
+
+  axios
+    .get(url)
+    .then((response) => {  // Use arrow function to preserve 'this'
+      console.log('📦 GetFeatureInfo response:', response.data)
+      
+      // Call showGetFeatureInfo directly, not through bind
+      this.showGetFeatureInfo(response.data, clickLatLng)
+    })
+    .catch((error) => {  // Use arrow function to preserve 'this'
+      console.error('❌ GetFeatureInfo error:', error)
+      this.showGetFeatureInfo(error.message || 'Unknown error', clickLatLng)
+    })
+},
+
+showGetFeatureInfo: function (content: any, clickLatLng: L.LatLng) {
+  // If content is an error string
+  if (typeof content === 'string') {
+    console.log('❌ Error in showGetFeatureInfo:', content)
+    return
+  }
+  
+  try {
+    const data = content
+    console.log('🖼️ Photo data received:', data)
+    
+    if (data.features && data.features.length > 0) {
+      const feature = data.features[0]
+      const properties = feature.properties
+      
+      console.log('📸 Photo found at:', clickLatLng, {
+        signatura: properties.signatura,
+        naziv: properties.naziv,
+        lokacija: properties.lokacija
+      })
+      
+      const photoData = {
+        id: properties.id,
+        signatura: properties.signatura,
+        naziv: properties.naziv,
+        opis: properties.opis,
+        lokacija: properties.lokacija,
+        datum_sni: properties.datum_sni,
+        kategorija: properties.kategorija,
+        autor: properties.autor,
+        tagovi: properties.tagovi,
+      }
+      
+      this.options.onSelectPhoto?.(photoData as Photo)
+    } else {
+      console.log('ℹ️ No features found at', clickLatLng)
+    }
+  } catch (e) {
+    console.error('❌ Error processing GetFeatureInfo response:', e)
+  }
+},
+  //////////////////
   getFeatureInfoUrl: function (latlng: L.LatLng, options: any = {}) {
     const point = this._map.latLngToContainerPoint(latlng)
     const size = this._map.getSize()
@@ -186,69 +135,96 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
     const x = Math.round(point.x)
     const y = Math.round(point.y)
 
-    const params = {
-      request: 'GetFeatureInfo',
+    // Get bounds in real-world 3857 coordinates
+    const bounds = this._map.getBounds();
+    
+    // Use Leaflet's built-in CRS transformation
+    const southWest = L.CRS.EPSG3857.project(bounds.getSouthWest());
+    const northEast = L.CRS.EPSG3857.project(bounds.getNorthEast());
+
+    // Format BBOX properly for WMS 1.3.0: minx,miny,maxx,maxy
+    const bbox = [
+      southWest.x.toFixed(6), 
+      southWest.y.toFixed(6),
+      northEast.x.toFixed(6), 
+      northEast.y.toFixed(6)
+    ].join(',');
+
+    console.log('✅ Correct BBOX:', bbox); // Should be like 1.8e6 numbers
+
+    const params: Record<string, any> = {
       service: 'WMS',
-      crs: 'EPSG:3857',
-      styles: this.wmsParams.styles,
-      transparent: this.wmsParams.transparent,
       version: '1.3.0',
-      format: this.wmsParams.format,
-      bbox: this._map.getBounds().toBBoxString(),
-      height: size.y,
-      width: size.x,
+      request: 'GetFeatureInfo',
       layers: this.wmsParams.layers,
       query_layers: this.wmsParams.layers,
-      info_format: 'application/json',
-      buffer: options.buffer || 5,
-      feature_count: options.feature_count || 5,
+      styles: this.wmsParams.styles || '',
+      format: this.wmsParams.format || 'image/png',
+      transparent: this.wmsParams.transparent !== false,
+      crs: 'EPSG:3857',
+      bbox: bbox,
+      width: size.x,
+      height: size.y,
       i: x,
       j: y,
-      ...options
+      info_format: 'application/json',
+      feature_count: options.feature_count || 5,
+      buffer: options.buffer || 5
     }
 
-    return this._url + L.Util.getParamString(params, this._url, true)
+    // Remove any undefined/null params
+    Object.keys(params).forEach(key => 
+      params[key] === undefined || params[key] === null ? delete params[key] : null
+    );
+
+    const url = this._url + L.Util.getParamString(params, this._url, true);
+    console.log('🌍 Final GetFeatureInfo URL:', url);
+    
+    return url;
   },
 
-  showGetFeatureInfo: function (err: unknown, latlng: L.LatLng, content: string) {
-    if (err) {
-      console.log('❌ Error in showGetFeatureInfo:', err)
-      return
-    }
+//////////////////
+
+// showGetFeatureInfo: function (err: unknown, latlng: L.LatLng, content: any) {
+//   if (err) {
+//     console.log('❌ Error in showGetFeatureInfo:', err)
+//     return
+//   }
+  
+//   try {
+//     // content is already an object from axios
+//     const data = content
+//     console.log('🖼️ Photo data received:', data)
     
-    try {
-      const data = JSON.parse(content)
-      console.log('🖼️ Parsed photo data:', data)
+//     if (data.features && data.features.length > 0) {
+//       const feature = data.features[0]
+//       const properties = feature.properties
       
-      if (data.features && data.features.length > 0) {
-        const feature = data.features[0]
-        const properties = feature.properties
-        
-        console.log('📸 Photo found:', {
-          signatura: properties.signatura,
-          naziv: properties.naziv,
-          lokacija: properties.lokacija,
-          allProps: properties
-        })
-        
-        const photoData = {
-          id: properties.id,
-          signatura: properties.signatura,
-          naziv: properties.naziv,
-          opis: properties.opis,
-          lokacija: properties.lokacija,
-          datum_sni: properties.datum_sni,
-          kategorija: properties.kategorija,
-          autor: properties.autor,
-          tagovi: properties.tagovi,
-        }
-        
-        this.options.onSelectPhoto?.(photoData as Photo)
-      } else {
-        console.log('ℹ️ No features found at this location')
-      }
-    } catch (e) {
-      console.error('❌ Error parsing GetFeatureInfo response:', e)
-    }
-  }
+//       console.log('📸 Photo found:', {
+//         signatura: properties.signatura,
+//         naziv: properties.naziv,
+//         lokacija: properties.lokacija
+//       })
+      
+//       const photoData = {
+//         id: properties.id,
+//         signatura: properties.signatura,
+//         naziv: properties.naziv,
+//         opis: properties.opis,
+//         lokacija: properties.lokacija,
+//         datum_sni: properties.datum_sni,
+//         kategorija: properties.kategorija,
+//         autor: properties.autor,
+//         tagovi: properties.tagovi,
+//       }
+      
+//       this.options.onSelectPhoto?.(photoData as Photo)
+//     } else {
+//       console.log('ℹ️ No features found at this location')
+//     }
+//   } catch (e) {
+//     console.error('❌ Error processing GetFeatureInfo response:', e)
+//   }
+// }
+  /////////////////////////////
 }) as unknown as typeof TileLayer.WMS
