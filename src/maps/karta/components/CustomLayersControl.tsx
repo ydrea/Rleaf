@@ -39,29 +39,29 @@ export const CustomLayersControl = ({
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Layer configuration with exact JSON legend URLs
-// Update the layerConfigs to use the same names as constants.ts
-const layerConfigs = {
-  'Korištenje zemljišta': {
-    id: 'temakz',
-    legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=tema_koristenje_zemljista_novo&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
-    wmsLayer: 'tema_koristenje_zemljista_novo' // Add this for reference
-  },
-  'Zaštita prirode': {
-    id: 'temazp',
-    legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=zasticena_podrucja&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
-    wmsLayer: 'zasticena_podrucja'
-  },
-  'Drvene zgrade': {
-    id: 'temadz',
-    legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_drvene_zgrade&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
-    wmsLayer: 'preklop_drvene_zgrade'
-  },
-  'FOTOTEKA': {
-    id: 'temafk',
-    legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_foto_katalog&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
-    wmsLayer: 'preklop_foto_katalog'
+  const layerConfigs = {
+    'Korištenje zemljišta': {
+      id: 'temakz',
+      legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=tema_koristenje_zemljista_novo&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
+      wmsLayer: 'tema_koristenje_zemljista_novo'
+    },
+    'Zaštita prirode': {
+      id: 'temazp',
+      legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=zasticena_podrucja&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
+      wmsLayer: 'zasticena_podrucja'
+    },
+    'Drvene zgrade': {
+      id: 'temadz',
+      legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_drvene_zgrade&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
+      wmsLayer: 'preklop_drvene_zgrade'
+    },
+    'FOTOTEKA': {
+      id: 'temafk',
+      legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_foto_katalog&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
+      wmsLayer: 'preklop_foto_katalog'
+    }
   }
-}
+
   // Fetch JSON legend data
   const fetchLegendData = async (layerName: string): Promise<LegendData | null> => {
     const config = layerConfigs[layerName as keyof typeof layerConfigs]
@@ -247,11 +247,11 @@ const layerConfigs = {
     }
   }, [isExpanded, activeLayers, debouncedAddLegends])
 
-  // Observe control expansion/collapse
+  // FIXED: Use proper ref object and separate effect for observation
   useEffect(() => {
-    if (!controlRef.current || typeof controlRef.current.getContainer !== 'function') return
+    if (!controlRef.current) return
     
-    const container = controlRef.current.getContainer()
+    const container = controlRef.current.getContainer?.()
     if (!container) return
 
     const observer = new MutationObserver(() => {
@@ -266,18 +266,11 @@ const layerConfigs = {
     return () => observer.disconnect()
   }, [debouncedAddLegends])
 
-  // Initial load - DEBOUNCED
+  // FIXED: Separate effect for checkbox changes
   useEffect(() => {
-    if (controlRef.current && isExpanded) {
-      debouncedAddLegends()
-    }
-  }, [controlRef.current, isExpanded, debouncedAddLegends])
+    if (!controlRef.current) return
 
-  // Listen for checkbox changes - DEBOUNCED
-  useEffect(() => {
-    if (!controlRef.current || !isExpanded || typeof controlRef.current.getContainer !== 'function') return
-
-    const container = controlRef.current.getContainer()
+    const container = controlRef.current.getContainer?.()
     if (!container) return
 
     const handleChange = () => {
@@ -286,21 +279,12 @@ const layerConfigs = {
 
     container.addEventListener('change', handleChange)
     return () => container.removeEventListener('change', handleChange)
-  }, [controlRef.current, isExpanded, debouncedAddLegends])
+  }, [debouncedAddLegends])
 
+  // FIXED: Proper ref handling - no inline function that breaks React-Leaflet
   return (
     <LayersControl 
-      ref={(instance: any) => {
-        if (instance) {
-          const leafletElement = instance._leafletElement || instance
-          controlRef.current = leafletElement
-          
-          const container = leafletElement.getContainer()
-          if (container) {
-            setIsExpanded(!container.classList.contains('leaflet-control-layers-collapsed'))
-          }
-        }
-      }}
+      ref={controlRef}
       collapsed={collapsed}
     >
       {children}
