@@ -24,15 +24,14 @@
 ### Projects to Study
 *Add your reference projects here. I will analyze them to understand your preferred coding style.*
 
-- **Project Name:** [e.g., My GIS Dashboard]
-  - **Location:** [e.g., /home/user/projects/gis-dash or https://github.com/user/gis-dash]
-  - **Key Patterns:** [e.g., "Check how I handle Leaflet popups" or "Look at the custom hooks"]
-  - **Description:** [Brief context about the project]
+- **Project Name:** react-leaflet-custom-layer-control-ts
+  - **Location:** /home/andrj/react-leaflet-custom-layer-control-ts
+  - **Key Patterns:** Functional components with hooks (useState, useMapEvents), custom HOCs for layer control, Material-UI for UI (Accordion, Checkbox), lodash.groupby for grouping, TypeScript interfaces, camelCase naming, Leaflet integration with react-leaflet.
+  - **Description:** React/TypeScript app for custom Leaflet layer control using Material-UI and react-leaflet, with grouped layers in accordions.
 
-- **Project Name:** 
-  - **Location:** 
-  - **Key Patterns:** 
-  - **Description:** 
+- **Project Name:** MapLibreExpo
+  - **Location:** /home/andrj/MapLibreExpo
+  - **Description:** Expo + Next.js hybrid app with MapLibre, React Native Web, targeting mobile maps.
 
 ### Skills & Preferences
 *Help me tailor my code generation to your level and style.*
