@@ -1,3 +1,4 @@
+// L.TileLayer.BetterWMS.ts
 import L, { type TileLayer } from 'leaflet'
 import axios from 'axios'
 
@@ -87,44 +88,34 @@ getFeatureInfo: function (evt: L.LeafletMouseEvent) {
 },
 
 showGetFeatureInfo: function (content: any, clickLatLng: L.LatLng) {
-  // If content is an error string
   if (typeof content === 'string') {
-    console.log('❌ Error in showGetFeatureInfo:', content)
+    console.log('❌ Error:', content)
     return
   }
   
   try {
-    const data = content
-    console.log('🖼️ Photo data received:', data)
-    
-    if (data.features && data.features.length > 0) {
-      const feature = data.features[0]
+    if (content.features && content.features.length > 0) {
+      const feature = content.features[0]
       const properties = feature.properties
-      
-      console.log('📸 Photo found at:', clickLatLng, {
-        signatura: properties.signatura,
-        naziv: properties.naziv,
-        lokacija: properties.lokacija
-      })
       
       const photoData = {
         id: properties.id,
         signatura: properties.signatura,
-        naziv: properties.naziv,
-        opis: properties.opis,
-        lokacija: properties.lokacija,
-        datum_sni: properties.datum_sni,
-        kategorija: properties.kategorija,
-        autor: properties.autor,
-        tagovi: properties.tagovi,
+        naziv: properties.naziv || '',
+        opis: properties.opis || '',
+        lokacija: properties.lokacija || '',
+        datum_sni: properties.datum_sni || '',
+        kategorija: properties.kategorija || '',
+        autor: properties.autor || '',
+        tagovi: properties.tagovi || '',
+        foto_url: `${import.meta.env.VITE_SERVER_PUB}/${properties.signatura}`
       }
       
-      this.options.onSelectPhoto?.(photoData as Photo)
-    } else {
-      console.log('ℹ️ No features found at', clickLatLng)
+      // Pass both the photo data AND the click location
+      this.options.onSelectPhoto?.(photoData, clickLatLng)
     }
   } catch (e) {
-    console.error('❌ Error processing GetFeatureInfo response:', e)
+    console.error('❌ Error:', e)
   }
 },
   //////////////////

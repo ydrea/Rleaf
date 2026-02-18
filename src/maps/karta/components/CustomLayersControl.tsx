@@ -11,7 +11,7 @@ interface CustomLayersControlProps {
 }
 
 interface LegendSymbol {
-  icon: string // base64 image data
+  icon: string
   title: string
 }
 
@@ -62,38 +62,29 @@ export const CustomLayersControl = ({
     }
   }
 
-  // Fetch JSON legend data
-  const fetchLegendData = async (layerName: string): Promise<LegendData | null> => {
-    const config = layerConfigs[layerName as keyof typeof layerConfigs]
-    if (!config) return null
-
-    // Check cache
-    if (legendCache.has(layerName)) {
-      return legendCache.get(layerName)!
+  // PRE-FETCH ALL LEGENDS IMMEDIATELY (in parallel)
+  useEffect(() => {
+    const prefetchAllLegends = async () => {
+      const fetchPromises = Object.entries(layerConfigs).map(async ([layerName, config]) => {
+        try {
+          const response = await fetch(config.legendUrl)
+          if (response.ok) {
+            const data: LegendData = await response.json()
+            setLegendCache(prev => new Map(prev).set(layerName, data))
+          }
+        } catch (error) {
+          console.error(`Failed to prefetch ${layerName}:`, error)
+        }
+      })
+      
+      await Promise.all(fetchPromises)
+      console.log('✅ All legends pre-fetched and cached')
     }
-
-    console.log(`Fetching JSON legend for: ${layerName}`, config.legendUrl)
     
-    try {
-      const response = await fetch(config.legendUrl)
-      if (!response.ok) {
-        console.error(`Failed to fetch legend for ${layerName}: ${response.status}`)
-        return null
-      }
-      
-      const data: LegendData = await response.json()
-      console.log(`Successfully fetched legend for ${layerName}:`, data)
-      
-      // Cache the result
-      setLegendCache(prev => new Map(prev).set(layerName, data))
-      return data
-    } catch (error) {
-      console.error(`Error fetching legend for ${layerName}:`, error)
-      return null
-    }
-  }
+    prefetchAllLegends()
+  }, []) // Run once on mount
 
-  // Render JSON legend
+  // Render JSON legend (synchronous - uses cache)
   const renderLegend = (legendData: LegendData): string => {
     if (!legendData.nodes || !Array.isArray(legendData.nodes)) {
       return '<div class="no-legend">No legend data available</div>'
@@ -103,12 +94,10 @@ export const CustomLayersControl = ({
     
     legendData.nodes.forEach((node) => {
       if (node.symbols && Array.isArray(node.symbols)) {
-        // Add layer title if available
         if (node.title && node.title !== legendData.title) {
           html += `<div class="node-title">${node.title}</div>`
         }
         
-        // Render each symbol
         node.symbols.forEach((symbol) => {
           if (symbol.icon && symbol.title) {
             const src = `data:image/png;base64,${symbol.icon}`
@@ -129,164 +118,110 @@ export const CustomLayersControl = ({
     return html
   }
 
-  // Add legends to control - JSON ONLY
-  const addLegendsToControl = useCallback(async () => {
-    if (isAddingLegends) {
-      console.log('Already adding legends, skipping...')
-      return
-    }
+  // Add legends to control - uses cache (fast!)
+  const addLegendsToControl = useCallback(() => {
+    if (isAddingLegends) return
+    if (!controlRef.current || !isExpanded) return
     
-    if (!controlRef.current || !isExpanded) {
-      console.log('Control not ready or not expanded')
-      return
-    }
-    
-    // Defensive check for getContainer
-    if (typeof controlRef.current.getContainer !== 'function') {
-      console.warn('controlRef.current.getContainer is not a function')
-      return
-    }
+    const container = controlRef.current.getContainer?.()
+    if (!container) return
 
-    const container = controlRef.current.getContainer()
-    if (!container) {
-      console.log('No container found')
-      return
-    }
-
-    console.log('Starting to add legends...')
     setIsAddingLegends(true)
 
     // Remove existing legends
     const existingLegends = container.querySelectorAll('.custom-layer-legend')
-    console.log(`Removing ${existingLegends.length} existing legends`)
     existingLegends.forEach(legend => legend.remove())
 
     // Find all checked layers
     const checkedInputs = container.querySelectorAll('input:checked')
-    console.log(`Found ${checkedInputs.length} checked inputs`)
-    
-    // Process each checked layer
     const processedLayers = new Set<string>()
     
-    for (const input of checkedInputs) {
-      const label = input.closest('label')
-      if (!label) continue
-      
-      const labelText = label.textContent?.trim() || ''
-      
-      // Check if this label matches any of our layers
-      for (const [layerName, config] of Object.entries(layerConfigs)) {
-        if (labelText.includes(layerName) || layerName.includes(labelText)) {
-          // Skip if we already processed this layer
-          if (processedLayers.has(layerName)) {
-            console.log(`Already processed ${layerName}, skipping...`)
-            continue
+    // Use requestAnimationFrame to avoid blocking UI
+    requestAnimationFrame(() => {
+      for (const input of checkedInputs) {
+        const label = input.closest('label')
+        if (!label) continue
+        
+        const labelText = label.textContent?.trim() || ''
+        
+        for (const [layerName, config] of Object.entries(layerConfigs)) {
+          if (labelText.includes(layerName) || layerName.includes(labelText)) {
+            if (processedLayers.has(layerName)) continue
+            
+            processedLayers.add(layerName)
+            
+            // Get from cache (synchronous!)
+            const legendData = legendCache.get(layerName)
+            
+            const legendContainer = document.createElement('div')
+            legendContainer.className = 'custom-layer-legend'
+            
+            if (legendData) {
+              legendContainer.innerHTML = `
+                <div class="legend-header">${layerName}</div>
+                ${renderLegend(legendData)}
+              `
+            } else {
+              legendContainer.innerHTML = `
+                <div class="legend-header">${layerName}</div>
+                <div class="no-legend">Loading legend...</div>
+              `
+            }
+            
+            label.parentNode?.insertBefore(legendContainer, label.nextSibling)
+            break
           }
-          
-          processedLayers.add(layerName)
-          console.log(`Processing layer: ${layerName}`)
-          
-          // Fetch JSON legend
-          const legendData = await fetchLegendData(layerName)
-          
-          // Create legend container
-          const legendContainer = document.createElement('div')
-          legendContainer.className = 'custom-layer-legend'
-          
-          if (legendData) {
-            // Render JSON legend
-            legendContainer.innerHTML = `
-              <div class="legend-header">${layerName}</div>
-              ${renderLegend(legendData)}
-            `
-          } else {
-            // No legend data available
-            legendContainer.innerHTML = `
-              <div class="legend-header">${layerName}</div>
-              <div class="no-legend">No JSON legend available</div>
-            `
-          }
-          
-          // Insert after label
-          label.parentNode?.insertBefore(legendContainer, label.nextSibling)
-          break
         }
       }
-    }
-    
-    console.log('Finished adding legends')
-    setIsAddingLegends(false)
-  }, [isAddingLegends, isExpanded, legendCache])
+      
+      setIsAddingLegends(false)
+    })
+  }, [isExpanded, legendCache, isAddingLegends])
 
-  // Debounced version of addLegendsToControl
+  // Debounced version
   const debouncedAddLegends = useCallback(() => {
-    // Clear any existing timeout
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-    }
-    
-    // Set new timeout
-    timeoutRef.current = setTimeout(() => {
-      addLegendsToControl()
-    }, 300)
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    timeoutRef.current = setTimeout(addLegendsToControl, 50) // Reduced from 300ms
   }, [addLegendsToControl])
 
-  // Clean up timeouts on unmount
+  // Effects
   useEffect(() => {
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
     }
   }, [])
 
-  // Effect for when control expands or layers change - DEBOUNCED
   useEffect(() => {
-    if (isExpanded) {
-      debouncedAddLegends()
-    }
+    if (isExpanded) debouncedAddLegends()
   }, [isExpanded, activeLayers, debouncedAddLegends])
 
-  // FIXED: Use proper ref object and separate effect for observation
   useEffect(() => {
     if (!controlRef.current) return
-    
     const container = controlRef.current.getContainer?.()
     if (!container) return
 
     const observer = new MutationObserver(() => {
       const expanded = !container.classList.contains('leaflet-control-layers-collapsed')
       setIsExpanded(expanded)
-      if (expanded) {
-        debouncedAddLegends()
-      }
+      if (expanded) debouncedAddLegends()
     })
 
     observer.observe(container, { attributes: true })
     return () => observer.disconnect()
   }, [debouncedAddLegends])
 
-  // FIXED: Separate effect for checkbox changes
   useEffect(() => {
     if (!controlRef.current) return
-
     const container = controlRef.current.getContainer?.()
     if (!container) return
 
-    const handleChange = () => {
-      debouncedAddLegends()
-    }
-
+    const handleChange = () => debouncedAddLegends()
     container.addEventListener('change', handleChange)
     return () => container.removeEventListener('change', handleChange)
   }, [debouncedAddLegends])
 
-  // FIXED: Proper ref handling - no inline function that breaks React-Leaflet
   return (
-    <LayersControl 
-      ref={controlRef}
-      collapsed={collapsed}
-    >
+    <LayersControl ref={controlRef} collapsed={collapsed}>
       {children}
     </LayersControl>
   )

@@ -1,4 +1,4 @@
-import type { TileLayer, WMSParams } from 'leaflet'
+import type { TileLayer, WMSParams, LatLng } from 'leaflet'
 import {
   createTileLayerComponent,
   createElementObject,
@@ -14,7 +14,8 @@ interface BetterWMSProps extends LayerProps {
   url: string
   layers: string
   params?: WMSParams
-  onSelectPhoto?: (photo: Photo) => void
+  // FIXED: Use a single flexible signature with optional second parameter
+  onSelectPhoto?: (photo: Photo, latlng?: LatLng) => void
 }
 
 export const BetterWMS = createTileLayerComponent<TileLayer.WMS, BetterWMSProps>(

@@ -1,9 +1,11 @@
-import { MapContainer, TileLayer, LayersControl, ZoomControl } from 'react-leaflet'
+// Karta.tsx
+import { MapContainer, TileLayer, LayersControl, ZoomControl, Popup } from 'react-leaflet'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useMap } from 'react-leaflet'
 import type { LayersControlEvent } from 'leaflet'
+import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'react-tabs/style/react-tabs.css'
 
@@ -18,8 +20,6 @@ import { useWindowWidth } from '../../services/use-window-width/use-window-width
 import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithSuspense'
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import './Karta.sass'
-// import { MapLegends } from './components/Legends'
-// import {WmsDebug} from './../WmsDebug'
 import { CustomLayersControl } from './components/CustomLayersControl'
 
 const LayerHandler = ({ 
@@ -43,24 +43,20 @@ const LayerHandler = ({
       }
     }
 
-// Legends handling
-const handleOverlayChange = (e: any) => {
-  const layerId = e.layer.options.id;   // capture the correct ID
+    const handleOverlayChange = (e: any) => {
+      const layerId = e.layer.options.id;
 
-  if (e.type === 'overlayadd') {
-    activeLayers.add(layerId);
-  } else if (e.type === 'overlayremove') {
-    activeLayers.delete(layerId);
-  }
-  onLayersChange(new Set(activeLayers));
-};
+      if (e.type === 'overlayadd') {
+        activeLayers.add(layerId);
+      } else if (e.type === 'overlayremove') {
+        activeLayers.delete(layerId);
+      }
+      onLayersChange(new Set(activeLayers));
+    };
 
- // Set up event listeners
     map.on('baselayerchange', handleBaseLayerChange);
     map.on('overlayadd', handleOverlayChange);
     map.on('overlayremove', handleOverlayChange);
-
-    // map.on('baselayerchange', handleBaseLayerChange)
 
     return () => {
       map.off('baselayerchange', handleBaseLayerChange)
@@ -84,69 +80,44 @@ export const Karta = () => {
   const [activeLayers, setActiveLayers] = useState<Set<string>>(new Set()) 
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
   const [currentPhoto, currentPhotoSet] = useState<Photo | null>(null)
+  const [popupPosition, setPopupPosition] = useState<L.LatLng | null>(null)
+  const [imageError, setImageError] = useState(false)
 
+  const handlePhotoSelect = (photo: Photo, latlng?: L.LatLng) => {
+    console.log('📍 Photo selected at:', latlng)
+    console.log('📸 Photo data:', photo)
+    
+    // Reset image error state for new photo
+    setImageError(false)
+    
+    const fotoUrl = photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
+    
+    // DEBUG: Log the constructed URL
+    console.log('🔗 Image URL:', fotoUrl)
+    console.log('🔍 VITE_SERVER_PUB:', import.meta.env.VITE_SERVER_PUB)
+    console.log('📝 Signatura:', photo.signatura)
+    
+    // Test if image exists (optional, for debugging)
+    fetch(fotoUrl, { method: 'HEAD' })
+      .then(res => console.log('📸 Image status:', res.status, res.statusText))
+      .catch(err => console.error('❌ Image fetch error:', err))
+    
+    currentPhotoSet({
+      ...photo,
+      foto_url: fotoUrl
+    })
+    
+    if (latlng) {
+      setPopupPosition(latlng)
+    }
+  }
 
-  //Wms Debug
-// Add this component inside your MapContainer
-const WMSDebug = () => {
-  const map = useMap()
-  
-  useEffect(() => {
-    console.log('=== WMS DEBUG ===')
-    
-    // Test WMS URL directly
-    const testWMS = async () => {
-      const testUrl = 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=tema_koristenje_zemljista_novo&FORMAT=image/png&TRANSPARENT=true&WIDTH=256&HEIGHT=256&CRS=EPSG:3857&BBOX=1810000,5680000,1820000,5690000'
-      
-      console.log('Testing WMS URL:', testUrl)
-      
-      try {
-        const response = await fetch(testUrl)
-        console.log('WMS Response status:', response.status, response.statusText)
-        
-        if (response.ok) {
-          console.log('✅ WMS layer is accessible')
-        } else {
-          console.log('❌ WMS layer failed:', await response.text())
-        }
-      } catch (error) {
-        console.log('❌ WMS fetch error:', error)
-      }
-    }
-    
-    testWMS()
-    
-    // Check what Leaflet is actually requesting
-    const checkTiles = () => {
-      const tiles = document.querySelectorAll('img[src*="qgis"]')
-      console.log(`Found ${tiles.length} WMS tiles`)
-      
-      tiles.forEach((tile, i) => {
-        const src = (tile as HTMLImageElement).src
-        console.log(`Tile ${i}:`, src)
-        
-        // Check if the tile loaded
-        tile.addEventListener('load', () => {
-          console.log(`Tile ${i} loaded successfully`)
-        })
-        
-        tile.addEventListener('error', () => {
-          console.log(`Tile ${i} failed to load`)
-        })
-      })
-    }
-    
-    setTimeout(checkTiles, 1000)
-    
-  }, [map])
-  
-  return null
-}
-//////////////////////////
+  const handleLayerSelect = (photo: Photo) => {
+    currentPhotoSet(photo)
+  }
 
   // Handle layer changes
   const handleLayersChange = (layers: Set<string>) => {
-    // Ensure we always have a Set
     if (layers instanceof Set) {
       setActiveLayers(layers);
     } else {
@@ -167,9 +138,16 @@ const WMSDebug = () => {
       const photo = photos.find((photo: any) => photo.id === Number(photoId))
 
       if (photo) {
+        const fotoUrl = photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
+
+        console.log('📸 Photo data from URL:', photo)
+        console.log('🔗 Constructed URL:', fotoUrl)
+        console.log('🔍 VITE_SERVER_PUB:', import.meta.env.VITE_SERVER_PUB)
+        console.log('📝 Signatura:', photo.signatura)
+
         currentPhotoSet({
           ...photo,
-          foto_url: photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
+          foto_url: fotoUrl
         })
       }
     }
@@ -177,8 +155,6 @@ const WMSDebug = () => {
 
   const { BaseLayer, Overlay } = LayersControl
 
- 
-// 
   return (
     <div>
       <BlockWithStickyTitle title='Mape'>
@@ -190,132 +166,169 @@ const WMSDebug = () => {
           potrebama.
         </p>
       </BlockWithStickyTitle>
-<div className='map'>
-      <section  id='map-container'>
-        <MapContainer
-          center={[45.2, 16.2]}
-          zoom={10}
-          maxZoom={28}
-          style={{
-            width: '100%',
-            height: '90vh',
-            cursor: 'crosshair'
-          }}
-          zoomControl={false}
-        >
-          {currentPhoto?.signatura && (
-            <div className='leaflet-bottom leaflet-right photo-popup'>
-              <ul>
-                <li>{currentPhoto?.signatura}</li>
-                <li>{currentPhoto?.naziv}</li>
-                <li>{currentPhoto?.opis}</li>
-                <li>{currentPhoto?.lokacija}</li>
-                <li>{currentPhoto?.datum_sni}</li>
-                <li>{currentPhoto?.kategorija}</li>
-                <li>{currentPhoto?.autor}</li>
-                <li>{currentPhoto?.tagovi}</li>
-              </ul>
-              {currentPhoto?.foto_url && (
-                <ImageWithSuspense src={currentPhoto?.foto_url} alt={currentPhoto?.naziv} />
-              )}
-            </div>
-          )}
+      <div className='map'>
+        <section id='map-container'>
+          <MapContainer
+            center={[45.2, 16.2]}
+            zoom={10}
+            maxZoom={28}
+            style={{
+              width: '100%',
+              height: '90vh',
+              cursor: 'crosshair'
+            }}
+            zoomControl={false}
+          >
+            <LayerHandler kartografijeSet={kartografijeSet} 
+              onLayersChange={handleLayersChange} />
+            <ZoomControl position='bottomright' />
+            <CustomLayersControl collapsed={windowWidth < 1248} activeLayers={activeLayers}>
+              <BaseLayer checked name='reljef'>
+                <TileLayer url='https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg' />
+              </BaseLayer>
 
-          <LayerHandler kartografijeSet={kartografijeSet} 
-          onLayersChange={handleLayersChange} />
-          <ZoomControl position='bottomright' />
-          <CustomLayersControl collapsed={windowWidth < 1248} activeLayers={activeLayers} >
-            <BaseLayer checked name='reljef'>
-              <TileLayer url='https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg' />
-            </BaseLayer>
+              <BaseLayer name='satelitska fotografija (ESRI)'>
+                <TileLayer
+                  attribution='Source: Esri, Maxar, Earthstar Geographics)'
+                  url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+                  maxZoom={20}
+                  maxNativeZoom={30}
+                />
+              </BaseLayer>
 
-            <BaseLayer name='satelitska fotografija (ESRI)'>
+              <Overlay checked name='Kartografija'>
+                <TileLayer url={kartografije} />
+              </Overlay>
+
               <TileLayer
-                attribution='Source: Esri, Maxar, Earthstar Geographics)'
-                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-                maxZoom={20}
-                maxNativeZoom={30}
+                url='https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png'
+                zIndex={999}
               />
-            </BaseLayer>
 
-            <Overlay checked name='Kartografija'>
-              <TileLayer url={kartografije} />
-            </Overlay>
+              <Overlay key={layers.temakz.id} name={layers.temakz.name}>
+                <BetterWMS
+                  key={layers.temakz.id}
+                  id={layers.temakz.id}
+                  url={layers.temakz.url}
+                  layers={layers.temakz.layers}
+                  onSelectPhoto={handlePhotoSelect}
+                  {...layers.temakz.props}
+                />
+              </Overlay>
+              
+              <Overlay key={layers.temazp.id} name={layers.temazp.name}>
+                <BetterWMS
+                  key={layers.temazp.id}
+                  id={layers.temazp.id}
+                  url={layers.temazp.url}
+                  layers={layers.temazp.layers}
+                  onSelectPhoto={handlePhotoSelect}
+                  {...layers.temazp.props}
+                />
+              </Overlay>
 
-            {/* fiksni_elementi */}
-            <TileLayer
-              url='https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png'
-              zIndex={999}
-            />
+              <Overlay key={layers.temadz.id} name={layers.temadz.name}>
+                <BetterWMS
+                  key={layers.temadz.id}
+                  id={layers.temadz.id}
+                  url={layers.temadz.url}
+                  layers={layers.temadz.layers}
+                  onSelectPhoto={handlePhotoSelect}
+                  {...layers.temadz.props}
+                />
+              </Overlay>
 
-            <Overlay key={layers.temakz.id} name={layers.temakz.name}>
-              <BetterWMS
-                key={layers.temakz.id}
-                id={layers.temakz.id}
-                url={layers.temakz.url}
-                layers={layers.temakz.layers}
-                {...layers.temakz.props}
-              />
-            </Overlay>
-            
-            <Overlay key={layers.temazp.id} name={layers.temazp.name}>
-              <BetterWMS
-                key={layers.temazp.id}
-                id={layers.temazp.id}
-                url={layers.temazp.url}
-                layers={layers.temazp.layers}
-                {...layers.temazp.props}
-              />
-            </Overlay>
-
-            <Overlay key={layers.temadz.id} name={layers.temadz.name}>
-              <BetterWMS
-                key={layers.temadz.id}
-                id={layers.temadz.id}
-                url={layers.temadz.url}
-                layers={layers.temadz.layers}
-                {...layers.temadz.props}
-              />
-            </Overlay>
-            {/* <Overlay key={layers.temadgu.id} name={layers.temadgu.name}>
-              <BetterWMS
-                key={layers.temadgu.id}
-                id={layers.temadgu.id}
-                url={layers.temadgu.url}
-                layers={layers.temadgu.layers}
-                {...layers.temadgu.props}
-              />
-            </Overlay> */}
-            <Overlay
-              key={layers.temafk.id}
-              name={layers.temafk.name}
-              checked={selectedLayer === layers.temafk.id}
-            >
-              <BetterWMS
+              <Overlay
                 key={layers.temafk.id}
-                id={layers.temafk.id}
-                url={layers.temafk.url}
-                layers={layers.temafk.layers}
-                onSelectPhoto={currentPhotoSet}
-                {...layers.temafk.props}
-              />
-            </Overlay>
-          </CustomLayersControl>
-          
-          {photoId && <SingleMarker />}
-          
-          {/* <MapLegends activeLayers={activeLayers}/> */}
-
-          { <WMSDebug /> }
-        
-        
-        </MapContainer>
-      </section>
-</div>
+                name={layers.temafk.name}
+                checked={selectedLayer === layers.temafk.id}
+              >
+                <BetterWMS
+                  key={layers.temafk.id}
+                  id={layers.temafk.id}
+                  url={layers.temafk.url}
+                  layers={layers.temafk.layers}
+                  onSelectPhoto={handlePhotoSelect}
+                  {...layers.temafk.props}
+                />
+              </Overlay>
+            </CustomLayersControl>
+            
+            {photoId && <SingleMarker />}
+            
+{popupPosition && currentPhoto && (
+  <Popup
+    position={popupPosition}
+    eventHandlers={{
+      remove: () => {
+        setPopupPosition(null)
+        currentPhotoSet(null)
+        setImageError(false)
+      }
+    }}
+  >
+    <div className="photo-popup-content">
+      <ul style={{ margin: '0 0 10px 0', padding: '0 0 0 20px' }}>
+        <li><strong>Signatura:</strong> {currentPhoto.signatura}</li>
+        <li><strong>Naziv:</strong> {currentPhoto.naziv || '—'}</li>
+        <li><strong>Opis:</strong> {currentPhoto.opis || '—'}</li>
+        <li><strong>Lokacija:</strong> {currentPhoto.lokacija || '—'}</li>
+        <li><strong>Datum:</strong> {currentPhoto.datum_sni || '—'}</li>
+        <li><strong>Kategorija:</strong> {currentPhoto.kategorija || '—'}</li>
+        <li><strong>Autor:</strong> {currentPhoto.autor || '—'}</li>
+        <li><strong>Tagovi:</strong> {currentPhoto.tagovi || '—'}</li>
+      </ul>
+      
+      {currentPhoto.foto_url && !imageError && (
+        <Link to={`/photos/${currentPhoto.id}`}>
+          <div style={{ 
+            textAlign: 'center', 
+            maxWidth: '250px',
+            minHeight: '100px',
+            backgroundColor: '#f5f5f5',
+            borderRadius: '4px',
+            padding: '5px',
+            marginTop: '10px',
+            cursor: 'pointer'
+          }}>
+            <ImageWithSuspense 
+              src={currentPhoto.foto_url} 
+              alt={currentPhoto.naziv || 'Photo'}
+              style={{ 
+                maxWidth: '100%', 
+                maxHeight: '200px', 
+                objectFit: 'contain',
+                display: 'block',
+                margin: '0 auto'
+              }}
+              onError={() => {
+                console.error('❌ Image failed to load:', currentPhoto.foto_url)
+                setImageError(true)
+              }}
+            />
+          </div>
+        </Link>
+      )}
+      
+      {imageError && (
+        <div style={{ 
+          textAlign: 'center', 
+          padding: '20px', 
+          color: '#666',
+          fontStyle: 'italic',
+          backgroundColor: '#f5f5f5',
+          borderRadius: '4px',
+          marginTop: '10px'
+        }}>
+          🖼️ Image not available
+        </div>
+      )}
+    </div>
+  </Popup>
+)}
+          </MapContainer>
+        </section>
+      </div>
     </div>
   )
 }
-// function setActiveLayers(layers: Set<string>) {
-//   throw new Error('Function not implemented.')
-// }
-
