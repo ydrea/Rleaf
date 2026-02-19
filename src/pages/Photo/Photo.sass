@@ -1,60 +1,81 @@
-.image-wrapper
-  position: relative
+.single-image-container
+  padding-top: 48px !important
 
-  .next-prev-cnt
-    height: 100%
-    padding: 20px
-    background-color: #FFFFFFCC
-    position: absolute
-    top: 0
-    cursor: pointer
-    transition: opacity 0.2s ease-in-out
+  .image-wrapper
+    position: relative
 
-    @media (max-width: 768px)
-      height: auto
-      padding: 20px 14px 12px
+    .next-prev-cnt
+      height: 100%
+      padding: 20px
+      background-color: #FFFFFFCC
+      position: absolute
+      top: 0
+      cursor: pointer
+      transition: opacity 0.2s ease-in-out
 
-    &.next
-      right: 0
-      opacity: 0
+      @media (max-width: 768px)
+        height: auto
+        padding: 20px 14px 12px
 
-    &.prev
-      left: 0
-      opacity: 0
+      &.next
+        right: 0
+        opacity: 0
 
-    &:hover
-      opacity: 1
+      &.prev
+        left: 0
+        opacity: 0
 
-  .single-image img
-    display: block
-    margin: 0 auto
-    min-height: 100px
-    user-select: none
-    user-drag: none
-    -webkit-user-drag: none
+      &:hover
+        opacity: 1
 
-  .single-image.vertical
-    background: url('../../assets/vertical-image-bg.svg')
+    .single-image
+      background-image: url('../../assets/dotted-background.svg')
+      min-height: 667px
 
-    img
-      margin-right: 0
-      margin-left: auto
+      img
+        display: block
+        margin: 0 auto
+        min-height: 100px
+        user-select: none
+        user-drag: none
+        -webkit-user-drag: none
 
-.photo-data
-  display: flex
-  flex-direction: column
-  gap: 10px
-  margin-top: 48px
+      &.vertical
+        img
+          margin-right: 0
+          margin-left: auto
 
-  .photo-data-item
+  .image-footer
     display: flex
-    gap: 10px
+    justify-content: space-between
+    align-items: flex-start
+    gap: 48px
 
-.navigation
-  display: flex
-  gap: 10px
-  padding: 48px 0
-  justify-content: space-between
+    @media (max-width: 640px)
+      flex-direction: column
+      align-items: flex-start
+      gap: 0
 
-  .cc-link
-    cursor: pointer
+    .photo-data
+      flex: 1
+      padding: 0
+      list-style: none
+      margin: 48px 0 0 0
+
+      li
+        font-size: 1rem
+        font-weight: 500
+        color: #000000
+
+      @media (max-width: 640px)
+        margin-top: 24px
+
+      + .photo-data
+        text-align: right
+        min-width: 220px
+
+        @media (max-width: 640px)
+          text-align: left
+          min-width: 100%
+          border-top: 1px solid #000000
+          padding-top: 24px

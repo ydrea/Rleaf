@@ -55,7 +55,7 @@
     flex-direction: column
     justify-content: space-between
     height: 375px
-    padding-bottom: 30px
+    padding-bottom: 20px
     border-top: 1px solid #000
     border-bottom: 1px solid #000
     transition: filter 0.3s ease
@@ -72,8 +72,8 @@
       cursor: pointer
 
     @media (max-width: 1152px)
-      padding-bottom: 20px
-      height: 355px
+      padding-bottom: 12px
+      height: 350px
 
     @media (max-width: 768px)
       height: 295px
@@ -91,7 +91,7 @@
       color: #000000
 
     .photo-data
-      margin-top: 1.25rem
+      margin-top: 0
 
       li
         display: -webkit-box
@@ -102,3 +102,6 @@
         text-overflow: ellipsis
         white-space: normal
         line-height: 1
+
+        + li
+          margin-top: 0.5rem !important

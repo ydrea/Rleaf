@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useThrottledState } from '@mantine/hooks'
 
 import type { Character } from './services/process-ascii-art/process-ascii-art'
@@ -14,7 +14,6 @@ type Props = {
 }
 
 export const CroatiaTextArt = ({ width = 1496, height = 896 }: Props) => {
-  const containerRef = useRef<HTMLDivElement>(null)
   const [characters, setCharacters] = useState<Record<string, Character[]>>({})
   const [isMouseMoving, setIsMouseMoving] = useThrottledState(0, 100)
   const { windowWidth, containerWidth, canvasLeft, canvasRef, ctx, blockRef } = useCanvasSizing({
@@ -53,12 +52,8 @@ export const CroatiaTextArt = ({ width = 1496, height = 896 }: Props) => {
 
   return (
     <div ref={blockRef} className='canvas-block'>
-      <h1 style={{ left: 75, top: 50 }}>eseji</h1>
-      <div
-        ref={containerRef}
-        className='canvas-container'
-        style={{ width: containerWidth, height }}
-      >
+      <h1 style={{ left: (canvasLeft < 0 ? 0 : canvasLeft) + 75, top: 50 }}>eseji</h1>
+      <div className='canvas-container' style={{ width: containerWidth, height }}>
         <canvas
           ref={canvasRef}
           width={width}

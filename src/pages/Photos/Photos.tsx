@@ -9,13 +9,14 @@ import {
   selectFilteredPhotos
 } from '../../redux/rtk/gallerySlice'
 import type { Photo } from '../../types/types'
+import { Loader } from '../../components/Loader/Loader'
 import { Section } from '../../components/Section/Section'
+import { Container } from '../../components/Container/Container'
 import { Pagination } from './components/Pagination/Pagination'
 import { TagoviSelekt } from '../../components/SelektT/SelektT'
-import { useAppDispatch } from '../../redux/hooks'
 import { PhotoThumbnail } from './components/PhotoThumbnail/PhotoThumbnail'
 import { KategorijeSelekt } from '../../components/SelektK/SelektK'
-import { Loader } from '../../components/Loader/Loader'
+import { useAppDispatch } from '../../redux/hooks'
 import './Photos.sass'
 
 export const Photos = ({ photosPerPage = 30 }: { photosPerPage?: number }) => {
@@ -69,40 +70,42 @@ export const Photos = ({ photosPerPage = 30 }: { photosPerPage?: number }) => {
   const totalPages = Math.ceil(filteredPhotos.length / photosPerPage)
 
   return (
-    <div>
-      <section className='select-container'>
-        <KategorijeSelekt />
-        <div className='selectxt'>
-          Odabrano <strong>{filteredPhotos.length}</strong> fotografija
-        </div>
-        <TagoviSelekt tagoviOptions={tagoviOptions} />
-      </section>
-      {loading && <Loader />}
-      {!loading && (
-        <>
-          <div className='photos-container' id='photos-container'>
-            {photosToDisplay?.length > 0 ? (
-              photosToDisplay.map((photo: Photo, index: number) => (
-                <PhotoThumbnail
-                  key={photo.id}
-                  photo={photo}
-                  index={index}
-                  onClick={handlePhotoClick}
-                />
-              ))
-            ) : (
-              <p>Nema fotografije po zadanim kriterijima</p>
-            )}
+    <>
+      <Container className='container'>
+        <section className='select-container'>
+          <KategorijeSelekt />
+          <div className='selectxt'>
+            Odabrano <strong>{filteredPhotos.length}</strong> fotografija
           </div>
-          <Pagination totalPages={totalPages} />
-        </>
-      )}
+          <TagoviSelekt tagoviOptions={tagoviOptions} />
+        </section>
+        {loading && <Loader />}
+        {!loading && (
+          <>
+            <div className='photos-container' id='photos-container'>
+              {photosToDisplay?.length > 0 ? (
+                photosToDisplay.map((photo: Photo, index: number) => (
+                  <PhotoThumbnail
+                    key={photo.id}
+                    photo={photo}
+                    index={index}
+                    onClick={handlePhotoClick}
+                  />
+                ))
+              ) : (
+                <p>Nema fotografije po zadanim kriterijima</p>
+              )}
+            </div>
+            <Pagination totalPages={totalPages} />
+          </>
+        )}
+      </Container>
 
       <Section dark style={{ marginBottom: '-96px' }}>
         Fototeka Opservatorija krajobraza čuva slikovne priče krajobraza, dokumentirajući ih kroz
         različite teme, projekte i vremenske okvire. Svaka slika je pažljivo odabrana, opremljena
         detaljnim informacijama i, gdje je to moguće, preciznim geografskim koordinatama.
       </Section>
-    </div>
+    </>
   )
 }

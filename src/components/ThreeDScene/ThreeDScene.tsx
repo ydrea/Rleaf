@@ -12,7 +12,6 @@ import {
 } from 'three'
 import { Line2, LineMaterial, LineGeometry, OrbitControls } from 'three-stdlib'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { degToRad } from 'three/src/math/MathUtils.js'
 
 import { useCanvasSizing } from '../../services/use-canvas-sizing/use-canvas-sizing'
 
@@ -23,7 +22,7 @@ type Props = {
   height?: number
 }
 
-export const ThreeDScene = ({ width = 1499, height = 749 }: Props) => {
+export const ThreeDScene = ({ width = 1497, height = 749 }: Props) => {
   const animationIdRef = useRef<number | undefined>(undefined)
   const rotationYRef = useRef<number>(0)
   const groupRef = useRef<Group | null>(null)
@@ -33,7 +32,8 @@ export const ThreeDScene = ({ width = 1499, height = 749 }: Props) => {
   const cameraRef = useRef<PerspectiveCamera | null>(null)
   const { containerWidth, blockRef, blockWidth, canvasLeft } = useCanvasSizing({
     width,
-    blockSize: BLOCK_SIZE
+    blockSize: BLOCK_SIZE,
+    extraContainerWidth: 1
   })
 
   const handleMouseMove = (event: MouseEvent | TouchEvent) => {
@@ -191,7 +191,17 @@ export const ThreeDScene = ({ width = 1499, height = 749 }: Props) => {
 
   return (
     <div ref={blockRef} className='canvas-block three-d-scene'>
-      <h1 style={{ left: BLOCK_SIZE * 3 + (blockWidth - containerWidth) / 2 - 3 }}>3d scene</h1>
+      <h1
+        style={{
+          left:
+            (canvasLeft < 0 ? 0 : canvasLeft) +
+            BLOCK_SIZE * 3 +
+            (blockWidth - containerWidth) / 2 -
+            3
+        }}
+      >
+        3d scene
+      </h1>
 
       <div
         ref={containerRef}
