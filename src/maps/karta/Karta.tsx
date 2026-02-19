@@ -83,24 +83,38 @@ export const Karta = () => {
   const [popupPosition, setPopupPosition] = useState<L.LatLng | null>(null)
   const [imageError, setImageError] = useState(false)
 
+  // Fetch coordinates for a photo
+  const fetchPhotoCoordinates = async (photoId: number) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/json_photos`)
+      const data = await response.json()
+      // Find the photo with matching signatura
+      const photo = photos.find(p => p.id === photoId)
+      if (photo) {
+        const photoGeo = data.find((item: any) => 
+          item.signatura === photo.signatura || item.id === photoId
+        )
+        if (photoGeo && photoGeo.geometry) {
+          const geometry = typeof photoGeo.geometry === 'string' 
+            ? JSON.parse(photoGeo.geometry) 
+            : photoGeo.geometry
+          const coords = geometry.coordinates
+          return L.latLng(coords[1], coords[0]) // GeoJSON is [lng, lat]
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch coordinates:', error)
+    }
+    return null
+  }
+
   const handlePhotoSelect = (photo: Photo, latlng?: L.LatLng) => {
     console.log('📍 Photo selected at:', latlng)
     console.log('📸 Photo data:', photo)
     
-    // Reset image error state for new photo
     setImageError(false)
     
     const fotoUrl = photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
-    
-    // DEBUG: Log the constructed URL
-    console.log('🔗 Image URL:', fotoUrl)
-    console.log('🔍 VITE_SERVER_PUB:', import.meta.env.VITE_SERVER_PUB)
-    console.log('📝 Signatura:', photo.signatura)
-    
-    // Test if image exists (optional, for debugging)
-    fetch(fotoUrl, { method: 'HEAD' })
-      .then(res => console.log('📸 Image status:', res.status, res.statusText))
-      .catch(err => console.error('❌ Image fetch error:', err))
     
     currentPhotoSet({
       ...photo,
@@ -112,10 +126,6 @@ export const Karta = () => {
     }
   }
 
-  const handleLayerSelect = (photo: Photo) => {
-    currentPhotoSet(photo)
-  }
-
   // Handle layer changes
   const handleLayersChange = (layers: Set<string>) => {
     if (layers instanceof Set) {
@@ -125,6 +135,7 @@ export const Karta = () => {
     }
   };
 
+  // 🔥 FIXED: Auto-open popup when coming from Photo.tsx
   useEffect(() => {
     if (photoId && selectedLayer !== layers.temafk.id) {
       selectedLayerSet(layers.temafk.id)
@@ -142,15 +153,24 @@ export const Karta = () => {
 
         console.log('📸 Photo data from URL:', photo)
         console.log('🔗 Constructed URL:', fotoUrl)
-        console.log('🔍 VITE_SERVER_PUB:', import.meta.env.VITE_SERVER_PUB)
-        console.log('📝 Signatura:', photo.signatura)
 
         currentPhotoSet({
           ...photo,
           foto_url: fotoUrl
         })
+        
+        
+    // 🔥 FIX: Get coordinates from the API since Photo type doesn't have lat/lng
+    console.log('🔍 Fetching coordinates for photo:', photoId)
+    fetchPhotoCoordinates(Number(photoId)).then(latLng => {
+      if (latLng) {
+        console.log('📍 Setting popup from fetched coordinates:', latLng)
+        setPopupPosition(latLng)
       }
-    }
+    })
+  }
+}
+
   }, [photoId, dispatch, photos, selectedLayer])
 
   const { BaseLayer, Overlay } = LayersControl
@@ -256,76 +276,75 @@ export const Karta = () => {
             
             {photoId && <SingleMarker />}
             
-{popupPosition && currentPhoto && (
-  <Popup
-    position={popupPosition}
-    eventHandlers={{
-      remove: () => {
-        setPopupPosition(null)
-        currentPhotoSet(null)
-        setImageError(false)
-      }
-    }}
-  >
-    <div className="photo-popup-content">
-      <ul style={{ margin: '0 0 10px 0', padding: '0 0 0 20px' }}>
-        <li><strong>Signatura:</strong> {currentPhoto.signatura}</li>
-        <li><strong>Naziv:</strong> {currentPhoto.naziv || '—'}</li>
-        <li><strong>Opis:</strong> {currentPhoto.opis || '—'}</li>
-        <li><strong>Lokacija:</strong> {currentPhoto.lokacija || '—'}</li>
-        <li><strong>Datum:</strong> {currentPhoto.datum_sni || '—'}</li>
-        <li><strong>Kategorija:</strong> {currentPhoto.kategorija || '—'}</li>
-        <li><strong>Autor:</strong> {currentPhoto.autor || '—'}</li>
-        <li><strong>Tagovi:</strong> {currentPhoto.tagovi || '—'}</li>
-      </ul>
-      
-      {currentPhoto.foto_url && !imageError && (
-        <Link to={`/photos/${currentPhoto.id}`}>
-          <div style={{ 
-            textAlign: 'center', 
-            maxWidth: '250px',
-            minHeight: '100px',
-            backgroundColor: '#f5f5f5',
-            borderRadius: '4px',
-            padding: '5px',
-            marginTop: '10px',
-            cursor: 'pointer'
-          }}>
-            <ImageWithSuspense 
-              src={currentPhoto.foto_url} 
-              alt={currentPhoto.naziv || 'Photo'}
-              style={{ 
-                maxWidth: '100%', 
-                maxHeight: '200px', 
-                objectFit: 'contain',
-                display: 'block',
-                margin: '0 auto'
-              }}
-              onError={() => {
-                console.error('❌ Image failed to load:', currentPhoto.foto_url)
-                setImageError(true)
-              }}
-            />
-          </div>
-        </Link>
-      )}
-      
-      {imageError && (
-        <div style={{ 
-          textAlign: 'center', 
-          padding: '20px', 
-          color: '#666',
-          fontStyle: 'italic',
-          backgroundColor: '#f5f5f5',
-          borderRadius: '4px',
-          marginTop: '10px'
-        }}>
-          🖼️ Image not available
-        </div>
-      )}
-    </div>
-  </Popup>
-)}
+            {popupPosition && currentPhoto && (
+              <Popup 
+                className="photo-popup"
+                autoPan={true} 
+                autoPanPadding={[40, 40]}
+                position={popupPosition}
+                eventHandlers={{
+                  remove: () => {
+                    setPopupPosition(null)
+                    currentPhotoSet(null)
+                    setImageError(false)
+                  }
+                }}
+              >
+                {/* <div className="photo-popup-content"> */}
+   <ul>
+      <li><span className="label">Signatura</span> <span className="value">{currentPhoto.signatura}</span></li>
+      <li><span className="label">Datum</span> <span className="value">{currentPhoto.datum_sni || '—'}</span></li>
+      <li><span className="label">Kategorija</span> <span className="value">{currentPhoto.kategorija || '—'}</span></li>
+      <li><span className="label">Autor</span> <span className="value">{currentPhoto.autor || '—'}</span></li>
+      <li><span className="label">Tagovi</span> <span className="value">{currentPhoto.tagovi || '—'}</span></li>
+    </ul>                  
+                  {currentPhoto.foto_url && !imageError && (
+                    <Link to={`/photos/${currentPhoto.id}`}>
+                      <div style={{ 
+                        textAlign: 'center', 
+                        maxWidth: '250px',
+                        minHeight: '100px',
+                        backgroundColor: '#f5f5f5',
+                        borderRadius: '4px',
+                        padding: '5px',
+                        marginTop: '10px',
+                        cursor: 'pointer'
+                      }}>
+                        <ImageWithSuspense 
+                          src={currentPhoto.foto_url} 
+                          alt={currentPhoto.naziv || 'Photo'}
+                          style={{ 
+                            maxWidth: '100%', 
+                            maxHeight: '200px', 
+                            objectFit: 'contain',
+                            display: 'block',
+                            margin: '0'
+                          }}
+                          onError={() => {
+                            console.error('❌ Image failed to load:', currentPhoto.foto_url)
+                            setImageError(true)
+                          }}
+                        />
+                      </div>
+                    </Link>
+                  )}
+                  
+                  {imageError && (
+                    <div style={{ 
+                      textAlign: 'center', 
+                      padding: '20px', 
+                      color: '#666',
+                      fontStyle: 'italic',
+                      backgroundColor: '#f5f5f5',
+                      borderRadius: '4px',
+                      marginTop: '10px'
+                    }}>
+                      🖼️ Image not available
+                    </div>
+                  )}
+                {/* </div> */}
+              </Popup>
+            )}
           </MapContainer>
         </section>
       </div>

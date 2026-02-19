@@ -209,7 +209,7 @@ export const PodK = () => {
     transparent: true,
     version: '1.3.0',
     attribution: 'WMS Service Attribution',
-    maxZoom: 22
+    maxZoom: 20
   }
   useEffect(() => {
     const fetchLegend = async () => {
