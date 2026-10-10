@@ -90,6 +90,9 @@
     opacity: 0
     transition-duration: 0.15s
 
+  > a
+    flex-shrink: 0
+
   > a > img
     display: block
     margin: 4px 0
@@ -103,6 +106,14 @@
     padding: 0
     height: 97px
     overflow: hidden
+
+    @media (min-width: 961px)
+      flex-wrap: nowrap // never hide items by wrapping them out of view
+      overflow-x: clip // clip the active row's width, but...
+      overflow-y: visible // ...let the hover dropdown hang below the header
+
+      a
+        white-space: nowrap
 
     a
       text-decoration: none
@@ -141,6 +152,9 @@
 
       @media (max-width: 1152px)
         padding: 15px 10px 0 15px
+
+      @media (max-width: 1040px)
+        padding: 15px 6px 0 8px
 
     @media (max-width: 960px)
       flex-direction: column
@@ -219,6 +233,16 @@
   & a.active + .submenu
     display: flex
 
+  // active page: horizontal row along the bottom of the header
+  @media (min-width: 961px)
+    & a.active + .submenu
+      flex-direction: row
+      top: auto
+      bottom: 0
+      height: 52px
+      overflow: hidden
+      width: calc(100vw - 192px)
+
   a
     display: block
     height: 100%
@@ -241,18 +265,17 @@
         height: auto
         top: 8px !important
 
+  // hover (page not active): vertical dropdown under the item
   .submenu
     display: none
+    flex-direction: column
     position: absolute
     left: 0
-    bottom: 0
-    height: 52px
-    overflow: hidden
+    top: 100%
     background: #fff
     z-index: 1001
     padding: 0
     margin: 0
-    width: calc(100vw - 192px)
 
     a
       width: 134px
@@ -264,6 +287,40 @@
       display: flex
       flex-direction: column
       position: relative
+      top: auto
       width: 100%
       height: auto
       overflow: visible
+
+// Desktop submenu item sizing. Scoped under #header to outweigh `#header .main-menu a`.
+@media (min-width: 961px)
+  #header .menu-item-with-submenu
+    // main link: half the header height, same stripes as the sub items
+    > a
+      height: 48.5px
+
+      &:hover::before,
+      &.active::before
+        height: 41px
+
+    // hover dropdown: starts right under the main link, items the same height as it
+    .submenu
+      top: 48.5px
+
+      a
+        height: 48.5px
+        padding-top: 15px
+
+        &::before
+          top: 8px
+
+        &:hover::before,
+        &.active::before
+          height: 41px
+
+    // active row: items fill the 52px row
+    a.active + .submenu
+      top: auto
+
+      a
+        height: 100%

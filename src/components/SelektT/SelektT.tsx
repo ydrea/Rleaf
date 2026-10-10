@@ -50,6 +50,15 @@ export const TagoviSelekt = ({ tagoviOptions }: Props) => {
       ...styles,
       width: '300px'
     }),
+    control: (styles: CSSObjectWithLabel) => ({
+      ...styles,
+      borderWidth: '0 0 1px 0',
+      borderRadius: '0'
+    }),
+    valueContainer: (styles: CSSObjectWithLabel) => ({
+      ...styles,
+      padding: '0'
+    }),
     menu: (styles: CSSObjectWithLabel) => ({
       ...styles,
       zIndex: '9999',
@@ -69,8 +78,8 @@ export const TagoviSelekt = ({ tagoviOptions }: Props) => {
         isSearchable
         isMulti
         onChange={handleTagoviFilterChange}
-        getOptionValue={(option: any) => option.value}
-        getOptionLabel={(option: any) => option.label}
+        getOptionValue={(option: any) => option.value || option.label}
+        getOptionLabel={(option: any) => option.label || option.value}
         options={tagoviOptions}
         value={
           selectedFilters?.tagovi
