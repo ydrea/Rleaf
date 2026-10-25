@@ -1,9 +1,9 @@
 // Karta.tsx
-import { MapContainer, TileLayer, LayersControl, ZoomControl, Popup } from 'react-leaflet'
+import { useMap, Marker, MapContainer, TileLayer, LayersControl, ZoomControl, Popup } from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useMap } from 'react-leaflet'
+// import {  } from 'react-leaflet'
 import type { LayersControlEvent } from 'leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -21,6 +21,28 @@ import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithS
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import './Karta.sass'
 import { CustomLayersControl } from './components/CustomLayersControl'
+// import L from 'leaflet'
+
+// Create a custom icon using divIcon (no extra library needed)
+const fototekaIcon = L.divIcon({
+  className: 'fototeka-marker',
+  html: `
+    <div style="
+      width: 32px; height: 32px;
+      background: white;
+      border: 2px solid #333;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    ">
+      <img src="/icons/fototeka.svg" style="width: 20px; height: 20px;" alt="Fototeka" />
+    </div>
+  `,
+  iconSize: [32, 32],
+  iconAnchor: [16, 16],
+  popupAnchor: [0, -16],
+})
+
 
 const LayerHandler = ({
   kartografijeSet,
@@ -33,6 +55,9 @@ const LayerHandler = ({
 
   useEffect(() => {
     const activeLayers = new Set<string>()
+
+
+    kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png')
 
     const handleBaseLayerChange = (e: LayersControlEvent) => {
       if (e.name === 'reljef') {
@@ -318,6 +343,10 @@ export const Karta = () => {
             </CustomLayersControl>
 
             {photoId && <SingleMarker />}
+
+  {popupPosition && (
+  <Marker position={popupPosition} icon={fototekaIcon} />
+)}
 
             {popupPosition && currentPhoto && (
               <Popup

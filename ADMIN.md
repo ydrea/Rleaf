@@ -488,3 +488,6 @@ curl -I https://client.croatianlandscape.hr/maps/BAN-002-91
 You should see HTTP/2 200 and content-type: text/html.
 
 This is the exact same principle as the Apache .htaccess solution I mentioned earlier - just implemented in Nginx syntax. Once this is in place, all your React Router paths will work immediately.
+
+
+5) Problem: balončić (u svim kategorijama) prikazuje kategorije od fotki, umjesto od dotične kategorije 
