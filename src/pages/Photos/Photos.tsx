@@ -43,7 +43,11 @@ export const Photos = ({ photosPerPage = 30 }: { photosPerPage?: number }) => {
 
   photos.forEach((photo) => {
     photo.tagovi.split(',').forEach((tag) => {
-      tagoviSet.add(tag.trim())
+      const trimmedTag = tag.trim()
+
+      if (trimmedTag) {
+        tagoviSet.add(trimmedTag)
+      }
     })
   })
 
@@ -74,10 +78,10 @@ export const Photos = ({ photosPerPage = 30 }: { photosPerPage?: number }) => {
       <Container className='container'>
         <section className='select-container'>
           <KategorijeSelekt />
-          <div className='selectxt'>
+          <TagoviSelekt tagoviOptions={tagoviOptions} />
+          <div className='info-text'>
             Odabrano <strong>{filteredPhotos.length}</strong> fotografija
           </div>
-          <TagoviSelekt tagoviOptions={tagoviOptions} />
         </section>
         {loading && <Loader />}
         {!loading && (

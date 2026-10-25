@@ -18,7 +18,7 @@ type Props = {
 export const SceneGLTF = ({
   filePath,
   width = 1496,
-  height = 749,
+  height = 767,
   initialPolarAngle = 0,
   initialCameraPosition = [0, 0, 0]
 }: Props) => {

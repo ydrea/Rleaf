@@ -46,6 +46,14 @@ export const KategorijeSelekt = () => {
       ...styles,
       width: '300px'
     }),
+    control: (styles: CSSObjectWithLabel) => ({
+      ...styles,
+      borderWidth: '0 0 1px 0'
+    }),
+    valueContainer: (styles: CSSObjectWithLabel) => ({
+      ...styles,
+      padding: '0'
+    }),
     menu: (styles: CSSObjectWithLabel) => ({
       ...styles,
       zIndex: '9999',

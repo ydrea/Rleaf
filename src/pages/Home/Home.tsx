@@ -69,19 +69,6 @@ export const Home = () => {
         </div>
       </Section>
 
-      <Section dark title='Što su to Opservatoriji krajobraza?'>
-        <p>
-          Konvencija Vijeća Europe o krajobrazu predviđa važnu ulogu opservatorija krajobraza u: 1)
-          dokumentiranju i monitoringu krajobraza i čimbenika koji ga oblikuju, 2) omogućavanju
-          razmjene podataka, 3) edukaciji šire javnosti, 4) eksperimentiranju s interdisciplinarnim
-          metodama te 5) povezivanju znanosti, lokalne zajednice i samouprave, kao i tijela državne
-          uprave. Stoga opservatoriji ne služe samo za promatranje krajobraza, već i za praćenje
-          protokola i politika, odnosno monitoringu implementacije krajobraznih tema. U Europi je
-          sve više opservatorija krajobraza, pri čemu je najviše njih smješteno u euromediteranskim
-          regijama.
-        </p>
-      </Section>
-
       <BlockWithStickyTitle title='opservatorij krajobraza Banovine / Banije' subtitle='projekt(i)'>
         <p>
           Opservatorij krajobraza Banovine/Banije je pilot projekt šireg programa Opservatorija, a

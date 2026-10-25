@@ -11,6 +11,7 @@
 /dist
 /photos
 /uploads
+
 # misc
 .DS_Store
 .env*
@@ -20,3 +21,5 @@ yarn-error.log*
 *.zip
 BiTs.js
 mem.md
+___misc
+.vercel

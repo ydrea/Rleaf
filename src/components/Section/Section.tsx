@@ -11,9 +11,10 @@ type Props = {
   title?: string
   className?: string
   style?: React.CSSProperties
+  noReadMore?: boolean
 }
 
-export const Section = ({ children, dark, title, className, style }: Props) => {
+export const Section = ({ children, dark, title, className, style, noReadMore }: Props) => {
   const id = useNumericId()
 
   return (
@@ -25,7 +26,8 @@ export const Section = ({ children, dark, title, className, style }: Props) => {
       >
         {title && <h2>{title}</h2>}
         <div className='section-content'>
-          <ReadMore id={id}>{children}</ReadMore>
+          {!noReadMore && <ReadMore id={id}>{children}</ReadMore>}
+          {noReadMore && children}
         </div>
       </section>
     </Container>

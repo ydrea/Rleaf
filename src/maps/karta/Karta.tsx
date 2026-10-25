@@ -22,18 +22,17 @@ import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/Bloc
 import './Karta.sass'
 import { CustomLayersControl } from './components/CustomLayersControl'
 
-const LayerHandler = ({ 
-  kartografijeSet, 
-  onLayersChange 
-}: { 
-  kartografijeSet: (url: string) => void;
-  onLayersChange: (activeLayers: Set<string>) => void;
+const LayerHandler = ({
+  kartografijeSet,
+  onLayersChange
+}: {
+  kartografijeSet: (url: string) => void
+  onLayersChange: (activeLayers: Set<string>) => void
 }) => {
-  const map = useMap();
+  const map = useMap()
 
   useEffect(() => {
-
-    const activeLayers = new Set<string>();
+    const activeLayers = new Set<string>()
 
     const handleBaseLayerChange = (e: LayersControlEvent) => {
       if (e.name === 'reljef') {
@@ -44,19 +43,19 @@ const LayerHandler = ({
     }
 
     const handleOverlayChange = (e: any) => {
-      const layerId = e.layer.options.id;
+      const layerId = e.layer.options.id
 
       if (e.type === 'overlayadd') {
-        activeLayers.add(layerId);
+        activeLayers.add(layerId)
       } else if (e.type === 'overlayremove') {
-        activeLayers.delete(layerId);
+        activeLayers.delete(layerId)
       }
-      onLayersChange(new Set(activeLayers));
-    };
+      onLayersChange(new Set(activeLayers))
+    }
 
-    map.on('baselayerchange', handleBaseLayerChange);
-    map.on('overlayadd', handleOverlayChange);
-    map.on('overlayremove', handleOverlayChange);
+    map.on('baselayerchange', handleBaseLayerChange)
+    map.on('overlayadd', handleOverlayChange)
+    map.on('overlayremove', handleOverlayChange)
 
     return () => {
       map.off('baselayerchange', handleBaseLayerChange)
@@ -68,6 +67,60 @@ const LayerHandler = ({
   return null
 }
 
+// Google-Maps-style cooperative gestures: wheel zooms only with ctrl/cmd, touch pans only with
+// two fingers, mouse drag works as usual. Keeps the page scrollable over the map.
+const GestureHandling = () => {
+  const map = useMap()
+  const [hint, hintSet] = useState<string | null>(null)
+
+  useEffect(() => {
+    const el = map.getContainer()
+    let timer: ReturnType<typeof setTimeout>
+
+    const show = (text: string) => {
+      clearTimeout(timer)
+      hintSet(text)
+      timer = setTimeout(() => hintSet(null), 1500)
+    }
+
+    const onWheel = (e: WheelEvent) => {
+      if (e.ctrlKey || e.metaKey) return
+      e.stopImmediatePropagation()
+      show('Zumirajte kartu uz Ctrl/Cmd + kotačić miša')
+    }
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 1) show('Koristite dva prsta za pomicanje karte')
+    }
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse' && el.contains(e.target as Node)) map.dragging.enable()
+    }
+
+    const onMouseUp = () => map.dragging.disable()
+
+    map.dragging.disable()
+    map.scrollWheelZoom.disable()
+    el.addEventListener('wheel', onWheel)
+    map.scrollWheelZoom.enable() // re-registered after ours, so ours runs first
+
+    el.addEventListener('touchmove', onTouchMove, { passive: true })
+    window.addEventListener('pointerdown', onPointerDown, true)
+    window.addEventListener('mouseup', onMouseUp)
+
+    return () => {
+      clearTimeout(timer)
+      el.removeEventListener('wheel', onWheel)
+      el.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('pointerdown', onPointerDown, true)
+      window.removeEventListener('mouseup', onMouseUp)
+      map.dragging.enable()
+    }
+  }, [map])
+
+  return hint ? <div className='gesture-hint'>{hint}</div> : null
+}
+
 export const Karta = () => {
   const { photoId } = useParams()
   const dispatch = useAppDispatch()
@@ -77,7 +130,7 @@ export const Karta = () => {
     'https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png'
   )
 
-  const [activeLayers, setActiveLayers] = useState<Set<string>>(new Set()) 
+  const [activeLayers, setActiveLayers] = useState<Set<string>>(new Set())
   const [selectedLayer, selectedLayerSet] = useState<string | null>(null)
   const [currentPhoto, currentPhotoSet] = useState<Photo | null>(null)
   const [popupPosition, setPopupPosition] = useState<L.LatLng | null>(null)
@@ -91,13 +144,14 @@ export const Karta = () => {
       // Find the photo with matching signatura
       const photo = photos.find(p => p.id === photoId)
       if (photo) {
-        const photoGeo = data.find((item: any) => 
-          item.signatura === photo.signatura || item.id === photoId
+        const photoGeo = data.find(
+          (item: any) => item.signatura === photo.signatura || item.id === photoId
         )
         if (photoGeo && photoGeo.geometry) {
-          const geometry = typeof photoGeo.geometry === 'string' 
-            ? JSON.parse(photoGeo.geometry) 
-            : photoGeo.geometry
+          const geometry =
+            typeof photoGeo.geometry === 'string'
+              ? JSON.parse(photoGeo.geometry)
+              : photoGeo.geometry
           const coords = geometry.coordinates
           return L.latLng(coords[1], coords[0]) // GeoJSON is [lng, lat]
         }
@@ -111,16 +165,16 @@ export const Karta = () => {
   const handlePhotoSelect = (photo: Photo, latlng?: L.LatLng) => {
     console.log('📍 Photo selected at:', latlng)
     console.log('📸 Photo data:', photo)
-    
+
     setImageError(false)
-    
+
     const fotoUrl = photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
-    
+
     currentPhotoSet({
       ...photo,
       foto_url: fotoUrl
     })
-    
+
     if (latlng) {
       setPopupPosition(latlng)
     }
@@ -129,11 +183,11 @@ export const Karta = () => {
   // Handle layer changes
   const handleLayersChange = (layers: Set<string>) => {
     if (layers instanceof Set) {
-      setActiveLayers(layers);
+      setActiveLayers(layers)
     } else {
-      setActiveLayers(new Set(layers));
+      setActiveLayers(new Set(layers))
     }
-  };
+  }
 
   // 🔥 FIXED: Auto-open popup when coming from Photo.tsx
   useEffect(() => {
@@ -158,34 +212,23 @@ export const Karta = () => {
           ...photo,
           foto_url: fotoUrl
         })
-        
-        
-    // 🔥 FIX: Get coordinates from the API since Photo type doesn't have lat/lng
-    console.log('🔍 Fetching coordinates for photo:', photoId)
-    fetchPhotoCoordinates(Number(photoId)).then(latLng => {
-      if (latLng) {
-        console.log('📍 Setting popup from fetched coordinates:', latLng)
-        setPopupPosition(latLng)
-      }
-    })
-  }
-}
 
+        // 🔥 FIX: Get coordinates from the API since Photo type doesn't have lat/lng
+        console.log('🔍 Fetching coordinates for photo:', photoId)
+        fetchPhotoCoordinates(Number(photoId)).then(latLng => {
+          if (latLng) {
+            console.log('📍 Setting popup from fetched coordinates:', latLng)
+            setPopupPosition(latLng)
+          }
+        })
+      }
+    }
   }, [photoId, dispatch, photos, selectedLayer])
 
   const { BaseLayer, Overlay } = LayersControl
 
   return (
     <div>
-      <BlockWithStickyTitle title='Mape'>
-        <p>
-          Dobrodošli na interaktivnu kartu "Opservatorija krajobraza". Ova karta predstavlja našu
-          kontinuirano nadopunjujuću kolekciju georeferenciranih podataka koja vam omogućuje uvid u
-          različite aspekte krajobraza. Upotrijebite alate za odabir podloge, prilagodbu slojeva i
-          filtriranje informacija kako biste prilagodili prikaz prema vlastitim istraživačkim
-          potrebama.
-        </p>
-      </BlockWithStickyTitle>
       <div className='map'>
         <section id='map-container'>
           <MapContainer
@@ -199,8 +242,8 @@ export const Karta = () => {
             }}
             zoomControl={false}
           >
-            <LayerHandler kartografijeSet={kartografijeSet} 
-              onLayersChange={handleLayersChange} />
+            <GestureHandling />
+            <LayerHandler kartografijeSet={kartografijeSet} onLayersChange={handleLayersChange} />
             <ZoomControl position='bottomright' />
             <CustomLayersControl collapsed={windowWidth < 1248} activeLayers={activeLayers}>
               <BaseLayer checked name='reljef'>
@@ -235,7 +278,7 @@ export const Karta = () => {
                   {...layers.temakz.props}
                 />
               </Overlay>
-              
+
               <Overlay key={layers.temazp.id} name={layers.temazp.name}>
                 <BetterWMS
                   key={layers.temazp.id}
@@ -273,13 +316,13 @@ export const Karta = () => {
                 />
               </Overlay>
             </CustomLayersControl>
-            
+
             {photoId && <SingleMarker />}
-            
+
             {popupPosition && currentPhoto && (
-              <Popup 
-                className="photo-popup"
-                autoPan={true} 
+              <Popup
+                className='photo-popup'
+                autoPan={true}
                 autoPanPadding={[40, 40]}
                 position={popupPosition}
                 eventHandlers={{
@@ -291,17 +334,33 @@ export const Karta = () => {
                 }}
               >
                 {/* <div className="photo-popup-content"> */}
-   <ul>
-      <li><span className="label">Signatura</span> <span className="value">{currentPhoto.signatura}</span></li>
-      <li><span className="label">Datum</span> <span className="value">{currentPhoto.datum_sni || '—'}</span></li>
-      <li><span className="label">Kategorija</span> <span className="value">{currentPhoto.kategorija || '—'}</span></li>
-      <li><span className="label">Autor</span> <span className="value">{currentPhoto.autor || '—'}</span></li>
-      <li><span className="label">Tagovi</span> <span className="value">{currentPhoto.tagovi || '—'}</span></li>
-    </ul>                  
-                  {currentPhoto.foto_url && !imageError && (
-                    <Link to={`/photos/${currentPhoto.id}`}>
-                      <div style={{ 
-                        textAlign: 'center', 
+                <ul>
+                  <li>
+                    <span className='label'>Signatura</span>{' '}
+                    <span className='value'>{currentPhoto.signatura}</span>
+                  </li>
+                  <li>
+                    <span className='label'>Datum</span>{' '}
+                    <span className='value'>{currentPhoto.datum_sni || '—'}</span>
+                  </li>
+                  <li>
+                    <span className='label'>Kategorija</span>{' '}
+                    <span className='value'>{currentPhoto.kategorija || '—'}</span>
+                  </li>
+                  <li>
+                    <span className='label'>Autor</span>{' '}
+                    <span className='value'>{currentPhoto.autor || '—'}</span>
+                  </li>
+                  <li>
+                    <span className='label'>Tagovi</span>{' '}
+                    <span className='value'>{currentPhoto.tagovi || '—'}</span>
+                  </li>
+                </ul>
+                {currentPhoto.foto_url && !imageError && (
+                  <Link to={`/photos/${currentPhoto.id}`}>
+                    <div
+                      style={{
+                        textAlign: 'center',
                         maxWidth: '250px',
                         minHeight: '100px',
                         backgroundColor: '#f5f5f5',
@@ -309,45 +368,57 @@ export const Karta = () => {
                         padding: '5px',
                         marginTop: '10px',
                         cursor: 'pointer'
-                      }}>
-                        <ImageWithSuspense 
-                          src={currentPhoto.foto_url} 
-                          alt={currentPhoto.naziv || 'Photo'}
-                          style={{ 
-                            maxWidth: '100%', 
-                            maxHeight: '200px', 
-                            objectFit: 'contain',
-                            display: 'block',
-                            margin: '0'
-                          }}
-                          onError={() => {
-                            console.error('❌ Image failed to load:', currentPhoto.foto_url)
-                            setImageError(true)
-                          }}
-                        />
-                      </div>
-                    </Link>
-                  )}
-                  
-                  {imageError && (
-                    <div style={{ 
-                      textAlign: 'center', 
-                      padding: '20px', 
+                      }}
+                    >
+                      <ImageWithSuspense
+                        src={currentPhoto.foto_url}
+                        alt={currentPhoto.naziv || 'Photo'}
+                        style={{
+                          maxWidth: '100%',
+                          maxHeight: '200px',
+                          objectFit: 'contain',
+                          display: 'block',
+                          margin: '0'
+                        }}
+                        onError={() => {
+                          console.error('❌ Image failed to load:', currentPhoto.foto_url)
+                          setImageError(true)
+                        }}
+                      />
+                    </div>
+                  </Link>
+                )}
+
+                {imageError && (
+                  <div
+                    style={{
+                      textAlign: 'center',
+                      padding: '20px',
                       color: '#666',
                       fontStyle: 'italic',
                       backgroundColor: '#f5f5f5',
                       borderRadius: '4px',
                       marginTop: '10px'
-                    }}>
-                      🖼️ Image not available
-                    </div>
-                  )}
+                    }}
+                  >
+                    🖼️ Image not available
+                  </div>
+                )}
                 {/* </div> */}
               </Popup>
             )}
           </MapContainer>
         </section>
       </div>
+      <BlockWithStickyTitle title='Mape'>
+        <p>
+          Dobrodošli na interaktivnu kartu "Opservatorija krajobraza". Ova karta predstavlja našu
+          kontinuirano nadopunjujuću kolekciju georeferenciranih podataka koja vam omogućuje uvid u
+          različite aspekte krajobraza. Upotrijebite alate za odabir podloge, prilagodbu slojeva i
+          filtriranje informacija kako biste prilagodili prikaz prema vlastitim istraživačkim
+          potrebama.
+        </p>
+      </BlockWithStickyTitle>
     </div>
   )
 }

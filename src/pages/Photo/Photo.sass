@@ -30,20 +30,28 @@
 
     .single-image
       background-image: url('../../assets/dotted-background.svg')
-      min-height: 667px
+      min-height: 677px
 
       img
         display: block
         margin: 0 auto
-        min-height: 100px
+        margin-right: 0
+        min-height: 677px
         user-select: none
         user-drag: none
         -webkit-user-drag: none
+
+        @media (max-width: 1670px)
+          min-height: auto
 
       &.vertical
         img
           margin-right: 0
           margin-left: auto
+          max-height: 992px
+
+          @media (max-width: 1670px)
+            max-height: auto
 
   .image-footer
     display: flex
