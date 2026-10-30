@@ -18,7 +18,23 @@
     crossorigin="" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css" />
 
+<!-- Preload the first tile of each initial layer so the browser fetches them before React boots 
 
+https://landscape.agr.hr/tiles/banija_fiksni_elementi/10/559/367.png
+
+-->
+<link
+  rel="preload"
+  as="image"
+  href="https://landscape.agr.hr/tiles/banija_reljef_light/10/559/367.jpg"
+  fetchpriority="high"
+/>
+<link
+  rel="preload"
+  as="image"
+  href="https://landscape.agr.hr/tiles/banija_kartografija_cb/10/559/367.png"
+  fetchpriority="high"
+/>
 
   <title>Opservatorij krajobraza</title>
 </head>

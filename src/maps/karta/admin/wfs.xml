@@ -1,0 +1,235 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<WFS_Capabilities xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ows="http://www.opengis.net/ows" xmlns="http://www.opengis.net/wfs" updateSequence="0" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.0.0/WFS-capabilities.xsd" version="1.0.0">
+<Service>
+<Name>WFS</Name>
+<Title>Untitled</Title>
+<OnlineResource/>
+<Fees>conditions unknown</Fees>
+<AccessConstraints>None</AccessConstraints>
+</Service>
+<Capability>
+<Request>
+<GetCapabilities>
+<DCPType>
+<HTTP>
+<Get onlineResource="https://landscape.agr.hr/qgis/wfs"/>
+</HTTP>
+</DCPType>
+<DCPType>
+<HTTP>
+<Post onlineResource="https://landscape.agr.hr/qgis/wfs"/>
+</HTTP>
+</DCPType>
+</GetCapabilities>
+<DescribeFeatureType>
+<SchemaDescriptionLanguage>
+<XMLSCHEMA/>
+</SchemaDescriptionLanguage>
+<DCPType>
+<HTTP>
+<Get onlineResource="https://landscape.agr.hr/qgis/wfs"/>
+</HTTP>
+</DCPType>
+<DCPType>
+<HTTP>
+<Post onlineResource="https://landscape.agr.hr/qgis/wfs"/>
+</HTTP>
+</DCPType>
+</DescribeFeatureType>
+<GetFeature>
+<ResultFormat>
+<GML2/>
+<GML3/>
+<GeoJSON/>
+</ResultFormat>
+<DCPType>
+<HTTP>
+<Get onlineResource="https://landscape.agr.hr/qgis/wfs"/>
+</HTTP>
+</DCPType>
+<DCPType>
+<HTTP>
+<Post onlineResource="https://landscape.agr.hr/qgis/wfs"/>
+</HTTP>
+</DCPType>
+</GetFeature>
+<Transaction>
+<DCPType>
+<HTTP>
+<Post onlineResource="https://landscape.agr.hr/qgis/wfs"/>
+</HTTP>
+</DCPType>
+</Transaction>
+</Request>
+</Capability>
+<FeatureTypeList>
+<Operations>
+<Query/>
+</Operations>
+<FeatureType>
+<Name>fiksno_granice_banije</Name>
+<Title>fiksno_granice_banije</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="442510.674" miny="4983988.632" maxy="5041009.63" maxx="529854.523"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>preklop_drvene_zgrade</Name>
+<Title>preklop_drvene_zgrade</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="442735.757" miny="4984439.866" maxy="5056279.273" maxx="540749.9"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>tema_koristenje_zemljista</Name>
+<Title>tema_koristenje_zemljista</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="442510.674" miny="4984025.403" maxy="5040940.875" maxx="529854.523"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>fiksno_drzavna_granica</Name>
+<Title>fiksno_drzavna_granica</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="242895.373" miny="4670721.216" maxy="5157272.821" maxx="731564.636"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>preklop_gradoviRH</Name>
+<Title>preklop_gradoviRH</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="267023.574" miny="4724623.322" maxy="5152494.962" maxx="725817.549"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>JLS</Name>
+<Title>JLS</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="442510.674" miny="4983988.632" maxy="5041009.63" maxx="529854.523"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>naselja_stanovnistvo</Name>
+<Title>naselja_stanovnistvo</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="443157.317" miny="4984521.203" maxy="5039277.331" maxx="535541.952"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>administrativna_naselja</Name>
+<Title>administrativna_naselja</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="442510.674" miny="4983988.632" maxy="5056380.207" maxx="530521.89"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>preklop_banijska_naselja</Name>
+<Title>preklop_banijska_naselja</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="443157.317" miny="4984521.203" maxy="5039277.331" maxx="535541.952"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>natura_2000</Name>
+<Title>natura_2000</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="453216.021" miny="4984245.06" maxy="5056318.135" maxx="550679.884"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>epicentri</Name>
+<Title>epicentri</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="390542.098" miny="4965636.197" maxy="5095968.011" maxx="565727.058"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>izoseiste</Name>
+<Title>izoseiste</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="342834.326" miny="4848463.664" maxy="5270283.112" maxx="733505.995"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>podrucja</Name>
+<Title>podrucja</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="175424.815" miny="4640654.653" maxy="5185125.048" maxx="785423.433"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>zasticena_podrucja</Name>
+<Title>zasticena_podrucja</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="443926.66" miny="5002807.622" maxy="5058657.049" maxx="550679.884"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>vode_linije</Name>
+<Title>vode_linije</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="441413.814" miny="4965425.221" maxy="5042945.17" maxx="526406.273"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+<FeatureType>
+<Name>vode_poligoni</Name>
+<Title>vode_poligoni</Title>
+<SRS>EPSG:3765</SRS>
+<LatLongBoundingBox minx="423732.545" miny="4970492.576" maxy="5046086.902" maxx="736199.242"/>
+<Operations>
+<Query/>
+</Operations>
+</FeatureType>
+</FeatureTypeList>
+<ogc:Filter_Capabilities>
+<ogc:Spatial_Capabilities>
+<ogc:Spatial_Operators>
+<ogc:BBOX/>
+<ogc:Disjoint/>
+<ogc:Intersect/>
+<ogc:Touches/>
+<ogc:Crosses/>
+<ogc:Contains/>
+<ogc:Overlaps/>
+<ogc:Within/>
+</ogc:Spatial_Operators>
+</ogc:Spatial_Capabilities>
+<ogc:Scalar_Capabilities>
+<ogc:Comparison_Operators>
+<ogc:Simple_Comparisons/>
+<ogc:Between/>
+<ogc:Like/>
+</ogc:Comparison_Operators>
+</ogc:Scalar_Capabilities>
+</ogc:Filter_Capabilities>
+</WFS_Capabilities>

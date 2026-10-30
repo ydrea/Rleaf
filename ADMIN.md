@@ -1,4 +1,19 @@
+
+5) Problem: balončić (u svim kategorijama) prikazuje kategorije od fotki, umjesto od dotične kategorije 
+
+
 # apache + node
+
+## Table of Contents
+
+<details>
+
+   <summary>Contents</summary>
+
+   1. [alter](#alter)
+1. [to VPS](#to-vps)
+
+</details>
 1. Update your React .env.production
 env
 VITE_SERVER_PUB=https://server.croatianlandscape.hr/public
@@ -135,7 +150,12 @@ import { HashRouter } from 'react-router-dom'
   <Routes>
     <Route path="/photos" element={<Photos />} />
     <Route path="/photos/:photoId" element={<Photo />} />
-    <Route path="/maps" element={<Karta />} />
+    <Routeting dependent: Some cheap hosting might restrict .htaccess overrides
+
+Initial setup: Requires testing to ensure it doesn't break existing file serving
+
+SOLUTION 2: Hash Router (React Router alternative)
+Chan path="/maps" element={<Karta />} />
     <Route path="/maps/:photoId" element={<Karta />} />
   </Routes>
 </HashRouter>
@@ -148,7 +168,12 @@ https://client.croatianlandscape.hr/#/maps/BAN-002-91
 
 Everything after # is never sent to the server
 
-Server always sees only: https://client.croatianlandscape.hr/
+Server alwayting dependent: Some cheap hosting might restrict .htaccess overrides
+
+Initial setup: Requires testing to ensure it doesn't break existing file serving
+
+SOLUTION 2: Hash Router (React Router alternative)
+Chans sees only: https://client.croatianlandscape.hr/
 
 Server serves index.html for that root path
 
@@ -489,5 +514,3 @@ You should see HTTP/2 200 and content-type: text/html.
 
 This is the exact same principle as the Apache .htaccess solution I mentioned earlier - just implemented in Nginx syntax. Once this is in place, all your React Router paths will work immediately.
 
-
-5) Problem: balončić (u svim kategorijama) prikazuje kategorije od fotki, umjesto od dotične kategorije 

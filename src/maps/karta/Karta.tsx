@@ -21,7 +21,6 @@ import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithS
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import './Karta.sass'
 import { CustomLayersControl } from './components/CustomLayersControl'
-// import L from 'leaflet'
 
 // Create a custom icon using divIcon (no extra library needed)
 const fototekaIcon = L.divIcon({
@@ -56,9 +55,7 @@ const LayerHandler = ({
   useEffect(() => {
     const activeLayers = new Set<string>()
 
-
-    kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png')
-
+    
     const handleBaseLayerChange = (e: LayersControlEvent) => {
       if (e.name === 'reljef') {
         kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png')
@@ -152,7 +149,7 @@ export const Karta = () => {
   const windowWidth = useWindowWidth()
   const photos = useSelector((state: RootState) => state.gallery.photos)
   const [kartografije, kartografijeSet] = useState<string>(
-    'https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png'
+    'https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png'
   )
 
   const [activeLayers, setActiveLayers] = useState<Set<string>>(new Set())
@@ -161,6 +158,49 @@ export const Karta = () => {
   const [popupPosition, setPopupPosition] = useState<L.LatLng | null>(null)
   const [imageError, setImageError] = useState(false)
 
+// oreload
+useEffect(() => {
+  const preloadVisibleTiles = async () => {
+    const zoom = 10
+    const center = { lat: 45.2, lng: 16.2 }
+
+    // Convert lat/lng to tile coordinates
+    const latRad = (center.lat * Math.PI) / 180
+    const n = Math.pow(2, zoom)
+    const x = Math.floor(((center.lng + 180) / 360) * n)
+    const y = Math.floor(
+      ((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n
+    )
+
+    // Order matters: base layer first, then overlays top-down
+    const layers = [
+      'https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg',
+ kartografije,
+      'https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png',
+    ]
+
+    // Small helper that waits a tick so we yield to the browser between layers
+    const tick = () => new Promise((r) => setTimeout(r, 0))
+
+    for (const template of layers) {
+      for (let dx = -2; dx <= 2; dx++) {
+        for (let dy = -2; dy <= 2; dy++) {
+          const url = template
+            .replace('{z}', zoom.toString())
+            .replace('{x}', (x + dx).toString())
+            .replace('{y}', (y + dy).toString())
+
+          fetch(url, { mode: 'no-cors' }).catch(() => {})
+        }
+      }
+      // Yield between layers so the base layer's fetches get a head start
+      await tick()
+    }
+  }
+
+  preloadVisibleTiles()
+}, [kartografije])
+//
   // Fetch coordinates for a photo
   const fetchPhotoCoordinates = async (photoId: number) => {
     try {

@@ -1,0 +1,1969 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<WMS_Capabilities xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qgs="http://www.qgis.org/wms" xmlns="http://www.opengis.net/wms" xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd http://www.qgis.org/wms https://landscape.agr.hr/qgis/wms?SERVICE=WMS&REQUEST=GetSchemaExtension" version="1.3.0">
+<Service>
+<Name>WMS</Name>
+<Title>Untitled</Title>
+<KeywordList>
+<Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+</KeywordList>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms"/>
+<ContactInformation>
+<ContactPersonPrimary>
+<ContactPerson>Grga Frangeš</ContactPerson>
+<ContactOrganization>unknown</ContactOrganization>
+</ContactPersonPrimary>
+<ContactElectronicMailAddress>mjestoivrijeme@proton.me</ContactElectronicMailAddress>
+</ContactInformation>
+<Fees>conditions unknown</Fees>
+<AccessConstraints>None</AccessConstraints>
+</Service>
+<Capability>
+<Request>
+<GetCapabilities>
+<Format>text/xml</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?"/>
+</Get>
+</HTTP>
+</DCPType>
+</GetCapabilities>
+<GetMap>
+<Format>image/jpeg</Format>
+<Format>image/png</Format>
+<Format>image/png; mode=16bit</Format>
+<Format>image/png; mode=8bit</Format>
+<Format>image/png; mode=1bit</Format>
+<Format>application/dxf</Format>
+<Format>application/pdf</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?"/>
+</Get>
+</HTTP>
+</DCPType>
+</GetMap>
+<GetFeatureInfo>
+<Format>text/plain</Format>
+<Format>text/html</Format>
+<Format>text/xml</Format>
+<Format>application/vnd.ogc.gml</Format>
+<Format>application/vnd.ogc.gml/3.1.1</Format>
+<Format>application/json</Format>
+<Format>application/geo+json</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?"/>
+</Get>
+</HTTP>
+</DCPType>
+</GetFeatureInfo>
+<sld:GetLegendGraphic>
+<Format>image/jpeg</Format>
+<Format>image/png</Format>
+<Format>application/json</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?"/>
+</Get>
+</HTTP>
+</DCPType>
+</sld:GetLegendGraphic>
+<sld:DescribeLayer>
+<Format>text/xml</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?"/>
+</Get>
+</HTTP>
+</DCPType>
+</sld:DescribeLayer>
+<qgs:GetStyles>
+<Format>text/xml</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?"/>
+</Get>
+</HTTP>
+</DCPType>
+</qgs:GetStyles>
+</Request>
+<Exception>
+<Format>XML</Format>
+</Exception>
+<sld:UserDefinedSymbolization UserLayer="0" RemoteWCS="0" SupportSLD="1" RemoteWFS="0" UserStyle="1" InlineFeature="0"/>
+<Layer queryable="1">
+<Name>BanijaLandcsapeObservatorijWMS</Name>
+<Title>Untitled</Title>
+<KeywordList>
+<Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+</KeywordList>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>14.96008</westBoundLongitude>
+<eastBoundLongitude>17.622089</eastBoundLongitude>
+<southBoundLatitude>44.648919</southBoundLatitude>
+<northBoundLatitude>45.923745</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1665348.577" miny="5566419.354" maxy="5768137.688" maxx="1961681.911"/>
+<Layer queryable="1">
+<Name>preklop_drvene_zgrade</Name>
+<Title>preklop_drvene_zgrade</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.765378</westBoundLongitude>
+<eastBoundLongitude>17.022776</eastBoundLongitude>
+<southBoundLatitude>44.997636</southBoundLatitude>
+<northBoundLatitude>45.646409</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754993.909" miny="5621149.367" maxy="5723865.815" maxx="1894966.741"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_drvene_zgrade&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>preklop_foto_katalog</Name>
+<Title>preklop_foto_katalog</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>16.046048</westBoundLongitude>
+<eastBoundLongitude>16.552779</eastBoundLongitude>
+<southBoundLatitude>45.116379</southBoundLatitude>
+<northBoundLatitude>45.383938</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1786237.929" miny="5639861.706" maxy="5682168.512" maxx="1842646.889"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_foto_katalog&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>preklop_spomenici</Name>
+<Title>preklop_spomenici</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.865501</westBoundLongitude>
+<eastBoundLongitude>17.250173</eastBoundLongitude>
+<southBoundLatitude>45.067241</southBoundLatitude>
+<northBoundLatitude>45.542675</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1766139.566" miny="5632113.573" maxy="5707363.001" maxx="1920280.438"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_spomenici&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>preklop_banijska_naselja</Name>
+<Title>preklop_banijska_naselja</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.772762</westBoundLongitude>
+<eastBoundLongitude>16.95473</eastBoundLongitude>
+<southBoundLatitude>44.998402</southBoundLatitude>
+<northBoundLatitude>45.493419</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1755815.938" miny="5621269.922" maxy="5699537.528" maxx="1887391.892"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_banijska_naselja&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>preklop_administrativne_jedinice</Name>
+<Title>preklop_administrativne_jedinice</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.762479</westBoundLongitude>
+<eastBoundLongitude>16.891572</eastBoundLongitude>
+<southBoundLatitude>44.993557</southBoundLatitude>
+<northBoundLatitude>45.647317</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754671.174" miny="5620507.321" maxy="5724010.407" maxx="1880361.173"/>
+<Layer queryable="1">
+<Name>administrativna_naselja</Name>
+<Title>administrativna_naselja</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.762479</westBoundLongitude>
+<eastBoundLongitude>16.891572</eastBoundLongitude>
+<southBoundLatitude>44.993557</southBoundLatitude>
+<northBoundLatitude>45.647317</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754671.174" miny="5620507.321" maxy="5724010.407" maxx="1880361.173"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=administrativna_naselja&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>JLS</Name>
+<Title>JLS</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.764287</westBoundLongitude>
+<eastBoundLongitude>16.882072</eastBoundLongitude>
+<southBoundLatitude>44.993557</southBoundLatitude>
+<northBoundLatitude>45.509008</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754872.467" miny="5620507.321" maxy="5702013.38" maxx="1879303.557"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=JLS&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>preklop_vode</Name>
+<Title>preklop_vode</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.523217</westBoundLongitude>
+<eastBoundLongitude>19.523183</eastBoundLongitude>
+<southBoundLatitude>44.826423</southBoundLatitude>
+<northBoundLatitude>45.554692</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1728036.638" miny="5594236.608" maxy="5709273.208" maxx="2173310.716"/>
+<Layer queryable="1">
+<Name>vode_linije</Name>
+<Title>vode_linije</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.75002</westBoundLongitude>
+<eastBoundLongitude>16.838047</eastBoundLongitude>
+<southBoundLatitude>44.826423</southBoundLatitude>
+<northBoundLatitude>45.526424</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753284.267" miny="5594236.608" maxy="5704780.361" maxx="1874402.739"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=vode_linije&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+<MinScaleDenominator>0</MinScaleDenominator>
+<MaxScaleDenominator>2e+06</MaxScaleDenominator>
+</Layer>
+<Layer queryable="1">
+<Name>vode_poligoni</Name>
+<Title>vode_poligoni</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.523217</westBoundLongitude>
+<eastBoundLongitude>19.523183</eastBoundLongitude>
+<southBoundLatitude>44.835339</southBoundLatitude>
+<northBoundLatitude>45.554692</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1728036.638" miny="5595636.164" maxy="5709273.208" maxx="2173310.716"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=vode_poligoni&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>preklop_gradoviRH</Name>
+<Title>preklop_gradoviRH</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>13.466164</westBoundLongitude>
+<eastBoundLongitude>19.440739</eastBoundLongitude>
+<southBoundLatitude>42.626096</southBoundLatitude>
+<northBoundLatitude>46.512102</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1499046.588" miny="5255231.965" maxy="5862797.025" maxx="2164133.163"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_gradoviRH&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+<MinScaleDenominator>0</MinScaleDenominator>
+<MaxScaleDenominator>1.5e+06</MaxScaleDenominator>
+</Layer>
+<Layer queryable="1">
+<Name>fiksni_elementi</Name>
+<Title>fiksni_elementi</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>13.149849</westBoundLongitude>
+<eastBoundLongitude>19.517853</eastBoundLongitude>
+<southBoundLatitude>42.133851</southBoundLatitude>
+<northBoundLatitude>46.555079</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1463834.561" miny="5181050.945" maxy="5869751.518" maxx="2172717.424"/>
+<Layer queryable="1">
+<Name>preklop_gradoviRH</Name>
+<Title>preklop_gradoviRH</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>13.466164</westBoundLongitude>
+<eastBoundLongitude>19.440739</eastBoundLongitude>
+<southBoundLatitude>42.626096</southBoundLatitude>
+<northBoundLatitude>46.512102</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1499046.588" miny="5255231.965" maxy="5862797.025" maxx="2164133.163"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_gradoviRH&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+<MinScaleDenominator>0</MinScaleDenominator>
+<MaxScaleDenominator>1.5e+06</MaxScaleDenominator>
+</Layer>
+<Layer queryable="1">
+<Name>fiksno_drzavna_granica</Name>
+<Title>fiksno_drzavna_granica</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>13.149849</westBoundLongitude>
+<eastBoundLongitude>19.517853</eastBoundLongitude>
+<southBoundLatitude>42.133851</southBoundLatitude>
+<northBoundLatitude>46.555079</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1463834.561" miny="5181050.945" maxy="5869751.518" maxx="2172717.424"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=fiksno_drzavna_granica&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>fiksno_granice_banije</Name>
+<Title>fiksno_granice_banije</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.764287</westBoundLongitude>
+<eastBoundLongitude>16.882072</eastBoundLongitude>
+<southBoundLatitude>44.993557</southBoundLatitude>
+<northBoundLatitude>45.509008</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754872.467" miny="5620507.321" maxy="5702013.38" maxx="1879303.557"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=fiksno_granice_banije&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>fiksni_elementi_2_0</Name>
+<Title>fiksni_elementi_2_0</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>13.149849</westBoundLongitude>
+<eastBoundLongitude>19.517853</eastBoundLongitude>
+<southBoundLatitude>42.133851</southBoundLatitude>
+<northBoundLatitude>46.555079</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1463834.561" miny="5181050.945" maxy="5869751.518" maxx="2172717.424"/>
+<Layer queryable="1">
+<Name>fiksno_drzavna_granica</Name>
+<Title>fiksno_drzavna_granica</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>13.149849</westBoundLongitude>
+<eastBoundLongitude>19.517853</eastBoundLongitude>
+<southBoundLatitude>42.133851</southBoundLatitude>
+<northBoundLatitude>46.555079</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1463834.561" miny="5181050.945" maxy="5869751.518" maxx="2172717.424"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=fiksno_drzavna_granica&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>fiksno_banija_highlight</Name>
+<Title>fiksno_banija_highlight</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.764287</westBoundLongitude>
+<eastBoundLongitude>16.882072</eastBoundLongitude>
+<southBoundLatitude>44.993557</southBoundLatitude>
+<northBoundLatitude>45.509008</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754872.467" miny="5620507.321" maxy="5702013.38" maxx="1879303.557"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=fiksno_banija_highlight&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>tema_drv_gradnja_udio</Name>
+<Title>tema_drv_gradnja_udio</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.762479</westBoundLongitude>
+<eastBoundLongitude>16.891572</eastBoundLongitude>
+<southBoundLatitude>44.993557</southBoundLatitude>
+<northBoundLatitude>45.647317</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754671.174" miny="5620507.321" maxy="5724010.407" maxx="1880361.173"/>
+<Layer queryable="1">
+<Name>naselja_drvena_arh</Name>
+<Title>naselja_drvena_arh</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.762479</westBoundLongitude>
+<eastBoundLongitude>16.891572</eastBoundLongitude>
+<southBoundLatitude>44.993557</southBoundLatitude>
+<northBoundLatitude>45.647317</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754671.174" miny="5620507.321" maxy="5724010.407" maxx="1880361.173"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=naselja_drvena_arh&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>tema_drvena_arhitektura</Name>
+<Title>tema_drvena_arhitektura</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.765378</westBoundLongitude>
+<eastBoundLongitude>17.022776</eastBoundLongitude>
+<southBoundLatitude>44.997636</southBoundLatitude>
+<northBoundLatitude>45.646409</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754993.909" miny="5621149.367" maxy="5723865.815" maxx="1894966.741"/>
+<Layer queryable="1">
+<Name>banija_zgrade</Name>
+<Title>banija_zgrade</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.765378</westBoundLongitude>
+<eastBoundLongitude>17.022776</eastBoundLongitude>
+<southBoundLatitude>44.997636</southBoundLatitude>
+<northBoundLatitude>45.646409</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754993.909" miny="5621149.367" maxy="5723865.815" maxx="1894966.741"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija_zgrade&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+<MinScaleDenominator>0</MinScaleDenominator>
+<MaxScaleDenominator>150001</MaxScaleDenominator>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>tema_stanovnisto_11_21_trend</Name>
+<Title>tema_stanovnisto_11_21_trend</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.772762</westBoundLongitude>
+<eastBoundLongitude>16.95473</eastBoundLongitude>
+<southBoundLatitude>44.998402</southBoundLatitude>
+<northBoundLatitude>45.493419</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1755815.938" miny="5621269.922" maxy="5699537.528" maxx="1887391.892"/>
+<Layer queryable="1">
+<Name>naselja_stanovnistvo_trnd</Name>
+<Title>naselja_stanovnistvo_trnd</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.772762</westBoundLongitude>
+<eastBoundLongitude>16.95473</eastBoundLongitude>
+<southBoundLatitude>44.998402</southBoundLatitude>
+<northBoundLatitude>45.493419</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1755815.938" miny="5621269.922" maxy="5699537.528" maxx="1887391.892"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=naselja_stanovnistvo_trnd&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>tema_stanovnistvo_2021</Name>
+<Title>tema_stanovnistvo_2021</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.772762</westBoundLongitude>
+<eastBoundLongitude>16.95473</eastBoundLongitude>
+<southBoundLatitude>44.998402</southBoundLatitude>
+<northBoundLatitude>45.493419</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1755815.938" miny="5621269.922" maxy="5699537.528" maxx="1887391.892"/>
+<Layer queryable="1">
+<Name>naselja_stanovnistvo</Name>
+<Title>naselja_stanovnistvo</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.772762</westBoundLongitude>
+<eastBoundLongitude>16.95473</eastBoundLongitude>
+<southBoundLatitude>44.998402</southBoundLatitude>
+<northBoundLatitude>45.493419</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1755815.938" miny="5621269.922" maxy="5699537.528" maxx="1887391.892"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=naselja_stanovnistvo&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>tema_koristenje_zemljista</Name>
+<Title>tema_koristenje_zemljista</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.764295</westBoundLongitude>
+<eastBoundLongitude>16.882067</eastBoundLongitude>
+<southBoundLatitude>44.993888</southBoundLatitude>
+<northBoundLatitude>45.508389</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754873.364" miny="5620559.406" maxy="5701915.104" maxx="1879303.091"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=tema_koristenje_zemljista&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>tema_koristenje_zemljista_novo</Name>
+<Title>tema_koristenje_zemljista_novo</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.765912</westBoundLongitude>
+<eastBoundLongitude>16.882073</eastBoundLongitude>
+<southBoundLatitude>44.993568</southBoundLatitude>
+<northBoundLatitude>45.509287</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1755053.353" miny="5620508.959" maxy="5702057.679" maxx="1879303.767"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=tema_koristenje_zemljista_novo&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>tema_zastita_prirode</Name>
+<Title>tema_zastita_prirode</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.78038</westBoundLongitude>
+<eastBoundLongitude>17.150407</eastBoundLongitude>
+<southBoundLatitude>44.996383</southBoundLatitude>
+<northBoundLatitude>45.667804</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1756663.974" miny="5620952.21" maxy="5727273.31" maxx="1909174.538"/>
+<Layer queryable="1">
+<Name>zasticena_podrucja</Name>
+<Title>zasticena_podrucja</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.78038</westBoundLongitude>
+<eastBoundLongitude>17.150407</eastBoundLongitude>
+<southBoundLatitude>45.163011</southBoundLatitude>
+<northBoundLatitude>45.667804</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1756663.974" miny="5647220.961" maxy="5727273.31" maxx="1909174.538"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=zasticena_podrucja&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>natura_2000</Name>
+<Title>natura_2000</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.899813</westBoundLongitude>
+<eastBoundLongitude>17.150164</eastBoundLongitude>
+<southBoundLatitude>44.996383</southBoundLatitude>
+<northBoundLatitude>45.646758</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1769959.186" miny="5620952.21" maxy="5723921.433" maxx="1909147.422"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=natura_2000&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>tema_potres</Name>
+<Title>tema_potres</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.253355</westBoundLongitude>
+<eastBoundLongitude>20.235583</eastBoundLongitude>
+<southBoundLatitude>41.838769</southBoundLatitude>
+<northBoundLatitude>47.571733</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1364037.296" miny="5136858.438" maxy="6035899.752" maxx="2252614.719"/>
+<Layer queryable="1">
+<Name>epicentri</Name>
+<Title>epicentri</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.086957</westBoundLongitude>
+<eastBoundLongitude>17.348585</eastBoundLongitude>
+<southBoundLatitude>44.822336</southBoundLatitude>
+<northBoundLatitude>46.003521</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1679472.417" miny="5593595.293" maxy="5780913.339" maxx="1931235.592"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=epicentri&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>izoseiste</Name>
+<Title>izoseiste</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>14.411672</westBoundLongitude>
+<eastBoundLongitude>19.601413</eastBoundLongitude>
+<southBoundLatitude>43.739355</southBoundLatitude>
+<northBoundLatitude>47.571733</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1604300.082" miny="5425195.103" maxy="6035899.752" maxx="2182019.237"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=izoseiste&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>podrucja</Name>
+<Title>podrucja</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.253355</westBoundLongitude>
+<eastBoundLongitude>20.235583</eastBoundLongitude>
+<southBoundLatitude>41.838769</southBoundLatitude>
+<northBoundLatitude>46.805621</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1364037.296" miny="5136858.438" maxy="5910403.946" maxx="2252614.719"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=podrucja&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>podloge_kartografija</Name>
+<Title>podloge_kartografija</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.628016</westBoundLongitude>
+<eastBoundLongitude>17.203995</eastBoundLongitude>
+<southBoundLatitude>44.980509</southBoundLatitude>
+<northBoundLatitude>45.639852</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1739702.838" miny="5618453.596" maxy="5722821.769" maxx="1915139.941"/>
+<Layer queryable="1">
+<Name>vrhovi</Name>
+<Title>vrhovi</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.758453</westBoundLongitude>
+<eastBoundLongitude>16.873147</eastBoundLongitude>
+<southBoundLatitude>44.992944</southBoundLatitude>
+<northBoundLatitude>45.513317</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754223.041" miny="5620410.841" maxy="5702697.978" maxx="1878310.088"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=vrhovi&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>naselja</Name>
+<Title>naselja</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.758453</westBoundLongitude>
+<eastBoundLongitude>16.873147</eastBoundLongitude>
+<southBoundLatitude>44.992944</southBoundLatitude>
+<northBoundLatitude>45.513317</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754223.041" miny="5620410.841" maxy="5702697.978" maxx="1878310.088"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=naselja&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>banija-multilines</Name>
+<Title>banija-multilines</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.758037</westBoundLongitude>
+<eastBoundLongitude>16.873221</eastBoundLongitude>
+<southBoundLatitude>44.991664</southBoundLatitude>
+<northBoundLatitude>45.511135</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754176.662" miny="5620209.288" maxy="5702351.274" maxx="1878318.343"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija-multilines&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>banija-lines</Name>
+<Title>banija-lines</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.75352</westBoundLongitude>
+<eastBoundLongitude>16.8928</eastBoundLongitude>
+<southBoundLatitude>44.986784</southBoundLatitude>
+<northBoundLatitude>45.517203</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753673.905" miny="5619441.258" maxy="5703315.348" maxx="1880497.87"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija-lines&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>banija_multipolygons</Name>
+<Title>banija_multipolygons</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.628016</westBoundLongitude>
+<eastBoundLongitude>17.203995</eastBoundLongitude>
+<southBoundLatitude>44.980509</southBoundLatitude>
+<northBoundLatitude>45.639852</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1739702.838" miny="5618453.596" maxy="5722821.769" maxx="1915139.941"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija_multipolygons&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>slojnice</Name>
+<Title>slojnice</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.753477</westBoundLongitude>
+<eastBoundLongitude>16.888209</eastBoundLongitude>
+<southBoundLatitude>44.986781</southBoundLatitude>
+<northBoundLatitude>45.515878</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753669.108" miny="5619440.759" maxy="5703104.762" maxx="1879986.739"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=slojnice&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+<MinScaleDenominator>-4.65661e-10</MinScaleDenominator>
+<MaxScaleDenominator>50001</MaxScaleDenominator>
+</Layer>
+<Layer queryable="1">
+<Name>banija-sume</Name>
+<Title>banija-sume</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.753472</westBoundLongitude>
+<eastBoundLongitude>16.883399</eastBoundLongitude>
+<southBoundLatitude>44.995689</southBoundLatitude>
+<northBoundLatitude>45.517612</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753668.512" miny="5620842.943" maxy="5703380.256" maxx="1879451.357"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija-sume&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>podloge_kartografija_dof</Name>
+<Title>podloge_kartografija_dof</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.628016</westBoundLongitude>
+<eastBoundLongitude>17.203995</eastBoundLongitude>
+<southBoundLatitude>44.980509</southBoundLatitude>
+<northBoundLatitude>45.639852</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1739702.838" miny="5618453.596" maxy="5722821.769" maxx="1915139.941"/>
+<Layer queryable="1">
+<Name>vrhovi copy copy</Name>
+<Title>vrhovi copy copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.758453</westBoundLongitude>
+<eastBoundLongitude>16.873147</eastBoundLongitude>
+<southBoundLatitude>44.992944</southBoundLatitude>
+<northBoundLatitude>45.513317</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754223.041" miny="5620410.841" maxy="5702697.978" maxx="1878310.088"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=vrhovi copy copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>naselja copy copy</Name>
+<Title>naselja copy copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.758453</westBoundLongitude>
+<eastBoundLongitude>16.873147</eastBoundLongitude>
+<southBoundLatitude>44.992944</southBoundLatitude>
+<northBoundLatitude>45.513317</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754223.041" miny="5620410.841" maxy="5702697.978" maxx="1878310.088"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=naselja copy copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>banija-multilines copy copy</Name>
+<Title>banija-multilines copy copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.758037</westBoundLongitude>
+<eastBoundLongitude>16.873221</eastBoundLongitude>
+<southBoundLatitude>44.991664</southBoundLatitude>
+<northBoundLatitude>45.511135</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754176.662" miny="5620209.288" maxy="5702351.274" maxx="1878318.343"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija-multilines copy copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>banija-lines copy copy</Name>
+<Title>banija-lines copy copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.75352</westBoundLongitude>
+<eastBoundLongitude>16.8928</eastBoundLongitude>
+<southBoundLatitude>44.986784</southBoundLatitude>
+<northBoundLatitude>45.517203</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753673.905" miny="5619441.258" maxy="5703315.348" maxx="1880497.87"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija-lines copy copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>banija_multipolygons copy copy</Name>
+<Title>banija_multipolygons copy copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.628016</westBoundLongitude>
+<eastBoundLongitude>17.203995</eastBoundLongitude>
+<southBoundLatitude>44.980509</southBoundLatitude>
+<northBoundLatitude>45.639852</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1739702.838" miny="5618453.596" maxy="5722821.769" maxx="1915139.941"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija_multipolygons copy copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Izgrađene površine copy</Name>
+<Title>Izgrađene površine copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.766409</westBoundLongitude>
+<eastBoundLongitude>16.864915</eastBoundLongitude>
+<southBoundLatitude>44.997543</southBoundLatitude>
+<northBoundLatitude>45.509286</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1755108.655" miny="5621134.834" maxy="5702057.597" maxx="1877393.746"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Izgrađene površine copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+<MinScaleDenominator>35000</MinScaleDenominator>
+<MaxScaleDenominator>250000</MaxScaleDenominator>
+</Layer>
+<Layer queryable="1">
+<Name>slojnice copy copy</Name>
+<Title>slojnice copy copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.753477</westBoundLongitude>
+<eastBoundLongitude>16.888209</eastBoundLongitude>
+<southBoundLatitude>44.986781</southBoundLatitude>
+<northBoundLatitude>45.515878</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753669.108" miny="5619440.759" maxy="5703104.762" maxx="1879986.739"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=slojnice copy copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+<MinScaleDenominator>-4.65661e-10</MinScaleDenominator>
+<MaxScaleDenominator>50001</MaxScaleDenominator>
+</Layer>
+<Layer queryable="1">
+<Name>banija-sume raster copy</Name>
+<Title>banija-sume raster copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.753472</westBoundLongitude>
+<eastBoundLongitude>16.883399</eastBoundLongitude>
+<southBoundLatitude>44.995689</southBoundLatitude>
+<northBoundLatitude>45.517612</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753668.512" miny="5620842.943" maxy="5703380.256" maxx="1879451.357"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija-sume raster copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>podloge_kartografija_cb</Name>
+<Title>podloge_kartografija_cb</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.628016</westBoundLongitude>
+<eastBoundLongitude>17.203995</eastBoundLongitude>
+<southBoundLatitude>44.980509</southBoundLatitude>
+<northBoundLatitude>45.639852</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1739702.838" miny="5618453.596" maxy="5722821.769" maxx="1915139.941"/>
+<Layer queryable="1">
+<Name>vrhovi copy</Name>
+<Title>vrhovi copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.758453</westBoundLongitude>
+<eastBoundLongitude>16.873147</eastBoundLongitude>
+<southBoundLatitude>44.992944</southBoundLatitude>
+<northBoundLatitude>45.513317</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754223.041" miny="5620410.841" maxy="5702697.978" maxx="1878310.088"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=vrhovi copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>naselja copy</Name>
+<Title>naselja copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.758453</westBoundLongitude>
+<eastBoundLongitude>16.873147</eastBoundLongitude>
+<southBoundLatitude>44.992944</southBoundLatitude>
+<northBoundLatitude>45.513317</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754223.041" miny="5620410.841" maxy="5702697.978" maxx="1878310.088"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=naselja copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>banija-multilines copy</Name>
+<Title>banija-multilines copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.758037</westBoundLongitude>
+<eastBoundLongitude>16.873221</eastBoundLongitude>
+<southBoundLatitude>44.991664</southBoundLatitude>
+<northBoundLatitude>45.511135</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1754176.662" miny="5620209.288" maxy="5702351.274" maxx="1878318.343"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija-multilines copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>banija-lines copy</Name>
+<Title>banija-lines copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.75352</westBoundLongitude>
+<eastBoundLongitude>16.8928</eastBoundLongitude>
+<southBoundLatitude>44.986784</southBoundLatitude>
+<northBoundLatitude>45.517203</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753673.905" miny="5619441.258" maxy="5703315.348" maxx="1880497.87"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija-lines copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>banija_multipolygons copy</Name>
+<Title>banija_multipolygons copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.628016</westBoundLongitude>
+<eastBoundLongitude>17.203995</eastBoundLongitude>
+<southBoundLatitude>44.980509</southBoundLatitude>
+<northBoundLatitude>45.639852</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1739702.838" miny="5618453.596" maxy="5722821.769" maxx="1915139.941"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija_multipolygons copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Izgrađene površine</Name>
+<Title>Izgrađene površine</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.766409</westBoundLongitude>
+<eastBoundLongitude>16.864915</eastBoundLongitude>
+<southBoundLatitude>44.997543</southBoundLatitude>
+<northBoundLatitude>45.509286</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1755108.655" miny="5621134.834" maxy="5702057.597" maxx="1877393.746"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Izgrađene površine&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+<MinScaleDenominator>35000</MinScaleDenominator>
+<MaxScaleDenominator>250000</MaxScaleDenominator>
+</Layer>
+<Layer queryable="1">
+<Name>slojnice copy</Name>
+<Title>slojnice copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.753477</westBoundLongitude>
+<eastBoundLongitude>16.888209</eastBoundLongitude>
+<southBoundLatitude>44.986781</southBoundLatitude>
+<northBoundLatitude>45.515878</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753669.108" miny="5619440.759" maxy="5703104.762" maxx="1879986.739"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=slojnice copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+<MinScaleDenominator>-4.65661e-10</MinScaleDenominator>
+<MaxScaleDenominator>50001</MaxScaleDenominator>
+</Layer>
+<Layer queryable="1">
+<Name>banija-sume raster</Name>
+<Title>banija-sume raster</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.753472</westBoundLongitude>
+<eastBoundLongitude>16.883399</eastBoundLongitude>
+<southBoundLatitude>44.995689</southBoundLatitude>
+<northBoundLatitude>45.517612</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753668.512" miny="5620842.943" maxy="5703380.256" maxx="1879451.357"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=banija-sume raster&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>podloge_reljef_light</Name>
+<Title>podloge_reljef_light</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.588179</westBoundLongitude>
+<eastBoundLongitude>19.940025</eastBoundLongitude>
+<southBoundLatitude>41.904767</southBoundLatitude>
+<northBoundLatitude>46.738767</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1401309.737" miny="5146724.677" maxy="5899537.848" maxx="2219713.38"/>
+<Layer queryable="1">
+<Name>sjencanje copy</Name>
+<Title>sjencanje copy</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.588179</westBoundLongitude>
+<eastBoundLongitude>19.940025</eastBoundLongitude>
+<southBoundLatitude>41.904767</southBoundLatitude>
+<northBoundLatitude>46.738767</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1401309.737" miny="5146724.677" maxy="5899537.848" maxx="2219713.38"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=sjencanje copy&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>podloge_reljef_visine</Name>
+<Title>podloge_reljef_visine</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.588179</westBoundLongitude>
+<eastBoundLongitude>19.940025</eastBoundLongitude>
+<southBoundLatitude>41.904767</southBoundLatitude>
+<northBoundLatitude>46.738767</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1401309.737" miny="5146724.677" maxy="5899537.848" maxx="2219713.38"/>
+<Layer queryable="1">
+<Name>karta_visina</Name>
+<Title>karta_visina</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.753718</westBoundLongitude>
+<eastBoundLongitude>16.892574</eastBoundLongitude>
+<southBoundLatitude>44.986812</southBoundLatitude>
+<northBoundLatitude>45.517487</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753695.893" miny="5619445.701" maxy="5703360.438" maxx="1880472.651"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=karta_visina&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>sjencanje_visine</Name>
+<Title>sjencanje_visine</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.588179</westBoundLongitude>
+<eastBoundLongitude>19.940025</eastBoundLongitude>
+<southBoundLatitude>41.904767</southBoundLatitude>
+<northBoundLatitude>46.738767</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1401309.737" miny="5146724.677" maxy="5899537.848" maxx="2219713.38"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=sjencanje_visine&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>podloge_reljef_hidrologija</Name>
+<Title>podloge_reljef_hidrologija</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.588179</westBoundLongitude>
+<eastBoundLongitude>19.940025</eastBoundLongitude>
+<southBoundLatitude>41.904767</southBoundLatitude>
+<northBoundLatitude>46.738767</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1401309.737" miny="5146724.677" maxy="5899537.848" maxx="2219713.38"/>
+<Layer queryable="1">
+<Name>vode_linije</Name>
+<Title>vode_linije</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.75002</westBoundLongitude>
+<eastBoundLongitude>16.838047</eastBoundLongitude>
+<southBoundLatitude>44.826423</southBoundLatitude>
+<northBoundLatitude>45.526424</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753284.267" miny="5594236.608" maxy="5704780.361" maxx="1874402.739"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=vode_linije&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+<MinScaleDenominator>0</MinScaleDenominator>
+<MaxScaleDenominator>2e+06</MaxScaleDenominator>
+</Layer>
+<Layer queryable="1">
+<Name>vode_poligoni</Name>
+<Title>vode_poligoni</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.523217</westBoundLongitude>
+<eastBoundLongitude>19.523183</eastBoundLongitude>
+<southBoundLatitude>44.835339</southBoundLatitude>
+<northBoundLatitude>45.554692</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1728036.638" miny="5595636.164" maxy="5709273.208" maxx="2173310.716"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=vode_poligoni&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>karta_visina</Name>
+<Title>karta_visina</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.753718</westBoundLongitude>
+<eastBoundLongitude>16.892574</eastBoundLongitude>
+<southBoundLatitude>44.986812</southBoundLatitude>
+<northBoundLatitude>45.517487</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753695.893" miny="5619445.701" maxy="5703360.438" maxx="1880472.651"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=karta_visina&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>sjencanje_reljef</Name>
+<Title>sjencanje_reljef</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.588179</westBoundLongitude>
+<eastBoundLongitude>19.940025</eastBoundLongitude>
+<southBoundLatitude>41.904767</southBoundLatitude>
+<northBoundLatitude>46.738767</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1401309.737" miny="5146724.677" maxy="5899537.848" maxx="2219713.38"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=sjencanje_reljef&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>podloge_reljef_dark</Name>
+<Title>podloge_reljef_dark</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.588179</westBoundLongitude>
+<eastBoundLongitude>19.940025</eastBoundLongitude>
+<southBoundLatitude>41.904767</southBoundLatitude>
+<northBoundLatitude>46.738767</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1401309.737" miny="5146724.677" maxy="5899537.848" maxx="2219713.38"/>
+<Layer queryable="1">
+<Name>karta_visina_dark</Name>
+<Title>karta_visina_dark</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.753718</westBoundLongitude>
+<eastBoundLongitude>16.892574</eastBoundLongitude>
+<southBoundLatitude>44.986812</southBoundLatitude>
+<northBoundLatitude>45.517487</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1753695.893" miny="5619445.701" maxy="5703360.438" maxx="1880472.651"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=karta_visina_dark&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>sjencanje_dark</Name>
+<Title>sjencanje_dark</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.588179</westBoundLongitude>
+<eastBoundLongitude>19.940025</eastBoundLongitude>
+<southBoundLatitude>41.904767</southBoundLatitude>
+<northBoundLatitude>46.738767</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1401309.737" miny="5146724.677" maxy="5899537.848" maxx="2219713.38"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=sjencanje_dark&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>podloge_reljef_vanilla_hs</Name>
+<Title>podloge_reljef_vanilla_hs</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.588179</westBoundLongitude>
+<eastBoundLongitude>19.940025</eastBoundLongitude>
+<southBoundLatitude>41.904767</southBoundLatitude>
+<northBoundLatitude>46.738767</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1401309.737" miny="5146724.677" maxy="5899537.848" maxx="2219713.38"/>
+<Layer queryable="1">
+<Name>sjencanje</Name>
+<Title>sjencanje</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>12.588179</westBoundLongitude>
+<eastBoundLongitude>19.940025</eastBoundLongitude>
+<southBoundLatitude>41.904767</southBoundLatitude>
+<northBoundLatitude>46.738767</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1401309.737" miny="5146724.677" maxy="5899537.848" maxx="2219713.38"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=sjencanje&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>Values</Name>
+<Title>Values</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.772762</westBoundLongitude>
+<eastBoundLongitude>16.95473</eastBoundLongitude>
+<southBoundLatitude>44.998402</southBoundLatitude>
+<northBoundLatitude>45.493419</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1755815.938" miny="5621269.922" maxy="5699537.528" maxx="1887391.892"/>
+<Layer queryable="1">
+<Name>val_building_feature</Name>
+<Title>val_building_feature</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_building_feature&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_ceiling_finish</Name>
+<Title>val_ceiling_finish</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_ceiling_finish&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_current_condition</Name>
+<Title>val_current_condition</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_current_condition&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_current_use</Name>
+<Title>val_current_use</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_current_use&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_deco_elemets</Name>
+<Title>val_deco_elemets</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_deco_elemets&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_door_features</Name>
+<Title>val_door_features</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_door_features&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_door_type</Name>
+<Title>val_door_type</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_door_type&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_floor_finish</Name>
+<Title>val_floor_finish</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_floor_finish&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_floors</Name>
+<Title>val_floors</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_floors&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_footprint</Name>
+<Title>val_footprint</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_footprint&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_foundation_mat</Name>
+<Title>val_foundation_mat</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_foundation_mat&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_function_type</Name>
+<Title>val_function_type</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_function_type&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_joints</Name>
+<Title>val_joints</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_joints&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_motifs_inscriptions</Name>
+<Title>val_motifs_inscriptions</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_motifs_inscriptions&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_name_type</Name>
+<Title>val_name_type</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_name_type&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_roof_finish</Name>
+<Title>val_roof_finish</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_roof_finish&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_roof_form</Name>
+<Title>val_roof_form</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_roof_form&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_roof_system</Name>
+<Title>val_roof_system</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_roof_system&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_struct_base</Name>
+<Title>val_struct_base</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_struct_base&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_struct_system</Name>
+<Title>val_struct_system</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_struct_system&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_threat_type</Name>
+<Title>val_threat_type</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_threat_type&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_wall_ext_finish</Name>
+<Title>val_wall_ext_finish</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_wall_ext_finish&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_wall_int_finish</Name>
+<Title>val_wall_int_finish</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_wall_int_finish&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_wall_mat</Name>
+<Title>val_wall_mat</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_wall_mat&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_window_features</Name>
+<Title>val_window_features</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_window_features&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_window_type</Name>
+<Title>val_window_type</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_window_type&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>val_wood_species</Name>
+<Title>val_wood_species</Title>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=val_wood_species&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>preklop_banijska_naselja</Name>
+<Title>preklop_banijska_naselja</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>15.772762</westBoundLongitude>
+<eastBoundLongitude>16.95473</eastBoundLongitude>
+<southBoundLatitude>44.998402</southBoundLatitude>
+<northBoundLatitude>45.493419</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="1755815.938" miny="5621269.922" maxy="5699537.528" maxx="1887391.892"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_banijska_naselja&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+<Layer queryable="1">
+<Name>Bing Satellite</Name>
+<Title>Bing Satellite</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-180</westBoundLongitude>
+<eastBoundLongitude>180</eastBoundLongitude>
+<southBoundLatitude>-85.051129</southBoundLatitude>
+<northBoundLatitude>85.051129</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox CRS="EPSG:3857" minx="-20037508.343" miny="-20037508.343" maxy="20037508.343" maxx="20037508.343"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://landscape.agr.hr/qgis/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Bing Satellite&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+</Capability>
+</WMS_Capabilities>
