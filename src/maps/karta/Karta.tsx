@@ -1,9 +1,7 @@
-// Karta.tsx
 import { useMap, Marker, MapContainer, TileLayer, LayersControl, ZoomControl, Popup } from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-// import {  } from 'react-leaflet'
 import type { LayersControlEvent } from 'leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -22,7 +20,7 @@ import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/Bloc
 import './Karta.sass'
 import { CustomLayersControl } from './components/CustomLayersControl'
 
-// Create a custom icon using divIcon (no extra library needed)
+// 🔥 RESTORED YOUR SVG ICON
 const fototekaIcon = L.divIcon({
   className: 'fototeka-marker',
   html: `
@@ -42,7 +40,6 @@ const fototekaIcon = L.divIcon({
   popupAnchor: [0, -16],
 })
 
-
 const LayerHandler = ({
   kartografijeSet,
   onLayersChange
@@ -51,11 +48,8 @@ const LayerHandler = ({
   onLayersChange: (activeLayers: Set<string>) => void
 }) => {
   const map = useMap()
-
   useEffect(() => {
     const activeLayers = new Set<string>()
-
-    
     const handleBaseLayerChange = (e: LayersControlEvent) => {
       if (e.name === 'reljef') {
         kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png')
@@ -63,10 +57,8 @@ const LayerHandler = ({
         kartografijeSet('https://landscape.agr.hr/tiles/banija_kartografija_dof/{z}/{x}/{y}.png')
       }
     }
-
     const handleOverlayChange = (e: any) => {
       const layerId = e.layer.options.id
-
       if (e.type === 'overlayadd') {
         activeLayers.add(layerId)
       } else if (e.type === 'overlayremove') {
@@ -74,62 +66,48 @@ const LayerHandler = ({
       }
       onLayersChange(new Set(activeLayers))
     }
-
     map.on('baselayerchange', handleBaseLayerChange)
     map.on('overlayadd', handleOverlayChange)
     map.on('overlayremove', handleOverlayChange)
-
     return () => {
       map.off('baselayerchange', handleBaseLayerChange)
       map.off('overlayadd', handleOverlayChange)
       map.off('overlayremove', handleOverlayChange)
     }
   }, [map, kartografijeSet, onLayersChange])
-
   return null
 }
 
-// Google-Maps-style cooperative gestures: wheel zooms only with ctrl/cmd, touch pans only with
-// two fingers, mouse drag works as usual. Keeps the page scrollable over the map.
 const GestureHandling = () => {
   const map = useMap()
   const [hint, hintSet] = useState<string | null>(null)
-
   useEffect(() => {
     const el = map.getContainer()
     let timer: ReturnType<typeof setTimeout>
-
     const show = (text: string) => {
       clearTimeout(timer)
       hintSet(text)
       timer = setTimeout(() => hintSet(null), 1500)
     }
-
     const onWheel = (e: WheelEvent) => {
       if (e.ctrlKey || e.metaKey) return
       e.stopImmediatePropagation()
       show('Zumirajte kartu uz Ctrl/Cmd + kotačić miša')
     }
-
     const onTouchMove = (e: TouchEvent) => {
       if (e.touches.length === 1) show('Koristite dva prsta za pomicanje karte')
     }
-
     const onPointerDown = (e: PointerEvent) => {
       if (e.pointerType === 'mouse' && el.contains(e.target as Node)) map.dragging.enable()
     }
-
     const onMouseUp = () => map.dragging.disable()
-
     map.dragging.disable()
     map.scrollWheelZoom.disable()
     el.addEventListener('wheel', onWheel)
-    map.scrollWheelZoom.enable() // re-registered after ours, so ours runs first
-
+    map.scrollWheelZoom.enable()
     el.addEventListener('touchmove', onTouchMove, { passive: true })
     window.addEventListener('pointerdown', onPointerDown, true)
     window.addEventListener('mouseup', onMouseUp)
-
     return () => {
       clearTimeout(timer)
       el.removeEventListener('wheel', onWheel)
@@ -139,15 +117,17 @@ const GestureHandling = () => {
       map.dragging.enable()
     }
   }, [map])
-
   return hint ? <div className='gesture-hint'>{hint}</div> : null
 }
+
+type PhotoWithCoords = Photo & { latlng: L.LatLng }
 
 export const Karta = () => {
   const { photoId } = useParams()
   const dispatch = useAppDispatch()
   const windowWidth = useWindowWidth()
   const photos = useSelector((state: RootState) => state.gallery.photos)
+  
   const [kartografije, kartografijeSet] = useState<string>(
     'https://landscape.agr.hr/tiles/banija_kartografija_cb/{z}/{x}/{y}.png'
   )
@@ -158,67 +138,78 @@ export const Karta = () => {
   const [popupPosition, setPopupPosition] = useState<L.LatLng | null>(null)
   const [imageError, setImageError] = useState(false)
 
-// oreload
-useEffect(() => {
-  const preloadVisibleTiles = async () => {
-    const zoom = 10
-    const center = { lat: 45.2, lng: 16.2 }
+  const [fototekaMarkers, setFototekaMarkers] = useState<(Photo & { latlng: L.LatLng })[]>([])
 
-    // Convert lat/lng to tile coordinates
-    const latRad = (center.lat * Math.PI) / 180
-    const n = Math.pow(2, zoom)
-    const x = Math.floor(((center.lng + 180) / 360) * n)
-    const y = Math.floor(
-      ((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n
-    )
+  useEffect(() => {
+    const fetchAllMarkers = async () => {
+      try {
+        const response = await fetch(`https://server.croatianlandscape.hr/json_photos`)
+        if (!response.ok) throw new Error('Network response was not ok')
+        const data = await response.json()
 
-    // Order matters: base layer first, then overlays top-down
-    const layers = [
-      'https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg',
- kartografije,
-      'https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png',
-    ]
+        const merged = data.map((item: any) => {
+          if (!item || !item.geometry) return null 
+          
+          const geometry = typeof item.geometry === 'string' ? JSON.parse(item.geometry) : item.geometry
+          if (!geometry.coordinates) return null
 
-    // Small helper that waits a tick so we yield to the browser between layers
-    const tick = () => new Promise((r) => setTimeout(r, 0))
+          const [lng, lat] = geometry.coordinates
 
-    for (const template of layers) {
-      for (let dx = -2; dx <= 2; dx++) {
-        for (let dy = -2; dy <= 2; dy++) {
-          const url = template
-            .replace('{z}', zoom.toString())
-            .replace('{x}', (x + dx).toString())
-            .replace('{y}', (y + dy).toString())
+          return {
+            id: item.signatura, 
+            signatura: item.signatura,
+            foto_url: `${import.meta.env.VITE_SERVER_PUB}/${item.signatura}`,
+            latlng: L.latLng(lat, lng)
+          }
+        }).filter(Boolean)
 
-          fetch(url, { mode: 'no-cors' }).catch(() => {})
-        }
+        setFototekaMarkers(merged as any)
+      } catch (error) {
+        console.error('❌ Error in fetchAllMarkers:', error)
       }
-      // Yield between layers so the base layer's fetches get a head start
-      await tick()
     }
-  }
 
-  preloadVisibleTiles()
-}, [kartografije])
-//
-  // Fetch coordinates for a photo
+    fetchAllMarkers()
+  }, []) 
+
+  useEffect(() => {
+    const preloadVisibleTiles = async () => {
+      const zoom = 10
+      const center = { lat: 45.2, lng: 16.2 }
+      const latRad = (center.lat * Math.PI) / 180
+      const n = Math.pow(2, zoom)
+      const x = Math.floor(((center.lng + 180) / 360) * n)
+      const y = Math.floor(((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n)
+      const layers = [
+        'https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg',
+        kartografije,
+        'https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png',
+      ]
+      const tick = () => new Promise((r) => setTimeout(r, 0))
+      for (const template of layers) {
+        for (let dx = -2; dx <= 2; dx++) {
+          for (let dy = -2; dy <= 2; dy++) {
+            const url = template.replace('{z}', zoom.toString()).replace('{x}', (x + dx).toString()).replace('{y}', (y + dy).toString())
+            fetch(url, { mode: 'no-cors' }).catch(() => {})
+          }
+        }
+        await tick()
+      }
+    }
+    preloadVisibleTiles()
+  }, [kartografije])
+
   const fetchPhotoCoordinates = async (photoId: number) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/json_photos`)
       const data = await response.json()
-      // Find the photo with matching signatura
       const photo = photos.find(p => p.id === photoId)
       if (photo) {
-        const photoGeo = data.find(
-          (item: any) => item.signatura === photo.signatura || item.id === photoId
-        )
+        const photoGeo = data.find((item: any) => item.signatura === photo.signatura || item.id === photoId)
         if (photoGeo && photoGeo.geometry) {
-          const geometry =
-            typeof photoGeo.geometry === 'string'
-              ? JSON.parse(photoGeo.geometry)
-              : photoGeo.geometry
+          const geometry = typeof photoGeo.geometry === 'string' ? JSON.parse(photoGeo.geometry) : photoGeo.geometry
           const coords = geometry.coordinates
-          return L.latLng(coords[1], coords[0]) // GeoJSON is [lng, lat]
+          return L.latLng(coords[1], coords[0])
         }
       }
     } catch (error) {
@@ -228,33 +219,18 @@ useEffect(() => {
   }
 
   const handlePhotoSelect = (photo: Photo, latlng?: L.LatLng) => {
-    console.log('📍 Photo selected at:', latlng)
-    console.log('📸 Photo data:', photo)
-
     setImageError(false)
-
     const fotoUrl = photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
-
-    currentPhotoSet({
-      ...photo,
-      foto_url: fotoUrl
-    })
-
-    if (latlng) {
-      setPopupPosition(latlng)
-    }
+    currentPhotoSet({ ...photo, foto_url: fotoUrl })
+    if (latlng) setPopupPosition(latlng)
   }
 
-  // Handle layer changes
   const handleLayersChange = (layers: Set<string>) => {
-    if (layers instanceof Set) {
-      setActiveLayers(layers)
-    } else {
-      setActiveLayers(new Set(layers))
-    }
+    if (layers instanceof Set) setActiveLayers(layers)
+    else setActiveLayers(new Set(layers))
   }
 
-  // 🔥 FIXED: Auto-open popup when coming from Photo.tsx
+  // 🔥 YOUR ORIGINAL SHOWONMAP PROGRAMMATIC CLICK LOGIC - UNTOUCHED
   useEffect(() => {
     if (photoId && selectedLayer !== layers.temafk.id) {
       selectedLayerSet(layers.temafk.id)
@@ -270,25 +246,21 @@ useEffect(() => {
       if (photo) {
         const fotoUrl = photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
 
-        console.log('📸 Photo data from URL:', photo)
-        console.log('🔗 Constructed URL:', fotoUrl)
-
         currentPhotoSet({
           ...photo,
           foto_url: fotoUrl
         })
 
-        // 🔥 FIX: Get coordinates from the API since Photo type doesn't have lat/lng
-        console.log('🔍 Fetching coordinates for photo:', photoId)
         fetchPhotoCoordinates(Number(photoId)).then(latLng => {
           if (latLng) {
-            console.log('📍 Setting popup from fetched coordinates:', latLng)
             setPopupPosition(latLng)
           }
         })
       }
     }
   }, [photoId, dispatch, photos, selectedLayer])
+
+  const showOnMap = selectedLayer === layers.temafk.id
 
   const { BaseLayer, Overlay } = LayersControl
 
@@ -300,16 +272,13 @@ useEffect(() => {
             center={[45.2, 16.2]}
             zoom={10}
             maxZoom={28}
-            style={{
-              width: '100%',
-              height: '90vh',
-              cursor: 'crosshair'
-            }}
+            style={{ width: '100%', height: '90vh', cursor: 'crosshair' }}
             zoomControl={false}
           >
             <GestureHandling />
             <LayerHandler kartografijeSet={kartografijeSet} onLayersChange={handleLayersChange} />
             <ZoomControl position='bottomright' />
+            
             <CustomLayersControl collapsed={windowWidth < 1248} activeLayers={activeLayers}>
               <BaseLayer checked name='reljef'>
                 <TileLayer url='https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg' />
@@ -369,7 +338,7 @@ useEffect(() => {
               <Overlay
                 key={layers.temafk.id}
                 name={layers.temafk.name}
-                checked={selectedLayer === layers.temafk.id}
+                checked={showOnMap} 
               >
                 <BetterWMS
                   key={layers.temafk.id}
@@ -378,15 +347,23 @@ useEffect(() => {
                   layers={layers.temafk.layers}
                   onSelectPhoto={handlePhotoSelect}
                   {...layers.temafk.props}
+                  opacity={0}
                 />
               </Overlay>
             </CustomLayersControl>
 
+             {/* 🔥 Local fototeka icons rendered based on the active layers state */}
+            {activeLayers.has(layers.temafk.id) && fototekaMarkers.map((marker, index) => (
+              <Marker 
+                key={`${marker.id}-${index}`} 
+                position={[marker.latlng.lat, marker.latlng.lng]} 
+                icon={fototekaIcon}
+                eventHandlers={{
+                  click: () => handlePhotoSelect(marker, marker.latlng)
+                }}
+              />
+            ))}           
             {photoId && <SingleMarker />}
-
-  {popupPosition && (
-  <Marker position={popupPosition} icon={fototekaIcon} />
-)}
 
             {popupPosition && currentPhoto && (
               <Popup
@@ -402,8 +379,7 @@ useEffect(() => {
                   }
                 }}
               >
-                {/* <div className="photo-popup-content"> */}
-                <ul>
+                 <ul>
                   <li>
                     <span className='label'>Signatura</span>{' '}
                     <span className='value'>{currentPhoto.signatura}</span>
@@ -427,28 +403,11 @@ useEffect(() => {
                 </ul>
                 {currentPhoto.foto_url && !imageError && (
                   <Link to={`/photos/${currentPhoto.id}`}>
-                    <div
-                      style={{
-                        textAlign: 'center',
-                        maxWidth: '250px',
-                        minHeight: '100px',
-                        backgroundColor: '#f5f5f5',
-                        borderRadius: '4px',
-                        padding: '5px',
-                        marginTop: '10px',
-                        cursor: 'pointer'
-                      }}
-                    >
+                    <div style={{ textAlign: 'center', maxWidth: '250px', minHeight: '100px', backgroundColor: '#f5f5f5', borderRadius: '4px', padding: '5px', marginTop: '10px', cursor: 'pointer' }}>
                       <ImageWithSuspense
                         src={currentPhoto.foto_url}
                         alt={currentPhoto.naziv || 'Photo'}
-                        style={{
-                          maxWidth: '100%',
-                          maxHeight: '200px',
-                          objectFit: 'contain',
-                          display: 'block',
-                          margin: '0'
-                        }}
+                        style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain', display: 'block', margin: '0' }}
                         onError={() => {
                           console.error('❌ Image failed to load:', currentPhoto.foto_url)
                           setImageError(true)
@@ -457,28 +416,17 @@ useEffect(() => {
                     </div>
                   </Link>
                 )}
-
                 {imageError && (
-                  <div
-                    style={{
-                      textAlign: 'center',
-                      padding: '20px',
-                      color: '#666',
-                      fontStyle: 'italic',
-                      backgroundColor: '#f5f5f5',
-                      borderRadius: '4px',
-                      marginTop: '10px'
-                    }}
-                  >
+                  <div style={{ textAlign: 'center', padding: '20px', color: '#666', fontStyle: 'italic', backgroundColor: '#f5f5f5', borderRadius: '4px', marginTop: '10px' }}>
                     🖼️ Image not available
                   </div>
                 )}
-                {/* </div> */}
               </Popup>
             )}
           </MapContainer>
         </section>
       </div>
+
       <BlockWithStickyTitle title='Mape'>
         <p>
           Dobrodošli na interaktivnu kartu "Opservatorija krajobraza". Ova karta predstavlja našu

@@ -14,21 +14,28 @@ interface BetterWMSProps extends LayerProps {
   url: string
   layers: string
   params?: WMSParams
-  // FIXED: Use a single flexible signature with optional second parameter
+  opacity?: number // 🔥 EXPLICITLY ADD THIS TO SATISFY TS
   onSelectPhoto?: (photo: Photo, latlng?: LatLng) => void
 }
 
 export const BetterWMS = createTileLayerComponent<TileLayer.WMS, BetterWMSProps>(
   ({ url, layers, ...props }, context) => {
     const layer = new BetterTileLayerWMS(url, { layers, ...props })
-
     return createElementObject(layer, context)
   },
   (layer, props, prevProps) => {
     updateGridLayer(layer, props, prevProps)
 
-    if (props.params != null && props.params !== prevProps.params) {
-      layer.setParams(props.params)
+    // 🔥 Safely cast props to our extended type
+    const typedProps = props as BetterWMSProps
+    const typedPrevProps = prevProps as BetterWMSProps
+
+    if (typedProps.opacity !== typedPrevProps.opacity) {
+      layer.setOpacity(typedProps.opacity ?? 1)
+    }
+
+    if (typedProps.params != null && typedProps.params !== typedPrevProps.params) {
+      layer.setParams(typedProps.params)
     }
   }
 )
