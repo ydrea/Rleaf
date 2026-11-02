@@ -1,6 +1,93 @@
 
 5) Problem: balončić (u svim kategorijama) prikazuje kategorije od fotki, umjesto od dotične kategorije 
 
+5\ Got it. If the WMS is interfering with clicks on the underlying layers, we should completely remove the `<BetterWMS>` component for the Fototeka layer. You don't need the invisible `opacity={0}` layer anymore since we have the actual markers rendering.
+
+Here is the exact fix for `Karta.tsx`. 
+
+### 1. Remove the WMS `Overlay` block
+Scroll down to your `<CustomLayersControl>` and completely delete or comment out the block for `layers.temafk`. It should look like this when you're done:
+
+```tsx
+              {/* 🔥 Fototeka WMS Removed - it was blocking clicks */}
+              {/* <Overlay
+                key={layers.temafk.id}
+                name={layers.temafk.name}
+                checked={showOnMap} 
+              >
+                <BetterWMS
+                  key={layers.temafk.id}
+                  id={layers.temafk.id}
+                  url={layers.temafk.url}
+                  layers={layers.temafk.layers}
+                  onSelectPhoto={handlePhotoSelect}
+                  {...layers.temafk.props}
+                  opacity={0}
+                />
+              </Overlay> */}
+```
+
+### 2. Update the `showOnMap` logic for the URL
+Since the WMS layer is gone, you don't need to set the `selectedLayer` to `layers.temafk.id` in your URL effect anymore. You only need to open the popup.
+
+Find this `useEffect`:
+```tsx
+  // 🔥 YOUR ORIGINAL SHOWONMAP PROGRAMMATIC CLICK LOGIC
+  useEffect(() => {
+    if (photoId && selectedLayer !== layers.temafk.id) {
+      selectedLayerSet(layers.temafk.id) // 👈 Remove this line
+      // ...
+```
+
+And update it to this:
+```tsx
+  useEffect(() => {
+    if (photoId) {
+      if (photos.length === 0) {
+        dispatch(getPhotos())
+      }
+    }
+
+    if (photoId && photos.length > 0) {
+      const photo = photos.find((photo: any) => photo.id === Number(photoId))
+
+      if (photo) {
+        const fotoUrl = photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
+        currentPhotoSet({ ...photo, foto_url: fotoUrl })
+
+        fetchPhotoCoordinates(Number(photoId)).then(latLng => {
+          if (latLng) {
+            setPopupPosition(latLng)
+          }
+        })
+      }
+    }
+  }, [photoId, dispatch, photos])
+```
+
+*(Note: I removed `selectedLayer` from the dependency array since we don't need it to trigger the popup anymore).*
+
+### 3. Keep the Markers
+Leave your marker loop exactly as it is. They will now render perfectly on top of your map without the invisible WMS layer intercepting any clicks.
+
+```tsx
+            {/* 🔥 Local fototeka icons rendered on top */}
+            {fototekaMarkers.map((marker, index) => (
+              <Marker 
+                key={`${marker.id}-${index}`} 
+                position={[marker.latlng.lat, marker.latlng.lng]} 
+                icon={fototekaIcon}
+                eventHandlers={{
+                  click: () => handlePhotoSelect(marker, marker.latlng)
+                }}
+              />
+            ))}
+```
+
+This completely removes the interference while keeping your programmatic URL popups and the actual markers working flawlessly.
+
+======================================================================
+
 
 # apache + node
 
