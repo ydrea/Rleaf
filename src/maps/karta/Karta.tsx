@@ -7,6 +7,11 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'react-tabs/style/react-tabs.css'
 
+//CLUSTER
+import MarkerClusterGroup from 'react-leaflet-cluster'
+import 'react-leaflet-cluster/dist/assets/MarkerCluster.css'
+import 'react-leaflet-cluster/dist/assets/MarkerCluster.Default.css'
+
 import type { Photo } from '../../types/types'
 import type { RootState } from '../../redux/store'
 import { layers } from './constants'
@@ -20,14 +25,14 @@ import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/Bloc
 import './Karta.sass'
 import { CustomLayersControl } from './components/CustomLayersControl'
 
-// 🔥 RESTORED YOUR SVG ICON
+// 🔥 CUSTOM ICON
 const fototekaIcon = L.divIcon({
   className: 'fototeka-marker',
   html: `
     <div style="
       width: 32px; height: 32px;
       background: white;
-      border: 2px solid #333;
+      border: 3px solid #fff;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
@@ -120,6 +125,19 @@ const GestureHandling = () => {
   return hint ? <div className='gesture-hint'>{hint}</div> : null
 }
 
+const MapZoomer = ({ position }: { position: L.LatLng | null }) => {
+  const map = useMap()
+  useEffect(() => {
+    if (position) {
+      // pan to the marker with a slight offset so the popup has room to open
+
+      const offsetPosition = L.latLng(position.lat - 0.005, position.lng)
+      map.flyTo(offsetPosition, 15, { animate: true, duration: 0.5 })
+        }
+  }, [position, map])
+  return null
+}
+
 type PhotoWithCoords = Photo & { latlng: L.LatLng }
 
 export const Karta = () => {
@@ -140,7 +158,7 @@ export const Karta = () => {
 
   const [fototekaMarkers, setFototekaMarkers] = useState<(Photo & { latlng: L.LatLng })[]>([])
 
-  useEffect(() => {
+    useEffect(() => {
     const fetchAllMarkers = async () => {
       try {
         const response = await fetch(`https://server.croatianlandscape.hr/json_photos`)
@@ -150,13 +168,16 @@ export const Karta = () => {
         const merged = data.map((item: any) => {
           if (!item || !item.geometry) return null 
           
+          // nadji u redux-u
+          const photoMatch = photos.find(p => p.signatura === item.signatura)
+          
           const geometry = typeof item.geometry === 'string' ? JSON.parse(item.geometry) : item.geometry
           if (!geometry.coordinates) return null
 
           const [lng, lat] = geometry.coordinates
 
           return {
-            id: item.signatura, 
+            id: photoMatch?.id || item.signatura, // 
             signatura: item.signatura,
             foto_url: `${import.meta.env.VITE_SERVER_PUB}/${item.signatura}`,
             latlng: L.latLng(lat, lng)
@@ -169,8 +190,10 @@ export const Karta = () => {
       }
     }
 
-    fetchAllMarkers()
-  }, []) 
+    if (photos.length > 0) {
+      fetchAllMarkers()
+    }
+  }, [photos]) // 
 
   useEffect(() => {
     const preloadVisibleTiles = async () => {
@@ -230,14 +253,10 @@ export const Karta = () => {
     else setActiveLayers(new Set(layers))
   }
 
-  // 🔥 YOUR ORIGINAL SHOWONMAP PROGRAMMATIC CLICK LOGIC - UNTOUCHED
+  // SHOWONMAP PROGRAMMATIC CLICK LOGIC - SAMO ZA MARKERE
   useEffect(() => {
-    if (photoId && selectedLayer !== layers.temafk.id) {
-      selectedLayerSet(layers.temafk.id)
-
-      if (photos.length === 0) {
-        dispatch(getPhotos())
-      }
+    if (photoId && photos.length === 0) {
+      dispatch(getPhotos())
     }
 
     if (photoId && photos.length > 0) {
@@ -258,9 +277,9 @@ export const Karta = () => {
         })
       }
     }
-  }, [photoId, dispatch, photos, selectedLayer])
+  }, [photoId, dispatch, photos])
 
-  const showOnMap = selectedLayer === layers.temafk.id
+  // sta je ovo??  const showOnMap = selectedLayer === layers.temafk.id
 
   const { BaseLayer, Overlay } = LayersControl
 
@@ -271,6 +290,7 @@ export const Karta = () => {
           <MapContainer
             center={[45.2, 16.2]}
             zoom={10}
+    minZoom={8}
             maxZoom={28}
             style={{ width: '100%', height: '90vh', cursor: 'crosshair' }}
             zoomControl={false}
@@ -279,6 +299,9 @@ export const Karta = () => {
             <LayerHandler kartografijeSet={kartografijeSet} onLayersChange={handleLayersChange} />
             <ZoomControl position='bottomright' />
             
+            {/* 🔥 Force map to zoom into the cluster when arriving via URL */}
+            <MapZoomer position={popupPosition} />
+
             <CustomLayersControl collapsed={windowWidth < 1248} activeLayers={activeLayers}>
               <BaseLayer checked name='reljef'>
                 <TileLayer url='https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg' />
@@ -335,41 +358,39 @@ export const Karta = () => {
                 />
               </Overlay>
 
+              {/* Marker Cluster Group */}
               <Overlay
                 key={layers.temafk.id}
                 name={layers.temafk.name}
-                checked={showOnMap} 
+checked={activeLayers.has(layers.temafk.id)}
               >
-                <BetterWMS
-                  key={layers.temafk.id}
-                  id={layers.temafk.id}
-                  url={layers.temafk.url}
-                  layers={layers.temafk.layers}
-                  onSelectPhoto={handlePhotoSelect}
-                  {...layers.temafk.props}
-                  opacity={0}
-                />
+                <MarkerClusterGroup
+                  chunkedLoading
+                  maxClusterRadius={40}
+                >
+                  {fototekaMarkers.map((marker, index) => (
+                    <Marker 
+                      key={`${marker.id}-${index}`} 
+                      position={[marker.latlng.lat, marker.latlng.lng]} 
+                      icon={fototekaIcon}
+                      eventHandlers={{
+                        click: () => handlePhotoSelect(marker, marker.latlng)
+                      }}
+                    />
+                  ))}
+                </MarkerClusterGroup>
               </Overlay>
             </CustomLayersControl>
 
-             {/* 🔥 Local fototeka icons rendered based on the active layers state */}
-            {activeLayers.has(layers.temafk.id) && fototekaMarkers.map((marker, index) => (
-              <Marker 
-                key={`${marker.id}-${index}`} 
-                position={[marker.latlng.lat, marker.latlng.lng]} 
-                icon={fototekaIcon}
-                eventHandlers={{
-                  click: () => handlePhotoSelect(marker, marker.latlng)
-                }}
-              />
-            ))}           
             {photoId && <SingleMarker />}
 
             {popupPosition && currentPhoto && (
               <Popup
                 className='photo-popup'
                 autoPan={true}
-                autoPanPadding={[40, 40]}
+                //  autoPanPadding={[40, 40]}
+                 autoPanPaddingTopLeft={[50, 50]} // 
+                autoPanPaddingBottomRight={[50, 50]} // 
                 position={popupPosition}
                 eventHandlers={{
                   remove: () => {

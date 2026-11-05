@@ -195,7 +195,6 @@
 
 
 // constants.ts
-// constants.ts - UPDATED WITH VERIFIED NAMES
 export const layers = {
   temakz: {
     id: 'temakz',

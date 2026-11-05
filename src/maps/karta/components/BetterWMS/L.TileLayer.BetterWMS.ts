@@ -57,7 +57,6 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
 
 
   ////////////////
-
 getFeatureInfo: function (evt: L.LeafletMouseEvent) {
   const el = evt.originalEvent.target as HTMLElement | null
 
@@ -65,28 +64,119 @@ getFeatureInfo: function (evt: L.LeafletMouseEvent) {
     return
   }
 
+  // Provjeri je li ovaj sloj najgornji
+  let isTopmost = true
+  const myZIndex = this.options.zIndex || 0
+
+  this._map.eachLayer((layer: any) => {
+    if (layer === this || !(layer instanceof L.TileLayer.WMS)) return
+    if ((layer.options.zIndex || 0) > myZIndex) {
+      isTopmost = false
+    }
+  })
+
+  if (!isTopmost) {
+    console.log('⏭️ Preskačem GetFeatureInfo jer nisam najgornji sloj.')
+    return
+  }
+
   const url = this.getFeatureInfoUrl(evt.latlng)
-  
-  // Store latlng for later use
   const clickLatLng = evt.latlng
 
-  console.log('🔍 GetFeatureInfo clicked at:', clickLatLng)
-  console.log('📡 Request URL:', url)
+  // 🔥 SPREMI 'this' U VARIJABLU 'self'
+  const self = this
 
   axios
     .get(url)
-    .then((response) => {  // Use arrow function to preserve 'this'
-      console.log('📦 GetFeatureInfo response:', response.data)
-      
-      // Call showGetFeatureInfo directly, not through bind
-      this.showGetFeatureInfo(response.data, clickLatLng)
+    .then((response) => {
+      // 🔥 KORISTI 'self' UMJESTO 'this'
+      if (typeof self.showGetFeatureInfo === 'function') {
+        self.showGetFeatureInfo(response.data, clickLatLng)
+      } else {
+        console.error('❌ showGetFeatureInfo nije definirana u klasi!')
+      }
     })
-    .catch((error) => {  // Use arrow function to preserve 'this'
-      console.error('❌ GetFeatureInfo error:', error)
-      this.showGetFeatureInfo(error.message || 'Unknown error', clickLatLng)
+    .catch((error) => {
+      // 400 Bad Request se često događa ako klikneš izvan sloja
+      if (error.response && error.response.status === 400) {
+        console.log('ℹ️ Nema podataka na ovoj lokaciji (400 Bad Request).')
+      } else {
+        console.error('❌ GetFeatureInfo error:', error)
+      }
+      
+      // 🔥 KORISTI 'self' UMJESTO 'this'
+      if (typeof self.showGetFeatureInfo === 'function' && error.response?.status !== 400) {
+        self.showGetFeatureInfo(error.message || 'Unknown error', clickLatLng)
+      }
     })
 },
+// getFeatureInfo: function (evt: L.LeafletMouseEvent) {
+//   const el = evt.originalEvent.target as HTMLElement | null
 
+//   if (el?.closest('.photo-popup')) {
+//     return
+//   }
+
+//   const url = this.getFeatureInfoUrl(evt.latlng)
+  
+//   // Store latlng for later use
+//   const clickLatLng = evt.latlng
+
+//   console.log('🔍 GetFeatureInfo clicked at:', clickLatLng)
+//   console.log('📡 Request URL:', url)
+
+//   axios
+//     .get(url)
+//     .then((response) => {  // Use arrow function to preserve 'this'
+//       console.log('📦 GetFeatureInfo response:', response.data)
+      
+//       // Call showGetFeatureInfo directly, not through bind
+//       this.showGetFeatureInfo(response.data, clickLatLng)
+//     })
+//     .catch((error) => {  // Use arrow function to preserve 'this'
+//       console.error('❌ GetFeatureInfo error:', error)
+//       this.showGetFeatureInfo(error.message || 'Unknown error', clickLatLng)
+//     })
+// },
+
+// showGetFeatureInfo: function (content: any, clickLatLng: L.LatLng) {
+//   if (typeof content === 'string') {
+//     console.log('❌ Error:', content)
+//     return
+//   }
+  
+//   try {
+//     if (content.features && content.features.length > 0) {
+//       const feature = content.features[0]
+//       const properties = feature.properties
+      
+//       // 🔥 PROVJERA: Ima li ovaj sloj polje 'signatura'?
+//       // Ako nema, to nije Fototeka i ne trebamo otvarati photo popup!
+//       if (!properties.signatura) {
+//         console.log('ℹ️ Kliknuti sloj nema fotografiju (nije Fototeka).')
+//         return
+//       }
+      
+//       const photoData = {
+//         id: properties.id,
+//         signatura: properties.signatura,
+//         naziv: properties.naziv || '',
+//         opis: properties.opis || '',
+//         lokacija: properties.lokacija || '',
+//         datum_sni: properties.datum_sni || '',
+//         kategorija: properties.kategorija || '',
+//         autor: properties.autor || '',
+//         tagovi: properties.tagovi || '',
+//         foto_url: `${import.meta.env.VITE_SERVER_PUB}/${properties.signatura}`
+//       }
+      
+//       // Pass both the photo data AND the click location
+//       this.options.onSelectPhoto?.(photoData, clickLatLng)
+//     }
+//   } catch (e) {
+//     console.error('❌ Error:', e)
+//   }
+// },
 showGetFeatureInfo: function (content: any, clickLatLng: L.LatLng) {
   if (typeof content === 'string') {
     console.log('❌ Error:', content)
@@ -98,21 +188,47 @@ showGetFeatureInfo: function (content: any, clickLatLng: L.LatLng) {
       const feature = content.features[0]
       const properties = feature.properties
       
-      const photoData = {
-        id: properties.id,
-        signatura: properties.signatura,
-        naziv: properties.naziv || '',
-        opis: properties.opis || '',
-        lokacija: properties.lokacija || '',
-        datum_sni: properties.datum_sni || '',
-        kategorija: properties.kategorija || '',
-        autor: properties.autor || '',
-        tagovi: properties.tagovi || '',
-        foto_url: `${import.meta.env.VITE_SERVER_PUB}/${properties.signatura}`
+      // Ako je Fototeka -> photo popup
+      if (properties.signatura) {
+        const photoData = {
+          id: properties.id,
+          signatura: properties.signatura,
+          naziv: properties.naziv || '',
+          opis: properties.opis || '',
+          lokacija: properties.lokacija || '',
+          datum_sni: properties.datum_sni || '',
+          kategorija: properties.kategorija || '',
+          autor: properties.autor || '',
+          tagovi: properties.tagovi || '',
+          foto_url: `${import.meta.env.VITE_SERVER_PUB}/${properties.signatura}`
+        }
+        this.options.onSelectPhoto?.(photoData, clickLatLng)
+      } 
+      // Ako NIJE Fototeka -> obični Feature Info popup
+      else {
+        console.log('📋 Prikazujem Feature Info popup za sloj:', this.wmsParams.layers)
+        
+        // Formatiramo podatke u HTML
+        const popupContent = Object.entries(properties)
+          .map(([key, val]) => `<b>${key}:</b> ${val}`)
+          .join('<br>')
+        
+        // 🔥 KLJUČNO: Koristi this._map koji je već postavljen u onAdd
+        const map = this._map
+        if (!map) {
+          console.error('❌ Karta nije dostupna!')
+          return
+        }
+
+        // Zatvori sve postojeće popupe prije otvaranja novog
+        map.closePopup()
+
+        // Otvori novi popup
+        L.popup()
+          .setLatLng(clickLatLng)
+          .setContent(popupContent)
+          .openOn(map)
       }
-      
-      // Pass both the photo data AND the click location
-      this.options.onSelectPhoto?.(photoData, clickLatLng)
     }
   } catch (e) {
     console.error('❌ Error:', e)
