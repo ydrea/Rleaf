@@ -30,7 +30,9 @@ export const ImageResource = forwardRef<HTMLImageElement, Props>(({ src, ...rest
       {...rest}
       onLoad={(e) => {
         rest.onLoad?.(e)
-        setLoaded(true)
+        // A cached image fires load before the first paint, so the 'loading' state would never be
+        // painted and the opacity transition would be skipped. Wait two frames before flipping.
+        requestAnimationFrame(() => requestAnimationFrame(() => setLoaded(true)))
       }}
       className={loaded ? 'loaded' : 'loading'}
     />

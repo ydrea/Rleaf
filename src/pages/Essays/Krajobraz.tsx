@@ -18,23 +18,29 @@ const thumb = (name: string) => thumbs[`../../assets/essays/krajobraz/thumbs/${n
 
 type Foto = [file: string, opis: string]
 
+// First photo spans the full width (and uses the full-size file), the rest sit in two columns.
 const Gallery = ({ items }: { items: Foto[] }) => (
-  <GalleryGrid style={{ marginTop: '7rem' }}>
-    {items.map(([file, opis]) => (
-      <GalleryImage key={file} src={src(file)} thumb={thumb(file)} alt={opis} caption={opis} />
+  <GalleryGrid className='featured-first' style={{ marginTop: '7rem' }}>
+    {items.map(([file, opis], i) => (
+      <GalleryImage
+        key={file}
+        src={src(file)}
+        thumb={i === 0 ? undefined : thumb(file)}
+        className={i === 0 ? 'featured' : undefined}
+        alt={opis}
+        caption={opis}
+      />
     ))}
   </GalleryGrid>
 )
 
 const ImageWithCaption = ({ file, opis }: { file: string; opis: string }) => (
-  <figure className='essay-figure' style={{ marginTop: 120, borderTop: '1px solid black' }}>
+  <figure
+    className='essay-figure'
+    style={{ marginTop: 120, paddingBottom: 64, borderBottom: '1px solid black' }}
+  >
+    <ImageWithSuspense src={src(file)} alt={opis} loading='lazy' />
     <figcaption>{opis}</figcaption>
-    <ImageWithSuspense
-      src={src(file)}
-      alt={opis}
-      loading='lazy'
-      style={{ maxWidth: 1200, margin: 'auto', display: 'block' }}
-    />
   </figure>
 )
 
@@ -113,27 +119,30 @@ const promjene: Foto[] = [
 export const Krajobraz = () => (
   <>
     <Lightbox />
-    <BlockWithStickyTitle title='Analiza krajobraza regije Banije/Banovine'>
-      <p>
-        Tekst koji slijedi parafraziran je i razrađen prema rezultatima dokumenta Krajobrazna osnova
+    <BlockWithStickyTitle
+      title='Analiza krajobraza regije Banije/Banovine'
+      subtitle='Tekst koji slijedi parafraziran je i razrađen prema rezultatima dokumenta Krajobrazna osnova
         Republike Hrvatske, konkretno, Knjiga 3c: Krajobrazna osnova RH makroregionalne i regionalne
         razine – Atlas krajobraza: Gorsko-brdska Panonsko-peripanonska Hrvatska (Andlar i sur.
-        2024.)
+        2024.)'
+    >
+      <p>
+        Prostor Banovine/Banije prepoznat je u okviru krajobrazne makroregije{' '}
+        <u>Gorsko-brdska Panonsko-peripanonska Hrvatska</u> odnosno u sklopu Krajobrazne regije{' '}
+        <u>Banovine/Banije</u>. Krajobrazna regija Banije/Banovine obuhvaća prostor između Posavine
+        na istoku, grada Siska na sjeveroistoku, petrinjsko-sisačko-lekeničkog Pokuplja na sjeveru,
+        rijeke Gline na zapadu, donjeg toka rijeke Une i granice s Bosnom i Hercegovinom na
+        jugoistoku, jugu i jugozapadu. Predloženi obuhvat krajobrazne regije ne treba izjednačavati
+        s obuhvatom kulturne regije Banovine/Banije – naime, obuhvat kulturne regije Banovine/Banije
+        ne samo da se mijenja kroz povijest, već i danas nije usuglašen među različitim stručnjacima
+        i znanstvenicima, što i nije neobično za kulturne regije obzirom da se ne radi o
+        administrativnim obuhvatima.
       </p>
     </BlockWithStickyTitle>
 
-    <Section noReadMore className='essay-section' title='Obuhvat'>
+    <Section noReadMore className='essay-section'>
       <p>
-        Prostor Banovine/Banije prepoznat je u okviru krajobrazne makroregije Gorsko-brdska
-        Panonsko-peripanonska Hrvatska odnosno u sklopu Krajobrazne regije Banovine/Banije.
-        Krajobrazna regija Banije/Banovine obuhvaća prostor između Posavine na istoku, grada Siska
-        na sjeveroistoku, petrinjsko-sisačko-lekeničkog Pokuplja na sjeveru, rijeke Gline na zapadu,
-        donjeg toka rijeke Une i granice s Bosnom i Hercegovinom na jugoistoku, jugu i jugozapadu.
-        Predloženi obuhvat krajobrazne regije ne treba izjednačavati s obuhvatom kulturne regije
-        Banovine/Banije – naime, obuhvat kulturne regije Banovine/Banije ne samo da se mijenja kroz
-        povijest, već i danas nije usuglašen među različitim stručnjacima i znanstvenicima, što i
-        nije neobično za kulturne regije obzirom da se ne radi o administrativnim obuhvatima. Stoga,
-        obuhvat krajobrazne regije ima višeslojno tumačenje, koje se prvenstveno temelji na
+        Stoga, obuhvat krajobrazne regije ima višeslojno tumačenje, koje se prvenstveno temelji na
         fizičko-geografskim obilježjima (reljef i geologija), a tek onda na temelju određenih
         tumačenja obuhvata kulture regije.
       </p>

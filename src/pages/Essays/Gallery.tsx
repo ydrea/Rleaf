@@ -24,15 +24,17 @@ export const GalleryImage = ({
   src,
   thumb,
   alt,
-  caption
+  caption,
+  className
 }: GalleryPhoto & {
   alt: string
   caption?: ReactNode
+  className?: string
 }) => {
   const [orientation, orientationSet] = useState('')
 
   return (
-    <figure className={`photo ${orientation}`}>
+    <figure className={`photo ${orientation} ${className ?? ''}`}>
       <ImageWithSuspense
         src={thumb ?? src}
         data-full={src}
