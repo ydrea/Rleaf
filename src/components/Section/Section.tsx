@@ -2,8 +2,8 @@ import type { ReactNode } from 'react'
 
 import { useNumericId } from '../../services/use-numeric-id/use-numeric-id'
 import { ReadMore } from '../ReadMore/ReadMore'
-import './Section.sass'
 import { Container } from '../Container/Container'
+import './Section.sass'
 
 type Props = {
   children?: ReactNode
@@ -12,15 +12,16 @@ type Props = {
   className?: string
   style?: React.CSSProperties
   noReadMore?: boolean
+  thin?: boolean
 }
 
-export const Section = ({ children, dark, title, className, style, noReadMore }: Props) => {
+export const Section = ({ children, dark, title, className, style, noReadMore, thin }: Props) => {
   const id = useNumericId()
 
   return (
     <Container className='container'>
       <section
-        className={`${dark ? 'dark' : ''}${className ? ` ${className}` : ''}`}
+        className={`${dark ? 'dark' : ''}${thin ? ' thin' : ''}${className ? ` ${className}` : ''}`}
         style={style}
         id={`section-${id}`}
       >

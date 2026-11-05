@@ -14,6 +14,10 @@ import { Karta } from './maps/karta/Karta'
 import { Layout } from './components/Layout/Layout'
 import { Home } from './pages/Home/Home'
 import { ThreeDScenes } from './pages/ThreeDScenes/ThreeDScenes'
+import { Essays } from './pages/Essays/Essays'
+import { Zemljiste } from './pages/Essays/Zemljiste'
+import { Spomenici } from './pages/Essays/Spomenici'
+import { Krajobraz } from './pages/Essays/Krajobraz'
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +45,19 @@ export const router = createBrowserRouter([
       },
       {
         path: 'essays',
-        element: <Home />
+        element: <Essays />
+      },
+      {
+        path: 'essays/poljoprivredno-koristenje-zemljista',
+        element: <Zemljiste />
+      },
+      {
+        path: 'essays/analiza-krajobraza',
+        element: <Krajobraz />
+      },
+      {
+        path: 'essays/spomenicka-bastina-nob',
+        element: <Spomenici />
       },
       {
         path: 'projects/banija',

@@ -8,6 +8,6 @@ export const Footer = () => (
 
     <a href='mailto:info@opservatorijkrajobraza.hr'>info@opservatorijkrajobraza.hr</a>
 
-    <div className='year-tab'>2025</div>
+    <div className='year-tab'>{new Date().getFullYear()}</div>
   </Section>
 )
