@@ -1,90 +1,301 @@
+Evo rješenja za oba zadatka, točno onako kako si zamislio.
 
-5) Problem: balončić (u svim kategorijama) prikazuje kategorije od fotki, umjesto od dotične kategorije 
+---
 
-5\ Got it. If the WMS is interfering with clicks on the underlying layers, we should completely remove the `<BetterWMS>` component for the Fototeka layer. You don't need the invisible `opacity={0}` layer anymore since we have the actual markers rendering.
+## 0. Jest mock za testiranje karte
 
-Here is the exact fix for `Karta.tsx`. 
+Budući da `react-leaflet` i `leaflet` koriste DOM i mjerenja koja Jest ne može izvesti bez pravog preglednika, potrebno je mockati ih. U rootu projekta (ili u `src/__mocks__`) kreiraj datoteku `leafletMocks.js`:
 
-### 1. Remove the WMS `Overlay` block
-Scroll down to your `<CustomLayersControl>` and completely delete or comment out the block for `layers.temafk`. It should look like this when you're done:
+```javascript
+// src/__mocks__/leafletMocks.js
 
-```tsx
-              {/* 🔥 Fototeka WMS Removed - it was blocking clicks */}
-              {/* <Overlay
-                key={layers.temafk.id}
-                name={layers.temafk.name}
-                checked={showOnMap} 
-              >
-                <BetterWMS
-                  key={layers.temafk.id}
-                  id={layers.temafk.id}
-                  url={layers.temafk.url}
-                  layers={layers.temafk.layers}
-                  onSelectPhoto={handlePhotoSelect}
-                  {...layers.temafk.props}
-                  opacity={0}
-                />
-              </Overlay> */}
-```
+// Mock za leaflet
+jest.mock('leaflet', () => {
+  const mockMap = {
+    on: jest.fn(),
+    off: jest.fn(),
+    flyTo: jest.fn(),
+    getContainer: jest.fn(() => document.createElement('div')),
+    getSize: jest.fn(() => ({ x: 800, y: 600 })),
+    latLngToContainerPoint: jest.fn(() => ({ x: 400, y: 300 })),
+    getBounds: jest.fn(() => ({
+      getSouthWest: () => ({ lat: 45, lng: 16 }),
+      getNorthEast: () => ({ lat: 46, lng: 17 }),
+    })),
+    closePopup: jest.fn(),
+  }
 
-### 2. Update the `showOnMap` logic for the URL
-Since the WMS layer is gone, you don't need to set the `selectedLayer` to `layers.temafk.id` in your URL effect anymore. You only need to open the popup.
+  const mockLayer = {
+    addTo: jest.fn().mockReturnThis(),
+    on: jest.fn(),
+    off: jest.fn(),
+  }
 
-Find this `useEffect`:
-```tsx
-  // 🔥 YOUR ORIGINAL SHOWONMAP PROGRAMMATIC CLICK LOGIC
-  useEffect(() => {
-    if (photoId && selectedLayer !== layers.temafk.id) {
-      selectedLayerSet(layers.temafk.id) // 👈 Remove this line
-      // ...
-```
+  return {
+    __esModule: true,
+    default: {
+      map: jest.fn(() => mockMap),
+      tileLayer: jest.fn(() => mockLayer),
+      marker: jest.fn(() => mockLayer),
+      divIcon: jest.fn(() => ({ options: {} })),
+      latLng: jest.fn((lat, lng) => ({ lat, lng })),
+      popup: jest.fn(() => ({
+        setLatLng: jest.fn().mockReturnThis(),
+        setContent: jest.fn().mockReturnThis(),
+        openOn: jest.fn(),
+      })),
+      CRS: {
+        EPSG3857: {
+          project: jest.fn((latlng) => ({ x: latlng.lng * 1000, y: latlng.lat * 1000 })),
+        },
+      },
+      Util: {
+        getParamString: jest.fn(() => '?mocked=true'),
+      },
+      TileLayer: {
+        WMS: {
+          extend: jest.fn((obj) => obj),
+          prototype: {
+            onAdd: jest.fn(),
+            onRemove: jest.fn(),
+          },
+        },
+      },
+    },
+  }
+})
 
-And update it to this:
-```tsx
-  useEffect(() => {
-    if (photoId) {
-      if (photos.length === 0) {
-        dispatch(getPhotos())
-      }
+// Mock za react-leaflet
+jest.mock('react-leaflet', () => ({
+  MapContainer: ({ children }) => <div data-testid="map-container">{children}</div>,
+  TileLayer: () => <div data-testid="tile-layer" />,
+  Marker: ({ children }) => <div data-testid="marker">{children}</div>,
+  Popup: ({ children }) => <div data-testid="popup">{children}</div>,
+  LayersControl: Object.assign(
+    ({ children }) => <div data-testid="layers-control">{children}</div>,
+    {
+      BaseLayer: ({ children }) => <div data-testid="base-layer">{children}</div>,
+      Overlay: ({ children }) => <div data-testid="overlay">{children}</div>,
     }
+  ),
+  ZoomControl: () => <div data-testid="zoom-control" />,
+  useMap: () => mockMap,
+}))
 
-    if (photoId && photos.length > 0) {
-      const photo = photos.find((photo: any) => photo.id === Number(photoId))
-
-      if (photo) {
-        const fotoUrl = photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
-        currentPhotoSet({ ...photo, foto_url: fotoUrl })
-
-        fetchPhotoCoordinates(Number(photoId)).then(latLng => {
-          if (latLng) {
-            setPopupPosition(latLng)
-          }
-        })
-      }
-    }
-  }, [photoId, dispatch, photos])
+// Mock za react-leaflet-cluster
+jest.mock('react-leaflet-cluster', () => ({
+  __esModule: true,
+  default: ({ children }) => <div data-testid="marker-cluster-group">{children}</div>,
+}))
 ```
 
-*(Note: I removed `selectedLayer` from the dependency array since we don't need it to trigger the popup anymore).*
+Zatim u `jest.config.js` ili `package.json` (u `setupFiles`) dodaj:
 
-### 3. Keep the Markers
-Leave your marker loop exactly as it is. They will now render perfectly on top of your map without the invisible WMS layer intercepting any clicks.
+```javascript
+setupFiles: ['<rootDir>/src/__mocks__/leafletMocks.js'],
+```
+
+I u samom testu možeš pisati:
+
+```javascript
+import { render, screen } from '@testing-library/react'
+import { Karta } from './Karta'
+import { Provider } from 'react-redux'
+import { store } from '../../redux/store'
+import { MemoryRouter } from 'react-router-dom'
+
+test('renders map with markers', () => {
+  render(
+    <Provider store={store}>
+      <MemoryRouter>
+        <Karta />
+      </MemoryRouter>
+    </Provider>
+  )
+  expect(screen.getByTestId('map-container')).toBeInTheDocument()
+})
+```
+
+---
+
+## 1. Karta preko cijelog ekrana, bez margina, bez skrolanja
+
+Tvoj trenutni `Karta.tsx` ima `<MapContainer style={{ height: '90vh' }}>`, a ispod njega `BlockWithStickyTitle`. Trebamo:
+- Ukloniti `BlockWithStickyTitle` i zamijeniti ga s gumbom "O karti" koji otvara bočni panel.
+- Postaviti kartu da zauzme cijeli prostor ispod navigacije, bez margina.
+- Onemogućiti vertikalni scroll na stranici.
+- Onemogućiti zoom kotačićem bez Ctrl (to već imaš u `GestureHandling`, samo trebaš ukloniti `map.scrollWheelZoom.enable()` — vidi dolje).
+- Dodati gumb "O karti" u gornji lijevi kut karte.
+- Dodati bočni panel s uvodnim tekstom.
+
+### 1.1. Izmjena `Karta.tsx`
+
+Zamijeni `return` dio tako da izgleda ovako:
 
 ```tsx
-            {/* 🔥 Local fototeka icons rendered on top */}
-            {fototekaMarkers.map((marker, index) => (
-              <Marker 
-                key={`${marker.id}-${index}`} 
-                position={[marker.latlng.lat, marker.latlng.lng]} 
-                icon={fototekaIcon}
-                eventHandlers={{
-                  click: () => handlePhotoSelect(marker, marker.latlng)
-                }}
-              />
-            ))}
+return (
+  <div className="karta-wrapper">
+    <MapContainer
+      center={[45.2, 16.2]}
+      zoom={10}
+      minZoom={8}
+      maxZoom={28}
+      style={{ width: '100%', height: '100%', cursor: 'crosshair' }}
+      zoomControl={false}
+    >
+      <GestureHandling />
+      <LayerHandler kartografijeSet={kartografijeSet} onLayersChange={handleLayersChange} />
+      <ZoomControl position="bottomright" />
+
+      <MapZoomer position={popupPosition} />
+
+      <CustomLayersControl collapsed={windowWidth < 1248} activeLayers={activeLayers}>
+        {/* ... tvoji slojevi ... */}
+      </CustomLayersControl>
+
+      {photoId && <SingleMarker />}
+
+      {popupPosition && currentPhoto && (
+        <Popup /* ... tvoj popup ... */ />
+      )}
+
+      {/* 🔥 Gumb "O karti" */}
+      <button
+        className="about-map-btn"
+        onClick={() => setAboutOpen(true)}
+      >
+        O karti
+      </button>
+    </MapContainer>
+
+    {/* 🔥 Bočni panel */}
+    {aboutOpen && (
+      <div className="about-panel">
+        <button
+          className="about-panel-close"
+          onClick={() => setAboutOpen(false)}
+        >
+          ×
+        </button>
+        <h2>Opservatorij krajobraza</h2>
+        <p>
+          Dobrodošli na interaktivnu kartu "Opservatorija krajobraza". Ova karta predstavlja našu
+          kontinuirano nadopunjujuću kolekciju georeferenciranih podataka koja vam omogućuje uvid u
+          različite aspekte krajobraza. Upotrijebite alate za odabir podloge, prilagodbu slojeva i
+          filtriranje informacija kako biste prilagodili prikaz prema vlastitim istraživačkim
+          potrebama.
+        </p>
+      </div>
+    )}
+  </div>
+)
 ```
 
-This completely removes the interference while keeping your programmatic URL popups and the actual markers working flawlessly.
+Dodaj `const [aboutOpen, setAboutOpen] = useState(false)` na vrh komponente.
+
+### 1.2. CSS (u `Karta.sass`)
+
+```sass
+html, body, #root
+  height: 100%
+  margin: 0
+  padding: 0
+  overflow: hidden
+
+.karta-wrapper
+  position: relative
+  width: 100%
+  height: calc(100vh - 80px) // prilagodi visinu navigacije (80px je primjer)
+  overflow: hidden
+
+  .leaflet-container
+    width: 100%
+    height: 100%
+
+.about-map-btn
+  position: absolute
+  top: 10px
+  left: 10px
+  z-index: 1000
+  padding: 8px 12px
+  background: white
+  border: 1px solid #ccc
+  border-radius: 4px
+  cursor: pointer
+  font-size: 14px
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2)
+
+  &:hover
+    background: #f0f0f0
+
+.about-panel
+  position: absolute
+  top: 0
+  left: 0
+  width: 300px
+  height: 100%
+  background: white
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2)
+  z-index: 1100
+  padding: 20px
+  overflow-y: auto
+  transition: transform 0.3s ease
+
+  .about-panel-close
+    position: absolute
+    top: 10px
+    right: 10px
+    background: none
+    border: none
+    font-size: 24px
+    cursor: pointer
+    color: #333
+```
+
+### 1.3. Uklanjanje zoom-a kotačićem bez Ctrl
+
+U `GestureHandling` komponenti, **ukloni** liniju `map.scrollWheelZoom.enable()`. Trenutno tvoj kod radi ovako:
+
+```tsx
+el.addEventListener('wheel', onWheel)
+map.scrollWheelZoom.enable() // ovo omogućuje zoom kotačićem
+```
+
+Ako želiš da kotačić **ništa ne radi** (osim s Ctrl), samo **ne pozivaj** `map.scrollWheelZoom.enable()`. Time ćeš onemogućiti zoom kotačićem u cijelosti, a `onWheel` će i dalje prikazivati poruku "Zumirajte kartu uz Ctrl/Cmd + kotačić miša".
+
+Alternativno, ako želiš da kotačić **radi zumiranje samo s Ctrl**, trebaš u `onWheel` provjeriti `e.ctrlKey` i ručno pozvati `map.zoomIn()`/`map.zoomOut()`. Ali najlakše je samo ne pozivati `map.scrollWheelZoom.enable()`.
+
+### 1.4. Uklanjanje `BlockWithStickyTitle` iz `Karta.tsx`
+
+Obriši `<BlockWithStickyTitle title='Mape'>...</BlockWithStickyTitle>` na dnu. Također ukloni import ako ti više ne treba.
+
+### 1.5. Uklanjanje margina iz `Karta.sass`
+
+Provjeri da `.map` i `#map-container` nemaju margine:
+
+```sass
+.map
+  margin: 0
+  padding: 0
+
+#map-container
+  margin: 0
+  padding: 0
+```
+
+Ako imaš `container` klasu oko karte, ukloni je ili postavi `padding: 0`.
+
+---
+
+## Sažetak promjena
+
+1. **Jest mock** – kreiraj `src/__mocks__/leafletMocks.js` i dodaj u `setupFiles`.
+2. **Karta preko cijelog ekrana** – postavi `karta-wrapper` s `height: calc(100vh - visina navigacije)`, ukloni `BlockWithStickyTitle`, ukloni margine.
+3. **Gumb "O karti"** – dodaj unutar `<MapContainer>` u gornji lijevi kut.
+4. **Bočni panel** – dodaj unutar `karta-wrapper`, prikazuje se na klik gumba.
+5. **Onemogući zoom kotačićem bez Ctrl** – ukloni `map.scrollWheelZoom.enable()` iz `GestureHandling`.
+
+Ako želiš da panel bude "overlay" preko karte (kao što je sada zamišljeno), on se prikazuje preko karte s `position: absolute` i `left: 0`, a karta ostaje ispod. Ako želiš da se karta smanji kad se panel otvori, možeš dodati klasu na `karta-wrapper` koja pomiče kartu udesno, ali to je složenije – ovako je najjednostavnije.
 
 ======================================================================
 
