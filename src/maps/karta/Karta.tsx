@@ -92,52 +92,38 @@ const LayerHandler = ({
 
 const GestureHandling = () => {
   const map = useMap()
-  const [hint, hintSet] = useState<string | null>(null)
+  
   useEffect(() => {
     const el = map.getContainer()
-    let timer: ReturnType<typeof setTimeout>
-    const show = (text: string) => {
-      clearTimeout(timer)
-      hintSet(text)
-      timer = setTimeout(() => hintSet(null), 1500)
-    }
-    const onWheel = (e: WheelEvent) => {
-      if (e.ctrlKey || e.metaKey) return
-      e.stopImmediatePropagation()
-      show('Zumirajte kartu uz Ctrl/Cmd + kotačić miša')
-    }
-    const onTouchMove = (e: TouchEvent) => {
-      if (e.touches.length === 1) show('Koristite dva prsta za pomicanje karte')
-    }
+    
     const onPointerDown = (e: PointerEvent) => {
       if (e.pointerType === 'mouse' && el.contains(e.target as Node)) map.dragging.enable()
     }
     const onMouseUp = () => map.dragging.disable()
+
     map.dragging.disable()
-    map.scrollWheelZoom.disable()
-    el.addEventListener('wheel', onWheel)
+    
+    // 🔥 Omogući zumiranje kotačićem bez ikakvih restrikcija
     map.scrollWheelZoom.enable()
-    el.addEventListener('touchmove', onTouchMove, { passive: true })
+
     window.addEventListener('pointerdown', onPointerDown, true)
     window.addEventListener('mouseup', onMouseUp)
+
     return () => {
-      clearTimeout(timer)
-      el.removeEventListener('wheel', onWheel)
-      el.removeEventListener('touchmove', onTouchMove)
       window.removeEventListener('pointerdown', onPointerDown, true)
       window.removeEventListener('mouseup', onMouseUp)
       map.dragging.enable()
     }
   }, [map])
-  return hint ? <div className='gesture-hint'>{hint}</div> : null
+  
+  return null // Nema više poruke
 }
-
 const MapZoomer = ({ position }: { position: L.LatLng | null }) => {
   const map = useMap()
   useEffect(() => {
     if (position) {
       const offsetPosition = L.latLng(position.lat - 0.005, position.lng)
-      map.flyTo(offsetPosition, 13, { animate: true, duration: 0.5 })
+      map.flyTo(offsetPosition, 10, { animate: true, duration: 0.5 })
     }
   }, [position, map])
   return null
@@ -160,10 +146,10 @@ export const Karta = () => {
   const [currentPhoto, currentPhotoSet] = useState<Photo | null>(null)
   const [popupPosition, setPopupPosition] = useState<L.LatLng | null>(null)
   const [imageError, setImageError] = useState(false)
-
+const [aboutOpen, setAboutOpen] = useState(false)
   const [fototekaMarkers, setFototekaMarkers] = useState<(Photo & { latlng: L.LatLng })[]>([])
 
-  // 🔥 FIX: Dohvati markere čim se komponenta montira, neovisno o Reduxu
+  // Dohvati markere čim se komponenta montira, neovisno o Reduxu
   useEffect(() => {
     const fetchAllMarkers = async () => {
       try {
@@ -396,7 +382,7 @@ export const Karta = () => {
                     <span className='label'>Signatura</span>{' '}
                     <span className='value'>{currentPhoto.signatura}</span>
                   </li>
-                  <li>
+                  {/* <li>
                     <span className='label'>Datum</span>{' '}
                     <span className='value'>{currentPhoto.datum_sni || '—'}</span>
                   </li>
@@ -411,7 +397,7 @@ export const Karta = () => {
                   <li>
                     <span className='label'>Tagovi</span>{' '}
                     <span className='value'>{currentPhoto.tagovi || '—'}</span>
-                  </li>
+                  </li> */}
                 </ul>
                 {currentPhoto.foto_url && !imageError && (
                   <Link to={`/photos/${currentPhoto.id}`}>
@@ -435,11 +421,24 @@ export const Karta = () => {
                 )}
               </Popup>
             )}
+            <button className='about-map-btn' onClick={()=>setAboutOpen(true)}>
+              o Karti
+            </button>
           </MapContainer>
         </section>
       </div>
 
-      <BlockWithStickyTitle title='Mape'>
+
+    {/* 🔥 Bočni panel */}
+    {aboutOpen && (
+      <div className="about-panel">
+        <button
+          className="about-panel-close"
+          onClick={() => setAboutOpen(false)}
+        >
+          ×
+        </button>
+        <h2>Opservatorij krajobraza</h2>
         <p>
           Dobrodošli na interaktivnu kartu "Opservatorija krajobraza". Ova karta predstavlja našu
           kontinuirano nadopunjujuću kolekciju georeferenciranih podataka koja vam omogućuje uvid u
@@ -447,9 +446,22 @@ export const Karta = () => {
           filtriranje informacija kako biste prilagodili prikaz prema vlastitim istraživačkim
           potrebama.
         </p>
-      </BlockWithStickyTitle>
-    </div>
-  )
+      </div>
+    )}
+  </div>
+)
+
+  //     <BlockWithStickyTitle title='Mape'>
+  //       <p>
+  //         Dobrodošli na interaktivnu kartu "Opservatorija krajobraza". Ova karta predstavlja našu
+  //         kontinuirano nadopunjujuću kolekciju georeferenciranih podataka koja vam omogućuje uvid u
+  //         različite aspekte krajobraza. Upotrijebite alate za odabir podloge, prilagodbu slojeva i
+  //         filtriranje informacija kako biste prilagodili prikaz prema vlastitim istraživačkim
+  //         potrebama.
+  //       </p>
+  //     </BlockWithStickyTitle>
+  //   </div>
+  // )
 }
 // import { useMap, Marker, MapContainer, TileLayer, LayersControl, ZoomControl, Popup } from 'react-leaflet'
 // import { useEffect, useState } from 'react'
