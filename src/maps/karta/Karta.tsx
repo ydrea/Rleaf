@@ -23,7 +23,10 @@ import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithS
 import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import './Karta.sass'
 import { CustomLayersControl } from './components/CustomLayersControl'
+import { preloadTiles } from './preLoad'
+// import {preloadTiles} from './preLoad'
 
+//
 const fototekaIcon = L.divIcon({
   className: 'fototeka-marker',
   html: `
@@ -160,7 +163,9 @@ export const Karta = () => {
   const [imageError, setImageError] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
   const [fototekaMarkers, setFototekaMarkers] = useState<(Photo & { latlng: L.LatLng })[]>([])
+const [isLoading, setIsLoading] = useState(false)
 
+  // dolazis li iz Photo.tsx?
   const isShowOnMap = location.state?.showOnMap === true
 
   // Dohvati markere
@@ -198,53 +203,82 @@ export const Karta = () => {
   }, [photos])
 
   // Preload tiles
+// Add this near your other helpers like LayerHandler or GestureHandling
+const TilePreloader = ({ kartografije }: { kartografije: string }) => {
+  const map = useMap()
+
   useEffect(() => {
-    const preloadVisibleTiles = async () => {
-      const zoom = 10
-      const center = { lat: 45.2, lng: 16.2 }
-      const latRad = (center.lat * Math.PI) / 180
-      const n = Math.pow(2, zoom)
-      const x = Math.floor(((center.lng + 180) / 360) * n)
-      const y = Math.floor(((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n)
-      const layers = [
-        'https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg',
-        kartografije,
-        'https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png',
-      ]
-      const tick = () => new Promise((r) => setTimeout(r, 0))
-      for (const template of layers) {
-        for (let dx = -2; dx <= 2; dx++) {
-          for (let dy = -2; dy <= 2; dy++) {
-            const url = template.replace('{z}', zoom.toString()).replace('{x}', (x + dx).toString()).replace('{y}', (y + dy).toString())
-            fetch(url, { mode: 'no-cors' }).catch(() => {})
-          }
-        }
-        await tick()
-      }
-    }
-    preloadVisibleTiles()
-  }, [kartografije])
+    if (!map) return
 
-  const fetchPhotoCoordinates = async (photoId: number) => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/json_photos`)
-      const data = await response.json()
-      const photo = photos.find(p => p.id === photoId)
-      if (photo) {
-        const photoGeo = data.find((item: any) => item.signatura === photo.signatura || item.id === photoId)
-        if (photoGeo && photoGeo.geometry) {
-          const geometry = typeof photoGeo.geometry === 'string' ? JSON.parse(photoGeo.geometry) : photoGeo.geometry
-          const coords = geometry.coordinates
-          return L.latLng(coords[1], coords[0])
-        }
-      }
-    } catch (error) {
-      console.error('Failed to fetch coordinates:', error)
-    }
-    return null
-  }
+    // Dynamically build layers based on current state
+    const currentLayers = [
+      'https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg',
+      kartografije,
+      'https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png',
+    ]
 
-  // 🔥 KLJUČNI POPRAVAK: Uvijek koristi pravi ID
+    const run = () => {
+      preloadTiles(map, currentLayers, { buffer: 1 }).catch(console.error)
+    }
+    
+    map.whenReady(run)
+    map.on('moveend zoomend', run)
+
+    return () => {
+      map.off('moveend zoomend', run)
+    }
+  }, [map, kartografije]) // Re-runs if base map changes!
+
+  return null
+}
+
+  // useEffect(() => {
+  //   const preloadVisibleTiles = async () => {
+  //     const zoom = 10
+  //     const center = { lat: 45.2, lng: 16.2 }
+  //     const latRad = (center.lat * Math.PI) / 180
+  //     const n = Math.pow(2, zoom)
+  //     const x = Math.floor(((center.lng + 180) / 360) * n)
+  //     const y = Math.floor(((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n)
+  //     const layers = [
+  //       'https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg',
+  //       kartografije,
+  //       'https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png',
+  //     ]
+  //     const tick = () => new Promise((r) => setTimeout(r, 0))
+  //     for (const template of layers) {
+  //       for (let dx = -2; dx <= 2; dx++) {
+  //         for (let dy = -2; dy <= 2; dy++) {
+  //           const url = template.replace('{z}', zoom.toString()).replace('{x}', (x + dx).toString()).replace('{y}', (y + dy).toString())
+  //           fetch(url, { mode: 'no-cors' }).catch(() => {})
+  //         }
+  //       }
+  //       await tick()
+  //     }
+  //   }
+  //   preloadVisibleTiles()
+  // }, [kartografije])
+
+  // const fetchPhotoCoordinates = async (photoId: number) => {
+  //   try {
+  //     const response = await fetch(`${import.meta.env.VITE_API_URL}/json_photos`)
+  //     const data = await response.json()
+  //     const photo = photos.find(p => p.id === photoId)
+  //     if (photo) {
+  //       const photoGeo = data.find((item: any) => item.signatura === photo.signatura || item.id === photoId)
+  //       if (photoGeo && photoGeo.geometry) {
+  //         const geometry = typeof photoGeo.geometry === 'string' ? JSON.parse(photoGeo.geometry) : photoGeo.geometry
+  //         const coords = geometry.coordinates
+  //         return L.latLng(coords[1], coords[0])
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('Failed to fetch coordinates:', error)
+  //   }
+  //   return null
+  // }
+
+  // koristi pravi ID
   const handlePhotoSelect = (photo: Photo, latlng?: L.LatLng) => {
     setImageError(false)
     const fotoUrl = photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
@@ -318,7 +352,29 @@ useEffect(() => {
   return (
     <div>
       <div className='map'>
-        <section id='map-container'>
+        <section id='map-container' style={{ position: 'relative' }}>
+  {isLoading && (
+    <div className="map-spinner">
+      <div className="spinner"></div>
+      <p>Učitavam kartu...</p>
+    </div>
+  )}
+
+  <MapContainer 
+    center={[45.2, 16.2]}
+    zoom={10}
+    minZoom={8}
+    maxZoom={28}
+    style={{ width: '100%', height: '85vh', cursor: 'crosshair', marginTop: -80 }}
+    zoomControl={false}
+    ref={(map) => {
+      if (map) {
+        // Kad je mapa spremna, makni spinner
+        map.whenReady(() => setIsLoading(false))
+      }
+    }}
+  >
+        {/* <section id='map-container'>
           <MapContainer
             center={[45.2, 16.2]}
             zoom={10}
@@ -326,7 +382,9 @@ useEffect(() => {
             maxZoom={28}
             style={{ width: '100%', height: '85vh', cursor: 'crosshair', marginTop: -80 }}
             zoomControl={false}
-          >
+          > */}
+ 
+  <TilePreloader kartografije={kartografije} />
             <GestureHandling />
             <LayerHandler kartografijeSet={kartografijeSet} onLayersChange={handleLayersChange} />
             <ZoomControl position='bottomright' />
