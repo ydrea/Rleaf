@@ -89,8 +89,10 @@ export const Photo = () => {
   }, [photoId])
 
   useEffect(() => {
-    const photoIndex = filteredPhotos.findIndex((photo) => photo.id === Number(photoId))
-
+    // const photoIndex = filteredPhotos.findIndex((photo) => photo.id === Number(photoId))
+const photoIndex = filteredPhotos.findIndex(
+  (photo) => photo.id === Number(photoId) || photo.signatura === photoId
+)
     dispatch(setSelectedPhotoIndex(photoIndex))
     setNotFound(filteredPhotos.length > 0 && photoIndex === -1)
   }, [dispatch, photos, photoId, filteredPhotos])
@@ -151,7 +153,7 @@ export const Photo = () => {
               {selectedPhotoIndex + 1} / {filteredPhotos.length}
             </li>
             <li>
-              <NavLink to={`/maps/${photoId}`}>pokaži na karti</NavLink>
+              <NavLink to={`/maps/${photoId}`} state={{showOnMap: true}}>pokaži na karti</NavLink>
             </li>
             <li>
               <NavLink to='/photos'>natrag u galeriju</NavLink>

@@ -29,7 +29,7 @@ interface LegendData {
 interface LayerConfig {
   id: string;
   legendUrl: string;
-  wmsLayer: string;
+  wmsLayer?: string;
   customHtml?: string;
 }
 
@@ -64,7 +64,7 @@ export const CustomLayersControl = ({
     'FOTOTEKA': {
       id: 'temafk',
       legendUrl: 'https://landscape.agr.hr/qgis?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=preklop_foto_katalog&FORMAT=application/json&STYLE=default&SLD_VERSION=1.1.0',
-      wmsLayer: 'preklop_foto_katalog',
+      // wmsLayer: 'preklop_foto_katalog',
       customHtml: `
         <div class="legend-item" style="display: flex; align-items: center; gap: 8px; padding: 4px 0;">
           <div style="

@@ -5,15 +5,19 @@ import axios from 'axios'
 import type { Photo } from '../../../../types/types'
 
 export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
-  onAdd: function (map: L.Map) {
+onAdd: function (map: L.Map) {
+  // 🔥 Ako je Fototeka, nemoj se vezati na klik (ali ipak dodaj sloj na kartu)
+  if (this.wmsParams.layers === 'preklop_foto_katalog') {
     L.TileLayer.WMS.prototype.onAdd.call(this, map)
-    map.on('click', this.getFeatureInfo, this)
-    
-    // Add mousemove event to change cursor with debouncing
-    this._hoverTimeout = null
-    map.on('mousemove', this.onMouseMove, this)
-  },
-
+    return
+  }
+  
+  L.TileLayer.WMS.prototype.onAdd.call(this, map)
+  map.on('click', this.getFeatureInfo, this)
+  
+  this._hoverTimeout = null
+  map.on('mousemove', this.onMouseMove, this)
+},
   onRemove: function (map: L.Map) {
     L.TileLayer.WMS.prototype.onRemove.call(this, map)
     map.off('click', this.getFeatureInfo, this)
@@ -58,11 +62,12 @@ export const BetterTileLayerWMS = L.TileLayer.WMS.extend({
 
   ////////////////
 getFeatureInfo: function (evt: L.LeafletMouseEvent) {
-  const el = evt.originalEvent.target as HTMLElement | null
+if (this.wmsParams.layers === 'preklop_foto_katalog'){return}
 
-  if (el?.closest('.photo-popup')) {
-    return
-  }
+
+
+const el = evt.originalEvent.target as HTMLElement | null
+  if (el?.closest('.photo-popup')) {return}
 
   // Provjeri je li ovaj sloj najgornji
   let isTopmost = true

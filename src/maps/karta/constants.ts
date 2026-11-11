@@ -200,13 +200,13 @@ export const layers = {
     id: 'temakz',
     name: 'Korištenje zemljišta',
     url: 'https://landscape.agr.hr/qgis',
-    layers: 'tema_koristenje_zemljista_novo', // MUST MATCH WMS SERVER
+    layers: 'tema_koristenje_zemljista_novo', // 
     legendLayer: 'tema_koristenje_zemljista_novo',
     props: {
       format: 'image/png',
       transparent: true,
-      version: '1.3.0', // Changed to 1.3.0 to match your URLs
-      uppercase: true, // Add this if needed
+      version: '1.3.0',  
+      uppercase: true, 
       zIndex: 150,
       opacity: 0.8
     }
@@ -215,7 +215,7 @@ export const layers = {
     id: 'temazp',
     name: 'Zaštita prirode',
     url: 'https://landscape.agr.hr/qgis',
-    layers: 'zasticena_podrucja', // MUST MATCH WMS SERVER
+    layers: 'zasticena_podrucja',
     legendLayer: 'zasticena_podrucja',
     props: {
       format: 'image/png',
@@ -244,17 +244,17 @@ export const layers = {
   temafk: {
     id: 'temafk',
     name: 'FOTOTEKA',
-    url: 'https://landscape.agr.hr/qgis',
-    layers: 'preklop_foto_katalog', //
-    legendLayer: 'preklop_foto_katalog',
-    props: {
-      format: 'image/png',
-      transparent: true,
-      version: '1.3.0',
-      uppercase: true,
-      zIndex: 150,
-      opacity: 1,
-      maxZoom: 28
-    }
+    // url: 'https://landscape.agr.hr/qgis',
+    // layers: 'preklop_foto_katalog', //
+    // legendLayer: 'preklop_foto_katalog',
+    // props: {
+    //   format: 'image/png',
+    //   transparent: true,
+    //   version: '1.3.0',
+    //   uppercase: true,
+    //   zIndex: 150,
+    //   opacity: 1,
+    //   maxZoom: 28
+    // }
   }
 } as const
