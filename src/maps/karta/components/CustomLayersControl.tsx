@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-imports */
 // // components/CustomLayersControl.tsx
 import { LayersControl, useMap } from 'react-leaflet'
 import { useEffect, useRef, useState, useCallback } from 'react'

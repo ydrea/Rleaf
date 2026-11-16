@@ -402,8 +402,8 @@ useEffect(() => {
                 <TileLayer
                   attribution='Source: Esri, Maxar, Earthstar Geographics)'
                   url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-                  maxZoom={20}
-                  maxNativeZoom={30}
+                  maxZoom={18}
+                  // maxNativeZoom={30}
                 />
               </BaseLayer>
 
