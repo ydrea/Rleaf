@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // L.TileLayer.BetterWMS.ts
 import L, { type TileLayer } from 'leaflet'
 import axios from 'axios'
@@ -194,23 +196,24 @@ showGetFeatureInfo: function (content: any, clickLatLng: L.LatLng) {
       const properties = feature.properties
       
       // Ako je Fototeka -> photo popup
-      if (properties.signatura) {
-        const photoData = {
-          id: properties.id,
-          signatura: properties.signatura,
-          naziv: properties.naziv || '',
-          opis: properties.opis || '',
-          lokacija: properties.lokacija || '',
-          datum_sni: properties.datum_sni || '',
-          kategorija: properties.kategorija || '',
-          autor: properties.autor || '',
-          tagovi: properties.tagovi || '',
-          foto_url: `${import.meta.env.VITE_SERVER_PUB}/${properties.signatura}`
-        }
-        this.options.onSelectPhoto?.(photoData, clickLatLng)
-      } 
+      // if (properties.signatura) {
+      //   const photoData = {
+      //     id: properties.id,
+      //     signatura: properties.signatura,
+      //     naziv: properties.naziv || '',
+      //     opis: properties.opis || '',
+      //     lokacija: properties.lokacija || '',
+      //     datum_sni: properties.datum_sni || '',
+      //     kategorija: properties.kategorija || '',
+      //     autor: properties.autor || '',
+      //     tagovi: properties.tagovi || '',
+      //     foto_url: `${import.meta.env.VITE_SERVER_PUB}/${properties.signatura}`
+      //   }
+      //   this.options.onSelectPhoto?.(photoData, clickLatLng)
+      // } 
       // Ako NIJE Fototeka -> obični Feature Info popup
-      else {
+       if (!properties.signatura)
+        {
         console.log('📋 Prikazujem Feature Info popup za sloj:', this.wmsParams.layers)
         
         // Formatiramo podatke u HTML

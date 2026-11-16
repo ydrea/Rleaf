@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMap, Marker, MapContainer, TileLayer, LayersControl, ZoomControl, Popup } from 'react-leaflet'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useParams, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import type { LayersControlEvent } from 'leaflet'
+// eslint-disable-next-line import/order
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'react-tabs/style/react-tabs.css'
@@ -364,7 +366,7 @@ useEffect(() => {
     center={[45.2, 16.2]}
     zoom={10}
     minZoom={8}
-    maxZoom={28}
+    maxZoom={18}
     style={{ width: '100%', height: '85vh', cursor: 'crosshair', marginTop: -80 }}
     zoomControl={false}
     ref={(map) => {
@@ -405,7 +407,7 @@ useEffect(() => {
                 />
               </BaseLayer>
 
-              <Overlay checked name='Kartografija'>
+              <Overlay checked name='Topografska karta'>
                 <TileLayer url={kartografije} />
               </Overlay>
 
