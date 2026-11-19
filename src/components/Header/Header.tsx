@@ -53,7 +53,7 @@ export const Header = () => {
               <NavLink to='/projects/ewap'>EWAP</NavLink>
             </div>
           </div>
-          <NavLink to='/maps'>mape</NavLink>
+          <NavLink to='/maps'>karta</NavLink>
           <NavLink to='/photos'>fototeka</NavLink>
           <NavLink to='/3d-scenes'>3d scene</NavLink>
           <NavLink to='/essays'>eseji</NavLink>

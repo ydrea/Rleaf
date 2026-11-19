@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { logon, selectValid } from '../../redux/rtk/authSlice'
 
 export const Login = () => {
-  const fix = import.meta.env.REACT_APP_PASS
+  const fix = import.meta.env.VITE_PASS
   const [pass, passSet] = useState(localStorage.getItem('pass') || '')
   const valid = useSelector(selectValid)
   const dispatch = useDispatch()
@@ -30,7 +30,8 @@ export const Login = () => {
   }
 
   return (
-    <form style={{ position: 'absolute', top: '50vh' }}>
+    <form style={{ position: 'absolute', top: '15vh', left: '40vw' }}>
+{/* <form> */}
       Login
       <input
         type='text'

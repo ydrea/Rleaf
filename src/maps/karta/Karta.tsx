@@ -18,15 +18,13 @@ import type { RootState } from '../../redux/store'
 import { layers } from './constants'
 import { BetterWMS } from './components/BetterWMS/BetterWMS'
 import { getPhotos } from '../../redux/rtk/gallerySlice'
-import { SingleMarker } from './components/SingleMarker/SingleMarker'
+// import { SingleMarker } from './components/SingleMarker/SingleMarker'
 import { useAppDispatch } from '../../redux/hooks'
 import { useWindowWidth } from '../../services/use-window-width/use-window-width'
 import { ImageWithSuspense } from '../../components/ImageWithSuspense/ImageWithSuspense'
-import { BlockWithStickyTitle } from '../../components/BlockWithStickyTitle/BlockWithStickyTitle'
 import './Karta.sass'
 import { CustomLayersControl } from './components/CustomLayersControl'
 import { preloadTiles } from './preLoad'
-// import {preloadTiles} from './preLoad'
 
 //
 const fototekaIcon = L.divIcon({
@@ -204,8 +202,7 @@ const [isLoading, setIsLoading] = useState(false)
     fetchAllMarkers()
   }, [photos])
 
-  // Preload tiles
-// Add this near your other helpers like LayerHandler or GestureHandling
+//   // Preload tiles
 const TilePreloader = ({ kartografije }: { kartografije: string }) => {
   const map = useMap()
 
@@ -234,58 +231,13 @@ const TilePreloader = ({ kartografije }: { kartografije: string }) => {
   return null
 }
 
-  // useEffect(() => {
-  //   const preloadVisibleTiles = async () => {
-  //     const zoom = 10
-  //     const center = { lat: 45.2, lng: 16.2 }
-  //     const latRad = (center.lat * Math.PI) / 180
-  //     const n = Math.pow(2, zoom)
-  //     const x = Math.floor(((center.lng + 180) / 360) * n)
-  //     const y = Math.floor(((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n)
-  //     const layers = [
-  //       'https://landscape.agr.hr/tiles/banija_reljef_light/{z}/{x}/{y}.jpg',
-  //       kartografije,
-  //       'https://landscape.agr.hr/tiles/banija_fiksni_elementi/{z}/{x}/{y}.png',
-  //     ]
-  //     const tick = () => new Promise((r) => setTimeout(r, 0))
-  //     for (const template of layers) {
-  //       for (let dx = -2; dx <= 2; dx++) {
-  //         for (let dy = -2; dy <= 2; dy++) {
-  //           const url = template.replace('{z}', zoom.toString()).replace('{x}', (x + dx).toString()).replace('{y}', (y + dy).toString())
-  //           fetch(url, { mode: 'no-cors' }).catch(() => {})
-  //         }
-  //       }
-  //       await tick()
-  //     }
-  //   }
-  //   preloadVisibleTiles()
-  // }, [kartografije])
-
-  // const fetchPhotoCoordinates = async (photoId: number) => {
-  //   try {
-  //     const response = await fetch(`${import.meta.env.VITE_API_URL}/json_photos`)
-  //     const data = await response.json()
-  //     const photo = photos.find(p => p.id === photoId)
-  //     if (photo) {
-  //       const photoGeo = data.find((item: any) => item.signatura === photo.signatura || item.id === photoId)
-  //       if (photoGeo && photoGeo.geometry) {
-  //         const geometry = typeof photoGeo.geometry === 'string' ? JSON.parse(photoGeo.geometry) : photoGeo.geometry
-  //         const coords = geometry.coordinates
-  //         return L.latLng(coords[1], coords[0])
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error('Failed to fetch coordinates:', error)
-  //   }
-  //   return null
-  // }
 
   // koristi pravi ID
   const handlePhotoSelect = (photo: Photo, latlng?: L.LatLng) => {
     setImageError(false)
     const fotoUrl = photo.foto_url ?? `${import.meta.env.VITE_SERVER_PUB}/${photo.signatura}`
     
-    // Ako photo.id nije broj, traži pravi ID u Reduxu
+    // Ako photo.id nije broj, nadji pravi ID u Reduxu
     let finalId = photo.id
     if (typeof finalId !== 'number') {
       const photoMatch = photos.find(p => p.signatura === photo.signatura)
@@ -293,7 +245,11 @@ const TilePreloader = ({ kartografije }: { kartografije: string }) => {
         finalId = photoMatch.id
       }
     }
-    
+
+    setPopupPosition(null)
+  currentPhotoSet(null)
+  
+  setTimeout(() => {
     currentPhotoSet({ 
       ...photo, 
       id: finalId as number, 
@@ -301,8 +257,9 @@ const TilePreloader = ({ kartografije }: { kartografije: string }) => {
     })
     
     if (latlng) setPopupPosition(latlng)
-  }
-
+  }, 0)
+}  
+ 
   const handleLayersChange = (layers: Set<string>) => {
     if (layers instanceof Set) setActiveLayers(layers)
     else setActiveLayers(new Set(layers))
@@ -473,9 +430,9 @@ useEffect(() => {
               </Overlay>
             </CustomLayersControl>
 
-            {photoId && <SingleMarker />}
+            {/* {photoId && <SingleMarker />} */}
 
-            {popupPosition && currentPhoto && (
+            {popupPosition && currentPhoto &&  (
               <Popup
                 className='photo-popup'
                 autoPan={true}
