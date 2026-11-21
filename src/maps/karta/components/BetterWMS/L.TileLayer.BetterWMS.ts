@@ -212,32 +212,80 @@ showGetFeatureInfo: function (content: any, clickLatLng: L.LatLng) {
       //   this.options.onSelectPhoto?.(photoData, clickLatLng)
       // } 
       // Ako NIJE Fototeka -> obični Feature Info popup
-       if (!properties.signatura)
-        {
-        console.log('📋 Prikazujem Feature Info popup za sloj:', this.wmsParams.layers)
-        
-        // Formatiramo podatke u HTML
-        const popupContent = Object.entries(properties)
-          .map(([key, val]) => `<b>${key}:</b> ${val}`)
-          .join('<br>')
-        
-        // 🔥 KLJUČNO: Koristi this._map koji je već postavljen u onAdd
-        const map = this._map
-        if (!map) {
-          console.error('❌ Karta nije dostupna!')
-          return
-        }
-
-        // Zatvori sve postojeće popupe prije otvaranja novog
-        map.closePopup()
-
-        // Otvori novi popup
-        L.popup()
-          .setLatLng(clickLatLng)
-          .setContent(popupContent)
-          .openOn(map)
-      }
+if (!properties.signatura) {
+  console.log('📋 Prikazujem Feature Info popup za sloj:', this.wmsParams.layers)
+  
+  // CILJANO ZA SLOJ 'DRVENA GRADNJA'
+  if (this.wmsParams.layers === 'preklop_drvene_zgrade' && properties.fotografija) {
+    const fotoUrl = properties.fotografija
+    if (typeof fotoUrl === 'string' && fotoUrl.startsWith('http')) {
+      properties.fotografija = `<img src="${fotoUrl}" alt="Fotografija" style="max-width: 100%; max-height: 250px; object-fit: contain; border-radius: 4px; display: block; margin: 0 auto 10px auto;" />`
     }
+  }
+  
+  let popupContent = ''
+
+  if (this.wmsParams.layers === 'preklop_drvene_zgrade') {
+    // 🔥 EKSPLICITNI REDOSLIJED ZA DRVENU GRADNJU
+    const redoslijed = [
+      'fotografija',
+      'naziv',
+      'funkcija/tip',
+      'upotreba',
+      'stanje',
+      'opis',
+      'oznaka',
+      'datum_obilaska' // Pretpostavljam da se polje zove ovako, provjeri točan naziv
+    ]
+
+    popupContent = redoslijed
+      .map(key => {
+        if (properties[key] !== undefined && properties[key] !== null) {
+          // Ako je fotografija (koja je sada <img> tag), prikaži je bez labelice
+          if (key === 'fotografija') {
+            return properties[key]
+          }
+          return `<b>${key}:</b> ${properties[key]}`
+        }
+        return null
+      })
+      .filter(Boolean) // Ukloni null vrijednosti
+      .join('<br>')
+
+  } else {
+    // Za sve ostale slojeve, zadrži originalni prikaz (Object.entries)
+    popupContent = Object.entries(properties)
+      .map(([key, val]) => {
+        if (typeof val === 'string' && val.startsWith('<img')) {
+          return val
+        }
+        return `<b>${key}:</b> ${val}`
+      })
+      .join('<br>')
+  }
+  
+  const map = this._map
+  if (!map) return
+  
+  map.closePopup()
+    
+  // DODAJ JEDINSTVENU KLASU ZA DRVENU GRADNJU
+  const popupClassName = this.wmsParams.layers === 'preklop_drvene_zgrade' 
+    ? 'drvena-gradnja-popup' 
+    : ''
+  
+  L.popup({
+    className: popupClassName,
+    maxWidth: this.wmsParams.layers === 'preklop_drvene_zgrade' ? 600 : 300,
+    minWidth: this.wmsParams.layers === 'preklop_drvene_zgrade' ? 590 : 0,
+    autoPan: true,
+    // autoPanPaddingTopLeft: [50, 50],
+    // autoPanPaddingBottomRight: [50, 50]
+  })
+    .setLatLng(clickLatLng)
+    .setContent(popupContent)
+    .openOn(map)
+}    }
   } catch (e) {
     console.error('❌ Error:', e)
   }
